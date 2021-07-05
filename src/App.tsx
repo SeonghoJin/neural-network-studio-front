@@ -1,12 +1,15 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react';
-import Main from "./Pages/main";
+import { BrowserRouter, Route } from 'react-router-dom';
+import Main from './Pages/main';
+import TestRouter from './Pages/test/TestRouter';
 
 function App() {
   return (
-    <div className="App">
-        <Main/>
-    </div>
+      <BrowserRouter>
+          <Route path="/test/:test_component/:id" component={TestRouter}/>
+          <Route path="/" exact={true} component={Main}/>
+      </BrowserRouter>
   );
 }
 
