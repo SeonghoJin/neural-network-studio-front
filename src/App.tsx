@@ -7,7 +7,7 @@ import TestRouter from './Pages/test/TestRouter';
 function App() {
   return (
       <BrowserRouter>
-          <Route path="/test/:test_component/:id" component={TestRouter}/>
+          <Route path="/test/:test_component/:id" exact={true} component={TestRouter}/>
           <Route path="/" exact={true} component={Main}/>
       </BrowserRouter>
   );

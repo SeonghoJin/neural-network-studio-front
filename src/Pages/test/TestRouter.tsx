@@ -4,7 +4,7 @@ import ReactFlow from './react-flow/ReactFlowTest';
 
 function TestRouter() {
   return (
-      <Route path="test/react-flow/:id" component={ReactFlow}></Route>
+      <Route path="/test/react-flow/:id" exact={true} component={ReactFlow}></Route>
   );
 }
 
