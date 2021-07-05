@@ -1,7 +1,24 @@
 import React from 'react';
-import ReactFlow from 'react-flow-renderer';
+import ReactFlow, {
+  Node, Edge, XYPosition, ElementId,
+} from 'react-flow-renderer';
 
-const elements = [
+class CustomNode implements Node {
+  id: ElementId;
+
+  data : any;
+
+  position: XYPosition;
+
+  constructor(id : ElementId, positon : XYPosition, data : any) {
+    this.id = id;
+    this.data = data;
+    this.position = positon;
+  }
+}
+
+const elements : Array<Node | Edge> = [
+  new CustomNode('6', { x: 50, y: 30 }, '12315'),
   {
     id: '1',
     type: 'input', // input node
@@ -30,6 +47,7 @@ const elements = [
 
 export default () => (
     <div style={{ height: 300 }}>
-        <ReactFlow elements={elements} />
+      <h1>기본 예제</h1>
+        <ReactFlow elements={elements}/>
     </div>
 );
