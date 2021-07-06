@@ -1,3 +1,5 @@
+import { XYPosition } from 'react-flow-renderer';
+
 export interface LocationProps {
     location : {
         hash : string | undefined
@@ -14,4 +16,15 @@ export interface MatchProps{
         path : string | undefined,
         url : string | undefined
     } | undefined
+}
+
+export class Position implements XYPosition {
+    x: number;
+
+    y: number;
+
+    constructor(x : number, y : number) {
+      this.x = x;
+      this.y = y;
+    }
 }

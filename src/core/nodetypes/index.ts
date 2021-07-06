@@ -1,7 +1,9 @@
-import TestNode from './TestNode';
+import TestNode1Component from './test/TestNode1Component';
 
-const nodetypes = {
-  testNode: TestNode,
+export const customTypes = {
+  testNode1: 'testNode1',
 };
 
-export default nodetypes;
+export const nodetypes = {
+  [customTypes.testNode1]: TestNode1Component,
+};
