@@ -13,5 +13,7 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': ['error'],
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': ['error'],
   },
 };
