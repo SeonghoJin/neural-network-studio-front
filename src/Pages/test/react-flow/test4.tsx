@@ -10,7 +10,7 @@ import ReactFlow, {
 } from 'react-flow-renderer';
 import TestNode1 from '../../../core/nodetypes/test/TestNode1';
 import { Position } from '../../../core/types';
-import { customTypes, nodetypes } from '../../../core/nodetypes';
+import { CustomTypes, nodetypes } from '../../../core/nodetypes';
 
 const initialElements : Elements = [
   {
@@ -151,19 +151,16 @@ const test4 = () => {
             nodeTypes={nodetypes}
         >
           <MiniMap
-              // @ts-ignore
               nodeStrokeColor={(n) => {
-                if (n.style?.background) return n.style.background;
+                if (n.style?.background) return (n.style.background as string);
                 if (n.type === 'input') return '#0041d0';
                 if (n.type === 'output') return '#ff0072';
                 if (n.type === 'default') return '#1a192b';
-                if (n.type === customTypes.testNode1) return '#aaaaaa';
+                if (n.type === CustomTypes.testNode1) return '#aaaaaa';
                 return '#eee';
               }}
-              // @ts-ignore
               nodeColor={(n) => {
-                if (n.style?.background) return n.style.background;
-
+                if (n.style?.background) return (n.style.background as string);
                 return '#fff';
               }}
               nodeBorderRadius={2}
