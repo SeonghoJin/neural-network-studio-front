@@ -6,6 +6,7 @@ import test3 from './test3';
 import test4 from './test4';
 import test5 from './test5';
 import test6 from './test6';
+import test7 from './test7';
 
 const ReactFlowTest = () => (
     <div>
@@ -15,6 +16,7 @@ const ReactFlowTest = () => (
         <Route path="/test/react-flow/4" exact={true} component={test4}></Route>
         <Route path="/test/react-flow/5" exact={true} component={test5}></Route>
         <Route path="/test/react-flow/6" exact={true} component={test6}></Route>
+        <Route path="/test/react-flow/7" exact={true} component={test7}></Route>
     </div>
 );
 

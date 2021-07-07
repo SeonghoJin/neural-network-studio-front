@@ -162,7 +162,6 @@ const CustomNodeFlow = () => {
     (params : any) => setElements((els: any) => addEdge({ ...params, animated: true, style: { stroke: '#fff' } }, els) as any),
     [],
   );
-
   const onLoad = useCallback(
     (rfi) => {
       if (!reactflowInstance) {
