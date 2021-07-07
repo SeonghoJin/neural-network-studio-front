@@ -1,13 +1,27 @@
-import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
-import {RestorIcon} from '@material-ui/icons'
-const Editor = () => (
-    <BottomNavigation
-      showLabels
-    >
-      <BottomNavigationAction label="Recents" icon={<RestoreIcon/>}/>
-      <BottomNavigationAction label="Favorites" icon={<FavoriteIcon/>}/>
-      <BottomNavigationAction label="Nearby" icon={<LocationOnIcon/>}/>
-    </BottomNavigation>
-);
+import { makeStyles } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
+import React from 'react';
+import TestNav1 from '../../../../Components/test/NavigationBar/TestNav1';
+import TestSideBar1 from '../../../../Components/test/SideBar/TestSideBar1';
+
+const useStyle = makeStyles({
+  container: {
+    display: 'flex',
+    flexDirection: 'row',
+    height: '100vh',
+  },
+});
+
+const Editor = () => {
+  const classes = useStyle();
+  return (
+  <>
+    <TestNav1></TestNav1>
+    <Container className={classes.container}>
+      <TestSideBar1></TestSideBar1>
+    </Container>
+  </>
+  );
+};
 
 export default Editor;
