@@ -1,6 +1,6 @@
 import { Button, makeStyles, Theme } from '@material-ui/core';
 import 'react-bootstrap/dist/react-bootstrap.min';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const BorderColor = '#D9DADB';
 
@@ -76,9 +76,17 @@ const useBlockStyle = makeStyles({
 
 const Block = () => {
   const classes = useBlockStyle();
+
+  const onDragStart = (event : React.DragEvent, nodeType : string) => {
+    const localEvent = event;
+    localEvent.dataTransfer.setData('application/reactflow', nodeType);
+    localEvent.dataTransfer.effectAllowed = 'copy';
+    console.log('dragStart');
+  };
+
   return (
     <li className={classes.Wrapper}>
-      <Button className={classes.item}>
+      <Button className={classes.item} draggable={true} onDragStart={(event) => onDragStart(event, 'default')}>
         <h5 style={{ margin: 0 }}>
           Input
         </h5>
@@ -88,7 +96,7 @@ const Block = () => {
 };
 
 const BlockList = () => {
-  const classes = useBlockListStyle({ elementNumber: 6 });
+  const classes = useBlockListStyle({ elementNumber: 5 });
 
   // eslint-disable-next-line no-unused-vars
   const [collapse, setCollapse] = useState(true);
@@ -103,8 +111,6 @@ const BlockList = () => {
           <h3 style={{ margin: 0 }}>IO</h3>
         </Button>
         <ul className={`${classes.Wrapper} ${classes.collapse} ${collapse ? '' : classes.show}`}>
-          <Block/>
-          <Block/>
           <Block/>
           <Block/>
           <Block/>

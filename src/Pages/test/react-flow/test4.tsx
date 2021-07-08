@@ -146,8 +146,6 @@ const test4 = () => {
             onElementsRemove={onElementsRemove}
             onConnect={onConnect}
             onLoad={onLoad}
-            snapToGrid={true}
-            snapGrid={[15, 15]}
             nodeTypes={nodetypes}
         >
           <MiniMap
@@ -166,7 +164,7 @@ const test4 = () => {
               nodeBorderRadius={2}
           />
           <Controls />
-          <Background color="#aaa" gap={16} />
+          <Background color="#aaa" />
         </ReactFlow>
       </div>
   );
