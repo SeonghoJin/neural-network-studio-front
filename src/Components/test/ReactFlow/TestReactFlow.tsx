@@ -1,11 +1,10 @@
-import ReactFlow, { Background, MiniMap } from 'react-flow-renderer';
+import ReactFlow, { Background, Controls } from 'react-flow-renderer';
 import React, { useRef, useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 
 const useStyle = makeStyles({
   ReactFlowWrapper: {
-    height: '100%',
-    width: '100%',
+    flexGrow: 1,
   },
 });
 
@@ -59,9 +58,13 @@ const TestReactFlow = () => {
                  onDragOver={onDragOver}
                  onLoad={onLoad}
       >
+        <Controls style={{
+          top: 10,
+          left: 10,
+          bottom: 'initial',
+        }}/>
         <Background color="#aaa" />
       </ReactFlow>
-      <MiniMap/>
     </div>
   );
 };

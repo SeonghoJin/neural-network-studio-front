@@ -37,7 +37,7 @@ const TestNav1 = () => {
 
   return (
   <NavWrapper>
-    <Container >
+    <Container style={{ maxWidth: 1440 }}>
       <div className={classes.root}>
       <a className={classes.logo}>
         <h1>

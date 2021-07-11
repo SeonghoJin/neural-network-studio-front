@@ -3,29 +3,37 @@ import Container from '@material-ui/core/Container';
 import React from 'react';
 import { ReactFlowProvider } from 'react-flow-renderer';
 import TestNav1 from '../../../../Components/test/NavigationBar/TestNav1';
-import TestSideBar1 from '../../../../Components/test/SideBar/TestSideBar1';
+import TestSideBarLeft1 from '../../../../Components/test/SideBar/TestSideBarLeft1';
 import TestReactFlow from '../../../../Components/test/ReactFlow/TestReactFlow';
+import TestSideBarRight1 from '../../../../Components/test/SideBar/TestSideBarRight1';
 
 const useStyle = makeStyles({
+  wrapper: {
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+  },
   container: {
     display: 'flex',
     flexDirection: 'row',
-    height: '100vh',
+    maxWidth: '1440px',
+    flexGrow: 1,
   },
 });
 
 const Editor = () => {
   const classes = useStyle();
   return (
-  <>
+  <div className={classes.wrapper}>
     <TestNav1></TestNav1>
     <Container className={classes.container}>
       <ReactFlowProvider>
-        <TestSideBar1/>
+        <TestSideBarLeft1/>
         <TestReactFlow/>
+        <TestSideBarRight1/>
       </ReactFlowProvider>
     </Container>
-  </>
+  </div>
   );
 };
 

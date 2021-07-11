@@ -1,22 +1,21 @@
 import { Button, makeStyles, Theme } from '@material-ui/core';
 import 'react-bootstrap/dist/react-bootstrap.min';
 import React, { useState } from 'react';
+import TestSideBarWrapper from './TestSideBarWrapper';
 
 const BorderColor = '#D9DADB';
 
+// eslint-disable-next-line no-unused-vars
 const useStyle = makeStyles({
   leftContent: {
     width: 280,
-    borderRight: `1px solid ${BorderColor}`,
-  },
-});
-
-const useBlockListsStyle = makeStyles({
-  Wrapper: {
     height: '60%',
     overflow: 'auto',
     borderBottom: `1px solid ${BorderColor}`,
   },
+});
+
+const useBlockListsStyle = makeStyles({
   blockListsWrapper: {
     paddingRight: 10,
     paddingLeft: 0,
@@ -38,6 +37,7 @@ const useBlockListStyle = makeStyles<Theme, BlockListProps>(() => ({
     zIndex: 1000,
     width: '100%',
     margin: 0,
+    marginLeft: 3,
     justifyContent: 'flex-start',
     '&::before': {
       lineHeight: 0,
@@ -124,7 +124,6 @@ const BlockList = () => {
 const BlockLists = () => {
   const classes = useBlockListsStyle();
   return (
-    <div className={classes.Wrapper}>
       <ul className={classes.blockListsWrapper}>
           <BlockList/>
           <BlockList/>
@@ -134,17 +133,17 @@ const BlockLists = () => {
           <BlockList/>
           <BlockList/>
       </ul>
-    </div>
   );
 };
 
-const TestSideBar1 = () => {
+const TestSideBarLeft1 = () => {
   const classes = useStyle();
   return (
-    <div className={classes.leftContent}>
-      <BlockLists/>
-    </div>
-  );
+    <TestSideBarWrapper>
+      <div className={classes.leftContent}>
+        <BlockLists/>
+      </div>
+    </TestSideBarWrapper>);
 };
 
-export default TestSideBar1;
+export default TestSideBarLeft1;
