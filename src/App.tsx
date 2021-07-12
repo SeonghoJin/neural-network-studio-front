@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Main from './Pages/main';
 import TestRouter from './Router/TestRouter';
 import configs from './config';
+import './App.css';
 
 function App() {
   return (
