@@ -24,7 +24,7 @@ const UpdateNode = () => {
       }
       return el;
     }));
-  }, [nodeName, setElements]);
+  }, [nodeName]);
 
   useEffect(() => {
     setElements((els) => els.map((el) => {
@@ -36,7 +36,7 @@ const UpdateNode = () => {
 
       return el;
     }));
-  }, [nodeBg, setElements]);
+  }, [nodeBg]);
 
   useEffect(() => {
     setElements((els) => els.map((el) => {
@@ -48,7 +48,7 @@ const UpdateNode = () => {
 
       return el;
     }));
-  }, [nodeHidden, setElements]);
+  }, [nodeHidden]);
 
   return (
       <>

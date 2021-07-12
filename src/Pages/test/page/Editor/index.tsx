@@ -6,6 +6,7 @@ import TestNav1 from '../../../../Components/test/NavigationBar/TestNav1';
 import TestSideBarLeft1 from '../../../../Components/test/SideBar/TestSideBarLeft1';
 import TestReactFlow from '../../../../Components/test/ReactFlow/TestReactFlow';
 import TestSideBarRight1 from '../../../../Components/test/SideBar/TestSideBarRight1';
+import { ReactFlowElementProvider } from '../../../../core/Context/ElementProvider/ElementProvider';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -27,11 +28,13 @@ const Editor = () => {
   <div className={classes.wrapper}>
     <TestNav1></TestNav1>
     <Container className={classes.container}>
-      <ReactFlowProvider>
-        <TestSideBarLeft1/>
-        <TestReactFlow/>
-        <TestSideBarRight1/>
-      </ReactFlowProvider>
+      <ReactFlowElementProvider>
+        <ReactFlowProvider>
+          <TestSideBarLeft1/>
+          <TestReactFlow/>
+          <TestSideBarRight1/>
+        </ReactFlowProvider>
+      </ReactFlowElementProvider>
     </Container>
   </div>
   );

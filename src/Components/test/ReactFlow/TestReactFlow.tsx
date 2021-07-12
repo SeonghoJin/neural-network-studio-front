@@ -1,6 +1,12 @@
-import ReactFlow, { Background, Controls } from 'react-flow-renderer';
+import ReactFlow, {
+  Background, Controls,
+} from 'react-flow-renderer';
 import React, { useRef, useState } from 'react';
 import { makeStyles } from '@material-ui/core';
+import {
+  useElementDispatch,
+  useElementState,
+} from '../../../core/Context/ElementProvider/ElementProvider';
 
 const useStyle = makeStyles({
   ReactFlowWrapper: {
@@ -13,8 +19,8 @@ const TestReactFlow = () => {
   const itemId = useRef(0);
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
-  const [elements, setElements] = useState([]);
-
+  const elements = useElementState();
+  const elementsDispatch = useElementDispatch();
   const getId = () => {
     const id = `node${itemId.current}`;
     itemId.current += 1;
@@ -47,7 +53,12 @@ const TestReactFlow = () => {
         position,
         data: { label: `${type} node` },
       };
-      setElements((es) => es.concat(newNode as any));
+
+      elementsDispatch({
+        type: 'renew',
+        payLoad: elements.concat(newNode),
+      });
+      // setElements((es) => es.concat(newNode as any));
     }
   };
 

@@ -5,7 +5,6 @@ const useStyle = makeStyles({
     width: '100%',
     height: '100%',
     padding: 5,
-    paddingLeft: 30,
   },
   container: {
     width: '100%',
@@ -15,6 +14,9 @@ const useStyle = makeStyles({
   },
   propertyNameWrapper: {
     flexGrow: 3,
+  },
+  propertyName: {
+    margin: 0,
   },
   propertyContentWrapper: {
     flexGrow: 7,
@@ -30,17 +32,24 @@ const useStyle = makeStyles({
   },
 });
 
-const Input = () => {
+const Input = ({ propertyName, propertyContent, onPropertyChange }
+  : {propertyName: string, propertyContent: string, onPropertyChange: any}) => {
   const classes = useStyle();
-
   return (
     <div className={classes.wrapper}>
       <div className={classes.container}>
         <div className={classes.propertyNameWrapper}>
-          name
+          <h4 className={classes.propertyName}>
+            {propertyName}
+          </h4>
         </div>
         <div className={classes.propertyContentWrapper}>
-          <input type="text" className={classes.propertyContentContainer}>
+          <input
+            onChange={(e) => { onPropertyChange(propertyName, e.target.value); } }
+            value={propertyContent}
+            type="text"
+            className={classes.propertyContentContainer}
+            >
           </input>
         </div>
       </div>
