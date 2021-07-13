@@ -7,6 +7,8 @@ import {
   useElementDispatch,
   useElementState,
 } from '../../../core/Context/ElementProvider/ElementProvider';
+import { getNodeId } from '../../../util';
+import ElementsStorage from '../../../Storage/ElementsStorage';
 
 const useStyle = makeStyles({
   ReactFlowWrapper: {
@@ -16,49 +18,54 @@ const useStyle = makeStyles({
 
 const TestReactFlow = () => {
   const classes = useStyle();
-  const itemId = useRef(0);
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const elements = useElementState();
   const elementsDispatch = useElementDispatch();
-  const getId = () => {
-    const id = `node${itemId.current}`;
-    itemId.current += 1;
-    return id;
-  };
 
   const onDragOver = (e : React.DragEvent) => {
     e.preventDefault();
     const localEvent = e;
     localEvent.dataTransfer.dropEffect = 'copy';
-    console.log('onDragOver');
   };
 
-  const onLoad = (instance : any) => (setReactFlowInstance(instance));
+  const onLoad = (instance : any) => {
+    setReactFlowInstance(instance);
+    const restoreElements = async () => {
+      const restoredElements = await (ElementsStorage.getElements());
+      if (restoredElements) {
+        elementsDispatch({
+          type: 'renew',
+          payLoad: restoredElements,
+        });
+      }
+    };
+
+    restoreElements();
+  };
 
   const onDrop = (e : React.DragEvent) => {
     e.preventDefault();
     const localEvent = e;
     if (localEvent.dataTransfer.types.includes('application/reactflow')) {
       const type = localEvent.dataTransfer.getData(('application/reactflow'));
-      console.log(type);
       const reactFlowBounds = (reactFlowWrapper.current as any).getBoundingClientRect();
       const position = (reactFlowInstance as any).project({
         x: localEvent.clientX - reactFlowBounds.left,
         y: localEvent.clientY - reactFlowBounds.top,
       });
       const newNode = {
-        id: getId(),
+        id: getNodeId(),
         type,
         position,
         data: { label: `${type} node` },
       };
-
+      const newElements = elements.concat(newNode);
       elementsDispatch({
         type: 'renew',
-        payLoad: elements.concat(newNode),
+        payLoad: newElements,
       });
-      // setElements((es) => es.concat(newNode as any));
+      ElementsStorage.setElements(newElements);
     }
   };
 

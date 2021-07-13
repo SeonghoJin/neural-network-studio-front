@@ -4,6 +4,4 @@ localforage.config({
   name: 'Neural Network Builder',
 });
 
-export const LocalForage = localforage;
-
-
+export default localforage;
