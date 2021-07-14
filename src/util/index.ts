@@ -6,6 +6,6 @@ export const getId = () => {
 };
 
 export const getNodeId = () => {
-  const id = `node ${uuidv4() + Date.now()}`;
+  const id = `node ${getId()}`;
   return id;
 };

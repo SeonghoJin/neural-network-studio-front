@@ -15,5 +15,6 @@ module.exports = {
     'import/no-unresolved': 'off',
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': ['error'],
+    'arrow-body-style': ['off'],
   },
 };

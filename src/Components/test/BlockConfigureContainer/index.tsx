@@ -65,12 +65,15 @@ const BlockConfigures = () => {
   // eslint-disable-next-line no-restricted-syntax
   for (const key in data) {
     if ({}.hasOwnProperty.call(data, key)) {
-      properties.push(<TextInput
-          key={key}
+      properties.push(
+        <li key={key}>
+          <TextInput
           propertyName={key}
           propertyContent={data[key]}
           onPropertyChange={onChange}
-        />);
+          />
+        </li>,
+      );
     }
   }
 
@@ -85,18 +88,7 @@ const BlockConfigures = () => {
           </h3>
         </div>
         <ul className={classes.propertyList}>
-          <li>
             {properties}
-          </li>
-          <li>
-            {properties}
-          </li>
-          <li>
-            {properties}
-          </li>
-          <li>
-            {properties}
-          </li>
         </ul>
       </div>);
 };

@@ -9,6 +9,7 @@ import {
 } from '../../../core/Context/ElementProvider/ElementProvider';
 import { getNodeId } from '../../../util';
 import ElementsStorage from '../../../Storage/ElementsStorage';
+import { BlockState } from '../../../core/block/BlockState';
 
 const useStyle = makeStyles({
   ReactFlowWrapper: {
@@ -47,8 +48,9 @@ const TestReactFlow = () => {
   const onDrop = (e : React.DragEvent) => {
     e.preventDefault();
     const localEvent = e;
-    if (localEvent.dataTransfer.types.includes('application/reactflow')) {
-      const type = localEvent.dataTransfer.getData(('application/reactflow'));
+    if (localEvent.dataTransfer.types.includes('application/nodetype')) {
+      const type = localEvent.dataTransfer.getData(('application/nodetype'));
+      const data = JSON.parse(localEvent.dataTransfer.getData(('application/nodedata'))) as BlockState;
       const reactFlowBounds = (reactFlowWrapper.current as any).getBoundingClientRect();
       const position = (reactFlowInstance as any).project({
         x: localEvent.clientX - reactFlowBounds.left,
@@ -58,7 +60,10 @@ const TestReactFlow = () => {
         id: getNodeId(),
         type,
         position,
-        data: { label: `${type} node` },
+        data: {
+          label: `${type} node`,
+          ...data.config,
+        },
       };
       const newElements = elements.concat(newNode);
       elementsDispatch({

@@ -1,9 +1,11 @@
-import { Button, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import 'react-bootstrap/dist/react-bootstrap.min';
 import React from 'react';
 import TestSideBarWrapper from './TestSideBarWrapper';
 import BlockConfigureContainter from '../BlockConfigureContainer';
 import BlockList from '../BlockList';
+import Block from '../BlockList/Block';
+import { blockStates } from '../../../core/block/BlockState';
 
 const BorderColor = '#D9DADB';
 
@@ -21,76 +23,31 @@ const useBlockListsStyle = makeStyles({
   },
 });
 
-const useBlockStyle = makeStyles({
-  Wrapper: {
-    paddingLeft: 30,
-  },
-  item: {
-    width: '100%',
-    margin: 0,
-    justifyContent: 'flex-start',
-  },
-});
-
-const Block = () => {
-  const classes = useBlockStyle();
-
-  const onDragStart = (event : React.DragEvent, nodeType : string) => {
-    const localEvent = event;
-    localEvent.dataTransfer.setData('application/reactflow', nodeType);
-    localEvent.dataTransfer.effectAllowed = 'copy';
-    console.log('dragStart');
-  };
-
-  return (
-    <li className={classes.Wrapper}>
-      <Button className={classes.item} draggable={true} onDragStart={(event) => onDragStart(event, 'default')}>
-        <h5 style={{ margin: 0 }}>
-          Input
-        </h5>
-      </Button>
-    </li>
-  );
-};
+const blocks = blockStates;
 
 const BlockListContainer = () => {
   const classes = useBlockListsStyle();
   return (
     <div className={classes.wrapper}>
       <ul className={classes.blockListsWrapper}>
-        <BlockList
-          elementNumber={10}
-          name="test"
-        >
-          <Block></Block>
-          <Block></Block>
-          <Block></Block>
-          <Block></Block>
-          <Block></Block>
-          <Block></Block>
-          <Block></Block>
-          <Block></Block>
-          <Block></Block>
-          <Block></Block>
-        </BlockList>
-        <BlockList
-          elementNumber={4}
-          name="IO"
-        >
-          <Block></Block>
-          <Block></Block>
-          <Block></Block>
-          <Block></Block>
-        </BlockList>
+        {blocks.map((block) => {
+          return <BlockList key={block.type} name={block.type} elementNumber={block.states.length}>
+            {block.states.map((blockState, index) => {
+              return <Block key={index} state={blockState}></Block>;
+            })}
+        </BlockList>;
+        })}
       </ul>
     </div>
   );
 };
 
-const TestSideBarLeft1 = () => (
+const TestSideBarLeft1 = () => {
+  return (
     <TestSideBarWrapper>
       <BlockListContainer/>
       <BlockConfigureContainter/>
     </TestSideBarWrapper>);
+};
 
 export default TestSideBarLeft1;

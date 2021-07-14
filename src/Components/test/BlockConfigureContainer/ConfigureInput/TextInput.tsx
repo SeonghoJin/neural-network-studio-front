@@ -10,7 +10,7 @@ const useStyle = makeStyles({
     width: '100%',
     height: '100%',
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
   },
   propertyNameWrapper: {
     flexGrow: 3,
