@@ -33,7 +33,13 @@ const ScollBox = forwardRef((props : any, ref : Ref<RefObject>) => {
     }
   };
 
-  useImperativeHandle(ref, () => ({ scrollToBottom }));
+  useImperativeHandle(ref, () => (
+    {
+      scrollToBottom,
+      test: () => {
+        console.log(2);
+      },
+    }));
   return (
     <div
       className={classes.style}
@@ -48,7 +54,10 @@ const test = () => {
   return (
     <div>
       <ScollBox ref={ref}></ScollBox>
-      <button onClick={() => { ref.current?.scrollToBottom(); }}>
+      <button onClick={() => {
+        ref.current?.scrollToBottom(); // @ts-ignore
+        ref.current?.test2();
+      }}>
         맨 밑으로
       </button>
     </div>
