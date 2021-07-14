@@ -26,7 +26,6 @@ const initialElements = [
 const SaveRestore = () => {
   const [rfInstance, setRfInstance] = useState<any>(null);
   const [elements, setElements] = useState(initialElements);
-
   const onLoad = (reactFlowInstance : any) => {
     setRfInstance(reactFlowInstance);
     const restoreFlow = async () => {
@@ -71,16 +70,16 @@ const SaveRestore = () => {
 
   return (
     <ReactFlowProvider>
-      <div className="save__controls">
-        <button onClick={onSave}>save</button>
-        <button onClick={onRestore}>restore</button>
-        <button onClick={onAdd}>add node</button>
-      </div>
       <ReactFlow
         elements={elements}
         onLoad={onLoad}
         style={{ width: 500, height: 500 }}
       >
+        <div className="save__controls">
+          <button onClick={onSave}>save</button>
+          <button onClick={onRestore}>restore</button>
+          <button onClick={onAdd}>add node</button>
+        </div>
       </ReactFlow>
     </ReactFlowProvider>
   );

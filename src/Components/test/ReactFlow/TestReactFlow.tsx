@@ -1,9 +1,19 @@
 import ReactFlow, {
   addEdge,
-  Background, Connection, Controls, Edge, Elements, removeElements, useStoreState,
+  Background,
+  Connection,
+  Controls,
+  Edge,
+  Elements,
+  OnLoadParams,
+  removeElements,
+  useStoreState,
 } from 'react-flow-renderer';
-import React, { KeyboardEventHandler, useRef, useState } from 'react';
+import React, {
+  KeyboardEventHandler, useRef, useState,
+} from 'react';
 import { makeStyles } from '@material-ui/core';
+import localforage from 'localforage';
 import {
   useElementDispatch,
   useElementState,
@@ -23,10 +33,15 @@ const useStyle = makeStyles({
   },
 });
 
+localforage.config({
+  name: 'ZoomPanHelperTransition',
+  storeName: 'TransitionStore',
+});
+
 const TestReactFlow = () => {
   const classes = useStyle();
   const reactFlowWrapper = useRef(null);
-  const [reactFlowInstance, setReactFlowInstance] = useState(null);
+  const [reactFlowInstance, setReactFlowInstance] = useState<OnLoadParams | null>(null);
   const selectedElements = useStoreState((state) => state.selectedElements);
   const elements = useElementState();
   const elementsDispatch = useElementDispatch();
@@ -49,7 +64,7 @@ const TestReactFlow = () => {
     localEvent.dataTransfer.dropEffect = 'copy';
   };
 
-  const onLoad = (instance : any) => {
+  const onLoad = (instance : OnLoadParams) => {
     setReactFlowInstance(instance);
     const restoreElements = async () => {
       const restoredElements = await (ElementsStorage.getElements());
@@ -58,9 +73,9 @@ const TestReactFlow = () => {
           type: 'renew',
           payLoad: restoredElements,
         });
+        instance.fitView();
       }
     };
-
     restoreElements();
   };
 
