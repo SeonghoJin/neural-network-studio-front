@@ -63,6 +63,22 @@ export class Conv2DBlockState implements BlockState {
 
   type: BlockType = BlockType.Conv2D;
 }
+export class AveragePooling2DConfig implements BlockConfig {
+  poolSize : string = '';
+
+  strides : string = '';
+
+  padding : string = '';
+}
+export class AveragePooling2DBlockState implements BlockState {
+  catergory: BlockCatergory = BlockCatergory.Layer;
+
+  config: BlockConfig = new AveragePooling2DConfig();
+
+  name: string | null = null;
+
+  type: BlockType = BlockType.AveragePooling2D;
+}
 
 export const blockStates : {type: BlockType, states : BlockState[]}[] = [
   {
@@ -72,5 +88,9 @@ export const blockStates : {type: BlockType, states : BlockState[]}[] = [
   {
     type: BlockType.Dense,
     states: [new DenseBlockState()],
+  },
+  {
+    type: BlockType.AveragePooling2D,
+    states: [new AveragePooling2DBlockState()],
   },
 ];

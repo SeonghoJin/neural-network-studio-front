@@ -7,7 +7,6 @@ import {
   useElementDispatch,
   useElementState,
 } from '../../../core/Context/ElementProvider/ElementProvider';
-import ElementsStorage from '../../../Storage/ElementsStorage';
 
 const useBlockConfiguresStyle = makeStyles({
   wrapper: {
@@ -59,7 +58,6 @@ const BlockConfigures = () => {
       type: 'renew',
       payLoad: newElement,
     });
-    ElementsStorage.setElements(newElement);
   };
   const properties : any[] = [];
   // eslint-disable-next-line no-restricted-syntax
@@ -77,7 +75,7 @@ const BlockConfigures = () => {
     }
   }
 
-  if (selectedNode == null) {
+  if (!element) {
     return <></>;
   }
   return (

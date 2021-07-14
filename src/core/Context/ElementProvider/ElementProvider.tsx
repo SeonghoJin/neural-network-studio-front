@@ -2,15 +2,17 @@ import { FlowElement } from 'react-flow-renderer';
 import React, {
   createContext, useContext, useReducer,
 } from 'react';
+import ElementsStorage from '../../../Storage/ElementsStorage';
 
 interface Action {
-  type : string,
+  type : string
   payLoad : FlowElement[],
 }
 
 const ElementReducer = (state : FlowElement[], action : Action) : FlowElement[] => {
   if (action.type === 'renew') {
     const newState = (action.payLoad);
+    ElementsStorage.setElements(newState);
     return newState;
   }
   throw new Error(`Unhandled action type: ${action.type}`);

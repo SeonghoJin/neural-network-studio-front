@@ -1,7 +1,8 @@
 import ReactFlow, {
-  Background, Controls,
+  addEdge,
+  Background, Connection, Controls, Edge, Elements, removeElements, useStoreState,
 } from 'react-flow-renderer';
-import React, { useRef, useState } from 'react';
+import React, { KeyboardEventHandler, useRef, useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 import {
   useElementDispatch,
@@ -15,14 +16,32 @@ const useStyle = makeStyles({
   ReactFlowWrapper: {
     flexGrow: 1,
   },
+  reactFlow: {
+    '&:focus': {
+      border: 'initial',
+    },
+  },
 });
 
 const TestReactFlow = () => {
   const classes = useStyle();
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
+  const selectedElements = useStoreState((state) => state.selectedElements);
   const elements = useElementState();
   const elementsDispatch = useElementDispatch();
+  const onElementsRemove = (elementsToRemove : Elements<any>) => {
+    elementsDispatch({
+      type: 'renew',
+      payLoad: removeElements(elementsToRemove, elements),
+    });
+  };
+  const onConnect = (params : Edge | Connection) => {
+    elementsDispatch({
+      type: 'renew',
+      payLoad: addEdge(params, elements),
+    });
+  };
 
   const onDragOver = (e : React.DragEvent) => {
     e.preventDefault();
@@ -70,16 +89,25 @@ const TestReactFlow = () => {
         type: 'renew',
         payLoad: newElements,
       });
-      ElementsStorage.setElements(newElements);
     }
   };
 
+  const onKeyDown : KeyboardEventHandler = (event) => {
+    if (event.code === 'Delete' && selectedElements) {
+      onElementsRemove(selectedElements);
+    }
+  };
   return (
     <div ref={reactFlowWrapper} className={classes.ReactFlowWrapper}>
-      <ReactFlow elements={elements}
+      <ReactFlow className={classes.reactFlow}
+                 elements={elements}
                  onDrop={onDrop}
                  onDragOver={onDragOver}
                  onLoad={onLoad}
+                 onConnect={onConnect}
+                 onKeyDown={onKeyDown}
+                 onElementsRemove={onElementsRemove}
+                 tabIndex={0}
       >
         <Controls style={{
           top: 10,
