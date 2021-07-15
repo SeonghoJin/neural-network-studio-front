@@ -4,15 +4,16 @@ import ReactFlow, {
   Connection,
   Controls,
   Edge,
-  Elements,
+  Elements, FlowExportObject,
   OnLoadParams,
   removeElements,
   useStoreState,
+  useZoomPanHelper,
 } from 'react-flow-renderer';
 import React, {
-  KeyboardEventHandler, useRef, useState,
+  KeyboardEventHandler, useCallback, useRef, useState,
 } from 'react';
-import { makeStyles } from '@material-ui/core';
+import { Button, makeStyles } from '@material-ui/core';
 import localforage from 'localforage';
 import {
   useElementDispatch,
@@ -31,13 +32,21 @@ const useStyle = makeStyles({
       border: 'initial',
     },
   },
+  saveButton: {
+    position: 'absolute',
+    zIndex: 1000,
+    top: 10,
+    left: 40,
+    backgroundColor: '#F7F7F7',
+  },
 });
 
 localforage.config({
-  name: 'ZoomPanHelperTransition',
+  name: 'flowInstance',
   storeName: 'TransitionStore',
 });
 
+const TransitionKey = 'TrnasitionKey';
 const TestReactFlow = () => {
   const classes = useStyle();
   const reactFlowWrapper = useRef(null);
@@ -45,6 +54,15 @@ const TestReactFlow = () => {
   const selectedElements = useStoreState((state) => state.selectedElements);
   const elements = useElementState();
   const elementsDispatch = useElementDispatch();
+  const { transform } = useZoomPanHelper();
+
+  const onSave = useCallback(() => {
+    if (reactFlowInstance) {
+      const flow = reactFlowInstance.toObject();
+      localforage.setItem(TransitionKey, flow);
+    }
+  }, [reactFlowInstance]);
+
   const onElementsRemove = (elementsToRemove : Elements<any>) => {
     elementsDispatch({
       type: 'renew',
@@ -76,6 +94,16 @@ const TestReactFlow = () => {
         instance.fitView();
       }
     };
+
+    const restoreFlow = async () => {
+      const flow = (await localforage.getItem(TransitionKey)) as FlowExportObject;
+
+      if (flow) {
+        const [x = 0, y = 0] = flow.position;
+        transform({ x, y, zoom: flow.zoom || 0 });
+      }
+    };
+    restoreFlow();
     restoreElements();
   };
 
@@ -129,6 +157,9 @@ const TestReactFlow = () => {
           left: 10,
           bottom: 'initial',
         }}/>
+        <Button onClick={onSave} className={classes.saveButton}>
+          Save
+        </Button>
         <Background color="#aaa" />
       </ReactFlow>
     </div>
