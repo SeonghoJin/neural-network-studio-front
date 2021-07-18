@@ -10,19 +10,19 @@ export enum BlockType{
   // eslint-disable-next-line no-unused-vars
   Conv2D= 'Conv2D',
   // eslint-disable-next-line no-unused-vars
-  AveragePooling2D= 'average_pooling_2D',
+  AveragePooling2D= 'AveragePooling2D',
   // eslint-disable-next-line no-unused-vars
-  MaxPool2D= 'max_pool_2D',
+  MaxPool2D= 'MaxPool2D',
   // eslint-disable-next-line no-unused-vars
-  Activation= 'activation',
+  Activation= 'Activation',
   // eslint-disable-next-line no-unused-vars
-  Input= 'input',
+  Input= 'Input',
   // eslint-disable-next-line no-unused-vars
-  Dropout= 'dropout',
+  Dropout= 'Dropout',
   // eslint-disable-next-line no-unused-vars
-  BatchNormalization= 'batch_normalization',
+  BatchNormalization= 'BatchNormalization',
   // eslint-disable-next-line no-unused-vars
-  Flatten= 'flatten'
+  Flatten= 'Flatten'
 }
 
 export interface BlockState{
@@ -35,7 +35,7 @@ export interface BlockState{
   config: BlockConfig;
 }
 
-interface BlockConfig {}
+export interface BlockConfig {}
 export class DenseConfig implements BlockConfig {
   units: number = 0;
 }

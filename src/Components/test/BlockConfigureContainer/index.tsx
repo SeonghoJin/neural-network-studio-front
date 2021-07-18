@@ -7,6 +7,7 @@ import {
   useElementDispatch,
   useElementState,
 } from '../../../core/Context/ElementProvider/ElementProvider';
+import { BlockState } from '../../../core/block/BlockState';
 
 const useBlockConfiguresStyle = makeStyles({
   wrapper: {
@@ -40,7 +41,7 @@ const BlockConfigures = () => {
   const elementDispatch = useElementDispatch();
   const nodeId = selectedNode?.id;
   const element : null | FlowElement = elements.filter((node) => node.id === nodeId)[0];
-  const data = element?.data;
+  const data : BlockState | null = element?.data;
   const onChange = (key : string, value : string) => {
     const newElement = elements?.map((node: FlowElement) => {
       if (node.id !== nodeId) {
@@ -61,13 +62,13 @@ const BlockConfigures = () => {
   };
   const properties : any[] = [];
   // eslint-disable-next-line no-restricted-syntax
-  for (const key in data) {
-    if ({}.hasOwnProperty.call(data, key)) {
+  for (const key in data?.config) {
+    if ({}.hasOwnProperty.call(data?.config, key)) {
       properties.push(
         <li key={key}>
           <TextInput
           propertyName={key}
-          propertyContent={data[key]}
+          propertyContent={(data?.config as any)[key]}
           onPropertyChange={onChange}
           />
         </li>,

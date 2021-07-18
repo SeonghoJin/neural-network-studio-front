@@ -22,6 +22,7 @@ import {
 import { getNodeId } from '../../../util';
 import ElementsStorage from '../../../Storage/ElementsStorage';
 import { BlockState } from '../../../core/block/BlockState';
+import convertGraphBeforeRun from '../../../core/GraphEngine';
 
 const useStyle = makeStyles({
   ReactFlowWrapper: {
@@ -31,6 +32,13 @@ const useStyle = makeStyles({
     '&:focus': {
       border: 'initial',
     },
+  },
+  runButton: {
+    position: 'absolute',
+    zIndex: 1000,
+    top: 10,
+    left: 110,
+    backgroundColor: '#F7F7F7',
   },
   saveButton: {
     position: 'absolute',
@@ -60,8 +68,16 @@ const TestReactFlow = () => {
     if (reactFlowInstance) {
       const flow = reactFlowInstance.toObject();
       localforage.setItem(TransitionKey, flow);
+      elementsDispatch({
+        type: 'renew',
+        payLoad: flow.elements,
+      });
     }
   }, [reactFlowInstance]);
+
+  const onRun = () => {
+    convertGraphBeforeRun(elements);
+  };
 
   const onElementsRemove = (elementsToRemove : Elements<any>) => {
     elementsDispatch({
@@ -124,7 +140,7 @@ const TestReactFlow = () => {
         position,
         data: {
           label: `${type} node`,
-          ...data.config,
+          ...data,
         },
       };
       const newElements = elements.concat(newNode);
@@ -159,6 +175,9 @@ const TestReactFlow = () => {
         }}/>
         <Button onClick={onSave} className={classes.saveButton}>
           Save
+        </Button>
+        <Button onClick={onRun} className={classes.runButton}>
+          Run
         </Button>
         <Background color="#aaa" />
       </ReactFlow>
