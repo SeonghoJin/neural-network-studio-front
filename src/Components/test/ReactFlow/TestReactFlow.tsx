@@ -23,6 +23,8 @@ import { getNodeId } from '../../../util';
 import ElementsStorage from '../../../Storage/ElementsStorage';
 import { BlockState } from '../../../core/block/BlockState';
 import convertGraphBeforeRun from '../../../core/GraphEngine';
+import { useProjectConfigState } from '../../../core/Context/ProjectConfigProvider';
+import { getPythonCode } from '../../../API/project';
 
 const useStyle = makeStyles({
   ReactFlowWrapper: {
@@ -62,6 +64,7 @@ const TestReactFlow = () => {
   const selectedElements = useStoreState((state) => state.selectedElements);
   const elements = useElementState();
   const elementsDispatch = useElementDispatch();
+  const projectConfig = useProjectConfigState();
   const { transform } = useZoomPanHelper();
 
   const onSave = useCallback(() => {
@@ -75,8 +78,9 @@ const TestReactFlow = () => {
     }
   }, [reactFlowInstance]);
 
-  const onRun = () => {
-    convertGraphBeforeRun(elements);
+  const onRun = async () => {
+    const graph = convertGraphBeforeRun(elements);
+    await getPythonCode(graph, projectConfig);
   };
 
   const onElementsRemove = (elementsToRemove : Elements<any>) => {

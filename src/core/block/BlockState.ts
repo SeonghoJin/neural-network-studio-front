@@ -5,24 +5,16 @@ export enum BlockCatergory {
 }
 
 export enum BlockType{
-  // eslint-disable-next-line no-unused-vars
   Dense= 'Dense',
-  // eslint-disable-next-line no-unused-vars
   Conv2D= 'Conv2D',
-  // eslint-disable-next-line no-unused-vars
   AveragePooling2D= 'AveragePooling2D',
-  // eslint-disable-next-line no-unused-vars
   MaxPool2D= 'MaxPool2D',
-  // eslint-disable-next-line no-unused-vars
   Activation= 'Activation',
-  // eslint-disable-next-line no-unused-vars
   Input= 'Input',
-  // eslint-disable-next-line no-unused-vars
   Dropout= 'Dropout',
-  // eslint-disable-next-line no-unused-vars
   BatchNormalization= 'BatchNormalization',
-  // eslint-disable-next-line no-unused-vars
-  Flatten= 'Flatten'
+  Flatten= 'Flatten',
+  Custom = 'Custom',
 }
 
 export interface BlockState{

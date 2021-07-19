@@ -8,6 +8,8 @@ import TestReactFlow from '../../../../Components/test/ReactFlow/TestReactFlow';
 import TestSideBarRight1 from '../../../../Components/test/SideBar/TestSideBarRight1';
 import { ReactFlowElementProvider } from '../../../../core/Context/ElementProvider/ElementProvider';
 
+import { ProjectConfigProvider } from '../../../../core/Context/ProjectConfigProvider';
+
 const useStyle = makeStyles({
   wrapper: {
     height: '100vh',
@@ -24,17 +26,20 @@ const useStyle = makeStyles({
 
 const Editor = () => {
   const classes = useStyle();
+
   return (
   <div className={classes.wrapper}>
     <TestNav1></TestNav1>
     <Container className={classes.container}>
-      <ReactFlowElementProvider>
-        <ReactFlowProvider>
-          <TestSideBarLeft1/>
-          <TestReactFlow/>
-          <TestSideBarRight1/>
-        </ReactFlowProvider>
-      </ReactFlowElementProvider>
+      <ProjectConfigProvider>
+        <ReactFlowElementProvider>
+          <ReactFlowProvider>
+            <TestSideBarLeft1/>
+            <TestReactFlow/>
+            <TestSideBarRight1/>
+          </ReactFlowProvider>
+        </ReactFlowElementProvider>
+      </ProjectConfigProvider>
     </Container>
   </div>
   );

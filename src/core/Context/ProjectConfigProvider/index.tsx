@@ -1,49 +1,35 @@
-import { FlowElement } from 'react-flow-renderer';
 import React, {
   createContext, useContext, useReducer,
 } from 'react';
-import ElementsStorage from '../../../Storage/ElementsStorage';
+import ProjectConfig from '../../project/config';
 
 interface Action {
   type : string
-  payLoad : FlowElement[],
+  payLoad : ProjectConfig,
 }
 
-const ElementReducer = (state : FlowElement[], action : Action) : FlowElement[] => {
-  if (action.type === 'renew') {
-    const newState = (action.payLoad);
-    ElementsStorage.setElements(newState);
-    return newState;
-  }
+const ProjectConfigReducer = (state :ProjectConfig, action : Action) : any => {
   throw new Error(`Unhandled action type: ${action.type}`);
 };
 
-const ElementStateContext = createContext<FlowElement[] | null>(null);
-const ElementDispatchContext = createContext<any>(null);
+const ProjectConfigContext = createContext<ProjectConfig | null>(null);
+const ProjectConfigDispatchContext = createContext<any>(null);
 
-export const ReactFlowElementProvider = ({ children } : {children : any}) => {
-  const [state, dispatch] = useReducer(ElementReducer, []);
+export const ProjectConfigProvider = ({ children } : {children : any}) => {
+  const [state, dispatch] = useReducer(ProjectConfigReducer, new ProjectConfig());
   return (
-    <ElementStateContext.Provider value={state}>
-    <ElementDispatchContext.Provider value={dispatch}>
-      {children}
-      </ElementDispatchContext.Provider>
-      </ElementStateContext.Provider>
+    <ProjectConfigContext.Provider value={state}>
+      <ProjectConfigDispatchContext.Provider value={dispatch}>
+        {children}
+      </ProjectConfigDispatchContext.Provider>
+    </ProjectConfigContext.Provider>
   );
 };
 
-export function useElementState() {
-  const context = useContext(ElementStateContext);
+export function useProjectConfigState() {
+  const context = useContext(ProjectConfigContext);
   if (!context) {
     throw new Error('Cannot find ElementStateContext');
-  }
-  return context;
-}
-
-export function useElementDispatch() {
-  const context = useContext(ElementDispatchContext);
-  if (!context) {
-    throw new Error('Cannot find ElementDispatchContext');
   }
   return context;
 }

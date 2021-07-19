@@ -51,7 +51,10 @@ const BlockConfigures = () => {
         ...node,
         data: {
           ...data,
-          [key]: value,
+          config: {
+            ...data?.config,
+              [key]: value,
+          },
         },
       };
     });
