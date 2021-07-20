@@ -9,10 +9,10 @@ export interface LocationProps {
     } | undefined
 }
 
-export interface MatchProps{
+export interface MatchProps<T>{
     match : {
         isExact : boolean | undefined,
-        params : any | undefined,
+        params : T | undefined,
         path : string | undefined,
         url : string | undefined
     } | undefined
