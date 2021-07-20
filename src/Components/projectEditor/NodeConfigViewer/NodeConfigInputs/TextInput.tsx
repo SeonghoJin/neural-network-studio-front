@@ -32,10 +32,9 @@ const useStyle = makeStyles({
   },
 });
 
-const Input = ({ propertyName, propertyContent, onChange }
-  : {propertyName: string, propertyContent: string, onChange: any}) => {
+const TextInput = ({ propertyName, propertyContent, onPropertyChange }
+  : {propertyName: string, propertyContent: string, onPropertyChange: any}) => {
   const classes = useStyle();
-
   return (
     <div className={classes.wrapper}>
       <div className={classes.container}>
@@ -46,11 +45,11 @@ const Input = ({ propertyName, propertyContent, onChange }
         </div>
         <div className={classes.propertyContentWrapper}>
           <input
-            onChange={(e) => { onChange(propertyName, e.target.value); } }
+            onChange={(e) => { onPropertyChange(propertyName, e.target.value); } }
             value={propertyContent}
             type="text"
             className={classes.propertyContentContainer}
-            >
+          >
           </input>
         </div>
       </div>
@@ -58,4 +57,4 @@ const Input = ({ propertyName, propertyContent, onChange }
   );
 };
 
-export default Input;
+export default TextInput;

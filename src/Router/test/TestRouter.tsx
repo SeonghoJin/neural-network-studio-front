@@ -1,9 +1,9 @@
 import { Route } from 'react-router-dom';
 import React from 'react';
-import ReactFlow from '../Pages/test/react-flow/ReactFlowTest';
-import TestPageRouter from '../Pages/test/page';
-import TestElementRouter from '../Pages/test/elements';
-import TestReactRouter from '../Pages/test/react';
+import ReactFlow from 'react-flow-renderer';
+import TestPageRouter from '../../Pages/test/page';
+import TestElementRouter from '../../Pages/test/elements';
+import TestReactRouter from '../../Pages/test/react';
 
 function TestRouter() {
   return (

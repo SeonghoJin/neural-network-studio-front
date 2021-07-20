@@ -17,3 +17,7 @@ ul {
 * {
     font-family: "naver";
 }
+
+a {
+    text-decoration: none;
+}

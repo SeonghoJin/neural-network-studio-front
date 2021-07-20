@@ -72,7 +72,7 @@ const BlockConfigures = () => {
           <TextInput
           propertyName={key}
           propertyContent={(data?.config as any)[key]}
-          onPropertyChange={onChange}
+          onChange={onChange}
           />
         </li>,
       );
