@@ -61,7 +61,6 @@ const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState<null | OnLoadParams>(null);
   const selectedElements = useStoreState((state) => state.selectedElements);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     onChangeSelectedElement(selectedElements)
