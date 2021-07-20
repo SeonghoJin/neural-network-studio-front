@@ -1,5 +1,5 @@
 import { Button, makeStyles } from '@material-ui/core';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { BlockState } from '../../../core/block/BlockState';
 
 const useBlockStyle = makeStyles({
@@ -15,13 +15,12 @@ const useBlockStyle = makeStyles({
 
 const Node = ({ state } : {state : BlockState}) => {
   const classes = useBlockStyle();
-  const onDragStart = (event : React.DragEvent, nodeType : string) => {
+
+  const onDragStart = useCallback((event : React.DragEvent) => {
     const localEvent = event;
-    localEvent.dataTransfer.setData('application/nodetype', nodeType);
-    console.log(localEvent.dataTransfer.types);
     localEvent.dataTransfer.setData('application/nodedata', JSON.stringify(state));
     localEvent.dataTransfer.effectAllowed = 'copy';
-  };
+  }, [state]);
 
   return (
     <li className={classes.Wrapper}>
@@ -30,7 +29,7 @@ const Node = ({ state } : {state : BlockState}) => {
         draggable={true}
         onDragStart={
           (event) => {
-            onDragStart(event, state.type);
+            onDragStart(event);
           }
         }>
         <h5 style={{ margin: 0 }}>

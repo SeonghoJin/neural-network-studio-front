@@ -10,7 +10,6 @@ const testNode1Styles = {
 const TestNode1Component = (props : TestNode1) => (
             <div style={testNode1Styles}>
                 <Handle type="target" position={Position.Left} style={{ borderRadius: 0 }} />
-                <div>{props.data?.text}</div>
                 <Handle
                     type="source"
                     position={Position.Left}

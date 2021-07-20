@@ -4,14 +4,6 @@ import TestNode1 from '../../../core/nodetypes/test/TestNode1';
 import { Position } from '../../../core/types';
 
 const elements : Array<Node | Edge> = [
-  new TestNode1('1', new Position(100, 300))
-    .setData({
-      text: 'Hello',
-    }),
-  new TestNode1('2', new Position(200, 400))
-    .setData({
-      text: 'World',
-    }),
 ];
 
 const CustomNodeExample = () => (

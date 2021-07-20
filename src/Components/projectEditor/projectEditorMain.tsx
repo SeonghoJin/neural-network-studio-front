@@ -1,19 +1,6 @@
 import { Container, makeStyles } from '@material-ui/core';
-import ProjectEditorGraph from './projectEditorGraph';
 import ProjectEditorLeftSideBar from './projectEditorSideBar/ProjectEditorLeftSideBar';
-import { useRef, useState } from 'react';
-import {
-  OnLoadParams,
-  ReactFlowProvider,
-  useStoreState,
-  useZoomPanHelper
-} from 'react-flow-renderer';
-import {
-  useElementDispatch,
-  useElementState
-} from '../../core/Context/ElementProvider/ElementProvider';
-import { useProjectConfigState } from '../../core/Context/ProjectConfigProvider';
-import ElementsStorage from '../../Storage/ElementsStorage';
+import ProjectEditorGraphContainer from './ProjectEditorGraphContainer';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -37,9 +24,7 @@ const ProjectEditorMain = () => {
       <Container className={classes.container}>
         <ProjectEditorLeftSideBar/>
         <div className={classes.graphWrapper}>
-          <ReactFlowProvider>
-            <ProjectEditorGraph/>
-          </ReactFlowProvider>
+          <ProjectEditorGraphContainer/>
         </div>
       </Container>
     </div>

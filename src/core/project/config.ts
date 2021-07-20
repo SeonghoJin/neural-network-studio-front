@@ -1,16 +1,30 @@
-class ProjectConfig {
+export interface IProjectConfig{
+  batch_size?: number;
 
-  private batch_size?: number;
+  epochs?: number;
 
-  private epochs?: number;
+  learning_rate?: number;
 
-  private learning_rate?: number;
+  loss?: string;
 
-  private loss?: string;
+  metrics?: string[];
 
-  private metrics?: string[];
+  optimizer?: string;
+}
 
-  private optimizer?: string;
+class ProjectConfig implements IProjectConfig{
+
+  batch_size?: number;
+
+  epochs?: number;
+
+  learning_rate?: number;
+
+  loss?: string;
+
+  metrics?: string[];
+
+  optimizer?: string;
 
   constructor(config? : ProjectConfig) {
     this.optimizer = config?.optimizer || 'adam';

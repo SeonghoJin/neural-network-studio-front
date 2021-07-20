@@ -10,7 +10,7 @@ import ReactFlow, {
 } from 'react-flow-renderer';
 import TestNode1 from '../../../core/nodetypes/test/TestNode1';
 import { Position } from '../../../core/types';
-import { CustomTypes, nodetypes } from '../../../core/nodetypes';
+import { nodetypes } from '../../../core/nodetypes';
 
 const initialElements : Elements = [
   {
@@ -120,10 +120,6 @@ const initialElements : Elements = [
     animated: true,
     labelStyle: { fill: '#f6ab6c', fontWeight: 700 },
   },
-  new TestNode1('test', new Position(250, 300))
-    .setData({
-      text: '123',
-    }),
 ];
 
 const onLoad = (reactFlowInstance : any) => {
@@ -154,7 +150,6 @@ const test4 = () => {
                 if (n.type === 'input') return '#0041d0';
                 if (n.type === 'output') return '#ff0072';
                 if (n.type === 'default') return '#1a192b';
-                if (n.type === CustomTypes.testNode1) return '#aaaaaa';
                 return '#eee';
               }}
               nodeColor={(n) => {

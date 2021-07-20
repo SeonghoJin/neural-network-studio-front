@@ -16,6 +16,7 @@ class Node{
   input: string | null = null;
   ouput: string | null = null;
   config: BlockConfig
+
   constructor(element: FlowElement) {
     const data = element.data as BlockState;
     this.catergory = data.catergory;

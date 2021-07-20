@@ -43,7 +43,6 @@ export class DenseBlockState implements BlockState {
 export class Conv2DConfig implements BlockConfig {
   filters : number = 0;
 
-  // eslint-disable-next-line camelcase
   kernel_size : string = '';
 
   strides : string = '';
@@ -60,7 +59,6 @@ export class Conv2DBlockState implements BlockState {
   type: BlockType = BlockType.Conv2D;
 }
 export class AveragePooling2DConfig implements BlockConfig {
-  // eslint-disable-next-line camelcase
   pool_size : string = '';
 
   strides : string = '';
@@ -78,7 +76,6 @@ export class AveragePooling2DBlockState implements BlockState {
 }
 
 export class MaxPool2DConfig implements BlockConfig {
-  // eslint-disable-next-line camelcase
   pool_size: string = '';
 
   strides: string = '';

@@ -12,7 +12,6 @@ import ReactFlow, {
   Handle,
   Position,
 } from 'react-flow-renderer';
-import TestNode2 from '../../../core/nodetypes/test/TestNode2';
 import { nodetypes } from '../../../core/nodetypes';
 
 const ColorSelectorNode = memo(({ data } : {data : any}) => (
@@ -86,13 +85,6 @@ const CustomNodeFlow = () => {
     };
 
     setElements([
-      new TestNode2('6', { x: 0, y: 30 })
-        .setData({
-          text: 'abc',
-          onClick: (event) => {
-            console.log(event.target);
-          },
-        }),
       {
         id: '1',
         type: 'input',
