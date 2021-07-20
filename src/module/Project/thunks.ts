@@ -3,8 +3,7 @@ import { RootState } from '../index';
 import { getProjectAsync, putProjectContentAsync } from './actions';
 import { ProjectActionTypes } from './types';
 import { getProject, updateProjectContent } from '../../API/project';
-import { IProjectContentDto } from '../../API/project/types';
-import { FlowElement } from 'react-flow-renderer';
+import { ReactFlowState } from '../ReactFlow';
 
 export function getProjectThunk(projectNo: string): ThunkAction<
   void, RootState, null, ProjectActionTypes>{
@@ -20,7 +19,7 @@ export function getProjectThunk(projectNo: string): ThunkAction<
   }
 }
 
-export function updateProjectThunk(projectNo: string , projectContent: { output: string; layers: Array<FlowElement<any>>})
+export function updateProjectThunk(projectNo: string , projectContent: { output: string; flowState: ReactFlowState})
 : ThunkAction<void, RootState, null, ProjectActionTypes>{
   return async dispatch => {
     const {request, success, failure} = putProjectContentAsync;

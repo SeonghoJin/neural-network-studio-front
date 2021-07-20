@@ -1,5 +1,6 @@
 import { Elements, FlowElement, FlowExportObject } from 'react-flow-renderer';
 import { createStandardAction } from '../../util';
+import { ReactFlowState } from './type';
 export enum ReactFlowAction {
   setFlowInstance = 'set',
   setElments = 'setElements',
@@ -16,7 +17,7 @@ type updateElementDataType = {
   value: any,
 }
 
-export const setFlowInstance = createStandardAction(ReactFlowAction.setFlowInstance)<FlowExportObject>();
+export const setFlowInstance = createStandardAction(ReactFlowAction.setFlowInstance)<ReactFlowState>();
 export const setElements = createStandardAction(ReactFlowAction.setElments)<FlowElement[]>();
 export const setPosition = createStandardAction(ReactFlowAction.setPosition)<[number, number]>();
 export const setZoom = createStandardAction(ReactFlowAction.setZoom)<number>();
