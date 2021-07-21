@@ -1,13 +1,12 @@
 import { ReactFlowActionTypes, ReactFlowState } from './type';
 import { createReducer } from 'typesafe-actions';
 import { ReactFlowAction } from './actions';
-import { BlockState } from '../../core/block/BlockState';
 
 const initialState: ReactFlowState = {
   elements: [],
   position : [0, 0],
   zoom: 1,
-  selectedElement: null
+  selectedElement: null,
 }
 
 const reactFlow = createReducer<ReactFlowState, ReactFlowActionTypes>(initialState, {

@@ -2,7 +2,7 @@ import { Elements, FlowElement, FlowExportObject } from 'react-flow-renderer';
 import { createStandardAction } from '../../util';
 import { ReactFlowState } from './type';
 export enum ReactFlowAction {
-  setFlowInstance = 'set',
+  setFlowInstance = 'setFlowInstance',
   setElments = 'setElements',
   setPosition = 'setPosition',
   setZoom = 'setZoom',

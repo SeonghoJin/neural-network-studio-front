@@ -11,7 +11,7 @@ const useStyle = makeStyles({
     height: '100%',
     display: 'flex',
   },
-  graphWrapper: {
+  contentWrapper: {
     flexGrow: 1,
   }
 })
@@ -23,7 +23,7 @@ const ProjectEditorMain = () => {
     <div className={classes.wrapper}>
       <Container className={classes.container}>
         <ProjectEditorLeftSideBar/>
-        <div className={classes.graphWrapper}>
+        <div className={classes.contentWrapper}>
           <ProjectEditorGraphContainer/>
         </div>
       </Container>

@@ -1,11 +1,10 @@
 import { LocationProps, MatchProps } from '../core/types';
-import ProjectEditorNav from '../Components/projectEditor/projectEditorNav';
-import { makeStyles } from '@material-ui/core';
+import ProjectEditorNav from '../Components/projectEditor/ProjectEditorNav/projectEditorNav';
+import { makeStyles, Modal } from '@material-ui/core';
 import ProjectEditorMain from '../Components/projectEditor/projectEditorMain';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../module';
 import { useEffect } from 'react';
-import project, { getProjectAsync } from '../module/Project';
 import { getProjectThunk } from '../module/Project/thunks';
 
 const useStyle = makeStyles({
@@ -32,7 +31,6 @@ const ProjectEditor = (props : MatchProps<ProjectEditorParams> & LocationProps) 
   const projectNo = props.match?.params?.projectNo as string;
   const {data, loading, error} = useSelector((state: RootState) => state.project);
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getProjectThunk(projectNo));
   }, [projectNo])
@@ -44,7 +42,8 @@ const ProjectEditor = (props : MatchProps<ProjectEditorParams> & LocationProps) 
     <div className={classes.content}>
       <ProjectEditorMain/>
     </div>
-  </>)
+  </>);
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.container}>

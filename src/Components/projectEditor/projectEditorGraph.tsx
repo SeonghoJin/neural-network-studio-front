@@ -7,13 +7,18 @@ import ReactFlow, {
   OnLoadParams,
   useStoreState,
   Node,
+  Elements,
+  Connection,
+  Edge,
+  addEdge,
+  removeElements,
 } from 'react-flow-renderer';
 import convertGraphBeforeRun from '../../core/GraphEngine';
 import { getPythonCode, updateProjectContent } from '../../API/project';
 import { useDispatch, useSelector } from 'react-redux';
-import {
+import reactFlow, {
   ReactFlowState,
-  setElements,
+  setFlowInstance,
 } from '../../module/ReactFlow';
 import { BlockState } from '../../core/block/BlockState';
 import { getNodeId } from '../../util';
@@ -47,24 +52,32 @@ const useStyle = makeStyles({
 });
 
 interface PrjectEditorGrahpProps{
-  flowState: ReactFlowState
-  onChangeSelectedElement: any
-  onConnect: any
-  onSave: any
-  onElementRemove: any
-  onDrop: any
+  flowState: ReactFlowState | undefined
 };
 
 const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
   const classes = useStyle();
-  const {flowState, onChangeSelectedElement, onElementRemove, onConnect, onSave, onDrop} = props;
+  const {flowState} = props;
+  const [elements, setElements] = useState<Elements>(flowState?.elements || []);
   const reactFlowWrapper = useRef<HTMLDivElement | null>(null);
   const [reactFlowInstance, setReactFlowInstance] = useState<null | OnLoadParams>(null);
   const selectedElements = useStoreState((state) => state.selectedElements);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    onChangeSelectedElement(selectedElements)
-  }, [selectedElements])
+    dispatch(setFlowInstance({
+      ...reactFlowInstance?.toObject() as ReactFlowState,
+      selectedElement: selectedElements,
+    }));
+  }, [selectedElements, reactFlowInstance?.toObject()]);
+
+  const onConnect = useCallback((params : Edge | Connection) => {
+    setElements(addEdge(params, elements));
+  }, [elements]);
+
+  const onElementsRemove = useCallback((elementsToRemove : Elements<any>) => {
+    setElements(removeElements(elementsToRemove, elements));
+  }, [elements]);
 
   const onDragOver = useCallback((e : React.DragEvent) => {
     e.preventDefault();
@@ -72,7 +85,7 @@ const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
     localEvent.dataTransfer.dropEffect = 'copy';
   }, []);
 
-  const onDropCallback =(e : React.DragEvent) => {
+  const onDrop = useCallback((e : React.DragEvent) => {
     e.preventDefault();
     const localEvent = e;
     if (localEvent.dataTransfer.types.includes('application/nodedata')) {
@@ -91,10 +104,9 @@ const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
           ...nodedata,
         },
       };
-      return newNode;
+      setElements(elements.concat(newNode));
     }
-    return null;
-  };
+  }, [elements, reactFlowInstance]);
 
   const onLoad = useCallback((instance: OnLoadParams) => {
     setReactFlowInstance(instance);
@@ -102,20 +114,20 @@ const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
 
   const onKeyDown : KeyboardEventHandler = useCallback((event) => {
     if (event.code === 'Delete' && selectedElements) {
-      onElementRemove(selectedElements);
+      setElements(removeElements(selectedElements, elements));
     }
   }, [selectedElements]);
 
   return (
     <div ref={reactFlowWrapper} className={classes.wrapper}>
       <ReactFlow className={classes.reactFlow}
-                 elements={flowState.elements}
-                 onDrop={(e) => {onDrop(e)(onDropCallback)}}
+                 elements={elements}
+                 onDrop={onDrop}
                  onDragOver={onDragOver}
                  onLoad={onLoad}
                  onConnect={onConnect}
                  onKeyDown={onKeyDown}
-                 onElementsRemove={onElementRemove}
+                 onElementsRemove={onElementsRemove}
                  tabIndex={0}
                  nodeTypes={nodetypes}
       >
@@ -126,12 +138,9 @@ const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
         }}/>
         <Button
           className={classes.saveButton}
-          onClick={() => {onSave(reactFlowInstance)}}
+          // onClick={() => {onSave(reactFlowInstance)}}
           >
-          Save
-        </Button>
-        <Button className={classes.runButton}>
-          Run
+         Run
         </Button>
         <MiniMap
                  nodeStrokeColor={(n) => {
