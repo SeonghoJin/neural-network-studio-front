@@ -58,7 +58,7 @@ interface PrjectEditorGrahpProps{
 const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
   const classes = useStyle();
   const {flowState, onChangeSelectedElement, onElementRemove, onConnect, onSave, onDrop} = props;
-  const reactFlowWrapper = useRef(null);
+  const reactFlowWrapper = useRef<HTMLDivElement | null>(null);
   const [reactFlowInstance, setReactFlowInstance] = useState<null | OnLoadParams>(null);
   const selectedElements = useStoreState((state) => state.selectedElements);
 
@@ -66,21 +66,21 @@ const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
     onChangeSelectedElement(selectedElements)
   }, [selectedElements])
 
-  const onDragOver = (e : React.DragEvent) => {
+  const onDragOver = useCallback((e : React.DragEvent) => {
     e.preventDefault();
     const localEvent = e;
     localEvent.dataTransfer.dropEffect = 'copy';
-  };
+  }, []);
 
-  const onDropCallback = (e : React.DragEvent) => {
+  const onDropCallback =(e : React.DragEvent) => {
     e.preventDefault();
     const localEvent = e;
     if (localEvent.dataTransfer.types.includes('application/nodedata')) {
       const nodedata = JSON.parse(localEvent.dataTransfer.getData(('application/nodedata'))) as BlockState;
-      const reactFlowBounds = (reactFlowWrapper.current as any).getBoundingClientRect();
+      const reactFlowBounds = reactFlowWrapper.current?.getBoundingClientRect();
       const position = (reactFlowInstance as any).project({
-        x: localEvent.clientX - reactFlowBounds.left,
-        y: localEvent.clientY - reactFlowBounds.top,
+        x: localEvent.clientX - (reactFlowBounds?.left || 0),
+        y: localEvent.clientY - (reactFlowBounds?.top || 0),
       });
       const newNode : Node = {
         id: getNodeId(),
