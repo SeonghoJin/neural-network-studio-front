@@ -1,10 +1,10 @@
 import * as actions from './actions';
 import { ActionType } from 'typesafe-actions';
-import { IProjectDto } from '../../API/project/types';
+import { IProjectDto } from '../../../API/project/types';
 
-export type APIActionTypes = ActionType<typeof actions>;
+export type ProjectAPIActionTypes = ActionType<typeof actions>;
 
-export type APIState = {
+export type ProjectAPIState = {
   getPythonCodeResult: {
     error: Error | null,
     loading: boolean,

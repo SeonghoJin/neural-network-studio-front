@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../module';
 import { useEffect } from 'react';
-import { getPythonCodeThunk } from '../../module/API/thunks';
+import { getPythonCodeThunk } from '../../module/API/project/thunks';
 
 const ProjectEditorLearn = () => {
   const location = useLocation();

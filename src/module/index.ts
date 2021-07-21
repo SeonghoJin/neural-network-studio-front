@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import reactFlowInstance  from './ReactFlowInstance';
-import api from './API'
+import projectApi from './API/project'
 const rootReducer = combineReducers({
   reactFlowInstance,
-  api,
+  api: projectApi,
 })
 
 export default rootReducer

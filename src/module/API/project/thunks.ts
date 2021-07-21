@@ -1,13 +1,13 @@
-import { RootState } from '../index';
-import { APIActionTypes } from './types';
+import { RootState } from '../../index';
+import { ProjectAPIActionTypes } from './types';
 import { ThunkAction } from 'redux-thunk';
 import { getProjectAsync, getPythonCodeAsync, putProjectContentAsync } from './actions';
-import { getProject, getPythonCode, updateProjectContent } from '../../API/project';
-import { IFlowState } from '../../API/project/types';
+import { getProject, getPythonCode, updateProjectContent } from '../../../API/project';
+import { IFlowState } from '../../../API/project/types';
 
 export function updateProjectContentThunk(
   projectNo: string , projectContent: { output: string; flowState: IFlowState})
-: ThunkAction<void, RootState, null, APIActionTypes>{
+: ThunkAction<void, RootState, null, ProjectAPIActionTypes>{
   return async dispatch => {
     const {request, success, failure} = putProjectContentAsync;
     dispatch(request());
@@ -21,7 +21,7 @@ export function updateProjectContentThunk(
 }
 
 export function getProjectThunk(projectNo: string): ThunkAction<
-  void, RootState, null, APIActionTypes>{
+  void, RootState, null, ProjectAPIActionTypes>{
   return async dispatch => {
     const {request, success, failure} = getProjectAsync;
     dispatch(request());
@@ -35,7 +35,7 @@ export function getProjectThunk(projectNo: string): ThunkAction<
 }
 
 export function getPythonCodeThunk(projectNo : string) :
-  ThunkAction<void, RootState, null, APIActionTypes> {
+  ThunkAction<void, RootState, null, ProjectAPIActionTypes> {
   return async dispatch => {
     const {request, success, failure} = getPythonCodeAsync;
     dispatch(request());

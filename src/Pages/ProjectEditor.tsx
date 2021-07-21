@@ -5,7 +5,7 @@ import ProjectEditorMain from '../Components/projectEditor/projectEditorMain';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../module';
 import { useEffect } from 'react';
-import { getProjectThunk } from '../module/API/thunks';
+import { getProjectThunk } from '../module/API/project/thunks';
 
 const useStyle = makeStyles({
   wrapper: {

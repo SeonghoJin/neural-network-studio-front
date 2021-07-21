@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../module';
 import { useEffect } from 'react';
-import { updateProjectContentThunk } from '../../module/API/thunks';
+import { updateProjectContentThunk } from '../../module/API/project/thunks';
 
 const ProjectEditorSave = () => {
   const location = useLocation();

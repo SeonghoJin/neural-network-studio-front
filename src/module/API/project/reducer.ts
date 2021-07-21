@@ -1,8 +1,8 @@
 import { createReducer } from 'typesafe-actions';
-import { APIActionTypes, APIState } from './types';
-import { APIAction } from './actions';
+import { ProjectAPIActionTypes, ProjectAPIState } from './types';
+import { ProjectAPIAction } from './actions';
 
-const initialState: APIState = {
+const initialState: ProjectAPIState = {
   getPythonCodeResult: {
     error: null,
     loading: false,
@@ -25,8 +25,8 @@ const initialState: APIState = {
   }
 }
 
-const api = createReducer<APIState, APIActionTypes>(initialState, {
-  [APIAction.GET_PROJECT]: state => ({
+const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initialState, {
+  [ProjectAPIAction.GET_PROJECT]: state => ({
     ...state,
     getProjectResult: {
       loading: true,
@@ -34,7 +34,7 @@ const api = createReducer<APIState, APIActionTypes>(initialState, {
       data: null,
     }
   }),
-  [APIAction.GET_PROJECT_SUCCESS]: (state, action) => ({
+  [ProjectAPIAction.GET_PROJECT_SUCCESS]: (state, action) => ({
     ...state,
     getProjectResult: {
       loading: false,
@@ -42,7 +42,7 @@ const api = createReducer<APIState, APIActionTypes>(initialState, {
       data: action.payload
     }
   }),
-  [APIAction.GET_PROJECT_ERROR]: (state, action) => ({
+  [ProjectAPIAction.GET_PROJECT_ERROR]: (state, action) => ({
     ...state,
     getProjectResult: {
       loading: false,
@@ -50,7 +50,7 @@ const api = createReducer<APIState, APIActionTypes>(initialState, {
       data: null,
     }
   }),
-  [APIAction.PUT_PROJECT_CONFIG]: (state) => ({
+  [ProjectAPIAction.PUT_PROJECT_CONFIG]: (state) => ({
     ...state,
     putProjectConfigResult: {
       loading: true,
@@ -58,7 +58,7 @@ const api = createReducer<APIState, APIActionTypes>(initialState, {
       result: null,
     }
   }),
-  [APIAction.PUT_PROJECT_CONFIG_SUCCESS]: (state) => ({
+  [ProjectAPIAction.PUT_PROJECT_CONFIG_SUCCESS]: (state) => ({
     ...state,
     putProjectConfigResult: {
       loading: true,
@@ -69,7 +69,7 @@ const api = createReducer<APIState, APIActionTypes>(initialState, {
       },
     }
   }),
-  [APIAction.PUT_PROJECT_CONFIG_ERROR]: (state, action) => ({
+  [ProjectAPIAction.PUT_PROJECT_CONFIG_ERROR]: (state, action) => ({
     ...state,
     putProjectConfigResult: {
       loading: true,
@@ -77,7 +77,7 @@ const api = createReducer<APIState, APIActionTypes>(initialState, {
       result: null,
     }
   }),
-  [APIAction.PUT_PROJECT_CONTENT]: (state) => ({
+  [ProjectAPIAction.PUT_PROJECT_CONTENT]: (state) => ({
     ...state,
     putProjectContentResult: {
       loading: true,
@@ -85,7 +85,7 @@ const api = createReducer<APIState, APIActionTypes>(initialState, {
       result: null,
     }
   }),
-  [APIAction.PUT_PROJECT_CONTENT_SUCCESS]: (state) => ({
+  [ProjectAPIAction.PUT_PROJECT_CONTENT_SUCCESS]: (state) => ({
     ...state,
     putProjectContentResult: {
       loading: false,
@@ -96,7 +96,7 @@ const api = createReducer<APIState, APIActionTypes>(initialState, {
       },
     }
   }),
-  [APIAction.PUT_PROJECT_CONTENT_ERROR]: (state, action) => ({
+  [ProjectAPIAction.PUT_PROJECT_CONTENT_ERROR]: (state, action) => ({
     ...state,
     putProjectContentResult: {
       loading: true,
@@ -104,7 +104,7 @@ const api = createReducer<APIState, APIActionTypes>(initialState, {
       result: null,
     }
   }),
-  [APIAction.GET_PYTHON_CODE]: (state) => ({
+  [ProjectAPIAction.GET_PYTHON_CODE]: (state) => ({
     ...state,
     getPythonCodeResult: {
       loading: true,
@@ -112,7 +112,7 @@ const api = createReducer<APIState, APIActionTypes>(initialState, {
       data: null,
     }
   }),
-  [APIAction.GET_PTYHON_CODE_SUCCESS]: (state, action) => ({
+  [ProjectAPIAction.GET_PTYHON_CODE_SUCCESS]: (state, action) => ({
     ...state,
     getPythonCodeResult: {
       loading: false,
@@ -120,7 +120,7 @@ const api = createReducer<APIState, APIActionTypes>(initialState, {
       data: action.payload,
     }
   }),
-  [APIAction.GET_PYTHON_CODE_ERROR]: (state, action) => ({
+  [ProjectAPIAction.GET_PYTHON_CODE_ERROR]: (state, action) => ({
     ...state,
     getPythonCodeResult:{
       loading: false,
@@ -130,4 +130,4 @@ const api = createReducer<APIState, APIActionTypes>(initialState, {
   }),
 });
 
-export default api;
+export default projectApi;
