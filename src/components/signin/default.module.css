@@ -1,0 +1,60 @@
+.signin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signinLogo {
+    color: black;
+    margin-bottom: 40px;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputWrapper {
+    display: flex;
+    width: 400px;
+    margin-bottom: 5px;
+}
+
+.loginForm input {
+    padding: 12px;
+    font-size: 16px;
+    width: 100%;
+    border: solid lightgray 1px;
+    border-radius: 5px;
+    transition: ease-in .2s;
+}
+
+.loginForm input:focus {
+    border-color: black;
+    outline: none;
+}
+
+.loginButton {
+    width: 400px;
+    height: 40px;
+    margin: 5px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.others {
+    font-size: 12px;
+    justify-content: center;
+    color: lightgray;
+    text-align: center;
+    align-items: center;
+}
+
+.others a {
+    color: lightgray;
+    margin: 0 10px;
+}

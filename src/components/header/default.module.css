@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.topHeader {
+    background-color: black;
+}
+
+.headerWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 5%;
+    height: 60px;
+}
+
+.profile {
+    display: flex;
+}
+
+.logo a {
+    color: white;
+    text-decoration: none;
+}
+
+.profile {
+
+}
+
+.profile a {
+    color: white;
+    text-decoration: none;
+}
+
+.login {
+    font-weight: bold;
+    background-color: #61dafb;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+.signup {
+    font-weight: bold;
+    background-color: red;
+    border-radius: 5px;
+}
