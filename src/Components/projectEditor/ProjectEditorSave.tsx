@@ -1,27 +1,33 @@
 import { Redirect, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../module';
-import { updateProjectThunk } from '../../module/Project/thunks';
 import { useEffect } from 'react';
+import { useStoreState, useZoomPanHelper } from 'react-flow-renderer';
+import { updateProjectContentThunk } from '../../module/Project/API/thunks';
 
 const ProjectEditorSave = () => {
   const location = useLocation();
   const projectNo = location.pathname.split('/')[2];
-  const flowState = useSelector((state : RootState) => (state.reactFlow));
+  const flowState = useSelector((state : RootState) => (state.reactFlowInstance));
+  const {error, result, loading} = useSelector((state : RootState) => state.api.putProjectContentResult);
   const dispatch =  useDispatch();
-  const {error, data, loading} = useSelector((state : RootState) => state.project);
 
-  useEffect(() => {dispatch(updateProjectThunk(projectNo, {
-    output: "",
-    flowState: {
-      ...flowState
+  useEffect(() => {
+    if(flowState.instance != null){
+      console.log(flowState.instance.toObject());
+      dispatch(updateProjectContentThunk(projectNo, {
+        output: "",
+        flowState: {
+          selectedElement: null,
+          ...flowState.instance.toObject()
+        }
+      }))
     }
-  }))}, [flowState]);
-  console.log(data, error, loading);
+  }, [flowState]);
+
+
   return <>
-    {loading && <span>로딩중...</span>}
-    {error && <span>{error}</span>}
-    {data && <Redirect to={`/project/${projectNo}`}></Redirect>}
+    {result?.check && window.location.replace(`/project/${projectNo}`)}
   </> }
 
 export default ProjectEditorSave;

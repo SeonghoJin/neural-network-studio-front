@@ -1,13 +1,10 @@
 import { makeStyles } from '@material-ui/core';
 import { BlockState } from '../../../core/block/BlockState';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../module';
+import { useDispatch, } from 'react-redux';
 import { updateElementData } from '../../../module/ReactFlow';
 import TextInput from '../../test/BlockConfigureContainer/ConfigureInput/TextInput';
 import { useCallback } from 'react';
-import { render } from 'react-dom';
-import { useElementState } from '../../../core/Context/ElementProvider/ElementProvider';
-import { FlowElement } from 'react-flow-renderer';
+import { useStoreActions, useStoreState } from 'react-flow-renderer';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -35,24 +32,41 @@ const useStyle = makeStyles({
 
 const NodeConfigViewer = () => {
   const classes = useStyle();
-  const element = useSelector((state: RootState) => {
-    const selectedNodes = state.reactFlow.selectedElement;
-    const selectedNode = selectedNodes && selectedNodes[0];
-    const elements = state.reactFlow.elements.filter((node) => node.id === selectedNode?.id);
-    return elements && elements[0];
+  const reactElements = useStoreState((state) => {
+    return [...state.nodes, ...state.edges]
   });
-  const data : null | BlockState = element?.data;
+  const selectedElement = useStoreState((state) => {
+    const selectedNodes = state.selectedElements;
+    const selectedNode = selectedNodes && selectedNodes[0];
+    const elements = state.nodes.filter((node) => node.id === selectedNode?.id);
+    return elements && elements[0];
+    });
+
+  const setElements = useStoreActions((state) => (state.setElements));
+  const data : null | BlockState = selectedElement?.data;
   const dispatch = useDispatch();
 
   const onChange = useCallback((key, value) => {
-    dispatch(updateElementData({
-      id: element?.id,
-      key: key,
-      value: value
-    }));
-  }, [element?.id])
+    const newElements = reactElements.map((element) => {
+      if(element.id !== selectedElement.id){
+        return element
+      }else{
+        return {
+          ...element,
+          data: {
+            ...data,
+            config: {
+              ...data?.config,
+              [key]: value
+            }
+          }
+        }
+      }
+    })
+    setElements(newElements)
+  }, [reactElements, selectedElement])
 
-  if(!element){
+  if(!selectedElement){
     return <></>
   }
   const configInputs : any[] = [];
@@ -74,7 +88,7 @@ const NodeConfigViewer = () => {
     <div className={classes.wrapper}>
       <div className={classes.elementHeadWrapper}>
         <h3 className={classes.elementHead}>
-          {element.id}
+          {selectedElement.id}
         </h3>
       </div>
       <ul className={classes.propertyList}>

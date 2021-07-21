@@ -1,6 +1,7 @@
 import { Container, makeStyles } from '@material-ui/core';
 import ProjectEditorLeftSideBar from './projectEditorSideBar/ProjectEditorLeftSideBar';
 import ProjectEditorGraphContainer from './ProjectEditorGraphContainer';
+import { ReactFlowProvider } from 'react-flow-renderer';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -21,12 +22,14 @@ const ProjectEditorMain = () => {
 
   return (
     <div className={classes.wrapper}>
-      <Container className={classes.container}>
-        <ProjectEditorLeftSideBar/>
-        <div className={classes.contentWrapper}>
-          <ProjectEditorGraphContainer/>
-        </div>
-      </Container>
+      <ReactFlowProvider>
+        <Container className={classes.container}>
+          <ProjectEditorLeftSideBar/>
+          <div className={classes.contentWrapper}>
+            <ProjectEditorGraphContainer/>
+          </div>
+        </Container>
+      </ReactFlowProvider>
     </div>
   );
 }
