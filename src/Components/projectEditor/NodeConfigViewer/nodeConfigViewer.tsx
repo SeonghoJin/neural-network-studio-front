@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 import { BlockState } from '../../../core/block/BlockState';
 import { useDispatch, } from 'react-redux';
-import { updateElementData } from '../../../module/ReactFlow';
 import TextInput from '../../test/BlockConfigureContainer/ConfigureInput/TextInput';
 import { useCallback } from 'react';
 import { useStoreActions, useStoreState } from 'react-flow-renderer';

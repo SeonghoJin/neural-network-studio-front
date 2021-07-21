@@ -7,7 +7,7 @@ import { RootState } from '../../module';
 import { useState } from 'react';
 
 const ProjectEditorGraphContainer = () => {
-  const {data} = useSelector((state: RootState) => state.project);
+  const {data} = useSelector((state: RootState) => state.api.getProjectResult);
   return(
     <ProjectEditorGraph
       flowState={data?.content.flowState}

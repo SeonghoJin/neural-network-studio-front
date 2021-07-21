@@ -1,9 +1,8 @@
-import { Redirect, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../module';
 import { useEffect } from 'react';
-import { useStoreState, useZoomPanHelper } from 'react-flow-renderer';
-import { updateProjectContentThunk } from '../../module/Project/API/thunks';
+import { updateProjectContentThunk } from '../../module/API/thunks';
 
 const ProjectEditorSave = () => {
   const location = useLocation();
@@ -17,16 +16,15 @@ const ProjectEditorSave = () => {
       console.log(flowState.instance.toObject());
       dispatch(updateProjectContentThunk(projectNo, {
         output: "",
-        flowState: {
-          selectedElement: null,
-          ...flowState.instance.toObject()
-        }
+        flowState: flowState.instance.toObject()
       }))
     }
   }, [flowState]);
 
 
   return <>
+    {error && <span>error</span>}
+    {loading && <span>loading...</span>}
     {result?.check && window.location.replace(`/project/${projectNo}`)}
   </> }
 

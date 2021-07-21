@@ -13,19 +13,13 @@ import ReactFlow, {
   addEdge,
   removeElements,
 } from 'react-flow-renderer';
-import convertGraphBeforeRun from '../../core/GraphEngine';
-import { getPythonCode, updateProjectContent } from '../../API/project';
 import { useDispatch, useSelector } from 'react-redux';
-import reactFlow, {
-  ReactFlowState,
-  setFlowInstance,
-} from '../../module/ReactFlow';
 import { BlockState } from '../../core/block/BlockState';
 import { getNodeId } from '../../util';
 import { nodetypes } from '../../core/nodetypes';
-import localforage from 'localforage';
 import { RootState } from '../../module';
 import { setReactFlowInstance } from '../../module/ReactFlowInstance';
+import { IFlowState } from '../../API/project/types';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -54,36 +48,20 @@ const useStyle = makeStyles({
 });
 
 interface PrjectEditorGrahpProps{
-  flowState: ReactFlowState | undefined,
+  flowState?: IFlowState,
 };
 
 const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
   const classes = useStyle();
   const {flowState} = props;
   const [elements, setElements] = useState<Elements>(flowState?.elements || []);
-  const [zoom] = useState(flowState?.zoom);
-  const [flowPosition] = useState(flowState?.position);
   const reactFlowWrapper = useRef<HTMLDivElement | null>(null);
-  const [reactFlowInstance, setReactInstance] = useState<null | OnLoadParams>(null);
-  const object = useState(reactFlowInstance?.toObject);
   const selectedElements = useStoreState((state) => state.selectedElements);
-  const test = useSelector((state: RootState) => state.reactFlowInstance.instance);
+  const reactFlowInstance = useSelector((state: RootState) => state.reactFlowInstance.instance);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setFlowInstance({
-      ...reactFlowInstance?.toObject() as ReactFlowState,
-      selectedElement: selectedElements,
-    }));
-  }, [selectedElements, object]);
-
-  useEffect(() => {
-    console.log(reactFlowInstance?.toObject());
-  }, [reactFlowInstance?.toObject().zoom, reactFlowInstance?.toObject().elements, reactFlowInstance?.toObject().position])
 
   const onShow = () => {
     console.log(reactFlowInstance?.toObject());
-    console.log(test?.toObject());
   }
 
   const onConnect = useCallback((params : Edge | Connection) => {
@@ -124,7 +102,6 @@ const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
   }, [elements, reactFlowInstance]);
 
   const onLoad = useCallback((instance: OnLoadParams) => {
-    setReactInstance(instance);
     dispatch(setReactFlowInstance(instance));
   }, []);
 
@@ -146,8 +123,8 @@ const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
                  onElementsRemove={onElementsRemove}
                  tabIndex={0}
                  nodeTypes={nodetypes}
-                 defaultPosition={flowPosition}
-                 defaultZoom={zoom}
+                 defaultPosition={flowState?.position}
+                 defaultZoom={flowState?.zoom}
       >
         <Controls style={{
           top: 10,

@@ -3,11 +3,10 @@ import config from '../../config';
 import { IProjectConfig } from '../../core/project/config';
 import { IProjectContentDto, IProjectDto } from './types';
 
-export const getPythonCode = async (graph: any, projectConfig : IProjectConfig) => {
-  const response = await axios.post<string>(config.TEST_SERVER_PREFIX+'/make-python', {
-    content: graph,
-    config: projectConfig,
-  });
+export const getPythonCode = async (projectNo: string) => {
+  const response = await axios.get(
+    config.SERVER_PREFIX+`/api/project/${projectNo}/code`
+  );
 
   return response.data;
 }

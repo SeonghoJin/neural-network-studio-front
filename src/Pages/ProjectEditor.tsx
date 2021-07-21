@@ -5,7 +5,7 @@ import ProjectEditorMain from '../Components/projectEditor/projectEditorMain';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../module';
 import { useEffect } from 'react';
-import { getProjectThunk } from '../module/Project/thunks';
+import { getProjectThunk } from '../module/API/thunks';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -29,7 +29,7 @@ interface ProjectEditorParams{
 
 const ProjectEditor = (props : MatchProps<ProjectEditorParams> & LocationProps) => {
   const projectNo = props.match?.params?.projectNo as string;
-  const {data, loading, error} = useSelector((state: RootState) => state.project);
+  const {data, loading, error} = useSelector((state: RootState) => state.api.getProjectResult);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProjectThunk(projectNo));
@@ -47,9 +47,9 @@ const ProjectEditor = (props : MatchProps<ProjectEditorParams> & LocationProps) 
   return (
     <div className={classes.wrapper}>
       <div className={classes.container}>
-        {loading && <p>로딩중...</p>}
-        {error && <p>{error}</p>}
-        {data && content}
+        {loading && <span>loading..</span>}
+        {error&& <span>{error}</span>}
+        {content}
       </div>
     </div>
   );

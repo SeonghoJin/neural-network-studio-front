@@ -1,7 +1,5 @@
-import { BlockConfig, BlockState } from '../../core/block/BlockState';
 import { IProjectConfig } from '../../core/project/config';
-import { Elements, FlowElement, FlowExportObject } from 'react-flow-renderer';
-import { ReactFlowState } from '../../module/ReactFlow';
+import { Elements, } from 'react-flow-renderer';
 
 export interface IProjectDto{
   config:      IProjectConfig;
@@ -13,6 +11,12 @@ export interface IProjectDto{
 }
 
 export interface IProjectContentDto {
-  flowState: ReactFlowState;
+  flowState: IFlowState,
   output: string;
+}
+
+export interface IFlowState {
+  zoom: number,
+  elements: Elements,
+  position: [number, number]
 }
