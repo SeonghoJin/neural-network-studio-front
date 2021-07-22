@@ -2,16 +2,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   initProjectControllerAction,
   ProjectControllerAction
-} from '../../../module/ProjectEditorController';
+} from '../../module/ProjectController';
 import {
   getProjectThunk,
   getPythonCodeThunk,
   updateProjectContentThunk
-} from '../../../module/API/project/thunks';
+} from '../../module/API/project/thunks';
 import { useEffect } from 'react';
-import { RootDispatch, RootState } from '../../../module';
-import { ProjectProps } from '../type';
-const useProjectEditorController = async (props : ProjectProps) => {
+import { RootDispatch, RootState } from '../../module';
+import { ProjectProps } from './type';
+const useProjectController = async (props : ProjectProps) => {
   const action = useSelector((state : RootState) => (state.projectController.action));
   const instance = useSelector((state: RootState) => state.reactFlowInstance.instance);
   const projectNo = (props.match?.params?.projectNo || '0');
@@ -56,4 +56,4 @@ const useProjectEditorController = async (props : ProjectProps) => {
   return action;
 }
 
-export default useProjectEditorController;
+export default useProjectController;

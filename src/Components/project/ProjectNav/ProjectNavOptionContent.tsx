@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { useDispatch } from 'react-redux';
-import { putProjectContent } from '../../../module/ProjectEditorController';
+import { putProjectContent } from '../../../module/ProjectController';
 import Button from 'react-bootstrap/esm/Button';
 import { Link, useLocation } from 'react-router-dom';
 const useStyle = makeStyles({

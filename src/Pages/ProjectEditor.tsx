@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core';
 import useGetPythonCodeResult from '../hooks/useGetPythonCodeResult';
 import usePutProjectContentResult from '../hooks/usePutProjectContentResult';
 import useGetProjectResult from '../hooks/useGetProjectResult';
-import useProjectEditorController from '../Components/project/projectEditor/projectEditorController';
+import useProjectController from '../Components/project/projectController';
 import ProjectEditorMain from '../Components/project/projectEditor/projectEditorMain';
 import ProjectNav from '../Components/project/ProjectNav/projectNav';
 import { ProjectProps } from '../Components/project/type';
@@ -24,29 +24,12 @@ const useStyle = makeStyles({
   }
 })
 
-const useProjectEditorError = (props: ProjectProps) => {
-
-  const getPythonCodeResult = useGetPythonCodeResult(props);
-  const putProjectContentResult = usePutProjectContentResult();
-  const getProjectResult = useGetProjectResult()
-  return (
-    <>
-      {getProjectResult.error && (getProjectResult.errorModal)}
-      {getPythonCodeResult.error && (getPythonCodeResult.errorModal)}
-      {putProjectContentResult.error && (putProjectContentResult.errorModal)}
-    </>
-  )
-}
-
 const ProjectEditor = (props : ProjectProps) => {
 
   const classes = useStyle();
-  const errorModal = useProjectEditorError(props);
-  useProjectEditorController(props);
 
   return (
     <>
-      {errorModal}
       <div className={classes.wrapper}>
         <div className={classes.container}>
           <ProjectNav/>

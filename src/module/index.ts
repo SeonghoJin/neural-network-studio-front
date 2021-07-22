@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import reactFlowInstance  from './ReactFlowInstance';
 import projectApi from './API/project'
-import projectController from './ProjectEditorController';
+import projectController from './ProjectController';
 import elements from './Elements';
 import { ThunkDispatch } from 'redux-thunk';
 import { ActionType } from 'typesafe-actions';

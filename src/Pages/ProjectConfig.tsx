@@ -1,10 +1,8 @@
 import { makeStyles } from '@material-ui/core';
 import useGetProjectResult from '../hooks/useGetProjectResult';
 import { ProjectProps } from '../Components/project/type';
-import useProjectConfigController
-  from '../Components/project/projectConfig/projectConfigController';
 import ProjectNav from '../Components/project/ProjectNav/projectNav';
-import ProjectEditorMain from '../Components/project/projectEditor/projectEditorMain';
+import useProjectController from '../Components/project/projectController';
 const useStyle = makeStyles({
   wrapper: {
     width: '100vw',
@@ -33,7 +31,7 @@ const useProjectConfigError = (props: ProjectProps) => {
 export const ProjectConfig = (props: ProjectProps) => {
   const classes = useStyle();
   const errorModal = useProjectConfigError(props);
-  useProjectConfigController(props);
+  useProjectController(props)
   return (
     <>
       {errorModal}
