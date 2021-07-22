@@ -13,12 +13,11 @@ import ReactFlow, {
   addEdge,
   removeElements,
 } from 'react-flow-renderer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { BlockState } from '../../core/block/BlockState';
 import { getNodeId } from '../../util';
 import { nodetypes } from '../../core/nodetypes';
 import { RootState } from '../../module';
-import { setReactFlowInstance } from '../../module/ReactFlowInstance';
 import { IFlowState } from '../../API/project/types';
 
 const useStyle = makeStyles({

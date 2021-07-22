@@ -33,13 +33,13 @@ const ProjectNavMainContent = () => {
   return (<div className={classes.wrapper}>
     <div className={classes.container}>
       <div className={classes.mainOptionContentItem}>
-        <button onClick={() => {onSave()}}>
+        <button>
           <SettingsIcon/>
         </button>
       </div>
       <div className={classes.mainOptionContentItem}>
         <div>
-          <button>
+            <button onClick={() => {onSave()}}>
             <SaveIcon/>
           </button>
         </div>
