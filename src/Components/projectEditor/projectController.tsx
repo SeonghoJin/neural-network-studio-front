@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../module';
 import { useLocation } from 'react-router-dom';
-import projectContoller, {
+import {
   initProjectControllerAction,
   ProjectControllerAction
 } from '../../module/ProjectController';
@@ -11,7 +11,6 @@ import { useCallback, useEffect } from 'react';
 const useProjectController = async () => {
   const action = useSelector((state : RootState) => (state.projectController.action));
   const instance = useSelector((state: RootState) => state.reactFlowInstance);
-  const result = useSelector((state : RootState) => state.projectApi);
   const location = useLocation();
   const projectNo = location.pathname.split('/')[2];
   const dispatch = useDispatch()

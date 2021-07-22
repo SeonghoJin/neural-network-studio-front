@@ -24,7 +24,7 @@ const ProjectEditorGraphContainer = () => {
 
   return(
     <>
-      {loading && <CircleLoading/>}
+      {(loading || error) && <CircleLoading/>}
       {error && <StandardModal head={Error} body={error}/>}
       {content}
     </>);

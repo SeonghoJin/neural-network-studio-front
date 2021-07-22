@@ -29,19 +29,6 @@ interface ProjectEditorParams{
 }
 
 const ProjectEditor = (props : MatchProps<ProjectEditorParams> & LocationProps) => {
-  const dispatch = useDispatch();
-  const action = useProjectController();
-  const result = useSelector((state: RootState) => state.projectApi.putProjectContentResult);
-
-  useEffect(() => {
-    dispatch(getProject());
-  }, []);
-
-  useEffect(() => {
-    if(result.result?.check === true){
-      dispatch(getProject());
-    }
-  }, [result.result?.check]);
 
   const classes = useStyle();
 
