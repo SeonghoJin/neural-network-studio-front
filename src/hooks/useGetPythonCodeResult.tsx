@@ -1,8 +1,8 @@
 import fileDownload from 'js-file-download';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../module';
-import StandardModal from '../../modal/StandardModal';
+import { RootState } from '../module';
+import StandardModal from '../Components/modal/StandardModal';
 
 const useGetPythonCodeResult = () => {
   const result = useSelector((state: RootState) => state.projectApi.getPythonCodeResult);

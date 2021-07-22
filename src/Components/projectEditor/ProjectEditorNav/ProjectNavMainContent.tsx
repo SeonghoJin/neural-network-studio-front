@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import fileDownload from 'js-file-download'
 import { getPythonCode } from '../../../module/ProjectController';
 import { RootState } from '../../../module';
-import useGetPythonCodeResult from '../hooks/useGetPythonCodeResult';
+import useGetPythonCodeResult from '../../../hooks/useGetPythonCodeResult';
 
 const useStyle = makeStyles({
   wrapper: {

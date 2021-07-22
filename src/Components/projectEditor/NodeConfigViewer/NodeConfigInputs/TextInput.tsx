@@ -32,8 +32,8 @@ const useStyle = makeStyles({
   },
 });
 
-const TextInput = ({ propertyName, propertyContent, onPropertyChange }
-  : {propertyName: string, propertyContent: string, onPropertyChange: any}) => {
+const TextInput = ({ propertyName, propertyContent, onChange}
+  : {propertyName: string, propertyContent: string, onChange: any}) => {
   const classes = useStyle();
   return (
     <div className={classes.wrapper}>
@@ -45,7 +45,7 @@ const TextInput = ({ propertyName, propertyContent, onPropertyChange }
         </div>
         <div className={classes.propertyContentWrapper}>
           <input
-            onChange={(e) => { onPropertyChange(propertyName, e.target.value); } }
+            onChange={(e) => { onChange(propertyName, e.target.value); } }
             value={propertyContent}
             type="text"
             className={classes.propertyContentContainer}

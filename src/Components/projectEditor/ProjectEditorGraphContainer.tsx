@@ -8,7 +8,7 @@ import CircleLoading from '../Loading/CircularLoading';
 import StandardModal from '../modal/StandardModal';
 import { getProject } from '../../module/ProjectController';
 import { setElements } from '../../module/Elements';
-import useGetProjectResult from './hooks/useGetProjectResult';
+import useGetProjectResult from '../../hooks/useGetProjectResult';
 
 const ProjectEditorGraphContainer = () => {
   const result = useGetProjectResult();

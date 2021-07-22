@@ -4,7 +4,7 @@ import projectApi from './API/project'
 import projectController from './ProjectController';
 import elements from './Elements';
 import usePutProjectContentResult
-  from '../Components/projectEditor/hooks/usePutProjectContentResult';
+  from '../hooks/usePutProjectContentResult';
 import { ThunkDispatch } from 'redux-thunk';
 import { ActionType } from 'typesafe-actions';
 

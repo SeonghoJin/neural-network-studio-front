@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../module';
+import { RootState } from '../module';
 import { useEffect } from 'react';
-import { getProject } from '../../../module/ProjectController';
-import StandardModal from '../../modal/StandardModal';
+import { getProject } from '../module/ProjectController';
+import StandardModal from '../Components/modal/StandardModal';
 
 const usePutProjectContentResult = () => {
   const result = useSelector((state: RootState) => state.projectApi.putProjectContentResult);

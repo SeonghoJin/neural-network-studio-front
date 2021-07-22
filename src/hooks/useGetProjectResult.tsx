@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../module';
-import StandardModal from '../../modal/StandardModal';
+import { RootState } from '../module';
+import StandardModal from '../Components/modal/StandardModal';
 
 const useGetProjectResult = () => {
   const result = useSelector((state: RootState) => state.projectApi.getProjectResult);

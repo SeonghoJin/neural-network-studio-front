@@ -3,9 +3,9 @@ import ProjectEditorLeftSideBar from './projectEditorSideBar/ProjectEditorLeftSi
 import ProjectEditorGraphContainer from './ProjectEditorGraphContainer';
 import { ReactFlowProvider } from 'react-flow-renderer';
 import useProjectController from './projectController';
-import useGetPythonCodeResult from './hooks/useGetPythonCodeResult';
-import usePutProjectContentResult from './hooks/usePutProjectContentResult';
-import useGetProjectResult from './hooks/useGetProjectResult';
+import useGetPythonCodeResult from '../../hooks/useGetPythonCodeResult';
+import usePutProjectContentResult from '../../hooks/usePutProjectContentResult';
+import useGetProjectResult from '../../hooks/useGetProjectResult';
 import StandardModal from '../modal/StandardModal';
 
 const useStyle = makeStyles({
