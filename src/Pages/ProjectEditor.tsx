@@ -1,11 +1,11 @@
 import { LocationProps, MatchProps } from '../core/types';
-import ProjectEditorNav from '../Components/projectEditor/ProjectEditorNav/projectEditorNav';
 import { makeStyles } from '@material-ui/core';
-import ProjectEditorMain from '../Components/projectEditor/projectEditorMain';
-import useProjectController from '../Components/projectEditor/projectController';
 import useGetPythonCodeResult from '../hooks/useGetPythonCodeResult';
 import usePutProjectContentResult from '../hooks/usePutProjectContentResult';
 import useGetProjectResult from '../hooks/useGetProjectResult';
+import useProjectController from '../Components/project/projectEditor/projectEditorController';
+import ProjectEditorMain from '../Components/project/projectEditor/projectEditorMain';
+import ProjectEditorNav from '../Components/project/ProjectNav/projectEditorNav';
 
 const useStyle = makeStyles({
   wrapper: {

@@ -14,11 +14,11 @@ import ReactFlow, {
   removeElements,
 } from 'react-flow-renderer';
 import { useDispatch, useSelector } from 'react-redux';
-import { BlockState } from '../../core/block/BlockState';
-import { getNodeId } from '../../util';
-import { nodetypes } from '../../core/nodetypes';
-import { RootState } from '../../module';
-import { IFlowState } from '../../API/project/types';
+import { BlockState } from '../../../core/block/BlockState';
+import { getNodeId } from '../../../util';
+import { nodetypes } from '../../../core/nodetypes';
+import { RootState } from '../../../module';
+import { IFlowState } from '../../../API/project/types';
 
 const useStyle = makeStyles({
   wrapper: {

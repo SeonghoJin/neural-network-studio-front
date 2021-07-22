@@ -1,17 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootDispatch, RootState } from '../../module';
-import { useLocation } from 'react-router-dom';
 import {
   initProjectControllerAction,
   ProjectControllerAction
-} from '../../module/ProjectController';
+} from '../../../module/ProjectController';
 import {
   getProjectThunk,
   getPythonCodeThunk,
   updateProjectContentThunk
-} from '../../module/API/project/thunks';
+} from '../../../module/API/project/thunks';
 import { useEffect } from 'react';
-import { ProjectEditorProps } from '../../Pages/ProjectEditor';
+import { ProjectEditorProps } from '../../../Pages/ProjectEditor';
+import { RootDispatch, RootState } from '../../../module';
 const useProjectController = async (props : ProjectEditorProps) => {
   const action = useSelector((state : RootState) => (state.projectController.action));
   const instance = useSelector((state: RootState) => state.reactFlowInstance.instance);
