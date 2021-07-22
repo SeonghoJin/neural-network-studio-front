@@ -8,7 +8,7 @@ export type ProjectAPIState = {
   getPythonCodeResult: {
     error: string | null,
     loading: boolean,
-    data: string | null,
+    data: Blob| null,
   },
   getProjectResult: {
     error: string | null;

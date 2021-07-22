@@ -4,6 +4,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { useDispatch } from 'react-redux';
 import { putProjectContent } from '../../../module/ProjectController';
+import Button from 'react-bootstrap/esm/Button';
 const useStyle = makeStyles({
   wrapper: {
     width: '100%',
@@ -22,7 +23,7 @@ const useStyle = makeStyles({
   }
 })
 
-const ProjectNavMainContent = () => {
+const ProjectNavOptionContent = () => {
   const classes = useStyle();
   const dispatch = useDispatch();
 
@@ -30,22 +31,21 @@ const ProjectNavMainContent = () => {
     dispatch(putProjectContent());
   }, []);
 
+
   return (<div className={classes.wrapper}>
     <div className={classes.container}>
       <div className={classes.mainOptionContentItem}>
-        <button>
+        <Button>
           <SettingsIcon/>
-        </button>
+        </Button>
       </div>
       <div className={classes.mainOptionContentItem}>
-        <div>
-            <button onClick={() => {onSave()}}>
+          <Button onClick={() => {onSave()}}>
             <SaveIcon/>
-          </button>
-        </div>
+        </Button>
       </div>
     </div>
   </div>)
 }
 
-export default ProjectNavMainContent;
+export default ProjectNavOptionContent;

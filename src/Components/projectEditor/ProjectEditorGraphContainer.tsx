@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../module';
 import { useCallback, useEffect } from 'react';
 import { setReactFlowInstance } from '../../module/ReactFlowInstance';
-import { OnLoadParams } from 'react-flow-renderer';
+import { Elements, OnLoadParams } from 'react-flow-renderer';
 import CircleLoading from '../Loading/CircularLoading';
 import StandardModal from '../modal/StandardModal';
 import { getProject } from '../../module/ProjectController';
+import { setElements } from '../../module/Elements';
 
 const ProjectEditorGraphContainer = () => {
   const {data, loading, error} = useSelector((state: RootState) => state.projectApi.getProjectResult);
@@ -27,10 +28,15 @@ const ProjectEditorGraphContainer = () => {
     dispatch(setReactFlowInstance(instance));
   }, []);
 
+  const onSetElements = useCallback((elements: Elements) => {
+    dispatch(setElements(elements));
+  }, [])
+
   const content = data && (
       <ProjectEditorGraph
         setReactInstance={setReactInstance}
         flowState={data?.content.flowState}
+        setElements={onSetElements}
       />
   );
 
@@ -46,5 +52,6 @@ const ProjectEditorGraphContainer = () => {
       {content}
     </>);
 };
+
 
 export default ProjectEditorGraphContainer;

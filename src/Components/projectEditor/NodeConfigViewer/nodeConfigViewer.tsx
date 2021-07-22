@@ -4,6 +4,7 @@ import { useDispatch, } from 'react-redux';
 import TextInput from '../../test/BlockConfigureContainer/ConfigureInput/TextInput';
 import { useCallback } from 'react';
 import { useStoreActions, useStoreState } from 'react-flow-renderer';
+import { setElementById } from '../../../module/Elements';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -31,9 +32,6 @@ const useStyle = makeStyles({
 
 const NodeConfigViewer = () => {
   const classes = useStyle();
-  const reactElements = useStoreState((state) => {
-    return [...state.nodes, ...state.edges]
-  });
   const selectedElement = useStoreState((state) => {
     const selectedNodes = state.selectedElements;
     const selectedNode = selectedNodes && selectedNodes[0];
@@ -41,29 +39,16 @@ const NodeConfigViewer = () => {
     return elements && elements[0];
     });
 
-  const setElements = useStoreActions((state) => (state.setElements));
   const data : null | BlockState = selectedElement?.data;
   const dispatch = useDispatch();
 
   const onChange = useCallback((key, value) => {
-    const newElements = reactElements.map((element) => {
-      if(element.id !== selectedElement.id){
-        return element
-      }else{
-        return {
-          ...element,
-          data: {
-            ...data,
-            config: {
-              ...data?.config,
-              [key]: value
-            }
-          }
-        }
-      }
-    })
-    setElements(newElements)
-  }, [reactElements, selectedElement])
+    dispatch(setElementById({
+      id: selectedElement.id,
+      key: key,
+      value: value,
+    }));
+  }, [selectedElement])
 
   if(!selectedElement){
     return <></>

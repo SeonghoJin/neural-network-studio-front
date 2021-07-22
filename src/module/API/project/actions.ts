@@ -39,6 +39,6 @@ export const getPythonCodeAsync = createAsyncAction(
   ProjectAPIAction.GET_PYTHON_CODE,
   ProjectAPIAction.GET_PTYHON_CODE_SUCCESS,
   ProjectAPIAction.GET_PYTHON_CODE_ERROR,
-)<undefined, string, string>();
+)<undefined, Blob, string>();
 
 

@@ -13,7 +13,7 @@ import ReactFlow, {
   addEdge,
   removeElements,
 } from 'react-flow-renderer';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BlockState } from '../../core/block/BlockState';
 import { getNodeId } from '../../util';
 import { nodetypes } from '../../core/nodetypes';
@@ -48,16 +48,21 @@ const useStyle = makeStyles({
 
 interface PrjectEditorGrahpProps{
   setReactInstance: ReturnType<typeof useCallback>
+  setElements: ReturnType<typeof useCallback>
   flowState?: IFlowState,
 };
 
 const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
   const classes = useStyle();
-  const {flowState, setReactInstance} = props;
-  const [elements, setElements] = useState<Elements>( flowState?.elements || []);
+  const {flowState, setReactInstance, setElements} = props;
+  const elements = useSelector((state: RootState) => state.elements.elements);
   const reactFlowWrapper = useRef<HTMLDivElement | null>(null);
   const selectedElements = useStoreState((state) => state.selectedElements);
   const reactFlowInstance = useSelector((state: RootState) => state.reactFlowInstance.instance);
+
+  useEffect(() => {
+    setElements(flowState?.elements || []);
+  }, [])
 
   const onConnect = useCallback((params : Edge | Connection) => {
     setElements(addEdge(params, elements));

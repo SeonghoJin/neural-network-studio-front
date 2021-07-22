@@ -5,7 +5,11 @@ import {
   initProjectControllerAction,
   ProjectControllerAction
 } from '../../module/ProjectController';
-import { getProjectThunk, updateProjectContentThunk } from '../../module/API/project/thunks';
+import {
+  getProjectThunk,
+  getPythonCodeThunk,
+  updateProjectContentThunk
+} from '../../module/API/project/thunks';
 import { useCallback, useEffect } from 'react';
 
 const useProjectController = async () => {
@@ -24,6 +28,9 @@ const useProjectController = async () => {
         flowState: instance?.toObject(),
         output: "",
       }));
+    }
+    else if(action === ProjectControllerAction.GET_PYTHON_CODE) {
+      dispatch(getPythonCodeThunk(projectNo));
     }
 
     if(action !== null){

@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { Link, useLocation } from 'react-router-dom';
+import Button from 'react-bootstrap/esm/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import fileDownload from 'js-file-download'
+import { getPythonCode } from '../../../module/ProjectController';
+import { RootState } from '../../../module';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -23,7 +28,20 @@ const useStyle = makeStyles({
 const ProjectNavMainContent = () => {
   const location = useLocation();
   const projectNo = location.pathname.split('/')[2];
+  const getPythonCodeResult = useSelector((state : RootState) => (state.projectApi.getPythonCodeResult));
   const classes = useStyle();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if(getPythonCodeResult.data != null){
+      fileDownload(getPythonCodeResult.data, 'model.py');
+    }
+  }, [getPythonCodeResult.data])
+
+  const onGetPythonCode = useCallback(() => {
+    dispatch(getPythonCode());
+  }, []);
+
   return (<div className={classes.wrapper}>
     <div className={classes.container}>
       <Link to={`/project/${projectNo}`}>
@@ -32,6 +50,9 @@ const ProjectNavMainContent = () => {
       <Link to={`/project/${projectNo}/learn`}>
         <div className={classes.mainContentItem}>학습</div>
       </Link>
+      <Button onClick={onGetPythonCode}>
+        <div className={classes.mainContentItem}>PythonCode추출</div>
+      </Button>
     </div>
   </div>)
 }
