@@ -1,17 +1,31 @@
-import {
-  ReactFlowProvider,
-} from 'react-flow-renderer';
 import ProjectEditorGraph from './projectEditorGraph';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../module';
-import { useState } from 'react';
+import { useCallback, useEffect } from 'react';
+import { setReactFlowInstance } from '../../module/ReactFlowInstance';
+import { OnLoadParams } from 'react-flow-renderer';
 
 const ProjectEditorGraphContainer = () => {
-  const {data} = useSelector((state: RootState) => state.api.getProjectResult);
+  const {data, loading, error} = useSelector((state: RootState) => state.projectApi.getProjectResult);
+  const dispatch = useDispatch();
+
+  const setReactInstance = useCallback((instance : OnLoadParams) => {
+    dispatch(setReactFlowInstance(instance));
+  }, [])
+
+  const content = data && (
+      <ProjectEditorGraph
+        setReactInstance={setReactInstance}
+        flowState={data?.content.flowState}
+      />
+  );
+
   return(
-    <ProjectEditorGraph
-      flowState={data?.content.flowState}
-    />)
+    <>
+      {loading && <span>loading...</span>}
+      {error && <span>{error}</span>}
+      {content}
+    </>)
 }
 
 export default ProjectEditorGraphContainer;

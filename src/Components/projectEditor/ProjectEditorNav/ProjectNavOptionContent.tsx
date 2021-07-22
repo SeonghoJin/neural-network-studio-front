@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { Link, useLocation } from 'react-router-dom';
 import SaveIcon from '@material-ui/icons/Save';
 import SettingsIcon from '@material-ui/icons/Settings';
+import { useDispatch } from 'react-redux';
+import { putProjectContent } from '../../../module/ProjectController';
 const useStyle = makeStyles({
   wrapper: {
     width: '100%',
@@ -22,20 +23,26 @@ const useStyle = makeStyles({
 })
 
 const ProjectNavMainContent = () => {
-  const location = useLocation();
-  const projectNo = location.pathname.split('/')[2];
   const classes = useStyle();
+  const dispatch = useDispatch();
+
+  const onSave = useCallback(() => {
+    dispatch(putProjectContent());
+  }, []);
+
   return (<div className={classes.wrapper}>
     <div className={classes.container}>
       <div className={classes.mainOptionContentItem}>
-        <Link to={`/project/${projectNo}/config`}>
+        <button onClick={() => {onSave()}}>
           <SettingsIcon/>
-        </Link>
+        </button>
       </div>
       <div className={classes.mainOptionContentItem}>
-        <Link to={`/project/${projectNo}/save`}>
-          <SaveIcon/>
-        </Link>
+        <div>
+          <button>
+            <SaveIcon/>
+          </button>
+        </div>
       </div>
     </div>
   </div>)

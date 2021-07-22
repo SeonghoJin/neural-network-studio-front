@@ -5,7 +5,8 @@ import ProjectEditorMain from '../Components/projectEditor/projectEditorMain';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../module';
 import { useEffect } from 'react';
-import { getProjectThunk } from '../module/API/project/thunks';
+import useProjectController from '../Components/projectEditor/projectController';
+import { getProject } from '../module/ProjectController';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -28,28 +29,29 @@ interface ProjectEditorParams{
 }
 
 const ProjectEditor = (props : MatchProps<ProjectEditorParams> & LocationProps) => {
-  const projectNo = props.match?.params?.projectNo as string;
-  const {data, loading, error} = useSelector((state: RootState) => state.api.getProjectResult);
   const dispatch = useDispatch();
+  const action = useProjectController();
+  const result = useSelector((state: RootState) => state.projectApi.putProjectContentResult);
+
   useEffect(() => {
-    dispatch(getProjectThunk(projectNo));
-  }, [projectNo])
+    dispatch(getProject());
+  }, []);
+
+  useEffect(() => {
+    if(result.result?.check === true){
+      dispatch(getProject());
+    }
+  }, [result.result?.check]);
 
   const classes = useStyle();
-
-  const content = data && (<>
-    <ProjectEditorNav/>
-    <div className={classes.content}>
-      <ProjectEditorMain/>
-    </div>
-  </>);
 
   return (
     <div className={classes.wrapper}>
       <div className={classes.container}>
-        {loading && <span>loading..</span>}
-        {error&& <span>{error}</span>}
-        {content}
+        <ProjectEditorNav/>
+        <div className={classes.content}>
+          <ProjectEditorMain/>
+        </div>
       </div>
     </div>
   );

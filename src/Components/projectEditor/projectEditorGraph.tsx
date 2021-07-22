@@ -48,21 +48,17 @@ const useStyle = makeStyles({
 });
 
 interface PrjectEditorGrahpProps{
+  setReactInstance: ReturnType<typeof useCallback>
   flowState?: IFlowState,
 };
 
 const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
   const classes = useStyle();
-  const {flowState} = props;
-  const [elements, setElements] = useState<Elements>(flowState?.elements || []);
+  const {flowState, setReactInstance} = props;
+  const [elements, setElements] = useState<Elements>( flowState?.elements || []);
   const reactFlowWrapper = useRef<HTMLDivElement | null>(null);
   const selectedElements = useStoreState((state) => state.selectedElements);
   const reactFlowInstance = useSelector((state: RootState) => state.reactFlowInstance.instance);
-  const dispatch = useDispatch();
-
-  const onShow = () => {
-    console.log(reactFlowInstance?.toObject());
-  }
 
   const onConnect = useCallback((params : Edge | Connection) => {
     setElements(addEdge(params, elements));
@@ -102,7 +98,7 @@ const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
   }, [elements, reactFlowInstance]);
 
   const onLoad = useCallback((instance: OnLoadParams) => {
-    dispatch(setReactFlowInstance(instance));
+    setReactInstance(instance);
   }, []);
 
   const onKeyDown : KeyboardEventHandler = useCallback((event) => {
@@ -133,7 +129,6 @@ const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
         }}/>
         <Button
           className={classes.saveButton}
-          onClick={onShow}
           >
          Run
         </Button>

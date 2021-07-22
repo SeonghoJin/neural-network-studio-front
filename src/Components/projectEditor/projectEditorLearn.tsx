@@ -7,7 +7,7 @@ import { getPythonCodeThunk } from '../../module/API/project/thunks';
 const ProjectEditorLearn = () => {
   const location = useLocation();
   const projectNo = location.pathname.split('/')[2];
-  const {error, data, loading} = useSelector((state: RootState) => (state.api.getPythonCodeResult));
+  const {error, data, loading} = useSelector((state: RootState) => (state.projectApi.getPythonCodeResult));
   const dispatch = useDispatch();
 
   useEffect(() => {

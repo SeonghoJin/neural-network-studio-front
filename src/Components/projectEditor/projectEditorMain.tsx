@@ -2,6 +2,7 @@ import { Container, makeStyles } from '@material-ui/core';
 import ProjectEditorLeftSideBar from './projectEditorSideBar/ProjectEditorLeftSideBar';
 import ProjectEditorGraphContainer from './ProjectEditorGraphContainer';
 import { ReactFlowProvider } from 'react-flow-renderer';
+import { useDispatch } from 'react-redux';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -19,7 +20,6 @@ const useStyle = makeStyles({
 
 const ProjectEditorMain = () => {
   const classes = useStyle();
-
   return (
     <div className={classes.wrapper}>
       <ReactFlowProvider>
