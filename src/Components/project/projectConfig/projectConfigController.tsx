@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   initProjectControllerAction,
   ProjectControllerAction
-} from '../../../module/ProjectController';
+} from '../../../module/ProjectEditorController';
 import {
   getProjectThunk,
 } from '../../../module/API/project/thunks';

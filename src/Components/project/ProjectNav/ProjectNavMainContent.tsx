@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Button from 'react-bootstrap/esm/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import fileDownload from 'js-file-download'
-import { getPythonCode } from '../../../module/ProjectController';
+import { getPythonCode } from '../../../module/ProjectEditorController';
 import { RootState } from '../../../module';
 import useGetPythonCodeResult from '../../../hooks/useGetPythonCodeResult';
 

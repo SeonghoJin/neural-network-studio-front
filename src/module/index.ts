@@ -1,18 +1,18 @@
 import { combineReducers } from 'redux';
 import reactFlowInstance  from './ReactFlowInstance';
 import projectApi from './API/project'
-import projectController from './ProjectController';
+import projectController from './ProjectEditorController';
 import elements from './Elements';
-import usePutProjectContentResult
-  from '../hooks/usePutProjectContentResult';
 import { ThunkDispatch } from 'redux-thunk';
 import { ActionType } from 'typesafe-actions';
+import projectConfig from './projectConfig';
 
 const rootReducer = combineReducers({
   reactFlowInstance,
   projectApi,
   projectController,
   elements,
+  projectConfig,
 });
 
 export default rootReducer
@@ -23,6 +23,7 @@ export type RootDispatch = ThunkDispatch<
   | typeof reactFlowInstance
   | typeof projectController
   | typeof elements
+  | typeof projectConfig
   >
 >
 export type RootState = ReturnType<typeof rootReducer>
