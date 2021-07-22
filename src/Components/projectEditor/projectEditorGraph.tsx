@@ -131,11 +131,6 @@ const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
           left: 10,
           bottom: 'initial',
         }}/>
-        <Button
-          className={classes.saveButton}
-          >
-         Run
-        </Button>
         <MiniMap
                  nodeStrokeColor={(n) => {
                    if (n.type === 'input') return '#0041d0';
