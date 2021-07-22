@@ -6,13 +6,6 @@ import StandardModal from '../../modal/StandardModal';
 
 const usePutProjectContentResult = () => {
   const result = useSelector((state: RootState) => state.projectApi.putProjectContentResult);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if(result.data === true){
-      dispatch(getProject());
-    }
-  }, [result.data]);
 
   return {
     ...result,

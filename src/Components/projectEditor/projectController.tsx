@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../module';
+import { RootDispatch, RootState } from '../../module';
 import { useLocation } from 'react-router-dom';
 import {
   initProjectControllerAction,
@@ -10,24 +10,42 @@ import {
   getPythonCodeThunk,
   updateProjectContentThunk
 } from '../../module/API/project/thunks';
-import { useCallback, useEffect } from 'react';
-
+import { useEffect } from 'react';
 const useProjectController = async () => {
   const action = useSelector((state : RootState) => (state.projectController.action));
   const instance = useSelector((state: RootState) => state.reactFlowInstance.instance);
   const location = useLocation();
   const projectNo = location.pathname.split('/')[2];
-  const dispatch = useDispatch()
-
+  const thunkDispatch : RootDispatch = useDispatch();
+  const dispatch = useDispatch();
   useEffect(() => {
     if(action === ProjectControllerAction.GET_PROJECT) {
       dispatch(getProjectThunk(projectNo));
     }
     else if(action === ProjectControllerAction.PUT_PROJECT_CONTENT) {
-      dispatch(updateProjectContentThunk(projectNo, "", instance?.toObject()));
+      const exec = async () => {
+        await thunkDispatch(updateProjectContentThunk(
+          projectNo, "", instance?.toObject())
+        ).then(async (res) => {
+          if(res){
+            await thunkDispatch(getProjectThunk(projectNo));
+          }
+        });
+      }
+      exec();
     }
     else if(action === ProjectControllerAction.GET_PYTHON_CODE) {
-      dispatch(getPythonCodeThunk(projectNo));
+      const exec = async () => {
+        await thunkDispatch(updateProjectContentThunk(
+          projectNo, "", instance?.toObject()
+        )).then(async (res) => {
+          if(res){
+            thunkDispatch(getProjectThunk(projectNo));
+            thunkDispatch(getPythonCodeThunk(projectNo));
+          }
+        })
+      }
+      exec();
     }
 
     if(action !== null){

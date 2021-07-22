@@ -7,12 +7,13 @@ import { IFlowState } from '../../../API/project/types';
 
 export function updateProjectContentThunk(
   projectNo: string , output: string, flowState?: IFlowState)
-: ThunkAction<void, RootState, null, ProjectAPIActionTypes>{
+: ThunkAction<Promise<boolean>, RootState, null, ProjectAPIActionTypes>{
   return async dispatch => {
     const {request, success, failure} = putProjectContentAsync;
     dispatch(request());
       try{
         if(flowState == null){
+          await setTimeout(() => {}, 0);
           throw new Error("잘못된 저장입니다");
         }
         await updateProjectContent(projectNo, {
@@ -20,36 +21,42 @@ export function updateProjectContentThunk(
           flowState:flowState,
         });
         dispatch(success());
+        return true;
       }catch (e) {
         dispatch(failure(e.message));
+        return false;
       }
   }
 }
 
 export function getProjectThunk(projectNo: string): ThunkAction<
-  void, RootState, null, ProjectAPIActionTypes>{
+  Promise<boolean>, RootState, null, ProjectAPIActionTypes>{
   return async dispatch => {
     const {request, success, failure} = getProjectAsync;
     dispatch(request());
     try {
       const project = await getProject(projectNo);
       dispatch(success(project));
+      return true;
     } catch (e) {
       dispatch(failure(e.message));
+      return false;
     }
   }
 }
 
 export function getPythonCodeThunk(projectNo : string) :
-  ThunkAction<void, RootState, null, ProjectAPIActionTypes> {
+  ThunkAction<Promise<boolean>, RootState, null, ProjectAPIActionTypes> {
   return async dispatch => {
     const {request, success, failure} = getPythonCodeAsync;
     dispatch(request());
     try {
       const pythonCode = await getPythonCode(projectNo);
       dispatch(success(pythonCode));
+      return false;
     } catch (e) {
       dispatch(failure(e.message));
+      return true;
     }
   }
 }
