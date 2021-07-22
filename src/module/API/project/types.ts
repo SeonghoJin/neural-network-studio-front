@@ -6,17 +6,17 @@ export type ProjectAPIActionTypes = ActionType<typeof actions>;
 
 export type ProjectAPIState = {
   getPythonCodeResult: {
-    error: Error | null,
+    error: string | null,
     loading: boolean,
     data: string | null,
   },
   getProjectResult: {
-    error: Error | null;
+    error: string | null;
     loading: boolean;
     data: IProjectDto | null;
   },
   putProjectConfigResult : {
-    error : null | Error,
+    error : null | string,
     loading: boolean,
     result: {
       data: null,
@@ -24,7 +24,7 @@ export type ProjectAPIState = {
     } | null
   },
   putProjectContentResult: {
-    error : null | Error
+    error : null | string
     loading: boolean,
     result: {
       data: null,

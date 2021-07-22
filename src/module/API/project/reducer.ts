@@ -99,7 +99,7 @@ const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initial
   [ProjectAPIAction.PUT_PROJECT_CONTENT_ERROR]: (state, action) => ({
     ...state,
     putProjectContentResult: {
-      loading: true,
+      loading: false,
       error: action.payload,
       result: null,
     }

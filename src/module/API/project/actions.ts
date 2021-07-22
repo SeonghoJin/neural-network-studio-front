@@ -21,24 +21,24 @@ export const getProjectAsync = createAsyncAction(
   ProjectAPIAction.GET_PROJECT,
   ProjectAPIAction.GET_PROJECT_SUCCESS,
   ProjectAPIAction.GET_PROJECT_ERROR,
-)<undefined, IProjectDto, AxiosError>();
+)<undefined, IProjectDto, string>();
 
 export const putProjectConfigAsync = createAsyncAction(
   ProjectAPIAction.PUT_PROJECT_CONFIG,
   ProjectAPIAction.PUT_PROJECT_CONFIG_SUCCESS,
   ProjectAPIAction.PUT_PROJECT_CONFIG_ERROR,
-)<undefined, undefined, AxiosError>();
+)<undefined, undefined, string>();
 
 export const putProjectContentAsync = createAsyncAction(
   ProjectAPIAction.PUT_PROJECT_CONTENT,
   ProjectAPIAction.PUT_PROJECT_CONTENT_SUCCESS,
   ProjectAPIAction.PUT_PROJECT_CONTENT_ERROR,
-)<undefined, undefined, AxiosError>();
+)<undefined, undefined, string>();
 
 export const getPythonCodeAsync = createAsyncAction(
   ProjectAPIAction.GET_PYTHON_CODE,
   ProjectAPIAction.GET_PTYHON_CODE_SUCCESS,
   ProjectAPIAction.GET_PYTHON_CODE_ERROR,
-)<undefined, string, AxiosError>();
+)<undefined, string, string>();
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 
@@ -23,15 +23,14 @@ const useStyles = makeStyles((theme: Theme) =>
 interface ModalProps{
   onCallback? : any,
   onClose? : any,
-  head?: any,
-  body?: any,
+  head: any,
+  body: any,
 }
 
 export default function StandardModal(props: ModalProps) {
   const classes = useStyles();
   const {onClose, head, body} = props;
   const [open, setOpen] = useState(true);
-
   return (
     <div>
       <Modal

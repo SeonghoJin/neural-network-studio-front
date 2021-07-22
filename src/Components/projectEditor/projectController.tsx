@@ -15,27 +15,21 @@ const useProjectController = async () => {
   const projectNo = location.pathname.split('/')[2];
   const dispatch = useDispatch()
 
-  const callback = useCallback(() => {
+  useEffect(() => {
     if(action === ProjectControllerAction.GET_PROJECT) {
       dispatch(getProjectThunk(projectNo));
     }
     else if(action === ProjectControllerAction.PUT_PROJECT_CONTENT) {
-      if(instance != null){
-        dispatch(updateProjectContentThunk(projectNo, {
-          output: "",
-          flowState: instance.toObject(),
-        }));
-      }
+      dispatch(updateProjectContentThunk(projectNo, {
+        flowState: instance?.toObject(),
+        output: "",
+      }));
     }
 
     if(action !== null){
       dispatch(initProjectControllerAction());
     }
   }, [action, instance, location, projectNo]);
-
-  useEffect(() => {
-    callback();
-  }, [action])
 
   return action;
 }

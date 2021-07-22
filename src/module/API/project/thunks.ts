@@ -6,16 +6,24 @@ import { getProject, getPythonCode, updateProjectContent } from '../../../API/pr
 import { IFlowState } from '../../../API/project/types';
 
 export function updateProjectContentThunk(
-  projectNo: string , projectContent: { output: string; flowState: IFlowState})
+  projectNo: string , projectContent: { output: string; flowState?: IFlowState})
 : ThunkAction<void, RootState, null, ProjectAPIActionTypes>{
   return async dispatch => {
     const {request, success, failure} = putProjectContentAsync;
     dispatch(request());
-    try{
-      await updateProjectContent(projectNo, projectContent);
-      dispatch(success());
-    }catch (e) {
-      dispatch(failure(e.message));
+
+    if(projectContent.flowState != null){
+      try{
+        await updateProjectContent(projectNo, {
+          output: projectContent.output,
+          flowState: projectContent.flowState,
+        });
+        dispatch(success());
+      }catch (e) {
+        dispatch(failure(e.message));
+      }
+    }else {
+      dispatch(failure(new Error("잘못된 저장입니다.").message));
     }
   }
 }
@@ -43,7 +51,7 @@ export function getPythonCodeThunk(projectNo : string) :
       const pythonCode = await getPythonCode(projectNo);
       dispatch(success(pythonCode));
     } catch (e) {
-      dispatch(failure(e));
+      dispatch(failure(e.message));
     }
   }
 }
