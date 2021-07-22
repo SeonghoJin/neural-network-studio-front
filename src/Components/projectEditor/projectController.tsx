@@ -10,7 +10,7 @@ import { useCallback, useEffect } from 'react';
 
 const useProjectController = async () => {
   const action = useSelector((state : RootState) => (state.projectController.action));
-  const instance = useSelector((state: RootState) => state.reactFlowInstance);
+  const instance = useSelector((state: RootState) => state.reactFlowInstance.instance);
   const location = useLocation();
   const projectNo = location.pathname.split('/')[2];
   const dispatch = useDispatch()
@@ -20,10 +20,10 @@ const useProjectController = async () => {
       dispatch(getProjectThunk(projectNo));
     }
     else if(action === ProjectControllerAction.PUT_PROJECT_CONTENT) {
-      if(instance.instance != null){
+      if(instance != null){
         dispatch(updateProjectContentThunk(projectNo, {
           output: "",
-          flowState: instance.instance.toObject(),
+          flowState: instance.toObject(),
         }));
       }
     }

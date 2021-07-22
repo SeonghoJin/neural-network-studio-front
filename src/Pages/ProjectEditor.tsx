@@ -1,12 +1,7 @@
 import { LocationProps, MatchProps } from '../core/types';
 import ProjectEditorNav from '../Components/projectEditor/ProjectEditorNav/projectEditorNav';
-import { makeStyles, Modal } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import ProjectEditorMain from '../Components/projectEditor/projectEditorMain';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../module';
-import { useEffect } from 'react';
-import useProjectController from '../Components/projectEditor/projectController';
-import { getProject } from '../module/ProjectController';
 
 const useStyle = makeStyles({
   wrapper: {
