@@ -3,9 +3,9 @@ import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../module';
 import StandardModal from '../Components/modal/StandardModal';
-import { ProjectEditorProps } from '../Pages/ProjectEditor';
+import { ProjectProps } from '../Components/project/type';
 
-const useGetPythonCodeResult = (props : ProjectEditorProps) => {
+const useGetPythonCodeResult = (props : ProjectProps) => {
   const result = useSelector((state: RootState) => state.projectApi.getPythonCodeResult);
   const projectNo = props.match?.params?.projectNo;
 

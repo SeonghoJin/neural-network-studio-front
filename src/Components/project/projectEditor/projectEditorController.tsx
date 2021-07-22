@@ -9,9 +9,9 @@ import {
   updateProjectContentThunk
 } from '../../../module/API/project/thunks';
 import { useEffect } from 'react';
-import { ProjectEditorProps } from '../../../Pages/ProjectEditor';
 import { RootDispatch, RootState } from '../../../module';
-const useProjectController = async (props : ProjectEditorProps) => {
+import { ProjectProps } from '../type';
+const useProjectEditorController = async (props : ProjectProps) => {
   const action = useSelector((state : RootState) => (state.projectController.action));
   const instance = useSelector((state: RootState) => state.reactFlowInstance.instance);
   const projectNo = (props.match?.params?.projectNo || '0');
@@ -56,4 +56,4 @@ const useProjectController = async (props : ProjectEditorProps) => {
   return action;
 }
 
-export default useProjectController;
+export default useProjectEditorController;

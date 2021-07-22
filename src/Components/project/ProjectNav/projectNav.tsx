@@ -47,7 +47,7 @@ const useStyled = makeStyles({
   }
 });
 
-const ProjectEditorNav = () => {
+const ProjectNav = () => {
   const classes = useStyled();
 
   return (
@@ -75,4 +75,4 @@ const ProjectEditorNav = () => {
 };
 
 
-export default ProjectEditorNav;
+export default ProjectNav;

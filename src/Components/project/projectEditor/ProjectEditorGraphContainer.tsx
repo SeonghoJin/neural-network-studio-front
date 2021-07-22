@@ -5,7 +5,6 @@ import { useCallback, useEffect } from 'react';
 import { setReactFlowInstance } from '../../../module/ReactFlowInstance';
 import { Elements, OnLoadParams } from 'react-flow-renderer';
 import CircleLoading from '../../Loading/CircularLoading';
-import StandardModal from '../../modal/StandardModal';
 import { getProject } from '../../../module/ProjectController';
 import { setElements } from '../../../module/Elements';
 import useGetProjectResult from '../../../hooks/useGetProjectResult';

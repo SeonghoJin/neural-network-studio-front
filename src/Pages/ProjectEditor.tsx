@@ -3,9 +3,10 @@ import { makeStyles } from '@material-ui/core';
 import useGetPythonCodeResult from '../hooks/useGetPythonCodeResult';
 import usePutProjectContentResult from '../hooks/usePutProjectContentResult';
 import useGetProjectResult from '../hooks/useGetProjectResult';
-import useProjectController from '../Components/project/projectEditor/projectEditorController';
+import useProjectEditorController from '../Components/project/projectEditor/projectEditorController';
 import ProjectEditorMain from '../Components/project/projectEditor/projectEditorMain';
-import ProjectEditorNav from '../Components/project/ProjectNav/projectEditorNav';
+import ProjectNav from '../Components/project/ProjectNav/projectNav';
+import { ProjectProps } from '../Components/project/type';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -23,13 +24,7 @@ const useStyle = makeStyles({
   }
 })
 
-type MatchParams = {
-  projectNo: string;
-}
-
-export type ProjectEditorProps = MatchProps<MatchParams>;
-
-const useProjectEditorError = (props: ProjectEditorProps) => {
+const useProjectEditorError = (props: ProjectProps) => {
 
   const getPythonCodeResult = useGetPythonCodeResult(props);
   const putProjectContentResult = usePutProjectContentResult();
@@ -43,18 +38,18 @@ const useProjectEditorError = (props: ProjectEditorProps) => {
   )
 }
 
-const ProjectEditor = (props : ProjectEditorProps & LocationProps) => {
+const ProjectEditor = (props : ProjectProps) => {
 
   const classes = useStyle();
   const errorModal = useProjectEditorError(props);
-  useProjectController(props);
+  useProjectEditorController(props);
 
   return (
     <>
       {errorModal}
       <div className={classes.wrapper}>
         <div className={classes.container}>
-          <ProjectEditorNav/>
+          <ProjectNav/>
           <div className={classes.content}>
             <ProjectEditorMain/>
           </div>
