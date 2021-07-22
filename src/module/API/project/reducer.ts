@@ -4,9 +4,9 @@ import { ProjectAPIAction } from './actions';
 
 const initialState: ProjectAPIState = {
   getPythonCodeResult: {
-    error: null,
     loading: false,
     data: null,
+    error: null,
   },
   getProjectResult: {
     loading: false,
@@ -15,13 +15,13 @@ const initialState: ProjectAPIState = {
   },
   putProjectConfigResult: {
     loading: false,
+    data: false,
     error: null,
-    result: null
   },
   putProjectContentResult: {
     loading: false,
+    data:false,
     error: null,
-    result: null,
   }
 }
 
@@ -55,7 +55,7 @@ const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initial
     putProjectConfigResult: {
       loading: true,
       error: null,
-      result: null,
+      data: false,
     }
   }),
   [ProjectAPIAction.PUT_PROJECT_CONFIG_SUCCESS]: (state) => ({
@@ -63,10 +63,7 @@ const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initial
     putProjectConfigResult: {
       loading: true,
       error: null,
-      result: {
-        check: true,
-        data: null
-      },
+      data: true,
     }
   }),
   [ProjectAPIAction.PUT_PROJECT_CONFIG_ERROR]: (state, action) => ({
@@ -74,7 +71,7 @@ const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initial
     putProjectConfigResult: {
       loading: true,
       error: action.payload,
-      result: null,
+      data: false,
     }
   }),
   [ProjectAPIAction.PUT_PROJECT_CONTENT]: (state) => ({
@@ -82,7 +79,7 @@ const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initial
     putProjectContentResult: {
       loading: true,
       error: null,
-      result: null,
+      data: false,
     }
   }),
   [ProjectAPIAction.PUT_PROJECT_CONTENT_SUCCESS]: (state) => ({
@@ -90,10 +87,7 @@ const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initial
     putProjectContentResult: {
       loading: false,
       error: null,
-      result: {
-        data: null,
-        check: true
-      },
+      data: true,
     }
   }),
   [ProjectAPIAction.PUT_PROJECT_CONTENT_ERROR]: (state, action) => ({
@@ -101,7 +95,7 @@ const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initial
     putProjectContentResult: {
       loading: false,
       error: action.payload,
-      result: null,
+      data: false,
     }
   }),
   [ProjectAPIAction.GET_PYTHON_CODE]: (state) => ({

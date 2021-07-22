@@ -3,6 +3,10 @@ import ProjectEditorLeftSideBar from './projectEditorSideBar/ProjectEditorLeftSi
 import ProjectEditorGraphContainer from './ProjectEditorGraphContainer';
 import { ReactFlowProvider } from 'react-flow-renderer';
 import useProjectController from './projectController';
+import useGetPythonCodeResult from './hooks/useGetPythonCodeResult';
+import usePutProjectContentResult from './hooks/usePutProjectContentResult';
+import useGetProjectResult from './hooks/useGetProjectResult';
+import StandardModal from '../modal/StandardModal';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -20,9 +24,13 @@ const useStyle = makeStyles({
 
 const ProjectEditorMain = () => {
   const classes = useStyle();
-  const action = useProjectController();
+  useProjectController();
+  const getPythonCodeResult = useGetPythonCodeResult();
+  const putProjectContentResult = usePutProjectContentResult();
   return (
     <>
+      {getPythonCodeResult.error && (getPythonCodeResult.errorModal)}
+      {putProjectContentResult.error && (putProjectContentResult.errorModal)}
       <div className={classes.wrapper}>
         <ReactFlowProvider>
           <Container className={classes.container}>

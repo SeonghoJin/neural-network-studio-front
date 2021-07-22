@@ -24,10 +24,7 @@ const useProjectController = async () => {
       dispatch(getProjectThunk(projectNo));
     }
     else if(action === ProjectControllerAction.PUT_PROJECT_CONTENT) {
-      dispatch(updateProjectContentThunk(projectNo, {
-        flowState: instance?.toObject(),
-        output: "",
-      }));
+      dispatch(updateProjectContentThunk(projectNo, "", instance?.toObject()));
     }
     else if(action === ProjectControllerAction.GET_PYTHON_CODE) {
       dispatch(getPythonCodeThunk(projectNo));
@@ -36,7 +33,7 @@ const useProjectController = async () => {
     if(action !== null){
       dispatch(initProjectControllerAction());
     }
-  }, [action, instance, location, projectNo]);
+  }, [action]);
 
   return action;
 }

@@ -18,17 +18,11 @@ export type ProjectAPIState = {
   putProjectConfigResult : {
     error : null | string,
     loading: boolean,
-    result: {
-      data: null,
-      check: boolean
-    } | null
+    data: boolean
   },
   putProjectContentResult: {
     error : null | string
     loading: boolean,
-    result: {
-      data: null,
-      check: boolean,
-    } | null
+    data: boolean
   },
 };

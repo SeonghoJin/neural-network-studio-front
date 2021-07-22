@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import fileDownload from 'js-file-download'
 import { getPythonCode } from '../../../module/ProjectController';
 import { RootState } from '../../../module';
+import useGetPythonCodeResult from '../hooks/useGetPythonCodeResult';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -28,15 +29,8 @@ const useStyle = makeStyles({
 const ProjectNavMainContent = () => {
   const location = useLocation();
   const projectNo = location.pathname.split('/')[2];
-  const getPythonCodeResult = useSelector((state : RootState) => (state.projectApi.getPythonCodeResult));
   const classes = useStyle();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if(getPythonCodeResult.data != null){
-      fileDownload(getPythonCodeResult.data, 'model.py');
-    }
-  }, [getPythonCodeResult.data])
 
   const onGetPythonCode = useCallback(() => {
     dispatch(getPythonCode());
