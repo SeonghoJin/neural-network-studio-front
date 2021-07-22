@@ -20,16 +20,10 @@ const useProjectController = async (props : ProjectProps) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if(action === ProjectControllerAction.GET_PROJECT) {
-      const exec = async () => {
         thunkDispatch(getProjectThunk(projectNo));
-      }
-      exec();
     }
     else if(action === ProjectControllerAction.GET_PROJECT_CONFIG){
-      const exec = async () => {
         thunkDispatch(getProjectConfigThunk(projectNo));
-      }
-      exec();
     }
     else if(action === ProjectControllerAction.PUT_PROJECT_CONTENT) {
       const exec = async () => {
