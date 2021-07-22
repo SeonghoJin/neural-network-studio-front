@@ -4,6 +4,7 @@ import {
   ProjectControllerAction
 } from '../../module/ProjectController';
 import {
+  getProjectConfigThunk,
   getProjectThunk,
   getPythonCodeThunk,
   updateProjectContentThunk
@@ -17,10 +18,18 @@ const useProjectController = async (props : ProjectProps) => {
   const projectNo = (props.match?.params?.projectNo || '0');
   const thunkDispatch : RootDispatch = useDispatch();
   const dispatch = useDispatch();
-
   useEffect(() => {
     if(action === ProjectControllerAction.GET_PROJECT) {
-      dispatch(getProjectThunk(projectNo));
+      const exec = async () => {
+        thunkDispatch(getProjectThunk(projectNo));
+      }
+      exec();
+    }
+    else if(action === ProjectControllerAction.GET_PROJECT_CONFIG){
+      const exec = async () => {
+        thunkDispatch(getProjectConfigThunk(projectNo));
+      }
+      exec();
     }
     else if(action === ProjectControllerAction.PUT_PROJECT_CONTENT) {
       const exec = async () => {

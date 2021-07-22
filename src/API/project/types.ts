@@ -1,5 +1,5 @@
 import { IProjectConfig } from '../../core/project/config';
-import { Elements, } from 'react-flow-renderer';
+import { Elements, FlowExportObject, OnLoadParams, } from 'react-flow-renderer';
 
 export interface IProjectDto{
   config:      IProjectConfig;
@@ -11,12 +11,6 @@ export interface IProjectDto{
 }
 
 export interface IProjectContentDto {
-  flowState: IFlowState,
+  flowState: FlowExportObject,
   output: string;
-}
-
-export interface IFlowState {
-  zoom: number,
-  elements: Elements,
-  position: [number, number]
 }

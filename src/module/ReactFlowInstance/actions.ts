@@ -1,5 +1,5 @@
 import { createStandardAction } from '../../util';
-import { OnLoadParams } from 'react-flow-renderer';
+import { FlowExportObject, OnLoadParams } from 'react-flow-renderer';
 
 export enum ReactFlowAction{
   GET_REACTFLOW_INSTANCE = 'getReactFlowInstance',

@@ -10,8 +10,6 @@ const ProjectRouter = () => {
       <ReactFlowProvider>
         <Route path={'/project/list'} exact={true}></Route>
         <Route path={'/project/:projectNo'} component={Project}></Route>
-        <Route path={'/project/:projectNo'} exact={true} component={ProjectEditor}></Route>
-        <Route path={'/project/:projectNo/config'} exact={true} component={ProjectConfig}></Route>
       </ReactFlowProvider>
     </>
   );

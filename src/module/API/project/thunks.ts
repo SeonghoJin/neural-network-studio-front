@@ -1,12 +1,22 @@
 import { RootState } from '../../index';
 import { ProjectAPIActionTypes } from './types';
 import { ThunkAction } from 'redux-thunk';
-import { getProjectAsync, getPythonCodeAsync, putProjectContentAsync } from './actions';
-import { getProject, getPythonCode, updateProjectContent } from '../../../API/project';
-import { IFlowState } from '../../../API/project/types';
+import {
+  getProjectAsync,
+  getProjectConfigAsync,
+  getPythonCodeAsync,
+  putProjectContentAsync
+} from './actions';
+import {
+  getProject,
+  getProjectConfig,
+  getPythonCode,
+  updateProjectContent
+} from '../../../API/project';
+import { FlowExportObject } from 'react-flow-renderer';
 
 export function updateProjectContentThunk(
-  projectNo: string , output: string, flowState?: IFlowState)
+  projectNo: string , output: string, flowState?: FlowExportObject)
 : ThunkAction<Promise<boolean>, RootState, null, ProjectAPIActionTypes>{
   return async dispatch => {
     const {request, success, failure} = putProjectContentAsync;
@@ -53,6 +63,22 @@ export function getPythonCodeThunk(projectNo : string) :
     try {
       const pythonCode = await getPythonCode(projectNo);
       dispatch(success(pythonCode));
+      return false;
+    } catch (e) {
+      dispatch(failure(e.message));
+      return true;
+    }
+  }
+}
+
+export function getProjectConfigThunk(projectNo: string) :
+ThunkAction<Promise<boolean>,RootState, null, ProjectAPIActionTypes> {
+  return async dispatch => {
+    const {request, success, failure} = getProjectConfigAsync;
+    dispatch(request());
+    try {
+      const projectConfig = await getProjectConfig(projectNo);
+      dispatch(success(projectConfig));
       return false;
     } catch (e) {
       dispatch(failure(e.message));

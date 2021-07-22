@@ -21,9 +21,12 @@ const projectContoller = createReducer<ProjectControllerState, ProjectController
     [ProjectControllerAction.GET_PYTHON_CODE]: (state) => ({
       action: ProjectControllerAction.GET_PYTHON_CODE
     }),
+    [ProjectControllerAction.GET_PROJECT_CONFIG]: (state) => ({
+      action: ProjectControllerAction.GET_PROJECT_CONFIG
+    }),
     [ProjectControllerAction.INIT_Project_Controller_Action]: (state) => (
-      {action: null}
-    )
-  });
+    {action: null}
+),
+});
 
 export default projectContoller;

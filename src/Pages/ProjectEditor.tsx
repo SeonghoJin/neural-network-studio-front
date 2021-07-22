@@ -22,7 +22,7 @@ const useStyle = makeStyles({
   content: {
     flexGrow: 1,
   }
-})
+});
 
 const ProjectEditor = (props : ProjectProps) => {
 

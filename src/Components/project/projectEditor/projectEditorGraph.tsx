@@ -12,13 +12,13 @@ import ReactFlow, {
   Edge,
   addEdge,
   removeElements,
+  FlowExportObject,
 } from 'react-flow-renderer';
 import { useDispatch, useSelector } from 'react-redux';
 import { BlockState } from '../../../core/block/BlockState';
 import { getNodeId } from '../../../util';
 import { nodetypes } from '../../../core/nodetypes';
 import { RootState } from '../../../module';
-import { IFlowState } from '../../../API/project/types';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -49,7 +49,7 @@ const useStyle = makeStyles({
 interface PrjectEditorGrahpProps{
   setReactInstance: ReturnType<typeof useCallback>
   setElements: ReturnType<typeof useCallback>
-  flowState?: IFlowState,
+  flowState?: FlowExportObject,
 };
 
 const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {

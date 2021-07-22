@@ -1,7 +1,12 @@
-export interface IProjectConfig{
-  batch_size?: number;
+export interface IProjectGlobalConfig{
 
   epochs?: number;
+
+  batch_size?: number;
+
+}
+
+export interface IProjectOptimizerConfig{
 
   learning_rate?: number;
 
@@ -10,6 +15,10 @@ export interface IProjectConfig{
   metrics?: string[];
 
   optimizer?: string;
+
+}
+
+export interface IProjectConfig extends IProjectOptimizerConfig, IProjectGlobalConfig{
 }
 
 class ProjectConfig implements IProjectConfig{

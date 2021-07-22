@@ -5,6 +5,8 @@ import React from 'react';
 import Logo from '../../Logo/Logo';
 import ProjectNavMainContent from './ProjectNavMainContent';
 import ProjectNavOptionContent from './ProjectNavOptionContent';
+import useGetProjectResult from '../../../hooks/useGetProjectResult';
+import CircleLoading from '../../Loading/CircularLoading';
 
 const useStyled = makeStyles({
   wrapper: {
@@ -49,27 +51,32 @@ const useStyled = makeStyles({
 
 const ProjectNav = () => {
   const classes = useStyled();
-
-  return (
-    <div className={classes.wrapper}>
-      <div className={classes.container}>
-      <Container>
-        <div className={classes.root}>
-          <div className={classes.logoWrapper}>
-            <Logo/>
-          </div>
-          <div className={classes.navContentWrapper}>
-            <div className={classes.navContent}>
-              <div className={classes.navMainContentWrapper}>
-                <ProjectNavMainContent/>
-              </div>
-              <div className={classes.navOptionContentWrapper}>
-                <ProjectNavOptionContent/>
-              </div>
+  const getProjectResult = useGetProjectResult();
+  const content = getProjectResult.data && (
+    <Container>
+      <div className={classes.root}>
+        <div className={classes.logoWrapper}>
+          <Logo/>
+        </div>
+        <div className={classes.navContentWrapper}>
+          <div className={classes.navContent}>
+            <div className={classes.navMainContentWrapper}>
+              <ProjectNavMainContent/>
+            </div>
+            <div className={classes.navOptionContentWrapper}>
+              <ProjectNavOptionContent/>
             </div>
           </div>
         </div>
-      </Container>
+      </div>
+    </Container>
+  );
+  return (
+
+    <div className={classes.wrapper}>
+      <div className={classes.container}>
+        {getProjectResult.loading && <CircleLoading/>}
+        {content}
       </div>
     </div>);
 };
