@@ -37,7 +37,6 @@ const ProjectEditorGraphContainer = () => {
 
   return(
     <>
-      {(result.error) && result.errorModal}
       {(result.loading || result.error) && <CircleLoading/>}
       {content}
     </>);

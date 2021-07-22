@@ -53,6 +53,7 @@ const NodeConfigViewer = () => {
   if(!selectedElement){
     return <></>
   }
+
   const configInputs : any[] = [];
   for(const key in data?.config){
     if({}.hasOwnProperty.call(data?.config, key)) {

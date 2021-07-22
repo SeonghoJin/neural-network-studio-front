@@ -11,13 +11,14 @@ import {
   updateProjectContentThunk
 } from '../../module/API/project/thunks';
 import { useEffect } from 'react';
-const useProjectController = async () => {
+import { ProjectEditorProps } from '../../Pages/ProjectEditor';
+const useProjectController = async (props : ProjectEditorProps) => {
   const action = useSelector((state : RootState) => (state.projectController.action));
   const instance = useSelector((state: RootState) => state.reactFlowInstance.instance);
-  const location = useLocation();
-  const projectNo = location.pathname.split('/')[2];
+  const projectNo = (props.match?.params?.projectNo || '0');
   const thunkDispatch : RootDispatch = useDispatch();
   const dispatch = useDispatch();
+
   useEffect(() => {
     if(action === ProjectControllerAction.GET_PROJECT) {
       dispatch(getProjectThunk(projectNo));

@@ -7,6 +7,8 @@ import useGetPythonCodeResult from '../../hooks/useGetPythonCodeResult';
 import usePutProjectContentResult from '../../hooks/usePutProjectContentResult';
 import useGetProjectResult from '../../hooks/useGetProjectResult';
 import StandardModal from '../modal/StandardModal';
+import { LocationProps } from '../../core/types';
+import { ProjectEditorProps } from '../../Pages/ProjectEditor';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -24,13 +26,8 @@ const useStyle = makeStyles({
 
 const ProjectEditorMain = () => {
   const classes = useStyle();
-  useProjectController();
-  const getPythonCodeResult = useGetPythonCodeResult();
-  const putProjectContentResult = usePutProjectContentResult();
   return (
     <>
-      {getPythonCodeResult.error && (getPythonCodeResult.errorModal)}
-      {putProjectContentResult.error && (putProjectContentResult.errorModal)}
       <div className={classes.wrapper}>
         <ReactFlowProvider>
           <Container className={classes.container}>

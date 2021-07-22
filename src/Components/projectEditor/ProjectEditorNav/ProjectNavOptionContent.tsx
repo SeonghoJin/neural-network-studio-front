@@ -5,6 +5,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import { useDispatch } from 'react-redux';
 import { putProjectContent } from '../../../module/ProjectController';
 import Button from 'react-bootstrap/esm/Button';
+import { Link, useLocation } from 'react-router-dom';
 const useStyle = makeStyles({
   wrapper: {
     width: '100%',
@@ -25,19 +26,19 @@ const useStyle = makeStyles({
 
 const ProjectNavOptionContent = () => {
   const classes = useStyle();
+  const location = useLocation();
   const dispatch = useDispatch();
 
   const onSave = useCallback(() => {
     dispatch(putProjectContent());
   }, []);
 
-
   return (<div className={classes.wrapper}>
     <div className={classes.container}>
       <div className={classes.mainOptionContentItem}>
-        <Button>
+        <Link to={location.pathname+'/config'}>
           <SettingsIcon/>
-        </Button>
+        </Link>
       </div>
       <div className={classes.mainOptionContentItem}>
           <Button onClick={() => {onSave()}}>

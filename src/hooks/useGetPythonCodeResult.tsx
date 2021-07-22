@@ -1,11 +1,13 @@
 import fileDownload from 'js-file-download';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../module';
 import StandardModal from '../Components/modal/StandardModal';
+import { ProjectEditorProps } from '../Pages/ProjectEditor';
 
-const useGetPythonCodeResult = () => {
+const useGetPythonCodeResult = (props : ProjectEditorProps) => {
   const result = useSelector((state: RootState) => state.projectApi.getPythonCodeResult);
+  const projectNo = props.match?.params?.projectNo;
 
   useEffect(() => {
     if(result.data != null){
@@ -13,10 +15,14 @@ const useGetPythonCodeResult = () => {
     }
   }, [result.data])
 
+  const handleError = useCallback(() => {
+    window.location.replace(`/project/`);
+  }, [projectNo]);
+
   return {
     ...result,
     errorModal : (
-      <StandardModal head={"error"} body={result.error}/>
+      <StandardModal head={"error"} body={result.error} onClose={handleError}/>
     )
   };
 }
