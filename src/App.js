@@ -1,13 +1,13 @@
 import './App.css';
-import Header from './components/header/header';
-import Main from './components/main/main';
+import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import { Landing, Signup } from './routes/index';
 
 function App() {
   return (
-      <>
-        <Header/>
-        <Main/>
-      </>
+      <Switch>
+        <Route exact path="/" component={Landing} />
+        <Route path="/signup" component={Signup} />
+      </Switch>
   );
 }
 

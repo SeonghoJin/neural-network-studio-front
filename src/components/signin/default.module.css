@@ -15,12 +15,6 @@
     align-items: center;
 }
 
-.inputWrapper {
-    display: flex;
-    width: 400px;
-    margin-bottom: 5px;
-}
-
 .loginForm input {
     padding: 12px;
     font-size: 16px;

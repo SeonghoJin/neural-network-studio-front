@@ -4,3 +4,18 @@
     text-align: center;
     font-family: 'Noto Sans KR', sans-serif;
 }
+
+.inputWrapper {
+    display: flex;
+    width: 400px;
+    margin-bottom: 5px;
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.iconButton {
+    display: flex;
+}
