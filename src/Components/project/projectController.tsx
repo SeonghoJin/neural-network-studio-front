@@ -12,9 +12,11 @@ import {
 import { useEffect } from 'react';
 import { RootDispatch, RootState } from '../../module';
 import { ProjectProps } from './type';
+import useGetProjectResult from '../../hooks/useGetProjectResult';
 const useProjectController = async (props : ProjectProps) => {
   const action = useSelector((state : RootState) => (state.projectController.action));
   const instance = useSelector((state: RootState) => state.reactFlowInstance.instance);
+  const getProjectResult = useGetProjectResult();
   const projectNo = (props.match?.params?.projectNo || '0');
   const thunkDispatch : RootDispatch = useDispatch();
   const dispatch = useDispatch();
@@ -28,7 +30,7 @@ const useProjectController = async (props : ProjectProps) => {
     else if(action === ProjectControllerAction.PUT_PROJECT_CONTENT) {
       const exec = async () => {
         await thunkDispatch(updateProjectContentThunk(
-          projectNo, "", instance?.toObject())
+          projectNo, "", instance?.toObject() || getProjectResult.data?.content.flowState)
         ).then(async (res) => {
           if(res){
             await thunkDispatch(getProjectThunk(projectNo));
