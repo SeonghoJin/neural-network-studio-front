@@ -29,12 +29,13 @@ header {
     width: 100%;
     font-size: 16px;
     padding: 10px;
-    border: lightgray 1px solid;
+    /*border: lightgray 1px solid;*/
     transition: .2s ease-in;
 }
+
 .signupForm input:focus {
     outline: none;
-    border-color: black;
+    /*border-color: black;*/
 }
 
 .submit {
@@ -54,4 +55,28 @@ header {
 .requirement {
     font-size: 12px;
     color: gray;
+}
+
+.pwVisible {
+    display: flex;
+    align-items: center;
+}
+
+.pwVisible span {
+    margin-right: 10px;
+}
+
+.pwVisible a {
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    color: gray;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
 }

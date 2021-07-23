@@ -7,6 +7,57 @@ import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons"
 class Signup extends React.PureComponent {
     state = {
         pwVisible: false,
+        pwValue: '',
+        pwValid: '',
+        pwCheck: false,
+        pwApprove: false,
+    };
+
+    // 비밀번호 조건이 맞지않으면 빨간색으로 알림.
+    onChangePW = (e) => {
+        const re = new RegExp('^(?=.*\\d)(?=.*[a-zA-Z])(?=.*([^\\w\\d\\s]|_)).{8,72}$');
+
+        if (re.test(e.target.value)) {
+            this.setState({
+                pwApprove: true,
+            })
+        }
+        else {
+            this.setState({
+                pwApprove: false,
+            })
+        }
+        if (e.target.value !== this.state.pwValid) {
+            this.setState({
+                pwCheck: false,
+            })
+        }
+        else {
+            this.setState({
+                pwCheck: true,
+            })
+        }
+
+        this.setState({
+            pwValue: e.target.value,
+        })
+    };
+
+    // validate pw.
+    onChangePWValid = (e) => {
+        if (e.target.value !== this.state.pwValue) {
+            this.setState({
+                pwCheck: false,
+            })
+        }
+        else {
+            this.setState({
+                pwCheck: true,
+            })
+        }
+        this.setState( {
+            pwValid: e.target.value,
+        })
     }
 
     clickEye = () => {
@@ -32,12 +83,32 @@ class Signup extends React.PureComponent {
                                 </div>
                                 <div className={`${utils.inputWrapper} ${utils.flexColumn}`}>
                                     <div className={`${utils.inputWrapper}`}>
-                                        <input type={ this.state.pwVisible ? "" : "password"} placeholder={"비밀번호"} />
-                                        <a href={"#"} onClick={this.clickEye} className={`${utils.iconButton}`}>
-                                            <FontAwesomeIcon icon={ this.state.pwVisible ? faEyeSlash : faEye } />
-                                        </a>
+                                        <input type={ this.state.pwVisible ? "" : "password"} placeholder={"비밀번호"} onChange={this.onChangePW}/>
                                     </div>
-                                    <span >기호, 영문, 숫자 중 2가지 이상 조합</span>
+                                    { this.state.pwValue === '' ?
+                                        <span className={`${style.requirement}`}>기호, 영문, 숫자 중 2가지 이상 조합</span>:
+                                        this.state.pwApprove ?
+                                        <span className={`${style.requirement}`}>기호, 영문, 숫자 중 2가지 이상 조합</span> :
+                                        <span className={`${style.requirement} ${style.red}`}>반드시 기호, 영문, 숫자 중 2가지 이상 조합해야합니다.</span>
+                                    }
+                                </div>
+                                <div className={`${utils.inputWrapper} ${utils.flexColumn}`}>
+                                    <div className={`${utils.inputWrapper}`}>
+                                        <input type={ this.state.pwVisible ? "" : "password"} placeholder={"비밀번호 확인"} onChange={this.onChangePWValid}/>
+                                    </div>
+                                    { this.state.pwValid === '' ?
+                                        '' :
+                                        this.state.pwCheck ?
+                                                <span className={`${style.requirement} ${style.green}`}>맞습니다.</span> :
+                                                <span className={`${style.requirement} ${style.red}`}>비밀번호가 틀립니다.</span>
+                                    }
+
+                                </div>
+                                <div className={style.pwVisible}>
+                                    <span>비밀번호 표시</span>
+                                    <a href={"#"} onClick={this.clickEye} className={`${utils.iconButton}`}>
+                                        <FontAwesomeIcon icon={ this.state.pwVisible ? faEyeSlash : faEye } />
+                                    </a>
                                 </div>
                                 <div className={`${utils.divButton} ${style.submit}`}>
                                     <a href={"#"}>제출</a>
