@@ -2,6 +2,7 @@ import { Container, makeStyles } from '@material-ui/core';
 import ProjectEditorLeftSideBar from './projectEditorSideBar/ProjectEditorLeftSideBar';
 import ProjectEditorGraphContainer from './ProjectEditorGraphContainer';
 import { ReactFlowProvider } from 'react-flow-renderer';
+import ProjectEditorNav from './ProjectEditorNav/projectEditorNav';
 
 const useStyle = makeStyles({
   wrapper: {

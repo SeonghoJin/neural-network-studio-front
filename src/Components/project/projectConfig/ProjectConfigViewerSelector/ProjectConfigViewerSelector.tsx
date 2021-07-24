@@ -21,16 +21,23 @@ const selectorItemHeads = [
   "Optimizer",
 ]
 
+interface Props{
+  value: number;
+  setValue: (num: number) => void
+}
 
-const ProjectConfigViewerSelector = () => {
+const ProjectConfigViewerSelector = (props: Props) => {
   const classes = useStyle();
-  const [value,setValue] = useState(0);
+  const {value, setValue} = props;
   const selectorItems = (
     <ul>
       {selectorItemHeads.map((head,index) => {
         return (
           <li key={index}>
-            <ProjectConfigViewerSelectorItem head={head} active={value === index} onClick={setValue}/>
+            <ProjectConfigViewerSelectorItem
+              head={head}
+              active={value === index}
+              onClick={() => {setValue(index)}}/>
           </li>
         )})
       }

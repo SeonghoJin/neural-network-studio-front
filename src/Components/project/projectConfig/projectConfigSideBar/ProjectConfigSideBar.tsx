@@ -14,12 +14,21 @@ const useStyle = makeStyles({
   },
 });
 
-const ProjectConfigSideBar = () => {
+interface Props{
+  value: number;
+  setValue: (num: number) => void
+}
+
+const ProjectConfigSideBar = (props: Props) => {
+  const {value, setValue} = props;
   const classes = useStyle();
   return (
     <div className={classes.wrapper}>
       <div className={classes.container}>
-        <ProjectConfigViewerSelector/>
+        <ProjectConfigViewerSelector
+          value={value}
+          setValue={setValue}
+        />
       </div>
     </div>
   );

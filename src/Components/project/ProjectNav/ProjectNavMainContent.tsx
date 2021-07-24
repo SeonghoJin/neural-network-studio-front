@@ -30,11 +30,6 @@ const ProjectNavMainContent = () => {
   const location = useLocation();
   const projectNo = location.pathname.split('/')[2];
   const classes = useStyle();
-  const dispatch = useDispatch();
-
-  const onGetPythonCode = useCallback(() => {
-    dispatch(getPythonCode());
-  }, []);
 
   return (<div className={classes.wrapper}>
     <div className={classes.container}>
@@ -44,9 +39,6 @@ const ProjectNavMainContent = () => {
       <Link to={`/project/${projectNo}/learn`}>
         <div className={classes.mainContentItem}>학습</div>
       </Link>
-      <Button onClick={onGetPythonCode}>
-        <div className={classes.mainContentItem}>PythonCode추출</div>
-      </Button>
     </div>
   </div>)
 }

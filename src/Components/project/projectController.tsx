@@ -6,26 +6,30 @@ import {
 import {
   getProjectConfigThunk,
   getProjectThunk,
-  getPythonCodeThunk,
+  getPythonCodeThunk, putProjectConfigThunk, putProjectInfoThunk,
   updateProjectContentThunk
 } from '../../module/API/project/thunks';
 import { useEffect } from 'react';
 import { RootDispatch, RootState } from '../../module';
 import { ProjectProps } from './type';
 import useGetProjectResult from '../../hooks/useGetProjectResult';
+import useProjectConfig from '../../hooks/useProjectConfig';
+import useProjectInfo from '../../hooks/useProjectInfo';
 const useProjectController = async (props : ProjectProps) => {
   const action = useSelector((state : RootState) => (state.projectController.action));
   const instance = useSelector((state: RootState) => state.reactFlowInstance.instance);
   const getProjectResult = useGetProjectResult();
-  const projectNo = (props.match?.params?.projectNo || '0');
+  const [projectConfig] = useProjectConfig();
+  const [projectInfo] = useProjectInfo();
   const thunkDispatch : RootDispatch = useDispatch();
   const dispatch = useDispatch();
+  const projectNo = (props.match?.params?.projectNo || '0');
   useEffect(() => {
     if(action === ProjectControllerAction.GET_PROJECT) {
-        thunkDispatch(getProjectThunk(projectNo));
+      thunkDispatch(getProjectThunk(projectNo));
     }
     else if(action === ProjectControllerAction.GET_PROJECT_CONFIG){
-        thunkDispatch(getProjectConfigThunk(projectNo));
+      thunkDispatch(getProjectConfigThunk(projectNo));
     }
     else if(action === ProjectControllerAction.PUT_PROJECT_CONTENT) {
       const exec = async () => {
@@ -50,6 +54,26 @@ const useProjectController = async (props : ProjectProps) => {
           }
         })
       }
+      exec();
+    }
+    else if(action === ProjectControllerAction.PUT_PROJECT_CONFIG_AND_INFO){
+      const exec = async () => {
+        if(projectInfo.name != null && projectInfo.description != null)
+        thunkDispatch(putProjectInfoThunk(
+          projectNo, projectInfo.name, projectInfo.description
+        )).then(async (res) => {
+          if(res){
+            return await thunkDispatch(putProjectConfigThunk(projectNo, projectConfig))
+          }
+          return false
+        }).then(async (res) => {
+          if(res) {
+            thunkDispatch(getProjectThunk(projectNo));
+            thunkDispatch(getProjectConfigThunk(projectNo));
+          }
+        })
+      }
+
       exec();
     }
 

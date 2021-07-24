@@ -1,10 +1,9 @@
-import { SyntheticEvent } from 'react';
 import { makeStyles } from '@material-ui/core';
 
 interface ProjectConfigViewerSelectorItemProps{
   head: string,
   active: boolean,
-  onClick?: (value: number) => void,
+  onClick?: () => void,
 }
 
 const useStyle = makeStyles({
@@ -16,7 +15,7 @@ const useStyle = makeStyles({
     width: '100%',
     height: '100%',
     padding: '10px',
-
+    borderBottom : '1px solid #B2B2B2',
     '&:hover': {
       backgroundColor: '#FFFFFF'
     },
@@ -32,7 +31,7 @@ const ProjectConfigViewerSelectorItem = (props: ProjectConfigViewerSelectorItemP
   const classes = useStyle();
   const {head, onClick, active} = props;
   return (
-    <div className={classes.wrapper}>
+    <div className={classes.wrapper} onClick={onClick}>
       <div className={`${classes.container} ${active && classes.active}`}>
         {head}
       </div>

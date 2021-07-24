@@ -27,6 +27,11 @@ const initialState: ProjectAPIState = {
     loading: false,
     data:false,
     error: null,
+  },
+  putProjectInfoResult: {
+    loading: false,
+    data:false,
+    error: null,
   }
 }
 
@@ -150,7 +155,32 @@ const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initial
       error: action.payload,
       data: null,
     }
-  })
+  }),
+  [ProjectAPIAction.PUT_PROJECT_INFO]: (state) => ({
+    ...state,
+    putProjectInfoResult: {
+      loading: false,
+      error: null,
+      data: false,
+    }
+  }),
+  [ProjectAPIAction.PUT_PROJECT_INFO_SUCCESS]: (state) => ({
+    ...state,
+    putProjectInfoResult: {
+      loading: false,
+      error: null,
+      data: true,
+    }
+  }),
+  [ProjectAPIAction.PUT_PROJECT_INFO_ERROR]: (state,action) => ({
+    ...state,
+    putProjectInfoResult: {
+      loading: false,
+      error: action.payload,
+      data: false,
+    }
+  }),
+
 });
 
 export default projectApi;

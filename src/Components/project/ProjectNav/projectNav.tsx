@@ -9,22 +9,20 @@ import useGetProjectResult from '../../../hooks/useGetProjectResult';
 import CircleLoading from '../../Loading/CircularLoading';
 
 const useStyled = makeStyles({
+
   wrapper: {
     width: '100%',
-    height: 40,
+    height: '40px'
   },
   container: {
     width: '100%',
     height: '100%',
-    display: 'flex',
-    backgroundColor: '#F7F7F7',
   },
-  root: {
-    width: '100%',
+  contentWrapper: {
+    width:'100%',
     height: '100%',
+    borderBottom: '1px solid #B2B2B2',
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
     backgroundColor: '#00000000',
   },
   logoWrapper: {
@@ -46,38 +44,30 @@ const useStyled = makeStyles({
   },
   navOptionContentWrapper: {
     height: '100%',
-  }
+  },
 });
 
 const ProjectNav = () => {
   const classes = useStyled();
-  const getProjectResult = useGetProjectResult();
-  const content = getProjectResult.data && (
-    <Container>
-      <div className={classes.root}>
-        <div className={classes.logoWrapper}>
-          <Logo/>
-        </div>
-        <div className={classes.navContentWrapper}>
-          <div className={classes.navContent}>
-            <div className={classes.navMainContentWrapper}>
-              <ProjectNavMainContent/>
-            </div>
-            <div className={classes.navOptionContentWrapper}>
-              <ProjectNavOptionContent/>
+  return (
+    <div className={classes.wrapper}>
+      <Container className={classes.container}>
+        <div className={classes.contentWrapper}>
+          <div className={classes.logoWrapper}>
+            <Logo/>
+          </div>
+          <div className={classes.navContentWrapper}>
+            <div className={classes.navContent}>
+              <div className={classes.navMainContentWrapper}>
+                <ProjectNavMainContent/>
+              </div>
+              <div className={classes.navOptionContentWrapper}>
+                <ProjectNavOptionContent/>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </Container>
-  );
-  return (
-
-    <div className={classes.wrapper}>
-      <div className={classes.container}>
-        {getProjectResult.loading && <CircleLoading/>}
-        {content}
-      </div>
+      </Container>
     </div>);
 };
 

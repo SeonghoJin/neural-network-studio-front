@@ -6,6 +6,7 @@ import elements from './Elements';
 import { ThunkDispatch } from 'redux-thunk';
 import { ActionType } from 'typesafe-actions';
 import projectConfig from './projectConfig';
+import projectInfo from './projectInfo'
 
 const rootReducer = combineReducers({
   reactFlowInstance,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   projectController,
   elements,
   projectConfig,
+  projectInfo,
 });
 
 export default rootReducer
@@ -24,6 +26,7 @@ export type RootDispatch = ThunkDispatch<
   | typeof projectController
   | typeof elements
   | typeof projectConfig
+  | typeof projectInfo
   >
 >
 export type RootState = ReturnType<typeof rootReducer>

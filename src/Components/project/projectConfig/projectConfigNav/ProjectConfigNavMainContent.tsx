@@ -1,11 +1,8 @@
 import React, { useCallback } from 'react';
+import { getPythonCode } from '../../../../module/ProjectController';
 import { makeStyles } from '@material-ui/core';
-import SaveIcon from '@material-ui/icons/Save';
-import SettingsIcon from '@material-ui/icons/Settings';
 import { useDispatch } from 'react-redux';
-import { putProjectContent } from '../../../module/ProjectController';
 import Button from 'react-bootstrap/esm/Button';
-import { Link, useLocation } from 'react-router-dom';
 const useStyle = makeStyles({
   wrapper: {
     width: '100%',
@@ -18,20 +15,21 @@ const useStyle = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  mainOptionContentItem: {
+  mainContentItem: {
     marginLeft: '10px',
     marginRight: '10px',
   }
 })
 
-const ProjectNavOptionContent = () => {
+const ProjectConfigNavMainContent = () => {
   const classes = useStyle();
-  const location = useLocation();
-
-  return (<div className={classes.wrapper}>
-    <div className={classes.container}>
+  return (
+    <div className={classes.wrapper}>
+      <div className={classes.container}>
+      </div>
     </div>
-  </div>)
+
+  )
 }
 
-export default ProjectNavOptionContent;
+export default ProjectConfigNavMainContent;

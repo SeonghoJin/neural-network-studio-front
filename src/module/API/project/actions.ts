@@ -19,6 +19,9 @@ export enum ProjectAPIAction{
   PUT_PROJECT_CONTENT = 'putProjectContent',
   PUT_PROJECT_CONTENT_SUCCESS = 'putProjectContentSuccess',
   PUT_PROJECT_CONTENT_ERROR = 'putProjectContentError',
+  PUT_PROJECT_INFO = 'putProjectInfo',
+  PUT_PROJECT_INFO_SUCCESS = 'putProjectInfoSuccess',
+  PUT_PROJECT_INFO_ERROR = 'putProjectInfoError',
 }
 
 export const getProjectAsync = createAsyncAction(
@@ -51,5 +54,10 @@ export const putProjectContentAsync = createAsyncAction(
   ProjectAPIAction.PUT_PROJECT_CONTENT_ERROR,
 )<undefined, undefined, string>();
 
+export const putProjectInfoAsync = createAsyncAction(
+  ProjectAPIAction.PUT_PROJECT_INFO,
+  ProjectAPIAction.PUT_PROJECT_INFO_SUCCESS,
+  ProjectAPIAction.PUT_PROJECT_INFO_ERROR,
+)<undefined, undefined, string>();
 
 
