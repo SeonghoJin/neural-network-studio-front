@@ -1,9 +1,9 @@
 import useProjectConfig from '../../../../hooks/useProjectConfig';
-import { IProjectGlobalConfig } from '../../../../core/project/config';
 import useGetProjectConfigResult from '../../../../hooks/useGetProjectConfigResult';
 import CircleLoading from '../../../Loading/CircularLoading';
 import { makeStyles } from '@material-ui/core';
 import { ChangeEvent, useCallback } from 'react';
+import { IProjectGlobalConfig } from '../../../../API/project/types';
 
 const useStyle = makeStyles({
   wrapper: {

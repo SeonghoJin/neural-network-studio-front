@@ -1,16 +1,16 @@
 import { FlowElement, Edge } from 'react-flow-renderer';
-import { BlockCatergory, BlockConfig, BlockState, BlockType } from '../block/BlockState';
+import { BlockCategory, BlockConfig, BlockState, BlockType } from '../block/BlockState';
 
 class Node{
 
   static isNode = (obj : any) : obj is Node => {
-    if(obj.catergory === undefined){
+    if(obj.category === undefined){
       return false;
     }
     return true;
   }
 
-  catergory: BlockCatergory;
+  category: BlockCategory;
   type: BlockType;
   name: string;
   input: string | null = null;
@@ -19,7 +19,7 @@ class Node{
 
   constructor(element: FlowElement) {
     const data = element.data as BlockState;
-    this.catergory = data.catergory;
+    this.category = data.category;
     this.type = data.type;
     this.name = element.id;
     this.config = data.config;

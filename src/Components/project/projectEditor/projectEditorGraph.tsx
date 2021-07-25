@@ -1,5 +1,5 @@
-import { Button, makeStyles } from '@material-ui/core';
-import React, { KeyboardEventHandler, useCallback, useEffect , useRef, useState } from 'react';
+import { makeStyles } from '@material-ui/core';
+import React, { KeyboardEventHandler, useCallback, useEffect , useRef } from 'react';
 import ReactFlow, {
   Background,
   Controls,
@@ -14,7 +14,7 @@ import ReactFlow, {
   removeElements,
   FlowExportObject,
 } from 'react-flow-renderer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { BlockState } from '../../../core/block/BlockState';
 import { getNodeId } from '../../../util';
 import { nodetypes } from '../../../core/nodetypes';

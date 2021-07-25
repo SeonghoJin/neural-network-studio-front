@@ -1,9 +1,9 @@
 import useProjectConfig from '../../../../hooks/useProjectConfig';
-import { IProjectOptimizerConfig } from '../../../../core/project/config';
 import useGetProjectConfigResult from '../../../../hooks/useGetProjectConfigResult';
 import { makeStyles } from '@material-ui/core';
 import CircleLoading from '../../../Loading/CircularLoading';
 import { ChangeEvent, useCallback } from 'react';
+import { IProjectOptimizerConfig } from '../../../../API/project/types';
 
 const useStyle = makeStyles({
   wrapper: {

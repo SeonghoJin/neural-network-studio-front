@@ -1,8 +1,6 @@
-import React, { useCallback } from 'react';
-import { getPythonCode } from '../../../../module/ProjectController';
+import React from 'react';
 import { makeStyles } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
-import Button from 'react-bootstrap/esm/Button';
+
 const useStyle = makeStyles({
   wrapper: {
     width: '100%',

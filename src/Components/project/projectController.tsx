@@ -1,20 +1,21 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { ProjectProps } from './type';
 import {
   initProjectControllerAction,
   ProjectControllerAction
 } from '../../module/ProjectController';
+import { RootDispatch, RootState } from '../../module';
 import {
   getProjectConfigThunk,
   getProjectThunk,
-  getPythonCodeThunk, putProjectConfigThunk, putProjectInfoThunk,
-  updateProjectContentThunk
+  getPythonCodeThunk, putProjectConfigThunk,
+  putProjectInfoThunk, updateProjectContentThunk
 } from '../../module/API/project/thunks';
-import { useEffect } from 'react';
-import { RootDispatch, RootState } from '../../module';
-import { ProjectProps } from './type';
+import { useDispatch, useSelector } from 'react-redux';
 import useGetProjectResult from '../../hooks/useGetProjectResult';
-import useProjectConfig from '../../hooks/useProjectConfig';
 import useProjectInfo from '../../hooks/useProjectInfo';
+import useProjectConfig from '../../hooks/useProjectConfig';
+import { useEffect } from 'react';
+
 const useProjectController = async (props : ProjectProps) => {
   const action = useSelector((state : RootState) => (state.projectController.action));
   const instance = useSelector((state: RootState) => state.reactFlowInstance.instance);

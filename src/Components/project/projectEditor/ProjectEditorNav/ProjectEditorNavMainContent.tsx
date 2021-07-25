@@ -3,8 +3,6 @@ import { getPythonCode } from '../../../../module/ProjectController';
 import { makeStyles } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/esm/Button';
-import useGetProjectResult from '../../../../hooks/useGetProjectResult';
-import CircleLoading from '../../../Loading/CircularLoading';
 const useStyle = makeStyles({
   wrapper: {
     width: '100%',

@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core';
-import { useState } from 'react';
 import ProjectConfigViewerSelectorItem from './ProjectConfigViewerSelectorItem';
 
 const useStyle = makeStyles({

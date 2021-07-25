@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core';
 import { BlockState } from '../../../../core/block/BlockState';
 import { useDispatch, } from 'react-redux';
 import { useCallback } from 'react';
-import { useStoreActions, useStoreState } from 'react-flow-renderer';
+import { useStoreState } from 'react-flow-renderer';
 import { setElementById } from '../../../../module/Elements';
 import TextInput from './NodeConfigInputs/TextInput';
 

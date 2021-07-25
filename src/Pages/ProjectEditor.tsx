@@ -1,9 +1,7 @@
-import { LocationProps, MatchProps } from '../core/types';
 import { makeStyles } from '@material-ui/core';
 import useGetPythonCodeResult from '../hooks/useGetPythonCodeResult';
 import usePutProjectContentResult from '../hooks/usePutProjectContentResult';
 import useGetProjectResult from '../hooks/useGetProjectResult';
-import useProjectController from '../Components/project/projectController';
 import ProjectEditorMain from '../Components/project/projectEditor/projectEditorMain';
 import ProjectNav from '../Components/project/ProjectNav/projectNav';
 import { ProjectProps } from '../Components/project/type';

@@ -1,18 +1,18 @@
 import React, {
   createContext, useContext, useReducer,
 } from 'react';
-import ProjectConfig from '../../project/config';
+import ProjectConfig, { IProjectConfig } from '../../../API/project/types';
 
 interface Action {
   type : string
-  payLoad : ProjectConfig,
+  payLoad : IProjectConfig,
 }
 
-const ProjectConfigReducer = (state :ProjectConfig, action : Action) : any => {
+const ProjectConfigReducer = (state: IProjectConfig, action : Action) : any => {
   throw new Error(`Unhandled action type: ${action.type}`);
 };
 
-const ProjectConfigContext = createContext<ProjectConfig | null>(null);
+const ProjectConfigContext = createContext<IProjectConfig | null>(null);
 const ProjectConfigDispatchContext = createContext<any>(null);
 
 export const ProjectConfigProvider = ({ children } : {children : any}) => {

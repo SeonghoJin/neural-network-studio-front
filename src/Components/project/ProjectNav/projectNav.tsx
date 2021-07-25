@@ -5,8 +5,6 @@ import React from 'react';
 import Logo from '../../Logo/Logo';
 import ProjectNavMainContent from './ProjectNavMainContent';
 import ProjectNavOptionContent from './ProjectNavOptionContent';
-import useGetProjectResult from '../../../hooks/useGetProjectResult';
-import CircleLoading from '../../Loading/CircularLoading';
 
 const useStyled = makeStyles({
 

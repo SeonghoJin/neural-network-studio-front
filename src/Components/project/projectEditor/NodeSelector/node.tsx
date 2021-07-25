@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import { BlockState } from '../../../../core/block/BlockState';
 
 const useBlockStyle = makeStyles({
-  Wrapper: {
+  wrapper: {
     paddingLeft: 30,
   },
   item: {
@@ -23,7 +23,7 @@ const Node = ({ state } : {state : BlockState}) => {
   }, [state]);
 
   return (
-    <li className={classes.Wrapper}>
+    <li className={classes.wrapper}>
       <Button
         className={classes.item}
         draggable={true}

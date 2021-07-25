@@ -1,15 +1,13 @@
 import { Container, makeStyles } from '@material-ui/core';
-import { ReactFlowProvider } from 'react-flow-renderer';
 import ProjectConfigSideBar from './projectConfigSideBar/ProjectConfigSideBar';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getProject, getProjectConfig } from '../../../module/ProjectController';
-import useGetProejctConfigResult from '../../../hooks/useGetProjectConfigResult';
 import useGetProjectConfigResult from '../../../hooks/useGetProjectConfigResult';
 import { setProjectConfig } from '../../../module/projectConfig';
 import ProjectConfigViewer from './ProjectConfigViewer/ProjectConfigViewer';
 import useGetProjectResult from '../../../hooks/useGetProjectResult';
-import projectInfo, { setProjectInfo } from '../../../module/projectInfo';
+import { setProjectInfo } from '../../../module/projectInfo';
 
 const useStyle = makeStyles({
   wrapper: {

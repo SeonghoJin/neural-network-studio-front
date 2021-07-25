@@ -1,7 +1,6 @@
 import axios from 'axios';
 import config from '../../config';
-import { IProjectConfig } from '../../core/project/config';
-import { IProjectContentDto, IProjectDto } from './types';
+import { IProjectConfig, IProjectContentDto, IProjectDto } from './types';
 
 export const getPythonCode = async (projectNo: string) => {
   const response = await axios.get<Blob>(

@@ -1,11 +1,9 @@
-import { Link, useLocation } from 'react-router-dom';
 import React, { useCallback } from 'react';
 import SaveIcon from '@material-ui/icons/Save';
-import { putProjectConfigAndInfo, putProjectContent } from '../../../../module/ProjectController';
+import { putProjectConfigAndInfo } from '../../../../module/ProjectController';
 import { makeStyles } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import SettingsIcon from '@material-ui/icons/Settings';
 import useProjectConfig from '../../../../hooks/useProjectConfig';
 
 const useStyle = makeStyles({

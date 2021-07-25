@@ -1,7 +1,6 @@
 import * as actions from './actions';
 import { ActionType } from 'typesafe-actions';
-import { IProjectDto } from '../../../API/project/types';
-import { IProjectConfig } from '../../../core/project/config';
+import { IProjectConfig, IProjectDto } from '../../../API/project/types';
 
 export type ProjectAPIActionTypes = ActionType<typeof actions>;
 

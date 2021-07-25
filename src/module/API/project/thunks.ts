@@ -14,7 +14,7 @@ import {
   updateProjectContent, updateProjectInfo
 } from '../../../API/project';
 import { FlowExportObject } from 'react-flow-renderer';
-import { IProjectConfig } from '../../../core/project/config';
+import { IProjectConfig } from '../../../API/project/types';
 
 export function updateProjectContentThunk(
   projectNo: string , output: string, flowState?: FlowExportObject)

@@ -1,14 +1,12 @@
 import { createAsyncAction } from 'typesafe-actions';
-import { AxiosError } from 'axios';
-import { IProjectDto } from '../../../API/project/types';
-import { IProjectConfig } from '../../../core/project/config';
+import { IProjectConfig, IProjectDto } from '../../../API/project/types';
 
 export enum ProjectAPIAction{
   GET_PROJECT = 'getProject',
   GET_PROJECT_SUCCESS = 'getProjectSuccess',
   GET_PROJECT_ERROR = 'getProjectError',
   GET_PYTHON_CODE = 'getPtyhonCode',
-  GET_PTYHON_CODE_SUCCESS = 'getPythonCodeSuccess',
+  GET_PYTHON_CODE_SUCCESS = 'getPythonCodeSuccess',
   GET_PYTHON_CODE_ERROR = 'getPythonCodeError',
   GET_PROJECT_CONFIG = 'getProjectConfig',
   GET_PROJECT_CONFIG_SUCCESS = 'getProjectConfigSuccess',
@@ -38,7 +36,7 @@ export const getProjectConfigAsync = createAsyncAction(
 
 export const getPythonCodeAsync = createAsyncAction(
   ProjectAPIAction.GET_PYTHON_CODE,
-  ProjectAPIAction.GET_PTYHON_CODE_SUCCESS,
+  ProjectAPIAction.GET_PYTHON_CODE_SUCCESS,
   ProjectAPIAction.GET_PYTHON_CODE_ERROR,
 )<undefined, Blob, string>();
 

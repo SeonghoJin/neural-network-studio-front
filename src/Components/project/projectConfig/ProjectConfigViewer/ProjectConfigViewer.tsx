@@ -1,7 +1,5 @@
 import useGetProjectConfigResult from '../../../../hooks/useGetProjectConfigResult';
 import CircleLoading from '../../../Loading/CircularLoading';
-import useProjectConfig from '../../../../hooks/useProjectConfig';
-import { IProjectGlobalConfig, IProjectOptimizerConfig } from '../../../../core/project/config';
 import ProjectInfoConfigViewer from './ProjectConfigInfoViewer';
 import ProjectGlobalConfigViewer from './ProjectGlobalConfigViewer';
 import ProjectOptimizerConfigViewer from './ProjectOptimizerConfigViewer';

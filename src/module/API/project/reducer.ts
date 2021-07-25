@@ -116,7 +116,7 @@ const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initial
       data: null,
     }
   }),
-  [ProjectAPIAction.GET_PTYHON_CODE_SUCCESS]: (state, action) => ({
+  [ProjectAPIAction.GET_PYTHON_CODE_SUCCESS]: (state, action) => ({
     ...state,
     getPythonCodeResult: {
       loading: false,

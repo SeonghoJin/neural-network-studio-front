@@ -1,4 +1,4 @@
-import { IProjectConfig } from '../../core/project/config';
+import { IProjectConfig } from '../../API/project/types';
 import { createStandardAction } from '../../util';
 
 export enum ProjectConfigAction  {

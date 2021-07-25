@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../module';
 import { useCallback, useState } from 'react';
-import { IProjectConfig } from '../core/project/config';
 import { setProjectConfig } from '../module/projectConfig';
+import { IProjectConfig } from '../API/project/types';
 
 const useProjectConfig = () : [IProjectConfig, (projectConfig: IProjectConfig) => void]=> {
 

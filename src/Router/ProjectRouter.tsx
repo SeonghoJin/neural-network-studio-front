@@ -1,7 +1,5 @@
 import { Route } from "react-router-dom"
-import ProjectEditor from "../Pages/ProjectEditor";
 import { ReactFlowProvider } from 'react-flow-renderer';
-import { ProjectConfig } from '../Pages/ProjectConfig';
 import Project from "../Pages/Project";
 
 const ProjectRouter = () => {

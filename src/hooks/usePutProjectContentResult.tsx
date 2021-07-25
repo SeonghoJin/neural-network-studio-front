@@ -1,7 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../module';
-import { useEffect } from 'react';
-import { getProject } from '../module/ProjectController';
 import StandardModal from '../Components/modal/StandardModal';
 
 const usePutProjectContentResult = () => {

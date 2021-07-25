@@ -1,4 +1,4 @@
-import { Node, Edge, Elements } from 'react-flow-renderer';
+import { Elements } from 'react-flow-renderer';
 import { createStandardAction } from '../../util';
 
 export enum ElementAction {

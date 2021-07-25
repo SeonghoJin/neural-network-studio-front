@@ -1,8 +1,5 @@
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
-import Logo from '../../../Logo/Logo';
-import ProjectNavMainContent from '../../ProjectNav/ProjectNavMainContent';
-import ProjectNavOptionContent from '../../ProjectNav/ProjectNavOptionContent';
 import React from 'react';
 import ProjectEditorNavMainContent from './ProjectEditorNavMainContent';
 import ProjectEditorNavOptionContent from './ProjectEditorNavOptionContent';

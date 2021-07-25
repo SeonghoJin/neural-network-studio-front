@@ -2,13 +2,13 @@ import { ProjectInfoActionTypes, ProjectInfoState } from './types';
 import { createReducer } from 'typesafe-actions';
 import { ProjectInfoAction } from './actions';
 
-const intialState : ProjectInfoState = {
+const initalState : ProjectInfoState = {
   name: null,
   description: null
 }
 
 const projectInfo = createReducer<ProjectInfoState, ProjectInfoActionTypes>(
-  intialState,
+  initalState,
   {
     [ProjectInfoAction.SET_PROJECT_Info]: (state, action) => ({
       ...state,

@@ -1,6 +1,4 @@
-// eslint-disable-next-line max-classes-per-file
-export enum BlockCatergory {
-  // eslint-disable-next-line no-unused-vars
+export enum BlockCategory {
   Layer= 'Layer',
 }
 
@@ -18,7 +16,7 @@ export enum BlockType{
 }
 
 export interface BlockState{
-  catergory : BlockCatergory;
+  category: BlockCategory;
 
   name: string | null;
 
@@ -32,7 +30,7 @@ export class DenseConfig implements BlockConfig {
   units: number = 0;
 }
 export class DenseBlockState implements BlockState {
-  catergory: BlockCatergory = BlockCatergory.Layer;
+  category: BlockCategory = BlockCategory.Layer;
 
   config: BlockConfig = new DenseConfig();
 
@@ -50,7 +48,7 @@ export class Conv2DConfig implements BlockConfig {
   padding : string = '';
 }
 export class Conv2DBlockState implements BlockState {
-  catergory: BlockCatergory = BlockCatergory.Layer;
+  category: BlockCategory = BlockCategory.Layer;
 
   config: BlockConfig = new Conv2DConfig();
 
@@ -66,7 +64,7 @@ export class AveragePooling2DConfig implements BlockConfig {
   padding : string = '';
 }
 export class AveragePooling2DBlockState implements BlockState {
-  catergory: BlockCatergory = BlockCatergory.Layer;
+  category: BlockCategory = BlockCategory.Layer;
 
   config: BlockConfig = new AveragePooling2DConfig();
 
@@ -84,7 +82,7 @@ export class MaxPool2DConfig implements BlockConfig {
 }
 
 export class MaxPool2DBlockState implements BlockState {
-  catergory: BlockCatergory = BlockCatergory.Layer;
+  category: BlockCategory = BlockCategory.Layer;
 
   config: BlockConfig = new MaxPool2DConfig();
 
@@ -98,7 +96,7 @@ export class ActivationConfig implements BlockConfig {
 }
 
 export class ActivationBlockState implements BlockState {
-  catergory: BlockCatergory = BlockCatergory.Layer;
+  category: BlockCategory = BlockCategory.Layer;
 
   config: BlockConfig = new ActivationConfig();
 
@@ -112,7 +110,7 @@ export class InputConfig implements BlockConfig {
 }
 
 export class InputBlockState implements BlockState {
-  catergory: BlockCatergory = BlockCatergory.Layer;
+  category: BlockCategory = BlockCategory.Layer;
 
   config: BlockConfig = new InputConfig();
 
@@ -126,7 +124,7 @@ export class DropoutConfig implements BlockConfig {
 }
 
 export class DropoutBlockState implements BlockState {
-  catergory: BlockCatergory = BlockCatergory.Layer;
+  category: BlockCategory = BlockCategory.Layer;
 
   config: BlockConfig = new DropoutConfig();
 
@@ -144,7 +142,7 @@ export class BatchNormalizationConfig implements BlockConfig {
 }
 
 export class BatchNormalizationBlockState implements BlockState {
-  catergory: BlockCatergory = BlockCatergory.Layer;
+  category: BlockCategory = BlockCategory.Layer;
 
   config: BlockConfig = new BatchNormalizationConfig();
 
@@ -157,7 +155,7 @@ export class FlattenConfig implements BlockConfig {
 }
 
 export class FlattenBlockState implements BlockState {
-  catergory: BlockCatergory = BlockCatergory.Layer;
+  category: BlockCategory = BlockCategory.Layer;
 
   config: BlockConfig = new FlattenConfig();
 
@@ -166,9 +164,9 @@ export class FlattenBlockState implements BlockState {
   type: BlockType = BlockType.Flatten;
 }
 
-export const blockStates : {type: BlockCatergory, states : BlockState[]}[] = [
+export const blockStates : {type: BlockCategory, states : BlockState[]}[] = [
   {
-    type: BlockCatergory.Layer,
+    type: BlockCategory.Layer,
     states: [
       new Conv2DBlockState(),
       new DenseBlockState(),
