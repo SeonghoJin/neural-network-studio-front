@@ -4,11 +4,7 @@ import usePutProjectContentResult from '../hooks/usePutProjectContentResult';
 import useGetProjectResult from '../hooks/useGetProjectResult';
 import ProjectEditorMain from '../Components/project/projectEditor/projectEditorMain';
 import ProjectNav from '../Components/project/ProjectNav/projectNav';
-import { ProjectProps } from '../Components/project/type';
 import ProjectEditorNav from '../Components/project/projectEditor/ProjectEditorNav/projectEditorNav';
-import { useEffect } from 'react';
-import { getProject } from '../module/ProjectController';
-import { useDispatch } from 'react-redux';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -26,8 +22,8 @@ const useStyle = makeStyles({
   }
 });
 
-const ProjectError = (props: ProjectProps) => {
-  const getPythonCodeResult = useGetPythonCodeResult(props);
+const ProjectError = () => {
+  const getPythonCodeResult = useGetPythonCodeResult();
   const putProjectContentResult = usePutProjectContentResult();
   const getProjectResult = useGetProjectResult()
   return (
@@ -39,18 +35,13 @@ const ProjectError = (props: ProjectProps) => {
   )
 }
 
-const ProjectEditor = (props : ProjectProps) => {
+const ProjectEditor = () => {
 
-  const dispatch = useDispatch();
   const classes = useStyle();
-
-  useEffect(() => {
-    dispatch(getProject());
-  }, []);
 
   return (
     <>
-      <ProjectError match={props.match}/>
+      <ProjectError/>
       <div className={classes.wrapper}>
         <div className={classes.container}>
           <ProjectNav/>

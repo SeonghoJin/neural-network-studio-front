@@ -5,6 +5,7 @@ import ProjectConfigNavMainContent from './ProjectConfigNavMainContent';
 import ProjectConfigNavOptionContent from './ProjectConfigNavOptionContent';
 import useGetProjectConfigResult from '../../../../hooks/useGetProjectConfigResult';
 import CircleLoading from '../../../Loading/CircularLoading';
+import ProjectConfigNavOptionContentContainer from './ProjectConfigNavOptionContentContainer';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -68,7 +69,7 @@ const ProjectConfigNav = () => {
             <ProjectConfigNavMainContent/>
           </div>
           <div className={classes.navOptionContentWrapper}>
-            <ProjectConfigNavOptionContent/>
+            <ProjectConfigNavOptionContentContainer/>
           </div>
         </div>
       </div>

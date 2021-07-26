@@ -44,7 +44,6 @@ const NodeContainer = ({ children, name, elementNumber }
   : {children : any, name : string, elementNumber : number}) => {
   const classes = useBlockListStyle({ elementNumber });
 
-  // eslint-disable-next-line no-unused-vars
   const [collapse, setCollapse] = useState(true);
 
   const onCollapseToggle = () => {

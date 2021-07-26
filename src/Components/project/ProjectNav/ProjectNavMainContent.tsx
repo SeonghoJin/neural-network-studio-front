@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import { Link, useLocation } from 'react-router-dom';
+import useProjectLocation from '../../../hooks/useProjectLocation';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -21,8 +22,7 @@ const useStyle = makeStyles({
 })
 
 const ProjectNavMainContent = () => {
-  const location = useLocation();
-  const projectNo = location.pathname.split('/')[2];
+  const {projectNo} = useProjectLocation();
   const classes = useStyle();
 
   return (<div className={classes.wrapper}>

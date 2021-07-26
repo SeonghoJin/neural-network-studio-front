@@ -40,8 +40,7 @@ const GlobalConfig = () => {
     <div>
       <div className={classes.wrapper}>
         <div className={classes.container}>
-          {(loading || error) && <CircleLoading/>}
-          {content}
+          {(loading || error) ? <CircleLoading/> : content}
         </div>
       </div>
     </div>

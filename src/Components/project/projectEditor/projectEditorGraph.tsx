@@ -62,7 +62,7 @@ const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
 
   useEffect(() => {
     setElements(flowState?.elements || []);
-  }, [])
+  }, [flowState?.elements])
 
   const onConnect = useCallback((params : Edge | Connection) => {
     setElements(addEdge(params, elements));

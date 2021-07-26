@@ -1,10 +1,11 @@
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import React from 'react';
-import ProjectEditorNavMainContent from './ProjectEditorNavMainContent';
 import ProjectEditorNavOptionContent from './ProjectEditorNavOptionContent';
 import useGetProjectResult from '../../../../hooks/useGetProjectResult';
 import CircleLoading from '../../../Loading/CircularLoading';
+import ProjectEditorNavMainContentContainer from './ProjectEditorNavMainContentContainer';
+import ProjectEditorNavOptionContentContainer from './ProjectEditorNavOptionContentContainer';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -66,10 +67,10 @@ const ProjectEditorNav = () => {
       <div className={classes.navContentWrapper}>
         <div className={classes.navContent}>
           <div className={classes.navMainContentWrapper}>
-            <ProjectEditorNavMainContent/>
+            <ProjectEditorNavMainContentContainer/>
           </div>
           <div className={classes.navOptionContentWrapper}>
-            <ProjectEditorNavOptionContent/>
+            <ProjectEditorNavOptionContentContainer/>
           </div>
         </div>
       </div>

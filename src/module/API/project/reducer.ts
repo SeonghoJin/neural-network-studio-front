@@ -156,6 +156,14 @@ const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initial
       data: null,
     }
   }),
+  [ProjectAPIAction.PUT_PROJECT_INFO_INIT]: (state) => ({
+    ...state,
+    putProjectInfoResult: {
+      loading: false,
+      error: null,
+      data: false,
+    }
+  }),
   [ProjectAPIAction.PUT_PROJECT_INFO]: (state) => ({
     ...state,
     putProjectInfoResult: {

@@ -1,12 +1,12 @@
 import { makeStyles } from '@material-ui/core';
-import { ProjectProps } from '../Components/project/type';
 import ProjectNav from '../Components/project/ProjectNav/projectNav';
-import ProjectConfigMain from '../Components/project/projectConfig/projectConfigMain';
 import useGetProjectConfigResult from '../hooks/useGetProjectConfigResult';
 import ProjectConfigNav
   from '../Components/project/projectConfig/projectConfigNav/projectConfigNav';
 import usePutProjectConfigResult from '../hooks/usePutProjectConfigResult';
 import usePutProjectInfoResult from '../hooks/usePutProjectInfoResult';
+import ProjectConfigMainContainer
+  from '../Components/project/projectConfig/ProjectConfigMainContainer';
 const useStyle = makeStyles({
   wrapper: {
     width: '100vw',
@@ -23,7 +23,7 @@ const useStyle = makeStyles({
   }
 })
 
-const ProjectConfigError = (props: ProjectProps) => {
+const ProjectConfigError = () => {
   const getProjectConfigResult = useGetProjectConfigResult();
   const putProjectConfigResult = usePutProjectConfigResult();
   const putProjectInfoResult = usePutProjectInfoResult();
@@ -36,18 +36,19 @@ const ProjectConfigError = (props: ProjectProps) => {
   )
 };
 
-export const ProjectConfig = (props: ProjectProps) => {
+export const ProjectConfig = () => {
+
   const classes = useStyle();
 
   return (
     <>
-      <ProjectConfigError match={props.match}/>
+      <ProjectConfigError/>
       <div className={classes.wrapper}>
         <div className={classes.container}>
           <ProjectNav/>
           <ProjectConfigNav/>
           <div className={classes.content}>
-            <ProjectConfigMain/>
+            <ProjectConfigMainContainer/>
           </div>
         </div>
       </div>

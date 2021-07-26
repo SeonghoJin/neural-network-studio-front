@@ -42,8 +42,7 @@ const OptimizerConfig = () => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.container}>
-        {(error || loading) && <CircleLoading/>}
-        {content}
+        {(error || loading) ? <CircleLoading/> : content}
       </div>
     </div>
   )

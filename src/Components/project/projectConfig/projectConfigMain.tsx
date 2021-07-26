@@ -1,13 +1,7 @@
 import { Container, makeStyles } from '@material-ui/core';
 import ProjectConfigSideBar from './projectConfigSideBar/ProjectConfigSideBar';
-import { useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { getProject, getProjectConfig } from '../../../module/ProjectController';
-import useGetProjectConfigResult from '../../../hooks/useGetProjectConfigResult';
-import { setProjectConfig } from '../../../module/projectConfig';
+import { useState } from 'react';
 import ProjectConfigViewer from './ProjectConfigViewer/ProjectConfigViewer';
-import useGetProjectResult from '../../../hooks/useGetProjectResult';
-import { setProjectInfo } from '../../../module/projectInfo';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -25,32 +19,6 @@ const useStyle = makeStyles({
 
 const ProjectConfigMain = () => {
   const classes = useStyle();
-  const dispatch = useDispatch();
-  const projectConfigResult = useGetProjectConfigResult();
-  const projectInfoResult = useGetProjectResult();
-
-  useEffect(() => {
-    if(projectConfigResult.data != null){
-      dispatch(setProjectConfig(projectConfigResult.data))
-    }
-  }, [projectConfigResult.data]);
-
-  useEffect(() => {
-    if(projectInfoResult.data != null){
-      dispatch(setProjectInfo({
-        name: projectInfoResult.data.name,
-        description: projectInfoResult.data.description,
-      }))
-    }
-  }, [projectInfoResult.data]);
-
-
-  useEffect(() => {
-    dispatch(getProjectConfig());
-    setTimeout(() => {
-      dispatch(getProject());
-    }, 1)
-  }, []);
 
   const [value, setValue] = useState(0);
 

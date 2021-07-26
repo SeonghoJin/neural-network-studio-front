@@ -57,17 +57,17 @@ export function getProjectThunk(projectNo: string): ThunkAction<
 }
 
 export function getPythonCodeThunk(projectNo : string) :
-  ThunkAction<Promise<boolean>, RootState, null, ProjectAPIActionTypes> {
+  ThunkAction<Promise<Blob | null>, RootState, null, ProjectAPIActionTypes> {
   return async dispatch => {
     const {request, success, failure} = getPythonCodeAsync;
     dispatch(request());
     try {
       const pythonCode = await getPythonCode(projectNo);
       dispatch(success(pythonCode));
-      return false;
+      return pythonCode;
     } catch (e) {
       dispatch(failure(e.message));
-      return true;
+      return null
     }
   }
 }

@@ -1,7 +1,5 @@
 import React, { useCallback } from 'react';
-import { getPythonCode } from '../../../../module/ProjectController';
 import { makeStyles } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/esm/Button';
 const useStyle = makeStyles({
   wrapper: {
@@ -21,18 +19,18 @@ const useStyle = makeStyles({
   }
 })
 
-const ProjectEditorNavMainContent = () => {
-  const classes = useStyle();
-  const dispatch = useDispatch();
-  const onGetPythonCode = useCallback(() => {
-    dispatch(getPythonCode());
-  }, []);
+interface Props {
+ onGetPythonCode : ReturnType<typeof useCallback>;
+}
 
+const ProjectEditorNavMainContent = (props: Props) => {
+  const classes = useStyle();
+  const { onGetPythonCode } = props;
   return (
     <div className={classes.wrapper}>
       <div className={classes.container}>
         <Button onClick={onGetPythonCode}>
-          <div className={classes.mainContentItem} >PythonCode 추출</div>
+          <div className={classes.mainContentItem}>PythonCode 추출</div>
         </Button>
       </div>
     </div>

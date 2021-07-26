@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
-import { useLocation } from 'react-router-dom';
 const useStyle = makeStyles({
   wrapper: {
     width: '100%',
@@ -21,7 +20,6 @@ const useStyle = makeStyles({
 
 const ProjectNavOptionContent = () => {
   const classes = useStyle();
-  const location = useLocation();
 
   return (<div className={classes.wrapper}>
     <div className={classes.container}>

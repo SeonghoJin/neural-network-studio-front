@@ -1,5 +1,6 @@
 import { createAsyncAction } from 'typesafe-actions';
 import { IProjectConfig, IProjectDto } from '../../../API/project/types';
+import { createStandardAction } from '../../../util';
 
 export enum ProjectAPIAction{
   GET_PROJECT = 'getProject',
@@ -17,6 +18,7 @@ export enum ProjectAPIAction{
   PUT_PROJECT_CONTENT = 'putProjectContent',
   PUT_PROJECT_CONTENT_SUCCESS = 'putProjectContentSuccess',
   PUT_PROJECT_CONTENT_ERROR = 'putProjectContentError',
+  PUT_PROJECT_INFO_INIT = 'putProjectInfoInit',
   PUT_PROJECT_INFO = 'putProjectInfo',
   PUT_PROJECT_INFO_SUCCESS = 'putProjectInfoSuccess',
   PUT_PROJECT_INFO_ERROR = 'putProjectInfoError',
@@ -52,6 +54,8 @@ export const putProjectContentAsync = createAsyncAction(
   ProjectAPIAction.PUT_PROJECT_CONTENT_ERROR,
 )<undefined, undefined, string>();
 
+
+export const putProjectInfoInit = createStandardAction(ProjectAPIAction.PUT_PROJECT_INFO_INIT)();
 export const putProjectInfoAsync = createAsyncAction(
   ProjectAPIAction.PUT_PROJECT_INFO,
   ProjectAPIAction.PUT_PROJECT_INFO_SUCCESS,

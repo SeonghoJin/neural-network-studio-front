@@ -2,6 +2,7 @@ import useProjectInfo from '../../../../hooks/useProjectInfo';
 import { makeStyles } from '@material-ui/core';
 import CircleLoading from '../../../Loading/CircularLoading';
 import { ChangeEvent, useCallback } from 'react';
+import useGetProjectResult from '../../../../hooks/useGetProjectResult';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -15,6 +16,7 @@ const useStyle = makeStyles({
 })
 
 const ProjectInfoConfigViewer = () => {
+  const getProjectInfoResult = useGetProjectResult();
   const [projectInfo, setProjectInfo] = useProjectInfo();
   const classes = useStyle();
 
@@ -25,10 +27,9 @@ const ProjectInfoConfigViewer = () => {
       ...projectInfo,
       [name] : value,
     })
-    console.log(e.target.name);
   },[projectInfo])
 
-  const content = (
+  const content = getProjectInfoResult.data && (
     <>
       <input
         name={"name"} value={projectInfo.name || ""}
@@ -43,7 +44,7 @@ const ProjectInfoConfigViewer = () => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.container}>
-        {projectInfo.name == null ? <CircleLoading/> : content}
+        {(getProjectInfoResult.error || getProjectInfoResult.loading) ? <CircleLoading/> : content}
       </div>
     </div>
   )
