@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './index.module.css'
 import utils from '../../utils/index.module.css'
+import {Link} from "react-router-dom";
 
 class Main extends React.PureComponent {
     render() {
@@ -11,7 +12,7 @@ class Main extends React.PureComponent {
                         GUI로 쉽게하는 딥러닝 통합 개발환경
                     </div>
                     <div className={`${utils.divButton} ${style.start}`}>
-                        <a href="#">Get Start</a>
+                        <Link to="/dashboard">Get Start</Link>
                     </div>
                 </div>
             </div>

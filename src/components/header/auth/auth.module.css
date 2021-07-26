@@ -1,0 +1,21 @@
+.login {
+    font-weight: bold;
+    background-color: #61dafb;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+.signup {
+    font-weight: bold;
+    background-color: red;
+    border-radius: 5px;
+}
+
+.profile {
+    display: flex;
+}
+
+.profile a {
+    color: white;
+    text-decoration: none;
+}

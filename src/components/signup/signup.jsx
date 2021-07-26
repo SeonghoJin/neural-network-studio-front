@@ -3,15 +3,24 @@ import style from './index.module.css';
 import utils from '../utils/index.module.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons"
+import axios from "axios";
+import { withRouter } from 'react-router-dom';
 
 class Signup extends React.PureComponent {
     state = {
+        idValue: '',
         pwVisible: false,
         pwValue: '',
         pwValid: '',
         pwCheck: false,
         pwApprove: false,
     };
+
+    onChangeId = (e) => {
+        this.setState({
+            idValue: e.target.value,
+        })
+    }
 
     // 비밀번호 조건이 맞지않으면 빨간색으로 알림.
     onChangePW = (e) => {
@@ -67,6 +76,33 @@ class Signup extends React.PureComponent {
         });
     }
 
+    submit = () => {
+        if (!this.state.pwApprove) {
+            alert('비밀번호는 반드시 기호, 영문, 숫자를 포함한 8자리이상으로 해야합니다.');
+            return;
+        }
+        else if (!this.state.pwCheck) {
+            alert('비밀번호가 일치하지 않습니다.');
+            return;
+        }
+
+        axios({
+            method:"POST",
+            url: "http://52.78.247.102:8080/api/user",
+            data: {
+                "id": this.state.idValue,
+                "pw": this.state.pwValue,
+            }
+        }).then((res) => {
+            console.log(res);
+            alert('회원가입이 완료되었습니다.');
+            this.props.history.push('/');
+        }).catch(err => {
+            console.log(err);
+            alert('이미 존재하는 아이디 입니다.');
+        });
+    }
+
     render() {
         return (
             <>
@@ -79,7 +115,7 @@ class Signup extends React.PureComponent {
                         <main>
                             <form className={`${style.signupForm} `}>
                                 <div className={`${utils.inputWrapper} ${utils.flexColumn}`}>
-                                    <input placeholder={"사용자 이름"} />
+                                    <input placeholder={"사용자 이름"} onChange={this.onChangeId}/>
                                 </div>
                                 <div className={`${utils.inputWrapper} ${utils.flexColumn}`}>
                                     <div className={`${utils.inputWrapper}`}>
@@ -111,7 +147,7 @@ class Signup extends React.PureComponent {
                                     </a>
                                 </div>
                                 <div className={`${utils.divButton} ${style.submit}`}>
-                                    <a href={"#"}>제출</a>
+                                    <a onClick={this.submit}>제출</a>
                                 </div>
                             </form>
                         </main>
@@ -125,4 +161,4 @@ class Signup extends React.PureComponent {
     }
 }
 
-export default Signup;
+export default withRouter(Signup);
