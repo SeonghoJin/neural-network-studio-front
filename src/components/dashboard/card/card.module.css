@@ -1,0 +1,27 @@
+.card {
+    margin: 10px;
+    border: solid 1px black;
+    padding : 20px;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-around;
+}
+
+.cardMain {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.cardFooter {
+    display: flex;
+}
+
+.startButton {
+    padding: 5px;
+    background-color: lightblue;
+    border: none;
+    border-radius: 5px;
+}

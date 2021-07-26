@@ -1,6 +1,6 @@
 import React from 'react';
-import style from './default.module.css'
-import utils from '../../utils/default.module.css'
+import style from './index.module.css'
+import utils from '../../utils/index.module.css'
 
 class Main extends React.PureComponent {
     render() {

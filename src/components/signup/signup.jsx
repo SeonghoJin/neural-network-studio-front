@@ -1,6 +1,6 @@
 import React from 'react';
-import style from './default.module.css';
-import utils from '../utils/default.module.css';
+import style from './index.module.css';
+import utils from '../utils/index.module.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons"
 

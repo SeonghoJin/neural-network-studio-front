@@ -1,6 +1,6 @@
 import React from 'react';
-import style from './default.module.css';
-import utils from '../utils/default.module.css';
+import style from './index.module.css';
+import utils from '../utils/index.module.css';
 
 class Signin extends React.Component {
     state = {
@@ -26,7 +26,7 @@ class Signin extends React.Component {
                 <div className={style.others}>
                     <a href={"#"}>비밀번호 찾기</a>
                     |
-                    <a href={"#"}>회원가입</a>
+                    <a href={"/signup"}>회원가입</a>
                 </div>
             </div>
         )

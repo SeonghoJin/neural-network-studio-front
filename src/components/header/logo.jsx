@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './default.module.css'
+import style from './index.module.css'
 
 class Logo extends React.PureComponent {
     render() {

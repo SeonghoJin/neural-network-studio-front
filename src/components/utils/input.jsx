@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './default.module.css';
+import style from './index.module.css';
 
 export class BorderInput extends React.PureComponent {
     render() {
