@@ -1,4 +1,5 @@
-import { makeStyles, TextField } from '@material-ui/core';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import TextField from '@material-ui/core/TextField';
 import Input from './Input';
 
 const useStyle = makeStyles({
@@ -7,25 +8,26 @@ const useStyle = makeStyles({
   },
 });
 
-const TextInput = ({ propertyName, propertyContent, onChange}
+const MultilineInput = ({ propertyName, propertyContent, onChange}
   : {propertyName: string, propertyContent: string | string[] | number, onChange: any}) => {
   const classes = useStyle();
 
   const body = (
     <TextField
-      name={propertyName}
-      onChange={(e) => { onChange(e); } }
-      value={propertyContent}
-      type="text"
-      className={classes.propertyContentContainer}
-      variant={'standard'}
       label={propertyName}
-    />)
+      multiline
+      rows={4}
+      variant="standard"
+      name={propertyName}
+      onChange={onChange}
+      value={propertyContent}
+      className={classes.propertyContentContainer}
+    />);
 
-    return (
-      <Input
-        body={body}
+  return (
+    <Input
+      body={body}
     />)
 };
 
-export default TextInput;
+export default MultilineInput;

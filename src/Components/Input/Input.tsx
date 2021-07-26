@@ -31,19 +31,21 @@ const useStyle = makeStyles({
 });
 
 interface Props {
-  head: ReactElement
+  head?: ReactElement
   body: ReactElement,
 }
 
 const Input = (props : Props) => {
   const {head, body} = props
   const classes = useStyle();
+
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.container}>
-        <div className={classes.propertyNameWrapper}>
+        {head && <div className={classes.propertyNameWrapper}>
           {head}
-        </div>
+        </div>}
         <div className={classes.propertyContentWrapper}>
           {body}
         </div>

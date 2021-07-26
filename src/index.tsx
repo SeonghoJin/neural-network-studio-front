@@ -12,11 +12,9 @@ import reduxThunk from 'redux-thunk'
 const store = createStore(rootReducer, applyMiddleware(reduxThunk,reduxLogger));
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
       <App />
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
   document.getElementById('root'),
 );
 

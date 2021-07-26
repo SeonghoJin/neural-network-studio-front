@@ -24,9 +24,6 @@ const useStyle = makeStyles({
     overflow: 'hidden',
   },
   propertyList: {
-    '& li': {
-      borderBottom: '1px solid #D9DADB',
-    },
   },
 });
 

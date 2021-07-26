@@ -4,6 +4,7 @@ import CircleLoading from '../../../Loading/CircularLoading';
 import { ChangeEvent, useCallback } from 'react';
 import useGetProjectResult from '../../../../hooks/useGetProjectResult';
 import TextInput from '../../../Input/TextInput';
+import MultilineInput from '../../../Input/MultilineInput';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -40,7 +41,7 @@ const ProjectInfoConfigViewer = () => {
         onChange={onChange}
         propertyName={"name"}
         propertyContent={projectInfo?.name|| ""}/>
-      <TextInput
+      <MultilineInput
         onChange={onChange}
         propertyName={"description"}
         propertyContent={projectInfo?.description || ""}/>

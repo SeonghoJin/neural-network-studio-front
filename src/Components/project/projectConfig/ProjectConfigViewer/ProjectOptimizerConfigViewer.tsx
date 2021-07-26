@@ -2,9 +2,11 @@ import useProjectConfig from '../../../../hooks/useProjectConfig';
 import useGetProjectConfigResult from '../../../../hooks/useGetProjectConfigResult';
 import { makeStyles } from '@material-ui/core';
 import CircleLoading from '../../../Loading/CircularLoading';
-import { ChangeEvent, useCallback } from 'react';
+import { ChangeEvent, useCallback, useMemo } from 'react';
 import { IProjectOptimizerConfig } from '../../../../API/project/types';
 import TextInput from '../../../Input/TextInput';
+import SelectInput from '../../../Input/SelectInput';
+import Optimizers from '../../../../core/Optimizers';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -32,11 +34,20 @@ const OptimizerConfig = () => {
     });
   }, [optimizerConfig, projectConfig])
 
+  const optimizerCandidates = useMemo(() => {
+    const optimizers= [];
+    for(const optimizerKeys in Optimizers){
+      optimizers.push(optimizerKeys);
+    }
+    return optimizers;
+  }, [])
+
   const content = data && (
     <>
-      <TextInput
+      <SelectInput
         onChange={onChange}
         propertyName={"optimizer"}
+        propertyCandidates={optimizerCandidates}
         propertyContent={optimizerConfig.optimizer|| ""}/>
       <TextInput
         onChange={onChange}
