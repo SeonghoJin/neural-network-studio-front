@@ -1,10 +1,10 @@
 import { makeStyles } from '@material-ui/core';
 import { BlockState } from '../../../../core/block/BlockState';
 import { useDispatch, } from 'react-redux';
-import { useCallback } from 'react';
+import { ChangeEvent, useCallback } from 'react';
 import { useStoreState } from 'react-flow-renderer';
 import { setElementById } from '../../../../module/Elements';
-import TextInput from './NodeConfigInputs/TextInput';
+import TextInput from '../../../Input/TextInput';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -42,10 +42,12 @@ const NodeConfigViewer = () => {
   const data : null | BlockState = selectedElement?.data;
   const dispatch = useDispatch();
 
-  const onChange = useCallback((key, value) => {
+  const onChange = useCallback((e : ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name;
+    const value = e.target.value;
     dispatch(setElementById({
       id: selectedElement.id,
-      key: key,
+      key: name,
       value: value,
     }));
   }, [selectedElement])

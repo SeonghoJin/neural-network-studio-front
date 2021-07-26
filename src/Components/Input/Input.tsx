@@ -1,14 +1,13 @@
 import { makeStyles } from '@material-ui/core';
+import { ReactElement, useCallback } from 'react';
 
 const useStyle = makeStyles({
   wrapper: {
     width: '100%',
-    height: '100%',
     padding: 5,
   },
   container: {
     width: '100%',
-    height: '100%',
     display: 'flex',
     flexDirection: 'column',
   },
@@ -22,7 +21,6 @@ const useStyle = makeStyles({
     flexGrow: 7,
   },
   propertyContentContainer: {
-    height: '100%',
     width: '100%',
     backgroundColor: 'white',
     border: 0,
@@ -32,29 +30,26 @@ const useStyle = makeStyles({
   },
 });
 
-const TextInput = ({ propertyName, propertyContent, onChange}
-  : {propertyName: string, propertyContent: string, onChange: any}) => {
+interface Props {
+  head: ReactElement
+  body: ReactElement,
+}
+
+const Input = (props : Props) => {
+  const {head, body} = props
   const classes = useStyle();
   return (
     <div className={classes.wrapper}>
       <div className={classes.container}>
         <div className={classes.propertyNameWrapper}>
-          <h4 className={classes.propertyName}>
-            {propertyName}
-          </h4>
+          {head}
         </div>
         <div className={classes.propertyContentWrapper}>
-          <input
-            onChange={(e) => { onChange(propertyName, e.target.value); } }
-            value={propertyContent}
-            type="text"
-            className={classes.propertyContentContainer}
-          >
-          </input>
+          {body}
         </div>
       </div>
     </div>
   );
 };
 
-export default TextInput;
+export default Input;

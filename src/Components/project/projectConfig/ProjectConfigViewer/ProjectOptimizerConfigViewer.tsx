@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core';
 import CircleLoading from '../../../Loading/CircularLoading';
 import { ChangeEvent, useCallback } from 'react';
 import { IProjectOptimizerConfig } from '../../../../API/project/types';
+import TextInput from '../../../Input/TextInput';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -13,6 +14,7 @@ const useStyle = makeStyles({
   container: {
     width: '100%',
     height: '100%',
+    padding: '10px',
   },
 });
 
@@ -32,10 +34,22 @@ const OptimizerConfig = () => {
 
   const content = data && (
     <>
-      <input name={"optimizer"} onChange={onChange} value={optimizerConfig.optimizer}/>
-      <input name={"metrics"} onChange={onChange} value={optimizerConfig.metrics}/>
-      <input name={"loss"}onChange={onChange} value={optimizerConfig.loss}/>
-      <input name={"learning_rate"} onChange={onChange} value={optimizerConfig.learning_rate}/>
+      <TextInput
+        onChange={onChange}
+        propertyName={"optimizer"}
+        propertyContent={optimizerConfig.optimizer|| ""}/>
+      <TextInput
+        onChange={onChange}
+        propertyName={"loss"}
+        propertyContent={optimizerConfig.loss || ""}/>
+      <TextInput
+        onChange={onChange}
+        propertyName={"metrics"}
+        propertyContent={optimizerConfig?.metrics || ""}/>
+      <TextInput
+        onChange={onChange}
+        propertyName={"learning_rate"}
+        propertyContent={optimizerConfig.learning_rate || ""}/>
     </>
   );
 

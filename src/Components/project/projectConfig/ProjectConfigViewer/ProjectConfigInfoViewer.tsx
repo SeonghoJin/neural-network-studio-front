@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 import CircleLoading from '../../../Loading/CircularLoading';
 import { ChangeEvent, useCallback } from 'react';
 import useGetProjectResult from '../../../../hooks/useGetProjectResult';
+import TextInput from '../../../Input/TextInput';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -12,7 +13,8 @@ const useStyle = makeStyles({
   container: {
     width: '100%',
     height: '100%',
-  }
+    padding: 10,
+  },
 })
 
 const ProjectInfoConfigViewer = () => {
@@ -34,14 +36,14 @@ const ProjectInfoConfigViewer = () => {
 
   const content = getProjectInfoResult.data && (
     <>
-      <input
-        name={"name"} value={projectInfo?.name || ""}
+      <TextInput
         onChange={onChange}
-        />
-      <textarea
-        name={"description"}
-        value={projectInfo?.description || ""}
-        onChange={onChange}/>
+        propertyName={"name"}
+        propertyContent={projectInfo?.name|| ""}/>
+      <TextInput
+        onChange={onChange}
+        propertyName={"description"}
+        propertyContent={projectInfo?.description || ""}/>
     </>
   )
   return (
@@ -51,6 +53,6 @@ const ProjectInfoConfigViewer = () => {
       </div>
     </div>
   )
-}
+};
 
 export default ProjectInfoConfigViewer;
