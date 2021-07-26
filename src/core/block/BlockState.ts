@@ -1,10 +1,8 @@
 import { BlockCategory } from "./BlockCategory";
 import { ActivationConfig, AveragePooling2DConfig,
-  BatchNormalizationConfig, Conv2DConfig, DenseConfig,DropoutConfig,
+  BatchNormalizationConfig, BlockConfig, Conv2DConfig, DenseConfig,DropoutConfig,
   FlattenConfig, InputConfig, MaxPool2DConfig } from "./BlockConfig";
 import { BlockType } from "./BlockType";
-
-
 
 export interface BlockState{
   category: BlockCategory;
@@ -16,7 +14,6 @@ export interface BlockState{
   config: BlockConfig;
 }
 
-export interface BlockConfig {}
 export class DenseBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;
 
@@ -26,6 +23,7 @@ export class DenseBlockState implements BlockState {
 
   type: BlockType = BlockType.Dense;
 }
+
 export class Conv2DBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;
 
@@ -35,6 +33,7 @@ export class Conv2DBlockState implements BlockState {
 
   type: BlockType = BlockType.Conv2D;
 }
+
 export class AveragePooling2DBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;
 
@@ -44,7 +43,6 @@ export class AveragePooling2DBlockState implements BlockState {
 
   type: BlockType = BlockType.AveragePooling2D;
 }
-
 
 export class MaxPool2DBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;
@@ -56,7 +54,6 @@ export class MaxPool2DBlockState implements BlockState {
   type: BlockType = BlockType.MaxPool2D;
 }
 
-
 export class ActivationBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;
 
@@ -66,7 +63,6 @@ export class ActivationBlockState implements BlockState {
 
   type: BlockType = BlockType.Activation;
 }
-
 
 export class InputBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;
@@ -78,7 +74,6 @@ export class InputBlockState implements BlockState {
   type: BlockType = BlockType.Input;
 }
 
-
 export class DropoutBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;
 
@@ -89,7 +84,6 @@ export class DropoutBlockState implements BlockState {
   type: BlockType = BlockType.Dropout;
 }
 
-
 export class BatchNormalizationBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;
 
@@ -99,7 +93,6 @@ export class BatchNormalizationBlockState implements BlockState {
 
   type: BlockType = BlockType.BatchNormalization;
 }
-
 
 export class FlattenBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;

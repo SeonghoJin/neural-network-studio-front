@@ -1,10 +1,15 @@
 import { makeStyles } from '@material-ui/core';
 import { BlockState } from '../../../../core/block/BlockState';
 import { useDispatch, } from 'react-redux';
-import { ChangeEvent, useCallback } from 'react';
+import { ChangeEvent, createElement, useCallback } from 'react';
 import { useStoreState } from 'react-flow-renderer';
 import { setElementById } from '../../../../module/Elements';
-import TextInput from '../../../Input/TextInput';
+import React from 'react';
+import MaxPool2DConfigComponent from './ConfigComponent/MaxPool2DConfigComponent';
+import { MaxPool2DConfig } from '../../../../core/block/BlockConfig';
+import { BlockType } from '../../../../core/block';
+import { indigo } from '@material-ui/core/colors';
+import ActivationConfigComponent from './ConfigComponent/ActivationConfigComponent';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -27,17 +32,35 @@ const useStyle = makeStyles({
   },
 });
 
+type ConfigViewerTableKeyType = typeof BlockType[keyof typeof BlockType];
+
+type ConfigViewerTableType = {
+  [index in ConfigViewerTableKeyType]: (props? : any) => JSX.Element;
+};
+
+const ConfigViewerTable : ConfigViewerTableType = {
+  Custom: MaxPool2DConfigComponent,
+  Activation: ActivationConfigComponent,
+  AveragePooling2D: MaxPool2DConfigComponent,
+  BatchNormalization: MaxPool2DConfigComponent,
+  Conv2D: MaxPool2DConfigComponent,
+  Dense: MaxPool2DConfigComponent,
+  Dropout: MaxPool2DConfigComponent,
+  Flatten: MaxPool2DConfigComponent,
+  Input: MaxPool2DConfigComponent,
+  MaxPool2D: MaxPool2DConfigComponent
+}
+
+
 const NodeConfigViewer = () => {
   const classes = useStyle();
+  const dispatch = useDispatch();
   const selectedElement = useStoreState((state) => {
     const selectedNodes = state.selectedElements;
     const selectedNode = selectedNodes && selectedNodes[0];
     const elements = state.nodes.filter((node) => node.id === selectedNode?.id);
     return elements && elements[0];
     });
-
-  const data : null | BlockState = selectedElement?.data;
-  const dispatch = useDispatch();
 
   const onChange = useCallback((e : ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -53,20 +76,12 @@ const NodeConfigViewer = () => {
     return <></>
   }
 
-  const configInputs : any[] = [];
-  for(const key in data?.config){
-    if({}.hasOwnProperty.call(data?.config, key)) {
-      configInputs.push(
-        <li key={key}>
-          <TextInput
-            propertyName={key}
-            propertyContent={(data?.config as any)[key]}
-            onChange={onChange}
-          />
-        </li>
-      )
-    }
-  }
+  const data : BlockState = selectedElement.data;
+
+  const inputs = createElement(ConfigViewerTable[data.type], {
+    config: data.config,
+    onChange: onChange
+  });
 
   return (
     <div className={classes.wrapper}>
@@ -76,7 +91,7 @@ const NodeConfigViewer = () => {
         </h3>
       </div>
       <ul className={classes.propertyList}>
-        {configInputs}
+        {inputs}
       </ul>
     </div>);
 };
