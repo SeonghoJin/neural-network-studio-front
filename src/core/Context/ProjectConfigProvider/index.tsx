@@ -1,7 +1,7 @@
 import React, {
   createContext, useContext, useReducer,
 } from 'react';
-import ProjectConfig, { IProjectConfig } from '../../../API/project/types';
+import { IProjectConfig, ProjectConfig } from '../../../API/project/types';
 
 interface Action {
   type : string

@@ -23,21 +23,24 @@ const ProjectInfoConfigViewer = () => {
   const onChange = useCallback((e : ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const name = e.target.name;
     const value = e.target.value;
-    setProjectInfo({
-      ...projectInfo,
-      [name] : value,
-    })
+
+    if(projectInfo != null){
+      setProjectInfo({
+        ...projectInfo,
+        [name]: value
+      });
+    }
   },[projectInfo])
 
   const content = getProjectInfoResult.data && (
     <>
       <input
-        name={"name"} value={projectInfo.name || ""}
+        name={"name"} value={projectInfo?.name || ""}
         onChange={onChange}
         />
       <textarea
         name={"description"}
-        value={projectInfo.description || ""}
+        value={projectInfo?.description || ""}
         onChange={onChange}/>
     </>
   )

@@ -1,10 +1,10 @@
 import { createStandardAction } from '../../util';
-import { ProjectInfoState } from './types';
+import { IProjectInfo } from '../../API/project/types';
 
 export enum ProjectInfoAction  {
-  SET_PROJECT_Info = 'SET_PROJECT_INFO',
+  SET_PROJECT_INFO = 'SET_PROJECT_INFO',
 }
 
 export const setProjectInfo = createStandardAction(
-  ProjectInfoAction.SET_PROJECT_Info
-)<ProjectInfoState>();
+  ProjectInfoAction.SET_PROJECT_INFO
+)<IProjectInfo>();

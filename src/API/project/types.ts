@@ -37,7 +37,7 @@ export interface IProjectOptimizerConfig{
 export interface IProjectConfig extends IProjectOptimizerConfig, IProjectGlobalConfig{
 }
 
-class ProjectConfig implements IProjectConfig{
+export class ProjectConfig implements IProjectConfig{
 
   batch_size?: number;
 
@@ -61,5 +61,7 @@ class ProjectConfig implements IProjectConfig{
   }
 }
 
-export default ProjectConfig;
-
+export interface IProjectInfo {
+  description: string,
+  name: string,
+}

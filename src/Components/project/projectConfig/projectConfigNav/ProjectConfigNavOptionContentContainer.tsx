@@ -20,9 +20,9 @@ const ProjectConfigNavOptionContentContainer = () => {
   const {projectNo} = useProjectLocation();
 
   const onSave = useCallback(() => {
-    if(projectInfo.name == null || projectInfo.description == null)return;
+    if(projectInfo == null)return;
     dispatch(putProjectInfoThunk(
-      projectNo, projectInfo.name, projectInfo.description
+      projectNo, projectInfo
     )).then(async (res) => {
       if(!res)return false;
       return await dispatch(putProjectConfigThunk(projectNo, projectConfig))

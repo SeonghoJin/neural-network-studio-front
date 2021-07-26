@@ -14,7 +14,7 @@ import {
   updateProjectContent, updateProjectInfo
 } from '../../../API/project';
 import { FlowExportObject } from 'react-flow-renderer';
-import { IProjectConfig } from '../../../API/project/types';
+import { IProjectConfig, IProjectInfo } from '../../../API/project/types';
 
 export function updateProjectContentThunk(
   projectNo: string , output: string, flowState?: FlowExportObject)
@@ -88,13 +88,13 @@ ThunkAction<Promise<boolean>,RootState, null, ProjectAPIActionTypes> {
   }
 }
 
-export function putProjectInfoThunk(projectNo: string, name: string, description: string) :
+export function putProjectInfoThunk(projectNo: string, projectInfo: IProjectInfo) :
 ThunkAction<Promise<boolean>,RootState, null, ProjectAPIActionTypes> {
   return async dispatch => {
     const {request, success, failure} = putProjectInfoAsync;
     dispatch(request());
     try {
-      await updateProjectInfo(projectNo, name, description);
+      await updateProjectInfo(projectNo, projectInfo);
       dispatch(success());
       return true;
     } catch(e){

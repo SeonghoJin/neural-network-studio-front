@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from '../../config';
-import { IProjectConfig, IProjectContentDto, IProjectDto } from './types';
+import { IProjectConfig, IProjectContentDto, IProjectDto, IProjectInfo } from './types';
 
 export const getPythonCode = async (projectNo: string) => {
   const response = await axios.get<Blob>(
@@ -32,22 +32,20 @@ export const getProjectContent = async (projectNo: string) => {
   return response.data;
 }
 
-export const createProject = async (name: string, description: string) => {
+export const createProject = async (projectInfo : IProjectInfo) => {
   const response = await axios.post<{projectNo: string}>(
-    config.SERVER_PREFIX+`/api/project`, {
-      name: name,
-      description: description,
-    }
+    config.SERVER_PREFIX+`/api/project`,
+    projectInfo
   );
 
   return response.data;
 }
 
-export const updateProjectInfo = async(projectNo: string, name: string, description: string) => {
-  const response = await axios.put(config.SERVER_PREFIX+`/api/project/${projectNo}/info`, {
-    name: name,
-    description: description,
-  });
+export const updateProjectInfo = async(projectNo: string, projectInfo: IProjectInfo) => {
+  const response = await axios.put(
+    config.SERVER_PREFIX+`/api/project/${projectNo}/info`,
+      projectInfo
+    );
 
   return response.data;
 }
