@@ -28,7 +28,7 @@ class Profile extends React.PureComponent {
                     <a href="#" onClick={this.openModal}>로그인</a>
                 </div>
                 <div className={`${utils.divButton} ${style.signup}`}>
-                    <a href="#">회원가입</a>
+                    <a href={'/signup'}>회원가입</a>
                 </div>
                 <Modal open={this.state.modalOpen} close={this.closeModal}>
                     <Signin />

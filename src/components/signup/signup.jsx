@@ -86,10 +86,10 @@ class Signup extends React.PureComponent {
                                         <input type={ this.state.pwVisible ? "" : "password"} placeholder={"비밀번호"} onChange={this.onChangePW}/>
                                     </div>
                                     { this.state.pwValue === '' ?
-                                        <span className={`${style.requirement}`}>기호, 영문, 숫자 중 2가지 이상 조합</span>:
+                                        <span className={`${style.requirement}`}>기호, 영문, 숫자를 포함한 8자리 이상</span>:
                                         this.state.pwApprove ?
-                                        <span className={`${style.requirement}`}>기호, 영문, 숫자 중 2가지 이상 조합</span> :
-                                        <span className={`${style.requirement} ${style.red}`}>반드시 기호, 영문, 숫자 중 2가지 이상 조합해야합니다.</span>
+                                        <span className={`${style.requirement}`}>기호, 영문, 숫자를 포함한 8자리 이상</span> :
+                                        <span className={`${style.requirement} ${style.red}`}>반드시 기호, 영문, 숫자를 포함한 8자리이상으로 해야합니다.</span>
                                     }
                                 </div>
                                 <div className={`${utils.inputWrapper} ${utils.flexColumn}`}>
