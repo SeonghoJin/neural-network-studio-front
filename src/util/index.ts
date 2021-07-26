@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {deprecated} from 'typesafe-actions';
 
 export const getId = () => {
-  const id = `${uuidv4() + Date.now()}`;
+  const id = `${uuidv4()}`;
   return id;
 };
 

@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-import { ReactElement, useCallback } from 'react';
+import { ReactElement } from 'react';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -11,16 +11,10 @@ const useStyle = makeStyles({
     display: 'flex',
     flexDirection: 'column',
   },
-  propertyNameWrapper: {
+  propertyHeadWrapper: {
     flexGrow: 3,
   },
-  propertyName: {
-    margin: 0,
-  },
-  propertyContentWrapper: {
-    flexGrow: 7,
-  },
-  propertyContentContainer: {
+  propertyBodyContainer: {
     width: '100%',
     backgroundColor: 'white',
     border: 0,
@@ -30,23 +24,21 @@ const useStyle = makeStyles({
   },
 });
 
-interface Props {
+type Props = {
   head?: ReactElement
   body: ReactElement,
 }
 
-const Input = (props : Props) => {
-  const {head, body} = props
+const Input = ({head, body} : Props) => {
   const classes = useStyle();
-
 
   return (
     <div className={classes.wrapper}>
       <div className={classes.container}>
-        {head && <div className={classes.propertyNameWrapper}>
+        {head && <div className={classes.propertyHeadWrapper}>
           {head}
         </div>}
-        <div className={classes.propertyContentWrapper}>
+        <div className={classes.propertyBodyContainer}>
           {body}
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { makeStyles, Slider, TextField, Typography } from '@material-ui/core';
+import { makeStyles, Slider, Typography } from '@material-ui/core';
 import Input from './Input';
 import { ChangeEvent } from 'react';
 
