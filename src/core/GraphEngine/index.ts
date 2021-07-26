@@ -1,5 +1,7 @@
 import { FlowElement, Edge } from 'react-flow-renderer';
-import { BlockCategory, BlockConfig, BlockState, BlockType } from '../block/BlockState';
+import { BlockCategory } from '../block/BlockCategory';
+import { BlockConfig, BlockState } from '../block/BlockState';
+import { BlockType } from '../block/BlockType';
 
 class Node{
 
@@ -14,7 +16,7 @@ class Node{
   type: BlockType;
   name: string;
   input: string | null = null;
-  ouput: string | null = null;
+  output: string | null = null;
   config: BlockConfig
 
   constructor(element: FlowElement) {
@@ -52,13 +54,13 @@ class GraphConvertor{
           node.input = source;
         }
         if(node.name === source){
-          node.ouput = target;
+          node.output = target;
         }
       });
     });
 
     const ouputNodeName = this.nodes.filter((node) => {
-      return node.ouput === null;
+      return node.output === null;
     });
     const inputNodeName = this.nodes.filter((node) => {
       return node.input === null;

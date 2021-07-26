@@ -1,19 +1,10 @@
-export enum BlockCategory {
-  Layer= 'Layer',
-}
+import { BlockCategory } from "./BlockCategory";
+import { ActivationConfig, AveragePooling2DConfig,
+  BatchNormalizationConfig, Conv2DConfig, DenseConfig,DropoutConfig,
+  FlattenConfig, InputConfig, MaxPool2DConfig } from "./BlockConfig";
+import { BlockType } from "./BlockType";
 
-export enum BlockType{
-  Dense= 'Dense',
-  Conv2D= 'Conv2D',
-  AveragePooling2D= 'AveragePooling2D',
-  MaxPool2D= 'MaxPool2D',
-  Activation= 'Activation',
-  Input= 'Input',
-  Dropout= 'Dropout',
-  BatchNormalization= 'BatchNormalization',
-  Flatten= 'Flatten',
-  Custom = 'Custom',
-}
+
 
 export interface BlockState{
   category: BlockCategory;
@@ -26,9 +17,6 @@ export interface BlockState{
 }
 
 export interface BlockConfig {}
-export class DenseConfig implements BlockConfig {
-  units: number = 0;
-}
 export class DenseBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;
 
@@ -38,15 +26,6 @@ export class DenseBlockState implements BlockState {
 
   type: BlockType = BlockType.Dense;
 }
-export class Conv2DConfig implements BlockConfig {
-  filters : number = 0;
-
-  kernel_size : string = '';
-
-  strides : string = '';
-
-  padding : string = '';
-}
 export class Conv2DBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;
 
@@ -55,13 +34,6 @@ export class Conv2DBlockState implements BlockState {
   name: string | null = null;
 
   type: BlockType = BlockType.Conv2D;
-}
-export class AveragePooling2DConfig implements BlockConfig {
-  pool_size : string = '';
-
-  strides : string = '';
-
-  padding : string = '';
 }
 export class AveragePooling2DBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;
@@ -73,13 +45,6 @@ export class AveragePooling2DBlockState implements BlockState {
   type: BlockType = BlockType.AveragePooling2D;
 }
 
-export class MaxPool2DConfig implements BlockConfig {
-  pool_size: string = '';
-
-  strides: string = '';
-
-  padding: string = '';
-}
 
 export class MaxPool2DBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;
@@ -91,9 +56,6 @@ export class MaxPool2DBlockState implements BlockState {
   type: BlockType = BlockType.MaxPool2D;
 }
 
-export class ActivationConfig implements BlockConfig {
-  activation: string = '';
-}
 
 export class ActivationBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;
@@ -105,9 +67,6 @@ export class ActivationBlockState implements BlockState {
   type: BlockType = BlockType.Activation;
 }
 
-export class InputConfig implements BlockConfig {
-  shape: string = '';
-}
 
 export class InputBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;
@@ -119,9 +78,6 @@ export class InputBlockState implements BlockState {
   type: BlockType = BlockType.Input;
 }
 
-export class DropoutConfig implements BlockConfig {
-  rate: number= 0;
-}
 
 export class DropoutBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;
@@ -133,13 +89,6 @@ export class DropoutBlockState implements BlockState {
   type: BlockType = BlockType.Dropout;
 }
 
-export class BatchNormalizationConfig implements BlockConfig {
-  axis: number =0 ;
-
-  momentum: number = 0;
-
-  epsilon: number = 0;
-}
 
 export class BatchNormalizationBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;
@@ -151,8 +100,6 @@ export class BatchNormalizationBlockState implements BlockState {
   type: BlockType = BlockType.BatchNormalization;
 }
 
-export class FlattenConfig implements BlockConfig {
-}
 
 export class FlattenBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;

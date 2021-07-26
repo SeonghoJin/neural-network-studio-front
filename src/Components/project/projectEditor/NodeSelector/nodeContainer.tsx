@@ -41,7 +41,7 @@ const useBlockListStyle = makeStyles<Theme, BlockListProps>(() => ({
 }));
 
 const NodeContainer = ({ children, name, elementNumber }
-  : {children : any, name : string, elementNumber : number}) => {
+  : {children : any, name : number | string, elementNumber : number}) => {
   const classes = useBlockListStyle({ elementNumber });
 
   const [collapse, setCollapse] = useState(true);
