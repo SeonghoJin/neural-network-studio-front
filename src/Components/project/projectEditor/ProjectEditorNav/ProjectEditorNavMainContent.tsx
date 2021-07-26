@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { MouseEventHandler } from 'react';
 import { makeStyles } from '@material-ui/core';
 import Button from 'react-bootstrap/esm/Button';
 const useStyle = makeStyles({
@@ -19,13 +19,13 @@ const useStyle = makeStyles({
   }
 })
 
-interface Props {
- onGetPythonCode : ReturnType<typeof useCallback>;
+type Props = {
+ onGetPythonCode : MouseEventHandler
 }
 
-const ProjectEditorNavMainContent = (props: Props) => {
+const ProjectEditorNavMainContent = ({onGetPythonCode}: Props) => {
   const classes = useStyle();
-  const { onGetPythonCode } = props;
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.container}>

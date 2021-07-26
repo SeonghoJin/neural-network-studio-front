@@ -20,7 +20,7 @@ const selectorItemHeads = [
   "Optimizer",
 ]
 
-interface Props{
+type Props = {
   value: number;
   setValue: (num: number) => void
 }

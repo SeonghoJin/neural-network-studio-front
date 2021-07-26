@@ -1,23 +1,20 @@
-import { ActivationConfig, IConfigComponent, MaxPool2DConfig } from '../../../../../core/block';
-import { ChangeEvent, createElement, FunctionComponent, ReactNode, useMemo } from 'react';
-import TextInput from '../../../../Input/TextInput';
+import { ActivationConfig, IConfigComponent } from '../../../../../core/block';
+import { ChangeEvent } from 'react';
 import React from 'react';
 import SelectInput from '../../../../Input/SelectInput';
 import Activations from '../../../../../core/Activations';
 
-interface Props {
+type Props = {
   config: ActivationConfig,
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-const ActivationConfigComponent = (props: Props) => {
+const ActivationConfigComponent = ({config, onChange}: Props) => {
 
-  const { config, onChange } = props
   const { activation } = config
-
   type configType = typeof config;
-
   const propertyCandidates = [];
+
   for (const activationsKey in Activations) {
     propertyCandidates.push(activationsKey)
   }

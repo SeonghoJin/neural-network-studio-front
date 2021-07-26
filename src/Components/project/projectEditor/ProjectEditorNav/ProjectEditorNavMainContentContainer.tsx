@@ -1,13 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import ProjectEditorNavMainContent from './ProjectEditorNavMainContent';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import {
   getProjectThunk,
   getPythonCodeThunk,
   updateProjectContentThunk
 } from '../../../../module/API/project/thunks';
 import { RootDispatch, RootState } from '../../../../module';
-import { useLocation } from 'react-router-dom';
 import fileDownload from 'js-file-download';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
 

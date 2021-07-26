@@ -5,7 +5,6 @@ import useGetProjectResult from '../../../hooks/useGetProjectResult';
 import { useEffect } from 'react';
 import { setProjectConfig } from '../../../module/projectConfig';
 import { setProjectInfo } from '../../../module/projectInfo';
-import { useLocation } from 'react-router-dom';
 import { getProjectConfigThunk, getProjectThunk } from '../../../module/API/project/thunks';
 import useProjectLocation from '../../../hooks/useProjectLocation';
 

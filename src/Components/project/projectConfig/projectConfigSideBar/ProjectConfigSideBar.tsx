@@ -14,14 +14,14 @@ const useStyle = makeStyles({
   },
 });
 
-interface Props{
+type Props = {
   value: number;
   setValue: (num: number) => void
 }
 
-const ProjectConfigSideBar = (props: Props) => {
-  const {value, setValue} = props;
+const ProjectConfigSideBar = ({value, setValue}: Props) => {
   const classes = useStyle();
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.container}>

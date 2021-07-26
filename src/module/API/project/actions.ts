@@ -6,7 +6,7 @@ export enum ProjectAPIAction{
   GET_PROJECT = 'getProject',
   GET_PROJECT_SUCCESS = 'getProjectSuccess',
   GET_PROJECT_ERROR = 'getProjectError',
-  GET_PYTHON_CODE = 'getPtyhonCode',
+  GET_PYTHON_CODE = 'getPythonCode',
   GET_PYTHON_CODE_SUCCESS = 'getPythonCodeSuccess',
   GET_PYTHON_CODE_ERROR = 'getPythonCodeError',
   GET_PROJECT_CONFIG = 'getProjectConfig',

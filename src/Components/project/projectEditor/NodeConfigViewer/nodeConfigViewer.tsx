@@ -6,9 +6,7 @@ import { useStoreState } from 'react-flow-renderer';
 import { setElementById } from '../../../../module/Elements';
 import React from 'react';
 import MaxPool2DConfigComponent from './ConfigComponent/MaxPool2DConfigComponent';
-import { MaxPool2DConfig } from '../../../../core/block/BlockConfig';
 import { BlockType } from '../../../../core/block';
-import { indigo } from '@material-ui/core/colors';
 import ActivationConfigComponent from './ConfigComponent/ActivationConfigComponent';
 
 const useStyle = makeStyles({
@@ -50,7 +48,6 @@ const ConfigViewerTable : ConfigViewerTableType = {
   Input: MaxPool2DConfigComponent,
   MaxPool2D: MaxPool2DConfigComponent
 }
-
 
 const NodeConfigViewer = () => {
   const classes = useStyle();

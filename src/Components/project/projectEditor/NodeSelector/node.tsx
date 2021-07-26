@@ -13,7 +13,11 @@ const useBlockStyle = makeStyles({
   },
 });
 
-const Node = ({ state } : {state : BlockState}) => {
+type Props = {
+  state : BlockState
+}
+
+const Node = ({state} : Props) => {
   const classes = useBlockStyle();
 
   const onDragStart = useCallback((event : React.DragEvent) => {

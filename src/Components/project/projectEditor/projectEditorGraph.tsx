@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-import React, { KeyboardEventHandler, useCallback, useEffect , useRef } from 'react';
+import React, { EventHandler, KeyboardEventHandler, useCallback, useEffect, useRef } from 'react';
 import ReactFlow, {
   Background,
   Controls,
@@ -46,15 +46,14 @@ const useStyle = makeStyles({
   },
 });
 
-interface PrjectEditorGrahpProps{
-  setReactInstance: ReturnType<typeof useCallback>
-  setElements: ReturnType<typeof useCallback>
+type Props = {
+  setReactInstance: EventHandler<any>
+  setElements: EventHandler<any>
   flowState?: FlowExportObject,
 };
 
-const ProjectEditorGraph = (props: PrjectEditorGrahpProps) => {
+const ProjectEditorGraph = ({setElements, flowState, setReactInstance} : Props) => {
   const classes = useStyle();
-  const {flowState, setReactInstance, setElements} = props;
   const elements = useSelector((state: RootState) => state.elements.elements);
   const reactFlowWrapper = useRef<HTMLDivElement | null>(null);
   const selectedElements = useStoreState((state) => state.selectedElements);

@@ -37,7 +37,6 @@ const OptimizerConfig = () => {
   const optimizerCandidates = useMemo(() => {
     const optimizers= [];
     for(const optimizerKeys in Optimizers){
-      console.log(optimizerKeys);
       optimizers.push(optimizerKeys);
     }
     return optimizers;

@@ -1,14 +1,7 @@
 import React, { useCallback } from 'react';
 import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import useProjectConfig from '../../../../hooks/useProjectConfig';
-import { getProjectConfigThunk, getProjectThunk, putProjectConfigThunk, putProjectInfoThunk } from '../../../../module/API/project/thunks';
-import { RootDispatch } from '../../../../module';
-import useProjectInfo from '../../../../hooks/useProjectInfo';
-import { useLocation } from 'react-router-dom';
-import { ThunkDispatch } from 'redux-thunk';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -28,14 +21,12 @@ const useStyle = makeStyles({
   }
 })
 
-interface Props {
+type Props =  {
   onSave : ReturnType<typeof useCallback>
 }
 
-const ProjectConfigNavOptionContent = (props : Props) => {
-  const {onSave} = props;
+const ProjectConfigNavOptionContent = ({onSave}: Props) => {
   const classes = useStyle();
-
 
   return (<div className={classes.wrapper}>
     <div className={classes.container}>

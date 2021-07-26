@@ -4,7 +4,6 @@ import { getProjectThunk, updateProjectContentThunk } from '../../../../module/A
 import { RootDispatch, RootState } from '../../../../module';
 import { useDispatch, useSelector } from 'react-redux';
 import useGetProjectResult from '../../../../hooks/useGetProjectResult';
-import { useLocation } from 'react-router-dom';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
 
 const ProjectEditorNavOptionContentContainer = () => {

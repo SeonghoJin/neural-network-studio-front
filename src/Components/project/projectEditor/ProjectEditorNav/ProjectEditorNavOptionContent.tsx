@@ -1,13 +1,9 @@
-import { Link, useLocation } from 'react-router-dom';
-import React, { useCallback } from 'react';
+import { Link } from 'react-router-dom';
+import React, { MouseEventHandler, useCallback } from 'react';
 import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { RootDispatch, RootState } from '../../../../module';
-import { getProjectThunk, updateProjectContentThunk } from '../../../../module/API/project/thunks';
-import useGetProjectResult from '../../../../hooks/useGetProjectResult';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -27,18 +23,17 @@ const useStyle = makeStyles({
   }
 })
 
-interface Props {
-  onSave : ReturnType<typeof useCallback>
+type Props = {
+  onSave : MouseEventHandler
 }
 
-const ProjectEditorNavOptionContent = (props : Props) => {
+const ProjectEditorNavOptionContent = ({onSave}: Props) => {
   const classes = useStyle();
-  const { onSave } = props;
 
   return (<div className={classes.wrapper}>
     <div className={classes.container}>
       <div className={classes.mainOptionContentItem}>
-        <Button onClick={() => {onSave()}}>
+        <Button onClick={onSave}>
           <SaveIcon/>
         </Button>
       </div>
