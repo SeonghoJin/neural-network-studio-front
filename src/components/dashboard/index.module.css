@@ -1,3 +1,23 @@
 .mainWrapper {
     margin: 0 5%;
 }
+
+.dashboardMenu {
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.createButton {
+    margin-left: auto;
+    padding: 10px;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    color: white;
+
+}
+
+.createButton a {
+    color: white;
+    text-decoration: none;
+}

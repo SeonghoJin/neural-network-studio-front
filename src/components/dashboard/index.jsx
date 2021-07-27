@@ -2,7 +2,9 @@ import React from 'react';
 import CardGrid from './cardGrid/cardGrid';
 import Header from '../header/header';
 import style from './index.module.css';
+import utils from '../utils/index.module.css';
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 class Dashboard extends React.PureComponent {
     state = {
@@ -14,7 +16,7 @@ class Dashboard extends React.PureComponent {
         this.setState({
             loading: true,
         })
-        const res = await axios.get('https://52.78.247.102:8080/api/projects?curPage=1&pageSize=10&sort=&filterType=&filterString=');
+        const res = await axios.get('/api/projects?curPage=1&pageSize=10&sort=&filterType=&filterString=');
         this.setState({
             data: res.data.projects,
         })
@@ -32,6 +34,11 @@ class Dashboard extends React.PureComponent {
             <>
                 <Header />
                 <div className={`${style.mainWrapper}`}>
+                    <div className={`${style.dashboardMenu}`}>
+                        <div className={`${utils.divButton} ${style.createButton}`}>
+                            <Link to='/newProject'>프로젝트 생성</Link>
+                        </div>
+                    </div>
                     {
                         this.state.loading ?
                             null:

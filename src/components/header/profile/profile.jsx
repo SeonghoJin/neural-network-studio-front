@@ -17,7 +17,7 @@ class Profile extends React.PureComponent {
     logout = () => {
         axios({
             method:"DELETE",
-            url: "http://52.78.247.102:8080/api/logout",
+            url: "/api/logout",
         }).then((res) => {
             this.props.history.push("/");
         }).catch(err => {
@@ -32,6 +32,9 @@ class Profile extends React.PureComponent {
 
                 </div>
                 <DropMenu open={this.state.dropMenuToggle}>
+                    <div className={`${style.profileMenu}`}>
+                        <a onClick={this.logout}>내 정보</a>
+                    </div>
                     <div className={`${style.profileMenu}`}>
                         <a onClick={this.logout}>로그아웃</a>
                     </div>

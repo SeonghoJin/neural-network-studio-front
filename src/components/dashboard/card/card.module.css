@@ -8,12 +8,31 @@
 .cardHeader {
     display: flex;
     justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.cardTitle h4 {
+    max-width: 95%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 1.2;
 }
 
 .cardMain {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+}
+
+.descript {
+    overflow: hidden;
+    max-width: 90%;
+    max-height: 100px;
+    text-overflow: ellipsis;
+    white-space: normal;
+    line-height: 1.2;
+    margin-bottom: 12px;
 }
 
 .cardFooter {
@@ -28,4 +47,35 @@
     color: white;
     padding: 10px;
     width: 100%;
+}
+
+.dropMenu {
+    background-color: cadetblue;
+}
+
+.projectMenu {
+    margin-bottom: 10px;
+}
+
+.projectMenu:last-child {
+    margin-bottom: 0;
+}
+
+.projectMenu a {
+    font-size: 12px;
+    color: black;
+    text-decoration: none;
+}
+
+.ellipsisWrapper {
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.ellipsisWrapper div {
+    font-size: 40px;
+    width: 100%;
+    height: 100%;
 }
