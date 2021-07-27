@@ -43,6 +43,7 @@ const SecondDivisionTupleInput = ({propertyName, propertyContent, onChange, canN
       className={classes.propertyContentContainer}
       variant={'standard'}
       label={propertyName}
+      placeholder={"123, 456"}
     />)
 
     return (

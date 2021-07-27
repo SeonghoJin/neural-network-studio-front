@@ -37,6 +37,7 @@ const ThirdDivisionTupleInput = ({propertyName, propertyContent, onChange} : Pro
       className={classes.propertyContentContainer}
       variant={'standard'}
       label={propertyName}
+      placeholder={"123, 456, 789"}
     />)
 
     return (
