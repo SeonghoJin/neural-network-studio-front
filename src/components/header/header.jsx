@@ -4,6 +4,7 @@ import Logo from './logo';
 import Auth from './auth/auth';
 import style from './index.module.css';
 
+
 class Header extends React.PureComponent {
     render() {
         const auth = this.props.authenticated;

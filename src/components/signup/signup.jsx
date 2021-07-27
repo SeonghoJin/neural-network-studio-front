@@ -113,7 +113,7 @@ class Signup extends React.PureComponent {
                             <div><h3>계정만들기</h3></div>
                         </header>
                         <main>
-                            <form className={`${style.signupForm} `}>
+                            <div className={`${style.signupForm} `}>
                                 <div className={`${utils.inputWrapper} ${utils.flexColumn}`}>
                                     <input placeholder={"사용자 이름"} onChange={this.onChangeId}/>
                                 </div>
@@ -124,7 +124,7 @@ class Signup extends React.PureComponent {
                                     { this.state.pwValue === '' ?
                                         <span className={`${style.requirement}`}>기호, 영문, 숫자를 포함한 8자리 이상</span>:
                                         this.state.pwApprove ?
-                                        <span className={`${style.requirement}`}>기호, 영문, 숫자를 포함한 8자리 이상</span> :
+                                        <span className={`${style.requirement}`}>기호, 영문, 숫자를 포함한 8자리 이상</span>:
                                         <span className={`${style.requirement} ${style.red}`}>반드시 기호, 영문, 숫자를 포함한 8자리이상으로 해야합니다.</span>
                                     }
                                 </div>
@@ -149,7 +149,7 @@ class Signup extends React.PureComponent {
                                 <div className={`${utils.divButton} ${style.submit}`}>
                                     <a onClick={this.submit}>제출</a>
                                 </div>
-                            </form>
+                            </div>
                         </main>
                         <footer>
 

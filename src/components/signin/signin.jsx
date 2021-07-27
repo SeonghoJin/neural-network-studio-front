@@ -4,6 +4,7 @@ import utils from '../utils/index.module.css';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
+import cookie from 'react-cookies';
 
 class Signin extends React.Component {
     state = {
@@ -25,10 +26,10 @@ class Signin extends React.Component {
         })
     }
 
-    loginRequest = () => {
+    loginRequest = async () => {
         axios({
             method:"POST",
-            url: "http://52.78.247.102:8080/api/login",
+            url: "/api/login",
             data: {
                 "id": this.state.idValue,
                 "pw": this.state.pwValue,

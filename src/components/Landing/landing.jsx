@@ -2,8 +2,17 @@ import React from 'react';
 import Main from './main/main';
 import Header from '../header/header';
 
-class Landing extends React.PureComponent {
+import cookie from 'react-cookies';
 
+class Landing extends React.PureComponent {
+    state = {
+        auth: false,
+        token: '',
+    }
+
+    componentDidMount() {
+        console.log(cookie.loadAll())
+    }
 
     render() {
         return (

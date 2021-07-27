@@ -14,7 +14,7 @@ class Dashboard extends React.PureComponent {
         this.setState({
             loading: true,
         })
-        const res = await axios.get('http://52.78.247.102:8080/api/projects?curPage=1&pageSize=10&sort=&filterType=&filterString=');
+        const res = await axios.get('https://52.78.247.102:8080/api/projects?curPage=1&pageSize=10&sort=&filterType=&filterString=');
         this.setState({
             data: res.data.projects,
         })
