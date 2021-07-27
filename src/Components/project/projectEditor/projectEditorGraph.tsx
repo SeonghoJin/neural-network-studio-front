@@ -105,7 +105,7 @@ const ProjectEditorGraph = ({setElements, flowState, setReactInstance} : Props) 
   }, []);
 
   const onKeyDown : KeyboardEventHandler = useCallback((event) => {
-    if (event.code === 'Delete' && selectedElements) {
+    if ((event.code === 'Delete' || event.code === 'Escape') && selectedElements) {
       setElements(removeElements(selectedElements, elements));
     }
   }, [selectedElements]);
