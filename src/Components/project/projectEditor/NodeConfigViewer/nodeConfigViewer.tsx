@@ -8,6 +8,13 @@ import React from 'react';
 import MaxPool2DConfigComponent from './ConfigComponent/MaxPool2DConfigComponent';
 import { BlockType } from '../../../../core/block';
 import ActivationConfigComponent from './ConfigComponent/ActivationConfigComponent';
+import AveragePooling2DConfigComponent from './ConfigComponent/AveragePooling2DConfigComponent';
+import BatchNormalizationConfigComponent from './ConfigComponent/BatchNormalizationConfigComponent';
+import DenseConfigComponent from './ConfigComponent/DenseConfigComponent';
+import DropoutConfigComponent from './ConfigComponent/DropoutConfigComponent';
+import FlattenConfigComponent from './ConfigComponent/FlattenConfigComponent';
+import InputConfigComponent from './ConfigComponent/InputConfigComponent';
+import Conv2DConfigComponent from './ConfigComponent/Conv2DConfigComponent';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -37,15 +44,14 @@ type ConfigViewerTableType = {
 };
 
 const ConfigViewerTable : ConfigViewerTableType = {
-  Custom: MaxPool2DConfigComponent,
   Activation: ActivationConfigComponent,
-  AveragePooling2D: MaxPool2DConfigComponent,
-  BatchNormalization: MaxPool2DConfigComponent,
-  Conv2D: MaxPool2DConfigComponent,
-  Dense: MaxPool2DConfigComponent,
-  Dropout: MaxPool2DConfigComponent,
-  Flatten: MaxPool2DConfigComponent,
-  Input: MaxPool2DConfigComponent,
+  AveragePooling2D: AveragePooling2DConfigComponent,
+  BatchNormalization: BatchNormalizationConfigComponent,
+  Conv2D:Conv2DConfigComponent,
+  Dense: DenseConfigComponent,
+  Dropout: DropoutConfigComponent,
+  Flatten: FlattenConfigComponent,
+  Input: InputConfigComponent,
   MaxPool2D: MaxPool2DConfigComponent
 }
 

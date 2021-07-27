@@ -8,5 +8,4 @@ export enum BlockType{
   Dropout = "Dropout",
   BatchNormalization = "BatchNormalization",
   Flatten = "Flatten",
-  Custom = "Custom",
 }
