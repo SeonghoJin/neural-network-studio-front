@@ -5,9 +5,8 @@ import Auth from './auth/auth';
 import style from './index.module.css';
 
 const Header = (props) => {
-
-
     const {auth, user, children, loading} = props;
+
 
     return (
         <header className={`${style.topHeader}`}>
@@ -17,7 +16,6 @@ const Header = (props) => {
                     {children}
                 </div>
                 <div className="top-right">
-                    {loading && "loading..."}
                     {!loading && (auth ? <Profile user={user}/> : <Auth/>)}
                 </div>
             </div>

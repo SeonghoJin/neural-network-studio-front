@@ -27,7 +27,7 @@ class Signin extends React.Component {
     }
 
     loginRequest = async () => {
-        axios({
+        await axios({
             method:"POST",
             url: "/api/login",
             data: {
@@ -36,11 +36,8 @@ class Signin extends React.Component {
             },
             withCredentials: true,
         }).then((res) => {
-            console.log(res);
-            localStorage.setItem("userID", res.data.name);
             window.location.href = "/";
         }).catch(err => {
-            console.log(err);
             alert('아이디가 존재하지 않거나 비밀번호가 일치하지 않습니다.');
         });
     }

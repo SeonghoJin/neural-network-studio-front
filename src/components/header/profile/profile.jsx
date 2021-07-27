@@ -32,7 +32,6 @@ class Profile extends React.PureComponent {
             method:"DELETE",
             url: "/api/logout",
         }).then((res) => {
-            localStorage.removeItem("userID");
             window.location.href = "/";
         }).catch(err => {
             console.log(err);

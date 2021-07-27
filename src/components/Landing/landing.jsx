@@ -15,22 +15,29 @@ const Landing = () => {
     useEffect(() => {
         const exec = async () => {
             setLoading(true);
-            const response = await axios.get(
+            await axios.get(
                 "/api/user",
                 axiosConfig,
-            );
-            setLoading(false);
-            if(response.status === 401){
-                setData({
-                    auth: false,
-                    data: null,
+            )
+                .then(res => {
+                    if(res.status === 401){
+                        setData({
+                            auth: false,
+                            data: null,
+                        })
+                    }else{
+                        setData({
+                            auth: true,
+                            user: res.data
+                        })
+                    }
+                    setLoading(false);
                 })
-            }else{
-                setData({
-                    auth: true,
-                    user: response.data
-                })
-            }
+                .catch(err => {
+                    console.log(err);
+                    setLoading(false);
+                });
+
         }
         exec();
     }, [])

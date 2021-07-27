@@ -9,6 +9,7 @@ import {Link, withRouter} from "react-router-dom";
 class Dashboard extends React.PureComponent {
     state = {
         data: null,
+        authLoading: true,
         loading: true,
         auth: false,
         user: null,
@@ -33,19 +34,18 @@ class Dashboard extends React.PureComponent {
             url: "/api/user",
             withCredentials: true,
         }).then((res) => {
-            if (res.status === 401) {
-                this.setState({
-                    auth: false,
-                })
-                alert('로그인이 필요합니다.');
-                this.props.history.push('/login');
-            }
-            else {
-                this.setState({
-                    auth: true,
-                    user: res.data,
-                })
-            }
+            this.setState({
+                auth: true,
+                user: res.data,
+                authLoading: false,
+            })
+        }).catch(err => {
+            this.setState({
+                auth: false,
+                authLoading: false,
+            })
+            alert('로그인이 필요합니다.');
+            this.props.history.push('/login');
         })
     }
 
@@ -57,7 +57,7 @@ class Dashboard extends React.PureComponent {
     render() {
         return (
             <>
-                <Header auth={this.state.auth} user={this.state.user}/>
+                <Header auth={this.state.auth} user={this.state.user} loading={this.state.authLoading}/>
                 <div className={`${style.mainWrapper}`}>
                     <div className={`${style.dashboardMenu}`}>
                         <div className={`${utils.divButton} ${style.createButton}`}>
