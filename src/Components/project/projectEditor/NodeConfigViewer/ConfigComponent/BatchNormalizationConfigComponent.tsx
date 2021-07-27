@@ -8,6 +8,7 @@ import {
   InputConfig
 } from '../../../../../core/block';
 import NumberInput from '../../../../Input/NumberInput';
+import FloatInput from '../../../../Input/FloatInput';
 
 type Props = {
   config: BatchNormalizationConfig,
@@ -24,12 +25,12 @@ const BatchNormalizationConfigComponent = ({config, onChange}: Props) => {
       propertyContent={axis}
       onChange={onChange}
     />,
-    epsilon:<TextInput
+    epsilon:<FloatInput
       propertyName={'epsilon'}
       propertyContent={epsilon}
       onChange={onChange}
     />,
-    momentum: <TextInput
+    momentum: <FloatInput
       propertyName={'momentum'}
       propertyContent={momentum}
       onChange={onChange}
