@@ -4,7 +4,7 @@ import CircleLoading from '../../../Loading/CircularLoading';
 import { makeStyles } from '@material-ui/core';
 import { ChangeEvent, useCallback } from 'react';
 import { IProjectGlobalConfig } from '../../../../API/project/types';
-import TextInput from '../../../Input/TextInput';
+import NumberInput from '../../../Input/NumberInput';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -34,11 +34,11 @@ const GlobalConfig = () => {
 
   const content = data && (
     <>
-      <TextInput
+      <NumberInput
         onChange={onChange}
         propertyName={"batch_size"}
         propertyContent={globalConfig.batch_size || ""}/>
-      <TextInput
+      <NumberInput
         onChange={onChange}
         propertyName={"epochs"}
         propertyContent={globalConfig.epochs || ""}/>

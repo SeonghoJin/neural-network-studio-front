@@ -7,6 +7,7 @@ import { IProjectOptimizerConfig } from '../../../../API/project/types';
 import TextInput from '../../../Input/TextInput';
 import SelectInput from '../../../Input/SelectInput';
 import Optimizers from '../../../../core/Optimizers';
+import FloatInput from '../../../Input/FloatInput';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -37,7 +38,8 @@ const OptimizerConfig = () => {
   const optimizerCandidates = useMemo(() => {
     const optimizers= [];
     for(const optimizerKeys in Optimizers){
-      optimizers.push(optimizerKeys);
+      const key = optimizerKeys as keyof typeof Optimizers
+      optimizers.push(Optimizers[key]);
     }
     return optimizers;
   }, [])
@@ -57,7 +59,7 @@ const OptimizerConfig = () => {
         onChange={onChange}
         propertyName={"metrics"}
         propertyContent={optimizerConfig?.metrics || ""}/>
-      <TextInput
+      <FloatInput
         onChange={onChange}
         propertyName={"learning_rate"}
         propertyContent={optimizerConfig.learning_rate || ""}/>

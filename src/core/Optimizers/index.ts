@@ -1,13 +1,13 @@
 enum Optimizers{
   GD= "GD",
   SGD = "SGD",
-  Momentum = "Momentum",
+  Momentum = "momentum",
   NAG = "NAG",
-  Adagrad = "Adagrad",
-  RMSProp = "RMSProp",
-  AdaDelta = "AdaDelta",
-  Adam = "Adam",
-  Nadam = "Nadam",
+  Adagrad = "adagrad",
+  RMSProp = "rmsprop",
+  AdaDelta = "adaDelta",
+  Adam = "adam",
+  Nadam = "nadam",
 }
 
 export default Optimizers;

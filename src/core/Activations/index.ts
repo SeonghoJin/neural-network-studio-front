@@ -1,8 +1,9 @@
 enum Activations{
-  Sigmoid = "Sigmoid",
-  Tanh = 'Thanh',
-  ReLU = "ReLU",
-  LeakyReLU = "LeakyReLU",
+  Sigmoid = "sigmoid",
+  Tanh = 'thanh',
+  ReLU = "relu",
+  LeakyReLU = "leakyRelu",
+  SoftMax = "softmax",
 }
 
 export default Activations
