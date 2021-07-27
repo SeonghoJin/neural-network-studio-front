@@ -37,6 +37,7 @@ class Signin extends React.Component {
             withCredentials: true,
         }).then((res) => {
             console.log(res);
+            localStorage.setItem("userID", res.data.name);
             window.location.href = "/";
         }).catch(err => {
             console.log(err);

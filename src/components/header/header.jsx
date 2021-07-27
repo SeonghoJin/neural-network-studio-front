@@ -6,6 +6,7 @@ import style from './index.module.css';
 
 const Header = (props) => {
 
+
     const {auth, user, children, loading} = props;
 
     return (
