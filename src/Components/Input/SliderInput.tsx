@@ -11,6 +11,13 @@ const useStyle = makeStyles({
   },
 });
 
+type Mark = {
+  value: number,
+  label: string | number
+}
+
+export type Marks = Array<Mark>;
+
 type Props = {
   propertyName: string,
   propertyContent: number,
@@ -18,25 +25,32 @@ type Props = {
   min: number,
   max: number,
   step: number | null,
-  marks?: {
-    value: number,
-    label: string | number
-  }[]
+  marks?: Marks
 };
 
 const SliderInput = (props : Props) => {
   const classes = useStyle();
   const {propertyContent, propertyName, max, min, step, onChange, marks} = props
+
+  const handleChange = (e : any, value: any) => {
+    onChange({
+      target: {
+        name: propertyName,
+        value: value
+      }
+    } as ChangeEvent<any>);
+  }
+
   const body = (
     <Slider
       className={classes.propertyContentContainer}
-      defaultValue={propertyContent}
+      value={propertyContent}
       name={propertyName}
       step={step}
       min={min}
       max={max}
       marks={marks}
-      onChange={onChange}
+      onChangeCommitted={handleChange}
       valueLabelDisplay={'auto'}
     >
     </Slider>

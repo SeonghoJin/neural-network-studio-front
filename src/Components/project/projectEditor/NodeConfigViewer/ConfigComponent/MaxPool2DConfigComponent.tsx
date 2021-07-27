@@ -2,6 +2,7 @@ import { IConfigComponent, MaxPool2DConfig } from '../../../../../core/block';
 import { ChangeEvent, useMemo } from 'react';
 import TextInput from '../../../../Input/TextInput';
 import React from 'react';
+import SecondDivisionTupleInput from '../../../../Input/SecondDivisionTupleInput';
 
 
 type Props = {
@@ -19,12 +20,13 @@ const MaxPool2DConfigComponent = ({config, onChange}: Props) => {
       propertyContent={padding}
       propertyName={'padding'}
     />),
-    pool_size: (<TextInput
+    pool_size: (<SecondDivisionTupleInput
       propertyName={'pool_size'}
       onChange={onChange}
       propertyContent={pool_size}
     />),
-    strides: (<TextInput
+    strides: (<SecondDivisionTupleInput
+      canNull={true}
       propertyName={'strides'}
       onChange={onChange}
       propertyContent={strides}/>

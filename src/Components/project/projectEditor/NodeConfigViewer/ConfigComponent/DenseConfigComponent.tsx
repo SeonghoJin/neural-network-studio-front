@@ -2,6 +2,7 @@ import { ChangeEvent, useMemo } from 'react';
 import TextInput from '../../../../Input/TextInput';
 import React from 'react';
 import { DenseConfig, IConfigComponent } from '../../../../../core/block';
+import NumberInput from '../../../../Input/NumberInput';
 
 
 type Props = {
@@ -14,7 +15,7 @@ const DenseConfigComponent = ({config, onChange}: Props) => {
   const {units} = config;
 
   const configComponent: IConfigComponent<typeof config> = {
-    units:  <TextInput
+    units:  <NumberInput
       propertyName={"units"}
       onChange={onChange}
       propertyContent={units}

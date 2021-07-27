@@ -7,6 +7,7 @@ import {
   IConfigComponent,
   InputConfig
 } from '../../../../../core/block';
+import NumberInput from '../../../../Input/NumberInput';
 
 type Props = {
   config: BatchNormalizationConfig,
@@ -18,7 +19,7 @@ const BatchNormalizationConfigComponent = ({config, onChange}: Props) => {
   const {axis, epsilon, momentum} = config
 
   const configComponent: IConfigComponent<typeof config> = {
-    axis: <TextInput
+    axis: <NumberInput
       propertyName={'axis'}
       propertyContent={axis}
       onChange={onChange}

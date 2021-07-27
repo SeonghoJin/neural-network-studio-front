@@ -12,14 +12,13 @@ type Props = {
 const ActivationConfigComponent = ({config, onChange}: Props) => {
 
   const { activation } = config
-  type configType = typeof config;
   const propertyCandidates = [];
 
   for (const activationsKey in Activations) {
     propertyCandidates.push(activationsKey)
   }
 
-  const configComponent : IConfigComponent<configType> = {
+  const configComponent : IConfigComponent<typeof config> = {
     activation: (<SelectInput
       propertyName={'activation'}
       propertyCandidates={propertyCandidates}

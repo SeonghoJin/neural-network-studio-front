@@ -7,14 +7,15 @@ import {
   IConfigComponent,
   InputConfig
 } from '../../../../../core/block';
-import SliderInput from '../../../../Input/SliderInput';
+import SliderInput, { Marks } from '../../../../Input/SliderInput';
+import SecondDivisionTupleInput from '../../../../Input/SecondDivisionTupleInput';
 
 type Props = {
   config: Conv2DConfig,
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-const marks = [
+const marks : Marks = [
   {
     value: 32,
     label: 32,
@@ -47,17 +48,17 @@ const Conv2DConfigComponent = ({config, onChange}: Props) => {
       min={32}
       step={null}
     />,
-    kernel_size: <TextInput
+    kernel_size: <SecondDivisionTupleInput
       onChange={onChange}
       propertyContent={kernel_size}
       propertyName={'kernel_size'}
     />,
-    padding:<TextInput
+    padding:<SecondDivisionTupleInput
       onChange={onChange}
       propertyContent={padding}
       propertyName={'padding'}
     />,
-    strides:<TextInput
+    strides:<SecondDivisionTupleInput
       onChange={onChange}
       propertyContent={strides}
       propertyName={'strides'}

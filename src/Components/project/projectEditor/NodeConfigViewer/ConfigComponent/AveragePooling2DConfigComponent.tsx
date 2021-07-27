@@ -9,7 +9,7 @@ type Props = {
 }
 
 const AveragePooling2DConfigComponent = ({config, onChange}: Props) => {
-  type configKey = keyof typeof config
+
   const {padding, strides, pool_size} = config
 
   const configComponent: IConfigComponent<typeof config> = {

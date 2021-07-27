@@ -2,6 +2,8 @@ import { ChangeEvent } from 'react';
 import TextInput from '../../../../Input/TextInput';
 import React from 'react';
 import { AveragePooling2DConfig, IConfigComponent, InputConfig } from '../../../../../core/block';
+import NumberInput from '../../../../Input/NumberInput';
+import SecondDivisionTupleInput from '../../../../Input/SecondDivisionTupleInput';
 
 type Props = {
   config: InputConfig,
@@ -13,7 +15,7 @@ const InputConfigComponent = ({config, onChange}: Props) => {
   const {shape} = config
 
   const configComponent: IConfigComponent<typeof config> = {
-    shape: <TextInput
+    shape: <SecondDivisionTupleInput
       propertyName={'shape'}
       onChange={onChange}
       propertyContent={shape}/>
