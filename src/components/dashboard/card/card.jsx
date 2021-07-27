@@ -13,18 +13,25 @@ class Card extends React.PureComponent {
         projectNo: '',
     }
 
+    dropRef = React.createRef(); // create Ref
+
+    // open dropdown menu
     openMenu = () => {
         this.setState({
             dropMenuToggle: !this.state.dropMenuToggle,
         });
     }
 
-    closeMenu = () => {
-        this.setState({
-            dropMenuToggle: false,
-        })
+    // close dropdown menu
+    closeMenu = (e) => {
+        if (!this.dropRef.current.contains(e.target)) {
+            this.setState({
+                dropMenuToggle: false,
+            })
+        }
     }
 
+    // delete project handler
     deleteProject = async () => {
         let deleted = false;
         // eslint-disable-next-line no-restricted-globals
@@ -48,6 +55,11 @@ class Card extends React.PureComponent {
         this.setState({
             projectNo: id,
         })
+        document.addEventListener('mousedown', this.closeMenu);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.closeMenu);
     }
 
     render() {
@@ -60,17 +72,17 @@ class Card extends React.PureComponent {
                             <h4>{title}</h4>
                         </div>
                         <div>
-                            <div className={`${style.ellipsisWrapper}`}>
-                                <FontAwesomeIcon size="xl" onClick={this.openMenu} icon={faEllipsisH} />
+                            <div className={`${style.ellipsisWrapper}`} onClick={this.openMenu} ref={this.dropRef}>
+                                <FontAwesomeIcon size="xl"  icon={faEllipsisH} />
+                                <DropMenu open={this.state.dropMenuToggle} color={style.dropMenu}>
+                                    <div className={`${style.projectMenu}`}>
+                                        <a href="#">프로젝트 수정</a>
+                                    </div>
+                                    <div className={`${style.projectMenu}`}>
+                                        <a href="#" onClick={this.deleteProject}>프로젝트 삭제</a>
+                                    </div>
+                                </DropMenu>
                             </div>
-                            <DropMenu open={this.state.dropMenuToggle} color={style.dropMenu}>
-                                <div className={`${style.projectMenu}`}>
-                                    <a href="#">프로젝트 수정</a>
-                                </div>
-                                <div className={`${style.projectMenu}`}>
-                                    <a href="#" onClick={this.deleteProject}>프로젝트 삭제</a>
-                                </div>
-                            </DropMenu>
                         </div>
                     </header>
                     <main className={`${style.cardMain}`}>

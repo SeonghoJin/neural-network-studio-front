@@ -5,10 +5,32 @@ import Auth from './auth/auth';
 import style from './index.module.css';
 
 
-class Header extends React.PureComponent {
-    render() {
-        const auth = this.props.authenticated;
+class Header extends React.Component {
+    state = {
+        auth: null,
+        loading: true,
+    }
 
+    componentDidMount() {
+        const {auth, user} = this.props;
+        console.log(auth);
+        this.setState({
+            auth: auth,
+        })
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log(this.state.auth);
+        if (prevState.auth !== this.state.auth) {
+            this.setState({
+                loading: false,
+            })
+        }
+    }
+
+    render() {
+        const {auth, user} = this.props;
+        console.log(this.state.loading);
         return(
             <header className={`${style.topHeader}`}>
                 <div className={`${style.headerWrapper}`}>
@@ -18,9 +40,13 @@ class Header extends React.PureComponent {
                     </div>
                     <div className="top-right">
                         {
-                            auth ?
-                                <Profile /> :
-                                <Auth />
+                            this.state.loading ?
+                                null:
+                                (
+                                    auth ?
+                                    <Profile user={user}/> :
+                                    <Auth />
+                                )
                         }
                     </div>
                 </div>

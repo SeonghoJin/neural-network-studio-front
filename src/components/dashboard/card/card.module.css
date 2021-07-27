@@ -28,7 +28,7 @@
 .descript {
     overflow: hidden;
     max-width: 90%;
-    max-height: 100px;
+    height: 100px;
     text-overflow: ellipsis;
     white-space: normal;
     line-height: 1.2;
@@ -72,10 +72,4 @@
     height: 20px;
     align-items: center;
     justify-content: center;
-}
-
-.ellipsisWrapper div {
-    font-size: 40px;
-    width: 100%;
-    height: 100%;
 }

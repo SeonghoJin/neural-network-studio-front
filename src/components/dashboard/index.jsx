@@ -4,12 +4,14 @@ import Header from '../header/header';
 import style from './index.module.css';
 import utils from '../utils/index.module.css';
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
 class Dashboard extends React.PureComponent {
     state = {
         data: null,
         loading: true,
+        auth: false,
+        user: null,
     }
 
     getProjects = async () => {
@@ -25,14 +27,37 @@ class Dashboard extends React.PureComponent {
         })
     }
 
+    getUser = async () => {
+        await axios({
+            method:"GET",
+            url: "/api/user",
+            withCredentials: true,
+        }).then((res) => {
+            if (res.status === 401) {
+                this.setState({
+                    auth: false,
+                })
+                alert('로그인이 필요합니다.');
+                this.props.history.push('/login');
+            }
+            else {
+                this.setState({
+                    auth: true,
+                    user: res.data,
+                })
+            }
+        })
+    }
+
     componentDidMount() {
+        this.getUser();
         this.getProjects();
     }
 
     render() {
         return (
             <>
-                <Header />
+                <Header auth={this.state.auth} user={this.state.user}/>
                 <div className={`${style.mainWrapper}`}>
                     <div className={`${style.dashboardMenu}`}>
                         <div className={`${utils.divButton} ${style.createButton}`}>
@@ -51,4 +76,4 @@ class Dashboard extends React.PureComponent {
     }
 }
 
-export default Dashboard;
+export default withRouter(Dashboard);

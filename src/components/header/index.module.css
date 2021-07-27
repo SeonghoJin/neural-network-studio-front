@@ -4,7 +4,7 @@
 }
 
 .topHeader {
-    background-color: black;
+    background-color: white;
 }
 
 .headerWrapper {
@@ -20,7 +20,7 @@
 }
 
 .logo a {
-    color: white;
+    color: black;
     text-decoration: none;
 }
 
