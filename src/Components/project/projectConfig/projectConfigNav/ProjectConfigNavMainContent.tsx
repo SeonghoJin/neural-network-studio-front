@@ -26,7 +26,6 @@ const ProjectConfigNavMainContent = () => {
       <div className={classes.container}>
       </div>
     </div>
-
   )
 }
 

@@ -20,16 +20,14 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface ModalProps{
-  onCallback? : any,
+type Props = {
   onClose? : any,
   head: any,
   body: any,
 }
 
-export default function StandardModal(props: ModalProps) {
+export default function StandardModal({onClose, body, head}: Props) {
   const classes = useStyles();
-  const {onClose, head, body} = props;
   const [open, setOpen] = useState(true);
   return (
     <div>

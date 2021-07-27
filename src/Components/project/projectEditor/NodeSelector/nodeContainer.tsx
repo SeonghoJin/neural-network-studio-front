@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button, makeStyles, Theme } from '@material-ui/core';
 
-interface BlockListProps {
-  elementNumber : number;
-}
-
-const useBlockListStyle = makeStyles<Theme, BlockListProps>(() => ({
+const useStyle = makeStyles<Theme, {elementNumber: number}>(() => ({
   Wrapper: {
     padding: 0,
     listStyle: 'none',
@@ -40,15 +36,19 @@ const useBlockListStyle = makeStyles<Theme, BlockListProps>(() => ({
   },
 }));
 
-const NodeContainer = ({ children, name, elementNumber }
-  : {children : any, name : number | string, elementNumber : number}) => {
-  const classes = useBlockListStyle({ elementNumber });
+type Props = {
+  elementNumber : number;
+  children : any;
+  name: string | number
+}
 
+const NodeContainer = ({elementNumber, children, name} : Props) => {
+  const classes = useStyle({ elementNumber });
   const [collapse, setCollapse] = useState(true);
 
-  const onCollapseToggle = () => {
+  const onCollapseToggle = useCallback(() => {
     setCollapse((pre) => !pre);
-  };
+  }, []);
 
   return (
     <li>

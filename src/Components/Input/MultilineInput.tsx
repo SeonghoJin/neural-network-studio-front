@@ -8,8 +8,13 @@ const useStyle = makeStyles({
   },
 });
 
-const MultilineInput = ({ propertyName, propertyContent, onChange}
-  : {propertyName: string, propertyContent: string | string[] | number, onChange: any}) => {
+type Props = {
+  propertyName: string,
+  propertyContent: string | string[] | number,
+  onChange: any,
+}
+
+const MultilineInput = ({propertyName, propertyContent, onChange}: Props) => {
   const classes = useStyle();
 
   const body = (

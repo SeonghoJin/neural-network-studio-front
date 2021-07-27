@@ -44,6 +44,7 @@ const GlobalConfig = () => {
         propertyContent={globalConfig.epochs || ""}/>
     </>
   );
+
   return (
     <div>
       <div className={classes.wrapper}>

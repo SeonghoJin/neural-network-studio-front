@@ -1,8 +1,6 @@
 import { FormControl, makeStyles, MenuItem, Select, TextField } from '@material-ui/core';
 import Input from './Input';
-import Optimizers from '../../core/Optimizers';
 import InputLabel from '@material-ui/core/InputLabel';
-import { useState } from 'react';
 
 const useStyle = makeStyles({
   propertyContentContainer: {
@@ -10,15 +8,14 @@ const useStyle = makeStyles({
   },
 });
 
-interface Props {
+type Props = {
   propertyName: string,
   propertyContent: string | string[] | number,
   propertyCandidates: Array<string | number>,
   onChange: any,
 }
 
-const SelectInput = (props: Props) => {
-  const {propertyName, propertyContent, onChange, propertyCandidates} = props;
+const SelectInput = ({propertyContent, propertyName, propertyCandidates, onChange}: Props) => {
   const classes = useStyle();
 
   const candidateComponent = propertyCandidates.map((candidate) => {

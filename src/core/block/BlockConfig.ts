@@ -1,5 +1,3 @@
-import InputTypes  from '../../Components/Input/InputTypes';
-
 export interface BlockConfig {}
 
 export class DenseConfig implements BlockConfig {

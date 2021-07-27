@@ -1,20 +1,19 @@
 import { IConfigComponent, MaxPool2DConfig } from '../../../../../core/block';
-import { ChangeEvent, createElement, FunctionComponent, ReactNode, useMemo } from 'react';
+import { ChangeEvent, useMemo } from 'react';
 import TextInput from '../../../../Input/TextInput';
 import React from 'react';
 
 
-interface Props {
+type Props = {
   config: MaxPool2DConfig,
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-const MaxPool2DConfigComponent = (props: Props) => {
+const MaxPool2DConfigComponent = ({config, onChange}: Props) => {
 
-  const { config, onChange } = props
   const { pool_size, strides, padding } = config;
 
-  const maxPool2DConfig : IConfigComponent<typeof config> = useMemo(() =>({
+  const configComponent: IConfigComponent<typeof config> = useMemo(() =>({
     padding: (<TextInput
       onChange={onChange}
       propertyContent={padding}
@@ -30,14 +29,14 @@ const MaxPool2DConfigComponent = (props: Props) => {
       onChange={onChange}
       propertyContent={strides}/>
     )
-  }), [props])
+  }), [config, onChange])
 
   const elements = [];
-  for (const maxPool2DConfigKey in maxPool2DConfig) {
-    const key = maxPool2DConfigKey as keyof typeof maxPool2DConfig
+  for (const maxPool2DConfigKey in configComponent) {
+    const key = maxPool2DConfigKey as keyof typeof configComponent
     elements.push(
       <li key={key}>
-        {maxPool2DConfig[key]}
+        {configComponent[key]}
       </li>
     );
   };

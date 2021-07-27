@@ -2,7 +2,6 @@ import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import React from 'react';
 import ProjectConfigNavMainContent from './ProjectConfigNavMainContent';
-import ProjectConfigNavOptionContent from './ProjectConfigNavOptionContent';
 import useGetProjectConfigResult from '../../../../hooks/useGetProjectConfigResult';
 import CircleLoading from '../../../Loading/CircularLoading';
 import ProjectConfigNavOptionContentContainer from './ProjectConfigNavOptionContentContainer';

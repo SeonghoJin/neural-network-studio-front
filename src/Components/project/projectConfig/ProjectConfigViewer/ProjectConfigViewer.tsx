@@ -4,14 +4,13 @@ import ProjectInfoConfigViewer from './ProjectConfigInfoViewer';
 import ProjectGlobalConfigViewer from './ProjectGlobalConfigViewer';
 import ProjectOptimizerConfigViewer from './ProjectOptimizerConfigViewer';
 
-interface ProjectConfigViewerProps {
+type Props = {
   index: number;
 }
 
-const ProjectConfigViewer = (props: ProjectConfigViewerProps) => {
+const ProjectConfigViewer = ({index} : Props) => {
 
   const configViewerMap = new Map();
-  const {index} = props;
   const {error, loading} = useGetProjectConfigResult();
 
   configViewerMap.set(0, <ProjectInfoConfigViewer/>)

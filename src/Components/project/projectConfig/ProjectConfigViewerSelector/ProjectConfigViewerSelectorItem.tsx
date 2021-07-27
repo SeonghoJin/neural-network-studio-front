@@ -1,11 +1,5 @@
 import { makeStyles } from '@material-ui/core';
 
-interface ProjectConfigViewerSelectorItemProps{
-  head: string,
-  active: boolean,
-  onClick?: () => void,
-}
-
 const useStyle = makeStyles({
   wrapper: {
     width: '100%',
@@ -25,11 +19,17 @@ const useStyle = makeStyles({
     height: '100%',
     backgroundColor: '#FFFFFF'
   }
-})
+});
 
-const ProjectConfigViewerSelectorItem = (props: ProjectConfigViewerSelectorItemProps) => {
+type Props = {
+  head: string,
+  active: boolean,
+  onClick?: () => void,
+}
+
+const ProjectConfigViewerSelectorItem = ({head, onClick, active}: Props) => {
   const classes = useStyle();
-  const {head, onClick, active} = props;
+
   return (
     <div className={classes.wrapper} onClick={onClick}>
       <div className={`${classes.container} ${active && classes.active}`}>
