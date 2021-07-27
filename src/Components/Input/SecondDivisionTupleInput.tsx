@@ -22,15 +22,17 @@ type Props = {
 
 const SecondDivisionTupleInput = ({propertyName, propertyContent, onChange, canNull} : Props) => {
   const classes = useStyle();
-  const [error, setError] = useState(secondDivisionTupleRegExp.test(propertyContent as string));
+
+  const isVaild = (str: string) => {
+    if(canNull && str.trim() == "")return true;
+    return secondDivisionTupleRegExp.test(str);
+  }
+
+  const [error, setError] = useState(isVaild(propertyContent as string));
 
   const handleChange = (e : ChangeEvent<any>) => {
     onChange(e);
-    if(canNull && (e.target.value as string).trim() === ""){
-      setError(true);
-      return;
-    }
-    setError(secondDivisionTupleRegExp.test(e.target.value))
+    setError(isVaild(e.target.value));
   }
 
   const body = (

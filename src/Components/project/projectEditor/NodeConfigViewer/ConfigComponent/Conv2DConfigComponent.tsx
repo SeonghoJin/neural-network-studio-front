@@ -9,6 +9,9 @@ import {
 } from '../../../../../core/block';
 import SliderInput, { Marks } from '../../../../Input/SliderInput';
 import SecondDivisionTupleInput from '../../../../Input/SecondDivisionTupleInput';
+import SelectInput from '../../../../Input/SelectInput';
+import Activations from '../../../../../core/Activations';
+import Paddings from '../../../../../core/Padding';
 
 type Props = {
   config: Conv2DConfig,
@@ -34,6 +37,12 @@ const marks : Marks = [
   },
 ]
 
+const propertyCandidates = Array<string | number>();
+for (const paddingsKey in Paddings) {
+  const key = paddingsKey as keyof typeof Paddings ;
+  propertyCandidates.push(Paddings[key]);
+}
+
 const Conv2DConfigComponent = ({config, onChange}: Props) => {
 
   const {padding, strides, kernel_size, filters} = config
@@ -53,12 +62,14 @@ const Conv2DConfigComponent = ({config, onChange}: Props) => {
       propertyContent={kernel_size}
       propertyName={'kernel_size'}
     />,
-    padding:<SecondDivisionTupleInput
+    padding:<SelectInput
       onChange={onChange}
       propertyContent={padding}
       propertyName={'padding'}
+      propertyCandidates={propertyCandidates}
     />,
     strides:<SecondDivisionTupleInput
+      canNull={true}
       onChange={onChange}
       propertyContent={strides}
       propertyName={'strides'}

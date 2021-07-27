@@ -9,14 +9,16 @@ type Props = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
+const propertyCandidates = Array<string | number>();
+for (const activationsKey in Activations) {
+  const key = activationsKey as keyof typeof Activations
+  propertyCandidates.push(Activations[key])
+}
+
 const ActivationConfigComponent = ({config, onChange}: Props) => {
 
   const { activation } = config
-  const propertyCandidates = [];
 
-  for (const activationsKey in Activations) {
-    propertyCandidates.push(activationsKey)
-  }
 
   const configComponent : IConfigComponent<typeof config> = {
     activation: (<SelectInput

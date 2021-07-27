@@ -1,6 +1,7 @@
 import { FormControl, makeStyles, MenuItem, Select, TextField } from '@material-ui/core';
 import Input from './Input';
 import InputLabel from '@material-ui/core/InputLabel';
+import { ChangeEvent, useState } from 'react';
 
 const useStyle = makeStyles({
   propertyContentContainer: {
@@ -15,8 +16,14 @@ type Props = {
   onChange: any,
 }
 
+const isVaild = (str : string) => {
+  if(str.trim() == "")return false;
+  return true;
+}
+
 const SelectInput = ({propertyContent, propertyName, propertyCandidates, onChange}: Props) => {
   const classes = useStyle();
+  const [error, setError] = useState(!isVaild(propertyContent as string));
 
   const candidateComponent = propertyCandidates.map((candidate) => {
     return (<MenuItem
@@ -27,12 +34,18 @@ const SelectInput = ({propertyContent, propertyName, propertyCandidates, onChang
     </MenuItem>)
   });
 
+  const handleChange = (e : ChangeEvent<any>) => {
+    setError(!isVaild(e.target.value));
+    onChange(e);
+  }
+
   const body = (
     <FormControl className={classes.propertyContentContainer}>
       <InputLabel>{propertyName}</InputLabel>
       <Select
+        error={error}
         name={propertyName}
-        onChange={onChange}
+        onChange={(e) => {handleChange(e)}}
         value={propertyContent}
       >
         <MenuItem value={propertyContent}>

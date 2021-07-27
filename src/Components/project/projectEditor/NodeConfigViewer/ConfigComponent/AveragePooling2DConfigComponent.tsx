@@ -2,6 +2,8 @@ import { ChangeEvent, useMemo } from 'react';
 import TextInput from '../../../../Input/TextInput';
 import React from 'react';
 import { AveragePooling2DConfig, IConfigComponent } from '../../../../../core/block';
+import NumberInput from '../../../../Input/NumberInput';
+import SecondDivisionTupleInput from '../../../../Input/SecondDivisionTupleInput';
 
 type Props = {
   config: AveragePooling2DConfig,
@@ -17,11 +19,12 @@ const AveragePooling2DConfigComponent = ({config, onChange}: Props) => {
       propertyContent={padding}
       propertyName={'padding'}
       onChange={onChange}/>,
-    pool_size: <TextInput
+    pool_size: <NumberInput
       propertyContent={pool_size}
       propertyName={'pool_size'}
       onChange={onChange}/>,
-    strides: <TextInput
+    strides: <SecondDivisionTupleInput
+      canNull={true}
       propertyContent={strides}
       propertyName={'strides'}
       onChange={onChange}/>,

@@ -35,6 +35,7 @@ const NumberInput = ({propertyName, propertyContent, onChange} : Props) => {
       className={classes.propertyContentContainer}
       variant={'standard'}
       label={propertyName}
+      placeholder={"12345"}
     />)
 
     return (
