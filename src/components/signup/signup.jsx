@@ -88,7 +88,7 @@ class Signup extends React.PureComponent {
 
         axios({
             method:"POST",
-            url: "http://52.78.247.102:8080/api/user",
+            url: "/api/user",
             data: {
                 "id": this.state.idValue,
                 "pw": this.state.pwValue,
