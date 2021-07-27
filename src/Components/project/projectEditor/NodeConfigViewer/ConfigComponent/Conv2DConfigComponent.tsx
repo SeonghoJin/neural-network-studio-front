@@ -7,21 +7,45 @@ import {
   IConfigComponent,
   InputConfig
 } from '../../../../../core/block';
+import SliderInput from '../../../../Input/SliderInput';
 
 type Props = {
   config: Conv2DConfig,
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
+const marks = [
+  {
+    value: 32,
+    label: 32,
+  },
+  {
+    value: 64,
+    label: 64,
+  },
+  {
+    value: 128,
+    label: 128,
+  },
+  {
+    value: 256,
+    label: 256,
+  },
+]
+
 const Conv2DConfigComponent = ({config, onChange}: Props) => {
 
   const {padding, strides, kernel_size, filters} = config
 
   const configComponent: IConfigComponent<typeof config> = {
-    filters: <TextInput
+    filters: <SliderInput
       onChange={onChange}
       propertyContent={filters}
       propertyName={'filters'}
+      marks={marks}
+      max={256}
+      min={32}
+      step={null}
     />,
     kernel_size: <TextInput
       onChange={onChange}

@@ -16,6 +16,8 @@ const useStyle = makeStyles({
   },
   propertyBodyContainer: {
     width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
     border: 0,
     '&:focus': {
       outline: '1px solid black',

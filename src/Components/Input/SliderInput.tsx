@@ -4,7 +4,10 @@ import { ChangeEvent } from 'react';
 
 const useStyle = makeStyles({
   propertyContentContainer: {
-    width: '100%',
+    width: '90%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignContent: 'center'
   },
 });
 
@@ -14,21 +17,25 @@ type Props = {
   onChange: (e: ChangeEvent<any>) => void,
   min: number,
   max: number,
-  step: number,
+  step: number | null,
+  marks?: {
+    value: number,
+    label: string | number
+  }[]
 };
 
 const SliderInput = (props : Props) => {
   const classes = useStyle();
-  const {propertyContent, propertyName, max, min, step, onChange} = props
+  const {propertyContent, propertyName, max, min, step, onChange, marks} = props
   const body = (
     <Slider
       className={classes.propertyContentContainer}
-      value={propertyContent}
+      defaultValue={propertyContent}
       name={propertyName}
       step={step}
       min={min}
       max={max}
-      marks={true}
+      marks={marks}
       onChange={onChange}
       valueLabelDisplay={'auto'}
     >
