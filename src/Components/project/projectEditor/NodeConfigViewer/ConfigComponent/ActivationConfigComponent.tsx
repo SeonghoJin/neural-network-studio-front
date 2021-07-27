@@ -19,7 +19,6 @@ const ActivationConfigComponent = ({config, onChange}: Props) => {
 
   const { activation } = config
 
-
   const configComponent : IConfigComponent<typeof config> = {
     activation: (<SelectInput
       propertyName={'activation'}

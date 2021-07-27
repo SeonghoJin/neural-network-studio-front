@@ -11,7 +11,7 @@ const useProjectConfig = () : [IProjectConfig, (projectConfig: IProjectConfig) =
   const setValue = useCallback((projectConfig : IProjectConfig) => {
     dispatch(setProjectConfig(projectConfig));
   }, []);
-  useState()
+
   return [
      value,
      setValue,

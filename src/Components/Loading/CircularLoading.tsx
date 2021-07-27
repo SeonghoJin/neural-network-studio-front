@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function CircleLoading() {
+export function CircleLoading() {
   const classes = useStyles();
 
   return (
@@ -38,3 +38,5 @@ export default function CircleLoading() {
     </div>
   );
 }
+
+export default React.memo(CircleLoading)

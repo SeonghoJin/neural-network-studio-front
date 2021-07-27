@@ -1,6 +1,6 @@
 import { makeStyles, TextField } from '@material-ui/core';
 import Input from './Input';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useCallback } from 'react';
 import { floatWithoutSpacesRegExp, numberWithoutSpacesRegExp } from './validation';
 import { useState } from 'react';
 
@@ -18,16 +18,21 @@ type Props = {
 
 const FloatInput = ({propertyName, propertyContent, onChange} : Props) => {
   const classes = useStyle();
-  const [error, setError] = useState(floatWithoutSpacesRegExp.test(propertyContent as string));
 
-  const handleChange = (e : ChangeEvent<any>) => {
+  const isVaild = useCallback((str : string) => {
+    return floatWithoutSpacesRegExp.test(str);
+  },[]);
+
+  const [error, setError] = useState(!isVaild(propertyContent as string));
+
+  const handleChange = useCallback((e : ChangeEvent<any>) => {
     onChange(e);
-    setError(floatWithoutSpacesRegExp.test(e.target.value));
-  }
+    setError(!isVaild(e.target.value));
+  }, [onChange])
 
   const body = (
     <TextField
-      error={!error}
+      error={error}
       name={propertyName}
       onChange={handleChange}
       value={propertyContent}

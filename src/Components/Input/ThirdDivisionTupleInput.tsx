@@ -1,6 +1,6 @@
 import { makeStyles, TextField } from '@material-ui/core';
 import Input from './Input';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useCallback } from 'react';
 import {
    thirdDivisionTupleRegExp
 } from './validation';
@@ -14,18 +14,23 @@ const useStyle = makeStyles({
 
 type Props = {
   propertyName: string,
-  propertyContent: string | string[] | number,
+  propertyContent: string,
   onChange: any,
 }
 
 const ThirdDivisionTupleInput = ({propertyName, propertyContent, onChange} : Props) => {
   const classes = useStyle();
-  const [error, setError] = useState(thirdDivisionTupleRegExp.test(propertyContent as string));
 
-  const handleChange = (e : ChangeEvent<any>) => {
+  const isVaild = useCallback((str : string) => {
+    return thirdDivisionTupleRegExp.test(str);
+  }, [])
+
+  const [error, setError] = useState(!isVaild(propertyContent));
+
+  const handleChange = useCallback((e : ChangeEvent<any>) => {
     onChange(e);
-    setError(thirdDivisionTupleRegExp.test(e.target.value))
-  }
+    setError(!isVaild(e.target.value));
+  }, [])
 
   const body = (
     <TextField

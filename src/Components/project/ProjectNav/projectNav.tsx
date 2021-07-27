@@ -7,7 +7,6 @@ import ProjectNavMainContent from './ProjectNavMainContent';
 import ProjectNavOptionContent from './ProjectNavOptionContent';
 
 const useStyled = makeStyles({
-
   wrapper: {
     width: '100%',
     height: '40px'

@@ -1,4 +1,4 @@
-import { ChangeEvent, useMemo } from 'react';
+import { ChangeEvent } from 'react';
 import React from 'react';
 import { DenseConfig, IConfigComponent } from '../../../../../core/block';
 import NumberInput from '../../../../Input/NumberInput';

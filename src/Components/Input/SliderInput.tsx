@@ -1,6 +1,6 @@
 import { makeStyles, Slider, Typography } from '@material-ui/core';
 import Input from './Input';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 
 const useStyle = makeStyles({
   propertyContentContainer: {
@@ -28,18 +28,17 @@ type Props = {
   marks?: Marks
 };
 
-const SliderInput = (props : Props) => {
+const SliderInput = ({propertyContent, propertyName, onChange, step, min, max, marks }: Props) => {
   const classes = useStyle();
-  const {propertyContent, propertyName, max, min, step, onChange, marks} = props
 
-  const handleChange = (e : any, value: any) => {
+  const handleChange = useCallback((e : any, value: any) => {
     onChange({
       target: {
         name: propertyName,
         value: value
       }
     } as ChangeEvent<any>);
-  }
+  }, [onChange])
 
   const body = (
     <Slider

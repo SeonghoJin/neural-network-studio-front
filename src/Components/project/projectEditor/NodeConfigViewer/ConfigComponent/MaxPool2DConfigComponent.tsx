@@ -4,7 +4,6 @@ import TextInput from '../../../../Input/TextInput';
 import React from 'react';
 import SecondDivisionTupleInput from '../../../../Input/SecondDivisionTupleInput';
 
-
 type Props = {
   config: MaxPool2DConfig,
   onChange: (e: ChangeEvent<HTMLInputElement>) => void

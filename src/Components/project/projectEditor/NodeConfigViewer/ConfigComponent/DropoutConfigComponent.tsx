@@ -1,11 +1,8 @@
 import { ChangeEvent } from 'react';
-import TextInput from '../../../../Input/TextInput';
 import React from 'react';
 import {
-  AveragePooling2DConfig,
   DropoutConfig,
   IConfigComponent,
-  InputConfig
 } from '../../../../../core/block';
 import SliderInput, { Marks } from '../../../../Input/SliderInput';
 

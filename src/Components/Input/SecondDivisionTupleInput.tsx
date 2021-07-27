@@ -1,8 +1,7 @@
 import { makeStyles, TextField } from '@material-ui/core';
 import Input from './Input';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useCallback } from 'react';
 import {
-  numberWithoutSpacesRegExp,
   secondDivisionTupleRegExp
 } from './validation';
 import { useState } from 'react';
@@ -15,29 +14,29 @@ const useStyle = makeStyles({
 
 type Props = {
   propertyName: string,
-  propertyContent: string | string[] | number,
-  onChange: any,
+  propertyContent: string,
+  onChange: (e : ChangeEvent<any>) => void,
   canNull?: boolean
 }
 
 const SecondDivisionTupleInput = ({propertyName, propertyContent, onChange, canNull} : Props) => {
   const classes = useStyle();
 
-  const isVaild = (str: string) => {
+  const isVaild = useCallback((str: string) => {
     if(canNull && str.trim() == "")return true;
     return secondDivisionTupleRegExp.test(str);
-  }
+  }, [])
 
-  const [error, setError] = useState(isVaild(propertyContent as string));
+  const [error, setError] = useState(!isVaild(propertyContent));
 
-  const handleChange = (e : ChangeEvent<any>) => {
+  const handleChange = useCallback((e : ChangeEvent<any>) => {
     onChange(e);
-    setError(isVaild(e.target.value));
-  }
+    setError(!isVaild(e.target.value));
+  }, [onChange])
 
   const body = (
     <TextField
-      error={!error}
+      error={error}
       name={propertyName}
       onChange={handleChange}
       value={propertyContent}

@@ -1,16 +1,12 @@
 import { ChangeEvent } from 'react';
-import TextInput from '../../../../Input/TextInput';
 import React from 'react';
 import {
-  AveragePooling2DConfig,
-  BatchNormalizationConfig, Conv2DConfig,
+  Conv2DConfig,
   IConfigComponent,
-  InputConfig
 } from '../../../../../core/block';
 import SliderInput, { Marks } from '../../../../Input/SliderInput';
 import SecondDivisionTupleInput from '../../../../Input/SecondDivisionTupleInput';
 import SelectInput from '../../../../Input/SelectInput';
-import Activations from '../../../../../core/Activations';
 import Paddings from '../../../../../core/Padding';
 
 type Props = {

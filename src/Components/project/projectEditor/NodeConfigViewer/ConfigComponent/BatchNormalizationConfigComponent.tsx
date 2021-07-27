@@ -1,11 +1,8 @@
 import { ChangeEvent } from 'react';
-import TextInput from '../../../../Input/TextInput';
 import React from 'react';
 import {
-  AveragePooling2DConfig,
   BatchNormalizationConfig,
   IConfigComponent,
-  InputConfig
 } from '../../../../../core/block';
 import NumberInput from '../../../../Input/NumberInput';
 import FloatInput from '../../../../Input/FloatInput';

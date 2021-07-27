@@ -45,7 +45,7 @@ export class MaxPool2DConfig implements BlockConfig {
 }
 
 export class AveragePooling2DConfig implements BlockConfig {
-  pool_size : string = '';
+  pool_size : number = 0;
 
   strides : string = '';
 
