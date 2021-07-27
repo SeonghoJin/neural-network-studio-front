@@ -7,30 +7,63 @@ import style from './index.module.css';
 
 class Header extends React.Component {
     state = {
-        auth: null,
+        auth: false,
         loading: true,
     }
 
     componentDidMount() {
-        const {auth, user} = this.props;
-        console.log(auth);
-        this.setState({
-            auth: auth,
-        })
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log(this.state.auth);
-        if (prevState.auth !== this.state.auth) {
-            this.setState({
+        // console.log(auth);
+        if (localStorage.getItem("userID") !== null) {
+            if (this.props.user !== null) {
+                this.setState({
+                    auth: true,
+                    loading: false,
+                })
+            }
+        }
+        else {
+            this.setState( {
+                auth: false,
                 loading: false,
             })
         }
+
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps !== this.props) {
+            console.log('updated');
+            if (localStorage.getItem("userID") !== null) {
+                console.log("authorized");
+                if (this.props.user !== null) {
+                    this.setState({
+                        auth: true,
+                        loading: false,
+                    })
+                }
+                else {
+                    this.setState({
+                        auth: true,
+                        loading: true,
+                    })
+                }
+            }
+            else {
+                console.log("unauthorized");
+                this.setState({
+                    auth: false,
+                    loading: false,
+                })
+            }
+        }
+        else {
+            return false;
+        }
+
     }
 
     render() {
         const {auth, user} = this.props;
-        console.log(this.state.loading);
         return(
             <header className={`${style.topHeader}`}>
                 <div className={`${style.headerWrapper}`}>
@@ -43,7 +76,7 @@ class Header extends React.Component {
                             this.state.loading ?
                                 null:
                                 (
-                                    auth ?
+                                    this.state.auth ?
                                     <Profile user={user}/> :
                                     <Auth />
                                 )

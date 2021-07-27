@@ -10,8 +10,12 @@ class Landing extends React.PureComponent {
         user: null,
     }
 
+    componentDidMount() {
+        this.getUser();
+    }
+
     getUser = async () => {
-        axios({
+        await axios({
             method:"GET",
             url: "/api/user",
             withCredentials: true,
@@ -28,10 +32,6 @@ class Landing extends React.PureComponent {
                 })
             }
         })
-    }
-
-    componentDidMount() {
-        this.getUser();
     }
 
     render() {
