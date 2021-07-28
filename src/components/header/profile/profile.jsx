@@ -3,6 +3,8 @@ import style from './profile.module.css';
 import DropMenu from '../../utils/dropMenu/dropMenu';
 import axios from "axios";
 
+import { Link } from "react-router-dom";
+
 class Profile extends React.PureComponent {
     state = {
         dropMenuToggle: false,
@@ -54,7 +56,7 @@ class Profile extends React.PureComponent {
                     <img src={user.profileImage} />
                     <DropMenu open={this.state.dropMenuToggle} color={style.dropMenu}>
                         <div className={`${style.profileMenu}`}>
-                            <a href="#">내 정보</a>
+                            <Link to='/profile'>내 정보</Link>
                         </div>
                         <div className={`${style.profileMenu}`}>
                             <a href="#" onClick={this.logout}>로그아웃</a>
