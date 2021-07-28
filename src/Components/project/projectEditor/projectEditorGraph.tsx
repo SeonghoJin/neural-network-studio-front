@@ -12,7 +12,7 @@ import ReactFlow, {
   Edge,
   addEdge,
   removeElements,
-  FlowExportObject,
+  FlowExportObject, useStoreActions,
 } from 'react-flow-renderer';
 import { useSelector } from 'react-redux';
 import { BlockState } from '../../../core/block/BlockState';
@@ -57,6 +57,7 @@ const ProjectEditorGraph = ({setElements, flowState, setReactInstance} : Props) 
   const elements = useSelector((state: RootState) => state.elements.elements);
   const reactFlowWrapper = useRef<HTMLDivElement | null>(null);
   const selectedElements = useStoreState((state) => state.selectedElements);
+  const setSelectedElements = useStoreActions((state) => state.setSelectedElements);
   const reactFlowInstance = useSelector((state: RootState) => state.reactFlowInstance.instance);
 
   useEffect(() => {
@@ -96,6 +97,7 @@ const ProjectEditorGraph = ({setElements, flowState, setReactInstance} : Props) 
         },
       };
       setElements(elements.concat(newNode));
+      setSelectedElements(newNode);
     }
   }, [elements, reactFlowInstance]);
 

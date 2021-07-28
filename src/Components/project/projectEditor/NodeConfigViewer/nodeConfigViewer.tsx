@@ -13,7 +13,6 @@ const useStyle = makeStyles({
   },
   elementHeadWrapper: {
     width: '100%',
-    borderBottom: '1px solid #D9DADB',
     textTransform: 'uppercase',
   },
   elementHead: {
