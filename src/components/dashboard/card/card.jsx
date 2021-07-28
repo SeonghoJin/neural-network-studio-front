@@ -74,7 +74,7 @@ class Card extends React.PureComponent {
                         <div>
                             <div className={`${style.ellipsisWrapper}`} onClick={this.openMenu} ref={this.dropRef}>
                                 <FontAwesomeIcon size="xl"  icon={faEllipsisH} />
-                                <DropMenu open={this.state.dropMenuToggle} color={style.dropMenu}>
+                                <DropMenu open={this.state.dropMenuToggle} custom={style.dropMenu} >
                                     <div className={`${style.projectMenu}`}>
                                         <a href="#">프로젝트 수정</a>
                                     </div>

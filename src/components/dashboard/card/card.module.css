@@ -7,8 +7,12 @@
 
 .cardHeader {
     display: flex;
-    justify-content: space-around;
     margin-bottom: 20px;
+}
+
+.cardTitle {
+    margin-right: auto;
+    width: 180px;
 }
 
 .cardTitle h4 {
@@ -51,6 +55,8 @@
 
 .dropMenu {
     background-color: cadetblue;
+    transform: translateX(-70%);
+    width: 80px;
 }
 
 .projectMenu {
@@ -72,4 +78,6 @@
     height: 20px;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    cursor: pointer;
 }
