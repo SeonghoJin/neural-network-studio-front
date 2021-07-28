@@ -7,8 +7,8 @@ const initialState : ProjectConfigState = {
   learning_rate: 0.001,
   loss: "sparse_categorical_crossentropy",
   metrics: ["accuracy"],
-  batch_size: 32,
-  epochs: 10
+  batch_size: '32',
+  epochs: '10'
 }
 
 const projectConfig = createReducer<ProjectConfigState, ProjectConfigActionTypes>(

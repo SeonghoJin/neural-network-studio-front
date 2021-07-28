@@ -37,11 +37,11 @@ const GlobalConfig = () => {
       <NumberInput
         onChange={onChange}
         propertyName={"batch_size"}
-        propertyContent={globalConfig.batch_size || 0}/>
+        propertyContent={globalConfig.batch_size || ""}/>
       <NumberInput
         onChange={onChange}
         propertyName={"epochs"}
-        propertyContent={globalConfig.epochs || 0}/>
+        propertyContent={globalConfig.epochs || ""}/>
     </>
   );
 

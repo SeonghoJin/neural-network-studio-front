@@ -34,7 +34,7 @@ const ThirdDivisionTupleInput = ({propertyName, propertyContent, onChange} : Pro
 
   const body = (
     <TextField
-      error={!error}
+      error={error}
       name={propertyName}
       onChange={handleChange}
       value={propertyContent}

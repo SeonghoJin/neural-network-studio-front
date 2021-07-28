@@ -1,7 +1,7 @@
 export interface BlockConfig {}
 
 export class DenseConfig implements BlockConfig {
-  units: number = 0;
+  units: string= '';
 }
 
 export class Conv2DConfig implements BlockConfig {
@@ -19,7 +19,7 @@ export class DropoutConfig implements BlockConfig {
 }
 
 export class BatchNormalizationConfig implements BlockConfig {
-  axis: number =0 ;
+  axis: string ='' ;
 
   momentum: number = 0;
 
@@ -45,7 +45,7 @@ export class MaxPool2DConfig implements BlockConfig {
 }
 
 export class AveragePooling2DConfig implements BlockConfig {
-  pool_size : number = 0;
+  pool_size : string = '';
 
   strides : string = '';
 

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { MouseEventHandler, useCallback } from 'react';
 import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core';
 import { Button } from 'react-bootstrap';
@@ -22,7 +22,7 @@ const useStyle = makeStyles({
 })
 
 type Props =  {
-  onSave : ReturnType<typeof useCallback>
+  onSave : MouseEventHandler
 }
 
 const ProjectConfigNavOptionContent = ({onSave}: Props) => {

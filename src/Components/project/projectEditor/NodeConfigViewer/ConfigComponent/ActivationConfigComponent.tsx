@@ -3,16 +3,11 @@ import { ChangeEvent } from 'react';
 import React from 'react';
 import SelectInput from '../../../../Input/SelectInput';
 import Activations from '../../../../../core/Activations';
+import { getActivationPropertyCandidates } from './SelectCadidates';
 
 type Props = {
   config: ActivationConfig,
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
-}
-
-const propertyCandidates = Array<string | number>();
-for (const activationsKey in Activations) {
-  const key = activationsKey as keyof typeof Activations
-  propertyCandidates.push(Activations[key])
 }
 
 const ActivationConfigComponent = ({config, onChange}: Props) => {
@@ -22,7 +17,7 @@ const ActivationConfigComponent = ({config, onChange}: Props) => {
   const configComponent : IConfigComponent<typeof config> = {
     activation: (<SelectInput
       propertyName={'activation'}
-      propertyCandidates={propertyCandidates}
+      propertyCandidates={getActivationPropertyCandidates()}
       onChange={onChange}
       propertyContent={activation}
     />)

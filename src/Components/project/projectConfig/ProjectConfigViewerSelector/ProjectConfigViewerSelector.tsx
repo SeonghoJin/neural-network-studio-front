@@ -15,7 +15,6 @@ const useStyle = makeStyles({
 })
 
 const selectorItemHeads = [
-  "Project Config",
   "Global Config",
   "Optimizer",
 ]

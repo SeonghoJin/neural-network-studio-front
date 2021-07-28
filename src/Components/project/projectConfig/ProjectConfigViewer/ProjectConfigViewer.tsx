@@ -13,9 +13,8 @@ const ProjectConfigViewer = ({index} : Props) => {
   const configViewerMap = new Map();
   const {error, loading} = useGetProjectConfigResult();
 
-  configViewerMap.set(0, <ProjectInfoConfigViewer/>)
-  configViewerMap.set(1, <ProjectGlobalConfigViewer/>)
-  configViewerMap.set(2, <ProjectOptimizerConfigViewer/>)
+  configViewerMap.set(0, <ProjectGlobalConfigViewer/>)
+  configViewerMap.set(1, <ProjectOptimizerConfigViewer/>)
 
   return (
     <>

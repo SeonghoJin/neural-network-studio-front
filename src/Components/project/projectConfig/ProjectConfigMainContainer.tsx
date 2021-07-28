@@ -11,7 +11,6 @@ import useProjectLocation from '../../../hooks/useProjectLocation';
 const ProjectConfigMainContainer = () => {
   const dispatch = useDispatch();
   const projectConfigResult = useGetProjectConfigResult();
-  const projectInfoResult = useGetProjectResult();
   const {projectNo} = useProjectLocation();
 
   useEffect(() => {
@@ -21,16 +20,6 @@ const ProjectConfigMainContainer = () => {
   }, [projectConfigResult.data]);
 
   useEffect(() => {
-    if(projectInfoResult.data != null){
-      dispatch(setProjectInfo({
-        name: projectInfoResult.data.name,
-        description: projectInfoResult.data.description,
-      }))
-    }
-  }, [projectInfoResult.data]);
-
-  useEffect(() => {
-    dispatch(getProjectThunk(projectNo))
     dispatch(getProjectConfigThunk(projectNo));
   }, [projectNo])
 
