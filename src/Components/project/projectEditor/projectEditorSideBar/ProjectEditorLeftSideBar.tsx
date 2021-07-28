@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 import NodeContainerWrapper from '../NodeSelector/nodeContainerWrapper';
-import NodeConfigViewer from '../NodeConfigViewer/nodeConfigViewer';
+import NodeConfigViewerContainer from '../NodeConfigViewer/NodeConfigViewerContainer';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -28,7 +28,7 @@ const ProjectEditorLeftSideBar = () => {
         <NodeContainerWrapper/>
       </div>
       <div className={classes.nodeConfigViewer}>
-        <NodeConfigViewer/>
+        <NodeConfigViewerContainer/>
       </div>
     </div>
   );

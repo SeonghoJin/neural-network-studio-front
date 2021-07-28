@@ -92,7 +92,6 @@ const ProjectEditorGraph = ({setElements, flowState, setReactInstance} : Props) 
         type: 'default',
         position,
         data: {
-          label: `${nodedata.type} node`,
           ...nodedata,
         },
       };

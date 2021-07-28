@@ -12,6 +12,8 @@ export interface BlockState{
   type: BlockType;
 
   config: BlockConfig;
+
+  label: string;
 }
 
 export class DenseBlockState implements BlockState {
@@ -22,10 +24,14 @@ export class DenseBlockState implements BlockState {
   name: string | null = null;
 
   type: BlockType = BlockType.Dense;
+
+  label: string = "Dense Node";
 }
 
 export class Conv2DBlockState implements BlockState {
   category: BlockCategory = BlockCategory.Layer;
+
+  label: string = "Conv2D Node";
 
   config: BlockConfig = new Conv2DConfig();
 
@@ -35,6 +41,9 @@ export class Conv2DBlockState implements BlockState {
 }
 
 export class AveragePooling2DBlockState implements BlockState {
+
+  label: string = "AveragePooling2D Node";
+
   category: BlockCategory = BlockCategory.Layer;
 
   config: BlockConfig = new AveragePooling2DConfig();
@@ -45,6 +54,9 @@ export class AveragePooling2DBlockState implements BlockState {
 }
 
 export class MaxPool2DBlockState implements BlockState {
+
+  label: string = "MaxPool2D Node";
+
   category: BlockCategory = BlockCategory.Layer;
 
   config: BlockConfig = new MaxPool2DConfig();
@@ -55,6 +67,9 @@ export class MaxPool2DBlockState implements BlockState {
 }
 
 export class ActivationBlockState implements BlockState {
+
+  label: string = "Activation Node";
+
   category: BlockCategory = BlockCategory.Layer;
 
   config: BlockConfig = new ActivationConfig();
@@ -65,6 +80,9 @@ export class ActivationBlockState implements BlockState {
 }
 
 export class InputBlockState implements BlockState {
+
+  label: string = "Input Node";
+
   category: BlockCategory = BlockCategory.Layer;
 
   config: BlockConfig = new InputConfig();
@@ -75,6 +93,9 @@ export class InputBlockState implements BlockState {
 }
 
 export class DropoutBlockState implements BlockState {
+
+  label: string = "Dropout Node"
+
   category: BlockCategory = BlockCategory.Layer;
 
   config: BlockConfig = new DropoutConfig();
@@ -85,6 +106,9 @@ export class DropoutBlockState implements BlockState {
 }
 
 export class BatchNormalizationBlockState implements BlockState {
+
+  label: string = "Batch Node"
+
   category: BlockCategory = BlockCategory.Layer;
 
   config: BlockConfig = new BatchNormalizationConfig();
@@ -95,6 +119,9 @@ export class BatchNormalizationBlockState implements BlockState {
 }
 
 export class FlattenBlockState implements BlockState {
+
+  label: string = "Flatten Node";
+
   category: BlockCategory = BlockCategory.Layer;
 
   config: BlockConfig = new FlattenConfig();
