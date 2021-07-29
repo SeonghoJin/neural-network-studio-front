@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../module';
-import StandardModal from '../components/modal/StandardModal';
+import { RootState } from '../../module';
+import StandardModal from '../../components/modal/StandardModal';
 import { useCallback } from 'react';
-import { putProjectInfoInit } from '../module/API/project';
+import { putProjectInfoInit } from '../../module/API/project';
 
 const usePutProjectInfoResult = () => {
   const result = useSelector((state: RootState) => state.projectApi.putProjectInfoResult);

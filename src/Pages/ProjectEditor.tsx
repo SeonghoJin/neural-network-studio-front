@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
-import useGetPythonCodeResult from '../hooks/useGetPythonCodeResult';
-import usePutProjectContentResult from '../hooks/usePutProjectContentResult';
-import useGetProjectResult from '../hooks/useGetProjectResult';
+import useGetPythonCodeResult from '../hooks/APIResult/useGetPythonCodeResult';
+import usePutProjectContentResult from '../hooks/APIResult/usePutProjectContentResult';
+import useGetProjectResult from '../hooks/APIResult/useGetProjectResult';
 import ProjectEditorMain from '../components/project/projectEditor/projectEditorMain';
 import ProjectNav from '../components/project/ProjectNav/projectNav';
 import ProjectEditorNav from '../components/project/projectEditor/ProjectEditorNav/projectEditorNav';

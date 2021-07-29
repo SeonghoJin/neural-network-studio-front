@@ -1,4 +1,4 @@
-import useGetProjectConfigResult from '../../../../hooks/useGetProjectConfigResult';
+import useGetProjectConfigResult from '../../../../hooks/APIResult/useGetProjectConfigResult';
 import CircleLoading from '../../../Loading/CircularLoading';
 import ProjectInfoConfigViewer from './ProjectConfigInfoViewer';
 import ProjectGlobalConfigViewer from './ProjectGlobalConfigViewer';

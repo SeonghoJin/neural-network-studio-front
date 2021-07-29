@@ -1,5 +1,5 @@
 import useProjectConfig from '../../../../hooks/useProjectConfig';
-import useGetProjectConfigResult from '../../../../hooks/useGetProjectConfigResult';
+import useGetProjectConfigResult from '../../../../hooks/APIResult/useGetProjectConfigResult';
 import { makeStyles } from '@material-ui/core';
 import CircleLoading from '../../../Loading/CircularLoading';
 import { ChangeEvent, useCallback, useMemo } from 'react';

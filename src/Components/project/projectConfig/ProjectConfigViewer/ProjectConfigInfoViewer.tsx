@@ -2,7 +2,7 @@ import useProjectInfo from '../../../../hooks/useProjectInfo';
 import { makeStyles } from '@material-ui/core';
 import CircleLoading from '../../../Loading/CircularLoading';
 import { ChangeEvent, useCallback } from 'react';
-import useGetProjectResult from '../../../../hooks/useGetProjectResult';
+import useGetProjectResult from '../../../../hooks/APIResult/useGetProjectResult';
 import TextInput from '../../../Input/TextInput';
 import MultilineInput from '../../../Input/MultilineInput';
 

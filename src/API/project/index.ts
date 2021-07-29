@@ -78,7 +78,6 @@ export const updateProjectConfig = async(projectNo: string, projectConfig: IProj
 export const updateProjectContent = async(projectNo: string, projectContent: IProjectContentDto) => {
 
   const layers = graphToLayouts(projectContent.flowState.elements);
-  console.log(layers);
   const response = await axios.put(
     config.SERVER_PREFIX+`/api/project/${projectNo}/content`,
       {

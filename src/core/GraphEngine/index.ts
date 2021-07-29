@@ -65,9 +65,9 @@ class GraphConvertor{
     return {
       output: ouputNodeName[0].name,
       input: inputNodeName[0].name,
-      layers: {
+      layers: [
         ...this.nodes
-      },
+      ],
     }
   }
 }

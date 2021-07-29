@@ -5,7 +5,7 @@ import { setReactFlowInstance } from '../../../module/ReactFlowInstance';
 import { Elements, OnLoadParams } from 'react-flow-renderer';
 import CircleLoading from '../../Loading/CircularLoading';
 import { setElements } from '../../../module/Elements';
-import useGetProjectResult from '../../../hooks/useGetProjectResult';
+import useGetProjectResult from '../../../hooks/APIResult/useGetProjectResult';
 import { getProjectThunk } from '../../../module/API/project/thunks';
 import useProjectLocation from '../../../hooks/useProjectLocation';
 
