@@ -3,6 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faGlobe, faLink } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { Link } from 'react-router-dom';
+import profile from '../../header/profile/default-profile.png';
 
 import style from './main.module.css';
 
@@ -16,7 +17,7 @@ class Main extends React.PureComponent {
                 <header>
                     <div className={`${style.profile}`}>
                         <div className={`${style.profileImage}`}>
-                            <img src={user.profileImage} />
+                            <img src={user.profileImage === "" ? profile : user.profileImage} />
                         </div>
                         <h2>{user.name}</h2>
                     </div>

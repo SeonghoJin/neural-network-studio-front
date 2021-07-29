@@ -1,8 +1,15 @@
+:root {
+    --base-color: #6bedc8;
+    --default-white: #fcfcfc;
+    --default-black: #0f0f0f;
+}
+
 .profileImage {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .profileImage img {
@@ -14,15 +21,25 @@
 .profileMenu {
     text-align: center;
     align-items: center;
+    margin-bottom: 10px;
+}
+
+.profileMenu:last-child {
+    margin-bottom: 0;
 }
 
 .profileMenu a {
     color: black;
     text-decoration: none;
-    font-weight: bold;
     font-size: 12px;
+
 }
 
 .dropMenu {
-    background-color: cadetblue;
+    /*background-color: cadetblue;*/
+    background-color: var(--base-color);
+}
+
+.dropMenu a {
+    color: var(--default-black);
 }

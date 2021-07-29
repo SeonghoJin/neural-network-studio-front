@@ -1,3 +1,9 @@
+:root {
+    --base-color: #6bedc8;
+    --default-white: #fcfcfc;
+    --default-black: #0f0f0f;
+}
+
 .card {
     margin: 10px;
     padding : 20px;
@@ -8,11 +14,14 @@
 .cardHeader {
     display: flex;
     margin-bottom: 20px;
+    height: 30px;
+    align-items: center;
 }
 
 .cardTitle {
     margin-right: auto;
     width: 180px;
+
 }
 
 .cardTitle h4 {
@@ -39,6 +48,10 @@
     margin-bottom: 12px;
 }
 
+.lastUpdate {
+    font-size: 12px;
+}
+
 .cardFooter {
     display: flex;
 }
@@ -48,13 +61,20 @@
     border-radius: 5px;
     background: gray;
     border: 0;
-    color: white;
+    color: var(--default-white);
     padding: 10px;
     width: 100%;
+    transition: .2s ease-in;
+    cursor: pointer;
+}
+
+.startButton:hover {
+    background: var(--base-color);
+    color: var(--default-black);
 }
 
 .dropMenu {
-    background-color: cadetblue;
+    background-color: var(--base-color);
     transform: translateX(-70%);
     width: 80px;
 }
@@ -74,10 +94,16 @@
 }
 
 .ellipsisWrapper {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     align-items: center;
     justify-content: center;
     text-align: center;
     cursor: pointer;
+    transition: .2s ease-in;
+    font-size: 20px;
+}
+
+.ellipsisWrapper:hover {
+    color: var(--base-color);
 }

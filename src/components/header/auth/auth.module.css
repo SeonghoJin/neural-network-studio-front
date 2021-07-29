@@ -1,13 +1,13 @@
 .login {
     font-weight: bold;
-    background-color: #61dafb;
+    background-color: #dedede;
     border-radius: 5px;
     margin: 0 5px;
 }
 
 .signup {
     font-weight: bold;
-    background-color: red;
+    background-color: var(--base-color);
     border-radius: 5px;
 }
 
@@ -16,6 +16,6 @@
 }
 
 .profile a {
-    color: white;
+    color: var(--default-black);
     text-decoration: none;
 }

@@ -4,6 +4,7 @@ import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 import DropMenu from "../../utils/dropMenu/dropMenu";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
+import moment from 'moment';
 
 import style from './card.module.css';
 
@@ -64,6 +65,8 @@ class Card extends React.PureComponent {
 
     render() {
         const {title, lastUpdate, description} = this.props;
+        const update = new moment(lastUpdate).format("YYYY년 MM월 DD일 HH:mm:ss");
+
         return (
             <>
                 <div className={`${style.card}`}>
@@ -73,7 +76,7 @@ class Card extends React.PureComponent {
                         </div>
                         <div>
                             <div className={`${style.ellipsisWrapper}`} onClick={this.openMenu} ref={this.dropRef}>
-                                <FontAwesomeIcon size="xl"  icon={faEllipsisH} />
+                                <FontAwesomeIcon icon={faEllipsisH} />
                                 <DropMenu open={this.state.dropMenuToggle} custom={style.dropMenu} >
                                     <div className={`${style.projectMenu}`}>
                                         <a href="#">프로젝트 수정</a>
@@ -89,7 +92,7 @@ class Card extends React.PureComponent {
                         <div className={`${style.descript}`}>
                             <span className={`${style.descript}`}>{description}</span>
                         </div>
-                        <span>마지막 수정 : {lastUpdate}</span>
+                        <span className={`${style.lastUpdate}`}>마지막 수정 : {update}</span>
                     </main>
                     <footer className={`${style.cardFooter}`}>
                         <button className={style.startButton}>프로젝트 열기</button>

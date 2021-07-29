@@ -62,6 +62,7 @@
     margin-right: 5px;
     color: black;
     text-decoration: none;
+    transition: .2s ease-in;
 }
 
 .userMail a:hover {
@@ -77,6 +78,7 @@
     margin-right: 5px;
     color: black;
     text-decoration: none;
+    transition: .2s ease-in;
 }
 
 .userWebsite a:hover {
