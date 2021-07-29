@@ -72,7 +72,7 @@ class GraphConvertor{
   }
 }
 
-const convertGraphBeforeRun = (graph: FlowElement[]) => {
+const graphToLayouts= (graph: FlowElement[]) => {
   const nodesAndEdges = graph.map((element) => {
     return element.data !== undefined ? new Node(element) : element
   });
@@ -87,4 +87,4 @@ const convertGraphBeforeRun = (graph: FlowElement[]) => {
   return graphConvertor.toJSON();
 };
 
-export default convertGraphBeforeRun;
+export default graphToLayouts;
