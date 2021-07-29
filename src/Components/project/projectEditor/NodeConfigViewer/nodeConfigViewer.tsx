@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core';
+import {makeStyles, Typography} from '@material-ui/core';
 import { BlockState } from '../../../../core/block/BlockState';
 import { ChangeEventHandler, createElement } from 'react';
 import React from 'react';
@@ -21,7 +21,10 @@ const useStyle = makeStyles({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
   },
-  propertyList: {
+  propertyTypeWrapper: {
+    width: '100%',
+    height: 20,
+    margin: '5px',
   },
 });
 
@@ -48,13 +51,18 @@ const NodeConfigViewer = ({onChangeConfig, onChangeLabel, selectedElement} : Pro
   return (
     <div className={classes.wrapper}>
       <div className={classes.elementHeadWrapper}>
+        <div className={classes.propertyTypeWrapper}>
+          <Typography>
+            {`Type: ${data.type}`}
+          </Typography>
+        </div>
         <TextValidationInput
           propertyName={'label'}
           propertyContent={data.label}
           onChange={onChangeLabel}
         ></TextValidationInput>
       </div>
-      <ul className={classes.propertyList}>
+      <ul>
         {inputs}
       </ul>
     </div>);
