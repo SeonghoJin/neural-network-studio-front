@@ -1,0 +1,22 @@
+.divButton {
+    padding: 5px 10px;
+    align-items: center;
+    text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+}
+
+.inputWrapper {
+    display: flex;
+    width: 400px;
+    margin-bottom: 5px;
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.iconButton {
+    display: flex;
+}

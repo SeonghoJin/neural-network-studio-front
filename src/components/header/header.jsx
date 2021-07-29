@@ -1,23 +1,26 @@
-import React from 'react';
-import Profile from './profile';
+import React, {useEffect, useState} from 'react';
+import Profile from './profile/profile';
 import Logo from './logo';
-import style from './default.module.css';
+import Auth from './auth/auth';
+import style from './index.module.css';
 
-class Header extends React.PureComponent {
-    const
-    render() {
-        return(
-            <header className={`${style.topHeader}`}>
-                <div className={`${style.headerWrapper}`}>
-                    <Logo />
-                    <div className="top-center"></div>
-                    <div className="top-right">
-                        <Profile />
-                    </div>
+const Header = (props) => {
+    const {auth, user, children, loading} = props;
+
+
+    return (
+        <header className={`${style.topHeader}`}>
+            <div className={`${style.headerWrapper}`}>
+                <Logo />
+                <div className="top-center">
+                    {children}
                 </div>
-            </header>
+                <div className="top-right">
+                    {!loading && (auth ? <Profile user={user}/> : <Auth/>)}
+                </div>
+            </div>
+        </header>
         );
-    }
 }
 
 export default Header;

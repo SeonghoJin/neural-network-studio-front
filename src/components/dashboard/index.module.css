@@ -1,0 +1,31 @@
+.mainWrapper {
+    margin: 0 5%;
+}
+
+.dashboardMenu {
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.createButton {
+    margin-left: auto;
+    padding: 7px;
+    background-color: gray;
+    border: none;
+    border-radius: 5px;
+    transition: .2s ease-in;
+}
+
+.createButton a {
+    color: var(--default-white);
+    text-decoration: none;
+    transition: .2s ease-in;
+}
+
+.createButton:hover {
+    background: var(--base-color);
+}
+
+.createButton:hover a {
+    color: var(--default-black);
+}

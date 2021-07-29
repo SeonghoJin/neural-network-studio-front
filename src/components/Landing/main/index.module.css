@@ -1,0 +1,45 @@
+:root {
+    --base-color: #6bedc8;
+    --default-white: #fcfcfc;
+    --default-black: #0f0f0f;
+}
+
+.start {
+    width: 80px;
+    background-color: black;
+    border-radius: 0;
+    padding: 10px;
+    transition: .2s ease-in;
+}
+
+.start a {
+    color: var(--default-white);
+    text-decoration: none;
+    font-weight: bold;
+    transition: .2s ease-in;
+}
+
+.start:hover {
+    background-color: var(--base-color);
+}
+
+.start:hover a {
+    color: var(--default-black);
+}
+
+.mainWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.serviceDescription {
+    font-size: 30px;
+    margin-bottom: 40px;
+}
+
+.serviceInfo {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
