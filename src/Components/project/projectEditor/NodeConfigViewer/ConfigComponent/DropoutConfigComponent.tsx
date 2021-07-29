@@ -30,7 +30,7 @@ const DropoutConfigComponent = ({config, onChange}: Props) => {
     rate: <SliderInput
       propertyName={'rate'}
       onChange={onChange}
-      propertyContent={rate}
+      propertyContent={Number(rate)}
       max={1}
       min={0}
       step={0.1}

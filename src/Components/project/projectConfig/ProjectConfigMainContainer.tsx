@@ -1,11 +1,9 @@
 import ProjectConfigMain from "./projectConfigMain"
 import { useDispatch } from 'react-redux';
 import useGetProjectConfigResult from '../../../hooks/APIResult/useGetProjectConfigResult';
-import useGetProjectResult from '../../../hooks/APIResult/useGetProjectResult';
 import { useEffect } from 'react';
 import { setProjectConfig } from '../../../module/projectConfig';
-import { setProjectInfo } from '../../../module/projectInfo';
-import { getProjectConfigThunk, getProjectThunk } from '../../../module/API/project/thunks';
+import { getProjectConfigThunk } from '../../../module/API/project/thunks';
 import useProjectLocation from '../../../hooks/useProjectLocation';
 
 const ProjectConfigMainContainer = () => {

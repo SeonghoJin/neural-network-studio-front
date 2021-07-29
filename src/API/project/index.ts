@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import config from '../../config';
 import { IProjectConfig, IProjectContentDto, IProjectDto, IProjectInfo } from './types';
-import convertGraphBeforeRun from "../../core/GraphEngine";
 import graphToLayouts from "../../core/GraphEngine";
 
 const axiosConfig : AxiosRequestConfig = {
@@ -78,6 +77,7 @@ export const updateProjectConfig = async(projectNo: string, projectConfig: IProj
 export const updateProjectContent = async(projectNo: string, projectContent: IProjectContentDto) => {
 
   const layers = graphToLayouts(projectContent.flowState.elements);
+  console.log(layers);
   const response = await axios.put(
     config.SERVER_PREFIX+`/api/project/${projectNo}/content`,
       {

@@ -5,7 +5,7 @@ export class DenseConfig implements BlockConfig {
 }
 
 export class Conv2DConfig implements BlockConfig {
-  filters : number = 0;
+  filters : string = '';
 
   kernel_size : string = '';
 
@@ -15,15 +15,15 @@ export class Conv2DConfig implements BlockConfig {
 }
 
 export class DropoutConfig implements BlockConfig {
-  rate: number= 0;
+  rate: string= '';
 }
 
 export class BatchNormalizationConfig implements BlockConfig {
   axis: string ='' ;
 
-  momentum: number = 0;
+  momentum: string= '';
 
-  epsilon: number = 0;
+  epsilon: string= '';
 }
 
 export class FlattenConfig implements BlockConfig {

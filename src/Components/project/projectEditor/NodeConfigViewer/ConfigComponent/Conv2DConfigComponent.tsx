@@ -41,7 +41,7 @@ const Conv2DConfigComponent = ({config, onChange}: Props) => {
   const configComponent: IConfigComponent<typeof config> = {
     filters: <SliderInput
       onChange={onChange}
-      propertyContent={filters}
+      propertyContent={Number(filters)}
       propertyName={'filters'}
       marks={marks}
       max={256}

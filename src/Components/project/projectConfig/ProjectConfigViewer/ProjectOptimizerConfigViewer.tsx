@@ -1,5 +1,4 @@
 import useProjectConfig from '../../../../hooks/useProjectConfig';
-import useGetProjectConfigResult from '../../../../hooks/APIResult/useGetProjectConfigResult';
 import { makeStyles } from '@material-ui/core';
 import CircleLoading from '../../../Loading/CircularLoading';
 import { ChangeEvent, useCallback, useMemo } from 'react';
@@ -8,6 +7,7 @@ import TextInput from '../../../Input/TextInput';
 import SelectInput from '../../../Input/SelectInput';
 import Optimizers from '../../../../core/Optimizers';
 import FloatInput from '../../../Input/FloatInput';
+import useGetProjectConfigResult from '../../../../hooks/APIResult/useGetProjectConfigResult';
 
 const useStyle = makeStyles({
   wrapper: {
@@ -26,12 +26,11 @@ const OptimizerConfig = () => {
   const classes = useStyle();
   const optimizerConfig = projectConfig as IProjectOptimizerConfig;
   const {loading, error, data} = useGetProjectConfigResult();
-
   const onChange = useCallback((e : ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
     setProjectConfig({
       ...projectConfig,
-      [name]: value,
+      [name]: Number(value),
     });
   }, [optimizerConfig, projectConfig])
 

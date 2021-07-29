@@ -3,11 +3,11 @@ import {deprecated} from 'typesafe-actions';
 
 export const getId = () => {
   const id = `${uuidv4()}`;
-  return id;
+  return id.replaceAll('-','');
 };
 
 export const getNodeId = () => {
-  const id = `node ${getId()}`;
+  const id = `node_${getId()}`;
   return id;
 };
 

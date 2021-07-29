@@ -31,11 +31,11 @@ type Props = {
 const SliderInput = ({propertyContent, propertyName, onChange, step, min, max, marks }: Props) => {
   const classes = useStyle();
 
-  const handleChange = useCallback((e : any, value: any) => {
+  const handleChange = useCallback((e : any, value: number | number[]) => {
     onChange({
       target: {
         name: propertyName,
-        value: value
+        value: value.toString()
       }
     } as ChangeEvent<any>);
   }, [onChange])
