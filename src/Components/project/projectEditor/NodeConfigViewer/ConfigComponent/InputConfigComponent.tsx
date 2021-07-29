@@ -1,10 +1,8 @@
 import { ChangeEvent } from 'react';
-import TextInput from '../../../../Input/TextInput';
 import React from 'react';
-import { AveragePooling2DConfig, IConfigComponent, InputConfig } from '../../../../../core/block';
-import NumberInput from '../../../../Input/NumberInput';
-import SecondDivisionTupleInput from '../../../../Input/SecondDivisionTupleInput';
+import { IConfigComponent, InputConfig } from '../../../../../core/block';
 import ThirdDivisionTupleInput from '../../../../Input/ThirdDivisionTupleInput';
+import { configComponentToReactNode } from './util';
 
 type Props = {
   config: InputConfig,
@@ -22,19 +20,8 @@ const InputConfigComponent = ({config, onChange}: Props) => {
       propertyContent={shape}/>
   }
 
-  const elements = [];
-
-  for (const configComponentKey in configComponent) {
-    const key = configComponentKey as keyof typeof configComponent
-    elements.push(
-      <li key={key}>
-        {configComponent[key]}
-      </li>
-    );
-  };
-
   return (<>
-    {elements}
+    {configComponentToReactNode(configComponent)}
   </>)
 }
 

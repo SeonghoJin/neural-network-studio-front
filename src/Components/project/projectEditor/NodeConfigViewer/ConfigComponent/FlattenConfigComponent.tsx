@@ -4,6 +4,7 @@ import {
   FlattenConfig,
   IConfigComponent,
 } from '../../../../../core/block';
+import { configComponentToReactNode } from './util';
 
 type Props = {
   config: FlattenConfig,
@@ -15,19 +16,8 @@ const FlattenConfigComponent = ({config, onChange}: Props) => {
   const configComponent: IConfigComponent<typeof config> = {
   }
 
-  const elements = [];
-
-  for (const configComponentKey in configComponent) {
-    const key = configComponentKey as keyof typeof configComponent
-    elements.push(
-      <li key={key}>
-        {configComponent[key]}
-      </li>
-    );
-  };
-
   return (<>
-    {elements}
+    {configComponentToReactNode(configComponent)}
   </>)
 }
 

@@ -6,6 +6,7 @@ import {
 } from '../../../../../core/block';
 import NumberInput from '../../../../Input/NumberInput';
 import FloatInput from '../../../../Input/FloatInput';
+import { configComponentToReactNode } from './util';
 
 type Props = {
   config: BatchNormalizationConfig,
@@ -34,19 +35,8 @@ const BatchNormalizationConfigComponent = ({config, onChange}: Props) => {
     />
   }
 
-  const elements = [];
-
-  for (const configComponentKey in configComponent) {
-    const key = configComponentKey as keyof typeof configComponent
-    elements.push(
-      <li key={key}>
-        {configComponent[key]}
-      </li>
-    );
-  };
-
   return (<>
-    {elements}
+    {configComponentToReactNode(configComponent)}
   </>)
 }
 

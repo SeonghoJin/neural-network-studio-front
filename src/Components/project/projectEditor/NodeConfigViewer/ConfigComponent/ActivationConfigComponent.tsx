@@ -2,8 +2,8 @@ import { ActivationConfig, IConfigComponent } from '../../../../../core/block';
 import { ChangeEvent } from 'react';
 import React from 'react';
 import SelectInput from '../../../../Input/SelectInput';
-import Activations from '../../../../../core/Activations';
 import { getActivationPropertyCandidates } from './SelectCadidates';
+import { configComponentToReactNode } from './util';
 
 type Props = {
   config: ActivationConfig,
@@ -23,18 +23,8 @@ const ActivationConfigComponent = ({config, onChange}: Props) => {
     />)
   }
 
-  const elements = [];
-  for (const maxPool2DConfigKey in configComponent) {
-    const key = maxPool2DConfigKey as keyof typeof configComponent
-    elements.push(
-      <li key={key}>
-        {configComponent[key]}
-      </li>
-    );
-  };
-
   return (<>
-    {elements}
+    {configComponentToReactNode(configComponent)}
   </>)
 }
 

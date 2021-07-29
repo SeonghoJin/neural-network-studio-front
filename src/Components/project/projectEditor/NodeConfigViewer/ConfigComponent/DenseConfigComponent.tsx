@@ -2,6 +2,7 @@ import { ChangeEvent } from 'react';
 import React from 'react';
 import { DenseConfig, IConfigComponent } from '../../../../../core/block';
 import NumberInput from '../../../../Input/NumberInput';
+import { configComponentToReactNode } from './util';
 
 type Props = {
   config: DenseConfig,
@@ -20,18 +21,8 @@ const DenseConfigComponent = ({config, onChange}: Props) => {
     />
   }
 
-  const elements = [];
-  for (const configComponentKey in configComponent) {
-    const key = configComponentKey as keyof typeof configComponent
-    elements.push(
-      <li key={key}>
-        {configComponent[key]}
-      </li>
-    );
-  };
-
   return (<>
-    {elements}
+    {configComponentToReactNode(configComponent)}
   </>)
 }
 

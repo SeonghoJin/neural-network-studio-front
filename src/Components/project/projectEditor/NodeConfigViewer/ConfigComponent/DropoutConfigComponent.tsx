@@ -5,6 +5,7 @@ import {
   IConfigComponent,
 } from '../../../../../core/block';
 import SliderInput, { Marks } from '../../../../Input/SliderInput';
+import { configComponentToReactNode } from './util';
 
 type Props = {
   config: DropoutConfig,
@@ -37,19 +38,8 @@ const DropoutConfigComponent = ({config, onChange}: Props) => {
     />
   }
 
-  const elements = [];
-
-  for (const configComponentKey in configComponent) {
-    const key = configComponentKey as keyof typeof configComponent
-    elements.push(
-      <li key={key}>
-        {configComponent[key]}
-      </li>
-    );
-  };
-
   return (<>
-    {elements}
+    {configComponentToReactNode(configComponent)}
   </>)
 }
 

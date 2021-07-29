@@ -3,6 +3,7 @@ import { ChangeEvent, useMemo } from 'react';
 import TextInput from '../../../../Input/TextInput';
 import React from 'react';
 import SecondDivisionTupleInput from '../../../../Input/SecondDivisionTupleInput';
+import { configComponentToReactNode } from './util';
 
 type Props = {
   config: MaxPool2DConfig,
@@ -32,18 +33,8 @@ const MaxPool2DConfigComponent = ({config, onChange}: Props) => {
     )
   }), [config, onChange])
 
-  const elements = [];
-  for (const maxPool2DConfigKey in configComponent) {
-    const key = maxPool2DConfigKey as keyof typeof configComponent
-    elements.push(
-      <li key={key}>
-        {configComponent[key]}
-      </li>
-    );
-  };
-
   return (<>
-    {elements}
+    {configComponentToReactNode(configComponent)}
   </>)
 }
 
