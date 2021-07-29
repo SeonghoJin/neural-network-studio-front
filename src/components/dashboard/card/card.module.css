@@ -94,14 +94,18 @@
 }
 
 .ellipsisWrapper {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     align-items: center;
     justify-content: center;
     text-align: center;
     cursor: pointer;
     transition: .2s ease-in;
     font-size: 20px;
+    line-height: 50%;
+    border: none;
+    background: transparent;
 }
 
 .ellipsisWrapper:hover {

@@ -51,6 +51,10 @@ class Card extends React.PureComponent {
         if (deleted) window.location.href = "/dashboard";
     }
 
+    openProject = () => {
+        window.location.href = `/project/${this.props.id}`
+    }
+
     componentDidMount() {
         const {title, lastUpdate, description, id} = this.props;
         this.setState({
@@ -75,7 +79,7 @@ class Card extends React.PureComponent {
                             <h4>{title}</h4>
                         </div>
                         <div>
-                            <div className={`${style.ellipsisWrapper}`} onClick={this.openMenu} ref={this.dropRef}>
+                            <button className={`${style.ellipsisWrapper}`} onClick={this.openMenu} ref={this.dropRef}>
                                 <FontAwesomeIcon icon={faEllipsisH} />
                                 <DropMenu open={this.state.dropMenuToggle} custom={style.dropMenu} >
                                     <div className={`${style.projectMenu}`}>
@@ -85,7 +89,7 @@ class Card extends React.PureComponent {
                                         <a href="#" onClick={this.deleteProject}>프로젝트 삭제</a>
                                     </div>
                                 </DropMenu>
-                            </div>
+                            </button>
                         </div>
                     </header>
                     <main className={`${style.cardMain}`}>
@@ -95,7 +99,7 @@ class Card extends React.PureComponent {
                         <span className={`${style.lastUpdate}`}>마지막 수정 : {update}</span>
                     </main>
                     <footer className={`${style.cardFooter}`}>
-                        <button className={style.startButton}>프로젝트 열기</button>
+                        <button className={style.startButton} onClick={this.openProject}>프로젝트 열기</button>
                     </footer>
                 </div>
             </>
