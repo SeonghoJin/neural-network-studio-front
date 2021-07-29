@@ -10,7 +10,7 @@ class CardGrid extends React.PureComponent {
             <div className={`${style.grid}`}>
                 {
                     {projects}.projects.map(project =>
-                        <Card title={project.name} description={project.description} lastUpdate={project.lastModify} id={project.projectNo} />
+                        <Card key={project.name + ' - ' + project.projectNo} title={project.name} description={project.description} lastUpdate={project.lastModify} id={project.projectNo} />
                     )
                 }
 

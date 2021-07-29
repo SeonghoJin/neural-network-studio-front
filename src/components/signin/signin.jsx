@@ -26,6 +26,11 @@ class Signin extends React.Component {
         })
     }
 
+    onPressEnter = (e) => {
+        console.log(e)
+        if (e.key === 'Enter') this.loginRequest();
+    }
+
     loginRequest = async () => {
         await axios({
             method:"POST",
@@ -44,7 +49,7 @@ class Signin extends React.Component {
 
     render() {
         return (
-            <div className={`${style.signin}`}>
+            <div className={`${style.signin}`} onKeyDown={this.onPressEnter}>
                 <div className={style.signinLogo}>
                     <h1>Neural Network Studio</h1>
                 </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import style from './profile.module.css';
 import DropMenu from '../../utils/dropMenu/dropMenu';
 import axios from "axios";
+import profile from './default-profile.png';
 
 import { Link } from "react-router-dom";
 
@@ -50,11 +51,13 @@ class Profile extends React.PureComponent {
 
     render() {
         const {user} = this.props;
+        console.log(user.profileImage);
         return (
             <>
                 <div className={`${style.profileImage}`} onClick={this.openMenu} ref={this.dropRef}>
-                    <img src={user.profileImage} />
-                    <DropMenu open={this.state.dropMenuToggle} color={style.dropMenu}>
+                    <img src={user.profileImage === "" ? profile : user.profileImage} />
+
+                    <DropMenu open={this.state.dropMenuToggle} custom={style.dropMenu}>
                         <div className={`${style.profileMenu}`}>
                             <Link to='/profile'>내 정보</Link>
                         </div>

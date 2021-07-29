@@ -5,7 +5,7 @@ class Logo extends React.PureComponent {
     render() {
         return (
             <div className={`${style.logo}`}>
-                <a href="/"><h1>Neural Network Studio</h1></a>
+                <a href="/"><h1>Neural Network</h1><span>Studio</span></a>
             </div>
         )
     }

@@ -9,15 +9,23 @@
 
 .createButton {
     margin-left: auto;
-    padding: 5px;
-    background-color: black;
+    padding: 7px;
+    background-color: gray;
     border: none;
     border-radius: 5px;
-    color: white;
-
+    transition: .2s ease-in;
 }
 
 .createButton a {
-    color: white;
+    color: var(--default-white);
     text-decoration: none;
+    transition: .2s ease-in;
+}
+
+.createButton:hover {
+    background: var(--base-color);
+}
+
+.createButton:hover a {
+    color: var(--default-black);
 }
