@@ -1,12 +1,10 @@
 import { makeStyles } from '@material-ui/core';
-import ProjectNav from '../Components/project/ProjectNav/projectNav';
+import ProjectConfigNav from '../components/project/projectConfig/projectConfigNav/projectConfigNav';
+import ProjectConfigMainContainer from '../components/project/projectConfig/ProjectConfigMainContainer';
+import ProjectNav from '../components/project/ProjectNav/projectNav';
 import useGetProjectConfigResult from '../hooks/useGetProjectConfigResult';
-import ProjectConfigNav
-  from '../Components/project/projectConfig/projectConfigNav/projectConfigNav';
 import usePutProjectConfigResult from '../hooks/usePutProjectConfigResult';
 import usePutProjectInfoResult from '../hooks/usePutProjectInfoResult';
-import ProjectConfigMainContainer
-  from '../Components/project/projectConfig/ProjectConfigMainContainer';
 const useStyle = makeStyles({
   wrapper: {
     width: '100vw',

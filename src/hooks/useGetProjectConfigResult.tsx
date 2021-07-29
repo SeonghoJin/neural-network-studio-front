@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../module';
-import StandardModal from '../Components/modal/StandardModal';
 import { useCallback } from 'react';
+import StandardModal from '../components/modal/StandardModal';
 
 const useGetProjectConfigResult = () => {
   const result = useSelector((state: RootState) => state.projectApi.getProjectConfigResult);

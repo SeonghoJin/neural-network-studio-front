@@ -3,7 +3,7 @@ import Input from './Input';
 import { ChangeEvent, useCallback } from 'react';
 import {
   secondDivisionTupleRegExp
-} from './validation';
+} from './Validation';
 import { useState } from 'react';
 
 const useStyle = makeStyles({

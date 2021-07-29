@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../module';
-import StandardModal from '../Components/modal/StandardModal';
+import StandardModal from '../components/modal/StandardModal';
 import { useCallback } from 'react';
 
 const useGetProjectResult = () => {

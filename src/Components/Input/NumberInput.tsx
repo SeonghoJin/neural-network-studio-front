@@ -1,8 +1,8 @@
 import { makeStyles, TextField } from '@material-ui/core';
 import Input from './Input';
 import { ChangeEvent, useCallback } from 'react';
-import { numberWithoutSpacesRegExp } from './validation';
 import { useState } from 'react';
+import { numberWithoutSpacesRegExp } from './Validation';
 
 const useStyle = makeStyles({
   propertyContentContainer: {

@@ -2,9 +2,9 @@ import { makeStyles } from '@material-ui/core';
 import useGetPythonCodeResult from '../hooks/useGetPythonCodeResult';
 import usePutProjectContentResult from '../hooks/usePutProjectContentResult';
 import useGetProjectResult from '../hooks/useGetProjectResult';
-import ProjectEditorMain from '../Components/project/projectEditor/projectEditorMain';
-import ProjectNav from '../Components/project/ProjectNav/projectNav';
-import ProjectEditorNav from '../Components/project/projectEditor/ProjectEditorNav/projectEditorNav';
+import ProjectEditorMain from '../components/project/projectEditor/projectEditorMain';
+import ProjectNav from '../components/project/ProjectNav/projectNav';
+import ProjectEditorNav from '../components/project/projectEditor/ProjectEditorNav/projectEditorNav';
 
 const useStyle = makeStyles({
   wrapper: {
