@@ -13,6 +13,7 @@
     border-radius: 7px;
     font-size: 14px;
     margin: 0 10px;
+    cursor: pointer;
 }
 
 .modifyButton:last-child {

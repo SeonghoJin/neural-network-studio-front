@@ -9,7 +9,7 @@ const axiosConfig : AxiosRequestConfig = {
 
 export const getPythonCode = async (projectNo: string) => {
   const response = await axios.get<Blob>(
-    config.SERVER_PREFIX+`/api/project/${projectNo}/code`,
+    `/api/project/${projectNo}/code`,
     axiosConfig
   );
 
@@ -18,7 +18,7 @@ export const getPythonCode = async (projectNo: string) => {
 
 export const getProject = async (projectNo:string) => {
   const response = await axios.get<any>(
-    config.SERVER_PREFIX+`/api/project/${projectNo}`,
+    `/api/project/${projectNo}`,
       axiosConfig
     );
 
@@ -28,7 +28,7 @@ export const getProject = async (projectNo:string) => {
 
 export const getProjectConfig = async (projectNo: string) => {
   const response = await axios.get<IProjectConfig>(
-    config.SERVER_PREFIX+`/api/project/${projectNo}/config`,
+    `/api/project/${projectNo}/config`,
     axiosConfig
     );
   console.log(response.data)
@@ -37,7 +37,7 @@ export const getProjectConfig = async (projectNo: string) => {
 
 export const getProjectContent = async (projectNo: string) => {
   const response = await axios.get<IProjectContentDto>(
-    config.SERVER_PREFIX+`/api/project/${projectNo}/content`,
+    `/api/project/${projectNo}/content`,
     axiosConfig
   );
 
@@ -46,7 +46,7 @@ export const getProjectContent = async (projectNo: string) => {
 
 export const createProject = async (projectInfo : IProjectInfo) => {
   const response = await axios.post<{projectNo: string}>(
-    config.SERVER_PREFIX+`/api/project`,
+    `/api/project`,
     projectInfo,
     axiosConfig
   );
@@ -56,7 +56,7 @@ export const createProject = async (projectInfo : IProjectInfo) => {
 
 export const updateProjectInfo = async(projectNo: string, projectInfo: IProjectInfo) => {
   const response = await axios.put(
-    config.SERVER_PREFIX+`/api/project/${projectNo}/info`,
+    `/api/project/${projectNo}/info`,
       projectInfo,
     axiosConfig
     );
@@ -66,7 +66,7 @@ export const updateProjectInfo = async(projectNo: string, projectInfo: IProjectI
 
 export const updateProjectConfig = async(projectNo: string, projectConfig: IProjectConfig) => {
   const response = await axios.put(
-    config.SERVER_PREFIX+`/api/project/${projectNo}/config`,
+    `/api/project/${projectNo}/config`,
     projectConfig,
     axiosConfig
   );
@@ -79,7 +79,7 @@ export const updateProjectContent = async(projectNo: string, projectContent: IPr
   const layers = graphToLayouts(projectContent.flowState.elements);
   console.log(layers);
   const response = await axios.put(
-    config.SERVER_PREFIX+`/api/project/${projectNo}/content`,
+    `/api/project/${projectNo}/content`,
       {
         ...projectContent,
         ...layers,
