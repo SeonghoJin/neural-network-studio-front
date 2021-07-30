@@ -2,6 +2,8 @@ import { Container, makeStyles } from '@material-ui/core';
 import ProjectEditorLeftSideBar from './projectEditorSideBar/ProjectEditorLeftSideBar';
 import ProjectEditorGraphContainer from './ProjectEditorGraphContainer';
 import { ReactFlowProvider } from 'react-flow-renderer';
+import {ReflexContainer, ReflexElement, ReflexSplitter} from "react-reflex";
+import 'react-reflex/styles.css'
 
 const useStyle = makeStyles({
   wrapper: {
@@ -13,7 +15,8 @@ const useStyle = makeStyles({
     display: 'flex',
   },
   contentWrapper: {
-    flexGrow: 1,
+    width:'100%',
+    height: '100%',
   }
 })
 
@@ -24,10 +27,22 @@ const ProjectEditorMain = () => {
       <div className={classes.wrapper}>
         <ReactFlowProvider>
           <Container className={classes.container}>
-            <ProjectEditorLeftSideBar/>
-            <div className={classes.contentWrapper}>
-              <ProjectEditorGraphContainer/>
-            </div>
+            <ReflexContainer orientation={"vertical"}>
+              <ReflexElement
+                  minSize={150}
+                  maxSize={350}
+                  size={260}
+                  className={"left-pane"}
+              >
+                <ProjectEditorLeftSideBar/>
+              </ReflexElement>
+              <ReflexSplitter/>
+              <ReflexElement className={"right-pane"}>
+                <div className={classes.contentWrapper}>
+                  <ProjectEditorGraphContainer/>
+                </div>
+              </ReflexElement>
+            </ReflexContainer>
           </Container>
         </ReactFlowProvider>
       </div>
