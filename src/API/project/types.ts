@@ -1,67 +1,61 @@
-import { FlowExportObject } from "react-flow-renderer";
+import { FlowExportObject } from 'react-flow-renderer';
 
-export interface IProjectDto{
-  config:      IProjectConfig;
-  content:     IProjectContentDto;
-  description: string;
-  lastModify:  Date;
-  name:        string;
-  projectNo:   string;
+export interface IProjectDto {
+	config: IProjectConfig;
+	content: IProjectContentDto;
+	description: string;
+	lastModify: Date;
+	name: string;
+	projectNo: string;
 }
 
 export interface IProjectContentDto {
-  flowState: FlowExportObject,
-  output: string;
+	flowState: FlowExportObject;
+	output: string;
 }
 
-export interface IProjectGlobalConfig{
+export interface IProjectGlobalConfig {
+	epochs?: number;
 
-  epochs?: number;
-
-  batch_size?: number;
-
+	batch_size?: number;
 }
 
-export interface IProjectOptimizerConfig{
+export interface IProjectOptimizerConfig {
+	learning_rate?: number;
 
-  learning_rate?: number;
+	loss?: string;
 
-  loss?: string;
+	metrics?: string[];
 
-  metrics?: string[];
-
-  optimizer?: string;
-
+	optimizer?: string;
 }
 
-export interface IProjectConfig extends IProjectOptimizerConfig, IProjectGlobalConfig{
-}
+export interface IProjectConfig extends IProjectOptimizerConfig, IProjectGlobalConfig {}
 
-export class ProjectConfig implements IProjectConfig{
+export class ProjectConfig implements IProjectConfig {
+	batch_size?: number;
 
-  batch_size?: number;
+	epochs?: number;
 
-  epochs?: number;
+	learning_rate?: number;
 
-  learning_rate?: number;
+	loss?: string;
 
-  loss?: string;
+	metrics?: string[];
 
-  metrics?: string[];
+	optimizer?: string;
 
-  optimizer?: string;
-
-  constructor(config? : ProjectConfig) {
-    this.optimizer = config?.optimizer || 'adam';
-    this.learning_rate = config?.learning_rate || 0.001;
-    this.loss = config?.loss || 'sparse_categorical_crossentropy';
-    this.metrics = config?.metrics || ['accuray'];
-    this.batch_size = config?.batch_size || 32;
-    this.epochs = config?.epochs || 10;
-  }
+	constructor(config?: ProjectConfig) {
+		this.optimizer = config?.optimizer || 'adam';
+		this.learning_rate = config?.learning_rate || 0.001;
+		this.loss = config?.loss || 'sparse_categorical_crossentropy';
+		this.metrics = config?.metrics || ['accuray'];
+		this.batch_size = config?.batch_size || 32;
+		this.epochs = config?.epochs || 10;
+	}
 }
 
 export interface IProjectInfo {
-  description: string,
-  name: string,
+	description: string;
+	name: string;
 }

@@ -1,24 +1,17 @@
-import { ChangeEvent } from 'react';
-import React from 'react';
-import {
-  FlattenConfig,
-  IConfigComponent,
-} from '../../../../../core/block';
+import React, { ChangeEvent } from 'react';
+
+import { FlattenConfig, IConfigComponent } from '../../../../../core/block';
 import { configComponentToReactNode } from './util';
 
 type Props = {
-  config: FlattenConfig,
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void
-}
+	config: FlattenConfig;
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
 
-const FlattenConfigComponent = ({config, onChange}: Props) => {
+const FlattenConfigComponent = ({ config, onChange }: Props) => {
+	const configComponent: IConfigComponent<typeof config> = {};
 
-  const configComponent: IConfigComponent<typeof config> = {
-  }
-
-  return (<>
-    {configComponentToReactNode(configComponent)}
-  </>)
-}
+	return <>{configComponentToReactNode(configComponent)}</>;
+};
 
 export default FlattenConfigComponent;
