@@ -5,7 +5,7 @@ class Node {
 	static isNode = (obj: unknown): obj is Node => {
 		if (typeof obj === 'object' && obj) {
 			if ('category' in obj) {
-				return false;
+				return true;
 			}
 		}
 

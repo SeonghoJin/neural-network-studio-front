@@ -41,8 +41,8 @@ class GraphConvertor {
 			return node.input === null;
 		});
 		return {
-			output: outputNodeName[0].name,
-			input: inputNodeName[0].name,
+			output: outputNodeName[0]?.name || '',
+			input: inputNodeName[0]?.name || '',
 			layers: [...this.nodes],
 		};
 	};
