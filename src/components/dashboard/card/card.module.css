@@ -1,113 +1,112 @@
 :root {
-    --base-color: #6bedc8;
-    --default-white: #fcfcfc;
-    --default-black: #0f0f0f;
+  --base-color: #6bedc8;
+  --default-white: #fcfcfc;
+  --default-black: #0f0f0f;
 }
 
 .card {
-    margin: 10px;
-    padding : 20px;
-    border: 1px solid #ccc;
-    box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
 }
 
 .cardHeader {
-    display: flex;
-    margin-bottom: 20px;
-    height: 30px;
-    align-items: center;
+  display: flex;
+  margin-bottom: 20px;
+  height: 30px;
+  align-items: center;
 }
 
 .cardTitle {
-    margin-right: auto;
-    width: 180px;
-
+  margin-right: auto;
+  width: 180px;
 }
 
 .cardTitle h4 {
-    max-width: 95%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    line-height: 1.2;
+  max-width: 95%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 1.2;
 }
 
 .cardMain {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .descript {
-    overflow: hidden;
-    max-width: 90%;
-    height: 100px;
-    text-overflow: ellipsis;
-    white-space: normal;
-    line-height: 1.2;
-    margin-bottom: 12px;
+  overflow: hidden;
+  max-width: 90%;
+  height: 100px;
+  text-overflow: ellipsis;
+  white-space: normal;
+  line-height: 1.2;
+  margin-bottom: 12px;
 }
 
 .lastUpdate {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .cardFooter {
-    display: flex;
+  display: flex;
 }
 
 .startButton {
-    border: none;
-    border-radius: 5px;
-    background: gray;
-    border: 0;
-    color: var(--default-white);
-    padding: 10px;
-    width: 100%;
-    transition: .2s ease-in;
-    cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background: gray;
+  border: 0;
+  color: var(--default-white);
+  padding: 10px;
+  width: 100%;
+  transition: 0.2s ease-in;
+  cursor: pointer;
 }
 
 .startButton:hover {
-    background: var(--base-color);
-    color: var(--default-black);
+  background: var(--base-color);
+  color: var(--default-black);
 }
 
 .dropMenu {
-    background-color: var(--base-color);
-    transform: translateX(-70%);
-    width: 80px;
+  background-color: var(--base-color);
+  transform: translateX(-70%);
+  width: 80px;
 }
 
 .projectMenu {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .projectMenu:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .projectMenu a {
-    font-size: 12px;
-    color: black;
-    text-decoration: none;
+  font-size: 12px;
+  color: black;
+  text-decoration: none;
 }
 
 .ellipsisWrapper {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    cursor: pointer;
-    transition: .2s ease-in;
-    font-size: 20px;
-    line-height: 50%;
-    border: none;
-    background: transparent;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s ease-in;
+  font-size: 20px;
+  line-height: 50%;
+  border: none;
+  background: transparent;
 }
 
 .ellipsisWrapper:hover {
-    color: var(--base-color);
+  color: var(--base-color);
 }

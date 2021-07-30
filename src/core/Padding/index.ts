@@ -1,10 +1,10 @@
 enum Paddings {
-  Valid = 'Valid',
-  Same = 'Same'
+	Valid = 'Valid',
+	Same = 'Same',
 }
 
 export const getPaddingValues = () => {
-  return Object.values(Paddings);
-}
+	return Object.values(Paddings);
+};
 
-export default Paddings
+export default Paddings;
