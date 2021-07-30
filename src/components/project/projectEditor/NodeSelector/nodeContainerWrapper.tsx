@@ -27,7 +27,7 @@ const NodeContainerWrapper = () => {
 					return (
 						<NodeContainer key={block.type} name={block.type} elementNumber={block.states.length}>
 							{block.states.map((blockState, index) => {
-								return <Node key={index} state={blockState} />;
+								return <Node key={blockState.type} state={blockState} />;
 							})}
 						</NodeContainer>
 					);

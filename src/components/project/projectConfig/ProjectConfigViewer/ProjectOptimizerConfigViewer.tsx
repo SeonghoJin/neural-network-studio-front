@@ -34,7 +34,7 @@ const OptimizerConfig = () => {
 				[name]: value,
 			});
 		},
-		[optimizerConfig, projectConfig]
+		[projectConfig, setProjectConfig]
 	);
 
 	const content = data && (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 
@@ -26,7 +26,7 @@ type Props = {
 	body: any;
 };
 
-export default function StandardModal({ onClose, body, head }: Props) {
+export const StandardModal: FC<Props> = ({ onClose, body, head }: Props) => {
 	const classes = useStyles();
 	const [open, setOpen] = useState(true);
 	return (
@@ -35,7 +35,9 @@ export default function StandardModal({ onClose, body, head }: Props) {
 				open={open}
 				onClose={() => {
 					setOpen(false);
-					onClose ? onClose() : null;
+					if (onClose) {
+						onClose();
+					}
 				}}
 				className={classes.modal}
 			>
@@ -46,4 +48,10 @@ export default function StandardModal({ onClose, body, head }: Props) {
 			</Modal>
 		</div>
 	);
-}
+};
+
+StandardModal.defaultProps = {
+	onClose: null,
+};
+
+export default StandardModal;

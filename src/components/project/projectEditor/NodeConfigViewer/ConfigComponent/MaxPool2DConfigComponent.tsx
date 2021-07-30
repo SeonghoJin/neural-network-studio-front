@@ -21,7 +21,7 @@ const MaxPool2DConfigComponent = ({ config, onChange }: Props) => {
 				<SecondDivisionTupleInput canNull propertyName="strides" onChange={onChange} propertyContent={strides} />
 			),
 		}),
-		[config, onChange]
+		[onChange, padding, pool_size, strides]
 	);
 
 	return <>{configComponentToReactNode(configComponent)}</>;

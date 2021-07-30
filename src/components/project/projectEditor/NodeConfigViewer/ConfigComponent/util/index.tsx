@@ -7,3 +7,5 @@ export const configComponentToReactNode = (configComponent: IConfigComponent<Blo
 		return <li key={key}>{configComponent[key as BlockConfigKey]}</li>;
 	});
 };
+
+export default configComponentToReactNode;

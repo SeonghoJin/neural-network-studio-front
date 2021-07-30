@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import React, { MouseEventHandler, useCallback } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import React, { MouseEventHandler } from 'react';
 import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core';
 import { Button } from 'react-bootstrap';
@@ -29,7 +29,7 @@ type Props = {
 
 const ProjectEditorNavOptionContent = ({ onSave }: Props) => {
 	const classes = useStyle();
-
+	const location = useLocation();
 	return (
 		<div className={classes.wrapper}>
 			<div className={classes.container}>

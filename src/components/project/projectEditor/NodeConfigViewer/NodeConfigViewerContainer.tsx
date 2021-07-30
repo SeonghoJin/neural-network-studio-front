@@ -27,7 +27,7 @@ const NodeConfigViewerContainer = () => {
 				})
 			);
 		},
-		[selectedElement]
+		[dispatch, selectedElement]
 	);
 
 	const onChangeLabel = useCallback(
@@ -40,7 +40,7 @@ const NodeConfigViewerContainer = () => {
 				})
 			);
 		},
-		[selectedElement]
+		[dispatch, selectedElement]
 	);
 
 	return (

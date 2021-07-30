@@ -10,7 +10,7 @@ const usePutProjectInfoResult = () => {
 
 	const handleError = useCallback(() => {
 		dispatch(putProjectInfoInit());
-	}, []);
+	}, [dispatch]);
 
 	return {
 		...result,

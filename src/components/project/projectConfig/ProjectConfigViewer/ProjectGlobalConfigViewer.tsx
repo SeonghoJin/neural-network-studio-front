@@ -32,7 +32,7 @@ const GlobalConfig = () => {
 				[name]: value,
 			});
 		},
-		[globalConfig, projectConfig]
+		[projectConfig, setProjectConfig]
 	);
 
 	const content = data && (

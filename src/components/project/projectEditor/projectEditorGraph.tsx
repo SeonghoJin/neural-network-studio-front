@@ -50,7 +50,7 @@ const useStyle = makeStyles({
 type Props = {
 	setReactInstance: EventHandler<any>;
 	setElements: EventHandler<any>;
-	flowState?: FlowExportObject;
+	flowState: FlowExportObject;
 };
 
 const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props) => {
@@ -63,20 +63,20 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 
 	useEffect(() => {
 		setElements(flowState?.elements || []);
-	}, [flowState?.elements]);
+	}, [flowState?.elements, setElements]);
 
 	const onConnect = useCallback(
 		(params: Edge | Connection) => {
 			setElements(addEdge(params, elements));
 		},
-		[elements]
+		[elements, setElements]
 	);
 
 	const onElementsRemove = useCallback(
 		(elementsToRemove: Elements<any>) => {
 			setElements(removeElements(elementsToRemove, elements));
 		},
-		[elements]
+		[elements, setElements]
 	);
 
 	const onDragOver = useCallback((e: React.DragEvent) => {
@@ -108,12 +108,15 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 				setSelectedElements(newNode);
 			}
 		},
-		[elements, reactFlowInstance]
+		[elements, reactFlowInstance, setElements, setSelectedElements]
 	);
 
-	const onLoad = useCallback((instance: OnLoadParams) => {
-		setReactInstance(instance);
-	}, []);
+	const onLoad = useCallback(
+		(instance: OnLoadParams) => {
+			setReactInstance(instance);
+		},
+		[setReactInstance]
+	);
 
 	const onKeyDown: KeyboardEventHandler = useCallback(
 		(event) => {
@@ -121,7 +124,7 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 				setElements(removeElements(selectedElements, elements));
 			}
 		},
-		[selectedElements]
+		[elements, selectedElements, setElements]
 	);
 
 	return (

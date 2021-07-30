@@ -18,7 +18,7 @@ const TextValidationInput = ({ propertyName, propertyContent, onChange }: Props)
 	const classes = useStyle();
 
 	const isVaild = useCallback((str: string) => {
-		if (str.trim() == '') return false;
+		if (str.trim() === '') return false;
 		return true;
 	}, []);
 
@@ -29,7 +29,7 @@ const TextValidationInput = ({ propertyName, propertyContent, onChange }: Props)
 			onChange(e);
 			setError(!isVaild(e.target.value));
 		},
-		[onChange]
+		[isVaild, onChange]
 	);
 
 	const body = (

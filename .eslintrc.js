@@ -19,9 +19,12 @@ module.exports = {
 		'no-shadow': 'off',
 		'linebreak-style': 'off',
 		'@typescript-eslint/no-shadow': ['error'],
+		'no-control-regex': 'off',
 		'arrow-body-style': ['off'],
+		'react/react-in-jsx-scope': 'off',
 		camelcase: 'off',
 		'no-underscore-dangle': 'off',
 		'no-unused-vars': 'off',
+		'react/jsx-filename-extension' : 'off',
 	},
 };

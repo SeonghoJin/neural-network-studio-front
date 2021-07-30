@@ -16,7 +16,7 @@ const ProjectConfigNavOptionContentContainer = () => {
 			if (!res) return;
 			dispatch(getProjectConfigThunk(projectNo));
 		});
-	}, [projectConfig, projectNo]);
+	}, [dispatch, projectConfig, projectNo]);
 
 	return <ProjectConfigNavOptionContent onSave={onSave} />;
 };

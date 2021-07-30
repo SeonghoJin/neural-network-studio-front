@@ -16,15 +16,21 @@ const ProjectEditorGraphContainer = () => {
 
 	useEffect(() => {
 		dispatch(getProjectThunk(projectNo));
-	}, [projectNo]);
+	}, [dispatch, projectNo]);
 
-	const setReactInstance = useCallback((instance: OnLoadParams) => {
-		dispatch(setReactFlowInstance(instance));
-	}, []);
+	const setReactInstance = useCallback(
+		(instance: OnLoadParams) => {
+			dispatch(setReactFlowInstance(instance));
+		},
+		[dispatch]
+	);
 
-	const onSetElements = useCallback((elements: Elements) => {
-		dispatch(setElements(elements));
-	}, []);
+	const onSetElements = useCallback(
+		(elements: Elements) => {
+			dispatch(setElements(elements));
+		},
+		[dispatch]
+	);
 
 	const content = result.data && (
 		<ProjectEditorGraph

@@ -15,11 +15,11 @@ const ProjectConfigMainContainer = () => {
 		if (projectConfigResult.data != null) {
 			dispatch(setProjectConfig(projectConfigResult.data));
 		}
-	}, [projectConfigResult.data]);
+	}, [dispatch, projectConfigResult.data]);
 
 	useEffect(() => {
 		dispatch(getProjectConfigThunk(projectNo));
-	}, [projectNo]);
+	}, [dispatch, projectNo]);
 
 	return <ProjectConfigMain />;
 };

@@ -24,14 +24,14 @@ const useStyle = makeStyles({
 type Props = {
 	head: string;
 	active: boolean;
-	onClick?: () => void;
+	onClick: () => void;
 };
 
 const ProjectConfigViewerSelectorItem = ({ head, onClick, active }: Props) => {
 	const classes = useStyle();
 
 	return (
-		<div className={classes.wrapper} onClick={onClick}>
+		<div className={classes.wrapper} role="button" onClick={onClick} tabIndex={0} onKeyDown={() => onClick()}>
 			<div className={`${classes.container} ${active && classes.active}`}>{head}</div>
 		</div>
 	);

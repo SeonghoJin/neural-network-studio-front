@@ -1,9 +1,10 @@
 import { Route } from 'react-router-dom';
 import { ReactFlowProvider } from 'react-flow-renderer';
+import { FC } from 'react';
 import ProjectEditor from '../Pages/ProjectEditor';
-import { ProjectConfig } from '../Pages/ProjectConfig';
+import ProjectConfig from '../Pages/ProjectConfig';
 
-const ProjectRouter = () => {
+const ProjectRouter: FC<null> = () => {
 	return (
 		<>
 			<ReactFlowProvider>

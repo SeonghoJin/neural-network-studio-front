@@ -20,7 +20,7 @@ const SelectInput = ({ propertyContent, propertyName, propertyCandidates, onChan
 	const classes = useStyle();
 
 	const isVaild = useCallback((str: string) => {
-		if (str.trim() == '') return false;
+		if (str.trim() === '') return false;
 		return true;
 	}, []);
 
@@ -35,7 +35,7 @@ const SelectInput = ({ propertyContent, propertyName, propertyCandidates, onChan
 					</MenuItem>
 				);
 			}),
-		[]
+		[propertyCandidates]
 	);
 
 	const handleChange = useCallback(
@@ -43,7 +43,7 @@ const SelectInput = ({ propertyContent, propertyName, propertyCandidates, onChan
 			setError(!isVaild(e.target.value));
 			onChange(e);
 		},
-		[onChange]
+		[isVaild, onChange]
 	);
 
 	const body = (

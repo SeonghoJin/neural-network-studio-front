@@ -30,6 +30,7 @@ const ValidatioonSample = () => {
 		return (
 			<div>
 				<input type="password" value={password} onChange={handleChanged} className="" />
+				{/* eslint-disable-next-line jsx-a11y/control-has-associated-label,react/button-has-type */}
 				<button onClick={handleButtonClick} />
 			</div>
 		);
@@ -43,6 +44,7 @@ const ValidatioonSample = () => {
 				onChange={handleChanged}
 				className={validated ? classes.success : classes.failure}
 			/>
+			{/* eslint-disable-next-line react/button-has-type */}
 			<button onClick={handleButtonClick}>검증하기</button>
 		</div>
 	);

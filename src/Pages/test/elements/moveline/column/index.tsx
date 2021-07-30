@@ -75,7 +75,8 @@ const ColumnMoveLine = () => {
 			}}
 		>
 			<div className={classes.b}>
-				<button className={classes.button} role="separator" aria-valuenow={50} aria-valuemax={100} aria-valuemin={0}>
+				{/* eslint-disable-next-line jsx-a11y/role-supports-aria-props,react/button-has-type */}
+				<button className={classes.button} aria-valuenow={50} aria-valuemax={100} aria-valuemin={0}>
 					<div
 						ref={ref}
 						style={{

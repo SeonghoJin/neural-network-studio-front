@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-import { ReactElement } from 'react';
+import { FunctionComponent, ReactElement } from 'react';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -26,11 +26,11 @@ const useStyle = makeStyles({
 });
 
 type Props = {
-	head?: ReactElement;
+	head?: ReactElement | null;
 	body: ReactElement;
 };
 
-const Input = ({ head, body }: Props) => {
+const Input: FunctionComponent<Props> = ({ head = null, body }: Props) => {
 	const classes = useStyle();
 
 	return (
@@ -41,6 +41,10 @@ const Input = ({ head, body }: Props) => {
 			</div>
 		</div>
 	);
+};
+
+Input.defaultProps = {
+	head: null,
 };
 
 export default Input;

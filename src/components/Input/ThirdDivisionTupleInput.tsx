@@ -24,10 +24,13 @@ const ThirdDivisionTupleInput = ({ propertyName, propertyContent, onChange }: Pr
 
 	const [error, setError] = useState(!isVaild(propertyContent));
 
-	const handleChange = useCallback((e: ChangeEvent<any>) => {
-		onChange(e);
-		setError(!isVaild(e.target.value));
-	}, []);
+	const handleChange = useCallback(
+		(e: ChangeEvent<any>) => {
+			onChange(e);
+			setError(!isVaild(e.target.value));
+		},
+		[isVaild, onChange]
+	);
 
 	const body = (
 		<TextField

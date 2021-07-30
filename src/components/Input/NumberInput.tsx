@@ -27,7 +27,6 @@ const NumberInput = ({ propertyName, propertyContent, onChange }: Props) => {
 
 	const handleChange = useCallback(
 		(e: ChangeEvent<HTMLInputElement>) => {
-			HTMLInputElement;
 			onChange({
 				...e,
 				target: {
@@ -37,7 +36,7 @@ const NumberInput = ({ propertyName, propertyContent, onChange }: Props) => {
 			});
 			setError(!isVaild(e.target.value));
 		},
-		[onChange]
+		[isVaild, onChange]
 	);
 
 	const body = (

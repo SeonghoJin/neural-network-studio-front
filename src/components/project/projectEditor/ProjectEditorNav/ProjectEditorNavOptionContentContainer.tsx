@@ -19,7 +19,7 @@ const ProjectEditorNavOptionContentContainer = () => {
 			if (!res) return;
 			dispatch(getProjectThunk(projectNo));
 		});
-	}, [projectNo, instance, getProjectResult, projectNo]);
+	}, [dispatch, projectNo, instance, getProjectResult.data?.content.flowState]);
 
 	return <ProjectEditorNavOptionContent onSave={onSave} />;
 };

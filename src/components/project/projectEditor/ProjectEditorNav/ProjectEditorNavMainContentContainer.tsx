@@ -17,7 +17,8 @@ const ProjectEditorNavMainContentContainer = () => {
 				.then(async (res) => {
 					if (res) {
 						thunkDispatch(getProjectThunk(projectNo));
-						return await thunkDispatch(getPythonCodeThunk(projectNo));
+						const result = await thunkDispatch(getPythonCodeThunk(projectNo));
+						return result;
 					}
 					return null;
 				})
@@ -28,7 +29,7 @@ const ProjectEditorNavMainContentContainer = () => {
 				});
 		};
 		exec();
-	}, [instance, projectNo]);
+	}, [instance, projectNo, thunkDispatch]);
 
 	return <ProjectEditorNavMainContent onGetPythonCode={onGetPythonCode} />;
 };

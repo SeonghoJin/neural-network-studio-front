@@ -25,7 +25,7 @@ type Props = {
 	min: number;
 	max: number;
 	step: number | null;
-	marks?: Marks;
+	marks: Marks;
 };
 
 const SliderInput = ({ propertyContent, propertyName, onChange, step, min, max, marks }: Props) => {
@@ -40,7 +40,7 @@ const SliderInput = ({ propertyContent, propertyName, onChange, step, min, max, 
 				},
 			} as ChangeEvent<any>);
 		},
-		[onChange]
+		[onChange, propertyName]
 	);
 
 	const body = (

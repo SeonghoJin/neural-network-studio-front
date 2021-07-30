@@ -34,7 +34,7 @@ const FloatInput = ({ propertyName, propertyContent, onChange }: Props) => {
 			});
 			setError(!isVaild(e.target.value));
 		},
-		[onChange]
+		[isVaild, onChange]
 	);
 
 	const body = (

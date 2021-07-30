@@ -44,14 +44,15 @@ const ScollBox = forwardRef((props: any, ref: Ref<RefObject>) => {
 	);
 });
 const test = () => {
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const ref = useRef<RefObject>(null);
 	return (
 		<div>
 			<ScollBox ref={ref} />
 			<button
+				type="button"
 				onClick={() => {
-					ref.current?.scrollToBottom(); // @ts-ignore
-					ref.current?.test2();
+					ref.current?.scrollToBottom();
 				}}
 			>
 				맨 밑으로

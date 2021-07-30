@@ -1,4 +1,5 @@
 const MyComponent = (props: any) => {
+	// eslint-disable-next-line react/destructuring-assignment
 	return <div>{props.name}</div>;
 };
 

@@ -28,7 +28,7 @@ const ProjectConfigViewerSelector = (props: Props) => {
 		<ul>
 			{selectorItemHeads.map((head, index) => {
 				return (
-					<li key={index}>
+					<li key={head}>
 						<ProjectConfigViewerSelectorItem
 							head={head}
 							active={value === index}
