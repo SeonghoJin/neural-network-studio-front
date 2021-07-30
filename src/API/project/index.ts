@@ -17,7 +17,7 @@ export const getPythonCode = async (projectNo: string) => {
 }
 
 export const getProject = async (projectNo:string) => {
-  const response = await axios.get<any>(
+  const response = await axios.get<IProjectDto>(
     `/api/project/${projectNo}`,
       axiosConfig
     );
@@ -77,7 +77,6 @@ export const updateProjectConfig = async(projectNo: string, projectConfig: IProj
 export const updateProjectContent = async(projectNo: string, projectContent: IProjectContentDto) => {
 
   const layers = graphToLayouts(projectContent.flowState.elements);
-  console.log(layers);
   const response = await axios.put(
     `/api/project/${projectNo}/content`,
       {

@@ -12,7 +12,7 @@ const useStyle = makeStyles({
 
 type Props = {
   propertyName: string,
-  propertyContent: string,
+  propertyContent: number,
   onChange: any,
 }
 
@@ -25,8 +25,15 @@ const NumberInput = ({propertyName, propertyContent, onChange} : Props) => {
 
   const [error, setError] = useState(!isVaild(propertyContent.toString()));
 
-  const handleChange = useCallback((e : ChangeEvent<any>) => {
-    onChange(e);
+  const handleChange = useCallback((e : ChangeEvent<HTMLInputElement>) => {
+    HTMLInputElement
+    onChange({
+      ...e,
+      target: {
+        name: e.target.name,
+        value: Number(e.target.value)
+      }
+    });
     setError(!isVaild(e.target.value));
   }, [onChange])
 
@@ -36,7 +43,7 @@ const NumberInput = ({propertyName, propertyContent, onChange} : Props) => {
       name={propertyName}
       onChange={handleChange}
       value={propertyContent}
-      type="text"
+      type="number"
       className={classes.propertyContentContainer}
       variant={'standard'}
       label={propertyName}

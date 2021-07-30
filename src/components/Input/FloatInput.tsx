@@ -12,7 +12,7 @@ const useStyle = makeStyles({
 
 type Props = {
   propertyName: string,
-  propertyContent: string | string[] | number,
+  propertyContent: number,
   onChange: any,
 }
 
@@ -23,10 +23,15 @@ const FloatInput = ({propertyName, propertyContent, onChange} : Props) => {
     return floatWithoutSpacesRegExp.test(str);
   },[]);
 
-  const [error, setError] = useState(!isVaild(propertyContent as string));
+  const [error, setError] = useState(!isVaild(propertyContent.toString()));
 
   const handleChange = useCallback((e : ChangeEvent<any>) => {
-    onChange(e);
+    onChange({
+      target: {
+        name: e.target.name,
+        value: Number(e.target.value)
+      }
+    });
     setError(!isVaild(e.target.value));
   }, [onChange])
 
@@ -36,7 +41,7 @@ const FloatInput = ({propertyName, propertyContent, onChange} : Props) => {
       name={propertyName}
       onChange={handleChange}
       value={propertyContent}
-      type="text"
+      type="number"
       className={classes.propertyContentContainer}
       variant={'standard'}
       label={propertyName}

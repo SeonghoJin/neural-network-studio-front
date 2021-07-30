@@ -17,7 +17,7 @@ const DenseConfigComponent = ({config, onChange}: Props) => {
     units:  <NumberInput
       propertyName={"units"}
       onChange={onChange}
-      propertyContent={units}
+      propertyContent={Number(units)}
     />
   }
 

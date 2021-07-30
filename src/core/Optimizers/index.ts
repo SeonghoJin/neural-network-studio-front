@@ -10,4 +10,8 @@ enum Optimizers{
   Nadam = "nadam",
 }
 
+export const getOptimizerValues = () => {
+  return Object.values(Optimizers);
+}
+
 export default Optimizers;

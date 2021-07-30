@@ -5,7 +5,7 @@ import { ChangeEvent, useCallback, useMemo } from 'react';
 import { IProjectOptimizerConfig } from '../../../../API/project/types';
 import TextInput from '../../../Input/TextInput';
 import SelectInput from '../../../Input/SelectInput';
-import Optimizers from '../../../../core/Optimizers';
+import Optimizers, { getOptimizerValues } from '../../../../core/Optimizers';
 import FloatInput from '../../../Input/FloatInput';
 import useGetProjectConfigResult from '../../../../hooks/APIResult/useGetProjectConfigResult';
 
@@ -30,25 +30,16 @@ const OptimizerConfig = () => {
     const {name, value} = e.target;
     setProjectConfig({
       ...projectConfig,
-      [name]: Number(value),
+      [name]: value,
     });
   }, [optimizerConfig, projectConfig])
-
-  const optimizerCandidates = useMemo(() => {
-    const optimizers= [];
-    for(const optimizerKeys in Optimizers){
-      const key = optimizerKeys as keyof typeof Optimizers
-      optimizers.push(Optimizers[key]);
-    }
-    return optimizers;
-  }, [])
 
   const content = data && (
     <>
       <SelectInput
         onChange={onChange}
         propertyName={"optimizer"}
-        propertyCandidates={optimizerCandidates}
+        propertyCandidates={getOptimizerValues()}
         propertyContent={optimizerConfig.optimizer|| ""}/>
       <TextInput
         onChange={onChange}
@@ -61,7 +52,7 @@ const OptimizerConfig = () => {
       <FloatInput
         onChange={onChange}
         propertyName={"learning_rate"}
-        propertyContent={optimizerConfig.learning_rate || ""}/>
+        propertyContent={optimizerConfig.learning_rate || 0}/>
     </>
   );
 

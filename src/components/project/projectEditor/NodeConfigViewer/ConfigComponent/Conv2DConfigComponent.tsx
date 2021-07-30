@@ -7,8 +7,8 @@ import {
 import SliderInput, { Marks } from '../../../../Input/SliderInput';
 import SecondDivisionTupleInput from '../../../../Input/SecondDivisionTupleInput';
 import SelectInput from '../../../../Input/SelectInput';
-import { getPaddingPropertyCandidates } from './SelectCadidates';
 import { configComponentToReactNode } from './util';
+import {getPaddingValues} from "../../../../../core/Padding";
 
 type Props = {
   config: Conv2DConfig,
@@ -57,7 +57,7 @@ const Conv2DConfigComponent = ({config, onChange}: Props) => {
       onChange={onChange}
       propertyContent={padding}
       propertyName={'padding'}
-      propertyCandidates={getPaddingPropertyCandidates()}
+      propertyCandidates={getPaddingValues()}
     />,
     strides:<SecondDivisionTupleInput
       canNull={true}

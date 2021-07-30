@@ -20,17 +20,17 @@ const BatchNormalizationConfigComponent = ({config, onChange}: Props) => {
   const configComponent: IConfigComponent<typeof config> = {
     axis: <NumberInput
       propertyName={'axis'}
-      propertyContent={axis}
+      propertyContent={Number(axis)}
       onChange={onChange}
     />,
     epsilon:<FloatInput
       propertyName={'epsilon'}
-      propertyContent={epsilon}
+      propertyContent={Number(epsilon)}
       onChange={onChange}
     />,
     momentum: <FloatInput
       propertyName={'momentum'}
-      propertyContent={momentum}
+      propertyContent={Number(momentum)}
       onChange={onChange}
     />
   }

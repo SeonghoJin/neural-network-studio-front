@@ -16,9 +16,9 @@ export interface IProjectContentDto {
 
 export interface IProjectGlobalConfig{
 
-  epochs?: string;
+  epochs?: number;
 
-  batch_size?: string;
+  batch_size?: number;
 
 }
 
@@ -39,9 +39,9 @@ export interface IProjectConfig extends IProjectOptimizerConfig, IProjectGlobalC
 
 export class ProjectConfig implements IProjectConfig{
 
-  batch_size?: string;
+  batch_size?: number;
 
-  epochs?: string;
+  epochs?: number;
 
   learning_rate?: number;
 
@@ -56,8 +56,8 @@ export class ProjectConfig implements IProjectConfig{
     this.learning_rate = config?.learning_rate || 0.001;
     this.loss = config?.loss || 'sparse_categorical_crossentropy';
     this.metrics = config?.metrics || ['accuray'];
-    this.batch_size = config?.batch_size || '32';
-    this.epochs = config?.epochs || '10';
+    this.batch_size = config?.batch_size || 32;
+    this.epochs = config?.epochs || 10;
   }
 }
 

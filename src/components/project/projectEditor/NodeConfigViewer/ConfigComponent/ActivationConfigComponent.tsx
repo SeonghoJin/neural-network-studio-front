@@ -2,8 +2,8 @@ import { ActivationConfig, IConfigComponent } from '../../../../../core/block';
 import { ChangeEvent } from 'react';
 import React from 'react';
 import SelectInput from '../../../../Input/SelectInput';
-import { getActivationPropertyCandidates } from './SelectCadidates';
 import { configComponentToReactNode } from './util';
+import {getActivationValues} from "../../../../../core/Activations";
 
 type Props = {
   config: ActivationConfig,
@@ -17,7 +17,7 @@ const ActivationConfigComponent = ({config, onChange}: Props) => {
   const configComponent : IConfigComponent<typeof config> = {
     activation: (<SelectInput
       propertyName={'activation'}
-      propertyCandidates={getActivationPropertyCandidates()}
+      propertyCandidates={getActivationValues()}
       onChange={onChange}
       propertyContent={activation}
     />)
