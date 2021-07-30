@@ -5,13 +5,13 @@ import TestElementRouter from '../../Pages/test/elements';
 import TestReactRouter from '../../Pages/test/react';
 
 function TestRouter() {
-  return (
-    <>
-      <Route path="/test/react-flow/:id" exact={true} component={ReactFlow}></Route>
-      <Route path='/test/elements/:elementname' exact={true} component={TestElementRouter}></Route>
-      <Route path='/test/react/:id' exact={true} component={TestReactRouter}></Route>
-    </>
-  );
+	return (
+		<>
+			<Route path="/test/react-flow/:id" exact component={ReactFlow} />
+			<Route path="/test/elements/:elementname" exact component={TestElementRouter} />
+			<Route path="/test/react/:id" exact component={TestReactRouter} />
+		</>
+	);
 }
 
 export default TestRouter;

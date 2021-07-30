@@ -1,4 +1,5 @@
 import { Container, makeStyles } from '@material-ui/core';
+import { ReactFlowProvider } from 'react-flow-renderer';
 import ProjectEditorLeftSideBar from './projectEditorSideBar/ProjectEditorLeftSideBar';
 import ProjectEditorGraphContainer from './ProjectEditorGraphContainer';
 import { ReactFlowProvider } from 'react-flow-renderer';

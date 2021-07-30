@@ -3,12 +3,12 @@ import { RootState } from '../../module';
 import StandardModal from '../../components/modal/StandardModal';
 
 const usePutProjectContentResult = () => {
-  const result = useSelector((state: RootState) => state.projectApi.putProjectContentResult);
+	const result = useSelector((state: RootState) => state.projectApi.putProjectContentResult);
 
-  return {
-    ...result,
-    errorModal: (<StandardModal head={"error"} body={result.error}/>)
-  };
-}
+	return {
+		...result,
+		errorModal: <StandardModal head="error" body={result.error} />,
+	};
+};
 
 export default usePutProjectContentResult;

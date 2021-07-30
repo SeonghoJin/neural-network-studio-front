@@ -1,3 +1,5 @@
 export enum BlockCategory {
-  Layer= "Layer",
+	Layer = 'Layer',
 }
+
+export default BlockCategory;

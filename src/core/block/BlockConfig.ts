@@ -1,57 +1,57 @@
+// eslint-disable-next-line @typescript-eslint/no-empty-interface,max-classes-per-file
 export interface BlockConfig {}
 
 export class DenseConfig implements BlockConfig {
-  units: string= '';
+	units = '';
 }
 
 export class Conv2DConfig implements BlockConfig {
-  filters : string = '';
+	filters = '';
 
-  kernel_size : string = '';
+	kernel_size = '';
 
-  strides : string = '';
+	strides = '';
 
-  padding : string = '';
+	padding = '';
 }
 
 export class DropoutConfig implements BlockConfig {
-  rate: string= '';
+	rate = '';
 }
 
 export class BatchNormalizationConfig implements BlockConfig {
-  axis: string ='' ;
+	axis = '';
 
-  momentum: string= '';
+	momentum = '';
 
-  epsilon: string= '';
+	epsilon = '';
 }
 
-export class FlattenConfig implements BlockConfig {
-}
+export class FlattenConfig implements BlockConfig {}
 
 export class InputConfig implements BlockConfig {
-  shape: string = '';
+	shape = '';
 }
 export class ActivationConfig implements BlockConfig {
-  activation: string = '';
+	activation = '';
 }
 
 export class MaxPool2DConfig implements BlockConfig {
-  pool_size: string = '';
+	pool_size = '';
 
-  strides: string = '';
+	strides = '';
 
-  padding: string = '';
+	padding = '';
 }
 
 export class AveragePooling2DConfig implements BlockConfig {
-  pool_size : string = '';
+	pool_size = '';
 
-  strides : string = '';
+	strides = '';
 
-  padding : string = '';
+	padding = '';
 }
 
 export type IConfigComponent<T> = {
-  [K in keyof T] : JSX.Element;
+	[K in keyof T]: JSX.Element;
 };
