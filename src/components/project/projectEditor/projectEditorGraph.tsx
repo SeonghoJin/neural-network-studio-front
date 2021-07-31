@@ -1,19 +1,19 @@
 import { makeStyles } from '@material-ui/core';
 import React, { EventHandler, KeyboardEventHandler, useCallback, useEffect, useRef } from 'react';
 import ReactFlow, {
-	Background,
-	Controls,
-	MiniMap,
-	OnLoadParams,
-	useStoreState,
-	Node,
-	Elements,
-	Connection,
-	Edge,
 	addEdge,
-	removeElements,
+	Background,
+	Connection,
+	Controls,
+	Edge,
+	Elements,
 	FlowExportObject,
+	MiniMap,
+	Node,
+	OnLoadParams,
+	removeElements,
 	useStoreActions,
+	useStoreState,
 } from 'react-flow-renderer';
 import { useSelector } from 'react-redux';
 import { BlockState } from '../../../core/block/BlockState';
@@ -46,6 +46,8 @@ const useStyle = makeStyles({
 		backgroundColor: '#F7F7F7',
 	},
 });
+
+const nodeProtoImage = <div />;
 
 type Props = {
 	setReactInstance: EventHandler<any>;
@@ -80,8 +82,8 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 	);
 
 	const onDragOver = useCallback((e: React.DragEvent) => {
-		e.preventDefault();
 		const localEvent = e;
+		localEvent.preventDefault();
 		localEvent.dataTransfer.dropEffect = 'copy';
 	}, []);
 

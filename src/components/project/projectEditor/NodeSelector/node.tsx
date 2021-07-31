@@ -20,13 +20,18 @@ type Props = {
 const Node = ({ state }: Props) => {
 	const classes = useBlockStyle();
 
+	const setEmptyImage = useCallback((dataTransfer: DataTransfer) => {
+		dataTransfer.setDragImage(document.createElement('img'), 0, 0);
+	}, []);
+
 	const onDragStart = useCallback(
 		(event: React.DragEvent) => {
 			const localEvent = event;
+			setEmptyImage(localEvent.dataTransfer);
 			localEvent.dataTransfer.setData('application/nodedata', JSON.stringify(state));
 			localEvent.dataTransfer.effectAllowed = 'copy';
 		},
-		[state]
+		[setEmptyImage, state]
 	);
 
 	return (
