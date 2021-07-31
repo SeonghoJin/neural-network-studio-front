@@ -12,6 +12,12 @@ module.exports = {
 		browser: true,
 	},
 	rules: {
+		'prettier/prettier': [
+			'error',
+			{
+				endOfLine: 'auto',
+			},
+		],
 		'no-use-before-define': 'off',
 		'@typescript-eslint/no-use-before-define': ['error'],
 		'import/extensions': 'off',
