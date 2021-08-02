@@ -7,6 +7,12 @@ import { RootDispatch } from '../../module';
 import { loginThunks } from '../../module/API/auth/thunks';
 import { getUserProfileThunks } from '../../module/API/user/thunks';
 import { setAuthentication, UserType } from '../../module/Auth';
+import useLoginResult from '../../hooks/APIResult/auth/useLoginResult';
+
+const SignInError = () => {
+	const loginResult = useLoginResult();
+	return <>{loginResult.error && loginResult.errorModal}</>;
+};
 
 const SignIn = () => {
 	const [inputs, setInputs] = useState({
@@ -55,8 +61,11 @@ const SignIn = () => {
 		[requestLogin]
 	);
 
+	const signInError = SignInError();
+
 	return (
 		<div role="button" tabIndex={0} className={`${style.signin}`} onKeyDown={onPressEnter}>
+			{signInError}
 			<div className={style.signinLogo}>
 				<h1>Neural Network Studio</h1>
 			</div>

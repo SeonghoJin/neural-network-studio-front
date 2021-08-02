@@ -13,9 +13,8 @@ type Props = {
 const Profile = ({ userProfile, logout }: Props) => {
 	const [dropMenuToggle, setDropMenuToggle] = useState(false);
 	const dropRef = useRef<HTMLDivElement | null>(null);
-	console.log(dropMenuToggle);
+
 	const openMenu = useCallback(() => {
-		console.log(dropMenuToggle);
 		setDropMenuToggle(!dropMenuToggle);
 	}, [setDropMenuToggle, dropMenuToggle]);
 
@@ -29,10 +28,7 @@ const Profile = ({ userProfile, logout }: Props) => {
 	);
 
 	useEffect(() => {
-		document.addEventListener('mousedown', (e) => {
-			console.log(2);
-			closeMenu(e);
-		});
+		document.addEventListener('mousedown', closeMenu);
 		return () => {
 			document.removeEventListener('mousedown', closeMenu);
 		};
@@ -49,17 +45,17 @@ const Profile = ({ userProfile, logout }: Props) => {
 				ref={dropRef}
 			>
 				<img alt="undefined" src={userProfile.profileImage === '' ? profile : userProfile.profileImage} />
+				<DropMenu open={dropMenuToggle} custom={style.dropMenu}>
+					<div className={`${style.profileMenu}`}>
+						<Link to="/profile">내 정보</Link>
+					</div>
+					<div className={`${style.profileMenu}`}>
+						<button type="button" onClick={logout}>
+							로그아웃
+						</button>
+					</div>
+				</DropMenu>
 			</div>
-			<DropMenu open={dropMenuToggle} custom={style.dropMenu}>
-				<div className={`${style.profileMenu}`}>
-					<Link to="/profile">내 정보</Link>
-				</div>
-				<div className={`${style.profileMenu}`}>
-					<button type="button" onClick={logout}>
-						로그아웃
-					</button>
-				</div>
-			</DropMenu>
 		</>
 	);
 };

@@ -37,6 +37,7 @@
 .dropMenu {
   /*background-color: cadetblue;*/
   background-color: var(--base-color);
+  z-index: 1000;
 }
 
 .dropMenu a {

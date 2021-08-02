@@ -16,6 +16,14 @@ const initialState: AuthAPIState = {
 };
 
 const authApi = createReducer<AuthAPIState, AuthAPIActionTypes>(initialState, {
+	[AuthAPIAction.INIT_LOGIN]: (state) => ({
+		...state,
+		loginResult: {
+			data: false,
+			error: null,
+			loading: false,
+		},
+	}),
 	[AuthAPIAction.LOGIN]: (state) => ({
 		...state,
 		logoutResult: {
@@ -61,6 +69,14 @@ const authApi = createReducer<AuthAPIState, AuthAPIActionTypes>(initialState, {
 		logoutResult: {
 			data: false,
 			error: action.payload,
+			loading: false,
+		},
+	}),
+	[AuthAPIAction.INIT_LOGOUT]: (state) => ({
+		...state,
+		loginResult: {
+			data: false,
+			error: null,
 			loading: false,
 		},
 	}),
