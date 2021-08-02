@@ -50,7 +50,7 @@ class Card extends React.PureComponent {
   };
 
   openProject = () => {
-    window.location.href = `/project/${this.props.id}`;
+    window.open(`/project/${this.props.id}`);
   };
 
   componentDidMount() {
