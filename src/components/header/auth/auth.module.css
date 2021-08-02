@@ -1,21 +1,21 @@
 .login {
-    font-weight: bold;
-    background-color: #dedede;
-    border-radius: 5px;
-    margin: 0 5px;
+  font-weight: bold;
+  background-color: #dedede;
+  border-radius: 5px;
+  margin: 0 5px;
 }
 
 .signup {
-    font-weight: bold;
-    background-color: var(--base-color);
-    border-radius: 5px;
+  font-weight: bold;
+  background-color: var(--base-color);
+  border-radius: 5px;
 }
 
 .profile {
-    display: flex;
+  display: flex;
 }
 
 .profile a {
-    color: var(--default-black);
-    text-decoration: none;
+  color: var(--default-black);
+  text-decoration: none;
 }

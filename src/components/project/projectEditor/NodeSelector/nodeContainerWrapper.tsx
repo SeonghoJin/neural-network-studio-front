@@ -6,33 +6,35 @@ import NodeContainer from './nodeContainer';
 import Node from './node';
 
 const useStyle = makeStyles({
-  wrapper: {
-    width: '100%',
-  },
-  container: {
-    paddingRight: 10,
-    paddingLeft: 0,
-    listStyle: 'none',
-  },
+	wrapper: {
+		width: '100%',
+	},
+	container: {
+		paddingRight: 10,
+		paddingLeft: 0,
+		listStyle: 'none',
+	},
 });
 
 const blocks = blockStates;
 
 const NodeContainerWrapper = () => {
-  const classes = useStyle();
-  return (
-    <div className={classes.wrapper}>
-      <ul className={classes.container}>
-        {blocks.map((block) => {
-          return <NodeContainer key={block.type} name={block.type} elementNumber={block.states.length}>
-            {block.states.map((blockState, index) => {
-              return <Node key={index} state={blockState}></Node>;
-            })}
-          </NodeContainer>;
-        })}
-      </ul>
-    </div>
-  );
+	const classes = useStyle();
+	return (
+		<div className={classes.wrapper}>
+			<ul className={classes.container}>
+				{blocks.map((block) => {
+					return (
+						<NodeContainer key={block.type} name={block.type} elementNumber={block.states.length}>
+							{block.states.map((blockState, index) => {
+								return <Node key={blockState.type} state={blockState} />;
+							})}
+						</NodeContainer>
+					);
+				})}
+			</ul>
+		</div>
+	);
 };
 
 export default NodeContainerWrapper;

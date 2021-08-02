@@ -1,149 +1,152 @@
-import { BlockCategory } from "./BlockCategory";
-import { ActivationConfig, AveragePooling2DConfig,
-  BatchNormalizationConfig, BlockConfig, Conv2DConfig, DenseConfig,DropoutConfig,
-  FlattenConfig, InputConfig, MaxPool2DConfig } from "./BlockConfig";
-import { BlockType } from "./BlockType";
+// eslint-disable-next-line max-classes-per-file
+import { BlockCategory } from './BlockCategory';
+import {
+	ActivationConfig,
+	AveragePooling2DConfig,
+	BatchNormalizationConfig,
+	BlockConfig,
+	Conv2DConfig,
+	DenseConfig,
+	DropoutConfig,
+	FlattenConfig,
+	InputConfig,
+	MaxPool2DConfig,
+} from './BlockConfig';
+import { BlockType } from './BlockType';
 
-export interface BlockState{
-  category: BlockCategory;
+export interface BlockState {
+	category: BlockCategory;
 
-  name: string | null;
+	name: string | null;
 
-  type: BlockType;
+	type: BlockType;
 
-  config: BlockConfig;
+	config: BlockConfig;
 
-  label: string;
+	label: string;
 }
 
 export class DenseBlockState implements BlockState {
-  category: BlockCategory = BlockCategory.Layer;
+	category: BlockCategory = BlockCategory.Layer;
 
-  config: BlockConfig = new DenseConfig();
+	config: BlockConfig = new DenseConfig();
 
-  name: string | null = null;
+	name: string | null = null;
 
-  type: BlockType = BlockType.Dense;
+	type: BlockType = BlockType.Dense;
 
-  label: string = "Dense Node";
+	label = 'Dense Node';
 }
 
 export class Conv2DBlockState implements BlockState {
-  category: BlockCategory = BlockCategory.Layer;
+	category: BlockCategory = BlockCategory.Layer;
 
-  label: string = "Conv2D Node";
+	label = 'Conv2D Node';
 
-  config: BlockConfig = new Conv2DConfig();
+	config: BlockConfig = new Conv2DConfig();
 
-  name: string | null = null;
+	name: string | null = null;
 
-  type: BlockType = BlockType.Conv2D;
+	type: BlockType = BlockType.Conv2D;
 }
 
 export class AveragePooling2DBlockState implements BlockState {
+	label = 'AveragePooling2D Node';
 
-  label: string = "AveragePooling2D Node";
+	category: BlockCategory = BlockCategory.Layer;
 
-  category: BlockCategory = BlockCategory.Layer;
+	config: BlockConfig = new AveragePooling2DConfig();
 
-  config: BlockConfig = new AveragePooling2DConfig();
+	name: string | null = null;
 
-  name: string | null = null;
-
-  type: BlockType = BlockType.AveragePooling2D;
+	type: BlockType = BlockType.AveragePooling2D;
 }
 
 export class MaxPool2DBlockState implements BlockState {
+	label = 'MaxPool2D Node';
 
-  label: string = "MaxPool2D Node";
+	category: BlockCategory = BlockCategory.Layer;
 
-  category: BlockCategory = BlockCategory.Layer;
+	config: BlockConfig = new MaxPool2DConfig();
 
-  config: BlockConfig = new MaxPool2DConfig();
+	name: string | null = null;
 
-  name: string | null = null;
-
-  type: BlockType = BlockType.MaxPool2D;
+	type: BlockType = BlockType.MaxPool2D;
 }
 
 export class ActivationBlockState implements BlockState {
+	label = 'Activation Node';
 
-  label: string = "Activation Node";
+	category: BlockCategory = BlockCategory.Layer;
 
-  category: BlockCategory = BlockCategory.Layer;
+	config: BlockConfig = new ActivationConfig();
 
-  config: BlockConfig = new ActivationConfig();
+	name: string | null = null;
 
-  name: string | null = null;
-
-  type: BlockType = BlockType.Activation;
+	type: BlockType = BlockType.Activation;
 }
 
 export class InputBlockState implements BlockState {
+	label = 'Input Node';
 
-  label: string = "Input Node";
+	category: BlockCategory = BlockCategory.Layer;
 
-  category: BlockCategory = BlockCategory.Layer;
+	config: BlockConfig = new InputConfig();
 
-  config: BlockConfig = new InputConfig();
+	name: string | null = null;
 
-  name: string | null = null;
-
-  type: BlockType = BlockType.Input;
+	type: BlockType = BlockType.Input;
 }
 
 export class DropoutBlockState implements BlockState {
+	label = 'Dropout Node';
 
-  label: string = "Dropout Node"
+	category: BlockCategory = BlockCategory.Layer;
 
-  category: BlockCategory = BlockCategory.Layer;
+	config: BlockConfig = new DropoutConfig();
 
-  config: BlockConfig = new DropoutConfig();
+	name: string | null = null;
 
-  name: string | null = null;
-
-  type: BlockType = BlockType.Dropout;
+	type: BlockType = BlockType.Dropout;
 }
 
 export class BatchNormalizationBlockState implements BlockState {
+	label = 'Batch Node';
 
-  label: string = "Batch Node"
+	category: BlockCategory = BlockCategory.Layer;
 
-  category: BlockCategory = BlockCategory.Layer;
+	config: BlockConfig = new BatchNormalizationConfig();
 
-  config: BlockConfig = new BatchNormalizationConfig();
+	name: string | null = null;
 
-  name: string | null = null;
-
-  type: BlockType = BlockType.BatchNormalization;
+	type: BlockType = BlockType.BatchNormalization;
 }
 
 export class FlattenBlockState implements BlockState {
+	label = 'Flatten Node';
 
-  label: string = "Flatten Node";
+	category: BlockCategory = BlockCategory.Layer;
 
-  category: BlockCategory = BlockCategory.Layer;
+	config: BlockConfig = new FlattenConfig();
 
-  config: BlockConfig = new FlattenConfig();
+	name: string | null = null;
 
-  name: string | null = null;
-
-  type: BlockType = BlockType.Flatten;
+	type: BlockType = BlockType.Flatten;
 }
 
-export const blockStates : {type: BlockCategory, states : BlockState[]}[] = [
-  {
-    type: BlockCategory.Layer,
-    states: [
-      new Conv2DBlockState(),
-      new DenseBlockState(),
-      new AveragePooling2DBlockState(),
-      new MaxPool2DBlockState(),
-      new ActivationBlockState(),
-      new InputBlockState(),
-      new DropoutBlockState(),
-      new BatchNormalizationBlockState(),
-      new FlattenBlockState(),
-    ],
-  },
+export const blockStates: { type: BlockCategory; states: BlockState[] }[] = [
+	{
+		type: BlockCategory.Layer,
+		states: [
+			new Conv2DBlockState(),
+			new DenseBlockState(),
+			new AveragePooling2DBlockState(),
+			new MaxPool2DBlockState(),
+			new ActivationBlockState(),
+			new InputBlockState(),
+			new DropoutBlockState(),
+			new BatchNormalizationBlockState(),
+			new FlattenBlockState(),
+		],
+	},
 ];

@@ -10,6 +10,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@material-ui/core": "^4.12.0",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.60",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -24,6 +25,7 @@
     "js-file-download": "^0.4.12",
     "localforage": "^1.9.0",
     "moment": "^2.29.1",
+    "query-string": "^4.3.4",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-cookie": "^4.0.3",
@@ -31,6 +33,7 @@
     "react-dom": "^17.0.2",
     "react-flow-renderer": "^9.6.3",
     "react-redux": "^7.2.4",
+    "react-reflex": "^4.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "redux": "^4.1.0",
@@ -41,20 +44,15 @@
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
   },
+  "proxy": "https://3.36.131.134:8080",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ../untitled2/src/**/*.ts",
-    "lint:fix": "eslint --fix ../untitled2/src/**/*.ts"
-  },
-  "proxy": "https://3.34.40.91:8080",
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "lint": "eslint --quiet ./src/**/*.{ts,tsx}",
+    "lint:fix": "eslint --fix ./src/**/*.{ts,tsx}",
+    "prettier": "prettier --write --config ./.prettierrc.js ./src/**/*.{ts,tsx}"
   },
   "browserslist": {
     "production": [
@@ -69,11 +67,19 @@
     ]
   },
   "devDependencies": {
+    "@types/query-string": "^6.3.0",
     "@types/uuid": "^8.3.1",
-    "@typescript-eslint/eslint-plugin": "^4.28.1",
-    "@typescript-eslint/parser": "^4.28.1",
-    "eslint": "^7.29.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5",
+    "eslint": "^7.31.0",
+    "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.23.4"
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.3.2"
   }
 }

@@ -1,15 +1,14 @@
-const MyComponent = (props : any) => {
-  return <div>{props.name}</div>;
+const MyComponent = (props: any) => {
+	// eslint-disable-next-line react/destructuring-assignment
+	return <div>{props.name}</div>;
 };
 
 const test1 = () => {
-  return (
-    <MyComponent/>
-  );
+	return <MyComponent />;
 };
 
 MyComponent.defaultProps = {
-  name: '진성호',
+	name: '진성호',
 };
 
 export default test1;
