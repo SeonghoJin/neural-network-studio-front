@@ -6,24 +6,24 @@ import configs from './config';
 import './App.css';
 import { Dashboard, Landing, LoginPage, NewProject, Profile, Signup } from './routes/index';
 import ProjectRouter from './Router/ProjectRouter';
+import LoginAuthentication from './Authentication/LoginAuthentication';
 import Authentication from './Authentication';
 
 function App() {
 	return (
 		<BrowserRouter>
+			<Authentication />
 			<Switch>
-				<Authentication>
-					{configs.NODE_ENV === 'development' && (
-						<Route path="/test/:test_component/:id" exact component={TestRouter} />
-					)}
+				<Route exact path="/" component={Landing} />
+				<Route path="/login" component={LoginPage} />
+				<Route path="/signup" component={Signup} />
+				{configs.NODE_ENV === 'development' && <Route path="/test/:test_component/:id" exact component={TestRouter} />}
+				<LoginAuthentication>
 					<Route path="/project" component={ProjectRouter} />
-					<Route exact path="/" component={Landing} />
-					<Route path="/signup" component={Signup} />
 					<Route path="/dashboard" component={Dashboard} />
 					<Route path="/newProject" component={NewProject} />
-					<Route path="/login" component={LoginPage} />
 					<Route path="/profile" component={Profile} />
-				</Authentication>
+				</LoginAuthentication>
 			</Switch>
 		</BrowserRouter>
 	);

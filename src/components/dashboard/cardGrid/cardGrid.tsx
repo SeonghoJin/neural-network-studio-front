@@ -24,8 +24,9 @@ const CardGrid = () => {
 		);
 	}, [page, dispatch]);
 
-	const emptyCards = new Array(DEFAULT_PAGE_SIZE).fill(null).map(() => {
-		return <EmptyCard />;
+	const emptyCards = new Array(DEFAULT_PAGE_SIZE).fill(null).map((value, index, array) => {
+		// eslint-disable-next-line react/no-array-index-key
+		return <EmptyCard key={`${index}1`} />;
 	});
 
 	return (
@@ -33,15 +34,13 @@ const CardGrid = () => {
 			<div className={`${style.grid}`}>
 				{data &&
 					data.projects.map((project) => (
-						<div>
-							<Card
-								key={`${project.name} - ${project.projectNo}`}
-								title={project.name}
-								description={project.description}
-								lastUpdate={project.lastModify}
-								id={project.projectNo}
-							/>
-						</div>
+						<Card
+							key={`${project.name} - ${project.projectNo}`}
+							title={project.name}
+							description={project.description}
+							lastUpdate={project.lastModify}
+							id={project.projectNo}
+						/>
 					))}
 				{loading && emptyCards}
 			</div>

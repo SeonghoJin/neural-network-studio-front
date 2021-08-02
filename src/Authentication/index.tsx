@@ -1,15 +1,10 @@
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import useGetUserProfileResult from '../hooks/APIResult/user/useGetUserProfileResult';
 import { getUserProfileThunks } from '../module/API/user/thunks';
 import { RootDispatch } from '../module';
 import { setAuthentication, UserType } from '../module/Auth';
 
-type Props = {
-	children: any;
-};
-const Authentication = ({ children }: Props) => {
-	const { loading } = useGetUserProfileResult();
+const Authentication = () => {
 	const thunkDispatch: RootDispatch = useDispatch();
 	const dispatch = useDispatch();
 
@@ -26,7 +21,7 @@ const Authentication = ({ children }: Props) => {
 		});
 	}, [dispatch, thunkDispatch]);
 
-	return <>{!loading && children}</>;
+	return <></>;
 };
 
 export default Authentication;

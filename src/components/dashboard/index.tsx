@@ -5,7 +5,6 @@ import CardGrid from './cardGrid/cardGrid';
 import Header from '../header/header';
 import style from './index.module.css';
 import utils from '../utils/index.module.css';
-import useAuthentication from '../../hooks/useAuthentication';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -21,12 +20,11 @@ const useStyle = makeStyles({
 });
 
 const DashBoard = () => {
-	const { user, isAuthentication } = useAuthentication();
 	const classes = useStyle();
 
 	return (
 		<>
-			<Header auth={isAuthentication} user={user.profile} />
+			<Header />
 			<div className={classes.wrapper}>
 				<div className={classes.container}>
 					<div className={`${style.mainWrapper}`}>
