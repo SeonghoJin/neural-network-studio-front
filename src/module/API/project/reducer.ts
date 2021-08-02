@@ -33,6 +33,11 @@ const initialState: ProjectAPIState = {
 		data: false,
 		error: null,
 	},
+	deleteProjectResult: {
+		loading: false,
+		data: false,
+		error: null,
+	},
 };
 
 const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initialState, {
@@ -183,6 +188,30 @@ const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initial
 	[ProjectAPIAction.PUT_PROJECT_INFO_ERROR]: (state, action) => ({
 		...state,
 		putProjectInfoResult: {
+			loading: false,
+			error: action.payload,
+			data: false,
+		},
+	}),
+	[ProjectAPIAction.DELETE_PROJECT]: (state) => ({
+		...state,
+		deleteProjectResult: {
+			loading: true,
+			error: null,
+			data: false,
+		},
+	}),
+	[ProjectAPIAction.DELETE_PROJECT_SUCCESS]: (state) => ({
+		...state,
+		deleteProjectResult: {
+			loading: false,
+			error: null,
+			data: true,
+		},
+	}),
+	[ProjectAPIAction.DELETE_PROJECT_ERROR]: (state, action) => ({
+		...state,
+		deleteProjectResult: {
 			loading: false,
 			error: action.payload,
 			data: false,

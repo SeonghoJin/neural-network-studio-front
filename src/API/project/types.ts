@@ -1,3 +1,4 @@
+// eslint-disable-next-line max-classes-per-file
 import { FlowExportObject } from 'react-flow-renderer';
 
 export interface IProjectDto {
@@ -58,4 +59,51 @@ export class ProjectConfig implements IProjectConfig {
 export interface IProjectInfo {
 	description: string;
 	name: string;
+}
+
+export interface IGetProjectListParams {
+	curPage?: string;
+	pageSize?: number;
+	sort?: string;
+	filterTypes?: string;
+	filterString?: string;
+}
+
+export class GetProjectListParams implements IGetProjectListParams {
+	curPage: string;
+
+	pageSize: number;
+
+	sort: string;
+
+	filterString: string;
+
+	filterTypes: string;
+
+	constructor(projectListParams?: IGetProjectListParams) {
+		this.curPage = projectListParams?.curPage || '';
+		this.pageSize = projectListParams?.pageSize || 10;
+		this.sort = projectListParams?.sort || '';
+		this.filterString = projectListParams?.filterString || '';
+		this.filterTypes = projectListParams?.filterString || '';
+	}
+}
+
+export interface Projects {
+	projects: Project[];
+	pagination: Pagination;
+}
+
+export interface Pagination {
+	curPage: number;
+	pageSize: number;
+	lastPage: number;
+	itemCount: number;
+}
+
+export interface Project {
+	projectNo: number;
+	name: string;
+	description: string;
+	lastModify: Date;
 }

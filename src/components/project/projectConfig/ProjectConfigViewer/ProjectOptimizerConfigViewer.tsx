@@ -7,7 +7,7 @@ import TextInput from '../../../Input/TextInput';
 import SelectInput from '../../../Input/SelectInput';
 import { getOptimizerValues } from '../../../../core/Optimizers';
 import FloatInput from '../../../Input/FloatInput';
-import useGetProjectConfigResult from '../../../../hooks/APIResult/useGetProjectConfigResult';
+import useGetProjectConfigResult from '../../../../hooks/APIResult/project/useGetProjectConfigResult';
 
 const useStyle = makeStyles({
 	wrapper: {

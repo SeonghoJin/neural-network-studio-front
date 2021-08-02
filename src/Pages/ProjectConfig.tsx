@@ -2,9 +2,9 @@ import { makeStyles } from '@material-ui/core';
 import ProjectConfigNav from '../components/project/projectConfig/projectConfigNav/projectConfigNav';
 import ProjectConfigMainContainer from '../components/project/projectConfig/ProjectConfigMainContainer';
 import ProjectNav from '../components/project/ProjectNav/projectNav';
-import useGetProjectConfigResult from '../hooks/APIResult/useGetProjectConfigResult';
-import usePutProjectConfigResult from '../hooks/APIResult/usePutProjectConfigResult';
-import usePutProjectInfoResult from '../hooks/APIResult/usePutProjectInfoResult';
+import useGetProjectConfigResult from '../hooks/APIResult/project/useGetProjectConfigResult';
+import usePutProjectConfigResult from '../hooks/APIResult/project/usePutProjectConfigResult';
+import usePutProjectInfoResult from '../hooks/APIResult/project/usePutProjectInfoResult';
 
 const useStyle = makeStyles({
 	wrapper: {

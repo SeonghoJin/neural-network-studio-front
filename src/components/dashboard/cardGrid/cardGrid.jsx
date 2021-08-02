@@ -7,7 +7,7 @@ class CardGrid extends React.PureComponent {
     const { projects } = this.props;
     return (
       <div className={`${style.grid}`}>
-        {{ projects }.projects.map((project) => (
+        {projects.projects.map((project) => (
           <Card
             key={project.name + ' - ' + project.projectNo}
             title={project.name}

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProjectEditorNavOptionContent from './ProjectEditorNavOptionContent';
 import { getProjectThunk, updateProjectContentThunk } from '../../../../module/API/project/thunks';
 import { RootDispatch, RootState } from '../../../../module';
-import useGetProjectResult from '../../../../hooks/APIResult/useGetProjectResult';
+import useGetProjectResult from '../../../../hooks/APIResult/project/useGetProjectResult';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
 
 const ProjectEditorNavOptionContentContainer = () => {

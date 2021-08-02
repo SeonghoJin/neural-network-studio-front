@@ -4,7 +4,7 @@ import useProjectConfig from '../../../../hooks/useProjectConfig';
 import CircleLoading from '../../../Loading/CircularLoading';
 import { IProjectGlobalConfig } from '../../../../API/project/types';
 import NumberInput from '../../../Input/NumberInput';
-import useGetProjectConfigResult from '../../../../hooks/APIResult/useGetProjectConfigResult';
+import useGetProjectConfigResult from '../../../../hooks/APIResult/project/useGetProjectConfigResult';
 
 const useStyle = makeStyles({
 	wrapper: {

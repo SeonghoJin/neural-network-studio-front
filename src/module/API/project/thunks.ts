@@ -3,6 +3,7 @@ import { FlowExportObject } from 'react-flow-renderer';
 import { RootState } from '../../index';
 import { ProjectAPIActionTypes } from './types';
 import {
+	deleteProjectAsync,
 	getProjectAsync,
 	getProjectConfigAsync,
 	getPythonCodeAsync,
@@ -11,6 +12,7 @@ import {
 	putProjectInfoAsync,
 } from './actions';
 import {
+	deleteProject,
 	getProject,
 	getProjectConfig,
 	getPythonCode,
@@ -131,3 +133,20 @@ export function putProjectConfigThunk(
 		}
 	};
 }
+
+export const deleteProjectThunk = (
+	projectNo: string
+): ThunkAction<Promise<boolean>, RootState, null, ProjectAPIActionTypes> => {
+	return async (dispatch) => {
+		const { request, success, failure } = deleteProjectAsync;
+		dispatch(request());
+		try {
+			await deleteProject(projectNo);
+			dispatch(success());
+			return true;
+		} catch (e) {
+			dispatch(failure(e.message));
+			return false;
+		}
+	};
+};
