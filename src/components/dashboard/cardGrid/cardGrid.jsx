@@ -5,7 +5,6 @@ import style from './cardGrid.module.css';
 class CardGrid extends React.PureComponent {
   render() {
     const { projects } = this.props;
-    console.log(projects);
     return (
       <div className={`${style.grid}`}>
         {{ projects }.projects.map((project) => (

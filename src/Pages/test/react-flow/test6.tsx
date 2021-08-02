@@ -63,16 +63,16 @@ const UpdateNode = () => {
 	}, [nodeBg]);
 
 	useEffect(() => {
-		setElements((els) =>
-			els.map((el) => {
+		setElements((els) => {
+			return els.map((el: any) => {
 				if (el.id === '1' || el.id === 'e1-2') {
 					// eslint-disable-next-line no-param-reassign
-					el.isHidden = nodeHidden;
+					el.el = nodeHidden;
 				}
 
 				return el;
-			})
-		);
+			});
+		});
 	}, [nodeHidden]);
 
 	return (
