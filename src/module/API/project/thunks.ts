@@ -3,22 +3,26 @@ import { FlowExportObject } from 'react-flow-renderer';
 import { RootState } from '../../index';
 import { ProjectAPIActionTypes } from './types';
 import {
+	deleteProjectAsync,
 	getProjectAsync,
 	getProjectConfigAsync,
+	getProjectListAsync,
 	getPythonCodeAsync,
 	putProjectConfigAsync,
 	putProjectContentAsync,
 	putProjectInfoAsync,
 } from './actions';
 import {
+	deleteProject,
 	getProject,
 	getProjectConfig,
+	getProjectList,
 	getPythonCode,
 	updateProjectConfig,
 	updateProjectContent,
 	updateProjectInfo,
 } from '../../../API/project';
-import { IProjectConfig, IProjectInfo } from '../../../API/project/types';
+import { IGetProjectListParams, IProjectConfig, IProjectInfo, Projects } from '../../../API/project/types';
 
 export function updateProjectContentThunk(
 	projectNo: string,
@@ -131,3 +135,38 @@ export function putProjectConfigThunk(
 		}
 	};
 }
+
+export const deleteProjectThunk = (
+	projectNo: string
+): ThunkAction<Promise<boolean>, RootState, null, ProjectAPIActionTypes> => {
+	return async (dispatch) => {
+		const { request, success, failure } = deleteProjectAsync;
+		dispatch(request());
+		try {
+			await deleteProject(projectNo);
+			dispatch(success());
+			return true;
+		} catch (e) {
+			dispatch(failure(e.message));
+			return false;
+		}
+	};
+};
+
+export const getProjectsThunk = (
+	params?: IGetProjectListParams
+): ThunkAction<Promise<Projects | null>, RootState, null, ProjectAPIActionTypes> => {
+	return async (dispatch) => {
+		const { request, success, failure } = getProjectListAsync;
+		dispatch(request());
+
+		try {
+			const projects = await getProjectList(params);
+			dispatch(success(projects));
+			return projects;
+		} catch (e) {
+			dispatch(failure(e.message));
+			return null;
+		}
+	};
+};

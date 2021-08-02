@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import ProjectConfigMain from './projectConfigMain';
-import useGetProjectConfigResult from '../../../hooks/APIResult/useGetProjectConfigResult';
+import useGetProjectConfigResult from '../../../hooks/APIResult/project/useGetProjectConfigResult';
 import { setProjectConfig } from '../../../module/projectConfig';
 import { getProjectConfigThunk } from '../../../module/API/project/thunks';
 import useProjectLocation from '../../../hooks/useProjectLocation';

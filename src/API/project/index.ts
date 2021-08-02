@@ -1,5 +1,14 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { IProjectConfig, IProjectContentDto, IProjectDto, IProjectInfo } from './types';
+import * as queryString from 'querystring';
+import {
+	GetProjectListParams,
+	IGetProjectListParams,
+	IProjectConfig,
+	IProjectContentDto,
+	IProjectDto,
+	IProjectInfo,
+	Projects,
+} from './types';
 import graphToLayouts from '../../core/GraphEngine';
 
 const axiosConfig: AxiosRequestConfig = {
@@ -58,5 +67,19 @@ export const updateProjectContent = async (projectNo: string, projectContent: IP
 		axiosConfig
 	);
 
+	return response.data;
+};
+
+export const deleteProject = async (projectNo: string) => {
+	const response = await axios.delete(`/api/project/${projectNo}`);
+	return response.data;
+};
+
+export const getProjectList = async (params?: IGetProjectListParams) => {
+	const uri = `api/projects?${queryString.stringify({
+		...new GetProjectListParams(params),
+	})}`;
+
+	const response = await axios.get<Projects>(uri, axiosConfig);
 	return response.data;
 };

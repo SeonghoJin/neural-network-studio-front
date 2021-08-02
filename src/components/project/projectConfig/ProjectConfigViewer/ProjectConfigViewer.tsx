@@ -1,5 +1,5 @@
-import useGetProjectConfigResult from '../../../../hooks/APIResult/useGetProjectConfigResult';
-import CircleLoading from '../../../Loading/CircularLoading';
+import useGetProjectConfigResult from '../../../../hooks/APIResult/project/useGetProjectConfigResult';
+import CircleLoading from '../../../utils/Loading/CircularLoading';
 import ProjectGlobalConfigViewer from './ProjectGlobalConfigViewer';
 import ProjectOptimizerConfigViewer from './ProjectOptimizerConfigViewer';
 

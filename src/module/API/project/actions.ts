@@ -1,5 +1,5 @@
 import { createAsyncAction } from 'typesafe-actions';
-import { IProjectConfig, IProjectDto } from '../../../API/project/types';
+import { IProjectConfig, IProjectDto, Projects } from '../../../API/project/types';
 import { createStandardAction } from '../../../util';
 
 export enum ProjectAPIAction {
@@ -22,6 +22,12 @@ export enum ProjectAPIAction {
 	PUT_PROJECT_INFO = 'putProjectInfo',
 	PUT_PROJECT_INFO_SUCCESS = 'putProjectInfoSuccess',
 	PUT_PROJECT_INFO_ERROR = 'putProjectInfoError',
+	DELETE_PROJECT = 'deleteProject',
+	DELETE_PROJECT_SUCCESS = 'deleteProjectSuccess',
+	DELETE_PROJECT_ERROR = 'deleteProjectError',
+	GET_PROJECT_LIST = 'getProjectList',
+	GET_PROJECT_LIST_SUCCESS = 'getProjectListSuccess',
+	GET_PROJECT_LIST_ERROR = 'getProjectListError',
 }
 
 export const getProjectAsync = createAsyncAction(
@@ -60,3 +66,15 @@ export const putProjectInfoAsync = createAsyncAction(
 	ProjectAPIAction.PUT_PROJECT_INFO_SUCCESS,
 	ProjectAPIAction.PUT_PROJECT_INFO_ERROR
 )<undefined, undefined, string>();
+
+export const deleteProjectAsync = createAsyncAction(
+	ProjectAPIAction.DELETE_PROJECT,
+	ProjectAPIAction.DELETE_PROJECT_SUCCESS,
+	ProjectAPIAction.DELETE_PROJECT_ERROR
+)<undefined, undefined, string>();
+
+export const getProjectListAsync = createAsyncAction(
+	ProjectAPIAction.GET_PROJECT_LIST,
+	ProjectAPIAction.GET_PROJECT_LIST_SUCCESS,
+	ProjectAPIAction.GET_PROJECT_LIST_ERROR
+)<undefined, Projects, string>();

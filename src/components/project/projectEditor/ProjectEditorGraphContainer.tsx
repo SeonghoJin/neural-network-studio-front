@@ -3,9 +3,9 @@ import { useCallback, useEffect } from 'react';
 import { Elements, OnLoadParams } from 'react-flow-renderer';
 import { setReactFlowInstance } from '../../../module/ReactFlowInstance';
 import ProjectEditorGraph from './projectEditorGraph';
-import CircleLoading from '../../Loading/CircularLoading';
+import CircleLoading from '../../utils/Loading/CircularLoading';
 import { setElements } from '../../../module/Elements';
-import useGetProjectResult from '../../../hooks/APIResult/useGetProjectResult';
+import useGetProjectResult from '../../../hooks/APIResult/project/useGetProjectResult';
 import { getProjectThunk } from '../../../module/API/project/thunks';
 import useProjectLocation from '../../../hooks/useProjectLocation';
 

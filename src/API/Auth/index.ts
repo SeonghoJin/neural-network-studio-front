@@ -7,12 +7,10 @@ const axiosConfig: AxiosRequestConfig = {
 
 export const login = async (loginRequest: LoginParams) => {
 	const response = await axios.post('/api/login', loginRequest, axiosConfig);
-
 	return response.data;
 };
 
 export const logout = async () => {
 	const response = await axios.delete('/api/logout', axiosConfig);
-
 	return response.data;
 };
