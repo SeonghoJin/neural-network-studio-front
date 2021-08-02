@@ -35,7 +35,7 @@ const ProjectInfoConfigViewer = () => {
 				});
 			}
 		},
-		[projectInfo]
+		[projectInfo, setProjectInfo]
 	);
 
 	const content = getProjectInfoResult.data && (

@@ -2,9 +2,27 @@ import React, { useEffect, useState } from 'react';
 import ReactFlow from 'react-flow-renderer';
 
 const initialElements = [
-	{ id: '1', data: { label: '-' }, position: { x: 100, y: 100 } },
-	{ id: '2', data: { label: 'Node 2' }, position: { x: 100, y: 200 } },
-	{ id: 'e1-2', source: '1', target: '2' },
+	{
+		id: '1',
+		data: { label: '-' },
+		position: {
+			x: 100,
+			y: 100,
+		},
+	},
+	{
+		id: '2',
+		data: { label: 'Node 2' },
+		position: {
+			x: 100,
+			y: 200,
+		},
+	},
+	{
+		id: 'e1-2',
+		source: '1',
+		target: '2',
+	},
 ];
 
 const UpdateNode = () => {
@@ -30,11 +48,13 @@ const UpdateNode = () => {
 
 	useEffect(() => {
 		setElements((els) =>
-			els.map((el) => {
+			els.map((el: any) => {
 				if (el.id === '1') {
-					// @ts-ignore
 					// eslint-disable-next-line no-param-reassign
-					el.style = { ...el.style, backgroundColor: nodeBg };
+					el.style = {
+						...el.style,
+						backgroundColor: nodeBg,
+					};
 				}
 
 				return el;
@@ -46,7 +66,6 @@ const UpdateNode = () => {
 		setElements((els) =>
 			els.map((el) => {
 				if (el.id === '1' || el.id === 'e1-2') {
-					// @ts-ignore
 					// eslint-disable-next-line no-param-reassign
 					el.isHidden = nodeHidden;
 				}
@@ -59,11 +78,16 @@ const UpdateNode = () => {
 	return (
 		<>
 			<div className="updatenode__controls">
-				<label>label:</label>
-				<input value={nodeName} onChange={(evt) => setNodeName(evt.target.value)} />
+				{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+				<label>
+					lllabel:
+					<input value={nodeName} onChange={(evt) => setNodeName(evt.target.value)} />
+				</label>
+				{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 				<label className="updatenode__bglabel">background:</label>
 				<input value={nodeBg} onChange={(evt) => setNodeBg(evt.target.value)} />
 				<div className="updatenode__checkboxwrapper">
+					{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 					<label>hidden:</label>
 					<input type="checkbox" checked={nodeHidden} onChange={(evt) => setNodeHidden(evt.target.checked)} />
 				</div>

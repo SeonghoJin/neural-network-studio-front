@@ -8,8 +8,6 @@ import ReactFlow, {
 	MiniMap,
 	removeElements,
 } from 'react-flow-renderer';
-import TestNode1 from '../../../core/nodetypes/test/TestNode1';
-import { Position } from '../../../core/types';
 import { nodetypes } from '../../../core/nodetypes';
 
 const initialElements: Elements = [
@@ -23,7 +21,10 @@ const initialElements: Elements = [
 				</>
 			),
 		},
-		position: { x: 250, y: 0 },
+		position: {
+			x: 250,
+			y: 0,
+		},
 	},
 	{
 		id: '2',
@@ -34,7 +35,10 @@ const initialElements: Elements = [
 				</>
 			),
 		},
-		position: { x: 100, y: 100 },
+		position: {
+			x: 100,
+			y: 100,
+		},
 	},
 	{
 		id: '3',
@@ -45,7 +49,10 @@ const initialElements: Elements = [
 				</>
 			),
 		},
-		position: { x: 400, y: 100 },
+		position: {
+			x: 400,
+			y: 100,
+		},
 		style: {
 			background: '#D6D5E6',
 			color: '#333',
@@ -55,7 +62,10 @@ const initialElements: Elements = [
 	},
 	{
 		id: '4',
-		position: { x: 250, y: 200 },
+		position: {
+			x: 250,
+			y: 200,
+		},
 		data: {
 			label: 'Another default node',
 		},
@@ -65,7 +75,10 @@ const initialElements: Elements = [
 		data: {
 			label: 'Node id: 5',
 		},
-		position: { x: 250, y: 325 },
+		position: {
+			x: 250,
+			y: 325,
+		},
 	},
 	{
 		id: '6',
@@ -77,13 +90,19 @@ const initialElements: Elements = [
 				</>
 			),
 		},
-		position: { x: 100, y: 480 },
+		position: {
+			x: 100,
+			y: 480,
+		},
 	},
 	{
 		id: '7',
 		type: 'output',
 		data: { label: 'Another output node' },
-		position: { x: 400, y: 450 },
+		position: {
+			x: 400,
+			y: 450,
+		},
 	},
 	{
 		id: 'e1-2',
@@ -91,7 +110,11 @@ const initialElements: Elements = [
 		target: '2',
 		label: 'this is an edge label',
 	},
-	{ id: 'e1-3', source: '1', target: '3' },
+	{
+		id: 'e1-3',
+		source: '1',
+		target: '3',
+	},
 	{
 		id: 'e3-4',
 		source: '3',
@@ -121,7 +144,10 @@ const initialElements: Elements = [
 		style: { stroke: '#f6ab6c' },
 		label: 'a step edge',
 		animated: true,
-		labelStyle: { fill: '#f6ab6c', fontWeight: 700 },
+		labelStyle: {
+			fill: '#f6ab6c',
+			fontWeight: 700,
+		},
 	},
 ];
 
@@ -131,6 +157,7 @@ const onLoad = (reactFlowInstance: any) => {
 };
 
 const test4 = () => {
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const [elements, setElements] = useState(initialElements);
 	const onElementsRemove = (elementsToRemove: Elements<any>) => {
 		setElements((els: any) => removeElements(elementsToRemove, els));

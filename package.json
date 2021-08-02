@@ -48,7 +48,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src/**/*.{ts,tsx}",
+    "lint": "eslint --quiet ./src/**/*.{ts,tsx}",
     "lint:fix": "eslint --fix ./src/**/*.{ts,tsx}",
     "prettier": "prettier --write --config ./.prettierrc.js ./src/**/*.{ts,tsx}"
   },

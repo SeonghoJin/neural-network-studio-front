@@ -33,7 +33,9 @@ const SideBar = () => {
 				</div>
 			))}
 			<div className="selectall">
-				<button onClick={selectAll}>select all nodes</button>
+				<button type="button" onClick={selectAll}>
+					select all nodes
+				</button>
 			</div>
 		</aside>
 	);
