@@ -2,7 +2,7 @@ import { Container, makeStyles } from '@material-ui/core';
 
 import React from 'react';
 import useGetProjectResult from '../../../../hooks/APIResult/project/useGetProjectResult';
-import CircleLoading from '../../../Loading/CircularLoading';
+import CircleLoading from '../../../utils/Loading/CircularLoading';
 import ProjectEditorNavMainContentContainer from './ProjectEditorNavMainContentContainer';
 import ProjectEditorNavOptionContentContainer from './ProjectEditorNavOptionContentContainer';
 

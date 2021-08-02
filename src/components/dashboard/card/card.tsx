@@ -4,9 +4,9 @@ import style from './card.module.css';
 import CardDropMenu from './cardDropMenu';
 
 type Props = {
-	id: string;
+	id: number;
 	title: string;
-	lastUpdate: string;
+	lastUpdate: Date;
 	description: string;
 };
 

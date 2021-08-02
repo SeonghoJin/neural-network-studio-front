@@ -2,8 +2,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../module';
 import StandardModal from '../../../components/utils/modal/StandardModal';
 
-const usePutProjectConfigResult = () => {
-	const result = useSelector((state: RootState) => state.projectApi.putProjectConfigResult);
+const useGetProjectResult = () => {
+	const result = useSelector((state: RootState) => state.projectApi.getProjectsResult);
 
 	return {
 		...result,
@@ -11,4 +11,4 @@ const usePutProjectConfigResult = () => {
 	};
 };
 
-export default usePutProjectConfigResult;
+export default useGetProjectResult;

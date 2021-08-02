@@ -1,5 +1,5 @@
 import { createAsyncAction } from 'typesafe-actions';
-import { IProjectConfig, IProjectDto } from '../../../API/project/types';
+import { IProjectConfig, IProjectDto, Projects } from '../../../API/project/types';
 import { createStandardAction } from '../../../util';
 
 export enum ProjectAPIAction {
@@ -25,6 +25,9 @@ export enum ProjectAPIAction {
 	DELETE_PROJECT = 'deleteProject',
 	DELETE_PROJECT_SUCCESS = 'deleteProjectSuccess',
 	DELETE_PROJECT_ERROR = 'deleteProjectError',
+	GET_PROJECT_LIST = 'getProjectList',
+	GET_PROJECT_LIST_SUCCESS = 'getProjectListSuccess',
+	GET_PROJECT_LIST_ERROR = 'getProjectListError',
 }
 
 export const getProjectAsync = createAsyncAction(
@@ -69,3 +72,9 @@ export const deleteProjectAsync = createAsyncAction(
 	ProjectAPIAction.DELETE_PROJECT_SUCCESS,
 	ProjectAPIAction.DELETE_PROJECT_ERROR
 )<undefined, undefined, string>();
+
+export const getProjectListAsync = createAsyncAction(
+	ProjectAPIAction.GET_PROJECT_LIST,
+	ProjectAPIAction.GET_PROJECT_LIST_SUCCESS,
+	ProjectAPIAction.GET_PROJECT_LIST_ERROR
+)<undefined, Projects, string>();

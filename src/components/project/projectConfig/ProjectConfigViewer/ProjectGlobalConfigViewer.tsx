@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import { ChangeEvent, useCallback } from 'react';
 import useProjectConfig from '../../../../hooks/useProjectConfig';
-import CircleLoading from '../../../Loading/CircularLoading';
+import CircleLoading from '../../../utils/Loading/CircularLoading';
 import { IProjectGlobalConfig } from '../../../../API/project/types';
 import NumberInput from '../../../Input/NumberInput';
 import useGetProjectConfigResult from '../../../../hooks/APIResult/project/useGetProjectConfigResult';

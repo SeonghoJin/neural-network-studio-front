@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import StandardModal from '../../../components/modal/StandardModal';
+import StandardModal from '../../../components/utils/modal/StandardModal';
 import { RootState } from '../../../module';
 import { PROJECT_ERROR_HANDLE_URI } from '../util';
 

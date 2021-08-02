@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import { RootState } from '../../../module';
-import StandardModal from '../../../components/modal/StandardModal';
+import StandardModal from '../../../components/utils/modal/StandardModal';
 import { PROJECT_ERROR_HANDLE_URI } from '../util';
 
 const useGetProjectConfigResult = () => {

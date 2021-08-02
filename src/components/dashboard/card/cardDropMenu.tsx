@@ -8,7 +8,7 @@ import { deleteProjectThunk } from '../../../module/API/project/thunks';
 import { RootDispatch } from '../../../module';
 
 type Props = {
-	projectNo: string;
+	projectNo: number;
 };
 
 const CardDropMenu = ({ projectNo }: Props) => {
@@ -31,7 +31,7 @@ const CardDropMenu = ({ projectNo }: Props) => {
 
 	const onDeleteProject = useCallback(async () => {
 		if (window.confirm('프로젝트를 삭제하시겠습니까?')) {
-			dispatch(deleteProjectThunk(projectNo)).then((res) => {
+			dispatch(deleteProjectThunk(projectNo.toString())).then((res) => {
 				if (!res) return;
 				window.location.href = '/dashboard';
 			});

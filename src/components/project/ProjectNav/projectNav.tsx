@@ -1,6 +1,6 @@
 import { Container, makeStyles } from '@material-ui/core';
 import React from 'react';
-import Logo from '../../Logo/Logo';
+import Logo from '../../utils/Logo/Logo';
 import ProjectNavMainContent from './ProjectNavMainContent';
 import ProjectNavOptionContent from './ProjectNavOptionContent';
 

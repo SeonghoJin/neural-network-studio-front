@@ -6,6 +6,7 @@ import {
 	deleteProjectAsync,
 	getProjectAsync,
 	getProjectConfigAsync,
+	getProjectListAsync,
 	getPythonCodeAsync,
 	putProjectConfigAsync,
 	putProjectContentAsync,
@@ -15,12 +16,13 @@ import {
 	deleteProject,
 	getProject,
 	getProjectConfig,
+	getProjectList,
 	getPythonCode,
 	updateProjectConfig,
 	updateProjectContent,
 	updateProjectInfo,
 } from '../../../API/project';
-import { IProjectConfig, IProjectInfo } from '../../../API/project/types';
+import { IGetProjectListParams, IProjectConfig, IProjectInfo, Projects } from '../../../API/project/types';
 
 export function updateProjectContentThunk(
 	projectNo: string,
@@ -147,6 +149,24 @@ export const deleteProjectThunk = (
 		} catch (e) {
 			dispatch(failure(e.message));
 			return false;
+		}
+	};
+};
+
+export const getProjectsThunk = (
+	params?: IGetProjectListParams
+): ThunkAction<Promise<Projects | null>, RootState, null, ProjectAPIActionTypes> => {
+	return async (dispatch) => {
+		const { request, success, failure } = getProjectListAsync;
+		dispatch(request());
+
+		try {
+			const projects = await getProjectList(params);
+			dispatch(success(projects));
+			return projects;
+		} catch (e) {
+			dispatch(failure(e.message));
+			return null;
 		}
 	};
 };

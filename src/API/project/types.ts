@@ -69,6 +69,8 @@ export interface IGetProjectListParams {
 	filterString?: string;
 }
 
+export const DEFAULT_PAGE_SIZE = 8;
+
 export class GetProjectListParams implements IGetProjectListParams {
 	curPage: string;
 
@@ -82,7 +84,7 @@ export class GetProjectListParams implements IGetProjectListParams {
 
 	constructor(projectListParams?: IGetProjectListParams) {
 		this.curPage = projectListParams?.curPage || '';
-		this.pageSize = projectListParams?.pageSize || 10;
+		this.pageSize = projectListParams?.pageSize || DEFAULT_PAGE_SIZE;
 		this.sort = projectListParams?.sort || '';
 		this.filterString = projectListParams?.filterString || '';
 		this.filterTypes = projectListParams?.filterString || '';

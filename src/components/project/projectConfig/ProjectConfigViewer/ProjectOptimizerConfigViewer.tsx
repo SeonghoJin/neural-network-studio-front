@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import { ChangeEvent, useCallback } from 'react';
 import useProjectConfig from '../../../../hooks/useProjectConfig';
-import CircleLoading from '../../../Loading/CircularLoading';
+import CircleLoading from '../../../utils/Loading/CircularLoading';
 import { IProjectOptimizerConfig } from '../../../../API/project/types';
 import TextInput from '../../../Input/TextInput';
 import SelectInput from '../../../Input/SelectInput';
