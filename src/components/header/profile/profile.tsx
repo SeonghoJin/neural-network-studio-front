@@ -1,12 +1,27 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Backdrop } from '@material-ui/core';
 import style from './profile.module.css';
 import DropMenu from '../../utils/dropMenu/dropMenu';
 import { UserProfile } from '../../../API/User/types';
+import useLogoutResult from '../../../hooks/APIResult/auth/useLogoutResult';
+import useGetUserProfileResult from '../../../hooks/APIResult/user/useGetUserProfileResult';
 
 type Props = {
 	userProfile: UserProfile;
 	logout: () => void;
+};
+
+const LogoutResult = () => {
+	const logoutResult = useLogoutResult();
+	const getUserProfileResult = useGetUserProfileResult();
+
+	return (
+		<>
+			<Backdrop open={logoutResult.loading || getUserProfileResult.loading} />
+			{logoutResult.error && logoutResult.errorModal}
+		</>
+	);
 };
 
 const Profile = ({ userProfile, logout }: Props) => {
@@ -55,6 +70,7 @@ const Profile = ({ userProfile, logout }: Props) => {
 					</div>
 				</DropMenu>
 			</div>
+			<LogoutResult />
 		</>
 	);
 };

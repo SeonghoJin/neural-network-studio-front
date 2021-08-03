@@ -5,45 +5,29 @@ import Modal from '../../utils/modal/modal';
 import Signin from '../../signin/signin';
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
+import SignInContainer from '../../signin/signInContainer';
 
 class Auth extends React.Component {
-  state = {
-    modalOpen: false,
-  };
+	state = {
+		modalOpen: false,
+	};
 
-  openModal = () => {
-    this.setState({ modalOpen: true });
-  };
-
-  closeModal = () => {
-    this.setState({ modalOpen: false });
-  };
-
-  pressKey = (e) => {
-    if (e.key === 'Escape') this.closeModal();
-  };
-
-  render() {
-    return (
-      <div onKeyDown={this.pressKey} className={`${style.profile}`}>
-        {
-          <>
-            <div className={`${utils.divButton} ${style.login}`}>
-              <a href="#" onClick={this.openModal}>
-                로그인
-              </a>
-            </div>
-            <div className={`${utils.divButton} ${style.signup}`}>
-              <Link to="/signup">회원가입</Link>
-            </div>
-            <Modal open={this.state.modalOpen} close={this.closeModal}>
-              <Signin />
-            </Modal>
-          </>
-        }
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div className={`${style.profile}`}>
+				{
+					<>
+						<div className={`${utils.divButton} ${style.login}`}>
+							<Link to="/login">로그인</Link>
+						</div>
+						<div className={`${utils.divButton} ${style.signup}`}>
+							<Link to="/signup">회원가입</Link>
+						</div>
+					</>
+				}
+			</div>
+		);
+	}
 }
 
 export default withRouter(Auth);

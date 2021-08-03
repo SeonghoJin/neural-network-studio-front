@@ -26,7 +26,7 @@ const authApi = createReducer<AuthAPIState, AuthAPIActionTypes>(initialState, {
 	}),
 	[AuthAPIAction.LOGIN]: (state) => ({
 		...state,
-		logoutResult: {
+		loginResult: {
 			data: false,
 			error: null,
 			loading: true,
@@ -74,7 +74,7 @@ const authApi = createReducer<AuthAPIState, AuthAPIActionTypes>(initialState, {
 	}),
 	[AuthAPIAction.INIT_LOGOUT]: (state) => ({
 		...state,
-		loginResult: {
+		logoutResult: {
 			data: false,
 			error: null,
 			loading: false,
