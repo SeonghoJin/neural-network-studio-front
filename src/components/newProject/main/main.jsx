@@ -4,6 +4,9 @@ import utils from '../../utils/index.module.css';
 
 import axios from 'axios';
 
+const maxNameLen = 45;
+const maxDescriptionLen = 2000;
+
 class Main extends React.PureComponent {
   state = {
     name: '',
@@ -51,15 +54,17 @@ class Main extends React.PureComponent {
           >
             <input
               className={`${style.name}`}
-              placeholder={'프로젝트 이름'}
+              placeholder={'프로젝트 이름 (최대 45자)'}
               onChange={this.onNameChange}
+              maxLength={maxNameLen}
             />
           </div>
           <div className={`${utils.inputWrapper}`} style={{ width: '100%' }}>
             <textarea
               className={`${style.description}`}
-              placeholder={'프로젝트 설명'}
+              placeholder={'프로젝트 설명 (최대 2000자)'}
               onChange={this.onDescriptionChange}
+              maxLength={maxDescriptionLen}
             />
           </div>
         </div>
