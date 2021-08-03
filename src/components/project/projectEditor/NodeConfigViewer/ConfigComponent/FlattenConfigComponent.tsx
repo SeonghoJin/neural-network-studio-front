@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 
-import { FlattenConfig, IConfigComponent } from '../../../../../core/block';
+import { FlattenConfig, IConfigComponent } from '../../../../../core/Project/block';
 import { configComponentToReactNode } from './util';
 
 type Props = {

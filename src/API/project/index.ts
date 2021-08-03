@@ -9,7 +9,7 @@ import {
 	IProjectInfo,
 	Projects,
 } from './types';
-import graphToLayouts from '../../core/GraphEngine';
+import graphToLayouts from '../../core/reactFlow/GraphEngine';
 
 const axiosConfig: AxiosRequestConfig = {
 	withCredentials: true,

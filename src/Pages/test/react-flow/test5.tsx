@@ -10,7 +10,7 @@ import ReactFlow, {
 	Handle,
 	Position,
 } from 'react-flow-renderer';
-import { nodetypes } from '../../../core/nodetypes';
+import { nodetypes } from '../../../core/reactFlow/node/nodetypes';
 
 const ColorSelectorNode = memo(({ data }: { data: any }) => (
 	<>

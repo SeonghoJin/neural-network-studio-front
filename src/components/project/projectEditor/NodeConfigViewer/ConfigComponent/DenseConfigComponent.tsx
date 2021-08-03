@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 
-import { DenseConfig, IConfigComponent } from '../../../../../core/block';
+import { DenseConfig, IConfigComponent } from '../../../../../core/Project/block';
 import NumberInput from '../../../../Input/NumberInput';
 import { configComponentToReactNode } from './util';
 

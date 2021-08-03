@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core';
 import React, { EventHandler, KeyboardEventHandler, useCallback, useEffect, useRef } from 'react';
 import ReactFlow, {
 	addEdge,
+	ArrowHeadType,
 	Background,
 	Connection,
 	Controls,
@@ -16,10 +17,12 @@ import ReactFlow, {
 	useStoreState,
 } from 'react-flow-renderer';
 import { useSelector } from 'react-redux';
-import { BlockState } from '../../../core/block/BlockState';
+import { BlockState } from '../../../core/Project/block/BlockState';
 import { getNodeId } from '../../../util';
-import { nodetypes } from '../../../core/nodetypes';
+import { nodetypes } from '../../../core/reactFlow/node/nodetypes';
 import { RootState } from '../../../module';
+import { createCustomNode } from '../../../core/reactFlow/node';
+import createCustomEdge from '../../../core/reactFlow/edge';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -69,7 +72,7 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 
 	const onConnect = useCallback(
 		(params: Edge | Connection) => {
-			setElements(addEdge(params, elements));
+			setElements(addEdge(createCustomEdge(params), elements));
 		},
 		[elements, setElements]
 	);
@@ -98,14 +101,10 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 					x: localEvent.clientX - (reactFlowBounds?.left || 0),
 					y: localEvent.clientY - (reactFlowBounds?.top || 0),
 				});
-				const newNode: Node = {
-					id: getNodeId(),
-					type: 'default',
+				const newNode: Node = createCustomNode({
 					position,
-					data: {
-						...nodedata,
-					},
-				};
+					data: nodedata,
+				});
 				setElements(elements.concat(newNode));
 				setSelectedElements(newNode);
 			}

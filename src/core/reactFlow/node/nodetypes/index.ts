@@ -1,4 +1,4 @@
-import { BlockType } from '../block/BlockType';
+import { BlockType } from '../../../Project/block/BlockType';
 import TestNode1Component from './test/TestNode1Component';
 
 export const nodetypes = {

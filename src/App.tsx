@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import TestRouter from './Router/test/TestRouter';
+import TestRouter from './Router/TestRouter';
 import configs from './config';
 import './App.css';
 import { Dashboard, Landing, LoginPage, NewProject, Profile, Signup } from './routes/index';

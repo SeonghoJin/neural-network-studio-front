@@ -8,7 +8,7 @@ import ReactFlow, {
 	MiniMap,
 	removeElements,
 } from 'react-flow-renderer';
-import { nodetypes } from '../../../core/nodetypes';
+import { nodetypes } from '../../../core/reactFlow/node/nodetypes';
 
 const initialElements: Elements = [
 	{

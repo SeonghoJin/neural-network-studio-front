@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useMemo } from 'react';
-import { IConfigComponent, MaxPool2DConfig } from '../../../../../core/block';
+import { IConfigComponent, MaxPool2DConfig } from '../../../../../core/Project/block';
 import TextInput from '../../../../Input/TextInput';
 
 import SecondDivisionTupleInput from '../../../../Input/SecondDivisionTupleInput';

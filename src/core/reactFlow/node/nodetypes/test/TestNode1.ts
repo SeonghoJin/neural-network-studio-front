@@ -1,4 +1,4 @@
-import { BlockType } from '../../block';
+import { BlockType } from '../../../../Project/block';
 import CommonNode from '../CommonNode';
 
 class TestNode1 extends CommonNode {

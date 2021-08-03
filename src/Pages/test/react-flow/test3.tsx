@@ -1,7 +1,7 @@
 import ReactFlow, { Node, Edge } from 'react-flow-renderer';
-import { nodetypes } from '../../../core/nodetypes';
-import TestNode1 from '../../../core/nodetypes/test/TestNode1';
-import { Position } from '../../../core/types';
+import { nodetypes } from '../../../core/reactFlow/node/nodetypes';
+import TestNode1 from '../../../core/reactFlow/node/nodetypes/test/TestNode1';
+import { Position } from '../../../core/Project/types';
 
 const elements: Array<Node | Edge> = [];
 

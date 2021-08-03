@@ -1,11 +1,11 @@
 import React, { ChangeEvent } from 'react';
 
-import { AveragePooling2DConfig, IConfigComponent } from '../../../../../core/block';
+import { AveragePooling2DConfig, IConfigComponent } from '../../../../../core/Project/block';
 import NumberInput from '../../../../Input/NumberInput';
 import SecondDivisionTupleInput from '../../../../Input/SecondDivisionTupleInput';
 import SelectInput from '../../../../Input/SelectInput';
 import { configComponentToReactNode } from './util';
-import { getPaddingValues } from '../../../../../core/Padding';
+import { getPaddingValues } from '../../../../../core/Project/Padding';
 
 type Props = {
 	config: AveragePooling2DConfig;
