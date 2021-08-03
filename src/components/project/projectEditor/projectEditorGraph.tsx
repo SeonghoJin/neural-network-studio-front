@@ -18,8 +18,7 @@ import ReactFlow, {
 } from 'react-flow-renderer';
 import { useSelector } from 'react-redux';
 import { BlockState } from '../../../core/Project/block/BlockState';
-import { getNodeId } from '../../../util';
-import { nodetypes } from '../../../core/reactFlow/node/nodetypes';
+import { nodeTypes } from '../../../core/reactFlow/node/nodetypes';
 import { RootState } from '../../../module';
 import { createCustomNode } from '../../../core/reactFlow/node';
 import createCustomEdge from '../../../core/reactFlow/edge';
@@ -95,15 +94,16 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 			e.preventDefault();
 			const localEvent = e;
 			if (localEvent.dataTransfer.types.includes('application/nodedata')) {
-				const nodedata = JSON.parse(localEvent.dataTransfer.getData('application/nodedata')) as BlockState;
+				const nodeData = JSON.parse(localEvent.dataTransfer.getData('application/nodedata')) as BlockState;
 				const reactFlowBounds = reactFlowWrapper.current?.getBoundingClientRect();
 				const position = (reactFlowInstance as any).project({
 					x: localEvent.clientX - (reactFlowBounds?.left || 0),
 					y: localEvent.clientY - (reactFlowBounds?.top || 0),
 				});
 				const newNode: Node = createCustomNode({
+					type: nodeData.category,
 					position,
-					data: nodedata,
+					data: nodeData,
 				});
 				setElements(elements.concat(newNode));
 				setSelectedElements(newNode);
@@ -140,7 +140,7 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 				onKeyDown={onKeyDown}
 				onElementsRemove={onElementsRemove}
 				tabIndex={0}
-				nodeTypes={nodetypes}
+				nodeTypes={nodeTypes}
 				defaultPosition={flowState?.position}
 				defaultZoom={flowState?.zoom}
 			>

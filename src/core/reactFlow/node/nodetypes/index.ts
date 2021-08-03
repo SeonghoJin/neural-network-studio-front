@@ -1,8 +1,8 @@
-import { BlockType } from '../../../Project/block/BlockType';
-import TestNode1Component from './test/TestNode1Component';
+import { BlockCategory } from '../../../Project/block';
+import LayerNode from './component/LayerNode';
 
-export const nodetypes = {
-	[BlockType.Dropout]: TestNode1Component,
+export const nodeTypes = {
+	[BlockCategory.Layer]: LayerNode,
 };
 
-export default nodetypes;
+export default nodeTypes;
