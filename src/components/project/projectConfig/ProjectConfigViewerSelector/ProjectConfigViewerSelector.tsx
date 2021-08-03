@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core';
+import selectorItemHeads from '..';
 import ProjectConfigViewerSelectorItem from './ProjectConfigViewerSelectorItem';
 
 const useStyle = makeStyles({
@@ -14,11 +15,9 @@ const useStyle = makeStyles({
 	},
 });
 
-const selectorItemHeads = ['Global Config', 'Optimizer'];
-
 type Props = {
-	value: number;
-	setValue: (num: number) => void;
+	value: keyof typeof selectorItemHeads;
+	setValue: (num: keyof typeof selectorItemHeads) => void;
 };
 
 const ProjectConfigViewerSelector = (props: Props) => {
@@ -26,14 +25,14 @@ const ProjectConfigViewerSelector = (props: Props) => {
 	const { value, setValue } = props;
 	const selectorItems = (
 		<ul>
-			{selectorItemHeads.map((head, index) => {
+			{Object.keys(selectorItemHeads).map((head, index) => {
 				return (
 					<li key={head}>
 						<ProjectConfigViewerSelectorItem
 							head={head}
-							active={value === index}
+							active={head === value}
 							onClick={() => {
-								setValue(index);
+								setValue(head as keyof typeof selectorItemHeads);
 							}}
 						/>
 					</li>
