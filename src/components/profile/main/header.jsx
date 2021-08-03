@@ -7,6 +7,8 @@ import { faEdit }from "@fortawesome/free-regular-svg-icons"
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
+const maxNameLen = 45;
+
 export default class Header extends React.PureComponent {
   state = {
     name: this.props.user.name,
@@ -82,7 +84,7 @@ export default class Header extends React.PureComponent {
                 </button> :
                 null
             }
-            <input className={`${style.invisibleInput}`} type={"file"} id={"uploadImage"} name={"image"} accept={"image/*"} onChange={this.imageUpload} />
+            <input className={`${style.invisibleInput}`} type={"file"} id={"uploadImage"} name={"image"} accept={"image/*"} onChange={this.imageUpload}/>
             <img src={modify ? this.state.profileImageUrl : user.profileImage.url} alt={"profile"}/>
           </div>
           {modify ? (
@@ -90,6 +92,7 @@ export default class Header extends React.PureComponent {
               className={`${style.modifyName}`}
               defaultValue={this.state.name}
               onChange={this.onNameChange}
+              maxLength={maxNameLen}
             />
           ) : (
             <h2>{user.name}</h2>

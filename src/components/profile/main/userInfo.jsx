@@ -6,6 +6,9 @@ import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 
 import style from './main.module.css';
 
+const maxNameLen = 45;
+const maxDescriptionLen = 2000;
+
 export default class UserInfo extends React.PureComponent {
   state = {
     email: '',
@@ -81,6 +84,7 @@ export default class UserInfo extends React.PureComponent {
               className={`${style.modifyTextarea}`}
               defaultValue={this.state.description}
               onChange={this.onChangeDescription}
+              maxLength={maxDescriptionLen}
             />
           ) : (
             <p>{user.description}</p>
