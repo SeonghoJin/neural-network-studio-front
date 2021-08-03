@@ -1,20 +1,21 @@
+import { useMemo, createElement } from 'react';
+
+import selectorItemHeads, { SelectorMappingViewer } from '..';
 import useGetProjectConfigResult from '../../../../hooks/APIResult/project/useGetProjectConfigResult';
 import CircleLoading from '../../../utils/Loading/CircularLoading';
-import ProjectGlobalConfigViewer from './ProjectGlobalConfigViewer';
-import ProjectOptimizerConfigViewer from './ProjectOptimizerConfigViewer';
 
 type Props = {
-	index: number;
+	index: keyof typeof selectorItemHeads;
 };
 
 const ProjectConfigViewer = ({ index }: Props) => {
-	const configViewerMap = new Map();
 	const { error, loading } = useGetProjectConfigResult();
 
-	configViewerMap.set(0, <ProjectGlobalConfigViewer />);
-	configViewerMap.set(1, <ProjectOptimizerConfigViewer />);
+	const element = useMemo(() => {
+		return createElement(SelectorMappingViewer[index]);
+	}, [index]);
 
-	return <>{error || loading ? <CircleLoading /> : configViewerMap.get(index)}</>;
+	return <>{error || loading ? <CircleLoading /> : element}</>;
 };
 
 export default ProjectConfigViewer;
