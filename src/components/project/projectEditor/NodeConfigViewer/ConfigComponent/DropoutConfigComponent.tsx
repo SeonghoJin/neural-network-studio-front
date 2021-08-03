@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 
-import { DropoutConfig, IConfigComponent } from '../../../../../core/block';
+import { DropoutConfig, IConfigComponent } from '../../../../../core/Project/block';
 import SliderInput, { Marks } from '../../../../Input/SliderInput';
 import { configComponentToReactNode } from './util';
 

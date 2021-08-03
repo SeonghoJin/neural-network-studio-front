@@ -11,9 +11,10 @@ class Main extends React.PureComponent {
 		email: this.props.user.email,
 		webSite: this.props.user.webSite,
 		description: this.props.user.description,
-		profileImage: this.props.user.profileImage,
+		profileImage: this.props.user.profileImage.id,
 		name: this.props.user.name,
 		user: this.props.user,
+		changed: false,
 	};
 
 	getUser = async () => {
@@ -46,40 +47,45 @@ class Main extends React.PureComponent {
 				modify: true,
 			});
 		} else {
-			if (window.confirm('저장하시겠습니까?')) {
-				await axios({
-					method: 'PUT',
-					url: '/api/user',
-					data: {
-						profileImage: this.state.profileImage,
-						description: this.state.description,
-						name: this.state.name,
-						email: this.state.email,
-						webSite: this.state.webSite,
-					},
-				})
-					.then((res) => {
-						this.getUser();
+			// TODO: modifying when current state and previous state are different.
+			if (this.state.changed) {
+				if (window.confirm('저장하시겠습니까?')) {
+					await axios({
+						method: 'PUT',
+						url: '/api/user',
+						data: {
+							profileImage: this.state.profileImage,
+							description: this.state.description,
+							name: this.state.name,
+							email: this.state.email,
+							webSite: this.state.webSite,
+						},
 					})
-					.catch((err) => {
-						alert('something wrong!');
-					});
-				this.setState({
-					modify: false,
-				});
+						.then((res) => {
+							this.getUser();
+						})
+						.catch((err) => {
+							alert(err);
+						});
+				}
 			}
+			this.setState({
+				modify: false,
+			});
 		}
 	};
 
 	onPressCancel = () => {
 		this.setState({
 			modify: false,
+			changed: true,
 		});
 	};
 
 	setEmail = (email) => {
 		this.setState({
 			email: email,
+			changed: true,
 		});
 		console.log(this.state.email);
 	};
@@ -87,25 +93,35 @@ class Main extends React.PureComponent {
 	setWebSite = (webSite) => {
 		this.setState({
 			webSite: webSite,
+			changed: true,
 		});
 	};
 
 	setDescription = (description) => {
 		this.setState({
 			description: description,
+			changed: true,
 		});
 	};
 
 	setName = (name) => {
 		this.setState({
 			name: name,
+			changed: true,
 		});
 	};
+
+	setProfileImage = (img) => {
+		this.setState({
+			profileImage: img,
+			changed: true,
+		});
+	}
 
 	render() {
 		return (
 			<div className={`${style.mainWrapper}`}>
-				<Header user={this.state.user} modify={this.state.modify} onChangeName={this.setName}>
+				<Header user={this.state.user} modify={this.state.modify} onChangeName={this.setName} onChangeImage={this.setProfileImage}>
 					<div className={`${style.buttons}`}>
 						{this.state.modify ? (
 							<button className={`${style.modifyButton}`} onClick={this.onPressCancel}>

@@ -10,7 +10,6 @@ import ReactFlow, {
 	Handle,
 	Position,
 } from 'react-flow-renderer';
-import { nodetypes } from '../../../core/nodetypes';
 
 const ColorSelectorNode = memo(({ data }: { data: any }) => (
 	<>
@@ -37,7 +36,6 @@ const initBgColor = '#1A192B';
 const connectionLineStyle = { stroke: '#fff' };
 const snapGrid = [20, 20];
 const nodeTypes = {
-	...nodetypes,
 	selectorNode: ColorSelectorNode,
 };
 

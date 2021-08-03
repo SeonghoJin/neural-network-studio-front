@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import style from './profile.module.css';
 import DropMenu from '../../utils/dropMenu/dropMenu';
-import profile from './default-profile.png';
 import { UserProfile } from '../../../API/User/types';
 
 type Props = {
@@ -44,7 +43,7 @@ const Profile = ({ userProfile, logout }: Props) => {
 				onClick={openMenu}
 				ref={dropRef}
 			>
-				<img alt="undefined" src={userProfile.profileImage === '' ? profile : userProfile.profileImage} />
+				<img alt="undefined" src={userProfile.profileImage.url} />
 				<DropMenu open={dropMenuToggle} custom={style.dropMenu}>
 					<div className={`${style.profileMenu}`}>
 						<Link to="/profile">내 정보</Link>

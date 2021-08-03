@@ -1,4 +1,4 @@
-import { BlockConfig, IConfigComponent } from '../../../../../../core/block';
+import { BlockConfig, IConfigComponent } from '../../../../../../core/Project/block';
 
 type BlockConfigKey = keyof BlockConfig;
 

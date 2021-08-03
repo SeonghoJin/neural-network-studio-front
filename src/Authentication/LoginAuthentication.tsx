@@ -1,10 +1,5 @@
 import { Redirect } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { useCallback, useEffect } from 'react';
-import useAuthentication from '../hooks/useAuthentication';
-import { RootDispatch } from '../module';
-import { getUserProfileThunks } from '../module/API/user/thunks';
-import { setAuthentication, UserType } from '../module/Auth';
 import useGetUserProfileResult from '../hooks/APIResult/user/useGetUserProfileResult';
 
 type Props = {
