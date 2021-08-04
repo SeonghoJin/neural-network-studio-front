@@ -2,8 +2,8 @@ import React from 'react';
 import Logo from './logo';
 import Auth from './auth/auth';
 import style from './index.module.css';
-import ProfileContainer from './profile/profileContinaer';
 import useGetUserProfileResult from '../../hooks/APIResult/user/useGetUserProfileResult';
+import ProfileContainer from './profile/profileContainer';
 
 type Props = {
 	children?: any;

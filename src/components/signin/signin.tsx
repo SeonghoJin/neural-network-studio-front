@@ -1,27 +1,33 @@
 import React, { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import style from './index.module.css';
 import utils from '../utils/index.module.css';
-import { RootDispatch } from '../../module';
-import { loginThunks } from '../../module/API/auth/thunks';
-import { getUserProfileThunks } from '../../module/API/user/thunks';
-import { setAuthentication, UserType } from '../../module/Auth';
+import useGetUserProfileResult from '../../hooks/APIResult/user/useGetUserProfileResult';
 import useLoginResult from '../../hooks/APIResult/auth/useLoginResult';
+import BackLoading from '../utils/BackLoading';
 
-const SignInError = () => {
-	const loginResult = useLoginResult();
-	return <>{loginResult.error && loginResult.errorModal}</>;
+type Props = {
+	requestLogin: ({ id, pw }: { id: string; pw: string }) => void;
 };
 
-const SignIn = () => {
+const SignInResult = () => {
+	const getUserProfileResult = useGetUserProfileResult();
+	const loginResult = useLoginResult();
+
+	return (
+		<>
+			<BackLoading open={getUserProfileResult.loading || loginResult.loading} />
+			{loginResult.error && loginResult.errorModal}
+			{getUserProfileResult.data && loginResult.data && <Redirect to="/" />}
+		</>
+	);
+};
+
+const SignIn = ({ requestLogin }: Props) => {
 	const [inputs, setInputs] = useState({
 		id: '',
 		pw: '',
 	});
-
-	const thunkDispatch: RootDispatch = useDispatch();
-	const dispatch = useDispatch();
 
 	const onChange = useCallback(
 		(e) => {
@@ -34,38 +40,15 @@ const SignIn = () => {
 		[inputs, setInputs]
 	);
 
-	const requestLogin = useCallback(async () => {
-		thunkDispatch(loginThunks(inputs))
-			.then(async (res) => {
-				if (!res) return null;
-				const response = await thunkDispatch(getUserProfileThunks());
-				return response;
-			})
-			.then((res) => {
-				if (!res) return;
-				dispatch(
-					setAuthentication({
-						user: {
-							type: UserType.Login,
-							profile: res,
-						},
-					})
-				);
-			});
-	}, [dispatch, inputs, thunkDispatch]);
-
 	const onPressEnter = useCallback(
 		(e) => {
-			if (e.key === 'Enter') requestLogin();
+			if (e.key === 'Enter') requestLogin(inputs);
 		},
-		[requestLogin]
+		[requestLogin, inputs]
 	);
-
-	const signInError = SignInError();
 
 	return (
 		<div role="button" tabIndex={0} className={`${style.signin}`} onKeyDown={onPressEnter}>
-			{signInError}
 			<div className={style.signinLogo}>
 				<h1>Neural Network Studio</h1>
 			</div>
@@ -76,13 +59,14 @@ const SignIn = () => {
 				<div className={`${utils.inputWrapper}`}>
 					<input name="pw" placeholder="비밀번호" type="password" onChange={onChange} />
 				</div>
-				<button type="button" className={`${style.loginButton}`} onClick={requestLogin}>
-					<Link to="/">로그인</Link>
+				<button type="button" className={`${style.loginButton}`} onClick={() => requestLogin(inputs)}>
+					로그인
 				</button>
 			</div>
 			<div className={style.others}>
 				<Link to="/">비밀번호찾기</Link>| <Link to="/signup">회원가입</Link>
 			</div>
+			<SignInResult />
 		</div>
 	);
 };
