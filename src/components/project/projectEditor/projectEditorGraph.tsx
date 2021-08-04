@@ -4,6 +4,7 @@ import ReactFlow, {
 	addEdge,
 	Background,
 	Connection,
+	ConnectionLineType,
 	Controls,
 	Edge,
 	Elements,
@@ -28,6 +29,7 @@ import {
 } from '../../../core/reactFlow/node';
 import createCustomEdge from '../../../core/reactFlow/edge';
 import { getNodeColor, getNodeStrokeColor } from '../../../core/reactFlow/node/nodetypes/component/NodeStroke';
+import ConnectionLine from '../../../core/reactFlow/connectionLine';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -145,6 +147,7 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 				nodeTypes={nodeTypes}
 				defaultPosition={flowState?.position}
 				defaultZoom={flowState?.zoom}
+				connectionLineComponent={ConnectionLine}
 			>
 				<Controls
 					style={{

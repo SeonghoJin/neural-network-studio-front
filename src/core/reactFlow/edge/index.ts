@@ -5,6 +5,7 @@ const createCustomEdge = (params: Edge | Connection) => {
 		...params,
 		animated: true,
 		style: {
+			stroke: 'black',
 			strokeWidth: 4,
 			cursor: 'pointer',
 		},
