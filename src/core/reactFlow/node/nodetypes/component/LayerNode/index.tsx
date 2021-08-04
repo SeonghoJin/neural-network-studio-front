@@ -1,8 +1,10 @@
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import React, { createElement, memo } from 'react';
-import { Handle, NodeProps, Position } from 'react-flow-renderer';
+import { NodeProps } from 'react-flow-renderer';
 import { BlockState } from '../../../../block';
 import LayerNodeTable from './LayerNodeTable';
+import useTargetCandidates from '../useTargetCandidates';
+import style from '../target.module.css';
 
 const useLayerStyle = makeStyles({
 	wrapper: {
@@ -22,15 +24,22 @@ const useLayerStyle = makeStyles({
 });
 
 const LayerNode = (props: NodeProps) => {
-	const { data, selected } = props;
-	const blockState: BlockState = data as BlockState;
-	const { type } = blockState;
+	const { data } = props;
+	const { targetCandidates } = useTargetCandidates();
+	const { type } = data as BlockState;
 	const classes = useLayerStyle();
 	const node = createElement(LayerNodeTable[type], props);
+	console.log(style.targetCandidate);
 	return (
-		<div tabIndex={0} role="button" className={`${classes.wrapper} ${selected}`}>
-			{node}
-		</div>
+		<>
+			<div
+				tabIndex={0}
+				role="button"
+				className={`${classes.wrapper} ${targetCandidates?.has(type) && style.targetCandidate}`}
+			>
+				{node}
+			</div>
+		</>
 	);
 };
 

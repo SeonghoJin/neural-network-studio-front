@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { Handle, NodeProps, Position } from 'react-flow-renderer';
 import { makeStyles } from '@material-ui/core';
 import useValidationConnection from '../useValidationConnection';
+import useTargetCandidates from '../useTargetCandidates';
 
 const useStyle = makeStyles({
 	wrapper: {
