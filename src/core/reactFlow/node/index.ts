@@ -1,16 +1,19 @@
 import { getNodeId } from '../../../util';
+import { BlockState } from '../../Project/block';
 
 export type CustomNodeParams = {
-	type?: string;
-	position: any;
-	data: unknown;
+	position?: any;
+	data: BlockState;
 };
 
-export const createCustomNode = ({ type, position, data }: CustomNodeParams) => {
+export const createCustomNode = ({ position, data }: CustomNodeParams) => {
 	return {
 		id: getNodeId(),
-		type: type || 'default',
-		position,
+		type: data.category || 'default',
+		position: position || {
+			x: 100,
+			y: 100,
+		},
 		data,
 	};
 };

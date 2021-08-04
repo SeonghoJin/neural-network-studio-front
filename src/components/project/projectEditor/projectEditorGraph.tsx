@@ -17,7 +17,7 @@ import ReactFlow, {
 	useStoreState,
 } from 'react-flow-renderer';
 import { useSelector } from 'react-redux';
-import { BlockState } from '../../../core/Project/block/BlockState';
+import { BlockState, InputBlockState } from '../../../core/Project/block/BlockState';
 import { nodeTypes } from '../../../core/reactFlow/node/nodetypes';
 import { RootState } from '../../../module';
 import { createCustomNode } from '../../../core/reactFlow/node';
@@ -49,8 +49,6 @@ const useStyle = makeStyles({
 	},
 });
 
-const nodeProtoImage = <div />;
-
 type Props = {
 	setReactInstance: EventHandler<any>;
 	setElements: EventHandler<any>;
@@ -66,7 +64,11 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 	const reactFlowInstance = useSelector((state: RootState) => state.reactFlowInstance.instance);
 
 	useEffect(() => {
-		setElements(flowState?.elements || []);
+		const inputBlockState = new InputBlockState();
+		const inputNode = createCustomNode({
+			data: inputBlockState,
+		});
+		setElements(flowState?.elements || [inputNode]);
 	}, [flowState?.elements, setElements]);
 
 	const onConnect = useCallback(
@@ -101,7 +103,6 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 					y: localEvent.clientY - (reactFlowBounds?.top || 0),
 				});
 				const newNode: Node = createCustomNode({
-					type: nodeData.category,
 					position,
 					data: nodeData,
 				});
