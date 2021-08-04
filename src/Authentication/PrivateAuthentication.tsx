@@ -1,12 +1,12 @@
 import { Redirect } from 'react-router-dom';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import useGetUserProfileResult from '../hooks/APIResult/user/useGetUserProfileResult';
 
 type Props = {
 	children: any;
 };
 
-const LoginAuthentication = ({ children }: Props) => {
+const PrivateAuthentication = ({ children }: Props) => {
 	const { data, error } = useGetUserProfileResult();
 
 	const errorComponent = useCallback(() => {
@@ -22,4 +22,4 @@ const LoginAuthentication = ({ children }: Props) => {
 	);
 };
 
-export default LoginAuthentication;
+export default PrivateAuthentication;

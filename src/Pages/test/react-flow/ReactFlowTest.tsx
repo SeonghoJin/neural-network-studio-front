@@ -11,6 +11,7 @@ import test8 from './test8';
 import test9 from './test9';
 import test10 from './test10';
 import CustomEdgeTest from './CustomEdgeTest';
+import ValidationTest from './ValiddationTest';
 
 const ReactFlowTest = () => (
 	<div>
@@ -25,6 +26,7 @@ const ReactFlowTest = () => (
 		<Route path="/test/react-flow/9" exact component={test9} />
 		<Route path="/test/react-flow/10" exact component={test10} />
 		<Route path="/test/react-flow/custom-edge" exact component={CustomEdgeTest} />
+		<Route path="/test/react-flow/validation" exact component={ValidationTest} />
 	</div>
 );
 
