@@ -27,6 +27,7 @@ import {
 	getPosition,
 } from '../../../core/reactFlow/node';
 import createCustomEdge from '../../../core/reactFlow/edge';
+import { getNodeColor, getNodeStrokeColor } from '../../../core/reactFlow/node/nodetypes/component/NodeStroke';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -154,14 +155,10 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 				/>
 				<MiniMap
 					nodeStrokeColor={(n) => {
-						if (n.type === 'input') return '#0041d0';
-						if (n.type === 'selectorNode') return '#1A192B';
-						if (n.type === 'output') return '#ff0072';
-						return '#000000';
+						return getNodeStrokeColor(n);
 					}}
 					nodeColor={(n) => {
-						if (n.type === 'selectorNode') return '#1A192B';
-						return '#000000';
+						return getNodeColor(n);
 					}}
 				/>
 				<Background color="#aaa" />
