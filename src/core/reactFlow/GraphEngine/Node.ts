@@ -1,5 +1,5 @@
 import { FlowElement } from 'react-flow-renderer';
-import { BlockCategory, BlockConfig, BlockState, BlockType } from '../../Project/block';
+import { BlockCategory, BlockConfig, BlockState, BlockType } from '../block';
 
 class Node {
 	static isNode = (obj: unknown): obj is Node => {

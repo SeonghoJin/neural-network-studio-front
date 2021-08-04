@@ -2,7 +2,7 @@ import { makeStyles, Typography } from '@material-ui/core';
 import React, { ChangeEventHandler, createElement } from 'react';
 
 import { Node } from 'react-flow-renderer';
-import { BlockState } from '../../../../core/Project/block/BlockState';
+import { BlockState } from '../../../../core/reactFlow/block/BlockState';
 import ConfigViewerTable from './ConfigViewerTable';
 import TextValidationInput from '../../../Input/TextValidationInput';
 

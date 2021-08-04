@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 
-import { Conv2DConfig, IConfigComponent } from '../../../../../core/Project/block';
+import { Conv2DConfig, IConfigComponent } from '../../../../../core/reactFlow/block';
 import SliderInput, { Marks } from '../../../../Input/SliderInput';
 import SecondDivisionTupleInput from '../../../../Input/SecondDivisionTupleInput';
 import SelectInput from '../../../../Input/SelectInput';

@@ -1,4 +1,4 @@
-import { BlockType } from '../../../../../Project/block';
+import { BlockType } from '../../../../block';
 import DefaultNode from './DefaultNode';
 import InputNode from './inputNode';
 

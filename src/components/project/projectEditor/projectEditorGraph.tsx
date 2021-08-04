@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core';
 import React, { EventHandler, KeyboardEventHandler, useCallback, useEffect, useRef } from 'react';
 import ReactFlow, {
 	addEdge,
-	ArrowHeadType,
 	Background,
 	Connection,
 	Controls,
@@ -17,12 +16,17 @@ import ReactFlow, {
 	useStoreState,
 } from 'react-flow-renderer';
 import { useSelector } from 'react-redux';
-import { BlockState, InputBlockState } from '../../../core/Project/block/BlockState';
+import { BlockState, InputBlockState } from '../../../core/reactFlow/block/BlockState';
 import { nodeTypes } from '../../../core/reactFlow/node/nodetypes';
 import { RootState } from '../../../module';
-import { createCustomNode } from '../../../core/reactFlow/node';
+import {
+	canGetNodeData,
+	canInsertNode,
+	createCustomNode,
+	getNodeData,
+	getPosition,
+} from '../../../core/reactFlow/node';
 import createCustomEdge from '../../../core/reactFlow/edge';
-import { canGetNodeData, canInsertNode, getNodeData, getPosition } from '.';
 
 const useStyle = makeStyles({
 	wrapper: {

@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 
-import { AveragePooling2DConfig, IConfigComponent } from '../../../../../core/Project/block';
+import { AveragePooling2DConfig, IConfigComponent } from '../../../../../core/reactFlow/block';
 import NumberInput from '../../../../Input/NumberInput';
 import SecondDivisionTupleInput from '../../../../Input/SecondDivisionTupleInput';
 import SelectInput from '../../../../Input/SelectInput';

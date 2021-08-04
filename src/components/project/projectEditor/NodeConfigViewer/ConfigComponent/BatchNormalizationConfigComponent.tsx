@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 
-import { BatchNormalizationConfig, IConfigComponent } from '../../../../../core/Project/block';
+import { BatchNormalizationConfig, IConfigComponent } from '../../../../../core/reactFlow/block';
 import NumberInput from '../../../../Input/NumberInput';
 import FloatInput from '../../../../Input/FloatInput';
 import { configComponentToReactNode } from './util';

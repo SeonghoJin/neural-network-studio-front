@@ -1,4 +1,4 @@
-import { BlockCategory } from '../../../Project/block';
+import { BlockCategory } from '../../block';
 import LayerNode from './component/LayerNode';
 
 export const nodeTypes = {

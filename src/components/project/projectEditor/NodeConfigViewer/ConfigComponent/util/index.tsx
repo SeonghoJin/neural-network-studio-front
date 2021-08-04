@@ -1,4 +1,4 @@
-import { BlockConfig, IConfigComponent } from '../../../../../../core/Project/block';
+import { BlockConfig, IConfigComponent } from '../../../../../../core/reactFlow/block';
 
 type BlockConfigKey = keyof BlockConfig;
 

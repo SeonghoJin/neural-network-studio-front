@@ -1,7 +1,7 @@
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import React, { createElement, memo } from 'react';
 import { Handle, NodeProps, Position } from 'react-flow-renderer';
-import { BlockState } from '../../../../../Project/block';
+import { BlockState } from '../../../../block';
 import LayerNodeTable from './LayerNodeTable';
 
 const useLayerStyle = makeStyles({

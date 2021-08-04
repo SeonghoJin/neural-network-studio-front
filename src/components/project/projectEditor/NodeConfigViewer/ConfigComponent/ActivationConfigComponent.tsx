@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 
-import { ActivationConfig, IConfigComponent } from '../../../../../core/Project/block';
+import { ActivationConfig, IConfigComponent } from '../../../../../core/reactFlow/block';
 import SelectInput from '../../../../Input/SelectInput';
 import { configComponentToReactNode } from './util';
 import { getActivationValues } from '../../../../../core/Project/Activations';

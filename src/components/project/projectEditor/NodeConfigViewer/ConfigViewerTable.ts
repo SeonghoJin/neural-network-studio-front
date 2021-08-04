@@ -1,4 +1,4 @@
-import { BlockType } from '../../../../core/Project/block';
+import { BlockType } from '../../../../core/reactFlow/block';
 import ActivationConfigComponent from './ConfigComponent/ActivationConfigComponent';
 import AveragePooling2DConfigComponent from './ConfigComponent/AveragePooling2DConfigComponent';
 import BatchNormalizationConfigComponent from './ConfigComponent/BatchNormalizationConfigComponent';
