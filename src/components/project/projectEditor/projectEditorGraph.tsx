@@ -17,11 +17,11 @@ import ReactFlow, {
 	useStoreState,
 } from 'react-flow-renderer';
 import { useSelector } from 'react-redux';
-import { BlockState } from '../../../core/Project/block/BlockState';
 import { nodeTypes } from '../../../core/reactFlow/node/nodetypes';
 import { RootState } from '../../../module';
 import { createCustomNode } from '../../../core/reactFlow/node';
 import createCustomEdge from '../../../core/reactFlow/edge';
+import { canGetNodeData, canInsertNode, getNodeData, getPosition } from '.';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -48,8 +48,6 @@ const useStyle = makeStyles({
 		backgroundColor: '#F7F7F7',
 	},
 });
-
-const nodeProtoImage = <div />;
 
 type Props = {
 	setReactInstance: EventHandler<any>;
@@ -93,21 +91,15 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 		(e: React.DragEvent) => {
 			e.preventDefault();
 			const localEvent = e;
-			if (localEvent.dataTransfer.types.includes('application/nodedata')) {
-				const nodeData = JSON.parse(localEvent.dataTransfer.getData('application/nodedata')) as BlockState;
-				const reactFlowBounds = reactFlowWrapper.current?.getBoundingClientRect();
-				const position = (reactFlowInstance as any).project({
-					x: localEvent.clientX - (reactFlowBounds?.left || 0),
-					y: localEvent.clientY - (reactFlowBounds?.top || 0),
-				});
-				const newNode: Node = createCustomNode({
-					type: nodeData.category,
-					position,
-					data: nodeData,
-				});
-				setElements(elements.concat(newNode));
-				setSelectedElements(newNode);
-			}
+			const { dataTransfer } = localEvent;
+			if (!canGetNodeData(dataTransfer)) return;
+			const newNode: Node = createCustomNode({
+				position: getPosition(localEvent, reactFlowWrapper.current, reactFlowInstance),
+				data: getNodeData(dataTransfer),
+			});
+			if (!canInsertNode(elements, newNode)) return;
+			setElements(elements.concat(newNode));
+			setSelectedElements(newNode);
 		},
 		[elements, reactFlowInstance, setElements, setSelectedElements]
 	);
