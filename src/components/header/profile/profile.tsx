@@ -4,8 +4,8 @@ import { Backdrop } from '@material-ui/core';
 import style from './profile.module.css';
 import DropMenu from '../../utils/dropMenu/dropMenu';
 import { UserProfile } from '../../../API/User/types';
-import useLogoutResult from '../../../hooks/APIResult/auth/useLogoutResult';
 import useGetUserProfileResult from '../../../hooks/APIResult/user/useGetUserProfileResult';
+import useLogoutResult from '../../../hooks/APIResult/auth/useLogoutResult';
 
 type Props = {
 	userProfile: UserProfile;
