@@ -6,6 +6,7 @@ import Main from '../profile/main/main';
 import axios from 'axios';
 
 import style from './index.module.css';
+import { getUserProfile } from '../../API/User';
 
 class Profile extends React.PureComponent {
 	state = {
@@ -15,11 +16,7 @@ class Profile extends React.PureComponent {
 	};
 
 	getUser = async () => {
-		await axios({
-			method: 'GET',
-			url: '/api/user',
-			withCredentials: true,
-		})
+		getUserProfile()
 			.then((res) => {
 				this.setState({
 					auth: true,
