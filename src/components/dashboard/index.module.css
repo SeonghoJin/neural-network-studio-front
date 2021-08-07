@@ -14,6 +14,7 @@
   border: none;
   border-radius: 5px;
   transition: 0.2s ease-in;
+  color: var(--default-white);
 }
 
 .createButton a {
@@ -24,6 +25,7 @@
 
 .createButton:hover {
   background: var(--base-color);
+  color: var(--default-black);
 }
 
 .createButton:hover a {
