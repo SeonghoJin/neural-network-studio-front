@@ -9,20 +9,12 @@ type Props = {
 };
 
 const PrivateAuthentication = ({ children }: Props) => {
-	const { data, error } = useGetUserProfileResult();
 	const { user } = useAuthentication();
-	const errorComponent = useCallback(() => {
-		if (user.type === UserType.Visitor) {
-			alert('로그인이 필요합니다.');
-			return <Redirect to="/login" />;
-		}
-		return <Redirect to="/" />;
-	}, [user]);
-
 	return (
 		<>
-			{data && children}
-			{error && errorComponent()}
+			{user?.type === UserType.Visitor && alert('로그인이 필요합니다.')}
+			{user?.type === UserType.Visitor && <Redirect to="/login" />}
+			{user?.type === UserType.Login && children}
 		</>
 	);
 };

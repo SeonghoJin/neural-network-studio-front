@@ -3,17 +3,12 @@ import { AuthenticationActionTypes, AuthenticationState, UserType } from './type
 import { AuthenticationAction } from './actions';
 
 const initialState: AuthenticationState = {
-	user: {
-		type: UserType.Visitor,
-		profile: null,
-	},
+	user: null,
 };
 
 const auth = createReducer<AuthenticationState, AuthenticationActionTypes>(initialState, {
 	[AuthenticationAction.SET_AUTHENTICATION]: (state, action) => ({
-		user: {
-			...action.payload.user,
-		},
+		...action.payload,
 	}),
 });
 

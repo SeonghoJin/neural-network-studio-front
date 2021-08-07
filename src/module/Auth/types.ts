@@ -15,5 +15,12 @@ export type AuthenticationState = {
 	user: {
 		type: UserType;
 		profile: UserProfile | null;
+	} | null;
+};
+
+export type RequiredAuthenticationState = {
+	user: {
+		type: UserType;
+		profile: UserProfile | null;
 	};
 };
