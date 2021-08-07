@@ -34,8 +34,6 @@ const ProfileContainer = ({ userProfile }: Props) => {
 						},
 					})
 				);
-			})
-			.then(() => {
 				history.push('/');
 			});
 	}, [dispatch, history, thunkDispatch]);
