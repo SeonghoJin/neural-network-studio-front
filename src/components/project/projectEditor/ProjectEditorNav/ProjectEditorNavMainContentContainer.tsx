@@ -24,7 +24,7 @@ const ProjectEditorNavMainContentContainer = () => {
 				})
 				.then(async (res) => {
 					if (res != null) {
-						fileDownload(res, 'module.py');
+						fileDownload(res, 'model.py');
 					}
 				});
 		};
