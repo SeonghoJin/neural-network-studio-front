@@ -1,10 +1,13 @@
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import React, { createElement, memo } from 'react';
-import { NodeProps } from 'react-flow-renderer';
+import React, { createElement, memo, useContext } from 'react';
+import { ElementId, NodeProps, useStoreActions, useStoreState } from 'react-flow-renderer';
+import NodeIdContext from 'react-flow-renderer/dist/contexts/NodeIdContext';
+import { onMouseDown } from 'react-flow-renderer/dist/components/Handle/handler';
 import { BlockState } from '../../../../block';
 import LayerNodeTable from './LayerNodeTable';
 import useTargetCandidates from '../useTargetCandidates';
 import style from '../target.module.css';
+import useValidationConnection from '../useValidationConnection';
 
 const useLayerStyle = makeStyles({
 	wrapper: {
@@ -24,18 +27,38 @@ const useLayerStyle = makeStyles({
 });
 
 const LayerNode = (props: NodeProps) => {
-	const { data } = props;
+	const { data, id } = props;
 	const { targetCandidates } = useTargetCandidates();
 	const { type } = data as BlockState;
 	const classes = useLayerStyle();
 	const node = createElement(LayerNodeTable[type], props);
-	console.log(style.targetCandidate);
+	const connectingNodeId = useStoreState((state) => state.connectionNodeId);
+	console.log(connectingNodeId);
+	const connectingHandleType = useStoreState((state) => state.connectionHandleType);
+	const onConnect = useStoreState((state) => state.onConnect);
+	const { isValidationConnection } = useValidationConnection();
 	return (
 		<>
 			<div
 				tabIndex={0}
 				role="button"
 				className={`${classes.wrapper} ${targetCandidates?.has(type) && style.targetCandidate}`}
+				onMouseUp={() => {
+					if (connectingNodeId === id) return;
+					if (onConnect && connectingHandleType && connectingNodeId) {
+						const connection = {
+							source: id,
+							target: id,
+							sourceHandle: null,
+							targetHandle: null,
+							[connectingHandleType]: connectingNodeId,
+						};
+
+						if (isValidationConnection(connection)) {
+							onConnect(connection);
+						}
+					}
+				}}
 			>
 				{node}
 			</div>
