@@ -11,7 +11,6 @@ type Props = {
 
 const SignInResult = () => {
 	const loginResult = useLoginResult();
-
 	return (
 		<>
 			<BackLoading open={loginResult.loading} />

@@ -28,6 +28,7 @@
     "@uppy/tus": "^1.9.2",
     "@uppy/url": "^1.5.23",
     "axios": "^0.21.1",
+    "axios-hooks": "^2.6.3",
     "bootstrap": "^4.6.0",
     "dotenv": "^8.2.0",
     "js-file-download": "^0.4.12",
@@ -44,6 +45,7 @@
     "react-reflex": "^4.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
+    "recoil": "^0.4.0",
     "redux": "^4.1.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
@@ -89,6 +91,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "^2.3.2"
+    "prettier": "^2.3.2",
+    "recoil-logger": "^1.2.0"
   }
 }

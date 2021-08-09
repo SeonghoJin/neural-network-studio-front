@@ -3,11 +3,9 @@ import { ThunkDispatch } from 'redux-thunk';
 import { ActionType } from 'typesafe-actions';
 import reactFlowInstance from './ReactFlowInstance';
 import projectApi from './API/project';
-import userApi from './API/user';
 import elements from './Elements';
 import projectConfig from './projectConfig';
 import auth from './Auth';
-import authApi from './API/auth';
 import projectInfo from './projectInfo';
 
 const rootReducer = combineReducers({
@@ -16,8 +14,6 @@ const rootReducer = combineReducers({
 	elements,
 	projectConfig,
 	projectInfo,
-	userApi,
-	authApi,
 	auth,
 });
 
@@ -31,9 +27,7 @@ export type RootDispatch = ThunkDispatch<
 		| typeof elements
 		| typeof projectConfig
 		| typeof projectInfo
-		| typeof userApi
 		| typeof auth
-		| typeof authApi
 	>
 >;
 export type RootState = ReturnType<typeof rootReducer>;

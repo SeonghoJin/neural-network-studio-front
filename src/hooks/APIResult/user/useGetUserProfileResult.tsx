@@ -11,13 +11,17 @@ const useGetUserProfileResult = () => {
 		} catch (e: AxiosError | any) {
 			if (e && e.isAxiosError) {
 				const status = (e as AxiosError).response?.status;
+				console.log(e.response);
 				if (status === 401) {
 					return null;
 				}
 			}
+			console.log(3);
 			throw e;
 		}
 	});
+
+	console.log(result);
 
 	const { data, error } = result;
 	return {

@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import reduxLogger from 'redux-logger';
 import reduxThunk from 'redux-thunk';
+import { RecoilRoot } from 'recoil';
 import rootReducer from './module';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
@@ -13,7 +14,9 @@ const store = createStore(rootReducer, applyMiddleware(reduxThunk, reduxLogger))
 
 ReactDOM.render(
 	<Provider store={store}>
-		<App />
+		<RecoilRoot>
+			<App />
+		</RecoilRoot>
 	</Provider>,
 	document.getElementById('root')
 );

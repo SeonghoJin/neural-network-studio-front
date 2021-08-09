@@ -1,9 +1,6 @@
 import { useDispatch } from 'react-redux';
-import React, { useEffect, useState } from 'react';
-import { getUserProfileThunks } from '../module/API/user/thunks';
-import { RootDispatch } from '../module';
+import React, { useEffect } from 'react';
 import { setAuthentication, UserType } from '../module/Auth';
-import useAuthentication from '../hooks/useAuthentication';
 import useGetUserProfileResult from '../hooks/APIResult/user/useGetUserProfileResult';
 
 type Props = {
@@ -26,7 +23,8 @@ const Authentication = ({ children }: Props) => {
 			);
 		}
 	}, [data, dispatch]);
-	return <>{data && children}</>;
+
+	return <>{data !== undefined && children}</>;
 };
 
 export default Authentication;

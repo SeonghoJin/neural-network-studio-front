@@ -3,16 +3,16 @@ import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import Profile from './profile';
 import { RootDispatch } from '../../../module';
-import { logoutThunks } from '../../../module/API/auth/thunks';
 import { setAuthentication, UserType } from '../../../module/Auth';
+import useLogoutResult from '../../../hooks/APIResult/auth/useLogoutResult';
 
 const ProfileContainer = () => {
-	const thunkDispatch: RootDispatch = useDispatch();
+	const { fetch } = useLogoutResult();
 	const dispatch = useDispatch();
 	const history = useHistory();
 
 	const logout = useCallback(() => {
-		thunkDispatch(logoutThunks()).then((res) => {
+		fetch().then((res) => {
 			if (!res) return;
 			dispatch(
 				setAuthentication({
@@ -24,7 +24,7 @@ const ProfileContainer = () => {
 			);
 			history.push('/');
 		});
-	}, [dispatch, history, thunkDispatch]);
+	}, [dispatch, fetch, history]);
 
 	return <Profile logout={logout} />;
 };

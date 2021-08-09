@@ -1,20 +1,17 @@
-import React, { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { RootDispatch } from '../../module';
-import { loginThunks } from '../../module/API/auth/thunks';
+import React, { useCallback } from 'react';
 import SignIn from './signin';
+import useLoginResult from '../../hooks/APIResult/auth/useLoginResult';
+import { LoginParams } from '../../API/Auth/types';
 
 const SignInContainer = () => {
-	const thunkDispatch: RootDispatch = useDispatch();
+	const { fetch } = useLoginResult();
 	const requestLogin = useCallback(
-		(inputs: any) => {
-			thunkDispatch(loginThunks(inputs)).then((res) => {
-				if (!res) return;
-				window.location.href = '/';
-			});
+		async (inputs: LoginParams) => {
+			const result = await fetch(inputs);
+			if (!result) return;
+			window.location.href = '/';
 		},
-		[thunkDispatch]
+		[fetch]
 	);
 	return (
 		<>
