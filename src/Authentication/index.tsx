@@ -4,30 +4,29 @@ import { getUserProfileThunks } from '../module/API/user/thunks';
 import { RootDispatch } from '../module';
 import { setAuthentication, UserType } from '../module/Auth';
 import useAuthentication from '../hooks/useAuthentication';
+import useGetUserProfileResult from '../hooks/APIResult/user/useGetUserProfileResult';
 
 type Props = {
 	children: any;
 };
 
 const Authentication = ({ children }: Props) => {
-	const thunkDispatch: RootDispatch = useDispatch();
 	const dispatch = useDispatch();
-	const { user } = useAuthentication();
+	const { data } = useGetUserProfileResult();
 
 	useEffect(() => {
-		thunkDispatch(getUserProfileThunks()).then((res) => {
+		if (data !== undefined) {
 			dispatch(
 				setAuthentication({
 					user: {
-						type: (res && UserType.Login) || UserType.Visitor,
-						profile: res,
+						type: (data && UserType.Login) || UserType.Visitor,
+						profile: data,
 					},
 				})
 			);
-		});
-	}, [dispatch, thunkDispatch]);
-
-	return <>{user != null && children}</>;
+		}
+	}, [data, dispatch]);
+	return <>{data && children}</>;
 };
 
 export default Authentication;
