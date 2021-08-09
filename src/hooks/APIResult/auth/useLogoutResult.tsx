@@ -39,7 +39,6 @@ export const useLogoutResult = () => {
 			return false;
 		}
 	}, [setResult]);
-
 	return {
 		fetch,
 		...result,

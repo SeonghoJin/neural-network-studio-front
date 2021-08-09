@@ -1,6 +1,5 @@
 import { Redirect } from 'react-router-dom';
-import useAuthentication from '../hooks/useAuthentication';
-import { UserType } from '../module/Auth';
+import useAuthentication, { UserType } from '../hooks/useAuthentication';
 
 type Props = {
 	children: any;
