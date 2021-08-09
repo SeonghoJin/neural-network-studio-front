@@ -3,10 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { getUserProfileThunks } from '../module/API/user/thunks';
 import { RootDispatch } from '../module';
 import { setAuthentication, UserType } from '../module/Auth';
+import useAuthentication from '../hooks/useAuthentication';
 
-const Authentication = () => {
+type Props = {
+	children: any;
+};
+
+const Authentication = ({ children }: Props) => {
 	const thunkDispatch: RootDispatch = useDispatch();
 	const dispatch = useDispatch();
+	const { user } = useAuthentication();
 
 	useEffect(() => {
 		thunkDispatch(getUserProfileThunks()).then((res) => {
@@ -21,7 +27,7 @@ const Authentication = () => {
 		});
 	}, [dispatch, thunkDispatch]);
 
-	return <></>;
+	return <>{user != null && children}</>;
 };
 
 export default Authentication;

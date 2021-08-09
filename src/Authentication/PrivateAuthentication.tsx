@@ -1,6 +1,4 @@
 import { Redirect } from 'react-router-dom';
-import { useCallback } from 'react';
-import useGetUserProfileResult from '../hooks/APIResult/user/useGetUserProfileResult';
 import useAuthentication from '../hooks/useAuthentication';
 import { UserType } from '../module/Auth';
 

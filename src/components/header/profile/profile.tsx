@@ -3,30 +3,28 @@ import { Link } from 'react-router-dom';
 import { Backdrop } from '@material-ui/core';
 import style from './profile.module.css';
 import DropMenu from '../../utils/dropMenu/dropMenu';
-import { UserProfile } from '../../../API/User/types';
-import useGetUserProfileResult from '../../../hooks/APIResult/user/useGetUserProfileResult';
 import useLogoutResult from '../../../hooks/APIResult/auth/useLogoutResult';
+import useAuthentication from '../../../hooks/useAuthentication';
 
 type Props = {
-	userProfile: UserProfile;
 	logout: () => void;
 };
 
 const LogoutResult = () => {
 	const logoutResult = useLogoutResult();
-	const getUserProfileResult = useGetUserProfileResult();
 
 	return (
 		<>
-			<Backdrop open={logoutResult.loading || getUserProfileResult.loading} />
+			<Backdrop open={logoutResult.loading} />
 			{logoutResult.error && logoutResult.errorModal}
 		</>
 	);
 };
 
-const Profile = ({ userProfile, logout }: Props) => {
+const Profile = ({ logout }: Props) => {
 	const [dropMenuToggle, setDropMenuToggle] = useState(false);
 	const dropRef = useRef<HTMLDivElement | null>(null);
+	const { user } = useAuthentication();
 
 	const openMenu = useCallback(() => {
 		setDropMenuToggle(!dropMenuToggle);
@@ -58,7 +56,7 @@ const Profile = ({ userProfile, logout }: Props) => {
 				onClick={openMenu}
 				ref={dropRef}
 			>
-				<img alt="undefined" src={userProfile.profileImage.url} />
+				<img alt="undefined" src={user?.profile?.profileImage.url} />
 				<DropMenu open={dropMenuToggle} custom={style.dropMenu}>
 					<div className={`${style.profileMenu}`}>
 						<Link to="/profile">내 정보</Link>

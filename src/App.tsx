@@ -12,19 +12,22 @@ import Authentication from './Authentication';
 function App() {
 	return (
 		<BrowserRouter>
-			<Authentication />
-			<Switch>
-				<Route exact path="/" component={Landing} />
-				<Route path="/login" component={LoginPage} />
-				<Route path="/signup" component={Signup} />
-				{configs.NODE_ENV === 'development' && <Route path="/test/:test_component/:id" exact component={TestRouter} />}
-				<PrivateAuthentication>
-					<Route path="/project" component={ProjectRouter} />
-					<Route path="/dashboard" component={Dashboard} />
-					<Route path="/newProject" component={NewProject} />
-					<Route path="/profile" component={Profile} />
-				</PrivateAuthentication>
-			</Switch>
+			<Authentication>
+				<Switch>
+					<Route exact path="/" component={Landing} />
+					<Route path="/login" component={LoginPage} />
+					<Route path="/signup" component={Signup} />
+					{configs.NODE_ENV === 'development' && (
+						<Route path="/test/:test_component/:id" exact component={TestRouter} />
+					)}
+					<PrivateAuthentication>
+						<Route path="/project" component={ProjectRouter} />
+						<Route path="/dashboard" component={Dashboard} />
+						<Route path="/newProject" component={NewProject} />
+						<Route path="/profile" component={Profile} />
+					</PrivateAuthentication>
+				</Switch>
+			</Authentication>
 		</BrowserRouter>
 	);
 }

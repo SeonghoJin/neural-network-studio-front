@@ -1,44 +1,32 @@
 import { useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { UserProfile } from '../../../API/User/types';
 import Profile from './profile';
 import { RootDispatch } from '../../../module';
 import { logoutThunks } from '../../../module/API/auth/thunks';
-import { getUserProfileThunks } from '../../../module/API/user/thunks';
 import { setAuthentication, UserType } from '../../../module/Auth';
 
-type Props = {
-	userProfile: UserProfile;
-};
-
-const ProfileContainer = ({ userProfile }: Props) => {
+const ProfileContainer = () => {
 	const thunkDispatch: RootDispatch = useDispatch();
-	const history = useHistory();
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const logout = useCallback(() => {
-		thunkDispatch(logoutThunks())
-			.then(async (res) => {
-				if (!res) return null;
-				const response = await thunkDispatch(getUserProfileThunks());
-				return response;
-			})
-			.then((res) => {
-				if (res) return;
-				dispatch(
-					setAuthentication({
-						user: {
-							type: UserType.Logout,
-							profile: null,
-						},
-					})
-				);
-				history.push('/');
-			});
+		thunkDispatch(logoutThunks()).then((res) => {
+			if (!res) return;
+			dispatch(
+				setAuthentication({
+					user: {
+						type: UserType.Logout,
+						profile: null,
+					},
+				})
+			);
+			history.push('/');
+		});
 	}, [dispatch, history, thunkDispatch]);
 
-	return <Profile logout={logout} userProfile={userProfile} />;
+	return <Profile logout={logout} />;
 };
 
 export default ProfileContainer;

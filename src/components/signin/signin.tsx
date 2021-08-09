@@ -1,8 +1,7 @@
 import React, { useCallback, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import style from './index.module.css';
 import utils from '../utils/index.module.css';
-import useGetUserProfileResult from '../../hooks/APIResult/user/useGetUserProfileResult';
 import useLoginResult from '../../hooks/APIResult/auth/useLoginResult';
 import BackLoading from '../utils/BackLoading';
 
@@ -11,14 +10,12 @@ type Props = {
 };
 
 const SignInResult = () => {
-	const getUserProfileResult = useGetUserProfileResult();
 	const loginResult = useLoginResult();
 
 	return (
 		<>
-			<BackLoading open={getUserProfileResult.loading || loginResult.loading} />
+			<BackLoading open={loginResult.loading} />
 			{loginResult.error && loginResult.errorModal}
-			{getUserProfileResult.data && loginResult.data && <Redirect to="/" />}
 		</>
 	);
 };

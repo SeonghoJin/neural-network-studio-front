@@ -4,7 +4,6 @@ import StandardModal from '../../../components/utils/modal/StandardModal';
 
 const useGetUserProfileResult = () => {
 	const result = useSelector((state: RootState) => state.userApi.getUserProfileResult);
-	const dispatch = useDispatch();
 
 	return {
 		...result,
