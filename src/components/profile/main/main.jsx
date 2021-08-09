@@ -62,7 +62,7 @@ class Main extends React.PureComponent {
 						},
 					})
 						.then((res) => {
-							this.getUser();
+							window.location.reload();
 						})
 						.catch((err) => {
 							alert(err);
@@ -116,12 +116,17 @@ class Main extends React.PureComponent {
 			profileImage: img,
 			changed: true,
 		});
-	}
+	};
 
 	render() {
 		return (
 			<div className={`${style.mainWrapper}`}>
-				<Header user={this.state.user} modify={this.state.modify} onChangeName={this.setName} onChangeImage={this.setProfileImage}>
+				<Header
+					user={this.state.user}
+					modify={this.state.modify}
+					onChangeName={this.setName}
+					onChangeImage={this.setProfileImage}
+				>
 					<div className={`${style.buttons}`}>
 						{this.state.modify ? (
 							<button className={`${style.modifyButton}`} onClick={this.onPressCancel}>
