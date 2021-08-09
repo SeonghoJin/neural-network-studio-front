@@ -1,11 +1,21 @@
-import { useSelector } from 'react-redux';
 import { useCallback } from 'react';
-import { RootState } from '../../../module';
+import useSWR from 'swr';
 import StandardModal from '../../../components/utils/modal/StandardModal';
 import { PROJECT_ERROR_HANDLE_URI } from '../util';
+import useProjectLocation from '../../useProjectLocation';
+import { getProject } from '../../../API/project';
 
 const useGetProjectResult = () => {
-	const result = useSelector((state: RootState) => state.projectApi.getProjectResult);
+	const { projectNo } = useProjectLocation();
+	const result = useSWR(
+		() => {
+			return ['getProject', projectNo];
+		},
+		async (key, projectNumber) => {
+			const response = await getProject(projectNumber);
+			return response;
+		}
+	);
 
 	const handleError = useCallback(() => {
 		window.location.replace(PROJECT_ERROR_HANDLE_URI);
@@ -13,6 +23,7 @@ const useGetProjectResult = () => {
 
 	return {
 		...result,
+		loading: !result.data && !result.error,
 		errorModal: <StandardModal head="error" body={result.error} onClose={handleError} />,
 	};
 };

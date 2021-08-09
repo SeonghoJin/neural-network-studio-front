@@ -4,7 +4,6 @@ import { RootState } from '../../index';
 import { ProjectAPIActionTypes } from './types';
 import {
 	deleteProjectAsync,
-	getProjectAsync,
 	getProjectConfigAsync,
 	getProjectListAsync,
 	getPythonCodeAsync,
@@ -41,23 +40,6 @@ export function updateProjectContentThunk(
 				flowState,
 			});
 			dispatch(success());
-			return true;
-		} catch (e) {
-			dispatch(failure(e.message));
-			return false;
-		}
-	};
-}
-
-export function getProjectThunk(
-	projectNo: string
-): ThunkAction<Promise<boolean>, RootState, null, ProjectAPIActionTypes> {
-	return async (dispatch) => {
-		const { request, success, failure } = getProjectAsync;
-		dispatch(request());
-		try {
-			const project = await getProject(projectNo);
-			dispatch(success(project));
 			return true;
 		} catch (e) {
 			dispatch(failure(e.message));

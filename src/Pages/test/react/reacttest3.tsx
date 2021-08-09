@@ -33,9 +33,6 @@ const ScollBox = forwardRef((props: any, ref: Ref<RefObject>) => {
 
 	useImperativeHandle(ref, () => ({
 		scrollToBottom,
-		test: () => {
-			console.log(2);
-		},
 	}));
 	return (
 		<div className={classes.style} ref={myRef}>

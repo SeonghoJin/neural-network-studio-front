@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
 import { atom, useRecoilState } from 'recoil';
-import StandardModal from '../../../components/utils/modal/StandardModal';
-import { login } from '../../../API/Auth';
-import { LoginParams } from '../../../API/Auth/types';
+import StandardModal from '../components/utils/modal/StandardModal';
+import { login } from '../API/Auth';
+import { LoginParams } from '../API/Auth/types';
 
 export const loginRequestResult = atom({
 	key: 'loginRequestResult',
@@ -13,7 +13,7 @@ export const loginRequestResult = atom({
 	},
 });
 
-export const useLoginResult = () => {
+export const useLogin = () => {
 	const [result, setResult] = useRecoilState(loginRequestResult);
 
 	const fetch = useCallback(
@@ -51,4 +51,4 @@ export const useLoginResult = () => {
 	};
 };
 
-export default useLoginResult;
+export default useLogin;

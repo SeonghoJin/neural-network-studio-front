@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import style from './index.module.css';
 import utils from '../utils/index.module.css';
-import useLoginResult from '../../hooks/APIResult/auth/useLoginResult';
+import useLogin from '../../hooks/useLogin';
 import BackLoading from '../utils/BackLoading';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const SignInResult = () => {
-	const loginResult = useLoginResult();
+	const loginResult = useLogin();
 	return (
 		<>
 			<BackLoading open={loginResult.loading} />

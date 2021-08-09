@@ -31,7 +31,6 @@ class Main extends React.PureComponent {
 			name: this.state.name,
 			description: this.state.description,
 		}).then((res) => {
-			console.log(res);
 			window.location.href = '/dashboard';
 		}).catch((err) => {
 			if (err.response.status === 422) {

@@ -18,7 +18,6 @@ class Profile extends React.PureComponent {
 	getUser = async () => {
 		getUserProfile()
 			.then((res) => {
-				console.log(res);
 				this.setState({
 					auth: true,
 					user: res,
@@ -26,7 +25,6 @@ class Profile extends React.PureComponent {
 				});
 			})
 			.catch((err) => {
-				console.log(err);
 				this.setState({
 					auth: false,
 					loading: false,
@@ -41,7 +39,6 @@ class Profile extends React.PureComponent {
 	}
 
 	render() {
-		console.log(this.state);
 		return (
 			<>
 				<Header />

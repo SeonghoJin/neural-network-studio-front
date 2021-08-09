@@ -53,8 +53,6 @@ const useStyle = makeStyles({
 const mouseMoveHandler = (e: MouseEvent) => {
 	const dx = e.clientX;
 	const dy = e.clientY;
-	console.log(dx, dy);
-	console.log(e);
 	(e.target as HTMLButtonElement).style.left += dx;
 	// const newLeftWidth = (leftWidth + dx) * 100 / resizer.parentNode.getBoundingClientRect().width;
 };
@@ -66,10 +64,7 @@ const ColumnMoveLine = () => {
 		<div
 			className={classes.a}
 			onMouseMove={(e) => {
-				console.log(e.clientX);
-				console.log(e.clientY);
 				if (ref.current?.style.width != null) {
-					console.log(ref.current);
 					ref.current.style.width = e.clientY.toString();
 				}
 			}}

@@ -42,7 +42,6 @@ export default class Header extends React.PureComponent {
         })
       })
       .catch((err) => {
-        console.log(err)
       });
   };
 
@@ -57,7 +56,6 @@ export default class Header extends React.PureComponent {
       return false;
     }
     else {
-      console.log("render");
     }
   }
 

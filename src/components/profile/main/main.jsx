@@ -29,7 +29,6 @@ class Main extends React.PureComponent {
 					user: res.data,
 					loading: false,
 				});
-				console.log(this.state);
 			})
 			.catch((err) => {
 				this.setState({
@@ -87,7 +86,6 @@ class Main extends React.PureComponent {
 			email: email,
 			changed: true,
 		});
-		console.log(this.state.email);
 	};
 
 	setWebSite = (webSite) => {

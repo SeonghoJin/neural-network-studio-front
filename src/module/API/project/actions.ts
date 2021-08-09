@@ -3,9 +3,6 @@ import { IProjectConfig, IProjectDto, Projects } from '../../../API/project/type
 import { createStandardAction } from '../../../util';
 
 export enum ProjectAPIAction {
-	GET_PROJECT = 'getProject',
-	GET_PROJECT_SUCCESS = 'getProjectSuccess',
-	GET_PROJECT_ERROR = 'getProjectError',
 	GET_PYTHON_CODE = 'getPythonCode',
 	GET_PYTHON_CODE_SUCCESS = 'getPythonCodeSuccess',
 	GET_PYTHON_CODE_ERROR = 'getPythonCodeError',
@@ -29,12 +26,6 @@ export enum ProjectAPIAction {
 	GET_PROJECT_LIST_SUCCESS = 'getProjectListSuccess',
 	GET_PROJECT_LIST_ERROR = 'getProjectListError',
 }
-
-export const getProjectAsync = createAsyncAction(
-	ProjectAPIAction.GET_PROJECT,
-	ProjectAPIAction.GET_PROJECT_SUCCESS,
-	ProjectAPIAction.GET_PROJECT_ERROR
-)<undefined, IProjectDto, string>();
 
 export const getProjectConfigAsync = createAsyncAction(
 	ProjectAPIAction.GET_PROJECT_CONFIG,

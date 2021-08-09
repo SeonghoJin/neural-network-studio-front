@@ -8,11 +8,6 @@ const initialState: ProjectAPIState = {
 		data: null,
 		error: null,
 	},
-	getProjectResult: {
-		loading: false,
-		data: null,
-		error: null,
-	},
 	getProjectConfigResult: {
 		loading: false,
 		data: null,
@@ -46,30 +41,6 @@ const initialState: ProjectAPIState = {
 };
 
 const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initialState, {
-	[ProjectAPIAction.GET_PROJECT]: (state) => ({
-		...state,
-		getProjectResult: {
-			loading: true,
-			error: null,
-			data: null,
-		},
-	}),
-	[ProjectAPIAction.GET_PROJECT_SUCCESS]: (state, action) => ({
-		...state,
-		getProjectResult: {
-			loading: false,
-			error: null,
-			data: action.payload,
-		},
-	}),
-	[ProjectAPIAction.GET_PROJECT_ERROR]: (state, action) => ({
-		...state,
-		getProjectResult: {
-			loading: false,
-			error: action.payload,
-			data: null,
-		},
-	}),
 	[ProjectAPIAction.PUT_PROJECT_CONFIG]: (state) => ({
 		...state,
 		putProjectConfigResult: {

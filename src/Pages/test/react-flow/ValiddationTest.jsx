@@ -11,7 +11,6 @@ const initialElements = [
 
 const onLoad = (reactFlowInstance) => reactFlowInstance.fitView();
 const isValidConnection = (connection) => {
-	console.log(connection);
 	return connection.target === 'B';
 };
 const onConnectStart = (event, { nodeId, handleType }) => console.log('on connect start', { nodeId, handleType });

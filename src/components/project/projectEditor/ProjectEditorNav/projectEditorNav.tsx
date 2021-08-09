@@ -54,8 +54,7 @@ const useStyle = makeStyles({
 
 const ProjectEditorNav = () => {
 	const classes = useStyle();
-	const { error, loading } = useGetProjectResult();
-
+	const { error, data } = useGetProjectResult();
 	const content = (
 		<div className={classes.contentWrapper}>
 			<div className={classes.logoWrapper}>
@@ -75,7 +74,7 @@ const ProjectEditorNav = () => {
 	);
 	return (
 		<div className={classes.wrapper}>
-			<Container className={classes.container}>{error || loading ? <CircleLoading /> : content}</Container>
+			<Container className={classes.container}>{!error && !data ? <CircleLoading /> : content}</Container>
 		</div>
 	);
 };

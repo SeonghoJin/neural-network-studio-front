@@ -10,11 +10,6 @@ export type ProjectAPIState = {
 		loading: boolean;
 		data: Blob | null;
 	};
-	getProjectResult: {
-		error: string | null;
-		loading: boolean;
-		data: IProjectDto | null;
-	};
 	getProjectConfigResult: {
 		error: string | null;
 		loading: boolean;

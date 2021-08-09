@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import Profile from './profile';
-import useLogoutResult from '../../../hooks/APIResult/auth/useLogoutResult';
+import useLogout from '../../../hooks/useLogout';
 import useAuthentication, { UserType } from '../../../hooks/useAuthentication';
 
 const ProfileContainer = () => {
-	const { fetch } = useLogoutResult();
+	const { fetch } = useLogout();
 	const { setUser } = useAuthentication();
 	const history = useHistory();
 

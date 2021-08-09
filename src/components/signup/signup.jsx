@@ -88,12 +88,10 @@ class Signup extends React.PureComponent {
 			pw: this.state.pwValue,
 		})
 			.then((res) => {
-				console.log(res);
 				alert('회원가입이 완료되었습니다.');
 				this.props.history.push('/');
 			})
 			.catch((err) => {
-				console.log(err);
 				alert('이미 존재하는 아이디 입니다.');
 			});
 	};

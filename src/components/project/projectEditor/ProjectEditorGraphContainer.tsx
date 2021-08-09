@@ -1,22 +1,15 @@
 import { useDispatch } from 'react-redux';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { Elements, OnLoadParams } from 'react-flow-renderer';
 import { setReactFlowInstance } from '../../../module/ReactFlowInstance';
 import ProjectEditorGraph from './projectEditorGraph';
 import CircleLoading from '../../utils/Loading/CircularLoading';
 import { setElements } from '../../../module/Elements';
 import useGetProjectResult from '../../../hooks/APIResult/project/useGetProjectResult';
-import { getProjectThunk } from '../../../module/API/project/thunks';
-import useProjectLocation from '../../../hooks/useProjectLocation';
 
 const ProjectEditorGraphContainer = () => {
 	const result = useGetProjectResult();
 	const dispatch = useDispatch();
-	const { projectNo } = useProjectLocation();
-
-	useEffect(() => {
-		dispatch(getProjectThunk(projectNo));
-	}, [dispatch, projectNo]);
 
 	const setReactInstance = useCallback(
 		(instance: OnLoadParams) => {
@@ -40,7 +33,7 @@ const ProjectEditorGraphContainer = () => {
 		/>
 	);
 
-	return <>{result.loading || result.error ? <CircleLoading /> : content}</>;
+	return <>{!result.data && !result.error ? <CircleLoading /> : content}</>;
 };
 
 export default ProjectEditorGraphContainer;

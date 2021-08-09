@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Backdrop } from '@material-ui/core';
 import style from './profile.module.css';
 import DropMenu from '../../utils/dropMenu/dropMenu';
-import useLogoutResult from '../../../hooks/APIResult/auth/useLogoutResult';
+import useLogout from '../../../hooks/useLogout';
 import useAuthentication from '../../../hooks/useAuthentication';
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 };
 
 const LogoutResult = () => {
-	const logoutResult = useLogoutResult();
+	const logoutResult = useLogout();
 
 	return (
 		<>
