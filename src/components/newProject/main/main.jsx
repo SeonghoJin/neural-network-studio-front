@@ -31,12 +31,12 @@ class Main extends React.PureComponent {
 			name: this.state.name,
 			description: this.state.description,
 		}).then((res) => {
-			if (res.status === 422) {
-				alert('이미 존재하는 프로젝트 이름입니다.');
-				return;
-			}
 			console.log(res);
 			window.location.href = '/dashboard';
+		}).catch((err) => {
+			if (err.response.status === 422) {
+				alert('이미 존재하는 프로젝트 이름입니다.');
+			}
 		});
 	};
 
