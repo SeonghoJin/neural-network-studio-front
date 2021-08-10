@@ -5,9 +5,11 @@ import utils from '../../utils/index.module.css';
 import useLogin from '../../../hooks/useLogin';
 import BackLoading from '../../utils/BackLoading';
 import { LoginParams } from '../../../API/Auth/types';
+import useAuthentication from '../../../hooks/useAuthentication';
 
 const SignIn = () => {
 	const { fetch, loadingFeedback, errorFeedback } = useLogin();
+	const { mutate } = useAuthentication();
 	const history = useHistory();
 	const [inputs, setInputs] = useState({
 		id: '',
@@ -18,10 +20,11 @@ const SignIn = () => {
 		async (params: LoginParams) => {
 			const response = await fetch(params);
 			if (response) {
+				mutate();
 				history.push('/');
 			}
 		},
-		[fetch, history]
+		[fetch, history, mutate]
 	);
 
 	const onChange = useCallback(

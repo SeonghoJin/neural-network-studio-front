@@ -43,7 +43,7 @@ export const StandardModal: FC<Props> = ({ onClose, body, head }: Props) => {
 			>
 				<div className={classes.paper}>
 					<h2>{head}</h2>
-					<p>{body}</p>
+					{body}
 				</div>
 			</Modal>
 		</div>

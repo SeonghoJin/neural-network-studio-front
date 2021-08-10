@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 import CardGrid from './cardGrid/cardGrid';
-import Index from '../nav';
 import style from './index.module.css';
 import utils from '../utils/index.module.css';
 import PrivateAuthentication from '../../Authentication/PrivateAuthentication';
+import Navigation from '../nav';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -23,20 +23,16 @@ const useStyle = makeStyles({
 const DashBoard = () => {
 	const classes = useStyle();
 
-	const newProject = () => {
-		window.location.href = '/dashboard/projects/new';
-	};
-
 	return (
 		<PrivateAuthentication>
-			<Index />
+			<Navigation />
 			<div className={classes.wrapper}>
 				<div className={classes.container}>
 					<div className={`${style.mainWrapper}`}>
 						<div className={`${style.dashboardMenu}`}>
-							<button className={`${utils.divButton} ${style.createButton}`} type="button" onClick={newProject}>
+							<Link to="/dashboard/projects/new" className={`${utils.divButton} ${style.createButton}`} type="button">
 								프로젝트 생성
-							</button>
+							</Link>
 						</div>
 						<CardGrid />
 					</div>

@@ -4,6 +4,7 @@ import StandardModal from '../components/utils/modal/StandardModal';
 import { login } from '../API/Auth';
 import { LoginParams } from '../API/Auth/types';
 import SimpleBackdrop from '../components/utils/BackLoading';
+import { sleep } from '../util';
 
 export const loginRequestResult = atom({
 	key: 'loginRequestResult',
@@ -24,22 +25,27 @@ export const useLogin = () => {
 				data: null,
 				loading: true,
 			});
-			try {
-				const response = await login(param);
-				setResult((state) => ({
-					loading: false,
-					error: null,
-					data: response.data,
-				}));
-				return true;
-			} catch (e) {
-				setResult({
-					data: null,
-					loading: false,
-					error: e,
-				});
-				return false;
-			}
+
+			const state = sleep(300).then(async () => {
+				try {
+					const response = await login(param);
+					setResult(() => ({
+						loading: false,
+						error: null,
+						data: response,
+					}));
+					return true;
+				} catch (e) {
+					setResult({
+						data: null,
+						loading: false,
+						error: e,
+					});
+					return false;
+				}
+			});
+
+			return state;
 		},
 
 		[setResult]

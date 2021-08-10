@@ -1,11 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Backdrop } from '@material-ui/core';
-import DropMenu from '../../utils/dropMenu/dropMenu';
+import DropMenu from '../../../utils/dropMenu/dropMenu';
 import style from './card.module.css';
-import useDeleteProject from '../../../hooks/useDeleteProject';
-import StandardModal from '../../utils/modal/StandardModal';
+import useDeleteProject from '../../../../hooks/useDeleteProject';
 
 type Props = {
 	projectNo: number;
