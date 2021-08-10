@@ -5,6 +5,7 @@ import CardGrid from './cardGrid/cardGrid';
 import Header from '../nav/header';
 import style from './index.module.css';
 import utils from '../utils/index.module.css';
+import PrivateAuthentication from '../../Authentication/PrivateAuthentication';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -27,7 +28,7 @@ const DashBoard = () => {
 	};
 
 	return (
-		<>
+		<PrivateAuthentication>
 			<Header />
 			<div className={classes.wrapper}>
 				<div className={classes.container}>
@@ -41,7 +42,7 @@ const DashBoard = () => {
 					</div>
 				</div>
 			</div>
-		</>
+		</PrivateAuthentication>
 	);
 };
 

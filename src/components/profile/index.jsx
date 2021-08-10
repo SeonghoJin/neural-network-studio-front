@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import style from './index.module.css';
 import { getUserProfile } from '../../API/User';
+import PrivateAuthentication from '../../Authentication/PrivateAuthentication';
 
 class Profile extends React.PureComponent {
 	state = {
@@ -40,10 +41,10 @@ class Profile extends React.PureComponent {
 
 	render() {
 		return (
-			<>
+			<PrivateAuthentication>
 				<Header />
 				<div className={`${style.wrapper}`}>{this.state.loading ? null : <Main user={this.state.user} />}</div>
-			</>
+			</PrivateAuthentication>
 		);
 	}
 }

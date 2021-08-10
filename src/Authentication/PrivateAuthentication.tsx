@@ -7,6 +7,7 @@ type Props = {
 
 const PrivateAuthentication = ({ children }: Props) => {
 	const { user } = useAuthentication();
+	console.log(user, children);
 	return (
 		<>
 			{user?.type === UserType.Visitor && alert('로그인이 필요합니다.')}

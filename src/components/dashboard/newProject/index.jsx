@@ -7,6 +7,7 @@ import Main from './main/main';
 import style from './index.module.css';
 import axios from 'axios';
 import { getUserProfile } from '../../../API/User';
+import PrivateAuthentication from '../../../Authentication/PrivateAuthentication';
 
 class NewProject extends React.PureComponent {
 	state = {
@@ -37,12 +38,12 @@ class NewProject extends React.PureComponent {
 
 	render() {
 		return (
-			<>
+			<PrivateAuthentication>
 				<Header auth={this.state.auth} user={this.state.user} />
 				<div className={`${style.wrapper}`}>
 					<Main />
 				</div>
-			</>
+			</PrivateAuthentication>
 		);
 	}
 }
