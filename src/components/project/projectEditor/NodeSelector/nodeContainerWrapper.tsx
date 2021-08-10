@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import 'react-bootstrap/dist/react-bootstrap.min';
 import React from 'react';
-import { blockStates } from '../../../../core/block/BlockState';
+import { blockStates } from '../../../../core/reactFlow/block/BlockState';
 import NodeContainer from './nodeContainer';
 import Node from './node';
 

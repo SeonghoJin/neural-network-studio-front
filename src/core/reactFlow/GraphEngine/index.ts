@@ -20,9 +20,12 @@ class GraphConvertor {
 	};
 
 	toJSON = () => {
+		console.log(1);
+		console.log(this.nodes, this.edges);
 		this.edges.forEach((edge) => {
 			const { source } = edge;
 			const { target } = edge;
+			console.log(2);
 			this.nodes.forEach((node: Node) => {
 				const newNode = node;
 				if (newNode.name === target) {
@@ -40,6 +43,7 @@ class GraphConvertor {
 		const inputNodeName = this.nodes.filter((node) => {
 			return node.input === null;
 		});
+		console.log(3);
 		return {
 			output: outputNodeName[0]?.name || '',
 			input: inputNodeName[0]?.name || '',
@@ -54,6 +58,7 @@ const graphToLayouts = (graph: FlowElement[]) => {
 	});
 	const graphConvertor = new GraphConvertor();
 	nodesAndEdges.forEach((element) => {
+		console.log(Node.isNode(element));
 		if (Node.isNode(element)) {
 			graphConvertor.addNode(element);
 		} else {

@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getUserProfileThunks } from '../module/API/user/thunks';
 import { RootDispatch } from '../module';
 import { setAuthentication, UserType } from '../module/Auth';

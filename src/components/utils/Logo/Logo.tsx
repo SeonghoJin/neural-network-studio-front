@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useProjectLocation from '../../../hooks/useProjectLocation';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -18,10 +19,11 @@ const useStyle = makeStyles({
 
 const Logo = () => {
 	const classes = useStyle();
+	const { projectNo } = useProjectLocation();
 	return (
 		<div className={classes.wrapper}>
 			<div className={classes.container}>
-				<Link to="/project/1">
+				<Link to={`/project/${projectNo}`}>
 					<div>Neural Network Studio</div>
 				</Link>
 			</div>
@@ -29,4 +31,4 @@ const Logo = () => {
 	);
 };
 
-export default React.memo(Logo);
+export default Logo;

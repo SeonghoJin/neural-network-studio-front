@@ -5,7 +5,7 @@ import CircleLoading from '../../../utils/Loading/CircularLoading';
 import { IProjectOptimizerConfig } from '../../../../API/project/types';
 import TextInput from '../../../Input/TextInput';
 import SelectInput from '../../../Input/SelectInput';
-import { getOptimizerValues } from '../../../../core/Optimizers';
+import { getOptimizerValues } from '../../../../core/Project/Optimizers';
 import FloatInput from '../../../Input/FloatInput';
 import useGetProjectConfigResult from '../../../../hooks/APIResult/project/useGetProjectConfigResult';
 

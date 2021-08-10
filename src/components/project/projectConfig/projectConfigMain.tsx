@@ -2,6 +2,7 @@ import { Container, makeStyles } from '@material-ui/core';
 import { useState } from 'react';
 import ProjectConfigSideBar from './projectConfigSideBar/ProjectConfigSideBar';
 import ProjectConfigViewer from './ProjectConfigViewer/ProjectConfigViewer';
+import selectorItemHeads from './index';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -20,7 +21,7 @@ const useStyle = makeStyles({
 const ProjectConfigMain = () => {
 	const classes = useStyle();
 
-	const [value, setValue] = useState(0);
+	const [value, setValue] = useState<keyof typeof selectorItemHeads>(selectorItemHeads['Global Config']);
 
 	return (
 		<>

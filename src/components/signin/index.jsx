@@ -1,15 +1,15 @@
 import React from 'react';
-import Signin from './signin';
 import style from './index.module.css';
+import SignInContainer from './signInContainer';
 
 class LoginPage extends React.PureComponent {
-  render() {
-    return (
-      <div className={style.signinWrapper}>
-        <Signin />
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div className={style.signinWrapper}>
+				<SignInContainer />
+			</div>
+		);
+	}
 }
 
 export default LoginPage;

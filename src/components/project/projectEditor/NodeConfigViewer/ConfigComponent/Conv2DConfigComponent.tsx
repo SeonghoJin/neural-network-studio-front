@@ -1,11 +1,11 @@
 import React, { ChangeEvent } from 'react';
 
-import { Conv2DConfig, IConfigComponent } from '../../../../../core/block';
+import { Conv2DConfig, IConfigComponent } from '../../../../../core/reactFlow/block';
 import SliderInput, { Marks } from '../../../../Input/SliderInput';
 import SecondDivisionTupleInput from '../../../../Input/SecondDivisionTupleInput';
 import SelectInput from '../../../../Input/SelectInput';
 import { configComponentToReactNode } from './util';
-import { getPaddingValues } from '../../../../../core/Padding';
+import { getPaddingValues } from '../../../../../core/Project/Padding';
 
 type Props = {
 	config: Conv2DConfig;

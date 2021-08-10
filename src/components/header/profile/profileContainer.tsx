@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import { UserProfile } from '../../../API/User/types';
 import Profile from './profile';
 import { RootDispatch } from '../../../module';
@@ -13,6 +14,7 @@ type Props = {
 
 const ProfileContainer = ({ userProfile }: Props) => {
 	const thunkDispatch: RootDispatch = useDispatch();
+	const history = useHistory();
 	const dispatch = useDispatch();
 
 	const logout = useCallback(() => {
@@ -32,8 +34,9 @@ const ProfileContainer = ({ userProfile }: Props) => {
 						},
 					})
 				);
+				history.push('/');
 			});
-	}, [dispatch, thunkDispatch]);
+	}, [dispatch, history, thunkDispatch]);
 
 	return <Profile logout={logout} userProfile={userProfile} />;
 };

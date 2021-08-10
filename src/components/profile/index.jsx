@@ -6,55 +6,49 @@ import Main from '../profile/main/main';
 import axios from 'axios';
 
 import style from './index.module.css';
+import { getUserProfile } from '../../API/User';
 
 class Profile extends React.PureComponent {
-  state = {
-    auth: false,
-    user: null,
-    loading: true,
-  };
+	state = {
+		auth: false,
+		user: null,
+		loading: true,
+	};
 
-  getUser = async () => {
-    await axios({
-      method: 'GET',
-      url: '/api/user',
-      withCredentials: true,
-    })
-      .then((res) => {
-        this.setState({
-          auth: true,
-          user: res.data,
-          loading: false,
-        });
-      })
-      .catch((err) => {
-        this.setState({
-          auth: false,
-          loading: false,
-        });
-        alert('로그인이 필요합니다.');
-        this.props.history.push('/login');
-      });
-  };
+	getUser = async () => {
+		getUserProfile()
+			.then((res) => {
+				console.log(res);
+				this.setState({
+					auth: true,
+					user: res,
+					loading: false,
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+				this.setState({
+					auth: false,
+					loading: false,
+				});
+				alert('로그인이 필요합니다.');
+				this.props.history.push('/login');
+			});
+	};
 
-  componentDidMount() {
-    this.getUser();
-  }
+	componentDidMount() {
+		this.getUser();
+	}
 
-  render() {
-    return (
-      <>
-        <Header
-          auth={this.state.auth}
-          user={this.state.user}
-          loading={this.state.loading}
-        />
-        <div className={`${style.wrapper}`}>
-          {this.state.loading ? null : <Main user={this.state.user} />}
-        </div>
-      </>
-    );
-  }
+	render() {
+		console.log(this.state);
+		return (
+			<>
+				<Header />
+				<div className={`${style.wrapper}`}>{this.state.loading ? null : <Main user={this.state.user} />}</div>
+			</>
+		);
+	}
 }
 
 export default withRouter(Profile);

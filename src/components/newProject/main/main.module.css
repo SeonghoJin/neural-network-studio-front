@@ -40,10 +40,18 @@
 }
 
 .createButton {
+  font-family: 'Noto Sans KR', sans-serif;
   margin-left: auto;
   padding: 10px;
-  background-color: black;
-  color: white;
+  background-color: gray;
+  color: var(--default-white);
   font-size: 16px;
   border: none;
+  cursor: pointer;
+  transition: .2s ease-in;
+}
+
+.createButton:hover {
+  background-color: var(--base-color);
+  color: var(--default-black);
 }

@@ -1,6 +1,6 @@
 import { Button, makeStyles } from '@material-ui/core';
 import React, { useCallback } from 'react';
-import { BlockState } from '../../../../core/block/BlockState';
+import { BlockState } from '../../../../core/reactFlow/block/BlockState';
 
 const useBlockStyle = makeStyles({
 	wrapper: {

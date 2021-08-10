@@ -1,21 +1,34 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Backdrop } from '@material-ui/core';
 import style from './profile.module.css';
 import DropMenu from '../../utils/dropMenu/dropMenu';
-import profile from './default-profile.png';
 import { UserProfile } from '../../../API/User/types';
+import useGetUserProfileResult from '../../../hooks/APIResult/user/useGetUserProfileResult';
+import useLogoutResult from '../../../hooks/APIResult/auth/useLogoutResult';
 
 type Props = {
 	userProfile: UserProfile;
 	logout: () => void;
 };
 
+const LogoutResult = () => {
+	const logoutResult = useLogoutResult();
+	const getUserProfileResult = useGetUserProfileResult();
+
+	return (
+		<>
+			<Backdrop open={logoutResult.loading || getUserProfileResult.loading} />
+			{logoutResult.error && logoutResult.errorModal}
+		</>
+	);
+};
+
 const Profile = ({ userProfile, logout }: Props) => {
 	const [dropMenuToggle, setDropMenuToggle] = useState(false);
 	const dropRef = useRef<HTMLDivElement | null>(null);
-	console.log(dropMenuToggle);
+
 	const openMenu = useCallback(() => {
-		console.log(dropMenuToggle);
 		setDropMenuToggle(!dropMenuToggle);
 	}, [setDropMenuToggle, dropMenuToggle]);
 
@@ -29,10 +42,7 @@ const Profile = ({ userProfile, logout }: Props) => {
 	);
 
 	useEffect(() => {
-		document.addEventListener('mousedown', (e) => {
-			console.log(2);
-			closeMenu(e);
-		});
+		document.addEventListener('mousedown', closeMenu);
 		return () => {
 			document.removeEventListener('mousedown', closeMenu);
 		};
@@ -48,18 +58,19 @@ const Profile = ({ userProfile, logout }: Props) => {
 				onClick={openMenu}
 				ref={dropRef}
 			>
-				<img alt="undefined" src={userProfile.profileImage === '' ? profile : userProfile.profileImage} />
+				<img alt="undefined" src={userProfile.profileImage.url} />
+				<DropMenu open={dropMenuToggle} custom={style.dropMenu}>
+					<div className={`${style.profileMenu}`}>
+						<Link to="/profile">내 정보</Link>
+					</div>
+					<div className={`${style.profileMenu}`}>
+						<button type="button" onClick={logout}>
+							로그아웃
+						</button>
+					</div>
+				</DropMenu>
 			</div>
-			<DropMenu open={dropMenuToggle} custom={style.dropMenu}>
-				<div className={`${style.profileMenu}`}>
-					<Link to="/profile">내 정보</Link>
-				</div>
-				<div className={`${style.profileMenu}`}>
-					<button type="button" onClick={logout}>
-						로그아웃
-					</button>
-				</div>
-			</DropMenu>
+			<LogoutResult />
 		</>
 	);
 };

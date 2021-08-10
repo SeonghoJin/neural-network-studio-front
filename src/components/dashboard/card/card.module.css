@@ -5,6 +5,8 @@
 }
 
 .card {
+    width: 250px;
+    height: 300px;
     margin: 10px;
     padding: 20px;
     border: 1px solid #ccc;
@@ -74,27 +76,33 @@
 
 .dropMenu {
     background-color: var(--base-color);
-    transform: translateX(-70%);
-    width: 80px;
+    transform: translateX(-60%);
+    width: 90px;
 }
 
 .projectMenu {
+    display: flex;
     margin-bottom: 10px;
+    justify-content: center;
 }
 
 .projectMenu:last-child {
     margin-bottom: 0;
 }
 
-.projectMenu a {
+.projectMenu button {
     font-size: 12px;
     color: black;
     text-decoration: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 .ellipsisWrapper {
-    width: 40px;
-    height: 40px;
+    position: relative;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     align-items: center;
     justify-content: center;
@@ -102,7 +110,7 @@
     cursor: pointer;
     transition: 0.2s ease-in;
     font-size: 20px;
-    line-height: 50%;
+    line-height: 30px;
     border: none;
     background: transparent;
 }
@@ -111,7 +119,11 @@
     color: var(--base-color);
 }
 
+.ellipsisWrapper:focus {
+    color: var(--base-color);
+}
+
 .emptyCard {
-    width: 287px;
-    height: 269px;
+    width: 250px;
+    height: 300px;
 }
