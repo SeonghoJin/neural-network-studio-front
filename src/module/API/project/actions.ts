@@ -10,9 +10,6 @@ export enum ProjectAPIAction {
 	PUT_PROJECT_CONFIG_SUCCESS = 'putProjectConfigSuccess',
 	PUT_PROJECT_CONFIG_ERROR = 'putProjectConfigError',
 	PUT_PROJECT_INFO_INIT = 'putProjectInfoInit',
-	PUT_PROJECT_INFO = 'putProjectInfo',
-	PUT_PROJECT_INFO_SUCCESS = 'putProjectInfoSuccess',
-	PUT_PROJECT_INFO_ERROR = 'putProjectInfoError',
 	DELETE_PROJECT = 'deleteProject',
 	DELETE_PROJECT_SUCCESS = 'deleteProjectSuccess',
 	DELETE_PROJECT_ERROR = 'deleteProjectError',
@@ -31,13 +28,6 @@ export const putProjectConfigAsync = createAsyncAction(
 	ProjectAPIAction.PUT_PROJECT_CONFIG,
 	ProjectAPIAction.PUT_PROJECT_CONFIG_SUCCESS,
 	ProjectAPIAction.PUT_PROJECT_CONFIG_ERROR
-)<undefined, undefined, string>();
-
-export const putProjectInfoInit = createStandardAction(ProjectAPIAction.PUT_PROJECT_INFO_INIT)();
-export const putProjectInfoAsync = createAsyncAction(
-	ProjectAPIAction.PUT_PROJECT_INFO,
-	ProjectAPIAction.PUT_PROJECT_INFO_SUCCESS,
-	ProjectAPIAction.PUT_PROJECT_INFO_ERROR
 )<undefined, undefined, string>();
 
 export const deleteProjectAsync = createAsyncAction(

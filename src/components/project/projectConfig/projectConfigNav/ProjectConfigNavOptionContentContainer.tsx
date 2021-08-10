@@ -1,25 +1,31 @@
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { putProjectConfigThunk } from '../../../../module/API/project/thunks';
-import { RootDispatch } from '../../../../module';
+import { Backdrop } from '@material-ui/core';
 import useProjectConfig from '../../../../hooks/useProjectConfig';
 import ProjectConfigNavOptionContent from './ProjectConfigNavOptionContent';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
+import useUpdateProjectConfig from '../../../../hooks/useUpdateProjectConfig';
+import StandardModal from '../../../utils/modal/StandardModal';
 
 const ProjectConfigNavOptionContentContainer = () => {
-	const dispatch: RootDispatch = useDispatch();
 	const { projectConfig, mutate } = useProjectConfig();
+	const { fetch, loading, data } = useUpdateProjectConfig();
 	const { projectNo } = useProjectLocation();
 
 	const onSave = useCallback(() => {
 		if (projectConfig == null) return;
-		dispatch(putProjectConfigThunk(projectNo, projectConfig)).then(async (res) => {
+		fetch(projectNo, projectConfig).then((res) => {
 			if (!res) return;
 			mutate();
 		});
-	}, [projectConfig, dispatch, mutate, projectNo]);
+	}, [projectConfig, fetch, projectNo, mutate]);
 
-	return <ProjectConfigNavOptionContent onSave={onSave} />;
+	return (
+		<>
+			{loading && <Backdrop open={loading} />}
+			{data && <StandardModal head="저장이 완료되었습니다." body="" />}
+			<ProjectConfigNavOptionContent onSave={onSave} />;
+		</>
+	);
 };
 
 export default ProjectConfigNavOptionContentContainer;

@@ -18,11 +18,6 @@ const initialState: ProjectAPIState = {
 		data: false,
 		error: null,
 	},
-	putProjectInfoResult: {
-		loading: false,
-		data: false,
-		error: null,
-	},
 	deleteProjectResult: {
 		loading: false,
 		data: false,
@@ -47,7 +42,7 @@ const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initial
 	[ProjectAPIAction.PUT_PROJECT_CONFIG_SUCCESS]: (state) => ({
 		...state,
 		putProjectConfigResult: {
-			loading: true,
+			loading: false,
 			error: null,
 			data: true,
 		},
@@ -55,7 +50,7 @@ const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initial
 	[ProjectAPIAction.PUT_PROJECT_CONFIG_ERROR]: (state, action) => ({
 		...state,
 		putProjectConfigResult: {
-			loading: true,
+			loading: false,
 			error: action.payload,
 			data: false,
 		},
@@ -82,38 +77,6 @@ const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initial
 			loading: false,
 			error: action.payload,
 			data: null,
-		},
-	}),
-	[ProjectAPIAction.PUT_PROJECT_INFO_INIT]: (state) => ({
-		...state,
-		putProjectInfoResult: {
-			loading: false,
-			error: null,
-			data: false,
-		},
-	}),
-	[ProjectAPIAction.PUT_PROJECT_INFO]: (state) => ({
-		...state,
-		putProjectInfoResult: {
-			loading: false,
-			error: null,
-			data: false,
-		},
-	}),
-	[ProjectAPIAction.PUT_PROJECT_INFO_SUCCESS]: (state) => ({
-		...state,
-		putProjectInfoResult: {
-			loading: false,
-			error: null,
-			data: true,
-		},
-	}),
-	[ProjectAPIAction.PUT_PROJECT_INFO_ERROR]: (state, action) => ({
-		...state,
-		putProjectInfoResult: {
-			loading: false,
-			error: action.payload,
-			data: false,
 		},
 	}),
 	[ProjectAPIAction.DELETE_PROJECT]: (state) => ({

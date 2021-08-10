@@ -33,7 +33,7 @@ const CardDropMenu = ({ projectNo }: Props) => {
 		if (window.confirm('프로젝트를 삭제하시겠습니까?')) {
 			dispatch(deleteProjectThunk(projectNo.toString())).then((res) => {
 				if (!res) return;
-				window.location.href = '/dashboard';
+				window.location.reload();
 			});
 		}
 	}, [dispatch, projectNo]);

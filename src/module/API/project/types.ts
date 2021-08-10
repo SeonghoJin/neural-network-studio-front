@@ -20,11 +20,6 @@ export type ProjectAPIState = {
 		loading: boolean;
 		data: boolean;
 	};
-	putProjectInfoResult: {
-		error: null | string;
-		loading: boolean;
-		data: boolean;
-	};
 	deleteProjectResult: {
 		error: null | string;
 		loading: boolean;
