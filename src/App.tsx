@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { Landing, LoginPage, Profile, Signup } from './routes/index';
-import ProjectRouter from './Router/ProjectRouter';
+import { Landing, Profile, Signup } from './routes/index';
 import Authentication from './Authentication';
-import NotFound from './Pages/NotFound';
+import ProjectRouter from './Router/ProjectRouter';
 import DashBoardRouter from './Router/DashBoardRouter';
+import NotFound from './Pages/NotFound';
+import SignIn from './components/auth/signin';
 
 function App() {
 	return (
@@ -13,10 +14,10 @@ function App() {
 			<Authentication>
 				<Switch>
 					<Route exact path="/" component={Landing} />
-					<Route exact path="/login" component={LoginPage} />
+					<Route exact path="/login" component={SignIn} />
 					<Route exact path="/signup" component={Signup} />
-					<Route exact path="/project" component={ProjectRouter} />
-					<Route exact path="/dashboard" component={DashBoardRouter} />
+					<Route path="/project" component={ProjectRouter} />
+					<Route path="/dashboard" component={DashBoardRouter} />
 					<Route exact path="/profile" component={Profile} />
 					<Route component={NotFound} />
 				</Switch>

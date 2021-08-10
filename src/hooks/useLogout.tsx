@@ -1,7 +1,10 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { atom, useRecoilState } from 'recoil';
+import { useHistory } from 'react-router-dom';
+import { logout } from '../API/Auth';
 import StandardModal from '../components/utils/modal/StandardModal';
-import { login, logout } from '../API/Auth';
+import useAuthentication from './useAuthentication';
+import SimpleBackdrop from '../components/utils/BackLoading';
 
 const logoutRequestResult = atom({
 	key: 'logoutRequestResult',
@@ -14,7 +17,8 @@ const logoutRequestResult = atom({
 
 export const useLogout = () => {
 	const [result, setResult] = useRecoilState(logoutRequestResult);
-
+	const { mutate } = useAuthentication();
+	const history = useHistory();
 	const fetch = useCallback(async () => {
 		setResult({
 			error: null,
@@ -26,7 +30,7 @@ export const useLogout = () => {
 			setResult((state) => ({
 				loading: false,
 				error: null,
-				data: response.data,
+				data: response || true,
 			}));
 			return true;
 		} catch (e) {
@@ -41,7 +45,23 @@ export const useLogout = () => {
 	return {
 		fetch,
 		...result,
-		errorModal: <StandardModal head="error" body="잘못된 로그아웃입니다." />,
+		loadingFeedback: result.loading && <SimpleBackdrop open={result.loading} />,
+		successFeedback: result.data && (
+			<StandardModal
+				head="로그아웃 되었습니다."
+				body=""
+				onClose={async () => {
+					history.push('/');
+					await mutate();
+					setResult({
+						loading: false,
+						error: null,
+						data: null,
+					});
+				}}
+			/>
+		),
+		errorFeedback: result.error && <StandardModal head={result.error} />,
 	};
 };
 

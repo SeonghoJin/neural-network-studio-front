@@ -2,7 +2,6 @@ import React from 'react';
 import style from './main.module.css';
 import utils from '../../../utils/index.module.css';
 
-import axios from 'axios';
 import { createProject } from '../../../../API/project';
 
 const maxNameLen = 45;
@@ -32,7 +31,7 @@ class Main extends React.PureComponent {
 			description: this.state.description,
 		})
 			.then((res) => {
-				window.location.href = '/dashboard';
+				window.location.href = '/dashboard/projects';
 			})
 			.catch((err) => {
 				if (err.response.status === 422) {

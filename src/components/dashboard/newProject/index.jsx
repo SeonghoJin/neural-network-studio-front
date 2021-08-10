@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Header from '../../nav/header';
+import Index from '../../nav';
 import Main from './main/main';
 
 import style from './index.module.css';
@@ -39,7 +39,7 @@ class NewProject extends React.PureComponent {
 	render() {
 		return (
 			<PrivateAuthentication>
-				<Header auth={this.state.auth} user={this.state.user} />
+				<Index auth={this.state.auth} user={this.state.user} />
 				<div className={`${style.wrapper}`}>
 					<Main />
 				</div>

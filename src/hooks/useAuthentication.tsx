@@ -1,5 +1,3 @@
-import { useSelector } from 'react-redux';
-
 import { atom, useRecoilState } from 'recoil';
 import useSWR from 'swr';
 import { AxiosError } from 'axios';
@@ -10,7 +8,6 @@ import StandardModal from '../components/utils/modal/StandardModal';
 
 export enum UserType {
 	Login = 'Login',
-	Logout = 'Logout',
 	SignUp = 'SignUp',
 	Visitor = 'Visitor',
 }
@@ -47,7 +44,7 @@ const useAuthentication = () => {
 		}
 	);
 
-	const { data, error } = result;
+	const { data, error, mutate } = result;
 
 	useEffect(() => {
 		if (data !== undefined) {
@@ -65,6 +62,7 @@ const useAuthentication = () => {
 		errorModal: <StandardModal head="error" body={result.error} />,
 		user,
 		setUser,
+		mutate,
 	};
 };
 

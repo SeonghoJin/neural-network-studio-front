@@ -1,11 +1,11 @@
 import React from 'react';
 import Main from './main/main';
-import Header from '../nav/header';
+import Navigation from '../nav';
 
 const Landing = () => {
 	return (
 		<>
-			<Header />
+			<Navigation />
 			<Main />
 		</>
 	);

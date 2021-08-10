@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 import CardGrid from './cardGrid/cardGrid';
-import Header from '../nav/header';
+import Index from '../nav';
 import style from './index.module.css';
 import utils from '../utils/index.module.css';
 import PrivateAuthentication from '../../Authentication/PrivateAuthentication';
@@ -24,12 +24,12 @@ const DashBoard = () => {
 	const classes = useStyle();
 
 	const newProject = () => {
-		window.location.href = '/newProject';
+		window.location.href = '/dashboard/projects/new';
 	};
 
 	return (
 		<PrivateAuthentication>
-			<Header />
+			<Index />
 			<div className={classes.wrapper}>
 				<div className={classes.container}>
 					<div className={`${style.mainWrapper}`}>

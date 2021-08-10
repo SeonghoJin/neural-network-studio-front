@@ -1,7 +1,7 @@
 import React from 'react';
 
 import style from './main.module.css';
-import profile from '../../nav/profile/default-profile.png';
+import profile from '../../nav/UserNavigation/default-profile.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';

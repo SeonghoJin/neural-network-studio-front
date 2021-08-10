@@ -7,7 +7,7 @@ type Props = {
 
 const Authentication = ({ children }: Props) => {
 	const { user } = useAuthentication();
-	return <>{user !== undefined && children}</>;
+	return <>{user != null && children}</>;
 };
 
 export default Authentication;

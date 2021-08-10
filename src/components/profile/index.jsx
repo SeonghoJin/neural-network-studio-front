@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Header from '../nav/header';
+import Index from '../nav';
 import Main from '../profile/main/main';
 import axios from 'axios';
 
@@ -42,7 +42,7 @@ class Profile extends React.PureComponent {
 	render() {
 		return (
 			<PrivateAuthentication>
-				<Header />
+				<Index />
 				<div className={`${style.wrapper}`}>{this.state.loading ? null : <Main user={this.state.user} />}</div>
 			</PrivateAuthentication>
 		);
