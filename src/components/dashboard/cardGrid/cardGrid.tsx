@@ -1,32 +1,32 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import Card from '../card/card';
 import style from './cardGrid.module.css';
-import useGetprojectsResult from '../../../hooks/APIResult/project/useGetprojectsResult';
-import { getProjectsThunk } from '../../../module/API/project/thunks';
 import usePageNation from '../../utils/pagenation/usePageNation';
-import { DEFAULT_PAGE_SIZE } from '../../../API/project/types';
+import { DEFAULT_PAGE_SIZE, GetProjectListParams } from '../../../API/project/types';
 import EmptyCard from '../card/emptyCard';
 import useDeleteProject from '../../../hooks/useDeleteProject';
 import StandardModal from '../../utils/modal/StandardModal';
 import SimpleBackdrop from '../../utils/BackLoading';
+import useProjectList from '../../../hooks/useProjectList';
 
 const CardGrid = () => {
-	const { loading, data } = useGetprojectsResult();
 	const deleteProject = useDeleteProject();
+	const [projectListParams, setProjectListPrams] = useState(new GetProjectListParams());
+	const { loading, data, mutate } = useProjectList({
+		params: projectListParams,
+	});
 	const { item, page } = usePageNation({
 		lastPage: data?.pagination.lastPage,
-		loading,
 	});
-	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(
-			getProjectsThunk({
+		setProjectListPrams(
+			new GetProjectListParams({
 				curPage: page.toString(),
 			})
 		);
-	}, [page, dispatch]);
+		mutate();
+	}, [page, mutate]);
 
 	const emptyCards = new Array(DEFAULT_PAGE_SIZE).fill(null).map((value, index, array) => {
 		// eslint-disable-next-line react/no-array-index-key
