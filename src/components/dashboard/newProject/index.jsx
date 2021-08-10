@@ -1,12 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Header from '../header/header';
+import Header from '../../nav/header';
 import Main from './main/main';
 
 import style from './index.module.css';
 import axios from 'axios';
-import { getUserProfile } from '../../API/User';
+import { getUserProfile } from '../../../API/User';
 
 class NewProject extends React.PureComponent {
 	state = {

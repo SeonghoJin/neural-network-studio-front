@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Header from '../header/header';
+import Header from '../nav/header';
 import Main from '../profile/main/main';
 import axios from 'axios';
 

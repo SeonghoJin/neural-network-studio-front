@@ -1,11 +1,11 @@
 import React from 'react';
 import style from './index.module.css';
-import utils from '../utils/index.module.css';
+import utils from '../../utils/index.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import { signUp } from '../../API/User';
+import { signUp } from '../../../API/User';
 
 class Signup extends React.PureComponent {
 	state = {

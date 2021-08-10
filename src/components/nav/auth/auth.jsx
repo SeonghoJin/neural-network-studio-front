@@ -2,10 +2,10 @@ import React from 'react';
 import style from './auth.module.css';
 import utils from '../../utils/index.module.css';
 import Modal from '../../utils/modal/modal';
-import Signin from '../../signin/signin';
+import Signin from '../../auth/signin/signin';
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
-import SignInContainer from '../../signin/signInContainer';
+import SignInContainer from '../../auth/signin/signInContainer';
 
 class Auth extends React.Component {
 	state = {

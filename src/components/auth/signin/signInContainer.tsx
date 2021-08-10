@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import SignIn from './signin';
-import useLogin from '../../hooks/useLogin';
-import { LoginParams } from '../../API/Auth/types';
+import useLogin from '../../../hooks/useLogin';
+import { LoginParams } from '../../../API/Auth/types';
 
 const SignInContainer = () => {
 	const { fetch } = useLogin();

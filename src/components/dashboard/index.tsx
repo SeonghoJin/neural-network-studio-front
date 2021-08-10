@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 import CardGrid from './cardGrid/cardGrid';
-import Header from '../header/header';
+import Header from '../nav/header';
 import style from './index.module.css';
 import utils from '../utils/index.module.css';
 

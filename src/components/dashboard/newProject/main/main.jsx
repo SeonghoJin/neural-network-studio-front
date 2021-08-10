@@ -1,9 +1,9 @@
 import React from 'react';
 import style from './main.module.css';
-import utils from '../../utils/index.module.css';
+import utils from '../../../utils/index.module.css';
 
 import axios from 'axios';
-import { createProject } from '../../../API/project';
+import { createProject } from '../../../../API/project';
 
 const maxNameLen = 45;
 const maxDescriptionLen = 2000;
@@ -30,13 +30,15 @@ class Main extends React.PureComponent {
 		createProject({
 			name: this.state.name,
 			description: this.state.description,
-		}).then((res) => {
-			window.location.href = '/dashboard';
-		}).catch((err) => {
-			if (err.response.status === 422) {
-				alert('이미 존재하는 프로젝트 이름입니다.');
-			}
-		});
+		})
+			.then((res) => {
+				window.location.href = '/dashboard';
+			})
+			.catch((err) => {
+				if (err.response.status === 422) {
+					alert('이미 존재하는 프로젝트 이름입니다.');
+				}
+			});
 	};
 
 	render() {
