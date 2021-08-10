@@ -4,7 +4,6 @@ import useProjectConfig from '../../../../hooks/useProjectConfig';
 import CircleLoading from '../../../utils/Loading/CircularLoading';
 import { IProjectGlobalConfig } from '../../../../API/project/types';
 import NumberInput from '../../../Input/NumberInput';
-import useGetProjectConfigResult from '../../../../hooks/APIResult/project/useGetProjectConfigResult';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -20,8 +19,7 @@ const useStyle = makeStyles({
 
 const GlobalConfig = () => {
 	const classes = useStyle();
-	const [projectConfig, setProjectConfig] = useProjectConfig();
-	const { loading, error, data } = useGetProjectConfigResult();
+	const { projectConfig, setProjectConfig, loading } = useProjectConfig();
 	const globalConfig = projectConfig as IProjectGlobalConfig;
 
 	const onChange = useCallback(
@@ -35,7 +33,7 @@ const GlobalConfig = () => {
 		[projectConfig, setProjectConfig]
 	);
 
-	const content = data && (
+	const content = projectConfig && (
 		<>
 			<NumberInput onChange={onChange} propertyName="batch_size" propertyContent={globalConfig.batch_size || 0} />
 			<NumberInput onChange={onChange} propertyName="epochs" propertyContent={globalConfig.epochs || 0} />
@@ -45,7 +43,7 @@ const GlobalConfig = () => {
 	return (
 		<div>
 			<div className={classes.wrapper}>
-				<div className={classes.container}>{loading || error ? <CircleLoading /> : content}</div>
+				<div className={classes.container}>{loading ? <CircleLoading /> : content}</div>
 			</div>
 		</div>
 	);

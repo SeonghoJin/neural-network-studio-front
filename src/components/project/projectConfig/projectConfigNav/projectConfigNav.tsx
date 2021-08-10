@@ -2,9 +2,9 @@ import { Container, makeStyles } from '@material-ui/core';
 
 import React from 'react';
 import ProjectConfigNavMainContent from './ProjectConfigNavMainContent';
-import useGetProjectConfigResult from '../../../../hooks/APIResult/project/useGetProjectConfigResult';
 import CircleLoading from '../../../utils/Loading/CircularLoading';
 import ProjectConfigNavOptionContentContainer from './ProjectConfigNavOptionContentContainer';
+import useProjectConfig from '../../../../hooks/useProjectConfig';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -54,7 +54,7 @@ const useStyle = makeStyles({
 
 const ProjectConfigNav = () => {
 	const classes = useStyle();
-	const { error, loading } = useGetProjectConfigResult();
+	const { error, loading } = useProjectConfig();
 	const content = (
 		<div className={classes.contentWrapper}>
 			<div className={classes.logoWrapper}>

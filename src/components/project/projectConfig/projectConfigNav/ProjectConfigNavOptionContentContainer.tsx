@@ -8,15 +8,16 @@ import useProjectLocation from '../../../../hooks/useProjectLocation';
 
 const ProjectConfigNavOptionContentContainer = () => {
 	const dispatch: RootDispatch = useDispatch();
-	const [projectConfig] = useProjectConfig();
+	const { projectConfig, mutate } = useProjectConfig();
 	const { projectNo } = useProjectLocation();
 
 	const onSave = useCallback(() => {
+		if (projectConfig == null) return;
 		dispatch(putProjectConfigThunk(projectNo, projectConfig)).then(async (res) => {
 			if (!res) return;
-			dispatch(getProjectConfigThunk(projectNo));
+			mutate();
 		});
-	}, [dispatch, projectConfig, projectNo]);
+	}, [dispatch, mutate, projectConfig, projectNo]);
 
 	return <ProjectConfigNavOptionContent onSave={onSave} />;
 };

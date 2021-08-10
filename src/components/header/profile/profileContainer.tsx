@@ -15,6 +15,7 @@ const ProfileContainer = () => {
 			setUser({
 				type: UserType.Logout,
 				profile: null,
+				isAuthentication: false,
 			});
 			history.push('/');
 		});
