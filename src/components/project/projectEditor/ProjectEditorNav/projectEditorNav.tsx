@@ -1,7 +1,7 @@
 import { Container, makeStyles } from '@material-ui/core';
 
 import React from 'react';
-import useProjectResult from '../../../../hooks/useProjectResult';
+import useProject from '../../../../hooks/useProject';
 import CircleLoading from '../../../utils/Loading/CircularLoading';
 import ProjectEditorNavMainContentContainer from './ProjectEditorNavMainContentContainer';
 import ProjectEditorNavOptionContentContainer from './ProjectEditorNavOptionContentContainer';
@@ -54,7 +54,7 @@ const useStyle = makeStyles({
 
 const ProjectEditorNav = () => {
 	const classes = useStyle();
-	const { error, data } = useProjectResult();
+	const { error, data } = useProject();
 	const content = (
 		<div className={classes.contentWrapper}>
 			<div className={classes.logoWrapper}>

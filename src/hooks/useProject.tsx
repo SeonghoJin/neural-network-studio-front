@@ -5,7 +5,7 @@ import { PROJECT_ERROR_HANDLE_URI } from './APIResult/util';
 import useProjectLocation from './useProjectLocation';
 import { getProject } from '../API/project';
 
-const useProjectResult = () => {
+const useProject = () => {
 	const { projectNo } = useProjectLocation();
 	const result = useSWR(
 		() => {
@@ -28,4 +28,4 @@ const useProjectResult = () => {
 	};
 };
 
-export default useProjectResult;
+export default useProject;

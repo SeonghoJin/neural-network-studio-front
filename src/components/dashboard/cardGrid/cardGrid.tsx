@@ -7,9 +7,13 @@ import { getProjectsThunk } from '../../../module/API/project/thunks';
 import usePageNation from '../../utils/pagenation/usePageNation';
 import { DEFAULT_PAGE_SIZE } from '../../../API/project/types';
 import EmptyCard from '../card/emptyCard';
+import useDeleteProject from '../../../hooks/useDeleteProject';
+import StandardModal from '../../utils/modal/StandardModal';
+import SimpleBackdrop from '../../utils/BackLoading';
 
 const CardGrid = () => {
 	const { loading, data } = useGetprojectsResult();
+	const deleteProject = useDeleteProject();
 	const { item, page } = usePageNation({
 		lastPage: data?.pagination.lastPage,
 		loading,
@@ -42,6 +46,10 @@ const CardGrid = () => {
 							id={project.projectNo}
 						/>
 					))}
+				{deleteProject.data && (
+					<StandardModal head="삭제완료했습니다." body="" onClose={() => window.location.reload()} />
+				)}
+				{deleteProject.loading && <SimpleBackdrop open={deleteProject.loading} />}
 				{loading && emptyCards}
 			</div>
 			{item}

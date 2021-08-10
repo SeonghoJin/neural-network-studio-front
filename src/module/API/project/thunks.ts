@@ -1,7 +1,7 @@
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from '../../index';
 import { ProjectAPIActionTypes } from './types';
-import { deleteProjectAsync, getProjectListAsync, getPythonCodeAsync } from './actions';
+import { getProjectListAsync, getPythonCodeAsync } from './actions';
 import { deleteProject, getProjectList, getPythonCode } from '../../../API/project';
 import { IGetProjectListParams, Projects } from '../../../API/project/types';
 
@@ -21,23 +21,6 @@ export function getPythonCodeThunk(
 		}
 	};
 }
-
-export const deleteProjectThunk = (
-	projectNo: string
-): ThunkAction<Promise<boolean>, RootState, null, ProjectAPIActionTypes> => {
-	return async (dispatch) => {
-		const { request, success, failure } = deleteProjectAsync;
-		dispatch(request());
-		try {
-			await deleteProject(projectNo);
-			dispatch(success());
-			return true;
-		} catch (e) {
-			dispatch(failure(e.message));
-			return false;
-		}
-	};
-};
 
 export const getProjectsThunk = (
 	params?: IGetProjectListParams

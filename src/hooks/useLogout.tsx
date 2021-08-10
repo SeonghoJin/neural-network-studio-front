@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react';
 import { atom, useRecoilState } from 'recoil';
 import StandardModal from '../components/utils/modal/StandardModal';
 import { login, logout } from '../API/Auth';
-import { LoginParams } from '../API/Auth/types';
 
 const logoutRequestResult = atom({
 	key: 'logoutRequestResult',

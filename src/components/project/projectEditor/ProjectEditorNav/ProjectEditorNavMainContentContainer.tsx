@@ -6,12 +6,12 @@ import ProjectEditorNavMainContent from './ProjectEditorNavMainContent';
 import { getPythonCodeThunk } from '../../../../module/API/project/thunks';
 import { RootDispatch, RootState } from '../../../../module';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
-import useProjectResult from '../../../../hooks/useProjectResult';
+import useProject from '../../../../hooks/useProject';
 import useUpdateProjectContent from '../../../../hooks/useUpdateProjectContent';
 
 const ProjectEditorNavMainContentContainer = () => {
 	const { projectNo } = useProjectLocation();
-	const { mutate } = useProjectResult();
+	const { mutate } = useProject();
 	const instance = useSelector((state: RootState) => state.reactFlowInstance.instance);
 	const { fetch } = useUpdateProjectContent();
 	const thunkDispatch: RootDispatch = useDispatch();

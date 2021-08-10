@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { Backdrop } from '@material-ui/core';
 import DropMenu from '../../utils/dropMenu/dropMenu';
 import style from './card.module.css';
-import { deleteProjectThunk } from '../../../module/API/project/thunks';
-import { RootDispatch } from '../../../module';
+import useDeleteProject from '../../../hooks/useDeleteProject';
+import StandardModal from '../../utils/modal/StandardModal';
 
 type Props = {
 	projectNo: number;
@@ -14,8 +14,7 @@ type Props = {
 const CardDropMenu = ({ projectNo }: Props) => {
 	const [dropMenuToggle, setDropMenuToggle] = useState(false);
 	const dropRef = useRef<HTMLDivElement | null>(null);
-	const dispatch: RootDispatch = useDispatch();
-
+	const { fetch } = useDeleteProject();
 	const closeMenu = useCallback((e) => {
 		if (!dropRef.current?.contains(e.target as Element)) {
 			setDropMenuToggle(false);
@@ -31,12 +30,9 @@ const CardDropMenu = ({ projectNo }: Props) => {
 
 	const onDeleteProject = useCallback(async () => {
 		if (window.confirm('프로젝트를 삭제하시겠습니까?')) {
-			dispatch(deleteProjectThunk(projectNo.toString())).then((res) => {
-				if (!res) return;
-				window.location.reload();
-			});
+			fetch(projectNo.toString());
 		}
-	}, [dispatch, projectNo]);
+	}, [fetch, projectNo]);
 
 	const openMenu = useCallback(() => {
 		setDropMenuToggle(!dropMenuToggle);
