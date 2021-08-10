@@ -8,11 +8,6 @@ const initialState: ProjectAPIState = {
 		data: null,
 		error: null,
 	},
-	getProjectConfigResult: {
-		loading: false,
-		data: null,
-		error: null,
-	},
 	putProjectConfigResult: {
 		loading: false,
 		data: false,
@@ -65,30 +60,6 @@ const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initial
 			data: false,
 		},
 	}),
-	[ProjectAPIAction.PUT_PROJECT_CONTENT]: (state) => ({
-		...state,
-		putProjectContentResult: {
-			loading: true,
-			error: null,
-			data: false,
-		},
-	}),
-	[ProjectAPIAction.PUT_PROJECT_CONTENT_SUCCESS]: (state) => ({
-		...state,
-		putProjectContentResult: {
-			loading: false,
-			error: null,
-			data: true,
-		},
-	}),
-	[ProjectAPIAction.PUT_PROJECT_CONTENT_ERROR]: (state, action) => ({
-		...state,
-		putProjectContentResult: {
-			loading: false,
-			error: action.payload,
-			data: false,
-		},
-	}),
 	[ProjectAPIAction.GET_PYTHON_CODE]: (state) => ({
 		...state,
 		getPythonCodeResult: {
@@ -108,30 +79,6 @@ const projectApi = createReducer<ProjectAPIState, ProjectAPIActionTypes>(initial
 	[ProjectAPIAction.GET_PYTHON_CODE_ERROR]: (state, action) => ({
 		...state,
 		getPythonCodeResult: {
-			loading: false,
-			error: action.payload,
-			data: null,
-		},
-	}),
-	[ProjectAPIAction.GET_PROJECT_CONFIG]: (state) => ({
-		...state,
-		getProjectConfigResult: {
-			loading: true,
-			error: null,
-			data: null,
-		},
-	}),
-	[ProjectAPIAction.GET_PROJECT_CONFIG_SUCCESS]: (state, action) => ({
-		...state,
-		getProjectConfigResult: {
-			loading: false,
-			error: null,
-			data: action.payload,
-		},
-	}),
-	[ProjectAPIAction.GET_PROJECT_CONFIG_ERROR]: (state, action) => ({
-		...state,
-		getProjectConfigResult: {
 			loading: false,
 			error: action.payload,
 			data: null,

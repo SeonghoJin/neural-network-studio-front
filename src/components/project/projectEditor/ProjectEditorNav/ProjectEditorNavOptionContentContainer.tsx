@@ -1,26 +1,38 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { FlowExportObject } from 'react-flow-renderer';
 import ProjectEditorNavOptionContent from './ProjectEditorNavOptionContent';
-import { updateProjectContentThunk } from '../../../../module/API/project/thunks';
 import { RootDispatch, RootState } from '../../../../module';
-import useGetProjectResult from '../../../../hooks/APIResult/project/useGetProjectResult';
+import useProjectResult from '../../../../hooks/useProjectResult';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
+import useUpdateProjectContent from '../../../../hooks/useUpdateProjectContent';
+import StandardModal from '../../../utils/modal/StandardModal';
+import SimpleBackdrop from '../../../utils/BackLoading';
 
 const ProjectEditorNavOptionContentContainer = () => {
-	const dispatch: RootDispatch = useDispatch();
 	const instance = useSelector((state: RootState) => state.reactFlowInstance.instance);
-	const { data, mutate } = useGetProjectResult();
+	const { mutate } = useProjectResult();
+	const result = useUpdateProjectContent();
 	const { projectNo } = useProjectLocation();
 	const onSave = useCallback(() => {
-		dispatch(updateProjectContentThunk(projectNo, '', instance?.toObject() || data?.content.flowState)).then(
-			async (res) => {
+		result
+			.fetch(projectNo, {
+				output: '',
+				flowState: instance?.toObject() as FlowExportObject,
+			})
+			.then((res) => {
 				if (!res) return;
 				mutate();
-			}
-		);
-	}, [dispatch, projectNo, instance, data?.content.flowState, mutate]);
+			});
+	}, [result, projectNo, instance, mutate]);
 
-	return <ProjectEditorNavOptionContent onSave={onSave} />;
+	return (
+		<>
+			{result.data && <StandardModal head="저장을 완료했습니다" body="" />}
+			{result.loading && <SimpleBackdrop open={result.loading} />}
+			{!result.loading && <ProjectEditorNavOptionContent onSave={onSave} />}
+		</>
+	);
 };
 
 export default ProjectEditorNavOptionContentContainer;

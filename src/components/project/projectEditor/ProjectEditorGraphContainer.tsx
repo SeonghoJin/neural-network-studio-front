@@ -5,10 +5,10 @@ import { setReactFlowInstance } from '../../../module/ReactFlowInstance';
 import ProjectEditorGraph from './projectEditorGraph';
 import CircleLoading from '../../utils/Loading/CircularLoading';
 import { setElements } from '../../../module/Elements';
-import useGetProjectResult from '../../../hooks/APIResult/project/useGetProjectResult';
+import useProjectResult from '../../../hooks/useProjectResult';
 
 const ProjectEditorGraphContainer = () => {
-	const result = useGetProjectResult();
+	const result = useProjectResult();
 	const dispatch = useDispatch();
 
 	const setReactInstance = useCallback(

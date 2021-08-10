@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import useGetPythonCodeResult from '../hooks/APIResult/project/useGetPythonCodeResult';
-import usePutProjectContentResult from '../hooks/APIResult/project/usePutProjectContentResult';
-import useGetProjectResult from '../hooks/APIResult/project/useGetProjectResult';
+import useUpdateProjectContent from '../hooks/useUpdateProjectContent';
+import useProjectResult from '../hooks/useProjectResult';
 import ProjectEditorMain from '../components/project/projectEditor/projectEditorMain';
 import ProjectNav from '../components/project/ProjectNav/projectNav';
 import ProjectEditorNav from '../components/project/projectEditor/ProjectEditorNav/projectEditorNav';
@@ -24,8 +24,8 @@ const useStyle = makeStyles({
 
 const ProjectError = () => {
 	const getPythonCodeResult = useGetPythonCodeResult();
-	const putProjectContentResult = usePutProjectContentResult();
-	const getProjectResult = useGetProjectResult();
+	const putProjectContentResult = useUpdateProjectContent();
+	const getProjectResult = useProjectResult();
 	return (
 		<>
 			{getProjectResult.error && getProjectResult.errorModal}

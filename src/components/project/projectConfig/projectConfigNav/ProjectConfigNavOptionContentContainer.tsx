@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { getProjectConfigThunk, putProjectConfigThunk } from '../../../../module/API/project/thunks';
+import { putProjectConfigThunk } from '../../../../module/API/project/thunks';
 import { RootDispatch } from '../../../../module';
 import useProjectConfig from '../../../../hooks/useProjectConfig';
 import ProjectConfigNavOptionContent from './ProjectConfigNavOptionContent';
@@ -17,7 +17,7 @@ const ProjectConfigNavOptionContentContainer = () => {
 			if (!res) return;
 			mutate();
 		});
-	}, [dispatch, mutate, projectConfig, projectNo]);
+	}, [projectConfig, dispatch, mutate, projectNo]);
 
 	return <ProjectConfigNavOptionContent onSave={onSave} />;
 };

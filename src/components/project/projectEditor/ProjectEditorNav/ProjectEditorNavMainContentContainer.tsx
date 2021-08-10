@@ -1,21 +1,26 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import fileDownload from 'js-file-download';
+import { FlowExportObject } from 'react-flow-renderer';
 import ProjectEditorNavMainContent from './ProjectEditorNavMainContent';
-import { getPythonCodeThunk, updateProjectContentThunk } from '../../../../module/API/project/thunks';
+import { getPythonCodeThunk } from '../../../../module/API/project/thunks';
 import { RootDispatch, RootState } from '../../../../module';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
-import useGetProjectResult from '../../../../hooks/APIResult/project/useGetProjectResult';
+import useProjectResult from '../../../../hooks/useProjectResult';
+import useUpdateProjectContent from '../../../../hooks/useUpdateProjectContent';
 
 const ProjectEditorNavMainContentContainer = () => {
 	const { projectNo } = useProjectLocation();
-	const { mutate } = useGetProjectResult();
-	const thunkDispatch: RootDispatch = useDispatch();
+	const { mutate } = useProjectResult();
 	const instance = useSelector((state: RootState) => state.reactFlowInstance.instance);
-
+	const { fetch } = useUpdateProjectContent();
+	const thunkDispatch: RootDispatch = useDispatch();
 	const onGetPythonCode = useCallback(() => {
 		const exec = async () => {
-			await thunkDispatch(updateProjectContentThunk(projectNo, '', instance?.toObject()))
+			await fetch(projectNo, {
+				output: '',
+				flowState: instance?.toObject() as FlowExportObject,
+			})
 				.then(async (res) => {
 					if (res) {
 						await mutate();
@@ -31,7 +36,7 @@ const ProjectEditorNavMainContentContainer = () => {
 				});
 		};
 		exec();
-	}, [instance, mutate, projectNo, thunkDispatch]);
+	}, [fetch, instance, mutate, projectNo, thunkDispatch]);
 
 	return <ProjectEditorNavMainContent onGetPythonCode={onGetPythonCode} />;
 };

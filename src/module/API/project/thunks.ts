@@ -1,52 +1,9 @@
 import { ThunkAction } from 'redux-thunk';
-import { FlowExportObject } from 'react-flow-renderer';
 import { RootState } from '../../index';
 import { ProjectAPIActionTypes } from './types';
-import {
-	deleteProjectAsync,
-	getProjectConfigAsync,
-	getProjectListAsync,
-	getPythonCodeAsync,
-	putProjectConfigAsync,
-	putProjectContentAsync,
-	putProjectInfoAsync,
-} from './actions';
-import {
-	deleteProject,
-	getProject,
-	getProjectConfig,
-	getProjectList,
-	getPythonCode,
-	updateProjectConfig,
-	updateProjectContent,
-	updateProjectInfo,
-} from '../../../API/project';
-import { IGetProjectListParams, IProjectConfig, IProjectInfo, Projects } from '../../../API/project/types';
-
-export function updateProjectContentThunk(
-	projectNo: string,
-	output: string,
-	flowState?: FlowExportObject
-): ThunkAction<Promise<boolean>, RootState, null, ProjectAPIActionTypes> {
-	return async (dispatch) => {
-		const { request, success, failure } = putProjectContentAsync;
-		dispatch(request());
-		try {
-			if (flowState == null) {
-				throw new Error('잘못된 저장입니다');
-			}
-			await updateProjectContent(projectNo, {
-				output,
-				flowState,
-			});
-			dispatch(success());
-			return true;
-		} catch (e) {
-			dispatch(failure(e.message));
-			return false;
-		}
-	};
-}
+import { deleteProjectAsync, getProjectListAsync, getPythonCodeAsync, putProjectConfigAsync } from './actions';
+import { deleteProject, getProjectList, getPythonCode, updateProjectConfig } from '../../../API/project';
+import { IGetProjectListParams, IProjectConfig, Projects } from '../../../API/project/types';
 
 export function getPythonCodeThunk(
 	projectNo: string
@@ -61,41 +18,6 @@ export function getPythonCodeThunk(
 		} catch (e) {
 			dispatch(failure(e.message));
 			return null;
-		}
-	};
-}
-
-export function getProjectConfigThunk(
-	projectNo: string
-): ThunkAction<Promise<boolean>, RootState, null, ProjectAPIActionTypes> {
-	return async (dispatch) => {
-		const { request, success, failure } = getProjectConfigAsync;
-		dispatch(request());
-		try {
-			const projectConfig = await getProjectConfig(projectNo);
-			dispatch(success(projectConfig));
-			return false;
-		} catch (e) {
-			dispatch(failure(e.message));
-			return true;
-		}
-	};
-}
-
-export function putProjectInfoThunk(
-	projectNo: string,
-	projectInfo: IProjectInfo
-): ThunkAction<Promise<boolean>, RootState, null, ProjectAPIActionTypes> {
-	return async (dispatch) => {
-		const { request, success, failure } = putProjectInfoAsync;
-		dispatch(request());
-		try {
-			await updateProjectInfo(projectNo, projectInfo);
-			dispatch(success());
-			return true;
-		} catch (e) {
-			dispatch(failure(e.message));
-			return false;
 		}
 	};
 }
