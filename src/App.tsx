@@ -7,6 +7,7 @@ import ProjectRouter from './Router/ProjectRouter';
 import DashBoardRouter from './Router/DashBoardRouter';
 import NotFound from './Pages/NotFound';
 import SignIn from './components/auth/signin';
+import ModifyProfile from './components/profile/modify';
 
 function App() {
 	return (
@@ -19,6 +20,7 @@ function App() {
 					<Route path="/project" component={ProjectRouter} />
 					<Route path="/dashboard" component={DashBoardRouter} />
 					<Route exact path="/profile" component={Profile} />
+					<Route exact path="/profile/modify" component={ModifyProfile} />
 					<Route component={NotFound} />
 				</Switch>
 			</Authentication>

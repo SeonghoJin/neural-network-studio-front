@@ -1,7 +1,5 @@
-import { useSelector } from 'react-redux';
 import { atom, useRecoilState } from 'recoil';
 import { useCallback } from 'react';
-import { RootState } from '../module';
 import StandardModal from '../components/utils/modal/StandardModal';
 import { updateProjectConfig } from '../API/project';
 import { IProjectConfig } from '../API/project/types';

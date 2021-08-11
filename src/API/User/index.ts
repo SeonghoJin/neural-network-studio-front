@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import config from '../../config';
-import { SignUpParams, UpdatedUserProfile, UserProfile, UserProfileToUpdateParams } from './types';
+import { SignUpParams, UserProfile, UserProfileImage, UserProfileToUpdateParams } from './types';
 
 const axiosConfig: AxiosRequestConfig = {
 	withCredentials: true,
@@ -19,11 +19,12 @@ export const getUserProfile = async () => {
 };
 
 export const updateUserProfile = async (userProfileToUpdate: UserProfileToUpdateParams) => {
-	const response = await axios.put<UpdatedUserProfile>(
-		`${config.SERVER_PREFIX}/api/user`,
-		userProfileToUpdate,
-		axiosConfig
-	);
+	const response = await axios.put(`${config.SERVER_PREFIX}/api/user`, userProfileToUpdate, axiosConfig);
 
+	return response.data;
+};
+
+export const uploadImage = async (blob: FormData) => {
+	const response = await axios.post<UserProfileImage>(`${config.SERVER_PREFIX}/api/image`, blob, axiosConfig);
 	return response.data;
 };

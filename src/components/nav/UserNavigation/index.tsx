@@ -15,7 +15,6 @@ const UserNavigation = ({ user }: Props) => {
 
 	const toggleMenu = useCallback(
 		(e) => {
-			e.preventDefault();
 			e.nativeEvent.stopImmediatePropagation();
 			setFlag(!flag);
 		},
@@ -24,8 +23,6 @@ const UserNavigation = ({ user }: Props) => {
 
 	const closeMenu = useCallback(
 		(e) => {
-			e.preventDefault();
-			e.stopPropagation();
 			setFlag(false);
 		},
 		[setFlag]

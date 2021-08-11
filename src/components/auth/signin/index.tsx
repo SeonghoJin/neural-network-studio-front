@@ -3,7 +3,6 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import style from './index.module.css';
 import utils from '../../utils/index.module.css';
 import useLogin from '../../../hooks/useLogin';
-import BackLoading from '../../utils/BackLoading';
 import { LoginParams } from '../../../API/Auth/types';
 import useAuthentication from '../../../hooks/useAuthentication';
 
@@ -20,8 +19,8 @@ const SignIn = () => {
 		async (params: LoginParams) => {
 			const response = await fetch(params);
 			if (response) {
-				mutate();
-				history.push('/');
+				await mutate();
+				history.goBack();
 			}
 		},
 		[fetch, history, mutate]
