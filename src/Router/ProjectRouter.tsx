@@ -9,7 +9,6 @@ const ProjectRouter: FC<null> = () => {
 	return (
 		<PrivateAuthentication>
 			<ReactFlowProvider>
-				<Route path="/project/list" exact />
 				<Route path="/project/:projectNo" exact component={ProjectEditor} />
 				<Route path="/project/:projectNo/config" exact component={ProjectConfig} />
 			</ReactFlowProvider>

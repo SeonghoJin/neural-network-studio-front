@@ -4,6 +4,9 @@ import { AxiosError } from 'axios';
 import StandardModal from '../components/utils/modal/StandardModal';
 import { updateProjectConfig } from '../API/project';
 import { IProjectConfig } from '../API/project/types';
+import { sleep } from '../util';
+import SimpleBackdrop from '../components/utils/BackLoading';
+import SuccessSnackbar from '../components/utils/Snackbar/SuccessSnackbar';
 
 type UpdateProjectConfigState = {
 	error: null | AxiosError;
@@ -28,20 +31,23 @@ const useUpdateProjectConfig = () => {
 			});
 
 			try {
-				const data = await updateProjectConfig(projectNo, projectConfig);
-				setResult({
-					data: data || true,
-					error: null,
-					loading: false,
+				const delayedData = await sleep(500).then(async () => {
+					const data = await updateProjectConfig(projectNo, projectConfig);
+					setResult({
+						data: data || true,
+						error: null,
+						loading: false,
+					});
+					return true;
 				});
-				return true;
+				return delayedData;
 			} catch (e) {
 				setResult({
 					data: null,
 					loading: false,
 					error: e,
 				});
-				return false;
+				return null;
 			}
 		},
 		[setResult]
@@ -54,7 +60,9 @@ const useUpdateProjectConfig = () => {
 	return {
 		...result,
 		fetch,
-		errorModal: <StandardModal head="error" body={result?.error?.name} />,
+		loadingFeedback: result?.loading && <SimpleBackdrop open />,
+		successFeedback: result?.data && <SuccessSnackbar message="저장되었습니다." open />,
+		errorFeedback: result?.error && <StandardModal head="error" body={result?.error?.name} />,
 	};
 };
 

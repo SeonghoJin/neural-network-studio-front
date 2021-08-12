@@ -6,6 +6,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { signUp } from '../../../API/User';
+import Navigation from '../../nav';
 
 class Signup extends React.PureComponent {
 	state = {
@@ -99,6 +100,7 @@ class Signup extends React.PureComponent {
 	render() {
 		return (
 			<>
+				<Navigation />
 				<div className={`${style.singupWrapper}`}>
 					<div className={`${style.formWrapper} ${utils.flexColumn}`}>
 						<header>

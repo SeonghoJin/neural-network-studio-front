@@ -25,7 +25,6 @@ const DashBoard = () => {
 
 	return (
 		<PrivateAuthentication>
-			<Navigation />
 			<div className={classes.wrapper}>
 				<div className={classes.container}>
 					<div className={`${style.mainWrapper}`}>

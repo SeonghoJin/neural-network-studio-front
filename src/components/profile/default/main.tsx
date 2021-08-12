@@ -17,7 +17,7 @@ const ProfileMain = () => {
 						<input className={`${style.invisibleInput}`} type="file" id="uploadImage" name="image" accept={'image/*'} />
 						<img src={profile?.profileImage.url} alt="profile" />
 					</div>
-					<h2>{profile?.name}</h2>)
+					<h2>{profile?.name}</h2>
 				</div>
 				<div className={`${style.buttons}`}>
 					<Link to="/profile/modify" type="button" className={`${style.modifyButton}`}>

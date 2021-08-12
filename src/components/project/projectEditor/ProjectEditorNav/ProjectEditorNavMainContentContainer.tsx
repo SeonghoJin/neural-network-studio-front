@@ -10,7 +10,7 @@ import usePythonCode from '../../../../hooks/usePythonCode';
 const ProjectEditorNavMainContentContainer = () => {
 	const { projectNo } = useProjectLocation();
 	const instance = useSelector((state: RootState) => state.reactFlowInstance.instance);
-	const { fetch, errorFeedback, successFeedback } = usePythonCode();
+	const { fetch, errorFeedback, successFeedback, loadingFeedback } = usePythonCode();
 	const onGetPythonCode = useCallback(() => {
 		(async () => {
 			await fetch(projectNo, {
@@ -27,6 +27,7 @@ const ProjectEditorNavMainContentContainer = () => {
 	return (
 		<>
 			{errorFeedback}
+			{loadingFeedback}
 			{successFeedback}
 			<ProjectEditorNavMainContent onGetPythonCode={onGetPythonCode} />;
 		</>

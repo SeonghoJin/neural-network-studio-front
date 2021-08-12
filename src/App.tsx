@@ -8,19 +8,22 @@ import DashBoardRouter from './Router/DashBoardRouter';
 import NotFound from './Pages/NotFound';
 import SignIn from './components/auth/signin';
 import ModifyProfile from './components/profile/modify';
+import { PagePathName } from './pagePathName';
+import Asset from './Pages/Asset';
 
 function App() {
 	return (
 		<BrowserRouter>
 			<Authentication>
 				<Switch>
-					<Route exact path="/" component={Landing} />
-					<Route exact path="/login" component={SignIn} />
-					<Route exact path="/signup" component={Signup} />
-					<Route path="/project" component={ProjectRouter} />
-					<Route path="/dashboard" component={DashBoardRouter} />
-					<Route exact path="/profile" component={Profile} />
-					<Route exact path="/profile/modify" component={ModifyProfile} />
+					<Route exact path={PagePathName.MAIN} component={Landing} />
+					<Route exact path={PagePathName.LOGIN} component={SignIn} />
+					<Route exact path={PagePathName.SIGN_UP} component={Signup} />
+					<Route path={PagePathName.PROJECT} component={ProjectRouter} />
+					<Route path={PagePathName.DASHBOARD} component={DashBoardRouter} />
+					<Route exact path={PagePathName.PROFILE} component={Profile} />
+					<Route exact path={PagePathName.PROFILE_MODIFY} component={ModifyProfile} />
+					<Route exact path={PagePathName.ASSET_MAIN} component={Asset} />
 					<Route component={NotFound} />
 				</Switch>
 			</Authentication>
