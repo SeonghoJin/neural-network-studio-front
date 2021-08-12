@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { atom, useRecoilState } from 'recoil';
 import StandardModal from '../components/utils/modal/StandardModal';
 import { updateProjectContent } from '../API/project';
@@ -29,26 +29,55 @@ const useUpdateProjectContent = () => {
 				setResult({
 					loading: false,
 					error: null,
-					data: response.data || true,
+					data: response || true,
 				});
-				return true;
+				return { projectNo, projectContent };
 			} catch (e) {
 				setResult({
 					data: null,
 					loading: false,
 					error: e,
 				});
-				return false;
+				return null;
 			}
 		},
 		[setResult]
 	);
 
+	useEffect(() => {
+		return () => {
+			setResult(null);
+		};
+	}, [setResult]);
+
 	return {
 		...result,
 		fetch,
-		errorModal: <StandardModal head="error" body={result?.error} />,
+		errorFeedback: result?.error && <StandardModal head="error" body={result?.error} />,
+		successFeedback: useCallback(
+			(onCloseSuccessFeedback?) => {
+				return (
+					result?.data && (
+						<StandardModal
+							head="저장을 완료했습니다"
+							onClose={() => {
+								if (onCloseSuccessFeedback) {
+									onCloseSuccessFeedback();
+								}
+							}}
+						/>
+					)
+				);
+			},
+			[result?.data]
+		),
 	};
 };
+
+useUpdateProjectContent.defaultProps = {
+	onCloseSuccessFeedback: null,
+};
+
+useUpdateProjectContent.defaultProps = {};
 
 export default useUpdateProjectContent;

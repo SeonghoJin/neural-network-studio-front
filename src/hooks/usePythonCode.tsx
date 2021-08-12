@@ -1,6 +1,9 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { atom, useRecoilState } from 'recoil';
-import { getPythonCode } from '../API/project';
+import { getPythonCode, updateProjectContent } from '../API/project';
+import { IProjectContentDto } from '../API/project/types';
+import StandardModal from '../components/utils/modal/StandardModal';
+import SuccessSnackbar from '../components/utils/Snackbar/SuccessSnackbar';
 
 type PythonCodeResult = {
 	data: null | Blob;
@@ -17,35 +20,48 @@ const usePythonCode = () => {
 	const [result, setResult] = useRecoilState(pythonCodeResultState);
 
 	const fetch = useCallback(
-		async (projectNo: string) => {
+		async (projectNo: string, projectContent: IProjectContentDto) => {
 			setResult({
 				data: null,
 				error: null,
 				loading: true,
 			});
-			try {
-				const data = await getPythonCode(projectNo);
-				setResult({
-					data,
-					error: null,
-					loading: false,
+
+			const res = await updateProjectContent(projectNo, projectContent)
+				.then(async () => {
+					const data = await getPythonCode(projectNo);
+					setResult({
+						error: null,
+						data,
+						loading: false,
+					});
+					return data;
+				})
+				.catch((e) => {
+					setResult({
+						error: e,
+						data: null,
+						loading: false,
+					});
+					return null;
 				});
-				return true;
-			} catch (e) {
-				setResult({
-					data: null,
-					error: e,
-					loading: false,
-				});
-				return false;
-			}
+
+			return res;
 		},
 		[setResult]
 	);
 
+	useEffect(() => {
+		return () => {
+			setResult(null);
+		};
+	}, [setResult]);
+
 	return {
 		...result,
 		fetch,
+		errorFeedback: result?.error && <StandardModal head={result.error} />,
+		successFeedback: result?.data && <SuccessSnackbar message="파이썬 코드를 열어보세요." open={!!result?.data} />,
 	};
 };
 

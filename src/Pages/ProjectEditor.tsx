@@ -1,7 +1,4 @@
 import { makeStyles } from '@material-ui/core';
-import usePythonCode from '../hooks/usePythonCode';
-import useUpdateProjectContent from '../hooks/useUpdateProjectContent';
-import useProject from '../hooks/useProject';
 import ProjectEditorMain from '../components/project/projectEditor/projectEditorMain';
 import ProjectNav from '../components/project/ProjectNav/projectNav';
 import ProjectEditorNav from '../components/project/projectEditor/ProjectEditorNav/projectEditorNav';

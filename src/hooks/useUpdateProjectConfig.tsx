@@ -1,5 +1,5 @@
 import { atom, useRecoilState } from 'recoil';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import StandardModal from '../components/utils/modal/StandardModal';
 import { updateProjectConfig } from '../API/project';
 import { IProjectConfig } from '../API/project/types';
@@ -45,6 +45,11 @@ const useUpdateProjectConfig = () => {
 		},
 		[setResult]
 	);
+
+	useEffect(() => {
+		setResult(null);
+	}, [setResult]);
+
 	return {
 		...result,
 		fetch,

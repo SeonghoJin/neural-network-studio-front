@@ -1,8 +1,6 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import style from './NewProjectMain.module.css';
 import utils from '../../../utils/index.module.css';
-
-import { createProject } from '../../../../API/project';
 import useCreateProject from '../../../../hooks/useCreateProject';
 
 const maxNameLen = 45;

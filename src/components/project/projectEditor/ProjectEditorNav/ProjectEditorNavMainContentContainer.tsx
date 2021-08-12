@@ -5,38 +5,32 @@ import { FlowExportObject } from 'react-flow-renderer';
 import ProjectEditorNavMainContent from './ProjectEditorNavMainContent';
 import { RootState } from '../../../../module';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
-import useProject from '../../../../hooks/useProject';
-import useUpdateProjectContent from '../../../../hooks/useUpdateProjectContent';
 import usePythonCode from '../../../../hooks/usePythonCode';
 
 const ProjectEditorNavMainContentContainer = () => {
 	const { projectNo } = useProjectLocation();
-	const { mutate } = useProject();
-	const { fetch } = useUpdateProjectContent();
-	const pythonCode = usePythonCode();
 	const instance = useSelector((state: RootState) => state.reactFlowInstance.instance);
+	const { fetch, errorFeedback, successFeedback } = usePythonCode();
 	const onGetPythonCode = useCallback(() => {
-		const exec = async () => {
+		(async () => {
 			await fetch(projectNo, {
 				output: '',
 				flowState: instance?.toObject() as FlowExportObject,
-			})
-				.then(async (res) => {
-					if (!res) return null;
-					mutate();
-					await pythonCode.fetch(projectNo);
-					return pythonCode.data;
-				})
-				.then(async (res) => {
-					if (res != null) {
-						fileDownload(res, 'model.py');
-					}
-				});
-		};
-		exec();
-	}, [fetch, instance, mutate, projectNo, pythonCode]);
+			}).then(async (res) => {
+				if (res != null) {
+					fileDownload(res, 'model.py');
+				}
+			});
+		})();
+	}, [fetch, instance, projectNo]);
 
-	return <ProjectEditorNavMainContent onGetPythonCode={onGetPythonCode} />;
+	return (
+		<>
+			{errorFeedback}
+			{successFeedback}
+			<ProjectEditorNavMainContent onGetPythonCode={onGetPythonCode} />;
+		</>
+	);
 };
 
 export default ProjectEditorNavMainContentContainer;

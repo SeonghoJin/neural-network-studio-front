@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import Main from './main/NewProjectMain';
 import style from './index.module.css';
 import PrivateAuthentication from '../../../Authentication/PrivateAuthentication';
@@ -18,4 +17,4 @@ class NewProject extends React.PureComponent {
 	}
 }
 
-export default withRouter(NewProject);
+export default NewProject;

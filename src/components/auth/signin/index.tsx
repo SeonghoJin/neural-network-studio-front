@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import style from './index.module.css';
 import utils from '../../utils/index.module.css';
 import useLogin from '../../../hooks/useLogin';
