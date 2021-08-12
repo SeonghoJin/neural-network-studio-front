@@ -83,22 +83,22 @@ const useCreateProject = () => {
 							onClick={() => {
 								init();
 								history.push('/dashboard/projects');
+							}}
+							className={classes.successFeedBackButton}
+							color="secondary"
+						>
+							취소
+						</Button>
+						<Button
+							onClick={() => {
+								init();
+								history.push('/dashboard/projects');
 								window.open(`/project/${result.data?.projectNo}`);
 							}}
 							className={classes.successFeedBackButton}
 							color="primary"
 						>
 							시작
-						</Button>
-						<Button
-							onClick={() => {
-								init();
-								history.push('/dashboard/projects');
-							}}
-							className={classes.successFeedBackButton}
-							color="secondary"
-						>
-							취소
 						</Button>
 					</div>
 				}
