@@ -59,7 +59,6 @@ const useAuthentication = () => {
 	return {
 		loading: !error && !user,
 		error,
-		errorModal: <StandardModal head="error" body={result.error} />,
 		user,
 		setUser,
 		mutate,

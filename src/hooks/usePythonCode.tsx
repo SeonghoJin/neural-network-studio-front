@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { atom, useRecoilState } from 'recoil';
+import { AxiosError } from 'axios';
 import { getPythonCode, updateProjectContent } from '../API/project';
 import { IProjectContentDto } from '../API/project/types';
 import StandardModal from '../components/utils/modal/StandardModal';
@@ -7,7 +8,7 @@ import SuccessSnackbar from '../components/utils/Snackbar/SuccessSnackbar';
 
 type PythonCodeResult = {
 	data: null | Blob;
-	error: null | string;
+	error: null | AxiosError;
 	loading: boolean;
 } | null;
 
@@ -60,7 +61,7 @@ const usePythonCode = () => {
 	return {
 		...result,
 		fetch,
-		errorFeedback: result?.error && <StandardModal head={result.error} />,
+		errorFeedback: result?.error && <StandardModal head={result.error.name} />,
 		successFeedback: result?.data && <SuccessSnackbar message="파이썬 코드를 열어보세요." open={!!result?.data} />,
 	};
 };

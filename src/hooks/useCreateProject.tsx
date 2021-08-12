@@ -1,5 +1,5 @@
 import { atom, useRecoilState } from 'recoil';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { AxiosError } from 'axios';
 import { Button, makeStyles } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
@@ -67,8 +67,10 @@ const useCreateProject = () => {
 		[setResult]
 	);
 
-	const init = useCallback(() => {
-		setResult(null);
+	useEffect(() => {
+		return () => {
+			setResult(null);
+		};
 	}, [setResult]);
 
 	return {
@@ -81,7 +83,6 @@ const useCreateProject = () => {
 					<div className={classes.successFeedBackButtonGroup}>
 						<Button
 							onClick={() => {
-								init();
 								history.push('/dashboard/projects');
 							}}
 							className={classes.successFeedBackButton}
@@ -91,7 +92,6 @@ const useCreateProject = () => {
 						</Button>
 						<Button
 							onClick={() => {
-								init();
 								history.push('/dashboard/projects');
 								window.open(`/project/${result.data?.projectNo}`);
 							}}
@@ -103,15 +103,13 @@ const useCreateProject = () => {
 					</div>
 				}
 				onClose={() => {
-					init();
 					history.push('/dashboard/projects');
 				}}
 			/>
 		),
 		errorFeedback: result?.error && (
 			<StandardModal
-				head={result.error.response?.status === 422 ? '이미 존재하는 프로젝트 이름입니다.' : result?.error}
-				onClose={init}
+				head={result.error.response?.status === 422 ? '이미 존재하는 프로젝트 이름입니다.' : result?.error.name}
 			/>
 		),
 		loadingFeedback: result?.loading && <StandardModal head="프로젝트 생성중입니다. 잠시만 기다려주세요." />,

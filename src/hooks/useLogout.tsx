@@ -1,18 +1,21 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { atom, useRecoilState } from 'recoil';
 import { useHistory } from 'react-router-dom';
+import { AxiosError } from 'axios';
 import { logout } from '../API/Auth';
 import StandardModal from '../components/utils/modal/StandardModal';
 import useAuthentication from './useAuthentication';
 import SimpleBackdrop from '../components/utils/BackLoading';
 
-const logoutRequestResult = atom({
+type LogoutRequestResult = {
+	error: null | AxiosError;
+	data: unknown;
+	loading: boolean;
+} | null;
+
+const logoutRequestResult = atom<LogoutRequestResult>({
 	key: 'logoutRequestResult',
-	default: {
-		error: null,
-		data: null,
-		loading: false,
-	},
+	default: null,
 });
 
 export const useLogout = () => {
@@ -42,26 +45,28 @@ export const useLogout = () => {
 			return false;
 		}
 	}, [setResult]);
+
+	useEffect(() => {
+		return () => {
+			setResult(null);
+		};
+	}, [setResult]);
+
 	return {
 		fetch,
 		...result,
-		loadingFeedback: result.loading && <SimpleBackdrop open={result.loading} />,
-		successFeedback: result.data && (
+		loadingFeedback: result?.loading && <SimpleBackdrop open={result.loading} />,
+		successFeedback: result?.data && (
 			<StandardModal
 				head="로그아웃 되었습니다."
 				body=""
 				onClose={async () => {
 					history.push('/');
 					await mutate();
-					setResult({
-						loading: false,
-						error: null,
-						data: null,
-					});
 				}}
 			/>
 		),
-		errorFeedback: result.error && <StandardModal head={result.error} />,
+		errorFeedback: result?.error && <StandardModal head={result?.error.name} />,
 	};
 };
 

@@ -23,7 +23,7 @@ const useProjectList = (props: Props = undefined) => {
 	);
 
 	return {
-		loading: !result.data && !result.error,
+		loading: !result.data,
 		...result,
 	};
 };

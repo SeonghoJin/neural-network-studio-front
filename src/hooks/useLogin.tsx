@@ -1,18 +1,21 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { atom, useRecoilState } from 'recoil';
+import { AxiosError } from 'axios';
 import StandardModal from '../components/utils/modal/StandardModal';
 import { login } from '../API/Auth';
 import { LoginParams } from '../API/Auth/types';
 import SimpleBackdrop from '../components/utils/BackLoading';
 import { sleep } from '../util';
 
-export const loginRequestResult = atom({
+type LoginRequestResult = {
+	error: AxiosError | null;
+	data: unknown;
+	loading: boolean;
+} | null;
+
+export const loginRequestResult = atom<LoginRequestResult>({
 	key: 'loginRequestResult',
-	default: {
-		error: null,
-		data: null,
-		loading: false,
-	},
+	default: null,
 });
 
 export const useLogin = () => {
@@ -51,22 +54,19 @@ export const useLogin = () => {
 		[setResult]
 	);
 
+	useEffect(() => {
+		return () => {
+			setResult(null);
+		};
+	}, [setResult]);
+
 	return {
 		fetch,
 		...result,
-		errorFeedback: result.error && (
-			<StandardModal
-				head="아이디 혹은 비밀번호가 잘못되었습니다. 다시 로그인해주십시요."
-				onClose={() => {
-					setResult({
-						data: null,
-						loading: false,
-						error: null,
-					});
-				}}
-			/>
+		errorFeedback: result?.error && (
+			<StandardModal head="아이디 혹은 비밀번호가 잘못되었습니다. 다시 로그인해주십시요." />
 		),
-		loadingFeedback: result.loading && <SimpleBackdrop open={result.loading} />,
+		loadingFeedback: result?.loading && <SimpleBackdrop open={result.loading} />,
 	};
 };
 

@@ -1,11 +1,12 @@
 import { atom, useRecoilState } from 'recoil';
 import { useCallback, useEffect } from 'react';
+import { AxiosError } from 'axios';
 import StandardModal from '../components/utils/modal/StandardModal';
 import { updateProjectConfig } from '../API/project';
 import { IProjectConfig } from '../API/project/types';
 
 type UpdateProjectConfigState = {
-	error: null | string;
+	error: null | AxiosError;
 	loading: boolean;
 	data: boolean | null;
 } | null;
@@ -53,7 +54,7 @@ const useUpdateProjectConfig = () => {
 	return {
 		...result,
 		fetch,
-		errorModal: <StandardModal head="error" body={result?.error} />,
+		errorModal: <StandardModal head="error" body={result?.error?.name} />,
 	};
 };
 

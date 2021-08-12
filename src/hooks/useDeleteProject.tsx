@@ -1,14 +1,14 @@
 import { atom, useRecoilState } from 'recoil';
-import React, { useCallback } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
-import { deleteProject, getProject, getProjectList } from '../API/project';
+import React, { useCallback, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { AxiosError } from 'axios';
+import { deleteProject } from '../API/project';
 import StandardModal from '../components/utils/modal/StandardModal';
 import SimpleBackdrop from '../components/utils/BackLoading';
 import { sleep } from '../util';
-import useProjectList from './useProjectList';
 
 type DeleteProjectResultState = {
-	error: null | string;
+	error: null | AxiosError;
 	data: null | any;
 	loading: boolean;
 } | null;
@@ -52,9 +52,11 @@ const useDeleteProject = () => {
 		[setResult]
 	);
 
-	const init = () => {
-		setResult(null);
-	};
+	useEffect(() => {
+		return () => {
+			setResult(null);
+		};
+	}, [setResult]);
 
 	return {
 		...result,
@@ -69,7 +71,7 @@ const useDeleteProject = () => {
 			/>
 		),
 		loadingFeedback: result?.loading && <SimpleBackdrop open={result?.loading} />,
-		errorFeedback: result?.error && <StandardModal head="이미 삭제된 프로젝트입니다." onClose={init} />,
+		errorFeedback: result?.error && <StandardModal head={result.error.name} />,
 	};
 };
 

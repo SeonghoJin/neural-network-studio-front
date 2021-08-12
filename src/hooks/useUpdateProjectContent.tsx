@@ -1,11 +1,12 @@
 import { useCallback, useEffect } from 'react';
 import { atom, useRecoilState } from 'recoil';
+import { AxiosError } from 'axios';
 import StandardModal from '../components/utils/modal/StandardModal';
 import { updateProjectContent } from '../API/project';
 import { IProjectContentDto } from '../API/project/types';
 
 type PutProjectContentResultState = {
-	error: null | string;
+	error: null | AxiosError;
 	loading: boolean;
 	data: boolean | null;
 } | null;
@@ -53,7 +54,7 @@ const useUpdateProjectContent = () => {
 	return {
 		...result,
 		fetch,
-		errorFeedback: result?.error && <StandardModal head="error" body={result?.error} />,
+		errorFeedback: result?.error && <StandardModal head="error" body={result?.error.name} />,
 		successFeedback: useCallback(
 			(onCloseSuccessFeedback?) => {
 				return (

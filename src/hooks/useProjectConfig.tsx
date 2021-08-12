@@ -1,7 +1,7 @@
 import { atom, useRecoilState } from 'recoil';
 import useSWR from 'swr';
 import { useEffect } from 'react';
-import { setRef } from '@material-ui/core';
+import { AxiosError } from 'axios';
 import { IProjectConfig } from '../API/project/types';
 import { getProjectConfig } from '../API/project';
 import useProjectLocation from './useProjectLocation';
@@ -17,7 +17,7 @@ const useProjectConfig = () => {
 	const { projectNo } = useProjectLocation();
 	const [projectConfig, setProjectConfig] = useRecoilState(projectConfigState);
 
-	const getProjectConfigResult = useSWR(
+	const getProjectConfigResult = useSWR<IProjectConfig, AxiosError>(
 		() => 'getProjectConfigResult',
 		async () => {
 			try {
