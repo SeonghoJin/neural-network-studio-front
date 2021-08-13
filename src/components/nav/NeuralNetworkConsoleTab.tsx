@@ -3,7 +3,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import DefaultTabs from '../utils/Tab';
-import { PagePathName, pagePathNameToNumber, UndefinedPathNameNumber } from '../../pagePathName';
+import { StaticPath, pagePathNameToNumber, UndefinedPathNameNumber } from '../../pagePathName';
 
 const TabWrapper = styled.div`
 	display: flex;
@@ -14,20 +14,20 @@ const TabWrapper = styled.div`
 const NeuralNetworkConsoleTab = () => {
 	const history = useHistory();
 	const { pathname } = history.location;
-	const pageNum = pagePathNameToNumber[pathname as PagePathName];
+	const pageNum = pagePathNameToNumber[pathname as StaticPath];
 	return (
 		<TabWrapper>
 			<DefaultTabs defaultValue={pageNum || UndefinedPathNameNumber}>
 				<Tab
 					label="Dashboard"
 					onClick={() => {
-						history.push(PagePathName.DASHBOARD_PROJECTS);
+						history.push(StaticPath.DASHBOARD_PROJECTS);
 					}}
 				/>
 				<Tab
 					label="Asset"
 					onClick={() => {
-						history.push(PagePathName.ASSET_MAIN);
+						history.push(StaticPath.ASSET_MAIN);
 					}}
 				/>
 			</DefaultTabs>

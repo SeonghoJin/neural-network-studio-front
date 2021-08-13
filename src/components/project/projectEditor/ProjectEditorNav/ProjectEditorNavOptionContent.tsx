@@ -4,6 +4,12 @@ import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core';
 import { Button } from 'react-bootstrap';
 import SettingsIcon from '@material-ui/icons/Settings';
+import LinkIcon from '@material-ui/icons/Link';
+import { format } from 'util';
+import useRoom from '../../../../hooks/useRoom';
+import { CircleLoading } from '../../../utils/Loading/CircularLoading';
+import useProjectLocation from '../../../../hooks/useProjectLocation';
+import { DynamicPath } from '../../../../pagePathName';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -30,6 +36,8 @@ type Props = {
 const ProjectEditorNavOptionContent = ({ onSave }: Props) => {
 	const classes = useStyle();
 	const location = useLocation();
+	const { projectNo } = useProjectLocation();
+	const { data, loading } = useRoom();
 	return (
 		<div className={classes.wrapper}>
 			<div className={classes.container}>
@@ -42,6 +50,14 @@ const ProjectEditorNavOptionContent = ({ onSave }: Props) => {
 					<Link to={`${location.pathname}/config`}>
 						<SettingsIcon />
 					</Link>
+				</div>
+				<div className={classes.mainOptionContentItem}>
+					{loading && <CircleLoading />}
+					{!loading && (
+						<Link to={`${format(DynamicPath.PROJECT_SHARE_FORMAT, projectNo, data)}`}>
+							<LinkIcon />
+						</Link>
+					)}
 				</div>
 			</div>
 		</div>

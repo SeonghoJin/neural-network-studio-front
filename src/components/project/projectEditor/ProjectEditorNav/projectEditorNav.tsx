@@ -54,7 +54,6 @@ const useStyle = makeStyles({
 
 const ProjectEditorNav = () => {
 	const classes = useStyle();
-	const { error, data } = useProject();
 	const content = (
 		<div className={classes.contentWrapper}>
 			<div className={classes.logoWrapper}>
@@ -74,7 +73,7 @@ const ProjectEditorNav = () => {
 	);
 	return (
 		<div className={classes.wrapper}>
-			<Container className={classes.container}>{!error && !data ? <CircleLoading /> : content}</Container>
+			<Container className={classes.container}>{content}</Container>
 		</div>
 	);
 };

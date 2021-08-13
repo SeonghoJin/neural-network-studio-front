@@ -7,7 +7,7 @@ import style from './index.module.css';
 import utils from '../../utils/index.module.css';
 import { signUp } from '../../../API/User';
 import Navigation from '../../nav';
-import { PagePathName } from '../../../pagePathName';
+import { StaticPath } from '../../../pagePathName';
 import { passwordValidationRegExp } from '../../Input/Validation';
 import useSignUp from '../../../hooks/useSignUp';
 import SuccessSnackbar from '../../utils/Snackbar/SuccessSnackbar';
@@ -60,9 +60,9 @@ const Signup = () => {
 		}).then((res) => {
 			if (!res) return;
 			history.push({
-				pathname: PagePathName.MAIN,
+				pathname: StaticPath.MAIN,
 				state: {
-					from: PagePathName.SIGN_UP,
+					from: StaticPath.SIGN_UP,
 				},
 			});
 		});

@@ -1,9 +1,8 @@
-import { useLocation } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 
-const useProjectLocation = (): { projectNo: string } => {
-	const location = useLocation();
-	const projectNo = location.pathname.split('/')[2];
-	return { projectNo };
+const useProjectLocation = () => {
+	const match = useRouteMatch<{ projectNo: string }>();
+	return { projectNo: match.params.projectNo };
 };
 
 export default useProjectLocation;

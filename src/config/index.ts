@@ -10,4 +10,6 @@ if (process.env.REACT_APP_SERVER_PREFIX === undefined || process.env.NODE_ENV ==
 export default {
 	NODE_ENV: process.env.NODE_ENV,
 	SERVER_PREFIX: process.env.REACT_APP_SERVER_PREFIX,
+	TEST_SERVER_PREFIX: process.env.REACT_APP_TEST_SERVER_PREFIX,
+	SOCKET_SERVER_PREFIX: process.env.REACT_APP_SOCKET_SERVER_PREFIX,
 };

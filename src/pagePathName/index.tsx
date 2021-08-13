@@ -1,4 +1,4 @@
-export enum PagePathName {
+export enum StaticPath {
 	DASHBOARD = '/dashboard',
 	DASHBOARD_PROJECTS = `/dashboard/projects`,
 	MAIN = '/',
@@ -10,11 +10,20 @@ export enum PagePathName {
 	ASSET_MAIN = '/asset',
 }
 
-export type PagePathKey = keyof typeof PagePathName;
+export enum DynamicPath {
+	PROJECT = '/project/:projectNo',
+	PROJECT_CONFIG = '/project/:projectNo/config',
+	PROJECT_SHARE = '/share/project/:projectNo/room/:roomNo',
+	PROJECT_SHARE_FORMAT = '/share/project/%s/room/%s',
+	PROJECT_SHARE_CONFIG = '/share/project/:projectNo/room/:roomNo/config',
+	PROJECT_SHARE_CONFIG_FORMAT = '/share/project/%s/room/%s/config',
+}
+
+export type PagePathKey = keyof typeof StaticPath;
 export const UndefinedPathNameNumber = 0;
 
 export const pagePathNameToNumber: {
-	[k in PagePathName]: number;
+	[k in StaticPath]: number;
 } = {
 	'/dashboard/projects': 1,
 	'/asset': 2,

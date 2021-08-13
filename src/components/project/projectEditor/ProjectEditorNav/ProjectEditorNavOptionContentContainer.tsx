@@ -23,7 +23,7 @@ const ProjectEditorNavOptionContentContainer = () => {
 			{result.successFeedback()}
 			{result.errorFeedback}
 			{result.loading && <SimpleBackdrop open={result.loading} />}
-			{!result.loading && <ProjectEditorNavOptionContent onSave={onSave} />}
+			<ProjectEditorNavOptionContent onSave={onSave} />
 		</>
 	);
 };

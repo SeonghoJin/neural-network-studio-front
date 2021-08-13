@@ -7,7 +7,7 @@ import useLogin from '../../../hooks/useLogin';
 import { LoginParams } from '../../../API/Auth/types';
 import useAuthentication from '../../../hooks/useAuthentication';
 import Navigation from '../../nav';
-import { PagePathName } from '../../../pagePathName';
+import { StaticPath } from '../../../pagePathName';
 
 const Wrapper = styled.div`
 	width: 100vw;
@@ -30,7 +30,7 @@ const SignIn = () => {
 			const response = await fetch(params);
 			if (response) {
 				await mutate();
-				history.push(PagePathName.MAIN);
+				history.push(StaticPath.MAIN);
 			}
 		},
 		[fetch, history, mutate]
