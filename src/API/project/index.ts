@@ -100,6 +100,6 @@ export const getProjectList = async (params?: IGetProjectListParams) => {
 };
 
 export const getProjectRoomNumber = async (projectNo: string | number) => {
-	const response = await axios.get<string>(`${config.TEST_SERVER_PREFIX}/project/${projectNo}/room`);
+	const response = await axios.get<string>(`${config.TEST_SERVER_PREFIX}/project/${projectNo}/room`, axiosConfig);
 	return response.data;
 };

@@ -16,10 +16,6 @@ const ProjectRouter: FC<null> = () => {
 					<Route path={DynamicPath.PROJECT} exact component={ProjectEditor} />
 					<Route path={DynamicPath.PROJECT_CONFIG} exact component={ProjectConfig} />
 				</ReactFlowProvider>
-				<ReactFlowProvider>
-					<Route path={DynamicPath.PROJECT_SHARE} exact component={ProjectShare} />
-					<Route path={DynamicPath.PROJECT_SHARE_CONFIG} exact component={ProjectShare} />
-				</ReactFlowProvider>
 				<Route component={NotFound} />
 			</Switch>
 		</PrivateAuthentication>

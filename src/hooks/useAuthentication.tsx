@@ -1,10 +1,9 @@
 import { atom, useRecoilState } from 'recoil';
 import useSWR from 'swr';
 import { AxiosError } from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { UserProfile } from '../API/User/types';
 import { getUserProfile } from '../API/User';
-import StandardModal from '../components/utils/modal/StandardModal';
 
 export enum UserType {
 	Login = 'Login',

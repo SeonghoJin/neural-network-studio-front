@@ -10,7 +10,7 @@ const useRoom = () => {
 			return 'useRoom';
 		},
 		async () => {
-			const delayedData = sleep(2000).then(async () => {
+			const delayedData = sleep(700).then(async () => {
 				const data = await getProjectRoomNumber(projectNo);
 				return data;
 			});
