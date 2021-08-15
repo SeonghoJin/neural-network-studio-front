@@ -65,11 +65,11 @@ type Props = {
 
 const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props) => {
 	const classes = useStyle();
-	const elements = useSelector((state: RootState) => state.elements.elements);
 	const reactFlowWrapper = useRef<HTMLDivElement | null>(null);
 	const selectedElements = useStoreState((state) => state.selectedElements);
 	const setSelectedElements = useStoreActions((state) => state.setSelectedElements);
 	const reactFlowInstance = useSelector((state: RootState) => state.reactFlowInstance.instance);
+	const elements = useSelector((state: RootState) => state.elements.elements);
 
 	useEffect(() => {
 		const inputBlockState = new InputBlockState();

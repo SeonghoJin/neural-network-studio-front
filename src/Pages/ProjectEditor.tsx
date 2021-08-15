@@ -1,7 +1,13 @@
 import { makeStyles } from '@material-ui/core';
+import { applyMiddleware, createStore } from 'redux';
+import reduxThunk from 'redux-thunk';
+import reduxLogger from 'redux-logger';
+import { Provider } from 'react-redux';
 import ProjectEditorMain from '../components/project/projectEditor/projectEditorMain';
 import ProjectNav from '../components/project/ProjectNav/projectNav';
 import ProjectEditorNav from '../components/project/projectEditor/ProjectEditorNav/projectEditorNav';
+import rootReducer from '../module';
+import ProjectEditorGraphContainer from '../components/project/projectEditor/ProjectEditorGraphContainer';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -18,22 +24,23 @@ const useStyle = makeStyles({
 		flexGrow: 1,
 	},
 });
+const store = createStore(rootReducer, applyMiddleware(reduxThunk, reduxLogger));
 
 const ProjectEditor = () => {
 	const classes = useStyle();
 
 	return (
-		<>
+		<Provider store={store}>
 			<div className={classes.wrapper}>
 				<div className={classes.container}>
 					<ProjectNav />
 					<ProjectEditorNav />
 					<div className={classes.content}>
-						<ProjectEditorMain />
+						<ProjectEditorMain projectEditorGraphContainer={<ProjectEditorGraphContainer />} />
 					</div>
 				</div>
 			</div>
-		</>
+		</Provider>
 	);
 };
 

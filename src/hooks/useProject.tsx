@@ -12,11 +12,14 @@ const useProject = () => {
 			return ['getProject', projectNo];
 		},
 		async (key, projectNumber) => {
-			const delayedData = await sleep(1000).then(async () => {
+			const delayedData = await sleep(500).then(async () => {
 				const response = await getProject(projectNumber);
 				return response;
 			});
 			return delayedData;
+		},
+		{
+			errorRetryCount: 0,
 		}
 	);
 

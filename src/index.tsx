@@ -1,23 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
-import reduxLogger from 'redux-logger';
-import reduxThunk from 'redux-thunk';
 import { RecoilRoot } from 'recoil';
-import rootReducer from './module';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
 
-const store = createStore(rootReducer, applyMiddleware(reduxThunk, reduxLogger));
-
 ReactDOM.render(
-	<Provider store={store}>
-		<RecoilRoot>
-			<App />
-		</RecoilRoot>
-	</Provider>,
+	<RecoilRoot>
+		<App />
+	</RecoilRoot>,
 	document.getElementById('root')
 );
 
