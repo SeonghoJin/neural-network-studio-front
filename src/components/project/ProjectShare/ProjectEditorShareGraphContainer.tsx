@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Elements, OnLoadParams } from 'react-flow-renderer';
 import { useDispatch } from 'react-redux';
 import { useRecoilState } from 'recoil';
@@ -9,7 +9,7 @@ import ProjectEditorGraph from '../projectEditor/projectEditorGraph';
 import { CircleLoading } from '../../utils/Loading/CircularLoading';
 
 const ProjectEditorShareGraphContainer = () => {
-	const { project } = useSocket();
+	const { project, disconnect, connected, login } = useSocket();
 	const dispatch = useDispatch();
 
 	const setReactInstance = useCallback(
@@ -33,6 +33,19 @@ const ProjectEditorShareGraphContainer = () => {
 			setElements={onSetElements}
 		/>
 	);
+
+	useEffect(() => {
+		if (connected) {
+			login();
+		}
+	}, [connected, disconnect, login]);
+
+	useEffect(() => {
+		return () => {
+			disconnect();
+		};
+	}, [disconnect]);
+
 	return <>{!project ? <CircleLoading /> : content}</>;
 };
 

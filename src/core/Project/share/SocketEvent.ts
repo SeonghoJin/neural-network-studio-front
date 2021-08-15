@@ -21,6 +21,7 @@ export enum SocketEvent {
 	ErrorResponse = 'error_response',
 	LeaveRequest = 'leave_response',
 	LeaveResponse = 'leave_response',
+	BeforeDisconnect = 'before_disconnect',
 	DisconnectResponse = 'disconnect_response',
 }
 
@@ -43,7 +44,6 @@ export type JoinRequestData = {
 	roomNo: string;
 };
 export type JoinResponseData = {
-	users: UserProfile[];
 	project: null | IProjectDto;
 };
 export type LoginRequestData = {

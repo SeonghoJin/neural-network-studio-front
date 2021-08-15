@@ -1,5 +1,5 @@
 import { io, Socket } from 'socket.io-client';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { atom, useRecoilState } from 'recoil';
 import { Simulate } from 'react-dom/test-utils';
 import assert from 'assert';
@@ -30,27 +30,40 @@ export const socketProjectResultState = atom<SocketProjectResult>({
 
 const useConnectSocket = () => {
 	const socketRef = useRef<Socket | null>(null);
+	const [, forceUpdate] = useState({});
 	const [socketProjectResult, setSocketProjectResult] = useRecoilState(socketProjectResultState);
 	const { roomNo } = useProjectShareLocation();
 	const projectResult = useProject();
 	const { user } = useAuthentication();
 
+	const join = useCallback(() => {
+		const joinRequestData: JoinRequestData = {
+			roomNo,
+		};
+		socketRef.current?.emit(SocketEvent.JoinRequest, joinRequestData);
+	}, [roomNo]);
+
+	const login = useCallback(() => {
+		const loginRequestData: LoginRequestData = {
+			user: user?.profile as UserProfile,
+		};
+		socketRef.current?.emit(SocketEvent.LoginRequest, loginRequestData);
+
+		join();
+	}, [join, user?.profile]);
+
+	const disconnect = useCallback(() => {
+		socketRef.current?.disconnect();
+	}, [socketRef]);
+
 	useEffect(() => {
 		sleep(1000).then(() => {
-			if (socketRef.current == null && projectResult.data) {
+			if (socketRef.current == null && (projectResult.data || projectResult.error)) {
 				socketRef.current = io(`${config.SOCKET_SERVER_PREFIX}`);
 
 				socketRef.current?.on('connect', () => {
 					console.log('Connecting Success!!!');
-					const loginRequestData: LoginRequestData = {
-						user: user?.profile as UserProfile,
-					};
-					socketRef.current?.emit(SocketEvent.LoginRequest, loginRequestData);
-
-					const joinRequestData: JoinRequestData = {
-						roomNo,
-					};
-					socketRef.current?.emit(SocketEvent.JoinRequest, joinRequestData);
+					forceUpdate({});
 				});
 
 				socketRef.current?.on(SocketEvent.LoginResponse, (data: LoginResponseData) => {
@@ -59,7 +72,7 @@ const useConnectSocket = () => {
 
 				socketRef.current?.on(SocketEvent.JoinResponse, (data: JoinResponseData) => {
 					console.log(`join `, data);
-					const { project, users } = data;
+					const { project } = data;
 					setSocketProjectResult(project);
 					if (project == null) {
 						assert(projectResult.data != null);
@@ -80,6 +93,10 @@ const useConnectSocket = () => {
 					console.log('changeCurrentUser : ', data);
 				});
 
+				socketRef.current?.on(SocketEvent.MoveCursorResponse, (data: any) => {
+					console.log('moveCursor');
+				});
+
 				socketRef.current?.on('disconnect', () => {
 					console.log('disconnect');
 				});
@@ -89,9 +106,12 @@ const useConnectSocket = () => {
 				});
 			}
 		});
-	}, [projectResult.data, roomNo, setSocketProjectResult, user]);
+	}, [projectResult.data, projectResult.error, roomNo, setSocketProjectResult, user]);
 
 	return {
+		connected: socketRef.current?.connected,
+		login,
+		disconnect,
 		project: socketProjectResult,
 	};
 };
