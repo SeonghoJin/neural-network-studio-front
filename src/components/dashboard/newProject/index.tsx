@@ -8,7 +8,6 @@ class NewProject extends React.PureComponent {
 	render() {
 		return (
 			<PrivateAuthentication>
-				<Navigation />
 				<div className={`${style.wrapper}`}>
 					<Main />
 				</div>

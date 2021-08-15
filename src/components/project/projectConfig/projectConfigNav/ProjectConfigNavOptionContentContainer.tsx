@@ -7,22 +7,20 @@ import useUpdateProjectConfig from '../../../../hooks/useUpdateProjectConfig';
 import StandardModal from '../../../utils/modal/StandardModal';
 
 const ProjectConfigNavOptionContentContainer = () => {
-	const { projectConfig, mutate } = useProjectConfig();
-	const { fetch, loading, data } = useUpdateProjectConfig();
+	const { projectConfig } = useProjectConfig();
+	const { fetch, successFeedback, loadingFeedback, errorFeedback } = useUpdateProjectConfig();
 	const { projectNo } = useProjectLocation();
 
 	const onSave = useCallback(() => {
 		if (projectConfig == null) return;
-		fetch(projectNo, projectConfig).then((res) => {
-			if (!res) return;
-			mutate();
-		});
-	}, [projectConfig, fetch, projectNo, mutate]);
+		fetch(projectNo, projectConfig);
+	}, [projectConfig, fetch, projectNo]);
 
 	return (
 		<>
-			{loading && <Backdrop open={loading} />}
-			{data && <StandardModal head="저장이 완료되었습니다." body="" />}
+			{errorFeedback}
+			{loadingFeedback}
+			{successFeedback}
 			<ProjectConfigNavOptionContent onSave={onSave} />;
 		</>
 	);

@@ -14,7 +14,6 @@ export const signUp = async (signUpParams: SignUpParams) => {
 
 export const getUserProfile = async () => {
 	const response = await axios.get<UserProfile>(`${config.SERVER_PREFIX}/api/user`, axiosConfig);
-
 	return response.data;
 };
 

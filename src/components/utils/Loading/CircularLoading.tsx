@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		root: {
 			display: 'flex',
+			padding: 5,
 			'& > * + *': {
 				marginLeft: theme.spacing(2),
 			},
@@ -32,7 +33,7 @@ export function CircleLoading() {
 		<div className={classes.wrapper}>
 			<div className={classes.container}>
 				<div className={classes.root}>
-					<CircularProgress />
+					<CircularProgress style={{ padding: 7 }} />
 				</div>
 			</div>
 		</div>

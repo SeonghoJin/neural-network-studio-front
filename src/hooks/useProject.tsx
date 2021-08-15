@@ -3,6 +3,7 @@ import useSWR from 'swr';
 import StandardModal from '../components/utils/modal/StandardModal';
 import useProjectLocation from './useProjectLocation';
 import { getProject } from '../API/project';
+import { sleep } from '../util';
 
 const useProject = () => {
 	const { projectNo } = useProjectLocation();
@@ -11,8 +12,11 @@ const useProject = () => {
 			return ['getProject', projectNo];
 		},
 		async (key, projectNumber) => {
-			const response = await getProject(projectNumber);
-			return response;
+			const delayedData = await sleep(1000).then(async () => {
+				const response = await getProject(projectNumber);
+				return response;
+			});
+			return delayedData;
 		}
 	);
 

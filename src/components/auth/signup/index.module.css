@@ -46,7 +46,8 @@ header {
   margin-top: 20px;
 }
 
-.submit a {
+.submit span {
+  border: none;
   padding: 10px 15px;
   color: white;
   text-decoration: none;
