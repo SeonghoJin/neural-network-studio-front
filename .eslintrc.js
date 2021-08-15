@@ -31,6 +31,7 @@ module.exports = {
 		camelcase: 'off',
 		'no-underscore-dangle': 'off',
 		'no-unused-vars': 'off',
-		'react/jsx-filename-extension' : 'off',
+		'react/jsx-filename-extension': 'off',
+		'react/jsx-props-no-spreading': 'off',
 	},
 };

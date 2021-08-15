@@ -33,7 +33,6 @@ const LayerNode = (props: NodeProps) => {
 	const classes = useLayerStyle();
 	const node = createElement(LayerNodeTable[type], props);
 	const connectingNodeId = useStoreState((state) => state.connectionNodeId);
-	console.log(connectingNodeId);
 	const connectingHandleType = useStoreState((state) => state.connectionHandleType);
 	const onConnect = useStoreState((state) => state.onConnect);
 	const { isValidationConnection } = useValidationConnection();

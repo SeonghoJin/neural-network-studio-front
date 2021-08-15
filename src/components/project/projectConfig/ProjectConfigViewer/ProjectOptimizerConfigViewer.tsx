@@ -7,7 +7,6 @@ import TextInput from '../../../Input/TextInput';
 import SelectInput from '../../../Input/SelectInput';
 import { getOptimizerValues } from '../../../../core/Project/Optimizers';
 import FloatInput from '../../../Input/FloatInput';
-import useGetProjectConfigResult from '../../../../hooks/APIResult/project/useGetProjectConfigResult';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -22,10 +21,10 @@ const useStyle = makeStyles({
 });
 
 const OptimizerConfig = () => {
-	const [projectConfig, setProjectConfig] = useProjectConfig();
+	const { projectConfig, setProjectConfig } = useProjectConfig();
 	const classes = useStyle();
 	const optimizerConfig = projectConfig as IProjectOptimizerConfig;
-	const { loading, error, data } = useGetProjectConfigResult();
+	const { loading, error } = useProjectConfig();
 	const onChange = useCallback(
 		(e: ChangeEvent<HTMLInputElement>) => {
 			const { name, value } = e.target;
@@ -37,7 +36,7 @@ const OptimizerConfig = () => {
 		[projectConfig, setProjectConfig]
 	);
 
-	const content = data && (
+	const content = projectConfig && (
 		<>
 			<SelectInput
 				onChange={onChange}

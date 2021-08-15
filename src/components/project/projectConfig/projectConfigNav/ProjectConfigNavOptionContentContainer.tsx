@@ -1,24 +1,29 @@
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { getProjectConfigThunk, putProjectConfigThunk } from '../../../../module/API/project/thunks';
-import { RootDispatch } from '../../../../module';
+import { Backdrop } from '@material-ui/core';
 import useProjectConfig from '../../../../hooks/useProjectConfig';
 import ProjectConfigNavOptionContent from './ProjectConfigNavOptionContent';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
+import useUpdateProjectConfig from '../../../../hooks/useUpdateProjectConfig';
+import StandardModal from '../../../utils/modal/StandardModal';
 
 const ProjectConfigNavOptionContentContainer = () => {
-	const dispatch: RootDispatch = useDispatch();
-	const [projectConfig] = useProjectConfig();
+	const { projectConfig } = useProjectConfig();
+	const { fetch, successFeedback, loadingFeedback, errorFeedback } = useUpdateProjectConfig();
 	const { projectNo } = useProjectLocation();
 
 	const onSave = useCallback(() => {
-		dispatch(putProjectConfigThunk(projectNo, projectConfig)).then(async (res) => {
-			if (!res) return;
-			dispatch(getProjectConfigThunk(projectNo));
-		});
-	}, [dispatch, projectConfig, projectNo]);
+		if (projectConfig == null) return;
+		fetch(projectNo, projectConfig);
+	}, [projectConfig, fetch, projectNo]);
 
-	return <ProjectConfigNavOptionContent onSave={onSave} />;
+	return (
+		<>
+			{errorFeedback}
+			{loadingFeedback}
+			{successFeedback}
+			<ProjectConfigNavOptionContent onSave={onSave} />;
+		</>
+	);
 };
 
 export default ProjectConfigNavOptionContentContainer;

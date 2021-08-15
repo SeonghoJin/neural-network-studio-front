@@ -1,6 +1,172 @@
-.wrapper {
+.headerWrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin: 0 5%;
+}
+
+.modifyButton {
+  height: fit-content;
+  padding: 7px;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: var(--default-black);
+  border: none;
+  color: var(--default-white);
+  border-radius: 7px;
+  font-size: 14px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.modifyButton:last-child {
+  margin: 0;
+}
+
+.buttons {
+  margin-left: auto;
+}
+
+.modifyInput {
+  margin-left: 10px;
+  margin-right: 5px;
+  color: black;
+  width: 80%;
+  height: 21px;
+  padding-left: 5px;
+}
+
+.modifyName {
+  margin-left: 10px;
+  margin-right: 5px;
+  color: black;
+  height: 21px;
+  padding-left: 5px;
+}
+
+.modifyTextarea {
+  width: 100%;
+  resize: none;
+  border: none;
+}
+
+.modifyTextarea:focus {
+  outline: none;
+}
+
+.mainWrapper {
+  display: flex;
+  width: 70%;
+  height: 70vh;
+  flex-direction: column;
+  padding: 40px;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+}
+
+.profileImage {
+  width: 100px;
+  height: 100px;
+  margin-right: 30px;
+  position: relative;
+}
+
+.profileImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.userInfo {
+  margin-bottom: 40px;
+  height: 300px;
+}
+
+.userDescription {
+  margin-top: 30px;
+  padding: 10px;
+  overflow-y: scroll;
+  height: 200px;
+  word-break: break-all;
+  border: 1px solid lightgray;
+}
+
+.userDescription::-webkit-scrollbar {
+  width: 5px;
+}
+
+.userDescription::-webkit-scrollbar-thumb {
+  width: 5px;
+  height: 10px;
+  background-color: #2f3542;
+}
+
+.userDescription::-webkit-scrollbar-track {
+  width: 5px;
+  background-color: transparent;
+}
+
+.userMail {
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.userMail a {
+  margin-left: 10px;
+  margin-right: 5px;
+  color: black;
+  text-decoration: none;
+  transition: 0.2s ease-in;
+}
+
+.userMail a:hover {
+  color: blue;
+}
+
+.userWebsite {
+  margin-bottom: 10px;
+}
+
+.userWebsite a {
+  margin-left: 10px;
+  margin-right: 5px;
+  color: black;
+  text-decoration: none;
+  transition: 0.2s ease-in;
+}
+
+.userWebsite a:hover {
+  color: blue;
+}
+
+.uploadImage {
+  position: absolute;
+  background-color: var(--default-black);
+  cursor: pointer;
+  align-items: center;
+  text-align: center;
+  line-height: 50%;
+  color: var(--default-white);
+  font-size: 16px;
+  transition: .2s ease-in;
+  border: none;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.uploadImage:hover {
+  color: var(--default-black);
+  background-color: var(--base-color);
+}
+
+.invisibleInput {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.deleteImg {
+  right: 0;
 }
