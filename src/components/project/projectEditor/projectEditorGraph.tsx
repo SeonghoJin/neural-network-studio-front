@@ -64,9 +64,16 @@ type Props = {
 	setElements: EventHandler<any>;
 	flowState: FlowExportObject;
 	onMoveCursor?: (data: MoveCursorBasicData) => void;
+	cursorModule?: any;
 };
 
-const ProjectEditorGraph: FC<Props> = ({ onMoveCursor, setElements, flowState, setReactInstance }: Props) => {
+const ProjectEditorGraph: FC<Props> = ({
+	cursorModule,
+	onMoveCursor,
+	setElements,
+	flowState,
+	setReactInstance,
+}: Props) => {
 	const classes = useStyle();
 	const reactFlowWrapper = useRef<HTMLDivElement | null>(null);
 	const selectedElements = useStoreState((state) => state.selectedElements);
@@ -158,6 +165,7 @@ const ProjectEditorGraph: FC<Props> = ({ onMoveCursor, setElements, flowState, s
 				defaultZoom={flowState?.zoom}
 				connectionLineComponent={ConnectionLine}
 			>
+				{cursorModule}
 				<Controls
 					style={{
 						top: 10,
@@ -181,6 +189,7 @@ const ProjectEditorGraph: FC<Props> = ({ onMoveCursor, setElements, flowState, s
 
 ProjectEditorGraph.defaultProps = {
 	onMoveCursor: undefined,
+	cursorModule: undefined,
 };
 
 export default ProjectEditorGraph;

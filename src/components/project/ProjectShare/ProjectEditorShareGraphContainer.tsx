@@ -35,6 +35,7 @@ const ProjectEditorShareGraphContainer = () => {
 			flowState={project.content.flowState}
 			setElements={onSetElements}
 			onMoveCursor={onMoveCursor}
+			cursorModule={cursors}
 		/>
 	);
 
