@@ -35,8 +35,8 @@ const GlobalConfig = () => {
 
 	const content = projectConfig && (
 		<>
-			<NumberInput onChange={onChange} propertyName="batch_size" propertyContent={globalConfig.batch_size || 0} />
-			<NumberInput onChange={onChange} propertyName="epochs" propertyContent={globalConfig.epochs || 0} />
+			<NumberInput onChange={onChange} propertyName="batch_size" propertyContent={globalConfig.batch_size || ''} />
+			<NumberInput onChange={onChange} propertyName="epochs" propertyContent={globalConfig.epochs || ''} />
 		</>
 	);
 
