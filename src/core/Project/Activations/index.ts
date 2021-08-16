@@ -1,5 +1,3 @@
-import Paddings from '../Padding';
-
 enum Activations {
 	Sigmoid = 'sigmoid',
 	Tanh = 'thanh',

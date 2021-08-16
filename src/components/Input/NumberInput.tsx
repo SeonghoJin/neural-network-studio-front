@@ -18,7 +18,6 @@ type Props = {
 
 const NumberInput = ({ propertyName, propertyContent, onChange }: Props) => {
 	const classes = useStyle();
-
 	const isVaild = useCallback((str: string) => {
 		return numberWithoutSpacesRegExp.test(str);
 	}, []);

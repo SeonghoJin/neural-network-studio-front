@@ -4,7 +4,6 @@ import ReactFlow, {
 	addEdge,
 	Background,
 	Connection,
-	ConnectionLineType,
 	Controls,
 	Edge,
 	Elements,
@@ -18,7 +17,7 @@ import ReactFlow, {
 	XYPosition,
 } from 'react-flow-renderer';
 import { useSelector } from 'react-redux';
-import { BlockState, InputBlockState } from '../../../core/reactFlow/block/BlockState';
+import { InputBlockState } from '../../../core/reactFlow/block/BlockState';
 import { nodeTypes } from '../../../core/reactFlow/node/nodetypes';
 import { RootState } from '../../../module';
 import {
@@ -31,7 +30,7 @@ import {
 import createCustomEdge from '../../../core/reactFlow/edge';
 import { getNodeColor, getNodeStrokeColor } from '../../../core/reactFlow/node/nodetypes/component/NodeStroke';
 import ConnectionLine from '../../../core/reactFlow/connectionLine';
-import { MoveCursorBasicData, MoveCursorEventData } from '../../../core/Project/share/SocketEvent';
+import { MoveCursorBasicData } from '../../../core/Project/share/SocketEvent';
 
 const useStyle = makeStyles({
 	wrapper: {
