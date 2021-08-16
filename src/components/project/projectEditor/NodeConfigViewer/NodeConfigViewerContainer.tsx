@@ -17,8 +17,7 @@ const NodeConfigViewerContainer = () => {
 
 	const onChangeConfig = useCallback(
 		(e: ChangeEvent<HTMLInputElement>) => {
-			const { name } = e.target;
-			const { value } = e.target;
+			const { name, value } = e.target;
 			dispatch(
 				setElementByIdAndUpdateConfig({
 					id: selectedElement.id,

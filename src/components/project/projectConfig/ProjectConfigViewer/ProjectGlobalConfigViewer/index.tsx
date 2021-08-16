@@ -31,7 +31,6 @@ const GlobalConfig = () => {
 				...(projectConfig as IProjectConfig),
 				[name]: value,
 			});
-			console.log(projectConfig);
 		},
 		[projectConfig, setProjectConfig]
 	);
