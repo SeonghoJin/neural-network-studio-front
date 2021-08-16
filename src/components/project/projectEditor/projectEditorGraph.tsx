@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-import React, { EventHandler, KeyboardEventHandler, useCallback, useEffect, useRef } from 'react';
+import React, { EventHandler, FC, KeyboardEventHandler, useCallback, useEffect, useRef } from 'react';
 import ReactFlow, {
 	addEdge,
 	Background,
@@ -15,6 +15,7 @@ import ReactFlow, {
 	removeElements,
 	useStoreActions,
 	useStoreState,
+	XYPosition,
 } from 'react-flow-renderer';
 import { useSelector } from 'react-redux';
 import { BlockState, InputBlockState } from '../../../core/reactFlow/block/BlockState';
@@ -30,6 +31,7 @@ import {
 import createCustomEdge from '../../../core/reactFlow/edge';
 import { getNodeColor, getNodeStrokeColor } from '../../../core/reactFlow/node/nodetypes/component/NodeStroke';
 import ConnectionLine from '../../../core/reactFlow/connectionLine';
+import { MoveCursorBasicData, MoveCursorEventData } from '../../../core/Project/share/SocketEvent';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -61,9 +63,10 @@ type Props = {
 	setReactInstance: EventHandler<any>;
 	setElements: EventHandler<any>;
 	flowState: FlowExportObject;
+	onMoveCursor?: (data: MoveCursorBasicData) => void;
 };
 
-const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props) => {
+const ProjectEditorGraph: FC<Props> = ({ onMoveCursor, setElements, flowState, setReactInstance }: Props) => {
 	const classes = useStyle();
 	const reactFlowWrapper = useRef<HTMLDivElement | null>(null);
 	const selectedElements = useStoreState((state) => state.selectedElements);
@@ -135,6 +138,12 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 	return (
 		<div ref={reactFlowWrapper} className={classes.wrapper}>
 			<ReactFlow
+				onMouseMove={(e) => {
+					if (onMoveCursor) {
+						const position = getPosition(e, reactFlowWrapper.current, reactFlowInstance);
+						onMoveCursor({ position: position as XYPosition });
+					}
+				}}
 				className={classes.reactFlow}
 				elements={elements}
 				onDrop={onDrop}
@@ -168,6 +177,10 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 			</ReactFlow>
 		</div>
 	);
+};
+
+ProjectEditorGraph.defaultProps = {
+	onMoveCursor: undefined,
 };
 
 export default ProjectEditorGraph;

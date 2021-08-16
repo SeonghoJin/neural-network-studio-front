@@ -3,18 +3,23 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { atom, useRecoilState } from 'recoil';
 import { Simulate } from 'react-dom/test-utils';
 import assert from 'assert';
+import { XYPosition } from 'react-flow-renderer';
 import { sleep } from '../util';
 import useAuthentication from './useAuthentication';
 import config from '../config';
 import useProjectShareLocation from './useProjectShareLocation';
 import {
 	ChangeCurrentUserResponse,
+	ExitCursorResponseData,
 	InitDataRequest,
 	InitDataResponse,
 	JoinRequestData,
 	JoinResponseData,
 	LoginRequestData,
 	LoginResponseData,
+	MoveCursorBasicData,
+	MoveCursorEventData,
+	MoveCursorResponseData,
 	SocketEvent,
 } from '../core/Project/share/SocketEvent';
 import { UserProfile } from '../API/User/types';
@@ -28,10 +33,18 @@ export const socketProjectResultState = atom<SocketProjectResult>({
 	default: null,
 });
 
+type CursorResponseResult = Map<string, XYPosition>;
+
+export const cursorResponseResultState = atom<CursorResponseResult>({
+	key: 'cursorResponseResultState',
+	default: new Map<string, XYPosition>(),
+});
+
 const useConnectSocket = () => {
 	const socketRef = useRef<Socket | null>(null);
 	const [, forceUpdate] = useState({});
 	const [socketProjectResult, setSocketProjectResult] = useRecoilState(socketProjectResultState);
+	const [cursorResponseResult, setCursorResponseResult] = useRecoilState(cursorResponseResultState);
 	const { roomNo } = useProjectShareLocation();
 	const projectResult = useProject();
 	const { user } = useAuthentication();
@@ -55,6 +68,17 @@ const useConnectSocket = () => {
 	const disconnect = useCallback(() => {
 		socketRef.current?.disconnect();
 	}, [socketRef]);
+
+	const onMoveCursor = useCallback(
+		(moveCursorEventData: MoveCursorBasicData) => {
+			const data: MoveCursorEventData = {
+				...moveCursorEventData,
+				roomNo,
+			};
+			socketRef.current?.emit(SocketEvent.MoveCursorRequest, data);
+		},
+		[roomNo, socketRef]
+	);
 
 	useEffect(() => {
 		sleep(1000).then(() => {
@@ -93,8 +117,15 @@ const useConnectSocket = () => {
 					console.log('changeCurrentUser : ', data);
 				});
 
-				socketRef.current?.on(SocketEvent.MoveCursorResponse, (data: any) => {
-					console.log('moveCursor');
+				socketRef.current?.on(SocketEvent.MoveCursorResponse, (data: MoveCursorResponseData) => {
+					const { userName, position } = data;
+					setCursorResponseResult(new Map(cursorResponseResult.set(userName, position)));
+				});
+
+				socketRef.current?.on(SocketEvent.ExitCursorResponse, (data: ExitCursorResponseData) => {
+					const { userName } = data;
+					cursorResponseResult.delete(userName);
+					setCursorResponseResult(new Map(cursorResponseResult));
 				});
 
 				socketRef.current?.on('disconnect', () => {
@@ -106,12 +137,21 @@ const useConnectSocket = () => {
 				});
 			}
 		});
-	}, [projectResult.data, projectResult.error, roomNo, setSocketProjectResult, user]);
+	}, [
+		cursorResponseResult,
+		projectResult.data,
+		projectResult.error,
+		roomNo,
+		setCursorResponseResult,
+		setSocketProjectResult,
+		user,
+	]);
 
 	return {
 		connected: socketRef.current?.connected,
 		login,
 		disconnect,
+		onMoveCursor,
 		project: socketProjectResult,
 	};
 };

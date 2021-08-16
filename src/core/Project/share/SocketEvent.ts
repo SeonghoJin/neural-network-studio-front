@@ -1,3 +1,4 @@
+import { XYPosition } from 'react-flow-renderer';
 import { UserProfile } from '../../../API/User/types';
 import { IProjectDto } from '../../../API/project/types';
 
@@ -12,6 +13,7 @@ export enum SocketEvent {
 	ChangeCurrentUserResponse = 'change_current_user_response',
 	MoveCursorRequest = 'move_cursor_request',
 	MoveCursorResponse = 'move_cursor_response',
+	ExitCursorResponse = 'exit_cursor_response',
 	MoveBlockRequest = 'move_block_request',
 	MoveBlockResponse = 'move_block_response',
 	ChangeBlockRequest = 'change_block_request',
@@ -23,6 +25,23 @@ export enum SocketEvent {
 	LeaveResponse = 'leave_response',
 	BeforeDisconnect = 'before_disconnect',
 	DisconnectResponse = 'disconnect_response',
+}
+
+export type ExitCursorResponseData = {
+	userName: string;
+};
+
+export type MoveCursorResponseData = {
+	userName: string;
+	position: XYPosition;
+};
+
+export interface MoveCursorBasicData {
+	position: XYPosition;
+}
+
+export interface MoveCursorEventData extends MoveCursorBasicData {
+	roomNo: string;
 }
 
 export type ChangeCurrentUserResponse = {

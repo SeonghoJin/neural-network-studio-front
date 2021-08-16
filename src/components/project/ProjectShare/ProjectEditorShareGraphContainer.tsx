@@ -1,15 +1,18 @@
 import { useCallback, useEffect } from 'react';
 import { Elements, OnLoadParams } from 'react-flow-renderer';
 import { useDispatch } from 'react-redux';
-import { useRecoilState } from 'recoil';
 import useSocket, { socketProjectResultState } from '../../../hooks/useSocket';
 import { setReactFlowInstance } from '../../../module/ReactFlowInstance';
 import { setElements } from '../../../module/Elements';
 import ProjectEditorGraph from '../projectEditor/projectEditorGraph';
 import { CircleLoading } from '../../utils/Loading/CircularLoading';
+import useAuthentication from '../../../hooks/useAuthentication';
+import Cursors from './Cursors';
 
 const ProjectEditorShareGraphContainer = () => {
-	const { project, disconnect, connected, login } = useSocket();
+	const { project, disconnect, connected, login, onMoveCursor } = useSocket();
+	const { user } = useAuthentication();
+	const cursors = Cursors({ ownerName: user?.profile?.name as string });
 	const dispatch = useDispatch();
 
 	const setReactInstance = useCallback(
@@ -31,6 +34,7 @@ const ProjectEditorShareGraphContainer = () => {
 			setReactInstance={setReactInstance}
 			flowState={project.content.flowState}
 			setElements={onSetElements}
+			onMoveCursor={onMoveCursor}
 		/>
 	);
 
