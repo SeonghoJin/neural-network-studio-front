@@ -4,7 +4,6 @@ import { faMousePointer } from '@fortawesome/free-solid-svg-icons';
 import { useStoreState, XYPosition } from 'react-flow-renderer';
 import { FC } from 'react';
 import randomColor from 'randomcolor';
-import { makeStyles } from '@material-ui/core';
 import { cursorResponseResultState } from '../../../hooks/useSocket';
 
 type Props = {

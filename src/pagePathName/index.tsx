@@ -12,7 +12,9 @@ export enum StaticPath {
 
 export enum DynamicPath {
 	PROJECT = '/project/:projectNo',
+	PROJECT_FORMAT = '/project/%s',
 	PROJECT_CONFIG = '/project/:projectNo/config',
+	PROJECT_CONFIG_FORMAT = '/project/%s/config',
 	PROJECT_SHARE = '/share/project/:projectNo/room/:roomNo',
 	PROJECT_SHARE_FORMAT = '/share/project/%s/room/%s',
 	PROJECT_SHARE_CONFIG = '/share/project/:projectNo/room/:roomNo/config',

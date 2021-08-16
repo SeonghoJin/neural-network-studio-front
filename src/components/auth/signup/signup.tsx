@@ -2,15 +2,12 @@ import React, { ChangeEvent, useCallback, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
 import style from './index.module.css';
 import utils from '../../utils/index.module.css';
-import { signUp } from '../../../API/User';
 import Navigation from '../../nav';
 import { StaticPath } from '../../../pagePathName';
 import { passwordValidationRegExp } from '../../Input/Validation';
 import useSignUp from '../../../hooks/useSignUp';
-import SuccessSnackbar from '../../utils/Snackbar/SuccessSnackbar';
 
 const Signup = () => {
 	const [inputs, setInputs] = useState({

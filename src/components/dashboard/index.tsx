@@ -5,7 +5,6 @@ import CardGrid from './cardGrid/cardGrid';
 import style from './index.module.css';
 import utils from '../utils/index.module.css';
 import PrivateAuthentication from '../../Authentication/PrivateAuthentication';
-import Navigation from '../nav';
 
 const useStyle = makeStyles({
 	wrapper: {

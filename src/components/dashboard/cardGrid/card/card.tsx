@@ -1,7 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
 import moment from 'moment';
+import { useHistory } from 'react-router-dom';
+import { format } from 'util';
 import style from './card.module.css';
 import CardDropMenu from './cardDropMenu';
+import { DynamicPath } from '../../../../pagePathName';
 
 type Props = {
 	id: number;
@@ -11,9 +14,11 @@ type Props = {
 };
 
 const Card = ({ id, description, title, lastUpdate }: Props) => {
+	const history = useHistory();
+
 	const openProject = useCallback(() => {
-		window.open(`/project/${id}`);
-	}, [id]);
+		history.push(format(DynamicPath.PROJECT_FORMAT, id));
+	}, [history, id]);
 
 	const update = useMemo(() => moment(lastUpdate).format('YYYY년 MM월 DD일 HH:mm:ss'), [lastUpdate]);
 

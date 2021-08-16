@@ -1,9 +1,8 @@
-import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { faEdit, faGlobe, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import style from '../index.module.css';
 import useAuthentication from '../../../hooks/useAuthentication';
 import { UserProfile, UserProfileImage } from '../../../API/User/types';

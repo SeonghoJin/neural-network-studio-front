@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { Elements, OnLoadParams } from 'react-flow-renderer';
 import { useDispatch } from 'react-redux';
-import useSocket, { socketProjectResultState } from '../../../hooks/useSocket';
+import useSocket from '../../../hooks/useSocket';
 import { setReactFlowInstance } from '../../../module/ReactFlowInstance';
 import { setElements } from '../../../module/Elements';
 import ProjectEditorGraph from '../projectEditor/projectEditorGraph';
