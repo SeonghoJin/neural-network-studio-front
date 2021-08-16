@@ -2,7 +2,6 @@ import { Container, makeStyles } from '@material-ui/core';
 import { ReactFlowProvider } from 'react-flow-renderer';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import ProjectEditorLeftSideBar from './projectEditorSideBar/ProjectEditorLeftSideBar';
-import ProjectEditorGraphContainer from './ProjectEditorGraphContainer';
 import 'react-reflex/styles.css';
 
 const useStyle = makeStyles({
@@ -20,7 +19,11 @@ const useStyle = makeStyles({
 	},
 });
 
-const ProjectEditorMain = () => {
+type Props = {
+	projectEditorGraphContainer: any;
+};
+
+const ProjectEditorMain = ({ projectEditorGraphContainer }: Props) => {
 	const classes = useStyle();
 	return (
 		<>
@@ -33,9 +36,7 @@ const ProjectEditorMain = () => {
 							</ReflexElement>
 							<ReflexSplitter />
 							<ReflexElement className="right-pane">
-								<div className={classes.contentWrapper}>
-									<ProjectEditorGraphContainer />
-								</div>
+								<div className={classes.contentWrapper}>{projectEditorGraphContainer}</div>
 							</ReflexElement>
 						</ReflexContainer>
 					</Container>

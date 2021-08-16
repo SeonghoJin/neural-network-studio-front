@@ -1,91 +1,48 @@
-import { Button } from '@material-ui/core';
-import { useCallback, useState } from 'react';
-import { useRecoilState } from 'recoil';
-import useConnectSocket, { Chats, JoinRooms } from '../../../hooks/useSocket';
-import useProjectShareLocation from '../../../hooks/useProjectShareLocation';
-import SimpleBackdrop from '../../utils/BackLoading';
+import { makeStyles } from '@material-ui/core';
+import { applyMiddleware, createStore } from 'redux';
+import reduxThunk from 'redux-thunk';
+import reduxLogger from 'redux-logger';
+import { Provider } from 'react-redux';
 import PrivateAuthentication from '../../../Authentication/PrivateAuthentication';
+import ProjectNav from '../ProjectNav/projectNav';
+import ProjectEditorNav from '../projectEditor/ProjectEditorNav/projectEditorNav';
+import ProjectEditorMain from '../projectEditor/projectEditorMain';
+import rootReducer from '../../../module';
+import ProjectEditorShareGraphContainer from './ProjectEditorShareGraphContainer';
 
-const rooms = ['hi', 'hello', 'dkssud'];
+const useStyle = makeStyles({
+	wrapper: {
+		width: '100vw',
+		height: '100vh',
+	},
+	container: {
+		width: '100%',
+		height: '100%',
+		display: 'flex',
+		flexDirection: 'column',
+	},
+	content: {
+		flexGrow: 1,
+	},
+});
+
+const store = createStore(rootReducer, applyMiddleware(reduxThunk, reduxLogger));
+
 const ProjectShare = () => {
-	const { roomNo } = useProjectShareLocation();
-	const { loading, connected, join, leave, chat } = useConnectSocket();
-	const [joinRooms] = useRecoilState(JoinRooms);
-	const [chats] = useRecoilState(Chats);
-	const [inputs, setInputs] = useState({
-		[rooms[0]]: '',
-		[rooms[1]]: '',
-		[rooms[2]]: '',
-	});
-
-	const onClick = useCallback(
-		(room: any) => {
-			chat(room, inputs[room]);
-			setInputs({
-				...inputs,
-				[room]: '',
-			});
-		},
-		[chat, inputs]
-	);
-
+	const classes = useStyle();
 	return (
 		<PrivateAuthentication>
-			<div>
-				ProjectShare
-				<SimpleBackdrop open={loading} />
-				<ul>
-					{rooms.map((room) => {
-						const joined = joinRooms.has(room);
-						const roomChats = chats.get(room);
-						return (
-							<li>
-								<div>
-									{room}
-									{/* eslint-disable-next-line react/button-has-type */}
-									<Button
-										onClick={() => {
-											if (joined) {
-												leave(room);
-											} else {
-												join(room);
-											}
-										}}
-									>{`${room} ${joined ? 'leave' : 'join'}`}</Button>
-								</div>
-								<div>
-									<input
-										name={room}
-										onChange={(e) => {
-											const { name, value } = e.target;
-											setInputs({
-												...inputs,
-												[name]: value,
-											});
-										}}
-										value={inputs[room]}
-									/>
-									<Button
-										disabled={!joined}
-										color="primary"
-										onClick={() => {
-											onClick(room);
-										}}
-									>
-										채팅하기
-									</Button>
-								</div>
-								<ul>
-									{roomChats?.map((roomChat, index) => {
-										// eslint-disable-next-line react/no-array-index-key
-										return <li key={index}>{roomChat}</li>;
-									})}
-								</ul>
-							</li>
-						);
-					})}
-				</ul>
-			</div>
+			<Provider store={store}>
+				<div className={classes.wrapper}>
+					<div className={classes.container}>
+						<ProjectNav />
+						<ProjectEditorNav />
+						<div className={classes.content}>
+							<ProjectEditorMain projectEditorGraphContainer={<ProjectEditorShareGraphContainer />} />
+						</div>
+					</div>
+				</div>
+			</Provider>
 		</PrivateAuthentication>
 	);
 };

@@ -7,7 +7,6 @@ const initialState: ReactFlowInstance = {
 };
 
 const reactFlow = createReducer<ReactFlowInstance, ReactFlowInstanceActionType>(initialState, {
-	[ReactFlowAction.GET_REACTFLOW_INSTANCE]: (state) => state,
 	[ReactFlowAction.SET_REACTFLOW_INSTANCE]: (state, action) => ({
 		...state,
 		instance: action.payload,

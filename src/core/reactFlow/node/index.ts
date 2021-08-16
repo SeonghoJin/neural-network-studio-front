@@ -50,7 +50,7 @@ export const canGetNodeData = (dataTransfer: DataTransfer) => {
 };
 
 export const getPosition = (
-	e: React.DragEvent,
+	e: React.DragEvent | React.MouseEvent<HTMLDivElement>,
 	reactFlowWrapper: HTMLDivElement | null,
 	reactFlowInstance: OnLoadParams | null
 ) => {

@@ -12,10 +12,8 @@ const ProjectRouter: FC<null> = () => {
 	return (
 		<PrivateAuthentication>
 			<Switch>
-				<ReactFlowProvider>
-					<Route path={DynamicPath.PROJECT} exact component={ProjectEditor} />
-					<Route path={DynamicPath.PROJECT_CONFIG} exact component={ProjectConfig} />
-				</ReactFlowProvider>
+				<Route path={DynamicPath.PROJECT} exact component={ProjectEditor} />
+				<Route path={DynamicPath.PROJECT_CONFIG} exact component={ProjectConfig} />
 				<Route component={NotFound} />
 			</Switch>
 		</PrivateAuthentication>

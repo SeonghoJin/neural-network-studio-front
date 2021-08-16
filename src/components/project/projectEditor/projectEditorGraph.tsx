@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-import React, { EventHandler, KeyboardEventHandler, useCallback, useEffect, useRef } from 'react';
+import React, { EventHandler, FC, KeyboardEventHandler, useCallback, useEffect, useRef } from 'react';
 import ReactFlow, {
 	addEdge,
 	Background,
@@ -15,6 +15,7 @@ import ReactFlow, {
 	removeElements,
 	useStoreActions,
 	useStoreState,
+	XYPosition,
 } from 'react-flow-renderer';
 import { useSelector } from 'react-redux';
 import { BlockState, InputBlockState } from '../../../core/reactFlow/block/BlockState';
@@ -30,6 +31,7 @@ import {
 import createCustomEdge from '../../../core/reactFlow/edge';
 import { getNodeColor, getNodeStrokeColor } from '../../../core/reactFlow/node/nodetypes/component/NodeStroke';
 import ConnectionLine from '../../../core/reactFlow/connectionLine';
+import { MoveCursorBasicData, MoveCursorEventData } from '../../../core/Project/share/SocketEvent';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -61,15 +63,23 @@ type Props = {
 	setReactInstance: EventHandler<any>;
 	setElements: EventHandler<any>;
 	flowState: FlowExportObject;
+	onMoveCursor?: (data: MoveCursorBasicData) => void;
+	cursorModule?: any;
 };
 
-const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props) => {
+const ProjectEditorGraph: FC<Props> = ({
+	cursorModule,
+	onMoveCursor,
+	setElements,
+	flowState,
+	setReactInstance,
+}: Props) => {
 	const classes = useStyle();
-	const elements = useSelector((state: RootState) => state.elements.elements);
 	const reactFlowWrapper = useRef<HTMLDivElement | null>(null);
 	const selectedElements = useStoreState((state) => state.selectedElements);
 	const setSelectedElements = useStoreActions((state) => state.setSelectedElements);
 	const reactFlowInstance = useSelector((state: RootState) => state.reactFlowInstance.instance);
+	const elements = useSelector((state: RootState) => state.elements.elements);
 
 	useEffect(() => {
 		const inputBlockState = new InputBlockState();
@@ -135,6 +145,12 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 	return (
 		<div ref={reactFlowWrapper} className={classes.wrapper}>
 			<ReactFlow
+				onMouseMove={(e) => {
+					if (onMoveCursor) {
+						const position = getPosition(e, reactFlowWrapper.current, reactFlowInstance);
+						onMoveCursor({ position: position as XYPosition });
+					}
+				}}
 				className={classes.reactFlow}
 				elements={elements}
 				onDrop={onDrop}
@@ -149,6 +165,7 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 				defaultZoom={flowState?.zoom}
 				connectionLineComponent={ConnectionLine}
 			>
+				{cursorModule}
 				<Controls
 					style={{
 						top: 10,
@@ -168,6 +185,11 @@ const ProjectEditorGraph = ({ setElements, flowState, setReactInstance }: Props)
 			</ReactFlow>
 		</div>
 	);
+};
+
+ProjectEditorGraph.defaultProps = {
+	onMoveCursor: undefined,
+	cursorModule: undefined,
 };
 
 export default ProjectEditorGraph;
