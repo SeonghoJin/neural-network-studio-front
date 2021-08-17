@@ -1,5 +1,6 @@
 import { Node } from 'react-flow-renderer';
 import { BlockCategory, BlockConfig, BlockState, BlockType } from '../block';
+import graphNodeNameValidator from './validate';
 
 class GraphNode {
 	category: BlockCategory;

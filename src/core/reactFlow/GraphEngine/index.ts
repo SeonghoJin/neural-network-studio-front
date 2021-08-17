@@ -1,6 +1,7 @@
 import { Edge, FlowElement, isNode, Node } from 'react-flow-renderer';
 import GraphNode from './GraphNode';
 import { BlockState } from '../block';
+import graphNodeNameValidator from './validate';
 
 class GraphConvertor {
 	nodes: Map<string, GraphNode>;
@@ -17,7 +18,11 @@ class GraphConvertor {
 	};
 
 	addNode = (node: GraphNode) => {
-		if (this.nodes.has(node.name)) throw new Error(`중복된 노드 이름이 있습니다. 수정해주세요.`);
+		console.log(graphNodeNameValidator.test(node.name));
+		if (!graphNodeNameValidator.test(node.name)) {
+			throw new Error(`허용되지 않은 노드 이름이 존재합니다. 수정해주세요. (${node.name})`);
+		}
+		if (this.nodes.has(node.name)) throw new Error(`중복된 노드 이름이 있습니다. 수정해주세요. (${node.name})`);
 		this.nodes.set(node.name, node);
 	};
 
@@ -67,7 +72,6 @@ const graphToLayouts = (graph: FlowElement[]) => {
 			graphConvertor.addEdge(element as Edge);
 		}
 	});
-	console.log(graphConvertor.toJSON());
 	return graphConvertor.toJSON();
 };
 
