@@ -1,8 +1,6 @@
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import React, { createElement, memo, useContext } from 'react';
-import { ElementId, NodeProps, useStoreActions, useStoreState } from 'react-flow-renderer';
-import NodeIdContext from 'react-flow-renderer/dist/contexts/NodeIdContext';
-import { onMouseDown } from 'react-flow-renderer/dist/components/Handle/handler';
+import React, { createElement, memo } from 'react';
+import { NodeProps, useStoreState } from 'react-flow-renderer';
 import { BlockState } from '../../../../block';
 import LayerNodeTable from './LayerNodeTable';
 import useTargetCandidates from '../useTargetCandidates';
@@ -12,11 +10,11 @@ import useValidationConnection from '../useValidationConnection';
 const useLayerStyle = makeStyles({
 	wrapper: {
 		padding: 10,
+		paddingTop: 5,
+		paddingBottom: 20,
 		borderRadius: 3,
-		width: 150,
 		fontSize: 12,
 		color: '#222',
-		textAlign: 'center',
 		borderWidth: '1px',
 		borderStyle: 'solid',
 		background: '#fff',
@@ -24,9 +22,26 @@ const useLayerStyle = makeStyles({
 			boxShadow: '0 1px 4px 1px rgba(0, 0, 0, 0.08)',
 		},
 	},
+	nodeContentWrapper: {
+		width: '100%',
+		height: '100%',
+		textAlign: 'center',
+	},
+	nodeContent: {
+		fontSize: 16,
+	},
+	nodeHeaderWrapper: {
+		width: 'fit-content',
+		height: 'fit-content',
+		marginBottom: 5,
+	},
+	nodeHeader: {
+		fontSize: 7,
+		opacity: 0.5,
+	},
 });
 
-const LayerNode = (props: NodeProps) => {
+const LayerNode = (props: NodeProps<BlockState>) => {
 	const { data, id } = props;
 	const { targetCandidates } = useTargetCandidates();
 	const { type } = data as BlockState;
@@ -59,7 +74,12 @@ const LayerNode = (props: NodeProps) => {
 					}
 				}}
 			>
-				{node}
+				<div className={classes.nodeHeaderWrapper}>
+					<span className={classes.nodeHeader}>{type}</span>
+				</div>
+				<div className={classes.nodeContentWrapper}>
+					<div className={classes.nodeContent}>{node}</div>
+				</div>
 			</div>
 		</>
 	);
