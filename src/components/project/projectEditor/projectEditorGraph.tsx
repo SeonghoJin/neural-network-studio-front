@@ -31,7 +31,14 @@ import {
 import createCustomEdge from '../../../core/reactFlow/edge';
 import { getNodeColor, getNodeStrokeColor } from '../../../core/reactFlow/node/nodetypes/component/NodeStroke';
 import ConnectionLine from '../../../core/reactFlow/connectionLine';
-import { MoveBlockBaseData, MoveCursorBasicData, MoveCursorEventData } from '../../../core/Project/share/SocketEvent';
+import {
+	CreateEdgeBaseData,
+	CreateElementBaseData,
+	MoveBlockBaseData,
+	MoveCursorBasicData,
+	MoveCursorEventData,
+	RemoveElementBaseData,
+} from '../../../core/Project/share/SocketEvent';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -67,7 +74,16 @@ type Props = {
 	onMoveBlock?: (data: MoveBlockBaseData) => void;
 	cursorModule?: any;
 	moveBlock?: MoveBlockBaseData | null;
+	removedBlock?: RemoveElementBaseData | null;
+	createdBlock?: CreateElementBaseData | null;
+	createdRemoteEdge?: CreateEdgeBaseData | null;
 	updatePosition?: (data: MoveBlockBaseData) => void;
+	onCreateElement?: (data: CreateElementBaseData) => void;
+	onCreateEdge?: (data: CreateEdgeBaseData) => void;
+	onRemoveElement?: (data: RemoveElementBaseData) => void;
+	addRemoteElement?: (data: CreateElementBaseData) => void;
+	addRemoteEdge?: (data: CreateEdgeBaseData) => void;
+	removeRemoteElement?: (data: RemoveElementBaseData) => void;
 };
 
 const ProjectEditorGraph: FC<Props> = ({
@@ -78,7 +94,16 @@ const ProjectEditorGraph: FC<Props> = ({
 	setReactInstance,
 	onMoveBlock,
 	moveBlock,
+	removedBlock,
+	createdBlock,
 	updatePosition,
+	onCreateElement,
+	onRemoveElement,
+	onCreateEdge,
+	addRemoteElement,
+	addRemoteEdge,
+	createdRemoteEdge,
+	removeRemoteElement,
 }: Props) => {
 	const classes = useStyle();
 	const reactFlowWrapper = useRef<HTMLDivElement | null>(null);
@@ -101,18 +126,46 @@ const ProjectEditorGraph: FC<Props> = ({
 		setElements(flowState?.elements || [inputNode]);
 	}, [flowState?.elements, setElements]);
 
+	useEffect(() => {
+		if (removedBlock && removeRemoteElement) {
+			removeRemoteElement(removedBlock);
+		}
+	}, [removeRemoteElement, removedBlock]);
+
+	useEffect(() => {
+		if (createdBlock && addRemoteElement) {
+			addRemoteElement(createdBlock);
+		}
+	}, [addRemoteElement, createdBlock]);
+
+	useEffect(() => {
+		if (createdRemoteEdge && addRemoteEdge) {
+			addRemoteEdge(createdRemoteEdge);
+		}
+	}, [addRemoteEdge, createdRemoteEdge]);
+
 	const onConnect = useCallback(
 		(params: Edge | Connection) => {
+			if (onCreateEdge) {
+				onCreateEdge({
+					edge: createCustomEdge(params),
+				});
+			}
 			setElements(addEdge(createCustomEdge(params), elements));
 		},
-		[elements, setElements]
+		[elements, onCreateEdge, setElements]
 	);
 
 	const onElementsRemove = useCallback(
 		(elementsToRemove: Elements<any>) => {
+			if (onRemoveElement) {
+				onRemoveElement({
+					elements: elementsToRemove,
+				});
+			}
 			setElements(removeElements(elementsToRemove, elements));
 		},
-		[elements, setElements]
+		[elements, onRemoveElement, setElements]
 	);
 
 	const onDragOver = useCallback((e: React.DragEvent) => {
@@ -133,9 +186,14 @@ const ProjectEditorGraph: FC<Props> = ({
 			});
 			if (!canInsertNode(elements, newNode)) return;
 			setElements(elements.concat(newNode));
+			if (onCreateElement) {
+				onCreateElement({
+					element: newNode,
+				});
+			}
 			setSelectedElements(newNode);
 		},
-		[elements, reactFlowInstance, setElements, setSelectedElements]
+		[elements, onCreateElement, reactFlowInstance, setElements, setSelectedElements]
 	);
 
 	const onLoad = useCallback(
@@ -148,10 +206,10 @@ const ProjectEditorGraph: FC<Props> = ({
 	const onKeyDown: KeyboardEventHandler = useCallback(
 		(event) => {
 			if ((event.code === 'Delete' || event.code === 'Escape') && selectedElements) {
-				setElements(removeElements(selectedElements, elements));
+				onElementsRemove(selectedElements);
 			}
 		},
-		[elements, selectedElements, setElements]
+		[onElementsRemove, selectedElements]
 	);
 
 	return (
@@ -211,6 +269,15 @@ ProjectEditorGraph.defaultProps = {
 	onMoveBlock: undefined,
 	moveBlock: undefined,
 	updatePosition: undefined,
+	onCreateElement: undefined,
+	onRemoveElement: undefined,
+	onCreateEdge: undefined,
+	removedBlock: undefined,
+	createdBlock: undefined,
+	addRemoteElement: undefined,
+	addRemoteEdge: undefined,
+	removeRemoteElement: undefined,
+	createdRemoteEdge: undefined,
 };
 
 export default ProjectEditorGraph;

@@ -9,6 +9,12 @@ import config from '../config';
 import useProjectShareLocation from './useProjectShareLocation';
 import {
 	ChangeCurrentUserResponse,
+	CreateEdgeBaseData,
+	CreateEdgeRequestData,
+	CreateEdgeResponseData,
+	CreateElementBaseData,
+	CreateElementRequestData,
+	CreateElementResponseData,
 	ExitCursorResponseData,
 	InitDataRequest,
 	InitDataResponse,
@@ -22,6 +28,9 @@ import {
 	MoveCursorBasicData,
 	MoveCursorEventData,
 	MoveCursorResponseData,
+	RemoveElementBaseData,
+	RemoveElementRequestData,
+	RemoveElementResponseData,
 	SocketEvent,
 } from '../core/Project/share/SocketEvent';
 import { UserProfile } from '../API/User/types';
@@ -49,12 +58,36 @@ export const moveBlockResponseResultState = atom<MoveBlockResponseResult>({
 	default: null,
 });
 
+type CreateElementResponseResult = CreateElementBaseData | null;
+type RemoveElementResponseResult = RemoveElementBaseData | null;
+
+export const createBlockResponseResultState = atom<CreateElementResponseResult>({
+	key: 'createBlockResponseResultState',
+	default: null,
+});
+
+export const removeBlockResponseResultState = atom<RemoveElementResponseResult>({
+	key: 'removeBlockResponseResultState',
+	default: null,
+});
+
+type CreateEdgeResponseResult = CreateEdgeBaseData | null;
+
+export const createEdgeResponseResultState = atom<CreateEdgeResponseResult>({
+	key: 'createEdgeResponseResult',
+	default: null,
+});
+
 const useConnectSocket = () => {
 	const socketRef = useRef<Socket | null>(null);
 	const [, forceUpdate] = useState({});
-	const [socketProjectResult, setSocketProjectResult] = useRecoilState(socketProjectResultState);
-	const [cursorResponseResult, setCursorResponseResult] = useRecoilState(cursorResponseResultState);
-	const [moveBlock, setMoveBlockResponseResult] = useRecoilState(moveBlockResponseResultState);
+	const [socketProjectResult, setSocketProjectResult] = useRecoilState<SocketProjectResult>(socketProjectResultState);
+	const [cursorResponseResult, setCursorResponseResult] =
+		useRecoilState<CursorResponseResult>(cursorResponseResultState);
+	const [moveBlock, setMoveBlockResponseResult] = useRecoilState<MoveBlockResponseResult>(moveBlockResponseResultState);
+	const [createBlock, setCreateBlock] = useRecoilState<CreateElementResponseResult>(createBlockResponseResultState);
+	const [removeBlock, setRemoveBlock] = useRecoilState<RemoveElementResponseResult>(removeBlockResponseResultState);
+	const [createdRemoteEdge, setCreatedEdge] = useRecoilState<CreateEdgeResponseResult>(createEdgeResponseResultState);
 	const { roomNo } = useProjectShareLocation();
 	const projectResult = useProject();
 	const { user } = useAuthentication();
@@ -98,6 +131,39 @@ const useConnectSocket = () => {
 			};
 
 			socketRef.current?.emit(SocketEvent.MoveBlockRequest, data);
+		},
+		[roomNo]
+	);
+
+	const onCreateElement = useCallback(
+		(createElement: CreateElementBaseData) => {
+			const data: CreateElementRequestData = {
+				...createElement,
+				roomNo,
+			};
+			socketRef.current?.emit(SocketEvent.CreateElementRequest, data);
+		},
+		[roomNo]
+	);
+
+	const onCreateEdge = useCallback(
+		(createEdge: CreateEdgeBaseData) => {
+			const data: CreateEdgeRequestData = {
+				...createEdge,
+				roomNo,
+			};
+			socketRef.current?.emit(SocketEvent.CreateEdgeRequest, data);
+		},
+		[roomNo]
+	);
+
+	const onRemoveElement = useCallback(
+		(removeElement: RemoveElementBaseData) => {
+			const data: RemoveElementRequestData = {
+				...removeElement,
+				roomNo,
+			};
+			socketRef.current?.emit(SocketEvent.RemoveElementRequest, data);
 		},
 		[roomNo]
 	);
@@ -151,8 +217,19 @@ const useConnectSocket = () => {
 				});
 
 				socketRef.current?.on(SocketEvent.MoveBlockResponse, (data: MoveBlockResponseData) => {
-					const { blockId, position } = data;
 					setMoveBlockResponseResult(data);
+				});
+
+				socketRef.current?.on(SocketEvent.CreateElementResponse, (data: CreateElementResponseData) => {
+					setCreateBlock(data);
+				});
+
+				socketRef.current?.on(SocketEvent.CreateEdgeResponse, (data: CreateEdgeResponseData) => {
+					setCreatedEdge(data);
+				});
+
+				socketRef.current?.on(SocketEvent.RemoveElementResponse, (data: RemoveElementResponseData) => {
+					setRemoveBlock(data);
 				});
 
 				socketRef.current?.on('disconnect', () => {
@@ -169,8 +246,11 @@ const useConnectSocket = () => {
 		projectResult.data,
 		projectResult.error,
 		roomNo,
+		setCreateBlock,
+		setCreatedEdge,
 		setCursorResponseResult,
 		setMoveBlockResponseResult,
+		setRemoveBlock,
 		setSocketProjectResult,
 		user,
 	]);
@@ -181,7 +261,13 @@ const useConnectSocket = () => {
 		disconnect,
 		onMoveCursor,
 		onMoveBlock,
+		onCreateElement,
+		onRemoveElement,
+		onCreateEdge,
 		moveBlock,
+		createBlock,
+		createdRemoteEdge,
+		removeBlock,
 		project: socketProjectResult,
 	};
 };

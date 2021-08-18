@@ -1,4 +1,5 @@
 import { createReducer } from 'typesafe-actions';
+import { addEdge, Edge, Elements, isEdge, removeElements } from 'react-flow-renderer';
 import { ElementActionTypes, ElementState } from './types';
 import { ElementAction } from './actions';
 
@@ -55,6 +56,21 @@ const elements = createReducer<ElementState, ElementActionTypes>(initialState, {
 					position,
 				};
 			}),
+		};
+	},
+	[ElementAction.ADD_ELEMENT]: (state, action) => {
+		return {
+			elements: state.elements.concat(action.payload),
+		};
+	},
+	[ElementAction.ADD_EDGE]: (state, action) => {
+		return {
+			elements: addEdge(action.payload as Edge, state.elements),
+		};
+	},
+	[ElementAction.REMOVE_ELEMENTS]: (state, action) => {
+		return {
+			elements: removeElements(action.payload, state.elements),
 		};
 	},
 });

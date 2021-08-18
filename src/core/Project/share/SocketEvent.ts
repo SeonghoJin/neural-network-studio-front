@@ -18,8 +18,12 @@ export enum SocketEvent {
 	MoveBlockResponse = 'move_block_response',
 	ChangeBlockRequest = 'change_block_request',
 	ChangeBlockResponse = 'change_block_request',
-	CreateBlockRequest = 'create_block_request',
-	CreateBlockResponse = 'create_block_response',
+	CreateEdgeRequest = 'create_edge_request',
+	CreateEdgeResponse = 'create_edge_response',
+	CreateElementRequest = 'create_block_request',
+	CreateElementResponse = 'create_block_response',
+	RemoveElementRequest = 'remove_block_request',
+	RemoveElementResponse = 'remove_block_response',
 	ErrorResponse = 'error_response',
 	LeaveRequest = 'leave_response',
 	LeaveResponse = 'leave_response',
@@ -29,6 +33,30 @@ export enum SocketEvent {
 
 export interface RoomData {
 	roomNo: string;
+}
+
+export type CreateEdgeRequestData = CreateEdgeBaseData & RoomData;
+
+export type CreateEdgeResponseData = CreateEdgeBaseData;
+
+export interface CreateEdgeBaseData {
+	edge: any;
+}
+
+export type RemoveElementRequestData = RemoveElementBaseData & RoomData;
+
+export type RemoveElementResponseData = RemoveElementBaseData;
+
+export interface RemoveElementBaseData {
+	elements: any;
+}
+
+export type CreateElementRequestData = CreateElementBaseData & RoomData;
+
+export type CreateElementResponseData = CreateElementBaseData;
+
+export interface CreateElementBaseData {
+	element: any;
 }
 
 export type MoveBlockRequestData = RoomData & MoveBlockBaseData;
