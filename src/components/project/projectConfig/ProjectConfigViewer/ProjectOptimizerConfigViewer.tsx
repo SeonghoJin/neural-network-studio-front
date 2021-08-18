@@ -1,8 +1,8 @@
 import { makeStyles } from '@material-ui/core';
-import { ChangeEvent, useCallback } from 'react';
+import { ChangeEvent, useCallback, useMemo } from 'react';
 import useProjectConfig from '../../../../hooks/useProjectConfig';
 import CircleLoading from '../../../utils/Loading/CircularLoading';
-import { IProjectOptimizerConfig } from '../../../../API/project/types';
+import { IProjectConfig, IProjectOptimizerConfig } from '../../../../API/project/types';
 import TextInput from '../../../Input/TextInput';
 import SelectInput from '../../../Input/SelectInput';
 import { getOptimizerValues } from '../../../../core/Project/Optimizers';
@@ -29,19 +29,21 @@ const OptimizerConfig = () => {
 		(e: ChangeEvent<HTMLInputElement>) => {
 			const { name, value } = e.target;
 			setProjectConfig({
-				...projectConfig,
+				...(projectConfig as IProjectConfig),
 				[name]: value,
 			});
 		},
 		[projectConfig, setProjectConfig]
 	);
 
+	const optimizerValues = useMemo(() => getOptimizerValues(), []);
+
 	const content = projectConfig && (
 		<>
 			<SelectInput
 				onChange={onChange}
 				propertyName="optimizer"
-				propertyCandidates={getOptimizerValues()}
+				propertyCandidates={optimizerValues}
 				propertyContent={optimizerConfig.optimizer || ''}
 			/>
 			<TextInput onChange={onChange} propertyName="loss" propertyContent={optimizerConfig.loss || ''} />

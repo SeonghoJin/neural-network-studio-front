@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { Handle, NodeProps, Position } from 'react-flow-renderer';
 import { makeStyles } from '@material-ui/core';
 import useValidationConnection from '../useValidationConnection';
-import useTargetCandidates from '../useTargetCandidates';
+import { BlockState } from '../../../../block';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -16,7 +16,7 @@ const DefaultNode = ({
 	isConnectable,
 	targetPosition = Position.Top,
 	sourcePosition = Position.Bottom,
-}: NodeProps) => {
+}: NodeProps<BlockState>) => {
 	const classes = useStyle();
 	const { isValidationConnection } = useValidationConnection();
 	return (

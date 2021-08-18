@@ -1,9 +1,11 @@
 import { makeStyles } from '@material-ui/core';
 import { ChangeEvent, useCallback } from 'react';
-import useProjectConfig from '../../../../hooks/useProjectConfig';
-import CircleLoading from '../../../utils/Loading/CircularLoading';
-import { IProjectGlobalConfig } from '../../../../API/project/types';
-import NumberInput from '../../../Input/NumberInput';
+import useProjectConfig from '../../../../../hooks/useProjectConfig';
+import { CircleLoading } from '../../../../utils/Loading/CircularLoading';
+import { IProjectConfig, IProjectGlobalConfig } from '../../../../../API/project/types';
+import NumberInput from '../../../../Input/NumberInput';
+import ProjectEarlyStopConfig from './ProjectEarlyStopConfig';
+import ProjectLearningRateReduction from './ProjectLearningRateReduction';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -26,7 +28,7 @@ const GlobalConfig = () => {
 		(e: ChangeEvent<HTMLInputElement>) => {
 			const { name, value } = e.target;
 			setProjectConfig({
-				...projectConfig,
+				...(projectConfig as IProjectConfig),
 				[name]: value,
 			});
 		},
@@ -37,6 +39,8 @@ const GlobalConfig = () => {
 		<>
 			<NumberInput onChange={onChange} propertyName="batch_size" propertyContent={globalConfig.batch_size || ''} />
 			<NumberInput onChange={onChange} propertyName="epochs" propertyContent={globalConfig.epochs || ''} />
+			<ProjectEarlyStopConfig earlyStopConfig={projectConfig.early_stop} />
+			<ProjectLearningRateReduction learningRateReduction={projectConfig.learning_rate_reduction} />
 		</>
 	);
 

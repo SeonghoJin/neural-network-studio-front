@@ -2,7 +2,7 @@ import { atom, useRecoilState } from 'recoil';
 import useSWR from 'swr';
 import { useEffect } from 'react';
 import { AxiosError } from 'axios';
-import { IProjectConfig } from '../API/project/types';
+import { IProjectConfig, ProjectConfig } from '../API/project/types';
 import { getProjectConfig } from '../API/project';
 import useProjectLocation from './useProjectLocation';
 
@@ -31,7 +31,7 @@ const useProjectConfig = () => {
 
 	useEffect(() => {
 		if (getProjectConfigResult.data != null) {
-			setProjectConfig(getProjectConfigResult.data);
+			setProjectConfig(new ProjectConfig(getProjectConfigResult.data));
 		}
 	}, [getProjectConfigResult.data, setProjectConfig]);
 

@@ -30,7 +30,7 @@ const Cursor: FC<CursorProps> = ({ userName, position, color }: CursorProps) => 
 				height: 'fit-content',
 				left: position?.x || 0,
 				top: position?.y || 0,
-				zIndex: 20,
+				zIndex: 1000,
 			}}
 		>
 			<FontAwesomeIcon
@@ -68,6 +68,7 @@ const Cursors = ({ ownerName }: Props) => {
 				height: '100%',
 				position: 'absolute',
 				transformOrigin: '0 0',
+				zIndex: 1000,
 				transform: `translate(${transform[0]}px, ${transform[1]}px) scale(${transform[2]})`,
 			}}
 		>

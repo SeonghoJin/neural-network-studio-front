@@ -1,5 +1,7 @@
 // eslint-disable-next-line max-classes-per-file
 import { FlowExportObject } from 'react-flow-renderer';
+import Monitor from '../../core/Project/Montior';
+import Optimizers from '../../core/Project/Optimizers';
 
 export interface IProjectDto {
 	config: IProjectConfig;
@@ -15,44 +17,78 @@ export interface IProjectContentDto {
 	output: string;
 }
 
-export interface IProjectGlobalConfig {
-	epochs?: number;
+export interface IEarlyStopConfig {
+	usage: boolean;
+	monitor: Monitor;
+	patience: number;
+}
 
-	batch_size?: number;
+export interface ILearningRateReductionConfig {
+	usage: boolean;
+	monitor: Monitor;
+	patience: number;
+	factor: number;
+	min_lr: number;
+}
+
+export interface IProjectGlobalConfig {
+	epochs: number;
+
+	batch_size: number;
+
+	early_stop: IEarlyStopConfig;
+
+	learning_rate_reduction: ILearningRateReductionConfig;
 }
 
 export interface IProjectOptimizerConfig {
-	learning_rate?: number;
+	learning_rate: number;
 
-	loss?: string;
+	loss: string;
 
-	metrics?: string[];
+	metrics: string[];
 
-	optimizer?: string;
+	optimizer: Optimizers;
 }
 
 export interface IProjectConfig extends IProjectOptimizerConfig, IProjectGlobalConfig {}
 
 export class ProjectConfig implements IProjectConfig {
-	batch_size?: number;
+	batch_size: number;
 
-	epochs?: number;
+	epochs: number;
 
-	learning_rate?: number;
+	learning_rate: number;
 
-	loss?: string;
+	loss: string;
 
-	metrics?: string[];
+	metrics: string[];
 
-	optimizer?: string;
+	optimizer: Optimizers;
+
+	early_stop: IEarlyStopConfig;
+
+	learning_rate_reduction: ILearningRateReductionConfig;
 
 	constructor(config?: ProjectConfig) {
-		this.optimizer = config?.optimizer || 'adam';
+		this.optimizer = config?.optimizer || Optimizers.Adam;
 		this.learning_rate = config?.learning_rate || 0.001;
 		this.loss = config?.loss || 'sparse_categorical_crossentropy';
 		this.metrics = config?.metrics || ['accuray'];
 		this.batch_size = config?.batch_size || 32;
 		this.epochs = config?.epochs || 10;
+		this.early_stop = config?.early_stop || {
+			patience: 2,
+			usage: true,
+			monitor: Monitor.loss,
+		};
+		this.learning_rate_reduction = config?.learning_rate_reduction || {
+			patience: 2,
+			factor: 0.25,
+			min_lr: 0.0000003,
+			monitor: Monitor.ValAccuracy,
+			usage: true,
+		};
 	}
 }
 
