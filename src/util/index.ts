@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { deprecated } from 'typesafe-actions';
+import { generate } from 'randomstring';
 
 export const getId = (): string => {
 	const id = `${uuidv4()}`;
@@ -9,6 +10,11 @@ export const getId = (): string => {
 export const getNodeId = (): string => {
 	const id = `node_${getId()}`;
 	return id;
+};
+
+export const getNodeLabel = (type: string): string => {
+	const label = `${type}_node_${generate(2)}`;
+	return label;
 };
 
 export function sleep(ms: number) {

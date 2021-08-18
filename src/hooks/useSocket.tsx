@@ -1,7 +1,6 @@
 import { io, Socket } from 'socket.io-client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { atom, useRecoilState } from 'recoil';
-import { Simulate } from 'react-dom/test-utils';
 import assert from 'assert';
 import { XYPosition } from 'react-flow-renderer';
 import { sleep } from '../util';
@@ -80,6 +79,10 @@ const useConnectSocket = () => {
 		[roomNo, socketRef]
 	);
 
+	const onMoveBlock = useCallback((data) => {
+		socketRef.current?.emit(SocketEvent.MoveBlockRequest, data);
+	}, []);
+
 	useEffect(() => {
 		sleep(1000).then(() => {
 			if (socketRef.current == null && (projectResult.data || projectResult.error)) {
@@ -99,7 +102,7 @@ const useConnectSocket = () => {
 					const { project } = data;
 					setSocketProjectResult(project);
 					if (project == null) {
-						assert(projectResult.data != null);
+						if (projectResult.data == null) throw new Error('잘못된 접근입니다.');
 						const initDataRequestData: InitDataRequest = {
 							roomNo,
 							project: projectResult.data,
@@ -152,6 +155,7 @@ const useConnectSocket = () => {
 		login,
 		disconnect,
 		onMoveCursor,
+		onMoveBlock,
 		project: socketProjectResult,
 	};
 };

@@ -66,7 +66,7 @@ const usePythonCode = () => {
 	return {
 		...result,
 		fetch,
-		errorFeedback: result?.error && <StandardModal head={result.error.name} />,
+		errorFeedback: result?.error && <StandardModal head={result.error.message} />,
 		loadingFeedback: result?.loading && <SimpleBackdrop open />,
 		successFeedback: result?.data && <SuccessSnackbar message="파이썬 코드를 열어보세요." open={!!result?.data} />,
 	};

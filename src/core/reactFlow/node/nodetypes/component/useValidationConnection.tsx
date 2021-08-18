@@ -15,7 +15,7 @@ const useValidationConnection = () => {
 			const source = elements.filter((element: FlowElement<BlockState>) => {
 				return element.id === connection.source;
 			})[0] as Node<BlockState>;
-			if (source == null) throw Error('잘못된 결과 입니다.');
+			if (source == null) throw Error('source는 null이 될 수 없습니다.');
 			const sourceRelationShip = blockRelationShip[source.data?.type as BlockType];
 			const target = elements.filter((element: FlowElement<BlockState>) => {
 				return element.id === connection.target && sourceRelationShip.has(element.data?.type as BlockType);

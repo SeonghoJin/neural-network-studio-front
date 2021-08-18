@@ -4,6 +4,7 @@ import { AxiosError } from 'axios';
 import StandardModal from '../components/utils/modal/StandardModal';
 import { updateProjectContent } from '../API/project';
 import { IProjectContentDto } from '../API/project/types';
+import { sleep } from '../util';
 
 type PutProjectContentResultState = {
 	error: null | AxiosError;
@@ -25,22 +26,27 @@ const useUpdateProjectContent = () => {
 				data: null,
 				loading: true,
 			});
-			try {
-				const response = await updateProjectContent(projectNo, projectContent);
-				setResult({
-					loading: false,
-					error: null,
-					data: response || true,
-				});
-				return { projectNo, projectContent };
-			} catch (e) {
-				setResult({
-					data: null,
-					loading: false,
-					error: e,
-				});
-				return null;
-			}
+
+			const delayedData = await sleep(500).then(async () => {
+				try {
+					const response = await updateProjectContent(projectNo, projectContent);
+					setResult({
+						loading: false,
+						error: null,
+						data: response || true,
+					});
+					return { projectNo, projectContent };
+				} catch (e) {
+					setResult({
+						data: null,
+						loading: false,
+						error: e,
+					});
+					return null;
+				}
+			});
+
+			return delayedData;
 		},
 		[setResult]
 	);
@@ -54,7 +60,7 @@ const useUpdateProjectContent = () => {
 	return {
 		...result,
 		fetch,
-		errorFeedback: result?.error && <StandardModal head="error" body={result?.error.name} />,
+		errorFeedback: result?.error && <StandardModal head={result.error.name} body={result?.error.message} />,
 		successFeedback: useCallback(
 			(onCloseSuccessFeedback?) => {
 				return (
