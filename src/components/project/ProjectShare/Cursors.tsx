@@ -65,7 +65,7 @@ const Cursors = ({ ownerName }: Props) => {
 		<div
 			style={{
 				zIndex: 4,
-				t statposition: 'absolute',
+				position: 'absolute',
 			}}
 		>
 			<div
