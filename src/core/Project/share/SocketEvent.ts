@@ -27,6 +27,19 @@ export enum SocketEvent {
 	DisconnectResponse = 'disconnect_response',
 }
 
+export interface RoomData {
+	roomNo: string;
+}
+
+export type MoveBlockRequestData = RoomData & MoveBlockBaseData;
+
+export type MoveBlockResponseData = MoveBlockBaseData;
+
+export interface MoveBlockBaseData {
+	blockId: string;
+	position: XYPosition;
+}
+
 export type ExitCursorResponseData = {
 	userName: string;
 };

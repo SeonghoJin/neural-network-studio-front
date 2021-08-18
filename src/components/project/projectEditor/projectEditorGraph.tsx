@@ -8,6 +8,7 @@ import ReactFlow, {
 	Edge,
 	Elements,
 	FlowExportObject,
+	isNode,
 	MiniMap,
 	Node,
 	OnLoadParams,
@@ -30,7 +31,7 @@ import {
 import createCustomEdge from '../../../core/reactFlow/edge';
 import { getNodeColor, getNodeStrokeColor } from '../../../core/reactFlow/node/nodetypes/component/NodeStroke';
 import ConnectionLine from '../../../core/reactFlow/connectionLine';
-import { MoveCursorBasicData } from '../../../core/Project/share/SocketEvent';
+import { MoveBlockBaseData, MoveCursorBasicData, MoveCursorEventData } from '../../../core/Project/share/SocketEvent';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -63,7 +64,10 @@ type Props = {
 	setElements: EventHandler<any>;
 	flowState: FlowExportObject;
 	onMoveCursor?: (data: MoveCursorBasicData) => void;
+	onMoveBlock?: (data: MoveBlockBaseData) => void;
 	cursorModule?: any;
+	moveBlock?: MoveBlockBaseData | null;
+	updatePosition?: (data: MoveBlockBaseData) => void;
 };
 
 const ProjectEditorGraph: FC<Props> = ({
@@ -72,6 +76,9 @@ const ProjectEditorGraph: FC<Props> = ({
 	setElements,
 	flowState,
 	setReactInstance,
+	onMoveBlock,
+	moveBlock,
+	updatePosition,
 }: Props) => {
 	const classes = useStyle();
 	const reactFlowWrapper = useRef<HTMLDivElement | null>(null);
@@ -79,6 +86,12 @@ const ProjectEditorGraph: FC<Props> = ({
 	const setSelectedElements = useStoreActions((state) => state.setSelectedElements);
 	const reactFlowInstance = useSelector((state: RootState) => state.reactFlowInstance.instance);
 	const elements = useSelector((state: RootState) => state.elements.elements);
+
+	useEffect(() => {
+		if (updatePosition && moveBlock) {
+			updatePosition(moveBlock);
+		}
+	}, [moveBlock, updatePosition]);
 
 	useEffect(() => {
 		const inputBlockState = new InputBlockState();
@@ -150,6 +163,12 @@ const ProjectEditorGraph: FC<Props> = ({
 						onMoveCursor({ position: position as XYPosition });
 					}
 				}}
+				onNodeDrag={(e, node) => {
+					if (onMoveBlock) {
+						const { position, id } = node;
+						onMoveBlock({ blockId: id, position });
+					}
+				}}
 				className={classes.reactFlow}
 				elements={elements}
 				onDrop={onDrop}
@@ -189,6 +208,9 @@ const ProjectEditorGraph: FC<Props> = ({
 ProjectEditorGraph.defaultProps = {
 	onMoveCursor: undefined,
 	cursorModule: undefined,
+	onMoveBlock: undefined,
+	moveBlock: undefined,
+	updatePosition: undefined,
 };
 
 export default ProjectEditorGraph;

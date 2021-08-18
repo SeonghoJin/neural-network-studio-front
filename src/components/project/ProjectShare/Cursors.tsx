@@ -64,15 +64,22 @@ const Cursors = ({ ownerName }: Props) => {
 	return (
 		<div
 			style={{
-				width: '100%',
-				height: '100%',
-				position: 'absolute',
-				transformOrigin: '0 0',
-				zIndex: 1000,
-				transform: `translate(${transform[0]}px, ${transform[1]}px) scale(${transform[2]})`,
+				zIndex: 4,
+				t statposition: 'absolute',
 			}}
 		>
-			{cursors}
+			<div
+				style={{
+					width: '100%',
+					height: '100%',
+					position: 'absolute',
+					transformOrigin: '0 0',
+					zIndex: 3,
+					transform: `translate(${transform[0]}px, ${transform[1]}px) scale(${transform[2]})`,
+				}}
+			>
+				{cursors}
+			</div>
 		</div>
 	);
 };

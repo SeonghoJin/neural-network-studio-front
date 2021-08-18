@@ -45,6 +45,18 @@ const elements = createReducer<ElementState, ElementActionTypes>(initialState, {
 			}),
 		};
 	},
+	[ElementAction.SET_ELEMENT_BY_ID_UPDATE_POSITION]: (state, action) => {
+		const { blockId, position } = action.payload;
+		return {
+			elements: state.elements.map((element) => {
+				if (element.id !== blockId) return element;
+				return {
+					...element,
+					position,
+				};
+			}),
+		};
+	},
 });
 
 export default elements;

@@ -16,6 +16,9 @@ import {
 	JoinResponseData,
 	LoginRequestData,
 	LoginResponseData,
+	MoveBlockBaseData,
+	MoveBlockRequestData,
+	MoveBlockResponseData,
 	MoveCursorBasicData,
 	MoveCursorEventData,
 	MoveCursorResponseData,
@@ -39,11 +42,19 @@ export const cursorResponseResultState = atom<CursorResponseResult>({
 	default: new Map<string, XYPosition>(),
 });
 
+type MoveBlockResponseResult = MoveBlockBaseData | null;
+
+export const moveBlockResponseResultState = atom<MoveBlockResponseResult>({
+	key: 'moveBlockResponseResultState',
+	default: null,
+});
+
 const useConnectSocket = () => {
 	const socketRef = useRef<Socket | null>(null);
 	const [, forceUpdate] = useState({});
 	const [socketProjectResult, setSocketProjectResult] = useRecoilState(socketProjectResultState);
 	const [cursorResponseResult, setCursorResponseResult] = useRecoilState(cursorResponseResultState);
+	const [moveBlock, setMoveBlockResponseResult] = useRecoilState(moveBlockResponseResultState);
 	const { roomNo } = useProjectShareLocation();
 	const projectResult = useProject();
 	const { user } = useAuthentication();
@@ -79,9 +90,17 @@ const useConnectSocket = () => {
 		[roomNo, socketRef]
 	);
 
-	const onMoveBlock = useCallback((data) => {
-		socketRef.current?.emit(SocketEvent.MoveBlockRequest, data);
-	}, []);
+	const onMoveBlock = useCallback(
+		(moveBlockData: MoveBlockBaseData) => {
+			const data: MoveBlockRequestData = {
+				roomNo,
+				...moveBlockData,
+			};
+
+			socketRef.current?.emit(SocketEvent.MoveBlockRequest, data);
+		},
+		[roomNo]
+	);
 
 	useEffect(() => {
 		sleep(1000).then(() => {
@@ -131,6 +150,11 @@ const useConnectSocket = () => {
 					setCursorResponseResult(new Map(cursorResponseResult));
 				});
 
+				socketRef.current?.on(SocketEvent.MoveBlockResponse, (data: MoveBlockResponseData) => {
+					const { blockId, position } = data;
+					setMoveBlockResponseResult(data);
+				});
+
 				socketRef.current?.on('disconnect', () => {
 					console.log('disconnect');
 				});
@@ -146,6 +170,7 @@ const useConnectSocket = () => {
 		projectResult.error,
 		roomNo,
 		setCursorResponseResult,
+		setMoveBlockResponseResult,
 		setSocketProjectResult,
 		user,
 	]);
@@ -156,6 +181,7 @@ const useConnectSocket = () => {
 		disconnect,
 		onMoveCursor,
 		onMoveBlock,
+		moveBlock,
 		project: socketProjectResult,
 	};
 };
