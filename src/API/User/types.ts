@@ -14,14 +14,14 @@ export interface UserProfile {
 	description: string;
 	createTime: Date;
 	updateTime: Date;
+	email: string;
+	webSite: string;
 }
 
 export interface UserProfileToUpdateParams {
-	profileImage: UserProfileImage;
+	profileImage: number;
 	description: string;
-}
-
-export interface UpdatedUserProfile {
-	profileImage: UserProfileImage;
-	description: string;
+	name: string;
+	email: string;
+	webSite: string;
 }

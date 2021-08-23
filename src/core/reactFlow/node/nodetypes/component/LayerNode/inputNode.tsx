@@ -2,6 +2,7 @@ import React, { memo, useCallback } from 'react';
 import { Connection, Node, Handle, NodeProps, Position, FlowElement } from 'react-flow-renderer';
 import { makeStyles } from '@material-ui/core';
 import useValidationConnection from '../useValidationConnection';
+import { BlockState } from '../../../../block';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -10,7 +11,7 @@ const useStyle = makeStyles({
 	},
 });
 
-const InputNode = ({ data, isConnectable, sourcePosition = Position.Bottom }: NodeProps) => {
+const InputNode = ({ data, isConnectable, sourcePosition = Position.Bottom }: NodeProps<BlockState>) => {
 	const classes = useStyle();
 	const { isValidationConnection } = useValidationConnection();
 	return (

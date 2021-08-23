@@ -1,10 +1,13 @@
 import { makeStyles } from '@material-ui/core';
-import useGetPythonCodeResult from '../hooks/APIResult/project/useGetPythonCodeResult';
-import usePutProjectContentResult from '../hooks/APIResult/project/usePutProjectContentResult';
-import useGetProjectResult from '../hooks/APIResult/project/useGetProjectResult';
+import { applyMiddleware, createStore } from 'redux';
+import reduxThunk from 'redux-thunk';
+import reduxLogger from 'redux-logger';
+import { Provider } from 'react-redux';
 import ProjectEditorMain from '../components/project/projectEditor/projectEditorMain';
 import ProjectNav from '../components/project/ProjectNav/projectNav';
 import ProjectEditorNav from '../components/project/projectEditor/ProjectEditorNav/projectEditorNav';
+import rootReducer from '../module';
+import ProjectEditorGraphContainer from '../components/project/projectEditor/ProjectEditorGraphContainer';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -21,36 +24,23 @@ const useStyle = makeStyles({
 		flexGrow: 1,
 	},
 });
-
-const ProjectError = () => {
-	const getPythonCodeResult = useGetPythonCodeResult();
-	const putProjectContentResult = usePutProjectContentResult();
-	const getProjectResult = useGetProjectResult();
-	return (
-		<>
-			{getProjectResult.error && getProjectResult.errorModal}
-			{getPythonCodeResult.error && getPythonCodeResult.errorModal}
-			{putProjectContentResult.error && putProjectContentResult.errorModal}
-		</>
-	);
-};
+const store = createStore(rootReducer, applyMiddleware(reduxThunk, reduxLogger));
 
 const ProjectEditor = () => {
 	const classes = useStyle();
 
 	return (
-		<>
-			<ProjectError />
+		<Provider store={store}>
 			<div className={classes.wrapper}>
 				<div className={classes.container}>
 					<ProjectNav />
 					<ProjectEditorNav />
 					<div className={classes.content}>
-						<ProjectEditorMain />
+						<ProjectEditorMain projectEditorGraphContainer={<ProjectEditorGraphContainer />} />
 					</div>
 				</div>
 			</div>
-		</>
+		</Provider>
 	);
 };
 

@@ -1,7 +1,7 @@
 import { Elements, Node, isNode, OnLoadParams } from 'react-flow-renderer';
 import React from 'react';
 import { BlockState, BlockType } from '../../../core/reactFlow/block';
-import { getNodeId } from '../../../util';
+import { getNodeId, getNodeLabel } from '../../../util';
 
 const UNIQUE = 1;
 const INFINITY = 100;
@@ -34,7 +34,10 @@ export const createCustomNode = ({ position, data }: CustomNodeParams) => {
 			x: 100,
 			y: 100,
 		},
-		data,
+		data: {
+			...data,
+			label: getNodeLabel(data.type),
+		},
 	};
 };
 
@@ -50,7 +53,7 @@ export const canGetNodeData = (dataTransfer: DataTransfer) => {
 };
 
 export const getPosition = (
-	e: React.DragEvent,
+	e: React.DragEvent | React.MouseEvent<HTMLDivElement>,
 	reactFlowWrapper: HTMLDivElement | null,
 	reactFlowInstance: OnLoadParams | null
 ) => {

@@ -1,20 +1,47 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useCallback } from 'react';
-import { RootState } from '../module';
-import { setProjectConfig } from '../module/projectConfig';
-import { IProjectConfig } from '../API/project/types';
+import { atom, useRecoilState } from 'recoil';
+import useSWR from 'swr';
+import { useEffect } from 'react';
+import { AxiosError } from 'axios';
+import { IProjectConfig, ProjectConfig } from '../API/project/types';
+import { getProjectConfig } from '../API/project';
+import useProjectLocation from './useProjectLocation';
 
-const useProjectConfig = (): [IProjectConfig, (projectConfig: IProjectConfig) => void] => {
-	const dispatch = useDispatch();
-	const value = useSelector((state: RootState) => state.projectConfig);
-	const setValue = useCallback(
-		(projectConfig: IProjectConfig) => {
-			dispatch(setProjectConfig(projectConfig));
-		},
-		[dispatch]
+export type ProjectConfigState = IProjectConfig | null;
+
+const projectConfigState = atom<ProjectConfigState>({
+	key: 'ProjectConfigState',
+	default: null,
+});
+
+const useProjectConfig = () => {
+	const { projectNo } = useProjectLocation();
+	const [projectConfig, setProjectConfig] = useRecoilState(projectConfigState);
+
+	const getProjectConfigResult = useSWR<IProjectConfig, AxiosError>(
+		() => 'getProjectConfigResult',
+		async () => {
+			try {
+				const data = await getProjectConfig(projectNo);
+				return data;
+			} catch (e) {
+				return e;
+			}
+		}
 	);
 
-	return [value, setValue];
+	useEffect(() => {
+		if (getProjectConfigResult.data != null) {
+			setProjectConfig(new ProjectConfig(getProjectConfigResult.data));
+		}
+	}, [getProjectConfigResult.data, setProjectConfig]);
+
+	return {
+		loading: !setProjectConfig && !getProjectConfigResult.error,
+		error: getProjectConfigResult.error,
+		mutate: getProjectConfigResult.mutate,
+		projectConfig,
+		setProjectConfig,
+	};
 };
 
 export default useProjectConfig;

@@ -11,10 +11,6 @@ function Upload() {
 		return new Uppy().use(Dashboard).use(Tus, { endpoint: 'https://tusd.tusdemo.net/files/' });
 	});
 
-	uppy.on('complete', (result) => {
-		console.log(result);
-	});
-
 	return <ReactDashBoard uppy={uppy} width="100%" />;
 }
 

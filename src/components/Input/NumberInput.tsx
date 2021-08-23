@@ -12,13 +12,12 @@ const useStyle = makeStyles({
 
 type Props = {
 	propertyName: string;
-	propertyContent: number;
+	propertyContent: number | string;
 	onChange: any;
 };
 
 const NumberInput = ({ propertyName, propertyContent, onChange }: Props) => {
 	const classes = useStyle();
-
 	const isVaild = useCallback((str: string) => {
 		return numberWithoutSpacesRegExp.test(str);
 	}, []);

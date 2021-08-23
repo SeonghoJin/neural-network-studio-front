@@ -1,27 +1,13 @@
-import { useDispatch } from 'react-redux';
-import React, { useEffect, useState } from 'react';
-import { getUserProfileThunks } from '../module/API/user/thunks';
-import { RootDispatch } from '../module';
-import { setAuthentication, UserType } from '../module/Auth';
+import React from 'react';
+import useAuthentication from '../hooks/useAuthentication';
 
-const Authentication = () => {
-	const thunkDispatch: RootDispatch = useDispatch();
-	const dispatch = useDispatch();
+type Props = {
+	children: any;
+};
 
-	useEffect(() => {
-		thunkDispatch(getUserProfileThunks()).then((res) => {
-			dispatch(
-				setAuthentication({
-					user: {
-						type: (res && UserType.Login) || UserType.Visitor,
-						profile: res,
-					},
-				})
-			);
-		});
-	}, [dispatch, thunkDispatch]);
-
-	return <></>;
+const Authentication = ({ children }: Props) => {
+	const { user } = useAuthentication();
+	return <>{user != null && children}</>;
 };
 
 export default Authentication;

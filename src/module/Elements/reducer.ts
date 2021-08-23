@@ -1,4 +1,5 @@
 import { createReducer } from 'typesafe-actions';
+import { addEdge, Edge, Elements, isEdge, removeElements } from 'react-flow-renderer';
 import { ElementActionTypes, ElementState } from './types';
 import { ElementAction } from './actions';
 
@@ -43,6 +44,33 @@ const elements = createReducer<ElementState, ElementActionTypes>(initialState, {
 					},
 				};
 			}),
+		};
+	},
+	[ElementAction.SET_ELEMENT_BY_ID_UPDATE_POSITION]: (state, action) => {
+		const { blockId, position } = action.payload;
+		return {
+			elements: state.elements.map((element) => {
+				if (element.id !== blockId) return element;
+				return {
+					...element,
+					position,
+				};
+			}),
+		};
+	},
+	[ElementAction.ADD_ELEMENT]: (state, action) => {
+		return {
+			elements: state.elements.concat(action.payload),
+		};
+	},
+	[ElementAction.ADD_EDGE]: (state, action) => {
+		return {
+			elements: addEdge(action.payload as Edge, state.elements),
+		};
+	},
+	[ElementAction.REMOVE_ELEMENTS]: (state, action) => {
+		return {
+			elements: removeElements(action.payload, state.elements),
 		};
 	},
 });

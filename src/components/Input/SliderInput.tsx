@@ -1,5 +1,5 @@
 import { makeStyles, Slider, Typography } from '@material-ui/core';
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback } from 'react';
 import Input from './Input';
 
 const useStyle = makeStyles({

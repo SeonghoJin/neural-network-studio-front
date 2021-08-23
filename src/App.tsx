@@ -1,30 +1,38 @@
-// eslint-disable-next-line no-use-before-define
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import TestRouter from './Router/TestRouter';
-import configs from './config';
 import './App.css';
-import { Dashboard, Landing, LoginPage, NewProject, Profile, Signup } from './routes/index';
-import ProjectRouter from './Router/ProjectRouter';
-import PrivateAuthentication from './Authentication/PrivateAuthentication';
+import { ReactFlowProvider } from 'react-flow-renderer';
+import { Landing, Profile, Signup } from './routes/index';
 import Authentication from './Authentication';
+import ProjectRouter from './Router/ProjectRouter';
+import DashBoardRouter from './Router/DashBoardRouter';
+import NotFound from './Pages/NotFound';
+import SignIn from './components/auth/signin';
+import ModifyProfile from './components/profile/modify';
+import { DynamicPath, StaticPath } from './pagePathName';
+import Asset from './Pages/Asset';
+import ProjectShare from './components/project/ProjectShare';
 
 function App() {
 	return (
 		<BrowserRouter>
-			<Authentication />
-			<Switch>
-				<Route exact path="/" component={Landing} />
-				<Route path="/login" component={LoginPage} />
-				<Route path="/signup" component={Signup} />
-				{configs.NODE_ENV === 'development' && <Route path="/test/:test_component/:id" exact component={TestRouter} />}
-				<PrivateAuthentication>
-					<Route path="/project" component={ProjectRouter} />
-					<Route path="/dashboard" component={Dashboard} />
-					<Route path="/newProject" component={NewProject} />
-					<Route path="/profile" component={Profile} />
-				</PrivateAuthentication>
-			</Switch>
+			<Authentication>
+				<Switch>
+					<Route exact path={StaticPath.MAIN} component={Landing} />
+					<Route exact path={StaticPath.LOGIN} component={SignIn} />
+					<Route exact path={StaticPath.SIGN_UP} component={Signup} />
+					<Route path={StaticPath.PROJECT} component={ProjectRouter} />
+					<Route path={StaticPath.DASHBOARD} component={DashBoardRouter} />
+					<Route exact path={StaticPath.PROFILE} component={Profile} />
+					<Route exact path={StaticPath.PROFILE_MODIFY} component={ModifyProfile} />
+					<Route exact path={StaticPath.ASSET_MAIN} component={Asset} />
+					<ReactFlowProvider>
+						<Route path={DynamicPath.PROJECT_SHARE} exact component={ProjectShare} />
+						<Route path={DynamicPath.PROJECT_SHARE_CONFIG} exact component={ProjectShare} />
+					</ReactFlowProvider>
+					<Route component={NotFound} />
+				</Switch>
+			</Authentication>
 		</BrowserRouter>
 	);
 }

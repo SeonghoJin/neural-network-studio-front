@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 type Props = {
 	onClose?: any;
 	head: any;
-	body: any;
+	body?: any;
 };
 
 export const StandardModal: FC<Props> = ({ onClose, body, head }: Props) => {
@@ -43,7 +43,7 @@ export const StandardModal: FC<Props> = ({ onClose, body, head }: Props) => {
 			>
 				<div className={classes.paper}>
 					<h2>{head}</h2>
-					<p>{body}</p>
+					{body}
 				</div>
 			</Modal>
 		</div>
@@ -52,6 +52,7 @@ export const StandardModal: FC<Props> = ({ onClose, body, head }: Props) => {
 
 StandardModal.defaultProps = {
 	onClose: null,
+	body: <></>,
 };
 
 export default StandardModal;

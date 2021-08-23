@@ -17,8 +17,6 @@ import { BlockType } from './BlockType';
 export interface BlockState {
 	category: BlockCategory;
 
-	name: string | null;
-
 	type: BlockType;
 
 	config: BlockConfig;
@@ -30,8 +28,6 @@ export class DenseBlockState implements BlockState {
 	category: BlockCategory = BlockCategory.Layer;
 
 	config: BlockConfig = new DenseConfig();
-
-	name: string | null = null;
 
 	type: BlockType = BlockType.Dense;
 
@@ -45,8 +41,6 @@ export class Conv2DBlockState implements BlockState {
 
 	config: BlockConfig = new Conv2DConfig();
 
-	name: string | null = null;
-
 	type: BlockType = BlockType.Conv2D;
 }
 
@@ -56,8 +50,6 @@ export class AveragePooling2DBlockState implements BlockState {
 	category: BlockCategory = BlockCategory.Layer;
 
 	config: BlockConfig = new AveragePooling2DConfig();
-
-	name: string | null = null;
 
 	type: BlockType = BlockType.AveragePooling2D;
 }
@@ -69,8 +61,6 @@ export class MaxPool2DBlockState implements BlockState {
 
 	config: BlockConfig = new MaxPool2DConfig();
 
-	name: string | null = null;
-
 	type: BlockType = BlockType.MaxPool2D;
 }
 
@@ -80,8 +70,6 @@ export class ActivationBlockState implements BlockState {
 	category: BlockCategory = BlockCategory.Layer;
 
 	config: BlockConfig = new ActivationConfig();
-
-	name: string | null = null;
 
 	type: BlockType = BlockType.Activation;
 }
@@ -93,8 +81,6 @@ export class InputBlockState implements BlockState {
 
 	config: BlockConfig = new InputConfig();
 
-	name: string | null = null;
-
 	type: BlockType = BlockType.Input;
 }
 
@@ -104,8 +90,6 @@ export class DropoutBlockState implements BlockState {
 	category: BlockCategory = BlockCategory.Layer;
 
 	config: BlockConfig = new DropoutConfig();
-
-	name: string | null = null;
 
 	type: BlockType = BlockType.Dropout;
 }
@@ -117,8 +101,6 @@ export class BatchNormalizationBlockState implements BlockState {
 
 	config: BlockConfig = new BatchNormalizationConfig();
 
-	name: string | null = null;
-
 	type: BlockType = BlockType.BatchNormalization;
 }
 
@@ -128,8 +110,6 @@ export class FlattenBlockState implements BlockState {
 	category: BlockCategory = BlockCategory.Layer;
 
 	config: BlockConfig = new FlattenConfig();
-
-	name: string | null = null;
 
 	type: BlockType = BlockType.Flatten;
 }

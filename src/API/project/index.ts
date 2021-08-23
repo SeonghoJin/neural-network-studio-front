@@ -73,6 +73,7 @@ export const updateProjectConfig = async (projectNo: string, projectConfig: IPro
 
 export const updateProjectContent = async (projectNo: string, projectContent: IProjectContentDto) => {
 	const layers = graphToLayouts(projectContent.flowState.elements);
+
 	const response = await axios.put(
 		`${config.SERVER_PREFIX}/api/project/${projectNo}/content`,
 		{
@@ -96,5 +97,10 @@ export const getProjectList = async (params?: IGetProjectListParams) => {
 	})}`;
 
 	const response = await axios.get<Projects>(uri, axiosConfig);
+	return response.data;
+};
+
+export const getProjectRoomNumber = async (projectNo: string | number) => {
+	const response = await axios.get<string>(`${config.TEST_SERVER_PREFIX}/project/${projectNo}/room`, axiosConfig);
 	return response.data;
 };

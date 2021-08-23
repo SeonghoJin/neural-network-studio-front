@@ -1,13 +1,15 @@
-import { Edge, FlowElement } from 'react-flow-renderer';
-import Node from './Node';
+import { Edge, FlowElement, isNode, Node } from 'react-flow-renderer';
+import GraphNode from './GraphNode';
+import { BlockState } from '../block';
+import graphNodeNameValidator from './validate';
 
 class GraphConvertor {
-	nodes: Node[];
+	nodes: Map<string, GraphNode>;
 
 	edges: Edge[];
 
 	constructor() {
-		this.nodes = [];
+		this.nodes = new Map<string, GraphNode>();
 		this.edges = [];
 	}
 
@@ -15,52 +17,57 @@ class GraphConvertor {
 		this.edges.push(edge);
 	};
 
-	addNode = (node: Node) => {
-		this.nodes.push(node);
+	addNode = (node: GraphNode) => {
+		console.log(graphNodeNameValidator.test(node.name));
+		if (!graphNodeNameValidator.test(node.name)) {
+			throw new Error(`허용되지 않은 노드 이름이 존재합니다. 수정해주세요. (${node.name})`);
+		}
+		if (this.nodes.has(node.name)) throw new Error(`중복된 노드 이름이 있습니다. 수정해주세요. (${node.name})`);
+		this.nodes.set(node.name, node);
 	};
 
 	toJSON = () => {
-		console.log(1);
-		console.log(this.nodes, this.edges);
 		this.edges.forEach((edge) => {
-			const { source } = edge;
-			const { target } = edge;
-			console.log(2);
-			this.nodes.forEach((node: Node) => {
+			const { source, target } = edge;
+			this.nodes.forEach((node: GraphNode) => {
 				const newNode = node;
-				if (newNode.name === target) {
+				if (newNode.id === target) {
 					newNode.input = source;
 				}
-				if (newNode.name === source) {
+				if (newNode.id === source) {
 					newNode.output = target;
 				}
 			});
 		});
 
-		const outputNodeName = this.nodes.filter((node) => {
-			return node.output === null;
-		});
-		const inputNodeName = this.nodes.filter((node) => {
-			return node.input === null;
-		});
-		console.log(3);
+		const outputNodeName = Array.from(this.nodes)
+			.filter(([, node]) => {
+				return node.output === null;
+			})
+			.map(([, node]) => {
+				return node;
+			});
+		const inputNodeName = Array.from(this.nodes)
+			.filter(([, node]) => {
+				return node.input === null;
+			})
+			.map(([, node]) => {
+				return node;
+			});
+
 		return {
 			output: outputNodeName[0]?.name || '',
 			input: inputNodeName[0]?.name || '',
-			layers: [...this.nodes],
+			layers: [...Array.from(this.nodes.values())],
 		};
 	};
 }
 
 const graphToLayouts = (graph: FlowElement[]) => {
-	const nodesAndEdges = graph.map((element) => {
-		return element.data !== undefined ? new Node(element) : element;
-	});
 	const graphConvertor = new GraphConvertor();
-	nodesAndEdges.forEach((element) => {
-		console.log(Node.isNode(element));
-		if (Node.isNode(element)) {
-			graphConvertor.addNode(element);
+	graph.forEach((element) => {
+		if (isNode(element)) {
+			graphConvertor.addNode(new GraphNode(element as Node<BlockState>));
 		} else {
 			graphConvertor.addEdge(element as Edge);
 		}
