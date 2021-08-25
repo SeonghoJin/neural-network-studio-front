@@ -210,7 +210,7 @@ const ProjectEditorGraph: FC<Props> = ({
 				onMouseMove={(e) => {
 					if (onMoveCursor) {
 						const position = getPosition(e, reactFlowWrapper.current, reactFlowInstance);
-						onMoveCursor({ position: position as XYPosition });
+						onMoveCursor(position as XYPosition);
 					}
 				}}
 				onNodeDrag={(e, node) => {

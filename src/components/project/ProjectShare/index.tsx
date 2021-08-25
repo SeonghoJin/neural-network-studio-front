@@ -9,6 +9,7 @@ import ProjectEditorNav from '../projectEditor/ProjectEditorNav/projectEditorNav
 import ProjectEditorMain from '../projectEditor/projectEditorMain';
 import rootReducer from '../../../module';
 import ProjectEditorShareGraphContainer from './ProjectEditorShareGraphContainer';
+import { SocketIOProvider } from '../../../core/Socket/Context/SocketIOProvider';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -33,15 +34,17 @@ const ProjectShare = () => {
 	return (
 		<PrivateAuthentication>
 			<Provider store={store}>
-				<div className={classes.wrapper}>
-					<div className={classes.container}>
-						<ProjectNav />
-						<ProjectEditorNav />
-						<div className={classes.content}>
-							<ProjectEditorMain projectEditorGraphContainer={<ProjectEditorShareGraphContainer />} />
+				<SocketIOProvider>
+					<div className={classes.wrapper}>
+						<div className={classes.container}>
+							<ProjectNav />
+							<ProjectEditorNav />
+							<div className={classes.content}>
+								<ProjectEditorMain projectEditorGraphContainer={<ProjectEditorShareGraphContainer />} />
+							</div>
 						</div>
 					</div>
-				</div>
+				</SocketIOProvider>
 			</Provider>
 		</PrivateAuthentication>
 	);

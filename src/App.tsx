@@ -12,6 +12,7 @@ import ModifyProfile from './components/profile/modify';
 import { DynamicPath, StaticPath } from './pagePathName';
 import Asset from './Pages/Asset';
 import ProjectShare from './components/project/ProjectShare';
+import { SocketIOProvider } from './core/Socket/Context/SocketIOProvider';
 
 function App() {
 	return (
@@ -28,7 +29,6 @@ function App() {
 					<Route exact path={StaticPath.ASSET_MAIN} component={Asset} />
 					<ReactFlowProvider>
 						<Route path={DynamicPath.PROJECT_SHARE} exact component={ProjectShare} />
-						<Route path={DynamicPath.PROJECT_SHARE_CONFIG} exact component={ProjectShare} />
 					</ReactFlowProvider>
 					<Route component={NotFound} />
 				</Switch>
