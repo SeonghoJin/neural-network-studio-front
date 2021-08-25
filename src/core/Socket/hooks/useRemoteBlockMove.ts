@@ -9,7 +9,7 @@ const remoteBlockMoveResult = atom<RemoteBlockMoveResult>({
 	default: null,
 });
 
-export const useRemoteCursorMove = () => {
+export const useRemoteBlockMove = () => {
 	const [remoteBlockMove, setRemoteBlockMove] = useRecoilState<RemoteBlockMoveResult>(remoteBlockMoveResult);
 
 	return {
