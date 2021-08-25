@@ -23,13 +23,16 @@
   "message": "user_list_response",
   "users": [{
     "name": "진성호",
-    "color": "#FFFFFF"
+    "color": "#FFFFFF",
+    "id": "ASDASDASD"
   }, {
     "name": "차도인",
-    "color": "#FFFFF1"
+    "color": "#FFFFF1",
+    "id": "ASDASDASD1"
   }, {
     "name": "이태원",
-    "color": "#FFFFF2"
+    "color": "#FFFFF2",
+    "id": "ASDASDASD2"
   }]
 }
 ```
@@ -41,7 +44,8 @@
   "cursor": {
     "user": {
       "name": "진성호",
-      "color": "#FFFFFF"
+      "color": "#FFFFFF",
+      "id": "ASDASDASD2"
     },
     "position": {
       "x": 100,
@@ -114,7 +118,8 @@
   "message": "remove_user_request",
   "user": {
     "name": "진성호",
-    "color": "#FFFFFF"
+    "color": "#FFFFFF",
+    "id": "ASDASDASD2"
   }
 }
 ```
@@ -150,7 +155,8 @@
 ```json
 {
     "name": "진성호",
-    "color": "#FFFFFF"
+    "color": "#FFFFFF",
+    "id": "ASDASDASD2"
 }
 ```
 
