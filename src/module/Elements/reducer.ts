@@ -1,7 +1,8 @@
 import { createReducer } from 'typesafe-actions';
-import { addEdge, Edge, Elements, isEdge, removeElements } from 'react-flow-renderer';
+import { addEdge, Edge, Elements, isEdge, removeElements, Node } from 'react-flow-renderer';
 import { ElementActionTypes, ElementState } from './types';
 import { ElementAction } from './actions';
+import { BlockState } from '../../core/reactFlow/block';
 
 const initialState: ElementState = {
 	elements: [],
@@ -11,6 +12,59 @@ const elements = createReducer<ElementState, ElementActionTypes>(initialState, {
 	[ElementAction.SET_ELEMENTS]: (state, action) => ({
 		elements: action.payload,
 	}),
+	[ElementAction.ADD_BLOCK]: (state, action) => {
+		return {
+			elements: state.elements.concat(action.payload.block),
+		};
+	},
+	[ElementAction.REMOVE_BLOCK]: (state, action) => {
+		const removeToElements = state.elements.filter((element) => {
+			return element.id === action.payload.blockId;
+		});
+
+		if (removeToElements == null) {
+			return state;
+		}
+
+		return {
+			elements: removeElements(removeToElements, state.elements),
+		};
+	},
+	[ElementAction.CHANGE_BLOCK_DATA]: (state, action) => {
+		const { blockId, blockState } = action.payload;
+		return {
+			elements: state.elements.map((element) => {
+				if (element.id === blockId) {
+					return {
+						...element,
+						data: {
+							...blockState,
+						},
+					};
+				}
+
+				return element;
+			}),
+		};
+	},
+	[ElementAction.ADD_EDGE]: (state, action) => {
+		return {
+			elements: addEdge(action.payload.edge, state.elements),
+		};
+	},
+	[ElementAction.REMOVE_EDGE]: (state, action) => {
+		const removeToElements = state.elements.filter((element) => {
+			return element.id === action.payload.edgeId;
+		});
+
+		if (removeToElements == null) {
+			return state;
+		}
+
+		return {
+			elements: removeElements(removeToElements, state.elements),
+		};
+	},
 	[ElementAction.SET_ELEMENT_BY_ID_UPDATE_CONFIG]: (state, action) => {
 		const { id, key, value } = action.payload;
 		return {
@@ -53,24 +107,9 @@ const elements = createReducer<ElementState, ElementActionTypes>(initialState, {
 				if (element.id !== blockId) return element;
 				return {
 					...element,
-					position,
+					...position,
 				};
 			}),
-		};
-	},
-	[ElementAction.ADD_ELEMENT]: (state, action) => {
-		return {
-			elements: state.elements.concat(action.payload),
-		};
-	},
-	[ElementAction.ADD_EDGE]: (state, action) => {
-		return {
-			elements: addEdge(action.payload as Edge, state.elements),
-		};
-	},
-	[ElementAction.REMOVE_ELEMENTS]: (state, action) => {
-		return {
-			elements: removeElements(action.payload, state.elements),
 		};
 	},
 });

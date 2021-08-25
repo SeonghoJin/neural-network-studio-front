@@ -1,22 +1,27 @@
 import { useCallback, useEffect } from 'react';
-import { Connection, Edge, Elements, FlowExportObject, isEdge, OnLoadParams, Node } from 'react-flow-renderer';
+import { Edge, Elements, OnLoadParams, Node } from 'react-flow-renderer';
 import { useDispatch } from 'react-redux';
 import { setReactFlowInstance } from '../../../module/ReactFlowInstance';
-import { setElements } from '../../../module/Elements';
+import {
+	addBlock,
+	addEdge,
+	changeBlockData,
+	removeBlock,
+	removeEdge,
+	setElementByIdAndUpdatePosition,
+	setElements,
+} from '../../../module/Elements';
 import ProjectEditorGraph from '../projectEditor/projectEditorGraph';
-import useAuthentication from '../../../hooks/useAuthentication';
 import { useSocket } from '../../../core/Socket/hooks/useSocket';
 import { CursorMoveDto } from '../../../core/Socket/dto/cursor.move.dto';
 import { XYPosition } from '../../../core/Socket/entities/types';
 import Cursors from './Cursors';
-import { useRemoteCursorMove } from '../../../core/Socket/hooks/useRemoteCursorMove';
 import { useRemoteEdgeCreate } from '../../../core/Socket/hooks/useRemoteEdgeCreate';
 import { useRemoteEdgeRemove } from '../../../core/Socket/hooks/useRemoteEdgeRemove';
 import { useRemoteBlockChange } from '../../../core/Socket/hooks/useRemoteBlockChange';
 import { useRemoteBlockRemove } from '../../../core/Socket/hooks/useRemoteBlockRemove';
 import { useRemoteBlockCreate } from '../../../core/Socket/hooks/useRemoteBlockCreate';
 import { useRemoteBlockMove } from '../../../core/Socket/hooks/useRemoteBlockMove';
-import { useUserList } from '../../../core/Socket/hooks/useUserListResponse';
 import { useCreateUserResponse } from '../../../core/Socket/hooks/useCreateUserResponse';
 import { User } from '../../../core/Socket/entities/User';
 import { EdgeCreateDto } from '../../../core/Socket/dto/edge.create.dto';
@@ -28,7 +33,6 @@ import { BlockState } from '../../../core/reactFlow/block';
 
 const ProjectEditorShareGraphContainer = () => {
 	const { socketService } = useSocket();
-	const { remoteCursorMove } = useRemoteCursorMove();
 	const { remoteEdgeCreate } = useRemoteEdgeCreate();
 	const { remoteEdgeRemove } = useRemoteEdgeRemove();
 	const { remoteBlockChange } = useRemoteBlockChange();
@@ -113,33 +117,41 @@ const ProjectEditorShareGraphContainer = () => {
 		[socketService]
 	);
 
-	// const updatePosition = useCallback(
-	// 	(data: MoveBlockBaseData) => {
-	// 		dispatch(setElementByIdAndUpdatePosition(data));
-	// 	},
-	// 	[dispatch]
-	// );
-	//
-	// const addRemoteElement = useCallback(
-	// 	(data: CreateElementBaseData) => {
-	// 		dispatch(addElement(data.element));
-	// 	},
-	// 	[dispatch]
-	// );
-	//
-	// const addRemoteEdge = useCallback(
-	// 	(data: CreateEdgeBaseData) => {
-	// 		dispatch(addEdge(data.edge));
-	// 	},
-	// 	[dispatch]
-	// );
-	//
-	// const removeRemoteElement = useCallback(
-	// 	(data: RemoveElementBaseData) => {
-	// 		dispatch(removeElements(data.elements));
-	// 	},
-	// 	[dispatch]
-	// );
+	useEffect(() => {
+		if (remoteBlockMove !== null) {
+			dispatch(setElementByIdAndUpdatePosition(remoteBlockMove));
+		}
+	}, [dispatch, remoteBlockMove]);
+
+	useEffect(() => {
+		if (remoteBlockCreate !== null) {
+			dispatch(addBlock(remoteBlockCreate.block));
+		}
+	});
+
+	useEffect(() => {
+		if (remoteBlockRemove !== null) {
+			dispatch(removeBlock(remoteBlockRemove));
+		}
+	});
+
+	useEffect(() => {
+		if (remoteBlockChange != null) {
+			dispatch(changeBlockData(remoteBlockChange));
+		}
+	});
+
+	useEffect(() => {
+		if (remoteEdgeCreate != null) {
+			dispatch(addEdge(remoteEdgeCreate));
+		}
+	});
+
+	useEffect(() => {
+		if (remoteEdgeRemove != null) {
+			dispatch(removeEdge(remoteEdgeRemove));
+		}
+	});
 
 	const content = createdUserResponse?.project && (
 		<ProjectEditorGraph
@@ -155,18 +167,6 @@ const ProjectEditorShareGraphContainer = () => {
 			cursorModule={cursors}
 		/>
 	);
-
-	// useEffect(() => {
-	// 	if (connected) {
-	// 		login();
-	// 	}
-	// }, [connected, disconnect, login]);
-	//
-	// useEffect(() => {
-	// 	return () => {
-	// 		disconnect();
-	// 	};
-	// }, [disconnect]);
 
 	return <>{content}</>;
 };
