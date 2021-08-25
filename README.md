@@ -10,6 +10,7 @@
 - UserCreateResponseDto
 ```json
 {
+  "message": "create_user_response",
   "project" : {
     
   }
@@ -19,6 +20,7 @@
 - UserListResponseDto
 ```json
 {
+  "message": "user_list_response",
   "users": [{
     "name": "진성호",
     "color": "#FFFFFF"
@@ -35,6 +37,7 @@
 - CursorMoveDto
 ```json
 {
+  "message": "move_cursor",
   "cursor": {
     "user": {
       "name": "진성호",
@@ -48,18 +51,17 @@
 }
 ```
 
-
-
 - BlockRemoveDto
 ```json
 {
+  "message": "remove_block",
   "blockId": "block-####"
 }
 ```
 - BlockMoveDto
 ```json
 {
-
+  "message": "move_block",
   "blockId": "block-####",
   "position": {
     "x": 100,
@@ -70,6 +72,7 @@
 - BlockCreateDto
 ```json
 {
+  "message": "create_block",
   "blockId": "block-#####",
   "block": {
   } 
@@ -78,6 +81,7 @@
 - BlockChangeDto
 ```json
 {
+  "message": "change_block",
   "blockId": "Node-#####",
   "blockState": {
 
@@ -88,6 +92,7 @@
 - EdgeCreateDto
 ```json
 {
+  "message": "create_edge",
   "edgeId": "edge-#####",
   "edge": {
 
@@ -98,6 +103,7 @@
 - EdgeRemoveDto
 ```json
 {
+  "message": "remove_edge",
   "edgeId": "edge-#####"
 }
 ```
@@ -105,6 +111,7 @@
 - UserRemoveRequestDto
 ```json
 {
+  "message": "remove_user_request",
   "user": {
     "name": "진성호",
     "color": "#FFFFFF"

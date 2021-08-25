@@ -31,14 +31,6 @@ import {
 import createCustomEdge from '../../../core/reactFlow/edge';
 import { getNodeColor, getNodeStrokeColor } from '../../../core/reactFlow/node/nodetypes/component/NodeStroke';
 import ConnectionLine from '../../../core/reactFlow/connectionLine';
-import {
-	CreateEdgeBaseData,
-	CreateElementBaseData,
-	MoveBlockBaseData,
-	MoveCursorBasicData,
-	MoveCursorEventData,
-	RemoveElementBaseData,
-} from '../../../core/Socket/SocketEvent';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -70,20 +62,20 @@ type Props = {
 	setReactInstance: EventHandler<any>;
 	setElements: EventHandler<any>;
 	flowState: FlowExportObject;
-	onMoveCursor?: (data: MoveCursorBasicData) => void;
-	onMoveBlock?: (data: MoveBlockBaseData) => void;
+	onMoveCursor?: any;
+	onMoveBlock?: any;
 	cursorModule?: any;
-	moveBlock?: MoveBlockBaseData | null;
-	removedBlock?: RemoveElementBaseData | null;
-	createdBlock?: CreateElementBaseData | null;
-	createdRemoteEdge?: CreateEdgeBaseData | null;
-	updatePosition?: (data: MoveBlockBaseData) => void;
-	onCreateElement?: (data: CreateElementBaseData) => void;
-	onCreateEdge?: (data: CreateEdgeBaseData) => void;
-	onRemoveElement?: (data: RemoveElementBaseData) => void;
-	addRemoteElement?: (data: CreateElementBaseData) => void;
-	addRemoteEdge?: (data: CreateEdgeBaseData) => void;
-	removeRemoteElement?: (data: RemoveElementBaseData) => void;
+	moveBlock?: any;
+	removedBlock?: any;
+	createdBlock?: any;
+	createdRemoteEdge?: any;
+	updatePosition?: any;
+	onCreateElement?: any;
+	onCreateEdge?: any;
+	onRemoveElement?: any;
+	addRemoteElement?: any;
+	addRemoteEdge?: any;
+	removeRemoteElement?: any;
 };
 
 const ProjectEditorGraph: FC<Props> = ({

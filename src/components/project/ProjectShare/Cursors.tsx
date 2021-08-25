@@ -4,7 +4,6 @@ import { faMousePointer } from '@fortawesome/free-solid-svg-icons';
 import { useStoreState, XYPosition } from 'react-flow-renderer';
 import { FC } from 'react';
 import randomColor from 'randomcolor';
-import { cursorResponseResultState } from '../../../hooks/useSocket';
 
 type Props = {
 	ownerName: string;
@@ -51,15 +50,14 @@ Cursor.defaultProps = {
 
 const Cursors = ({ ownerName }: Props) => {
 	const [cursorColors] = useRecoilState(CursorColors);
-	const [cursorResponseResult] = useRecoilState(cursorResponseResultState);
-	const cursors = Array.from(cursorResponseResult, ([name, value]) => {
-		if (name === ownerName) return null;
-		let color = cursorColors.get(ownerName);
-		if (color === undefined) {
-			color = cursorColors.set(ownerName, randomColor()).get(ownerName) as string;
-		}
-		return <Cursor key={name} userName={name} position={value} color={color} />;
-	});
+	// const cursors = Array.from(cursorResponseResult, ([name, value]) => {
+	// 	if (name === ownerName) return null;
+	// 	let color = cursorColors.get(ownerName);
+	// 	if (color === undefined) {
+	// 		color = cursorColors.set(ownerName, randomColor()).get(ownerName) as string;
+	// 	}
+	// 	return <Cursor key={name} userName={name} position={value} color={color} />;
+	// });
 	const transform = useStoreState((state) => state.transform);
 	return (
 		<div
@@ -77,9 +75,7 @@ const Cursors = ({ ownerName }: Props) => {
 					zIndex: 3,
 					transform: `translate(${transform[0]}px, ${transform[1]}px) scale(${transform[2]})`,
 				}}
-			>
-				{cursors}
-			</div>
+			/>
 		</div>
 	);
 };

@@ -1,6 +1,5 @@
 import { Elements, FlowElement } from 'react-flow-renderer';
 import { createStandardAction } from '../../util';
-import { MoveBlockBaseData } from '../../core/Socket/SocketEvent';
 
 export enum ElementAction {
 	SET_ELEMENTS = 'SET_ELEMENTS',
@@ -27,4 +26,4 @@ export const setElementByIdAndUpdateLabel = createStandardAction(ElementAction.S
 }>();
 export const setElementByIdAndUpdatePosition = createStandardAction(
 	ElementAction.SET_ELEMENT_BY_ID_UPDATE_POSITION
-)<MoveBlockBaseData>();
+)<any>();
