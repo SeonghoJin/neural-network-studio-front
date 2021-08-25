@@ -33,5 +33,6 @@ module.exports = {
 		'no-unused-vars': 'off',
 		'react/jsx-filename-extension': 'off',
 		'react/jsx-props-no-spreading': 'off',
+		'import/prefer-default-export': 'off',
 	},
 };
