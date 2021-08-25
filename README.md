@@ -1,8 +1,153 @@
-# To Do
+# Socket
 
-- Editor Layout 만든다.
-- SideBar에서 Drag And Drop으로 블록 꺼내온다.
-- Editor에서 블록을 선택하여 SideBar에서 블록 정보 출력한다.
-  - Editor에서 블록을 선택하여 SideBar에서 정보 수정할 수 있게 한다.
-- Editor에 있는 블록들을 간략하게 볼 수 있는 MiniMap 출력한다.
-- Edge를 선택하여 수정할 수 있게 한다.
+## SocketEvent
+
+## SocketDataTypes
+
+
+
+### Dtos
+
+- EdgeCreateDto
+```json
+{
+  "edgeId": "edge-#####",
+  "edge": {
+
+  }
+}
+```
+
+- EdgeRemoveDto
+```json
+{
+  "edgeId": "edge-#####"
+}
+```
+
+- CursorMoveDto
+```json
+{
+  "cursor": {
+    "user": {
+      "name": "진성호",
+      "color": "#FFFFFF"
+    },
+    "position": {
+      "x": 100,
+      "y": 100
+    }
+  }
+}
+```
+
+- BlockRemoveDto 
+```json
+{
+  "blockId": "block-####"
+}
+```
+- BlockMoveDto
+```json
+{
+
+  "blockId": "block-####",
+  "position": {
+    "x": 100,
+    "y": 100
+  }
+}
+```
+- BlockCreateDto 
+```json
+{
+  "blockId": "block-#####",
+  "block": {
+  } 
+}
+```
+- BlockChangeDto 
+```json
+{
+  "blockId": "Node-#####",
+  "blockState": {
+
+  }
+}
+```
+- UserCreateDto 
+```json
+{
+  "user": {
+    "name": "진성호",
+    "color": "#FFFFFF"
+  }
+}
+```
+- UserRemoveDto
+```json
+{
+  "user": {
+    "name": "진성호",
+    "color": "#FFFFFF"
+  }
+}
+```
+
+- UserListResponseDto
+```json
+{
+  "users": [{
+    "name": "진성호",
+    "color": "#FFFFFF"
+  }, {
+    "name": "차도인",
+    "color": "#FFFFF1"
+  }, {
+    "name": "이태원",
+    "color": "#FFFFF2"
+  }]
+}
+```
+
+
+### Entities
+
+- Cursor
+```json
+{
+  "user": {
+    "name": "진성호",
+    "color": "#FFFFFF"
+  },
+  "position": {
+    "x": 100,
+    "y": 100
+  }
+}
+```
+
+- Node
+```json
+{
+  "data": {
+    
+  }
+}
+```
+
+- User
+```json
+{
+    "name": "진성호",
+    "color": "#FFFFFF"
+}
+```
+
+- XYPosition
+```json
+{
+  "x": 100,
+  "y": 100
+}
+```

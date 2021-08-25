@@ -9,6 +9,9 @@ import config from '../config';
 import useProjectShareLocation from './useProjectShareLocation';
 import {
 	ChangeCurrentUserResponse,
+	ChangeNodeBaseData,
+	ChangeNodeRequestData,
+	ChangeNodeResponseData,
 	CreateEdgeBaseData,
 	CreateEdgeRequestData,
 	CreateEdgeResponseData,
@@ -78,6 +81,12 @@ export const createEdgeResponseResultState = atom<CreateEdgeResponseResult>({
 	default: null,
 });
 
+type ChangeNodeResponseResult = ChangeNodeBaseData | null;
+
+export const changeNodeResponseResultState = atom<ChangeNodeResponseResult>({
+	key: 'changeNodeResponseResultState',
+	default: null,
+});
 const useConnectSocket = () => {
 	const socketRef = useRef<Socket | null>(null);
 	const [, forceUpdate] = useState({});
@@ -88,6 +97,8 @@ const useConnectSocket = () => {
 	const [createBlock, setCreateBlock] = useRecoilState<CreateElementResponseResult>(createBlockResponseResultState);
 	const [removeBlock, setRemoveBlock] = useRecoilState<RemoveElementResponseResult>(removeBlockResponseResultState);
 	const [createdRemoteEdge, setCreatedEdge] = useRecoilState<CreateEdgeResponseResult>(createEdgeResponseResultState);
+	const [changedRemoteNode, setChangeRemoteNode] =
+		useRecoilState<ChangeNodeResponseResult>(changeNodeResponseResultState);
 	const { roomNo } = useProjectShareLocation();
 	const projectResult = useProject();
 	const { user } = useAuthentication();
@@ -168,6 +179,17 @@ const useConnectSocket = () => {
 		[roomNo]
 	);
 
+	const onChangeNode = useCallback(
+		(changedNode: ChangeNodeBaseData) => {
+			const data: ChangeNodeRequestData = {
+				...changedNode,
+				roomNo,
+			};
+			socketRef.current?.emit(SocketEvent.ChangeBlockResponse, data);
+		},
+		[roomNo]
+	);
+
 	useEffect(() => {
 		sleep(1000).then(() => {
 			if (socketRef.current == null && (projectResult.data || projectResult.error)) {
@@ -232,6 +254,11 @@ const useConnectSocket = () => {
 					setRemoveBlock(data);
 				});
 
+				socketRef.current?.on(SocketEvent.ChangeBlockResponse, (data: ChangeNodeResponseData) => {
+					console.log('Change', data);
+					setChangeRemoteNode(data);
+				});
+
 				socketRef.current?.on('disconnect', () => {
 					console.log('disconnect');
 				});
@@ -246,6 +273,7 @@ const useConnectSocket = () => {
 		projectResult.data,
 		projectResult.error,
 		roomNo,
+		setChangeRemoteNode,
 		setCreateBlock,
 		setCreatedEdge,
 		setCursorResponseResult,
@@ -263,11 +291,13 @@ const useConnectSocket = () => {
 		onMoveBlock,
 		onCreateElement,
 		onRemoveElement,
+		onChangeNode,
 		onCreateEdge,
 		moveBlock,
 		createBlock,
 		createdRemoteEdge,
 		removeBlock,
+		changedRemoteNode,
 		project: socketProjectResult,
 	};
 };

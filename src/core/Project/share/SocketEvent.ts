@@ -35,6 +35,14 @@ export interface RoomData {
 	roomNo: string;
 }
 
+export type ChangeNodeRequestData = ChangeNodeBaseData & RoomData;
+
+export type ChangeNodeResponseData = ChangeNodeBaseData;
+
+export interface ChangeNodeBaseData {
+	block: any;
+}
+
 export type CreateEdgeRequestData = CreateEdgeBaseData & RoomData;
 
 export type CreateEdgeResponseData = CreateEdgeBaseData;
