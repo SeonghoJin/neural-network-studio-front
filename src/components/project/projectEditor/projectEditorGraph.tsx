@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-import React, { EventHandler, FC, KeyboardEventHandler, useCallback, useEffect, useRef } from 'react';
+import React, { EventHandler, FC, KeyboardEventHandler, ReactNode, useCallback, useEffect, useRef } from 'react';
 import ReactFlow, {
 	addEdge,
 	Background,
@@ -8,6 +8,7 @@ import ReactFlow, {
 	Edge,
 	Elements,
 	FlowExportObject,
+	isEdge,
 	isNode,
 	MiniMap,
 	Node,
@@ -18,7 +19,7 @@ import ReactFlow, {
 	XYPosition,
 } from 'react-flow-renderer';
 import { useSelector } from 'react-redux';
-import { InputBlockState } from '../../../core/reactFlow/block/BlockState';
+import { BlockState, InputBlockState } from '../../../core/reactFlow/block/BlockState';
 import { nodeTypes } from '../../../core/reactFlow/node/nodetypes';
 import { RootState } from '../../../module';
 import {
@@ -62,40 +63,26 @@ type Props = {
 	setReactInstance: EventHandler<any>;
 	setElements: EventHandler<any>;
 	flowState: FlowExportObject;
-	onMoveCursor?: any;
-	onMoveBlock?: any;
-	cursorModule?: any;
-	moveBlock?: any;
-	removedBlock?: any;
-	createdBlock?: any;
-	createdRemoteEdge?: any;
-	updatePosition?: any;
-	onCreateElement?: any;
-	onCreateEdge?: any;
-	onRemoveElement?: any;
-	addRemoteElement?: any;
-	addRemoteEdge?: any;
-	removeRemoteElement?: any;
+	onMoveCursor?: (position: XYPosition) => void;
+	onCreateBlock?: (block: Node<BlockState>) => void;
+	onMoveBlock?: (blockId: string, position: XYPosition) => void;
+	onRemoveBlock?: (blockId: string) => void;
+	onCreateEdge?: (edge: Edge) => void;
+	onRemoveEdge?: (edgeId: string) => void;
+	cursorModule?: ReactNode;
 };
 
 const ProjectEditorGraph: FC<Props> = ({
-	cursorModule,
-	onMoveCursor,
+	setReactInstance,
 	setElements,
 	flowState,
-	setReactInstance,
+	onCreateBlock,
 	onMoveBlock,
-	moveBlock,
-	removedBlock,
-	createdBlock,
-	updatePosition,
-	onCreateElement,
-	onRemoveElement,
+	onRemoveBlock,
 	onCreateEdge,
-	addRemoteElement,
-	addRemoteEdge,
-	createdRemoteEdge,
-	removeRemoteElement,
+	onRemoveEdge,
+	onMoveCursor,
+	cursorModule,
 }: Props) => {
 	const classes = useStyle();
 	const reactFlowWrapper = useRef<HTMLDivElement | null>(null);
@@ -105,12 +92,6 @@ const ProjectEditorGraph: FC<Props> = ({
 	const elements = useSelector((state: RootState) => state.elements.elements);
 
 	useEffect(() => {
-		if (updatePosition && moveBlock) {
-			updatePosition(moveBlock);
-		}
-	}, [moveBlock, updatePosition]);
-
-	useEffect(() => {
 		const inputBlockState = new InputBlockState();
 		const inputNode = createCustomNode({
 			data: inputBlockState,
@@ -118,30 +99,10 @@ const ProjectEditorGraph: FC<Props> = ({
 		setElements(flowState?.elements || [inputNode]);
 	}, [flowState?.elements, setElements]);
 
-	useEffect(() => {
-		if (removedBlock && removeRemoteElement) {
-			removeRemoteElement(removedBlock);
-		}
-	}, [removeRemoteElement, removedBlock]);
-
-	useEffect(() => {
-		if (createdBlock && addRemoteElement) {
-			addRemoteElement(createdBlock);
-		}
-	}, [addRemoteElement, createdBlock]);
-
-	useEffect(() => {
-		if (createdRemoteEdge && addRemoteEdge) {
-			addRemoteEdge(createdRemoteEdge);
-		}
-	}, [addRemoteEdge, createdRemoteEdge]);
-
 	const onConnect = useCallback(
 		(params: Edge | Connection) => {
 			if (onCreateEdge) {
-				onCreateEdge({
-					edge: createCustomEdge(params),
-				});
+				onCreateEdge(createCustomEdge(params) as Edge);
 			}
 			setElements(addEdge(createCustomEdge(params), elements));
 		},
@@ -150,14 +111,9 @@ const ProjectEditorGraph: FC<Props> = ({
 
 	const onElementsRemove = useCallback(
 		(elementsToRemove: Elements<any>) => {
-			if (onRemoveElement) {
-				onRemoveElement({
-					elements: elementsToRemove,
-				});
-			}
 			setElements(removeElements(elementsToRemove, elements));
 		},
-		[elements, onRemoveElement, setElements]
+		[elements, setElements]
 	);
 
 	const onDragOver = useCallback((e: React.DragEvent) => {
@@ -178,14 +134,12 @@ const ProjectEditorGraph: FC<Props> = ({
 			});
 			if (!canInsertNode(elements, newNode)) return;
 			setElements(elements.concat(newNode));
-			if (onCreateElement) {
-				onCreateElement({
-					element: newNode,
-				});
+			if (onCreateBlock) {
+				onCreateBlock(newNode);
 			}
 			setSelectedElements(newNode);
 		},
-		[elements, onCreateElement, reactFlowInstance, setElements, setSelectedElements]
+		[elements, onCreateBlock, reactFlowInstance, setElements, setSelectedElements]
 	);
 
 	const onLoad = useCallback(
@@ -199,9 +153,15 @@ const ProjectEditorGraph: FC<Props> = ({
 		(event) => {
 			if ((event.code === 'Delete' || event.code === 'Escape') && selectedElements) {
 				onElementsRemove(selectedElements);
+				if (onRemoveBlock && isNode(selectedElements[0])) {
+					onRemoveBlock(selectedElements[0].id);
+				}
+				if (onRemoveEdge && isEdge(selectedElements[0])) {
+					onRemoveEdge(selectedElements[0].id);
+				}
 			}
 		},
-		[onElementsRemove, selectedElements]
+		[onElementsRemove, onRemoveBlock, onRemoveEdge, selectedElements]
 	);
 
 	return (
@@ -216,7 +176,7 @@ const ProjectEditorGraph: FC<Props> = ({
 				onNodeDrag={(e, node) => {
 					if (onMoveBlock) {
 						const { position, id } = node;
-						onMoveBlock({ blockId: id, position });
+						onMoveBlock(id, position);
 					}
 				}}
 				className={classes.reactFlow}
@@ -257,19 +217,12 @@ const ProjectEditorGraph: FC<Props> = ({
 
 ProjectEditorGraph.defaultProps = {
 	onMoveCursor: undefined,
-	cursorModule: undefined,
+	onCreateBlock: undefined,
 	onMoveBlock: undefined,
-	moveBlock: undefined,
-	updatePosition: undefined,
-	onCreateElement: undefined,
-	onRemoveElement: undefined,
+	onRemoveBlock: undefined,
 	onCreateEdge: undefined,
-	removedBlock: undefined,
-	createdBlock: undefined,
-	addRemoteElement: undefined,
-	addRemoteEdge: undefined,
-	removeRemoteElement: undefined,
-	createdRemoteEdge: undefined,
+	onRemoveEdge: undefined,
+	cursorModule: undefined,
 };
 
 export default ProjectEditorGraph;
