@@ -10,6 +10,7 @@ import ProjectEditorMain from '../projectEditor/projectEditorMain';
 import rootReducer from '../../../module';
 import ProjectEditorShareGraphContainer from './ProjectEditorShareGraphContainer';
 import { SocketIOProvider } from '../../../core/Socket/Context/SocketIOProvider';
+import { WebSocketContext } from '../../../core/Socket/Context/WebSocketContext';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -34,7 +35,7 @@ const ProjectShare = () => {
 	return (
 		<PrivateAuthentication>
 			<Provider store={store}>
-				<SocketIOProvider>
+				<WebSocketContext>
 					<div className={classes.wrapper}>
 						<div className={classes.container}>
 							<ProjectNav />
@@ -44,7 +45,7 @@ const ProjectShare = () => {
 							</div>
 						</div>
 					</div>
-				</SocketIOProvider>
+				</WebSocketContext>
 			</Provider>
 		</PrivateAuthentication>
 	);
