@@ -1,6 +1,6 @@
 import { Elements, FlowElement } from 'react-flow-renderer';
 import { createStandardAction } from '../../util';
-import { MoveBlockBaseData } from '../../core/Project/share/SocketEvent';
+import { MoveBlockBaseData } from '../../core/Socket/SocketEvent';
 
 export enum ElementAction {
 	SET_ELEMENTS = 'SET_ELEMENTS',

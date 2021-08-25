@@ -35,7 +35,7 @@ import {
 	RemoveElementRequestData,
 	RemoveElementResponseData,
 	SocketEvent,
-} from '../core/Project/share/SocketEvent';
+} from '../core/Socket/SocketEvent';
 import { UserProfile } from '../API/User/types';
 import useProject from './useProject';
 import { IProjectDto } from '../API/project/types';

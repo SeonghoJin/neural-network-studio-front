@@ -38,7 +38,7 @@ import {
 	MoveCursorBasicData,
 	MoveCursorEventData,
 	RemoveElementBaseData,
-} from '../../../core/Project/share/SocketEvent';
+} from '../../../core/Socket/SocketEvent';
 
 const useStyle = makeStyles({
 	wrapper: {

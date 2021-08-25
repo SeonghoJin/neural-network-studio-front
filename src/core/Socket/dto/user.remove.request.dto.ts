@@ -1,5 +1,5 @@
 import { User } from '../entities/User';
 
-export class UserCreateDto {
+export class UserRemoveRequestDto {
 	user: User | undefined;
 }
