@@ -1,7 +1,7 @@
 # Socket
 
-## SocketEvent
- 
+## SocketEvents
+[ SocketEvents ](https://github.com/Stonebridge-soma12/otherFronts/blob/feat/src/core/Socket/SocketEvent.ts)
 ## SocketDataTypes
 
 
