@@ -64,7 +64,7 @@
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
   },
-  "proxy": "https://3.36.131.134",
+  "proxy": "https://nnstudio.io/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
