@@ -15,6 +15,10 @@ export class WebSocketService implements SocketService {
 		this.socket = socket;
 	}
 
+	disconnect: () => void = () => {
+		this.socket.close();
+	};
+
 	changeBlock(data: BlockChangeDto): void {
 		this.socket.send(JSON.stringify(data));
 	}

@@ -48,4 +48,8 @@ export class SocketIoService implements SocketService {
 	removeUser(data: UserRemoveRequestDto): void {
 		this.socket?.emit(SocketEvent.RemoveUserRequest, data);
 	}
+
+	disconnect(): void {
+		this.socket?.disconnect();
+	}
 }

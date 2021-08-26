@@ -16,4 +16,5 @@ export interface SocketService {
 	createEdge: (data: EdgeCreateDto) => void;
 	removeEdge: (data: EdgeRemoveDto) => void;
 	removeUser: (data: UserRemoveRequestDto) => void;
+	disconnect: () => void;
 }

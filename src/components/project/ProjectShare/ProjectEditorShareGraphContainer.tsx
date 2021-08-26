@@ -118,6 +118,12 @@ const ProjectEditorShareGraphContainer = () => {
 	);
 
 	useEffect(() => {
+		return () => {
+			socketService?.disconnect();
+		};
+	}, [socketService]);
+
+	useEffect(() => {
 		if (remoteBlockMove !== null) {
 			dispatch(setElementByIdAndUpdatePosition(remoteBlockMove));
 		}
