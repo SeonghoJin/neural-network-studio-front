@@ -1,6 +1,6 @@
 import { Container, makeStyles } from '@material-ui/core';
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import useProject from '../../../../hooks/useProject';
 import CircleLoading from '../../../utils/Loading/CircularLoading';
 import ProjectEditorNavMainContentContainer from './ProjectEditorNavMainContentContainer';
@@ -52,7 +52,7 @@ const useStyle = makeStyles({
 	},
 });
 
-const ProjectEditorNav = () => {
+const ProjectEditorNav = ({ projectEditorNavOptionContent }: { projectEditorNavOptionContent: ReactNode }) => {
 	const classes = useStyle();
 	const content = (
 		<div className={classes.contentWrapper}>
@@ -64,9 +64,7 @@ const ProjectEditorNav = () => {
 					<div className={classes.navMainContentWrapper}>
 						<ProjectEditorNavMainContentContainer />
 					</div>
-					<div className={classes.navOptionContentWrapper}>
-						<ProjectEditorNavOptionContentContainer />
-					</div>
+					<div className={classes.navOptionContentWrapper}>{projectEditorNavOptionContent}</div>
 				</div>
 			</div>
 		</div>

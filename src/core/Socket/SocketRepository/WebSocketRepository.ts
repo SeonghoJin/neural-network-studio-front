@@ -18,72 +18,81 @@ export class WebSocketRepository implements SocketRepository {
 
 	createdUserResponse: (event: string, cf: (data: UserCreateResponseDto) => void) => void = (event, cf) => {
 		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
-			if (msgevt.data.message === event) {
-				cf(msgevt.data);
+			const data = JSON.parse(msgevt.data);
+			if (data.message === event) {
+				cf(data);
 			}
 		});
 	};
 
 	renewUserListResponse: (event: string, cf: (data: UserListResponseDto) => void) => void = (event, cf) => {
 		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
-			if (msgevt.data.message === event) {
-				cf(msgevt.data);
+			const data = JSON.parse(msgevt.data);
+			if (data.message === event) {
+				cf(data);
 			}
 		});
 	};
 
 	moveCursor: (event: string, cf: (data: CursorMoveDto) => void) => void = (event, cf) => {
 		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
-			if (msgevt.data.message === event) {
-				cf(msgevt.data);
+			const data = JSON.parse(msgevt.data);
+			if (data.message === event) {
+				cf(data);
 			}
 		});
 	};
 
 	createBlock: (event: string, cf: (data: BlockCreateDto) => void) => void = (event, cf) => {
 		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
-			if (msgevt.data.message === event) {
-				cf(msgevt.data);
+			const data = JSON.parse(msgevt.data);
+			if (data.message === event) {
+				cf(data);
 			}
 		});
 	};
 
 	moveBlock: (event: string, cf: (data: BlockMoveDto) => void) => void = (event, cf) => {
 		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
-			if (msgevt.data.message === event) {
-				cf(msgevt.data);
+			const data = JSON.parse(msgevt.data);
+			if (data.message === event) {
+				cf(data);
 			}
 		});
 	};
 
 	changeBlock: (event: string, cf: (data: BlockChangeDto) => void) => void = (event, cf) => {
 		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
-			if (msgevt.data.message === event) {
-				cf(msgevt.data);
+			const data = JSON.parse(msgevt.data);
+			if (data.message === event) {
+				cf(data);
 			}
 		});
 	};
 
 	removeBlock: (event: string, cf: (data: BlockRemoveDto) => void) => void = (event, cf) => {
 		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
-			if (msgevt.data.message === event) {
-				cf(msgevt.data);
+			const data = JSON.parse(msgevt.data);
+			if (data.message === event) {
+				cf(data);
 			}
 		});
 	};
 
 	createEdge: (event: string, cf: (data: EdgeCreateDto) => void) => void = (event, cf) => {
 		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
-			if (msgevt.data.message === event) {
-				cf(msgevt.data);
+			const data = JSON.parse(msgevt.data);
+			if (data.message === event) {
+				cf(data);
 			}
 		});
 	};
 
 	removeEdge: (event: string, cf: (data: EdgeRemoveDto) => void) => void = (event, cf) => {
 		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
-			if (msgevt.data.message === event) {
-				cf(msgevt.data);
+			const data = JSON.parse(msgevt.data);
+			if (data.message === event) {
+				cf(data);
 			}
 		});
 	};

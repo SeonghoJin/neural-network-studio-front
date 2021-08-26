@@ -1,5 +1,5 @@
 import { createReducer } from 'typesafe-actions';
-import { addEdge, Edge, Elements, isEdge, removeElements, Node } from 'react-flow-renderer';
+import { addEdge, Edge, Elements, isEdge, removeElements, Node, XYPosition } from 'react-flow-renderer';
 import { ElementActionTypes, ElementState } from './types';
 import { ElementAction } from './actions';
 import { BlockState } from '../../core/reactFlow/block';
@@ -13,6 +13,7 @@ const elements = createReducer<ElementState, ElementActionTypes>(initialState, {
 		elements: action.payload,
 	}),
 	[ElementAction.ADD_BLOCK]: (state, action) => {
+		console.log(action.payload);
 		return {
 			elements: state.elements.concat(action.payload.block),
 		};
@@ -107,7 +108,7 @@ const elements = createReducer<ElementState, ElementActionTypes>(initialState, {
 				if (element.id !== blockId) return element;
 				return {
 					...element,
-					...position,
+					position: position as XYPosition,
 				};
 			}),
 		};

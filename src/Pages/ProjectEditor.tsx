@@ -8,6 +8,8 @@ import ProjectNav from '../components/project/ProjectNav/projectNav';
 import ProjectEditorNav from '../components/project/projectEditor/ProjectEditorNav/projectEditorNav';
 import rootReducer from '../module';
 import ProjectEditorGraphContainer from '../components/project/projectEditor/ProjectEditorGraphContainer';
+import ProjectEditorNavOptionContent from '../components/project/projectEditor/ProjectEditorNav/ProjectEditorNavOptionContent';
+import ProjectEditorNavOptionContentContainer from '../components/project/projectEditor/ProjectEditorNav/ProjectEditorNavOptionContentContainer';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -34,7 +36,7 @@ const ProjectEditor = () => {
 			<div className={classes.wrapper}>
 				<div className={classes.container}>
 					<ProjectNav />
-					<ProjectEditorNav />
+					<ProjectEditorNav projectEditorNavOptionContent={<ProjectEditorNavOptionContentContainer />} />
 					<div className={classes.content}>
 						<ProjectEditorMain projectEditorGraphContainer={<ProjectEditorGraphContainer />} />
 					</div>

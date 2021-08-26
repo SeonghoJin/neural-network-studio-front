@@ -1,9 +1,9 @@
 import { SocketEvent } from '../SocketEvent';
-import { IProjectDto } from '../../../API/project/types';
+import { IProjectContentDto, IProjectDto } from '../../../API/project/types';
 import { User } from '../entities/User';
 
 export class UserCreateResponseDto {
-	project: IProjectDto | undefined;
+	project: IProjectContentDto | undefined;
 
 	user: User | undefined;
 

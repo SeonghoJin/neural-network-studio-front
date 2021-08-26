@@ -11,6 +11,8 @@ import rootReducer from '../../../module';
 import ProjectEditorShareGraphContainer from './ProjectEditorShareGraphContainer';
 import { SocketIOProvider } from '../../../core/Socket/Context/SocketIOProvider';
 import { WebSocketContext } from '../../../core/Socket/Context/WebSocketContext';
+import ProjectEditorNavOptionContentContainer from '../projectEditor/ProjectEditorNav/ProjectEditorNavOptionContentContainer';
+import ProjectShareNavOptionContentContainer from './ProjectShareNav/ProjectShareNavOptionContentContainer';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -39,7 +41,7 @@ const ProjectShare = () => {
 					<div className={classes.wrapper}>
 						<div className={classes.container}>
 							<ProjectNav />
-							<ProjectEditorNav />
+							<ProjectEditorNav projectEditorNavOptionContent={<ProjectShareNavOptionContentContainer />} />
 							<div className={classes.content}>
 								<ProjectEditorMain projectEditorGraphContainer={<ProjectEditorShareGraphContainer />} />
 							</div>

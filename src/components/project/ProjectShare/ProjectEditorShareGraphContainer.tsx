@@ -130,7 +130,8 @@ const ProjectEditorShareGraphContainer = () => {
 
 	useEffect(() => {
 		if (remoteBlockCreate !== null) {
-			dispatch(addBlock(remoteBlockCreate.block));
+			console.log(remoteBlockCreate);
+			dispatch(addBlock(remoteBlockCreate));
 		}
 	}, [dispatch, remoteBlockCreate]);
 
@@ -157,11 +158,10 @@ const ProjectEditorShareGraphContainer = () => {
 			dispatch(removeEdge(remoteEdgeRemove));
 		}
 	}, [dispatch, remoteEdgeRemove]);
-
-	const content = createdUserResponse?.project && (
+	const content = createdUserResponse?.project?.flowState && (
 		<ProjectEditorGraph
 			setReactInstance={setReactInstance}
-			flowState={createdUserResponse?.project.content.flowState}
+			flowState={createdUserResponse?.project.flowState}
 			setElements={onSetElements}
 			onMoveCursor={onMoveCursor}
 			onCreateBlock={onCreateBlock}

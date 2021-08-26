@@ -38,6 +38,7 @@ export const useSocket = () => {
 			setRemoteCursorMove(data);
 		});
 		socketRepository?.createdUserResponse(SocketEvent.CreateUserResponse, (data: UserCreateResponseDto) => {
+			console.log(data);
 			setCreateUserResponse(data);
 		});
 		socketRepository?.renewUserListResponse(SocketEvent.UserListResponse, (data: UserListResponseDto) => {

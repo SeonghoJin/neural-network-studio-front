@@ -4,6 +4,7 @@ import { useRemoteCursorMove } from '../../../../core/Socket/hooks/useRemoteCurs
 import { useUserList } from '../../../../core/Socket/hooks/useUserListResponse';
 import { CursorBackground } from './CursorBackground';
 import { Cursor } from './Cursor';
+import { useCreateUserResponse } from '../../../../core/Socket/hooks/useCreateUserResponse';
 
 type UserId = string;
 type CursorPosition = XYPosition;
@@ -11,6 +12,7 @@ type CursorPosition = XYPosition;
 const CursorModule = () => {
 	const { remoteCursorMove } = useRemoteCursorMove();
 	const { userList } = useUserList();
+	const { createdUserResponse } = useCreateUserResponse();
 	const [cursorPositions, setCursorPositions] = useState<Map<UserId, CursorPosition>>(
 		new Map<UserId, CursorPosition>()
 	);
@@ -19,14 +21,16 @@ const CursorModule = () => {
 		if (remoteCursorMove != null) {
 			const userId = remoteCursorMove?.cursor?.user?.id as UserId;
 			const position = remoteCursorMove?.cursor?.position as CursorPosition;
-			cursorPositions.set(userId, position);
-			setCursorPositions(new Map(cursorPositions));
+			setCursorPositions((state) => {
+				return state.set(userId, position);
+			});
 		}
-	}, [cursorPositions, remoteCursorMove, remoteCursorMove?.cursor?.position, remoteCursorMove?.cursor?.user?.id]);
+	}, [remoteCursorMove, remoteCursorMove?.cursor?.position, remoteCursorMove?.cursor?.user?.id]);
 
 	const cursors = userList?.users?.map((user) => {
 		const { id, color, name } = user;
-		if (!id || !color || !name) return null;
+		const createUserResponse = createdUserResponse;
+		if (!id || !color || !name || createUserResponse?.user?.id === id) return null;
 		const cursorPosition = cursorPositions.get(id);
 		return <Cursor key={id} userName={name} color={color} position={cursorPosition} />;
 	});
