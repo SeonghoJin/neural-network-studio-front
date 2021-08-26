@@ -15,7 +15,6 @@ import ProjectEditorGraph from '../projectEditor/projectEditorGraph';
 import { useSocket } from '../../../core/Socket/hooks/useSocket';
 import { CursorMoveDto } from '../../../core/Socket/dto/cursor.move.dto';
 import { XYPosition } from '../../../core/Socket/entities/types';
-import Cursors from './Cursors';
 import { useRemoteEdgeCreate } from '../../../core/Socket/hooks/useRemoteEdgeCreate';
 import { useRemoteEdgeRemove } from '../../../core/Socket/hooks/useRemoteEdgeRemove';
 import { useRemoteBlockChange } from '../../../core/Socket/hooks/useRemoteBlockChange';
@@ -30,6 +29,7 @@ import { EdgeRemoveDto } from '../../../core/Socket/dto/edge.remove.dto';
 import { BlockMoveDto } from '../../../core/Socket/dto/block.move.dto';
 import { BlockCreateDto } from '../../../core/Socket/dto/block.create.dto';
 import { BlockState } from '../../../core/reactFlow/block';
+import CursorModule from './CursorModule';
 
 const ProjectEditorShareGraphContainer = () => {
 	const { socketService } = useSocket();
@@ -41,7 +41,6 @@ const ProjectEditorShareGraphContainer = () => {
 	const { remoteBlockMove } = useRemoteBlockMove();
 	const { createdUserResponse } = useCreateUserResponse();
 	const dispatch = useDispatch();
-	const cursors = Cursors();
 
 	const setReactInstance = useCallback(
 		(instance: OnLoadParams) => {
@@ -133,31 +132,31 @@ const ProjectEditorShareGraphContainer = () => {
 		if (remoteBlockCreate !== null) {
 			dispatch(addBlock(remoteBlockCreate.block));
 		}
-	});
+	}, [dispatch, remoteBlockCreate]);
 
 	useEffect(() => {
 		if (remoteBlockRemove !== null) {
 			dispatch(removeBlock(remoteBlockRemove));
 		}
-	});
+	}, [dispatch, remoteBlockRemove]);
 
 	useEffect(() => {
 		if (remoteBlockChange != null) {
 			dispatch(changeBlockData(remoteBlockChange));
 		}
-	});
+	}, [dispatch, remoteBlockChange]);
 
 	useEffect(() => {
 		if (remoteEdgeCreate != null) {
 			dispatch(addEdge(remoteEdgeCreate));
 		}
-	});
+	}, [dispatch, remoteEdgeCreate]);
 
 	useEffect(() => {
 		if (remoteEdgeRemove != null) {
 			dispatch(removeEdge(remoteEdgeRemove));
 		}
-	});
+	}, [dispatch, remoteEdgeRemove]);
 
 	const content = createdUserResponse?.project && (
 		<ProjectEditorGraph
@@ -170,7 +169,7 @@ const ProjectEditorShareGraphContainer = () => {
 			onRemoveBlock={onRemoveBlock}
 			onCreateEdge={onCreateEdge}
 			onRemoveEdge={onRemoveEdge}
-			cursorModule={cursors}
+			cursorModule={<CursorModule />}
 		/>
 	);
 
