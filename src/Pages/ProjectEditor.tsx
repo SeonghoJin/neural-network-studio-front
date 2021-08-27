@@ -10,6 +10,9 @@ import rootReducer from '../module';
 import ProjectEditorGraphContainer from '../components/project/projectEditor/ProjectEditorGraphContainer';
 import ProjectEditorNavOptionContent from '../components/project/projectEditor/ProjectEditorNav/ProjectEditorNavOptionContent';
 import ProjectEditorNavOptionContentContainer from '../components/project/projectEditor/ProjectEditorNav/ProjectEditorNavOptionContentContainer';
+import NodeConfigViewerContainer from '../components/project/projectEditor/NodeConfigViewer/NodeConfigViewerContainer';
+import NodeConfigShareViewerContainer from '../components/project/ProjectShare/NodeConfigShareViewer';
+import NodeConfigViewer from '../components/project/projectEditor/NodeConfigViewer/nodeConfigViewer';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -38,7 +41,10 @@ const ProjectEditor = () => {
 					<ProjectNav />
 					<ProjectEditorNav projectEditorNavOptionContent={<ProjectEditorNavOptionContentContainer />} />
 					<div className={classes.content}>
-						<ProjectEditorMain projectEditorGraphContainer={<ProjectEditorGraphContainer />} />
+						<ProjectEditorMain
+							nodeConfigViewerContainer={<NodeConfigViewerContainer />}
+							projectEditorGraphContainer={<ProjectEditorGraphContainer />}
+						/>
 					</div>
 				</div>
 			</div>

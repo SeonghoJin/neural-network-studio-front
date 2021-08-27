@@ -13,6 +13,8 @@ import { SocketIOProvider } from '../../../core/Socket/Context/SocketIOProvider'
 import { WebSocketContext } from '../../../core/Socket/Context/WebSocketContext';
 import ProjectEditorNavOptionContentContainer from '../projectEditor/ProjectEditorNav/ProjectEditorNavOptionContentContainer';
 import ProjectShareNavOptionContentContainer from './ProjectShareNav/ProjectShareNavOptionContentContainer';
+import NodeConfigViewerContainer from '../projectEditor/NodeConfigViewer/NodeConfigViewerContainer';
+import NodeConfigShareViewerContainer from './NodeConfigShareViewer';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -43,7 +45,10 @@ const ProjectShare = () => {
 							<ProjectNav />
 							<ProjectEditorNav projectEditorNavOptionContent={<ProjectShareNavOptionContentContainer />} />
 							<div className={classes.content}>
-								<ProjectEditorMain projectEditorGraphContainer={<ProjectEditorShareGraphContainer />} />
+								<ProjectEditorMain
+									nodeConfigViewerContainer={<NodeConfigShareViewerContainer />}
+									projectEditorGraphContainer={<ProjectEditorShareGraphContainer />}
+								/>
 							</div>
 						</div>
 					</div>

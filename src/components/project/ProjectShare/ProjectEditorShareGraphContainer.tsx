@@ -130,7 +130,6 @@ const ProjectEditorShareGraphContainer = () => {
 
 	useEffect(() => {
 		if (remoteBlockCreate !== null) {
-			console.log(remoteBlockCreate);
 			dispatch(addBlock(remoteBlockCreate));
 		}
 	}, [dispatch, remoteBlockCreate]);
@@ -158,6 +157,7 @@ const ProjectEditorShareGraphContainer = () => {
 			dispatch(removeEdge(remoteEdgeRemove));
 		}
 	}, [dispatch, remoteEdgeRemove]);
+
 	const content = createdUserResponse?.project?.flowState && (
 		<ProjectEditorGraph
 			setReactInstance={setReactInstance}

@@ -33,18 +33,20 @@ const elements = createReducer<ElementState, ElementActionTypes>(initialState, {
 	},
 	[ElementAction.CHANGE_BLOCK_DATA]: (state, action) => {
 		const { blockId, blockState } = action.payload;
+		console.log();
 		return {
 			elements: state.elements.map((element) => {
-				if (element.id === blockId) {
-					return {
-						...element,
-						data: {
-							...blockState,
+				if (element.id !== blockId) return element;
+				return {
+					...element,
+					data: {
+						...element.data,
+						config: {
+							...element.data.config,
+							[blockState.name]: blockState.value,
 						},
-					};
-				}
-
-				return element;
+					},
+				};
 			}),
 		};
 	},
@@ -71,7 +73,6 @@ const elements = createReducer<ElementState, ElementActionTypes>(initialState, {
 		return {
 			elements: state.elements.map((element) => {
 				if (element.id !== id) return element;
-
 				return {
 					...element,
 					data: {

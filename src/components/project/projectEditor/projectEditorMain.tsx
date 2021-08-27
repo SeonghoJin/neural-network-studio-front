@@ -3,6 +3,7 @@ import { ReactFlowProvider } from 'react-flow-renderer';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import ProjectEditorLeftSideBar from './projectEditorSideBar/ProjectEditorLeftSideBar';
 import 'react-reflex/styles.css';
+import NodeConfigViewerContainer from './NodeConfigViewer/NodeConfigViewerContainer';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -21,9 +22,10 @@ const useStyle = makeStyles({
 
 type Props = {
 	projectEditorGraphContainer: any;
+	nodeConfigViewerContainer: any;
 };
 
-const ProjectEditorMain = ({ projectEditorGraphContainer }: Props) => {
+const ProjectEditorMain = ({ projectEditorGraphContainer, nodeConfigViewerContainer }: Props) => {
 	const classes = useStyle();
 	return (
 		<>
@@ -32,7 +34,7 @@ const ProjectEditorMain = ({ projectEditorGraphContainer }: Props) => {
 					<Container className={classes.container}>
 						<ReflexContainer orientation="vertical">
 							<ReflexElement minSize={150} maxSize={350} size={260} className="left-pane">
-								<ProjectEditorLeftSideBar />
+								<ProjectEditorLeftSideBar nodeConfigViewer={nodeConfigViewerContainer} />
 							</ReflexElement>
 							<ReflexSplitter />
 							<ReflexElement className="right-pane">

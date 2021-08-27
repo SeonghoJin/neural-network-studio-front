@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
+import { ReactNode } from 'react';
 import NodeContainerWrapper from '../NodeSelector/nodeContainerWrapper';
 import NodeConfigViewerContainer from '../NodeConfigViewer/NodeConfigViewerContainer';
 
@@ -21,7 +22,7 @@ const useStyle = makeStyles({
 	},
 });
 
-const ProjectEditorLeftSideBar = () => {
+const ProjectEditorLeftSideBar = ({ nodeConfigViewer }: { nodeConfigViewer: ReactNode }) => {
 	const classes = useStyle();
 	return (
 		<div className={classes.wrapper}>
@@ -33,9 +34,7 @@ const ProjectEditorLeftSideBar = () => {
 				</ReflexElement>
 				<ReflexSplitter />
 				<ReflexElement>
-					<div className={classes.nodeConfigViewer}>
-						<NodeConfigViewerContainer />
-					</div>
+					<div className={classes.nodeConfigViewer}>{nodeConfigViewer}</div>
 				</ReflexElement>
 			</ReflexContainer>
 		</div>
