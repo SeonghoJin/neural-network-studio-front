@@ -33,7 +33,6 @@ const elements = createReducer<ElementState, ElementActionTypes>(initialState, {
 	},
 	[ElementAction.CHANGE_BLOCK_DATA]: (state, action) => {
 		const { blockId, blockState } = action.payload;
-		console.log();
 		return {
 			elements: state.elements.map((element) => {
 				if (element.id !== blockId) return element;

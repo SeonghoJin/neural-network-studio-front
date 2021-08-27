@@ -21,7 +21,7 @@
 ```json
 {
   "message": "user_list_response",
-  "users": [{
+  "users(User[])": [{
     "name": "진성호",
     "color": "#FFFFFF",
     "id": "ASDASDASD"
@@ -42,12 +42,12 @@
 {
   "message": "move_cursor",
   "cursor": {
-    "user": {
+    "user(User)": {
       "name": "진성호",
       "color": "#FFFFFF",
       "id": "ASDASDASD2"
     },
-    "position": {
+    "position(XYPosition)": {
       "x": 100,
       "y": 100
     }
@@ -67,7 +67,7 @@
 {
   "message": "move_block",
   "blockId": "block-####",
-  "position": {
+  "position(XYPosition)": {
     "x": 100,
     "y": 100
   }
@@ -83,15 +83,36 @@
 }
 ```
 - BlockChangeDto
-```json
-{
-  "message": "change_block",
-  "blockId": "Node-#####",
-  "blockState": {
+  - 현재 
+    ```json
+    {
+        "message": "change_block",
+        "blockId": "Node-#####",
+         "blockState": {
+          }
+    }
+    ```
+  - 변경 -> BlockConfigChangeDto, BlockLabelChangeDto
+    - BlockConfigChangeDto
+      ```json
+        {
+          "message": "change_block",
+          "blockId": "Node-#####",
+          "config" : {
+            "name" : "padding",
+            "value" : "Valid"
+          }
+        }
+      ```
 
-  }
-}
-```
+    - BlockConfigChangeDto
+      ```json
+        {
+          "message": "change_block",
+          "blockId": "Node-#####",
+          "data" : "ActivationNode84"
+        }
+      ```
 
 - EdgeCreateDto
 ```json
@@ -116,7 +137,7 @@
 ```json
 {
   "message": "remove_user_request",
-  "user": {
+  "user(User)": {
     "name": "진성호",
     "color": "#FFFFFF",
     "id": "ASDASDASD2"
@@ -131,11 +152,12 @@
 - Cursor
 ```json
 {
-  "user": {
+  "user(User)": {
     "name": "진성호",
-    "color": "#FFFFFF"
+    "color": "#FFFFFF",
+    "id": "ASDASDASD2"
   },
-  "position": {
+  "position(XYPosition)": {
     "x": 100,
     "y": 100
   }
