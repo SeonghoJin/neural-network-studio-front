@@ -6,7 +6,7 @@ import config from '../../../config';
 import { SocketIoService } from '../SocketService/Socket.io.Service';
 import useProjectShareLocation from '../../../hooks/useProjectShareLocation';
 
-export const SocketIOProvider = ({ children }: { children: React.ReactNode }) => {
+export const SocketIOContext = ({ children }: { children: React.ReactNode }) => {
 	const location = useProjectShareLocation();
 	const socket = io(`${config.SOCKET_SERVER_PREFIX}/${location.roomNo}`);
 	const values = {

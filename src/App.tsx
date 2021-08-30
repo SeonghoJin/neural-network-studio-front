@@ -12,7 +12,6 @@ import ModifyProfile from './components/profile/modify';
 import { DynamicPath, StaticPath } from './pagePathName';
 import Asset from './Pages/Asset';
 import ProjectShare from './components/project/ProjectShare';
-import { SocketIOProvider } from './core/Socket/Context/SocketIOProvider';
 
 function App() {
 	return (

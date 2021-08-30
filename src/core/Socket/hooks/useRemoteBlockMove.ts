@@ -1,5 +1,4 @@
 import { atom, useRecoilState } from 'recoil';
-import { CursorMoveDto } from '../dto/cursor.move.dto';
 import { BlockMoveDto } from '../dto/block.move.dto';
 
 type RemoteBlockMoveResult = BlockMoveDto | null;
