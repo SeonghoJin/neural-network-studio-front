@@ -9,4 +9,5 @@ export enum SocketEvent {
 	CreateEdge = 'create_edge',
 	RemoveEdge = 'remove_edge',
 	RemoveUserRequest = 'remove_user_request',
+	ChangeProjectConfig = 'change_project_config',
 }

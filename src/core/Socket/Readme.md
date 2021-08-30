@@ -1,11 +1,11 @@
 # Socket
-
+## Socket 통신시 서버에서 저장해야할 데이터
+[ SocketService ](https://github.com/Stonebridge-soma12/otherFronts/tree/feat/src/core/Socket/SocketService)
 ## SocketEvents
 [ SocketEvents ](https://github.com/Stonebridge-soma12/otherFronts/blob/feat/src/core/Socket/SocketEvent.ts)
 ## SocketDataTypes
-
-
-### Dtos
+### Project
+#### Dtos
 
 - UserCreateResponseDto
 ```json
@@ -144,10 +144,7 @@
   }
 }
 ```
-
-
-
-### Entities
+#### Entities
 
 - Cursor
 ```json
@@ -187,5 +184,18 @@
 {
   "x": 100,
   "y": 100
+}
+```
+
+### ProjectConfig
+
+#### Dtos
+- ChangeProjectConfigDto
+
+```json
+{
+  "message": "change_project_config",
+  "name": "optimizer",
+  "value": "0.1"
 }
 ```
