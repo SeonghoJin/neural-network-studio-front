@@ -4,8 +4,7 @@
 
 # dependencies
 /package-lock.json
-/node_modules/*
-!/node_modules/react-flow-nns
+/node_modules
 /.pnp
 .pnp.js
 
