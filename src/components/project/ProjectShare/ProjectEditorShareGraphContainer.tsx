@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import { Edge, Elements, OnLoadParams, Node } from 'react-flow-renderer';
+import { Edge, Elements, OnLoadParams, Node } from 'react-flow-nns';
 import { useDispatch } from 'react-redux';
 import { setReactFlowInstance } from '../../../module/ReactFlowInstance';
 import {

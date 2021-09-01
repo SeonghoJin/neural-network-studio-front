@@ -1,4 +1,4 @@
-import { Node } from 'react-flow-renderer';
+import { Node } from 'react-flow-nns';
 import { BlockCategory, BlockState } from '../../../../block';
 
 type NodeStrokeColorTableKey = keyof typeof BlockCategory;

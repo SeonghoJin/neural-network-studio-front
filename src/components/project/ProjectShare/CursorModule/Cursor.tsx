@@ -1,4 +1,4 @@
-import { XYPosition } from 'react-flow-renderer';
+import { XYPosition } from 'react-flow-nns';
 import { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMousePointer } from '@fortawesome/free-solid-svg-icons';

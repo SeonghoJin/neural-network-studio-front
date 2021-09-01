@@ -1,4 +1,4 @@
-import { Edge, FlowElement, isNode, Node } from 'react-flow-renderer';
+import { Edge, FlowElement, isNode, Node } from 'react-flow-nns';
 import GraphNode from './GraphNode';
 import { BlockState } from '../block';
 import graphNodeNameValidator from './validate';

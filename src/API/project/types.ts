@@ -1,5 +1,5 @@
 // eslint-disable-next-line max-classes-per-file
-import { FlowExportObject } from 'react-flow-renderer';
+import { FlowExportObject } from 'react-flow-nns';
 import Monitor from '../../core/Project/Montior';
 import Optimizers from '../../core/Project/Optimizers';
 

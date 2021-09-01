@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { XYPosition } from 'react-flow-renderer';
+import { XYPosition } from 'react-flow-nns';
 import { useRemoteCursorMove } from '../../../../core/Socket/hooks/useRemoteCursorMove';
 import { useUserList } from '../../../../core/Socket/hooks/useUserListResponse';
 import { CursorBackground } from './CursorBackground';

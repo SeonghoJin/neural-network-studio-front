@@ -1,4 +1,4 @@
-import { Connection, Edge } from 'react-flow-renderer';
+import { Connection, Edge } from 'react-flow-nns';
 
 const createCustomEdge = (params: Edge | Connection) => {
 	return {

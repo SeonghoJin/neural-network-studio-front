@@ -1,5 +1,5 @@
 import { Container, makeStyles } from '@material-ui/core';
-import { ReactFlowProvider } from 'react-flow-renderer';
+import { ReactFlowProvider } from 'react-flow-nns';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import ProjectEditorLeftSideBar from './projectEditorSideBar/ProjectEditorLeftSideBar';
 import 'react-reflex/styles.css';

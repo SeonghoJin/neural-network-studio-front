@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { isNode, useStoreState, Node } from 'react-flow-renderer';
+import { isNode, useStoreState, Node } from 'react-flow-nns';
 import { ChangeEvent, useCallback } from 'react';
 import { setElementByIdAndUpdateConfig, setElementByIdAndUpdateLabel } from '../../../../module/Elements';
 import NodeConfigViewer from '../../projectEditor/NodeConfigViewer/nodeConfigViewer';

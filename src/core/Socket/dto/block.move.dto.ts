@@ -1,4 +1,4 @@
-import { XYPosition } from 'react-flow-renderer';
+import { XYPosition } from 'react-flow-nns';
 import { SocketEvent } from '../SocketEvent';
 
 export class BlockMoveDto {

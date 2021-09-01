@@ -1,4 +1,4 @@
-import { Elements, FlowElement, Node } from 'react-flow-renderer';
+import { Elements, FlowElement, Node } from 'react-flow-nns';
 import { createStandardAction } from '../../util';
 import { BlockMoveDto } from '../../core/Socket/dto/block.move.dto';
 import { BlockState } from '../../core/reactFlow/block';

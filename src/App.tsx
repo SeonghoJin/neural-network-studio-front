@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { ReactFlowProvider } from 'react-flow-renderer';
+import { ReactFlowProvider } from 'react-flow-nns';
 import { Landing, Profile, Signup } from './routes/index';
 import Authentication from './Authentication';
 import ProjectRouter from './Router/ProjectRouter';

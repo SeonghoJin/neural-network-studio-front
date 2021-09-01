@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { FlowExportObject } from 'react-flow-renderer';
+import { FlowExportObject } from 'react-flow-nns';
 import { RootState } from '../../../../module';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
 import useUpdateProjectContent from '../../../../hooks/useUpdateProjectContent';

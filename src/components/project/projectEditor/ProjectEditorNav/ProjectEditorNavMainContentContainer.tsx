@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import fileDownload from 'js-file-download';
-import { FlowExportObject } from 'react-flow-renderer';
+import { FlowExportObject } from 'react-flow-nns';
 import ProjectEditorNavMainContent from './ProjectEditorNavMainContent';
 import { RootState } from '../../../../module';
 import useProjectLocation from '../../../../hooks/useProjectLocation';

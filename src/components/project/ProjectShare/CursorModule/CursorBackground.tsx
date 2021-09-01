@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { useStoreState } from 'react-flow-renderer';
+import { useStoreState } from 'react-flow-nns';
 
 export const CursorBackground = ({ children }: { children: ReactNode }) => {
 	const transform = useStoreState((state) => state.transform);

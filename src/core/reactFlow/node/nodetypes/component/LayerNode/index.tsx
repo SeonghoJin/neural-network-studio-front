@@ -1,6 +1,6 @@
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import React, { createElement, memo } from 'react';
-import { NodeProps, useStoreState } from 'react-flow-renderer';
+import { NodeProps, useStoreState } from 'react-flow-nns';
 import { BlockState } from '../../../../block';
 import LayerNodeTable from './LayerNodeTable';
 import useTargetCandidates from '../useTargetCandidates';

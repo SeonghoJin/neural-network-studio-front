@@ -1,4 +1,4 @@
-import { Node, isEdge, useStoreState } from 'react-flow-renderer';
+import { Node, isEdge, useStoreState } from 'react-flow-nns';
 import { BlockState } from '../../../block';
 import BlockRelationShip from '../../../../Project/BlockRelationShip';
 

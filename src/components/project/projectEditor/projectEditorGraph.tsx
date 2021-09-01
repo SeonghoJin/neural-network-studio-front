@@ -17,7 +17,7 @@ import ReactFlow, {
 	useStoreActions,
 	useStoreState,
 	XYPosition,
-} from 'react-flow-renderer';
+} from 'react-flow-nns';
 import { useSelector } from 'react-redux';
 import { BlockState, InputBlockState } from '../../../core/reactFlow/block/BlockState';
 import { nodeTypes } from '../../../core/reactFlow/node/nodetypes';

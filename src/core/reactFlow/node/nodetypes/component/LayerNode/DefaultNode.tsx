@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Handle, NodeProps, Position } from 'react-flow-renderer';
+import { Handle, NodeProps, Position } from 'react-flow-nns';
 import { makeStyles } from '@material-ui/core';
 import useValidationConnection from '../useValidationConnection';
 import { BlockState } from '../../../../block';

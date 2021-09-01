@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useCallback } from 'react';
-import { Elements, OnLoadParams } from 'react-flow-renderer';
+import { Elements, OnLoadParams } from 'react-flow-nns';
 import { setReactFlowInstance } from '../../../module/ReactFlowInstance';
 import ProjectEditorGraph from './projectEditorGraph';
 import CircleLoading from '../../utils/Loading/CircularLoading';

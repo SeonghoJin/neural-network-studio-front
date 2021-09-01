@@ -1,5 +1,5 @@
 import { createReducer } from 'typesafe-actions';
-import { addEdge, Edge, Elements, isEdge, removeElements, Node, XYPosition } from 'react-flow-renderer';
+import { addEdge, Edge, Elements, isEdge, removeElements, Node, XYPosition } from 'react-flow-nns';
 import { ElementActionTypes, ElementState } from './types';
 import { ElementAction } from './actions';
 import { BlockState } from '../../core/reactFlow/block';

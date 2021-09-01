@@ -1,4 +1,4 @@
-import { Edge } from 'react-flow-renderer';
+import { Edge } from 'react-flow-nns';
 import { SocketEvent } from '../SocketEvent';
 
 export class EdgeCreateDto {

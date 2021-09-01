@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useCallback } from 'react';
-import { Connection, FlowElement, Node } from 'react-flow-renderer';
+import { Connection, FlowElement, Node } from 'react-flow-nns';
 import { RootState } from '../../../../../module';
 import { BlockState, BlockType } from '../../../block';
 import BlockRelationShip from '../../../../Project/BlockRelationShip';

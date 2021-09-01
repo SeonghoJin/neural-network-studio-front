@@ -1,4 +1,4 @@
-import { Elements, Node, isNode, OnLoadParams } from 'react-flow-renderer';
+import { Elements, Node, isNode, OnLoadParams } from 'react-flow-nns';
 import React from 'react';
 import { BlockState, BlockType } from '../../../core/reactFlow/block';
 import { getNodeId, getNodeLabel } from '../../../util';
