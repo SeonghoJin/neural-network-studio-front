@@ -9,9 +9,13 @@ const initialState: ElementState = {
 };
 
 const elements = createReducer<ElementState, ElementActionTypes>(initialState, {
-	[ElementAction.SET_ELEMENTS]: (state, action) => ({
-		elements: action.payload,
-	}),
+	[ElementAction.SET_ELEMENTS]: (state, action) => {
+		if (action.payload instanceof Function) {
+			console.log(state.elements);
+			return { elements: action.payload(state.elements) };
+		}
+		return { elements: action.payload };
+	},
 	[ElementAction.ADD_BLOCK]: (state, action) => {
 		console.log(action.payload);
 		return {

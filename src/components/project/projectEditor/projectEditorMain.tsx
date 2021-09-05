@@ -3,7 +3,6 @@ import { ReactFlowProvider } from 'react-flow-nns';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import ProjectEditorLeftSideBar from './projectEditorSideBar/ProjectEditorLeftSideBar';
 import 'react-reflex/styles.css';
-import NodeConfigViewerContainer from './NodeConfigViewer/NodeConfigViewerContainer';
 
 const useStyle = makeStyles({
 	wrapper: {

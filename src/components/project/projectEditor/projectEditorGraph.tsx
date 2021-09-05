@@ -14,6 +14,7 @@ import ReactFlow, {
 	Node,
 	OnLoadParams,
 	removeElements,
+	updateEdge,
 	useStoreActions,
 	useStoreState,
 	XYPosition,
@@ -116,6 +117,13 @@ const ProjectEditorGraph: FC<Props> = ({
 		[elements, setElements]
 	);
 
+	const onEdgeUpdate = useCallback(
+		(oldEdge: Edge, newConnection: Connection) => {
+			setElements((els: Elements) => updateEdge(oldEdge, newConnection, els));
+		},
+		[setElements]
+	);
+
 	const onDragOver = useCallback((e: React.DragEvent) => {
 		const localEvent = e;
 		localEvent.preventDefault();
@@ -187,6 +195,7 @@ const ProjectEditorGraph: FC<Props> = ({
 				onConnect={onConnect}
 				onKeyDown={onKeyDown}
 				onElementsRemove={onElementsRemove}
+				onEdgeUpdate={onEdgeUpdate}
 				tabIndex={0}
 				nodeTypes={nodeTypes}
 				defaultPosition={flowState?.position}

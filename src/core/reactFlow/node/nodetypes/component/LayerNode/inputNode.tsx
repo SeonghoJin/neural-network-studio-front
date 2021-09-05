@@ -1,5 +1,5 @@
-import React, { memo, useCallback } from 'react';
-import { Connection, Node, Handle, NodeProps, Position, FlowElement } from 'react-flow-nns';
+import React, { memo } from 'react';
+import { Handle, NodeProps, Position } from 'react-flow-nns';
 import { makeStyles } from '@material-ui/core';
 import useValidationConnection from '../useValidationConnection';
 import { BlockState } from '../../../../block';
@@ -16,13 +16,13 @@ const InputNode = ({ data, isConnectable, sourcePosition = Position.Bottom }: No
 	const { isValidationConnection } = useValidationConnection();
 	return (
 		<div className={classes.wrapper}>
-			{data.label}
 			<Handle
 				type="source"
 				position={sourcePosition}
 				isConnectable={isConnectable}
 				isValidConnection={isValidationConnection}
 			/>
+			{data.label}
 		</div>
 	);
 };

@@ -50,8 +50,8 @@ const ProjectEditorShareGraphContainer = () => {
 	);
 
 	const onSetElements = useCallback(
-		(elements: Elements) => {
-			dispatch(setElements(elements));
+		(elementsOrFunc: Elements | ((elem: Elements) => Elements)) => {
+			dispatch(setElements(elementsOrFunc));
 		},
 		[dispatch]
 	);

@@ -25,7 +25,6 @@ const ProjectEditorGraphContainer = () => {
 		[dispatch]
 	);
 
-	console.log(result.data);
 	const content = result.data && (
 		<ProjectEditorGraph
 			setReactInstance={setReactInstance}

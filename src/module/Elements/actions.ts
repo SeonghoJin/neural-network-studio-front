@@ -20,7 +20,7 @@ export enum ElementAction {
 	SET_ELEMENT_BY_ID_UPDATE_POSITION = 'SET_ELEMENT_BY_ID_UPDATE_POSITION',
 }
 
-export const setElements = createStandardAction(ElementAction.SET_ELEMENTS)<Elements>();
+export const setElements = createStandardAction(ElementAction.SET_ELEMENTS)<Elements | ((els: Elements) => Elements)>();
 export const addBlock = createStandardAction(ElementAction.ADD_BLOCK)<BlockCreateDto>();
 export const removeBlock = createStandardAction(ElementAction.REMOVE_BLOCK)<BlockRemoveDto>();
 export const changeBlockData = createStandardAction(ElementAction.CHANGE_BLOCK_DATA)<BlockChangeDto>();
