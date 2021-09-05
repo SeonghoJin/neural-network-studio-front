@@ -1,13 +1,13 @@
 import { useCallback, useEffect } from 'react';
-import { Edge, Elements, OnLoadParams, Node } from 'react-flow-nns';
+import { Elements, OnLoadParams, Node } from 'react-flow-nns';
 import { useDispatch } from 'react-redux';
 import { setReactFlowInstance } from '../../../module/ReactFlowInstance';
 import {
 	addBlock,
-	addEdge,
-	changeBlockData,
 	removeBlock,
 	removeEdge,
+	setElementByIdAndUpdateConfig,
+	setElementByIdAndUpdateLabel,
 	setElementByIdAndUpdatePosition,
 	setElements,
 } from '../../../module/Elements';
@@ -17,7 +17,6 @@ import { CursorMoveDto } from '../../../core/Socket/dto/cursor.move.dto';
 import { XYPosition } from '../../../core/Socket/entities/types';
 import { useRemoteEdgeCreate } from '../../../core/Socket/hooks/useRemoteEdgeCreate';
 import { useRemoteEdgeRemove } from '../../../core/Socket/hooks/useRemoteEdgeRemove';
-import { useRemoteBlockChange } from '../../../core/Socket/hooks/useRemoteBlockChange';
 import { useRemoteBlockRemove } from '../../../core/Socket/hooks/useRemoteBlockRemove';
 import { useRemoteBlockCreate } from '../../../core/Socket/hooks/useRemoteBlockCreate';
 import { useRemoteBlockMove } from '../../../core/Socket/hooks/useRemoteBlockMove';
@@ -30,12 +29,18 @@ import { BlockMoveDto } from '../../../core/Socket/dto/block.move.dto';
 import { BlockCreateDto } from '../../../core/Socket/dto/block.create.dto';
 import { BlockState } from '../../../core/reactFlow/block';
 import CursorModule from './CursorModule';
+import { useRemoteEdgeUpdate } from '../../../core/Socket/hooks/useRemoteEdgeUpdate';
+import { useRemoteBlockConfigChange } from '../../../core/Socket/hooks/useRemoteBlockConfigChange';
+import { useRemoteBlockLabelChange } from '../../../core/Socket/hooks/useRemoteBlockLabelChange';
+import { EdgeUpdateDto } from '../../../core/Socket/dto/edge.update.dto';
 
 const ProjectEditorShareGraphContainer = () => {
 	const { socketService } = useSocket();
 	const { remoteEdgeCreate } = useRemoteEdgeCreate();
 	const { remoteEdgeRemove } = useRemoteEdgeRemove();
-	const { remoteBlockChange } = useRemoteBlockChange();
+	const { remoteEdgeUpdate } = useRemoteEdgeUpdate();
+	const { remoteBlockConfigChange } = useRemoteBlockConfigChange();
+	const { remoteBlockLabelChange } = useRemoteBlockLabelChange();
 	const { remoteBlockRemove } = useRemoteBlockRemove();
 	const { remoteBlockCreate } = useRemoteBlockCreate();
 	const { remoteBlockMove } = useRemoteBlockMove();
@@ -115,6 +120,15 @@ const ProjectEditorShareGraphContainer = () => {
 		[socketService]
 	);
 
+	const onUpdateEdge = useCallback(
+		(elements: Elements) => {
+			const dto = new EdgeUpdateDto();
+			dto.elements = elements;
+			socketService?.updateEdge(dto);
+		},
+		[socketService]
+	);
+
 	useEffect(() => {
 		return () => {
 			socketService?.disconnect();
@@ -140,14 +154,8 @@ const ProjectEditorShareGraphContainer = () => {
 	}, [dispatch, remoteBlockRemove]);
 
 	useEffect(() => {
-		if (remoteBlockChange != null) {
-			dispatch(changeBlockData(remoteBlockChange));
-		}
-	}, [dispatch, remoteBlockChange]);
-
-	useEffect(() => {
-		if (remoteEdgeCreate != null) {
-			dispatch(addEdge(remoteEdgeCreate));
+		if (remoteEdgeCreate?.elements != null) {
+			dispatch(setElements(remoteEdgeCreate.elements));
 		}
 	}, [dispatch, remoteEdgeCreate]);
 
@@ -156,6 +164,44 @@ const ProjectEditorShareGraphContainer = () => {
 			dispatch(removeEdge(remoteEdgeRemove));
 		}
 	}, [dispatch, remoteEdgeRemove]);
+
+	useEffect(() => {
+		if (remoteEdgeUpdate?.elements != null) {
+			dispatch(setElements(remoteEdgeUpdate.elements));
+		}
+	}, [dispatch, remoteEdgeUpdate?.elements]);
+
+	useEffect(() => {
+		if (remoteBlockConfigChange != null) {
+			const { blockId, config } = remoteBlockConfigChange;
+			if (!blockId || !config || !config.value || !config.name) {
+				throw new Error('잘못된 데이터입니다.');
+			}
+
+			dispatch(
+				setElementByIdAndUpdateConfig({
+					key: config.name,
+					value: config.name,
+					id: blockId,
+				})
+			);
+		}
+	}, [dispatch, remoteBlockConfigChange]);
+
+	useEffect(() => {
+		if (remoteBlockLabelChange != null) {
+			const { blockId, data } = remoteBlockLabelChange;
+			if (!blockId || !data) {
+				throw new Error('잘못된 데이터입니다.');
+			}
+			dispatch(
+				setElementByIdAndUpdateLabel({
+					id: blockId,
+					label: data,
+				})
+			);
+		}
+	}, [dispatch, remoteBlockLabelChange]);
 
 	const content = createdUserResponse?.project?.flowState && (
 		<ProjectEditorGraph
@@ -168,6 +214,7 @@ const ProjectEditorShareGraphContainer = () => {
 			onRemoveBlock={onRemoveBlock}
 			onCreateEdge={onCreateEdge}
 			onRemoveEdge={onRemoveEdge}
+			onUpdateEdge={onUpdateEdge}
 			cursorModule={<CursorModule />}
 		/>
 	);

@@ -70,6 +70,7 @@ type Props = {
 	onRemoveBlock?: (blockId: string) => void;
 	onCreateEdge?: (elements: Elements) => void;
 	onRemoveEdge?: (edgeId: string) => void;
+	onUpdateEdge?: (elements: Elements) => void;
 	cursorModule?: ReactNode;
 };
 
@@ -79,6 +80,7 @@ const ProjectEditorGraph: FC<Props> = ({
 	flowState,
 	onCreateBlock,
 	onMoveBlock,
+	onUpdateEdge,
 	onRemoveBlock,
 	onCreateEdge,
 	onRemoveEdge,
@@ -120,9 +122,15 @@ const ProjectEditorGraph: FC<Props> = ({
 
 	const onEdgeUpdate = useCallback(
 		(oldEdge: Edge, newConnection: Connection) => {
-			setElements((els: Elements) => updateEdge(oldEdge, newConnection, els));
+			setElements((els: Elements) => {
+				const newElements = updateEdge(oldEdge, newConnection, els);
+				if (onUpdateEdge) {
+					onUpdateEdge(newElements);
+				}
+				return updateEdge(oldEdge, newConnection, els);
+			});
 		},
-		[setElements]
+		[onUpdateEdge, setElements]
 	);
 
 	const onDragOver = useCallback((e: React.DragEvent) => {
@@ -233,6 +241,7 @@ ProjectEditorGraph.defaultProps = {
 	onCreateEdge: undefined,
 	onRemoveEdge: undefined,
 	cursorModule: undefined,
+	onUpdateEdge: undefined,
 };
 
 export default ProjectEditorGraph;

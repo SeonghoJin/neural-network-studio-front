@@ -4,8 +4,9 @@ import { ChangeEvent, useCallback } from 'react';
 import { setElementByIdAndUpdateConfig, setElementByIdAndUpdateLabel } from '../../../../module/Elements';
 import NodeConfigViewer from '../../projectEditor/NodeConfigViewer/nodeConfigViewer';
 import { useSocket } from '../../../../core/Socket/hooks/useSocket';
-import { BlockChangeDto } from '../../../../core/Socket/dto/block.change.dto';
 import { BlockState, blockStates } from '../../../../core/reactFlow/block';
+import { BlockConfigChangeDto } from '../../../../core/Socket/dto/block.config.change.dto';
+import { BlockLabelChangeDto } from '../../../../core/Socket/dto/block.label.change.dto';
 
 const NodeConfigShareViewerContainer = () => {
 	const dispatch = useDispatch();
@@ -22,13 +23,13 @@ const NodeConfigShareViewerContainer = () => {
 		(e: ChangeEvent<HTMLInputElement>) => {
 			if (!isNode(selectedElement)) return;
 			const { name, value } = e.target;
-			const dto = new BlockChangeDto();
+			const dto = new BlockConfigChangeDto();
 			dto.blockId = selectedElement.id;
-			dto.blockState = {
+			dto.config = {
 				name,
 				value,
 			};
-			socketService?.changeBlock(dto);
+			socketService?.changeBlockConfig(dto);
 			dispatch(
 				setElementByIdAndUpdateConfig({
 					id: selectedElement.id,
@@ -43,6 +44,10 @@ const NodeConfigShareViewerContainer = () => {
 	const onChangeLabel = useCallback(
 		(e: ChangeEvent<HTMLInputElement>) => {
 			const { value } = e.target;
+			const dto = new BlockLabelChangeDto();
+			dto.blockId = selectedElement.id;
+			dto.data = value;
+			socketService?.changeBlockLabel(dto);
 			dispatch(
 				setElementByIdAndUpdateLabel({
 					id: selectedElement.id,
@@ -50,7 +55,7 @@ const NodeConfigShareViewerContainer = () => {
 				})
 			);
 		},
-		[dispatch, selectedElement]
+		[dispatch, selectedElement.id, socketService]
 	);
 
 	return (

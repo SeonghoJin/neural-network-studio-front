@@ -2,7 +2,6 @@ import { createReducer } from 'typesafe-actions';
 import { addEdge, Edge, Elements, isEdge, removeElements, Node, XYPosition } from 'react-flow-nns';
 import { ElementActionTypes, ElementState } from './types';
 import { ElementAction } from './actions';
-import { BlockState } from '../../core/reactFlow/block';
 
 const initialState: ElementState = {
 	elements: [],
@@ -11,13 +10,11 @@ const initialState: ElementState = {
 const elements = createReducer<ElementState, ElementActionTypes>(initialState, {
 	[ElementAction.SET_ELEMENTS]: (state, action) => {
 		if (action.payload instanceof Function) {
-			console.log(state.elements);
 			return { elements: action.payload(state.elements) };
 		}
 		return { elements: action.payload };
 	},
 	[ElementAction.ADD_BLOCK]: (state, action) => {
-		console.log(action.payload);
 		return {
 			elements: state.elements.concat(action.payload.block),
 		};
@@ -33,29 +30,6 @@ const elements = createReducer<ElementState, ElementActionTypes>(initialState, {
 
 		return {
 			elements: removeElements(removeToElements, state.elements),
-		};
-	},
-	[ElementAction.CHANGE_BLOCK_DATA]: (state, action) => {
-		const { blockId, blockState } = action.payload;
-		return {
-			elements: state.elements.map((element) => {
-				if (element.id !== blockId) return element;
-				return {
-					...element,
-					data: {
-						...element.data,
-						config: {
-							...element.data.config,
-							[blockState.name]: blockState.value,
-						},
-					},
-				};
-			}),
-		};
-	},
-	[ElementAction.ADD_EDGE]: (state, action) => {
-		return {
-			elements: addEdge(action.payload.edge, state.elements),
 		};
 	},
 	[ElementAction.REMOVE_EDGE]: (state, action) => {

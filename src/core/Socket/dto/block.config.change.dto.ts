@@ -8,7 +8,7 @@ export class BlockConfigChangeDto {
 	config:
 		| {
 				name: string;
-				value: undefined;
+				value: string;
 		  }
 		| undefined;
 }
