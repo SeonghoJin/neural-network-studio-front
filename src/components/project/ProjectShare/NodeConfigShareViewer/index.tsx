@@ -55,7 +55,7 @@ const NodeConfigShareViewerContainer = () => {
 				})
 			);
 		},
-		[dispatch, selectedElement.id, socketService]
+		[dispatch, selectedElement, socketService]
 	);
 
 	return (

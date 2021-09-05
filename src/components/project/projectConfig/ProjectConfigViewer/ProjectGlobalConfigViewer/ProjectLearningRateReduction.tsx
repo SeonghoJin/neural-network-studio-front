@@ -1,13 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import { ChangeEvent, useCallback, useMemo } from 'react';
 import useProjectConfig from '../../../../../hooks/useProjectConfig';
-import { CircleLoading } from '../../../../utils/Loading/CircularLoading';
-import {
-	IEarlyStopConfig,
-	ILearningRateReductionConfig,
-	IProjectConfig,
-	IProjectGlobalConfig,
-} from '../../../../../API/project/types';
+import { ILearningRateReductionConfig, IProjectConfig } from '../../../../../API/project/types';
 import NumberInput from '../../../../Input/NumberInput';
 import SelectInput from '../../../../Input/SelectInput';
 import { getMonitorValues } from '../../../../../core/Project/Montior';

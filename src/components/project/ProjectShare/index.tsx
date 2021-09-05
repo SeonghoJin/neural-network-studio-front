@@ -3,13 +3,11 @@ import { applyMiddleware, createStore } from 'redux';
 import reduxThunk from 'redux-thunk';
 import reduxLogger from 'redux-logger';
 import { Provider } from 'react-redux';
-import PrivateAuthentication from '../../../Authentication/PrivateAuthentication';
 import ProjectNav from '../ProjectNav/projectNav';
 import ProjectEditorNav from '../projectEditor/ProjectEditorNav/projectEditorNav';
 import ProjectEditorMain from '../projectEditor/projectEditorMain';
 import rootReducer from '../../../module';
 import ProjectEditorShareGraphContainer from './ProjectEditorShareGraphContainer';
-import { WebSocketContext } from '../../../core/Socket/Context/WebSocketContext';
 import ProjectShareNavOptionContentContainer from './ProjectShareNav/ProjectShareNavOptionContentContainer';
 import NodeConfigShareViewerContainer from './NodeConfigShareViewer';
 
@@ -34,24 +32,20 @@ const store = createStore(rootReducer, applyMiddleware(reduxThunk, reduxLogger))
 const ProjectShare = () => {
 	const classes = useStyle();
 	return (
-		<PrivateAuthentication>
-			<Provider store={store}>
-				<WebSocketContext>
-					<div className={classes.wrapper}>
-						<div className={classes.container}>
-							<ProjectNav />
-							<ProjectEditorNav projectEditorNavOptionContent={<ProjectShareNavOptionContentContainer />} />
-							<div className={classes.content}>
-								<ProjectEditorMain
-									nodeConfigViewerContainer={<NodeConfigShareViewerContainer />}
-									projectEditorGraphContainer={<ProjectEditorShareGraphContainer />}
-								/>
-							</div>
-						</div>
+		<Provider store={store}>
+			<div className={classes.wrapper}>
+				<div className={classes.container}>
+					<ProjectNav />
+					<ProjectEditorNav projectEditorNavOptionContent={<ProjectShareNavOptionContentContainer />} />
+					<div className={classes.content}>
+						<ProjectEditorMain
+							nodeConfigViewerContainer={<NodeConfigShareViewerContainer />}
+							projectEditorGraphContainer={<ProjectEditorShareGraphContainer />}
+						/>
 					</div>
-				</WebSocketContext>
-			</Provider>
-		</PrivateAuthentication>
+				</div>
+			</div>
+		</Provider>
 	);
 };
 

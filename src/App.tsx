@@ -12,6 +12,7 @@ import ModifyProfile from './components/profile/modify';
 import { DynamicPath, StaticPath } from './pagePathName';
 import Asset from './Pages/Asset';
 import ProjectShare from './components/project/ProjectShare';
+import ProjectShareRouter from './Router/ProjectShareRouter';
 
 function App() {
 	return (
@@ -21,11 +22,12 @@ function App() {
 					<Route exact path={StaticPath.MAIN} component={Landing} />
 					<Route exact path={StaticPath.LOGIN} component={SignIn} />
 					<Route exact path={StaticPath.SIGN_UP} component={Signup} />
-					<Route path={StaticPath.PROJECT} component={ProjectRouter} />
-					<Route path={StaticPath.DASHBOARD} component={DashBoardRouter} />
 					<Route exact path={StaticPath.PROFILE} component={Profile} />
 					<Route exact path={StaticPath.PROFILE_MODIFY} component={ModifyProfile} />
 					<Route exact path={StaticPath.ASSET_MAIN} component={Asset} />
+					<Route path={StaticPath.PROJECT} component={ProjectRouter} />
+					<Route path={DynamicPath.PROJECT_SHARE} component={ProjectShareRouter} />
+					<Route path={StaticPath.DASHBOARD} component={DashBoardRouter} />
 					<ReactFlowProvider>
 						<Route path={DynamicPath.PROJECT_SHARE} exact component={ProjectShare} />
 					</ReactFlowProvider>

@@ -10,8 +10,14 @@ enum selectorItemHeads {
 }
 
 type SelectorMappingViewerKey = keyof typeof selectorItemHeads;
-type SelectorMappingViewerType = {
+export type SelectorMappingViewerType = {
 	[K in SelectorMappingViewerKey]: FC;
+};
+
+export const SelectorMappingViewerShareMode: SelectorMappingViewerType = {
+	'Global Config': ProjectGlobalConfigViewer,
+	Optimizer: ProjectOptimizerConfigViewer,
+	'Upload File': ProjectInputViewer,
 };
 
 export const SelectorMappingViewer: SelectorMappingViewerType = {
