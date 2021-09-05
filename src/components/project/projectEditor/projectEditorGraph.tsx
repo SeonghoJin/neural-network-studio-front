@@ -68,7 +68,7 @@ type Props = {
 	onCreateBlock?: (block: Node<BlockState>) => void;
 	onMoveBlock?: (blockId: string, position: XYPosition) => void;
 	onRemoveBlock?: (blockId: string) => void;
-	onCreateEdge?: (edge: Edge) => void;
+	onCreateEdge?: (elements: Elements) => void;
 	onRemoveEdge?: (edgeId: string) => void;
 	cursorModule?: ReactNode;
 };
@@ -102,10 +102,11 @@ const ProjectEditorGraph: FC<Props> = ({
 
 	const onConnect = useCallback(
 		(params: Edge | Connection) => {
+			const newElements = addEdge(createCustomEdge(params), elements);
 			if (onCreateEdge) {
-				onCreateEdge(createCustomEdge(params) as Edge);
+				onCreateEdge(newElements);
 			}
-			setElements(addEdge(createCustomEdge(params), elements));
+			setElements(newElements);
 		},
 		[elements, onCreateEdge, setElements]
 	);

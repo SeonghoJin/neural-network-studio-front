@@ -1,8 +1,8 @@
 import { Edge, Elements } from 'react-flow-nns';
 import { SocketEvent } from '../SocketEvent';
 
-export class EdgeCreateDto {
+export class EdgeUpdateDto {
 	elements: Elements | undefined;
 
-	message = SocketEvent.CreateEdge;
+	message = SocketEvent.UpdateEdge;
 }

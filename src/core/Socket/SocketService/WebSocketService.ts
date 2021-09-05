@@ -1,5 +1,4 @@
 import { SocketService } from './SocketService';
-import { BlockChangeDto } from '../dto/block.change.dto';
 import { BlockCreateDto } from '../dto/block.create.dto';
 import { EdgeCreateDto } from '../dto/edge.create.dto';
 import { BlockMoveDto } from '../dto/block.move.dto';
@@ -7,6 +6,9 @@ import { CursorMoveDto } from '../dto/cursor.move.dto';
 import { BlockRemoveDto } from '../dto/block.remove.dto';
 import { EdgeRemoveDto } from '../dto/edge.remove.dto';
 import { UserRemoveRequestDto } from '../dto/user.remove.request.dto';
+import { BlockConfigChangeDto } from '../dto/block.config.change.dto';
+import { BlockLabelChangeDto } from '../dto/block.label.change.dto';
+import { EdgeUpdateDto } from '../dto/edge.update.dto';
 
 export class WebSocketService implements SocketService {
 	private socket: WebSocket;
@@ -15,13 +17,21 @@ export class WebSocketService implements SocketService {
 		this.socket = socket;
 	}
 
+	changeBlockConfig(data: BlockConfigChangeDto) {
+		this.socket.send(JSON.stringify(data));
+	}
+
+	changeBlockLabel(data: BlockLabelChangeDto) {
+		this.socket.send(JSON.stringify(data));
+	}
+
+	updateEdge(data: EdgeUpdateDto) {
+		this.socket.send(JSON.stringify(data));
+	}
+
 	disconnect: () => void = () => {
 		this.socket.close();
 	};
-
-	changeBlock(data: BlockChangeDto): void {
-		this.socket.send(JSON.stringify(data));
-	}
 
 	createBlock(data: BlockCreateDto): void {
 		this.socket.send(JSON.stringify(data));

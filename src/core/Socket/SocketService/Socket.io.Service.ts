@@ -1,6 +1,5 @@
-import { io, Socket } from 'socket.io-client';
+import { Socket } from 'socket.io-client';
 import { SocketService } from './SocketService';
-import { BlockChangeDto } from '../dto/block.change.dto';
 import { BlockCreateDto } from '../dto/block.create.dto';
 import { EdgeCreateDto } from '../dto/edge.create.dto';
 import { BlockMoveDto } from '../dto/block.move.dto';
@@ -9,16 +8,15 @@ import { BlockRemoveDto } from '../dto/block.remove.dto';
 import { EdgeRemoveDto } from '../dto/edge.remove.dto';
 import { UserRemoveRequestDto } from '../dto/user.remove.request.dto';
 import { SocketEvent } from '../SocketEvent';
+import { EdgeUpdateDto } from '../dto/edge.update.dto';
+import { BlockLabelChangeDto } from '../dto/block.label.change.dto';
+import { BlockConfigChangeDto } from '../dto/block.config.change.dto';
 
 export class SocketIoService implements SocketService {
 	socket: Socket | null = null;
 
 	constructor(socket: Socket) {
 		this.socket = socket;
-	}
-
-	changeBlock(data: BlockChangeDto): void {
-		this.socket?.emit(SocketEvent.ChangeBlock, data);
 	}
 
 	createBlock(data: BlockCreateDto): void {
@@ -51,5 +49,17 @@ export class SocketIoService implements SocketService {
 
 	disconnect(): void {
 		this.socket?.disconnect();
+	}
+
+	changeBlockConfig(data: BlockConfigChangeDto): void {
+		this.socket?.emit(SocketEvent.ChangeBlockConfig, data);
+	}
+
+	changeBlockLabel(data: BlockLabelChangeDto): void {
+		this.socket?.emit(SocketEvent.ChangeBlockLabel, data);
+	}
+
+	updateEdge(data: EdgeUpdateDto): void {
+		this.socket?.emit(SocketEvent.UpdateEdge, data);
 	}
 }

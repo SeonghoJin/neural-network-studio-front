@@ -65,7 +65,7 @@
 - BlockMoveDto
 ```json
 {
-  "message": "move_block",
+  "message": "move_block",  
   "blockId": "block-####",
   "position(XYPosition)": {
     "x": 100,
@@ -92,11 +92,11 @@
             }
       }
       ```
-    - 변경 -> BlockConfigChangeDto, BlockLabelChangeDto
+    - 변경 (2개로 분할) -> BlockConfigChangeDto, BlockLabelChangeDto
         - BlockConfigChangeDto
           ```json
             {
-              "message": "change_block",
+              "message": "change_block_config",
               "blockId": "Node-#####",
               "config" : {
                 "name" : "padding",
@@ -105,24 +105,27 @@
             }
           ```
 
-        - BlockConfigChangeDto
+        - BlockLabelChangeDto
           ```json
             {
-              "message": "change_block",
+              "message": "change_block_label",
               "blockId": "Node-#####",
               "data" : "ActivationNode84"
             }
           ```
 
-- EdgeCreateDto
+- EdgeCreateDto (변경)
 ```json
 {
   "message": "create_edge",
-  "edgeId": "edge-#####",
-  "edge": {
-
-  }
+  "elements" : []
 }
+```
+
+- EdgeUpdateDto (추가)
+```json
+    "message": "update_edge",
+    "elements": [],
 ```
 
 - EdgeRemoveDto
@@ -144,6 +147,8 @@
   }
 }
 ```
+
+
 #### Entities
 
 - Cursor

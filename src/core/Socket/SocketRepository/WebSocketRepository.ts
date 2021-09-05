@@ -1,4 +1,3 @@
-import { BlockChangeDto } from '../dto/block.change.dto';
 import { BlockCreateDto } from '../dto/block.create.dto';
 import { BlockMoveDto } from '../dto/block.move.dto';
 import { BlockRemoveDto } from '../dto/block.remove.dto';
@@ -8,6 +7,9 @@ import { EdgeRemoveDto } from '../dto/edge.remove.dto';
 import { UserCreateResponseDto } from '../dto/user.create.response.dto';
 import { UserListResponseDto } from '../dto/userList.response.dto';
 import { SocketRepository } from './SocketRespository';
+import { EdgeUpdateDto } from '../dto/edge.update.dto';
+import { BlockLabelChangeDto } from '../dto/block.label.change.dto';
+import { BlockConfigChangeDto } from '../dto/block.config.change.dto';
 
 export class WebSocketRepository implements SocketRepository {
 	private socket: WebSocket;
@@ -61,15 +63,6 @@ export class WebSocketRepository implements SocketRepository {
 		});
 	};
 
-	changeBlock: (event: string, cf: (data: BlockChangeDto) => void) => void = (event, cf) => {
-		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
-			const data = JSON.parse(msgevt.data);
-			if (data.message === event) {
-				cf(data);
-			}
-		});
-	};
-
 	removeBlock: (event: string, cf: (data: BlockRemoveDto) => void) => void = (event, cf) => {
 		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
 			const data = JSON.parse(msgevt.data);
@@ -96,4 +89,31 @@ export class WebSocketRepository implements SocketRepository {
 			}
 		});
 	};
+
+	changeBlockConfig(event: string, cf: (data: BlockConfigChangeDto) => void): void {
+		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
+			const data = JSON.parse(msgevt.data);
+			if (data.message === event) {
+				cf(data);
+			}
+		});
+	}
+
+	changeBlockLabel(event: string, cf: (data: BlockLabelChangeDto) => void): void {
+		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
+			const data = JSON.parse(msgevt.data);
+			if (data.message === event) {
+				cf(data);
+			}
+		});
+	}
+
+	updateEdge(event: string, cf: (data: EdgeUpdateDto) => void): void {
+		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
+			const data = JSON.parse(msgevt.data);
+			if (data.message === event) {
+				cf(data);
+			}
+		});
+	}
 }

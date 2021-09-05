@@ -69,10 +69,9 @@ const ProjectEditorShareGraphContainer = () => {
 	);
 
 	const onCreateEdge = useCallback(
-		(edge: Edge) => {
+		(elements: Elements) => {
 			const dto = new EdgeCreateDto();
-			dto.edge = edge;
-			dto.edgeId = edge.id;
+			dto.elements = elements;
 			socketService?.createEdge(dto);
 		},
 		[socketService]
