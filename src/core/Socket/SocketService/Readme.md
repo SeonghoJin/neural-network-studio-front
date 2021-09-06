@@ -131,8 +131,67 @@ content.flowState.elements = content.flowState.elements.map((element) => {
 })
 ```
 ---
-#### 'change_block Event 을때 서버에서 처리해야할 것'
-추후에 변경사항이 있어서 이것은 보류
+#### 'change_block_config Event 을때 서버에서 처리해야할 것' (추가)
+dto: BlockConfigChangeDto라고 할때,
+dto.blockId와 일치하는 elements의 config를 수정하면됩니다.
+
+Example
+
+```typescript
+import {BlockConfigChangeDto} from "./block.config.change.dto";
+import {IProjectContent} from "./types";
+
+dto : BlockConfigChangeDto = new BlockConfigChangeDto();
+content : IProjectContent = new IProjectContent();
+
+content.flowState.elements = content.flowState.elements.map((element) => {
+    if(element.id != dto.blockId)return element;
+    const { value, name } = dto.config;
+    element.data.config[name] = value;
+    return element;
+})
+```
+---
+#### 'change_block_label Event 을때 서버에서 처리해야할 것' (추가)
+dto: BlockLabelChangeDto라고 할때,
+dto.blockId와 일치하는 elements의 label수정하면됩니다.
+
+Example
+
+```typescript
+import {IProjectContent} from "./types";
+import {BlockLabelChangeDto} from "./block.label.change.dto";
+
+dto : BlockLabelChangeDto = new BlockLabelChangeDto();
+content : IProjectContent = new IProjectContent();
+
+content.flowState.elements = content.flowState.elements.map((element) => {
+    if (element.id != dto.blockId) return element;
+    const label = dto.data;
+    element.data.label = label;
+    return element;
+})
+```
+---
+dto: BlockMoveDto라고 할때,
+flowState.elements에서 각 id와 dto.blockId를 비교해서
+일치하는 block에 dto.position을 덮어 씌우면 됩니다.
+
+Example
+```typescript
+import {BlockMoveDto} from "./block.move.dto";
+import {IProjectContent} from "./types";
+
+dto : BlockMoveDto = new BlockMoveDto();
+content : IProjectContent = new IProjectContent();
+
+content.flowState.elements = content.flowState.elements.map((element) => {
+    if(element.id != dto.blockId) return element;
+    const newElement = new Element(element);
+    element.position = dto.position;
+    return newElement;
+})
+```
 
 ---
 #### 'remove_block Event 을때 서버에서 처리해야할 것'
@@ -153,9 +212,10 @@ content.flowState.elements = content.flowState.elements.filter((element) => {
 })
 ```
 ---
-#### 'create_edge Event 을때 서버에서 처리해야할 것'
-dto: EdgeCreateDto라고 할때,
-flowState.elements에 dto.edge를 insert하시면 됩니다.
+
+#### 'create_edge Event 을때 서버에서 처리해야할 것' (변경)
+dto: EdgeUpdateDto라고 할때,
+flowState.elements에 dto.elements를 덮어 씌우시면 됩니다.
 
 Example
 
@@ -165,8 +225,23 @@ import {IProjectContent} from "./types";
 
 dto : EdgeCreateDto= new EdgeCreateDto();
 content : IProjectContent = new IProjectContent();
-content.flowState.elements.push(dto.edge);
+content.flowState.elements = dto.elements;
 ````
+---
+#### 'update_edge Event 을때 서버에서 처리해야할 것' (추가)
+dto: EdgeUpdateDto라고 할때,
+flowState.elements에 dto.elements를 덮어 씌우시면 됩니다.
+
+Example
+
+```typescript
+import {IProjectContent} from "./types";
+import {EdgeUpdateDto} from "./edge.update.dto";
+
+dto :EdgeUpdateDto = new EdgeUpdateDto();
+content : IProjectContent = new IProjectContent();
+content.flowState.elements = dto.elements;
+```
 ---
 #### 'remove_edge Event 을때 서버에서 처리해야할 것'
 dto: EdgeRemoteDto라고 할때,
