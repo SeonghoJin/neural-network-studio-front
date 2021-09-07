@@ -4,7 +4,7 @@ import { ChangeEvent, useCallback } from 'react';
 import { setElementByIdAndUpdateConfig, setElementByIdAndUpdateLabel } from '../../../../module/Elements';
 import NodeConfigViewer from '../../projectEditor/NodeConfigViewer/nodeConfigViewer';
 import { useSocket } from '../../../../core/Socket/hooks/useSocket';
-import { BlockState, blockStates } from '../../../../core/reactFlow/block';
+import { BlockState } from '../../../../core/reactFlow/block';
 import { BlockConfigChangeDto } from '../../../../core/Socket/dto/block.config.change.dto';
 import { BlockLabelChangeDto } from '../../../../core/Socket/dto/block.label.change.dto';
 

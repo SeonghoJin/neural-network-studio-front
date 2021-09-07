@@ -1,11 +1,11 @@
-import { BlockType } from '../../reactFlow/block';
+import { BlockType } from '../../../reactFlow/block';
 
 type BlockRelationShipKey = keyof typeof BlockType;
 
 const BlockRelationShip: {
 	[K in BlockRelationShipKey]: Set<BlockType>;
 } = {
-	Activation: new Set<BlockType>([BlockType.Dense, BlockType.Flatten]),
+	Activation: new Set([BlockType.Dense, BlockType.Flatten]),
 	AveragePooling2D: new Set([]),
 	BatchNormalization: new Set([]),
 	Conv2D: new Set([BlockType.Activation]),

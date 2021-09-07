@@ -1,9 +1,9 @@
 import { makeStyles } from '@material-ui/core';
 import 'react-bootstrap/dist/react-bootstrap.min';
 import React from 'react';
-import { blockStates } from '../../../../core/reactFlow/block/BlockState';
 import NodeContainer from './nodeContainer';
 import Node from './node';
+import { BlockRenderData } from '../../../../core/Project/settings/BlockDragAndDropRenderData';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -16,7 +16,7 @@ const useStyle = makeStyles({
 	},
 });
 
-const blocks = blockStates;
+const blocks = BlockRenderData;
 
 const NodeContainerWrapper = () => {
 	const classes = useStyle();

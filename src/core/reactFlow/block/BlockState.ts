@@ -113,20 +113,3 @@ export class FlattenBlockState implements BlockState {
 
 	type: BlockType = BlockType.Flatten;
 }
-
-export const blockStates: { type: BlockCategory; states: BlockState[] }[] = [
-	{
-		type: BlockCategory.Layer,
-		states: [
-			new Conv2DBlockState(),
-			new DenseBlockState(),
-			new AveragePooling2DBlockState(),
-			new MaxPool2DBlockState(),
-			new ActivationBlockState(),
-			new InputBlockState(),
-			new DropoutBlockState(),
-			new BatchNormalizationBlockState(),
-			new FlattenBlockState(),
-		],
-	},
-];

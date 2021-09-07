@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { Connection, FlowElement, Node } from 'react-flow-nns';
 import { RootState } from '../../../../../module';
 import { BlockState, BlockType } from '../../../block';
-import BlockRelationShip from '../../../../Project/BlockRelationShip';
+import BlockRelationShip from '../../../../Project/settings/BlockRelationShip';
 
 const blockRelationShip = BlockRelationShip;
 
