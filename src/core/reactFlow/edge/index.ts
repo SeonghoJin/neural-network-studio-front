@@ -9,7 +9,6 @@ const createCustomEdge = (params: Edge | Connection) => {
 			strokeWidth: 4,
 			cursor: 'pointer',
 		},
-		type: 'smoothstep',
 	};
 };
 

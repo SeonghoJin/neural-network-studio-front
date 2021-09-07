@@ -33,6 +33,7 @@ import {
 import createCustomEdge from '../../../core/reactFlow/edge';
 import { getNodeColor, getNodeStrokeColor } from '../../../core/reactFlow/node/nodetypes/component/NodeStroke';
 import ConnectionLine from '../../../core/reactFlow/connectionLine';
+import useValidationConnection from '../../../core/reactFlow/node/validation/useValidationConnection';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -93,6 +94,7 @@ const ProjectEditorGraph: FC<Props> = ({
 	const setSelectedElements = useStoreActions((state) => state.setSelectedElements);
 	const reactFlowInstance = useSelector((state: RootState) => state.reactFlowInstance.instance);
 	const elements = useSelector((state: RootState) => state.elements.elements);
+	const { isValidationConnection } = useValidationConnection();
 
 	useEffect(() => {
 		const inputBlockState = new InputBlockState();
@@ -210,6 +212,7 @@ const ProjectEditorGraph: FC<Props> = ({
 				defaultPosition={flowState?.position}
 				defaultZoom={flowState?.zoom}
 				connectionLineComponent={ConnectionLine}
+				isValidConnection={isValidationConnection}
 			>
 				{cursorModule}
 				<Controls

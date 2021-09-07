@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Handle, NodeProps, Position } from 'react-flow-nns';
 import { makeStyles } from '@material-ui/core';
-import useValidationConnection from '../useValidationConnection';
+import useValidationConnection from '../../../validation/useValidationConnection';
 import { BlockState } from '../../../../block';
 
 const useStyle = makeStyles({
@@ -21,7 +21,12 @@ const DefaultNode = ({
 	const { isValidationConnection } = useValidationConnection();
 	return (
 		<div className={classes.wrapper}>
-			<Handle type="target" position={targetPosition} isConnectable={isConnectable} />
+			<Handle
+				type="target"
+				position={targetPosition}
+				isConnectable={isConnectable}
+				isValidConnection={isValidationConnection}
+			/>
 			{data.label}
 			<Handle
 				type="source"
