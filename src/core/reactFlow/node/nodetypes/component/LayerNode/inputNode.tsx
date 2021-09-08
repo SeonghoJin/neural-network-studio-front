@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Handle, NodeProps, Position } from 'react-flow-nns';
 import { makeStyles } from '@material-ui/core';
-import useValidationConnection from '../../../validation/useValidationConnection';
+import useValidationConnection from '../../../../validation/useValidationConnection';
 import { BlockState } from '../../../../block';
 
 const useStyle = makeStyles({

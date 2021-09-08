@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Connection, Elements, FlowElement, isEdge, Node } from 'react-flow-nns';
-import { RootState } from '../../../../module';
-import { BlockState, BlockType } from '../../block';
-import BlockRelationShip from '../../../Project/settings/BlockRelationShip';
-import { INPUT_CONNECT_NUMBER, OUTPUT_CONNECT_NUMBER } from '../../../Project/settings/EdgeLimit';
+import { RootState } from '../../../module';
+import { BlockState, BlockType } from '../block';
+import BlockRelationShip from '../../Project/settings/BlockRelationShip';
+import { INPUT_CONNECT_NUMBER, OUTPUT_CONNECT_NUMBER } from '../../Project/settings/EdgeLimit';
 
 const blockRelationShip = BlockRelationShip;
 
@@ -13,9 +13,7 @@ const satisfyBlockRelationShip = (connection: Connection, elements: Elements) =>
 		return element.id === connection.source;
 	}) as Node<BlockState>;
 	if (!source) throw Error(`elements에서 ${connection.source}를 가진 element를 찾을 수 없습니다.`);
-
 	const sourceRelationShip = blockRelationShip[source.data?.type as BlockType];
-	console.log(sourceRelationShip);
 	const target = elements.find((element: FlowElement<BlockState>) => {
 		return element.id === connection.target;
 	}) as Node<BlockState>;
@@ -55,8 +53,6 @@ const satisfyEdgeLimit = (connection: Connection, elements: Elements) => {
 		}
 		return element.target === target.id;
 	}).length;
-	console.log(elements, source, target);
-	console.log(sourceOutPutNumber, currentSourceOutPutNumber, targetInputNumber, currentTargetInputNumber);
 	if (sourceOutPutNumber <= currentSourceOutPutNumber) return false;
 	// console.warn(`${source.data?.type}은 Ouput에 최대 ${sourceOutPutNumber}개 까지만 연결할 수 있습니다.`);
 	if (targetInputNumber <= currentTargetInputNumber) return false;

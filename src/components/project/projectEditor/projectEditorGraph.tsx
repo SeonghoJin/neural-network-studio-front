@@ -33,7 +33,7 @@ import {
 import createCustomEdge from '../../../core/reactFlow/edge';
 import { getNodeColor, getNodeStrokeColor } from '../../../core/reactFlow/node/nodetypes/component/NodeStroke';
 import ConnectionLine from '../../../core/reactFlow/connectionLine';
-import useValidationConnection from '../../../core/reactFlow/node/validation/useValidationConnection';
+import useValidationConnection from '../../../core/reactFlow/validation/useValidationConnection';
 
 const useStyle = makeStyles({
 	wrapper: {
