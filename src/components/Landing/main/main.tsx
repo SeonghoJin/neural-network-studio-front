@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './index.module.css';
-import { StaticPath } from '../../../pagePathName';
+import { StaticPath } from '../../PagePathConsts';
 
 const Main = () => {
 	return (

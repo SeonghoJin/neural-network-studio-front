@@ -9,7 +9,7 @@ import { format } from 'util';
 import useRoom from '../../../../hooks/useRoom';
 import { CircleLoading } from '../../../utils/Loading/CircularLoading';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
-import { DynamicPath } from '../../../../pagePathName';
+import { DynamicPath } from '../../../PagePathConsts';
 
 const useStyle = makeStyles({
 	wrapper: {

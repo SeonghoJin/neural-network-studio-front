@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
-import useSignUp from '../../hooks/useSignUp';
-import { StaticPath } from '../../pagePathName';
+import useSignUp from '../../../hooks/useSignUp';
+import { StaticPath } from '../../PagePathConsts';
 
 const MainLocationFilter = () => {
 	const location = useLocation<{ from?: any }>();

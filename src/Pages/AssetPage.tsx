@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import AssetMain from '../components/asset/AssetMain';
-import PrivateAuthentication from '../Authentication/PrivateAuthentication';
+import PrivateAuthentication from '../components/Authentication/PrivateAuthentication';
 import Navigation from '../components/nav';
 
 const Wrapper = styled.div`

@@ -1,7 +1,7 @@
 import { Route, Switch } from 'react-router-dom';
 import React, { FC } from 'react';
-import PrivateAuthentication from '../Authentication/PrivateAuthentication';
-import { DynamicPath } from '../pagePathName';
+import PrivateAuthentication from '../components/Authentication/PrivateAuthentication';
+import { DynamicPath } from '../components/PagePathConsts';
 import { WebSocketContext } from '../core/Socket/Context/WebSocketContext';
 import { NotFoundPage, ProjectConfigPage, ProjectSharePage } from '../Pages';
 

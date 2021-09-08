@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { format } from 'util';
 import style from './card.module.css';
 import CardDropMenu from './cardDropMenu';
-import { DynamicPath } from '../../../../pagePathName';
+import { DynamicPath } from '../../../PagePathConsts';
 
 type Props = {
 	id: number;

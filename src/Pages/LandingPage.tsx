@@ -1,5 +1,5 @@
 import React from 'react';
-import MainLocationFilter from '../filter/MainLocationFilter';
+import MainLocationFilter from '../components/filter/MainLocationFilter';
 import Navigation from '../components/nav';
 import Main from '../components/Landing/main/main';
 

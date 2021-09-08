@@ -1,11 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { ReactFlowProvider } from 'react-flow-nns';
-import Authentication from './Authentication';
+import Authentication from './components/Authentication';
 import ProjectRouter from './Router/ProjectRouter';
 import DashBoardRouter from './Router/DashBoardRouter';
-import { DynamicPath, StaticPath } from './pagePathName';
+import { DynamicPath, StaticPath } from './components/PagePathConsts';
 import { AssetPage, LandingPage, NotFoundPage, ProfileModifyPage, ProfilePage, SignInPage, SignUpPage } from './Pages';
 import ProjectShareRouter from './Router/ProjectShareRouter';
 

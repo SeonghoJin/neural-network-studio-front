@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router-dom';
 import React from 'react';
-import PrivateAuthentication from '../Authentication/PrivateAuthentication';
+import PrivateAuthentication from '../components/Authentication/PrivateAuthentication';
 import Navigation from '../components/nav';
 import { CreateProjectPage, DashBoardPage, NotFoundPage } from '../Pages';
 

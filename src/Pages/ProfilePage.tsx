@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 import React from 'react';
-import PrivateAuthentication from '../Authentication/PrivateAuthentication';
+import PrivateAuthentication from '../components/Authentication/PrivateAuthentication';
 import Navigation from '../components/nav';
 import ProfileMain from '../components/profile/default/main';
 

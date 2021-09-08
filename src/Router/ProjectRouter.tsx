@@ -1,7 +1,7 @@
 import { Route, Switch } from 'react-router-dom';
 import React, { FC } from 'react';
-import PrivateAuthentication from '../Authentication/PrivateAuthentication';
-import { DynamicPath } from '../pagePathName';
+import PrivateAuthentication from '../components/Authentication/PrivateAuthentication';
+import { DynamicPath } from '../components/PagePathConsts';
 import { NotFoundPage, ProjectConfigPage, ProjectEditorPage } from '../Pages';
 
 const ProjectRouter: FC<null> = () => {

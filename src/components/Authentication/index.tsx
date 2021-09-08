@@ -1,5 +1,5 @@
 import React from 'react';
-import useAuthentication from '../hooks/useAuthentication';
+import useAuthentication from '../../hooks/useAuthentication';
 
 type Props = {
 	children: any;

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import useLogin from '../hooks/useLogin';
 import useAuthentication from '../hooks/useAuthentication';
 import { LoginParams } from '../API/Auth/types';
-import { StaticPath } from '../pagePathName';
+import { StaticPath } from '../components/PagePathConsts';
 import Navigation from '../components/nav';
 import style from '../components/auth/signin/index.module.css';
 import utils from '../components/utils/index.module.css';

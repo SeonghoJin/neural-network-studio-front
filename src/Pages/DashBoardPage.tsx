@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
-import PrivateAuthentication from '../Authentication/PrivateAuthentication';
+import PrivateAuthentication from '../components/Authentication/PrivateAuthentication';
 import style from '../components/dashboard/index.module.css';
 import utils from '../components/utils/index.module.css';
 import CardGrid from '../components/dashboard/cardGrid/cardGrid';
-import { StaticPath } from '../pagePathName';
+import { StaticPath } from '../components/PagePathConsts';
 
 const useStyle = makeStyles({
 	wrapper: {
