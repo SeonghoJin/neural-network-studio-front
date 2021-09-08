@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { SocketService } from '../SocketService/SocketService';
 import { SocketRepository } from '../SocketRepository/SocketRespository';
 
