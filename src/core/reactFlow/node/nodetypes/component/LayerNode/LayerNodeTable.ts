@@ -17,6 +17,8 @@ const LayerNodeTable: LayerNodeTableType = {
 	Flatten: DefaultNode,
 	Input: InputNode,
 	MaxPool2D: DefaultNode,
+	Rescaling: DefaultNode,
+	Reshape: DefaultNode,
 };
 
 export default LayerNodeTable;

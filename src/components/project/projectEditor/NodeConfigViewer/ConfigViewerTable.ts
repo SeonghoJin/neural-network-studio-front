@@ -8,6 +8,8 @@ import DropoutConfigComponent from './ConfigComponent/DropoutConfigComponent';
 import FlattenConfigComponent from './ConfigComponent/FlattenConfigComponent';
 import InputConfigComponent from './ConfigComponent/InputConfigComponent';
 import MaxPool2DConfigComponent from './ConfigComponent/MaxPool2DConfigComponent';
+import RescalingConfigComponent from './ConfigComponent/RescalingConfigComponent';
+import ReshapeConfigComponent from './ConfigComponent/ReshapeConfigComponent';
 
 type ConfigViewerTableKeyType = typeof BlockType[keyof typeof BlockType];
 
@@ -25,6 +27,8 @@ const ConfigViewerTable: ConfigViewerTableType = {
 	Flatten: FlattenConfigComponent,
 	Input: InputConfigComponent,
 	MaxPool2D: MaxPool2DConfigComponent,
+	Rescaling: RescalingConfigComponent,
+	Reshape: ReshapeConfigComponent,
 };
 
 export default ConfigViewerTable;

@@ -8,6 +8,8 @@ export enum BlockType {
 	Dropout = 'Dropout',
 	BatchNormalization = 'BatchNormalization',
 	Flatten = 'Flatten',
+	Rescaling = 'Rescaling',
+	Reshape = 'Reshape',
 }
 
 export default BlockType;

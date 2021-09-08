@@ -7,7 +7,7 @@ type MAXIMUM_NUMBER_PER_BLOCK_TYPE_AT_GRAPH_KEY = keyof typeof BlockType;
 export const MAXIMUM_NUMBER_PER_BLOCK_TYPE_AT_GRAPH: {
 	[K in MAXIMUM_NUMBER_PER_BLOCK_TYPE_AT_GRAPH_KEY]: number;
 } = {
-	Activation: 3,
+	Activation: INFINITY,
 	AveragePooling2D: INFINITY,
 	BatchNormalization: INFINITY,
 	Conv2D: INFINITY,
@@ -16,4 +16,6 @@ export const MAXIMUM_NUMBER_PER_BLOCK_TYPE_AT_GRAPH: {
 	MaxPool2D: INFINITY,
 	Dense: INFINITY,
 	Input: UNIQUE,
+	Rescaling: INFINITY,
+	Reshape: INFINITY,
 };
