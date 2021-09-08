@@ -1,6 +1,7 @@
 export enum StaticPath {
 	DASHBOARD = '/dashboard',
 	DASHBOARD_PROJECTS = `/dashboard/projects`,
+	DASHBOARD_NEW_PROJECT = '/dashboard/projects/new',
 	MAIN = '/',
 	LOGIN = '/login',
 	PROFILE = '/profile',
@@ -38,4 +39,5 @@ export const pagePathNameToNumber: {
 	'/project': UndefinedPathNameNumber,
 	'/signup': UndefinedPathNameNumber,
 	'/share/project': UndefinedPathNameNumber,
+	'/dashboard/projects/new': UndefinedPathNameNumber,
 };

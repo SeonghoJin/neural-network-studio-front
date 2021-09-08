@@ -1,12 +1,11 @@
 import { Route, Switch } from 'react-router-dom';
 import React, { FC } from 'react';
-import ProjectEditor from '../Pages/ProjectEditor';
 import ProjectConfig from '../Pages/ProjectConfig';
 import PrivateAuthentication from '../Authentication/PrivateAuthentication';
 import { DynamicPath } from '../pagePathName';
 import NotFound from '../Pages/NotFound';
-import ProjectShare from '../components/project/ProjectShare';
 import { WebSocketContext } from '../core/Socket/Context/WebSocketContext';
+import ProjectShare from '../Pages/ProjectShare';
 
 const ProjectShareRouter: FC<null> = () => {
 	return (

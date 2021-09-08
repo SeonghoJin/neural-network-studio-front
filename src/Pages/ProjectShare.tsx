@@ -3,13 +3,13 @@ import { applyMiddleware, createStore } from 'redux';
 import reduxThunk from 'redux-thunk';
 import reduxLogger from 'redux-logger';
 import { Provider } from 'react-redux';
-import ProjectNav from '../ProjectNav/projectNav';
-import ProjectEditorNav from '../projectEditor/ProjectEditorNav/projectEditorNav';
-import ProjectEditorMain from '../projectEditor/projectEditorMain';
-import rootReducer from '../../../module';
-import ProjectEditorShareGraphContainer from './ProjectEditorShareGraphContainer';
-import ProjectShareNavOptionContentContainer from './ProjectShareNav/ProjectShareNavOptionContentContainer';
-import NodeConfigShareViewerContainer from './NodeConfigShareViewer';
+import rootReducer from '../module';
+import ProjectNav from '../components/project/ProjectNav/projectNav';
+import ProjectEditorNav from '../components/project/projectEditor/ProjectEditorNav/projectEditorNav';
+import ProjectShareNavOptionContentContainer from '../components/project/ProjectShare/ProjectShareNav/ProjectShareNavOptionContentContainer';
+import ProjectEditorMain from '../components/project/projectEditor/projectEditorMain';
+import NodeConfigShareViewerContainer from '../components/project/ProjectShare/NodeConfigShareViewer';
+import ProjectEditorShareGraphContainer from '../components/project/ProjectShare/ProjectEditorShareGraphContainer';
 
 const useStyle = makeStyles({
 	wrapper: {

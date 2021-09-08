@@ -1,10 +1,11 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import React from 'react';
 import { makeStyles } from '@material-ui/core';
-import CardGrid from './cardGrid/cardGrid';
-import style from './index.module.css';
-import utils from '../utils/index.module.css';
-import PrivateAuthentication from '../../Authentication/PrivateAuthentication';
+import PrivateAuthentication from '../Authentication/PrivateAuthentication';
+import style from '../components/dashboard/index.module.css';
+import utils from '../components/utils/index.module.css';
+import CardGrid from '../components/dashboard/cardGrid/cardGrid';
+import { StaticPath } from '../pagePathName';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -28,7 +29,11 @@ const DashBoard = () => {
 				<div className={classes.container}>
 					<div className={`${style.mainWrapper}`}>
 						<div className={`${style.dashboardMenu}`}>
-							<Link to="/dashboard/projects/new" className={`${utils.divButton} ${style.createButton}`} type="button">
+							<Link
+								to={`${StaticPath.DASHBOARD_NEW_PROJECT}`}
+								className={`${utils.divButton} ${style.createButton}`}
+								type="button"
+							>
 								프로젝트 생성
 							</Link>
 						</div>

@@ -1,13 +1,13 @@
-import React, { useCallback, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import style from './index.module.css';
-import utils from '../../utils/index.module.css';
-import useLogin from '../../../hooks/useLogin';
-import { LoginParams } from '../../../API/Auth/types';
-import useAuthentication from '../../../hooks/useAuthentication';
-import Navigation from '../../nav';
-import { StaticPath } from '../../../pagePathName';
+import useLogin from '../hooks/useLogin';
+import useAuthentication from '../hooks/useAuthentication';
+import { LoginParams } from '../API/Auth/types';
+import { StaticPath } from '../pagePathName';
+import Navigation from '../components/nav';
+import style from '../components/auth/signin/index.module.css';
+import utils from '../components/utils/index.module.css';
 
 const Wrapper = styled.div`
 	width: 100vw;

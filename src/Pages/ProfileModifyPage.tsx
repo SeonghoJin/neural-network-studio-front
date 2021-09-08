@@ -1,8 +1,8 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/core';
-import PrivateAuthentication from '../../../Authentication/PrivateAuthentication';
-import Navigation from '../../nav';
-import ModifyProfileMain from './main';
+import React from 'react';
+import PrivateAuthentication from '../Authentication/PrivateAuthentication';
+import Navigation from '../components/nav';
+import ModifyProfileMain from '../components/profile/modify/main';
 
 const useStyle = makeStyles({
 	wrapper: {

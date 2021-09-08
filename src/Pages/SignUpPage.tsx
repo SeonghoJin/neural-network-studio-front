@@ -2,12 +2,12 @@ import React, { ChangeEvent, useCallback, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
-import style from './index.module.css';
-import utils from '../../utils/index.module.css';
-import Navigation from '../../nav';
-import { StaticPath } from '../../../pagePathName';
-import { passwordValidationRegExp } from '../../Input/Validation';
-import useSignUp from '../../../hooks/useSignUp';
+import style from '../components/auth/signup/index.module.css';
+import utils from '../components/utils/index.module.css';
+import useSignUp from '../hooks/useSignUp';
+import { passwordValidationRegExp } from '../components/Input/Validation';
+import { StaticPath } from '../pagePathName';
+import Navigation from '../components/nav';
 
 const Signup = () => {
 	const [inputs, setInputs] = useState({
