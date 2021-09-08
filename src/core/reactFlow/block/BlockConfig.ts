@@ -52,6 +52,16 @@ export class AveragePooling2DConfig implements BlockConfig {
 	padding = '';
 }
 
+export class RescalingConfig implements BlockConfig {
+	scale = '';
+
+	offset = '';
+}
+
+export class ReshapeConfig implements BlockConfig {
+	target_shape = '';
+}
+
 export type IConfigComponent<T> = {
 	[K in keyof T]: JSX.Element;
 };

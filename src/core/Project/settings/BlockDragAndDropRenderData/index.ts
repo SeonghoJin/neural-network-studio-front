@@ -10,6 +10,8 @@ import {
 	FlattenBlockState,
 	InputBlockState,
 	MaxPool2DBlockState,
+	RescalingBlockState,
+	ReshapeBlockState,
 } from '../../../reactFlow/block';
 
 export const BlockRenderData: { type: BlockCategory; states: BlockState[] }[] = [
@@ -25,6 +27,8 @@ export const BlockRenderData: { type: BlockCategory; states: BlockState[] }[] = 
 			new DropoutBlockState(),
 			new BatchNormalizationBlockState(),
 			new FlattenBlockState(),
+			new RescalingBlockState(),
+			new ReshapeBlockState(),
 		],
 	},
 ];

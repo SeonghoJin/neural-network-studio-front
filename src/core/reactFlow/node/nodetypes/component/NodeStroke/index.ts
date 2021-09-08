@@ -7,6 +7,7 @@ const NodeStrokeColorTable: {
 	[index in NodeStrokeColorTableKey]: string;
 } = {
 	Layer: '#000000',
+	Math: '#000000',
 };
 
 export const getNodeStrokeColor = (e: Node<BlockState>) => {
@@ -20,6 +21,7 @@ const NodeColorTable: {
 	[index in NodeColorTableKey]: string;
 } = {
 	Layer: '#FFFFFF',
+	Math: '#FFFFFF',
 };
 
 export const getNodeColor = (e: Node<BlockState>) => {
