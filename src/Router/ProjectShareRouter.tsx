@@ -1,11 +1,9 @@
 import { Route, Switch } from 'react-router-dom';
 import React, { FC } from 'react';
-import ProjectConfig from '../Pages/ProjectConfig';
 import PrivateAuthentication from '../Authentication/PrivateAuthentication';
 import { DynamicPath } from '../pagePathName';
-import NotFound from '../Pages/NotFound';
 import { WebSocketContext } from '../core/Socket/Context/WebSocketContext';
-import ProjectShare from '../Pages/ProjectShare';
+import { NotFoundPage, ProjectConfigPage, ProjectSharePage } from '../Pages';
 
 const ProjectShareRouter: FC<null> = () => {
 	return (
@@ -13,9 +11,9 @@ const ProjectShareRouter: FC<null> = () => {
 			<Switch>
 				<PrivateAuthentication>
 					<WebSocketContext>
-						<Route path={DynamicPath.PROJECT_SHARE} exact component={ProjectShare} />
-						<Route path={DynamicPath.PROJECT_SHARE_CONFIG} exact component={ProjectConfig} />
-						<Route component={NotFound} />
+						<Route path={DynamicPath.PROJECT_SHARE} exact component={ProjectSharePage} />
+						<Route path={DynamicPath.PROJECT_SHARE_CONFIG} exact component={ProjectConfigPage} />
+						<Route component={NotFoundPage} />
 					</WebSocketContext>
 				</PrivateAuthentication>
 			</Switch>

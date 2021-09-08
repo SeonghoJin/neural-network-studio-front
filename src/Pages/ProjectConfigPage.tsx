@@ -19,7 +19,7 @@ const useStyle = makeStyles({
 	},
 });
 
-const ProjectConfig = () => {
+export const ProjectConfigPage = () => {
 	const classes = useStyle();
 
 	return (
@@ -36,5 +36,3 @@ const ProjectConfig = () => {
 		</>
 	);
 };
-
-export default ProjectConfig;

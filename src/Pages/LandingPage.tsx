@@ -3,7 +3,7 @@ import MainLocationFilter from '../filter/MainLocationFilter';
 import Navigation from '../components/nav';
 import Main from '../components/Landing/main/main';
 
-const Landing = () => {
+export const Landing = () => {
 	return (
 		<>
 			<MainLocationFilter />
@@ -12,5 +12,3 @@ const Landing = () => {
 		</>
 	);
 };
-
-export default Landing;

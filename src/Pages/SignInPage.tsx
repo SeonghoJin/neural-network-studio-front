@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 	flex-direction: column;
 `;
 
-const SignIn = () => {
+export const SignIn = () => {
 	const { fetch, loadingFeedback, errorFeedback } = useLogin();
 	const { mutate } = useAuthentication();
 	const history = useHistory();
@@ -83,5 +83,3 @@ const SignIn = () => {
 		</Wrapper>
 	);
 };
-
-export default SignIn;

@@ -19,7 +19,7 @@ const useStyle = makeStyles({
 	},
 });
 
-const ModifyProfile = () => {
+export const ModifyProfile = () => {
 	const classes = useStyle();
 	return (
 		<PrivateAuthentication>
@@ -32,5 +32,3 @@ const ModifyProfile = () => {
 		</PrivateAuthentication>
 	);
 };
-
-export default ModifyProfile;

@@ -9,7 +9,7 @@ import { passwordValidationRegExp } from '../components/Input/Validation';
 import { StaticPath } from '../pagePathName';
 import Navigation from '../components/nav';
 
-const Signup = () => {
+export const Signup = () => {
 	const [inputs, setInputs] = useState({
 		id: '',
 		password: '',
@@ -132,5 +132,3 @@ const Signup = () => {
 		</>
 	);
 };
-
-export default Signup;

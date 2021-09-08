@@ -3,13 +3,13 @@ import { applyMiddleware, createStore } from 'redux';
 import reduxThunk from 'redux-thunk';
 import reduxLogger from 'redux-logger';
 import { Provider } from 'react-redux';
-import ProjectEditorMain from '../components/project/projectEditor/projectEditorMain';
+import rootReducer from '../module';
 import ProjectNav from '../components/project/ProjectNav/projectNav';
 import ProjectEditorNav from '../components/project/projectEditor/ProjectEditorNav/projectEditorNav';
-import rootReducer from '../module';
-import ProjectEditorGraphContainer from '../components/project/projectEditor/ProjectEditorGraphContainer';
-import ProjectEditorNavOptionContentContainer from '../components/project/projectEditor/ProjectEditorNav/ProjectEditorNavOptionContentContainer';
-import NodeConfigViewerContainer from '../components/project/projectEditor/NodeConfigViewer/NodeConfigViewerContainer';
+import ProjectShareNavOptionContentContainer from '../components/project/ProjectShare/ProjectShareNav/ProjectShareNavOptionContentContainer';
+import ProjectEditorMain from '../components/project/projectEditor/projectEditorMain';
+import NodeConfigShareViewerContainer from '../components/project/ProjectShare/NodeConfigShareViewer';
+import ProjectEditorShareGraphContainer from '../components/project/ProjectShare/ProjectEditorShareGraphContainer';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -26,21 +26,21 @@ const useStyle = makeStyles({
 		flexGrow: 1,
 	},
 });
+
 const store = createStore(rootReducer, applyMiddleware(reduxThunk, reduxLogger));
 
-const ProjectEditor = () => {
+export const ProjectSharePage = () => {
 	const classes = useStyle();
-
 	return (
 		<Provider store={store}>
 			<div className={classes.wrapper}>
 				<div className={classes.container}>
 					<ProjectNav />
-					<ProjectEditorNav projectEditorNavOptionContent={<ProjectEditorNavOptionContentContainer />} />
+					<ProjectEditorNav projectEditorNavOptionContent={<ProjectShareNavOptionContentContainer />} />
 					<div className={classes.content}>
 						<ProjectEditorMain
-							nodeConfigViewerContainer={<NodeConfigViewerContainer />}
-							projectEditorGraphContainer={<ProjectEditorGraphContainer />}
+							nodeConfigViewerContainer={<NodeConfigShareViewerContainer />}
+							projectEditorGraphContainer={<ProjectEditorShareGraphContainer />}
 						/>
 					</div>
 				</div>
@@ -48,5 +48,3 @@ const ProjectEditor = () => {
 		</Provider>
 	);
 };
-
-export default ProjectEditor;

@@ -14,7 +14,7 @@ const AssetMainWrapper = styled.div`
 	flex-grow: 1;
 `;
 
-const Asset = () => {
+export const AssetPage = () => {
 	return (
 		<PrivateAuthentication>
 			<Wrapper>
@@ -26,5 +26,3 @@ const Asset = () => {
 		</PrivateAuthentication>
 	);
 };
-
-export default Asset;

@@ -19,7 +19,7 @@ const useStyle = makeStyles({
 	},
 });
 
-const Profile = () => {
+export const Profile = () => {
 	const classes = useStyle();
 	return (
 		<PrivateAuthentication>
@@ -32,5 +32,3 @@ const Profile = () => {
 		</PrivateAuthentication>
 	);
 };
-
-export default Profile;

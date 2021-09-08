@@ -20,7 +20,7 @@ const useStyle = makeStyles({
 	},
 });
 
-const DashBoard = () => {
+export const DashBoard = () => {
 	const classes = useStyle();
 
 	return (
@@ -44,5 +44,3 @@ const DashBoard = () => {
 		</PrivateAuthentication>
 	);
 };
-
-export default DashBoard;
