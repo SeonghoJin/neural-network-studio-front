@@ -9,6 +9,9 @@ import { UserRemoveRequestDto } from '../dto/user.remove.request.dto';
 import { BlockConfigChangeDto } from '../dto/block.config.change.dto';
 import { BlockLabelChangeDto } from '../dto/block.label.change.dto';
 import { EdgeUpdateDto } from '../dto/edge.update.dto';
+import { ProjectLearningRateReductionChangeDto } from '../dto/project.learningratereduction.change.dto';
+import { ProjectConfigChangeDto } from '../dto/project.config.change.dto';
+import { ProjectEarlyStopConfigChangeDto } from '../dto/project.earlystopconfig.change.dto';
 
 export class WebSocketService implements SocketService {
 	private socket: WebSocket;
@@ -58,6 +61,18 @@ export class WebSocketService implements SocketService {
 	}
 
 	removeUser(data: UserRemoveRequestDto): void {
+		this.socket.send(JSON.stringify(data));
+	}
+
+	changeLearningRateReduction(data: ProjectLearningRateReductionChangeDto): void {
+		this.socket.send(JSON.stringify(data));
+	}
+
+	changeProjectConfig(data: ProjectConfigChangeDto): void {
+		this.socket.send(JSON.stringify(data));
+	}
+
+	changeProjectEarlyStopConfig(data: ProjectEarlyStopConfigChangeDto): void {
 		this.socket.send(JSON.stringify(data));
 	}
 }

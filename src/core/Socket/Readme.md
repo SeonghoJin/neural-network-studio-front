@@ -1,13 +1,21 @@
 # Socket
+
 ## Socket 통신시 서버에서 저장해야할 데이터
+
 [ SocketService ](https://github.com/Stonebridge-soma12/otherFronts/tree/feat/src/core/Socket/SocketService)
+
 ## SocketEvents
+
 [ SocketEvents ](https://github.com/Stonebridge-soma12/otherFronts/blob/feat/src/core/Socket/SocketEvent.ts)
+
 ## SocketDataTypes
+
 ### Project
+
 #### Dtos
 
 - UserCreateResponseDto
+
 ```json
 {
   "message": "create_user_response",
@@ -18,6 +26,7 @@
 ```
 
 - UserListResponseDto
+
 ```json
 {
   "message": "user_list_response",
@@ -38,6 +47,7 @@
 ```
 
 - CursorMoveDto
+
 ```json
 {
   "message": "move_cursor",
@@ -56,13 +66,16 @@
 ```
 
 - BlockRemoveDto
+
 ```json
 {
   "message": "remove_block",
   "blockId": "block-####"
 }
 ```
+
 - BlockMoveDto
+
 ```json
 {
   "message": "move_block",  
@@ -73,7 +86,9 @@
   }
 }
 ```
+
 - BlockCreateDto
+
 ```json
 {
   "message": "create_block",
@@ -82,39 +97,32 @@
   } 
 }
 ```
-- BlockChangeDto
-    - 현재
-      ```json
-      {
-          "message": "change_block",
-          "blockId": "Node-#####",
-           "blockState": {
-            }
-      }
-      ```
-    - 변경 (2개로 분할) -> BlockConfigChangeDto, BlockLabelChangeDto
-        - BlockConfigChangeDto
-          ```json
-            {
-              "message": "change_block_config",
-              "blockId": "Node-#####",
-              "config" : {
-                "name" : "padding",
-                "value" : "Valid"
-              }
-            }
-          ```
 
-        - BlockLabelChangeDto
-          ```json
-            {
-              "message": "change_block_label",
-              "blockId": "Node-#####",
-              "data" : "ActivationNode84"
-            }
-          ```
+- BlockConfigChangeDto
 
-- EdgeCreateDto (변경)
+```json
+{
+    "message": "change_block_config",
+    "blockId": "Node-#####",
+    "config" : {
+    "name" : "padding",
+    "value" : "Valid"
+    }
+}
+```
+
+- BlockLabelChangeDto
+
+```json
+{
+    "message": "change_block_label",
+    "blockId": "Node-#####",
+    "data" : "ActivationNode84"
+}
+```
+
+- EdgeCreateDto
+
 ```json
 {
   "message": "create_edge",
@@ -122,13 +130,15 @@
 }
 ```
 
-- EdgeUpdateDto (추가)
+- EdgeUpdateDto
+
 ```json
     "message": "update_edge",
-    "elements": [],
+"elements": [],
 ```
 
 - EdgeRemoveDto
+
 ```json
 {
   "message": "remove_edge",
@@ -137,6 +147,7 @@
 ```
 
 - UserRemoveRequestDto
+
 ```json
 {
   "message": "remove_user_request",
@@ -148,10 +159,10 @@
 }
 ```
 
-
 #### Entities
 
 - Cursor
+
 ```json
 {
   "user(User)": {
@@ -167,6 +178,7 @@
 ```
 
 - Node
+
 ```json
 {
   "data": {
@@ -176,6 +188,7 @@
 ```
 
 - User
+
 ```json
 {
     "name": "진성호",
@@ -185,6 +198,7 @@
 ```
 
 - XYPosition
+
 ```json
 {
   "x": 100,
@@ -195,11 +209,32 @@
 ### ProjectConfig
 
 #### Dtos
+
 - ChangeProjectConfigDto
 
 ```json
 {
   "message": "change_project_config",
+  "name": "optimizer",
+  "value": "0.1"
+}
+```
+
+- ProjectEarlyStopConfigChangeDto
+
+```json
+{
+  "message": "change_project_early_stop_config",
+  "name": "optimizer",
+  "value": "0.1"
+}
+```
+
+- ProjectLearningRateReductionChangeDto
+
+```json
+{
+  "message": "change_project_learning_rate_reduction_config",
   "name": "optimizer",
   "value": "0.1"
 }

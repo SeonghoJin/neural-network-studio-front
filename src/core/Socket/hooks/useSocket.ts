@@ -20,6 +20,12 @@ import { BlockRemoveDto } from '../dto/block.remove.dto';
 import { useRemoteBlockConfigChange } from './useRemoteBlockConfigChange';
 import { useRemoteBlockLabelChange } from './useRemoteBlockLabelChange';
 import { useRemoteEdgeUpdate } from './useRemoteEdgeUpdate';
+import { useRemoteProjectLearningRateReductionConfigChange } from './useProjectLearningRateReductionChange';
+import { useRemoteProjectConfigChange } from './useProjectConfigChange';
+import { useRemoteProjectEarlyStopConfigChange } from './useProjectEarlyStopConfigChange';
+import { ProjectConfigChangeDto } from '../dto/project.config.change.dto';
+import { ProjectEarlyStopConfigChangeDto } from '../dto/project.earlystopconfig.change.dto';
+import { ProjectLearningRateReductionChangeDto } from '../dto/project.learningratereduction.change.dto';
 
 export const useSocket = () => {
 	const { socketService, socketRepository } = useContext(SocketContext);
@@ -34,6 +40,9 @@ export const useSocket = () => {
 	const { setRemoteEdgeUpdate } = useRemoteEdgeUpdate();
 	const { setUserList } = useUserList();
 	const { setCreateUserResponse } = useCreateUserResponse();
+	const { setChangeProjectConfig } = useRemoteProjectConfigChange();
+	const { setChangeProjectLearningRateReductionConfig } = useRemoteProjectLearningRateReductionConfigChange();
+	const { setChangeProjectEarlyStopConfig } = useRemoteProjectEarlyStopConfigChange();
 
 	useEffect(() => {
 		socketRepository?.moveCursor(SocketEvent.MoveCursor, (data: CursorMoveDto) => {
@@ -69,6 +78,21 @@ export const useSocket = () => {
 		socketRepository?.removeEdge(SocketEvent.RemoveEdge, (data: EdgeRemoveDto) => {
 			setRemoteEdgeRemove(data);
 		});
+		socketRepository?.changeProjectConfig(SocketEvent.ChangeProjectConfig, (data: ProjectConfigChangeDto) => {
+			setChangeProjectConfig(data);
+		});
+		socketRepository?.changeProjectEarlyStopConfig(
+			SocketEvent.ChangeProjectEarlyStopConfig,
+			(data: ProjectEarlyStopConfigChangeDto) => {
+				setChangeProjectEarlyStopConfig(data);
+			}
+		);
+		socketRepository?.changeProjectLearningRateReductionChangeDto(
+			SocketEvent.ChangeProjectLearningRateReductionConfig,
+			(data: ProjectLearningRateReductionChangeDto) => {
+				setChangeProjectLearningRateReductionConfig(data);
+			}
+		);
 	}, [
 		setCreateUserResponse,
 		setRemoteBlockCreate,
@@ -82,6 +106,9 @@ export const useSocket = () => {
 		setRemoteBlockConfigChange,
 		setUserList,
 		socketRepository,
+		setChangeProjectConfig,
+		setChangeProjectEarlyStopConfig,
+		setChangeProjectLearningRateReductionConfig,
 	]);
 
 	return {

@@ -1,6 +1,6 @@
 import { SocketEvent } from '../SocketEvent';
 
-export class ProjectChangeDto {
+export class ProjectConfigChangeDto {
 	message = SocketEvent.ChangeProjectConfig;
 
 	name: string | undefined;

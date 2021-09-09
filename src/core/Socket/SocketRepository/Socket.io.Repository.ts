@@ -11,6 +11,9 @@ import { EdgeUpdateDto } from '../dto/edge.update.dto';
 import { UserCreateResponseDto } from '../dto/user.create.response.dto';
 import { UserListResponseDto } from '../dto/userList.response.dto';
 import { SocketRepository } from './SocketRespository';
+import { ProjectConfigChangeDto } from '../dto/project.config.change.dto';
+import { ProjectEarlyStopConfigChangeDto } from '../dto/project.earlystopconfig.change.dto';
+import { ProjectLearningRateReductionChangeDto } from '../dto/project.learningratereduction.change.dto';
 
 export class SocketIoRepository implements SocketRepository {
 	private socket: Socket;
@@ -56,4 +59,13 @@ export class SocketIoRepository implements SocketRepository {
 	createEdge: (event: string, cf: (data: EdgeCreateDto) => void) => void = (event, cf) => this.socket.on(event, cf);
 
 	removeEdge: (event: string, cf: (data: EdgeRemoveDto) => void) => void = (event, cf) => this.socket.on(event, cf);
+
+	changeProjectConfig(event: string, cf: (data: ProjectConfigChangeDto) => void): void {}
+
+	changeProjectEarlyStopConfig(event: string, cf: (data: ProjectEarlyStopConfigChangeDto) => void): void {}
+
+	changeProjectLearningRateReductionChangeDto(
+		event: string,
+		cf: (data: ProjectLearningRateReductionChangeDto) => void
+	): void {}
 }

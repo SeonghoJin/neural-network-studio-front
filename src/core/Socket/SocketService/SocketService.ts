@@ -8,6 +8,9 @@ import { UserRemoveRequestDto } from '../dto/user.remove.request.dto';
 import { EdgeUpdateDto } from '../dto/edge.update.dto';
 import { BlockConfigChangeDto } from '../dto/block.config.change.dto';
 import { BlockLabelChangeDto } from '../dto/block.label.change.dto';
+import { ProjectConfigChangeDto } from '../dto/project.config.change.dto';
+import { ProjectEarlyStopConfigChangeDto } from '../dto/project.earlystopconfig.change.dto';
+import { ProjectLearningRateReductionChangeDto } from '../dto/project.learningratereduction.change.dto';
 
 export interface SocketService {
 	createBlock: (data: BlockCreateDto) => void;
@@ -21,4 +24,7 @@ export interface SocketService {
 	removeEdge: (data: EdgeRemoveDto) => void;
 	removeUser: (data: UserRemoveRequestDto) => void;
 	disconnect: () => void;
+	changeProjectConfig: (data: ProjectConfigChangeDto) => void;
+	changeProjectEarlyStopConfig: (data: ProjectEarlyStopConfigChangeDto) => void;
+	changeLearningRateReduction: (data: ProjectLearningRateReductionChangeDto) => void;
 }

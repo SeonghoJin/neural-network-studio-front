@@ -11,5 +11,7 @@ export enum SocketEvent {
 	UpdateEdge = 'update_edge',
 	RemoveEdge = 'remove_edge',
 	ChangeProjectConfig = 'change_project_config',
+	ChangeProjectEarlyStopConfig = 'change_project_early_stop_config',
+	ChangeProjectLearningRateReductionConfig = 'change_project_learning_rate_reduction_config',
 	RemoveUserRequest = 'remove_user_request',
 }

@@ -11,6 +11,9 @@ import { SocketEvent } from '../SocketEvent';
 import { EdgeUpdateDto } from '../dto/edge.update.dto';
 import { BlockLabelChangeDto } from '../dto/block.label.change.dto';
 import { BlockConfigChangeDto } from '../dto/block.config.change.dto';
+import { ProjectLearningRateReductionChangeDto } from '../dto/project.learningratereduction.change.dto';
+import { ProjectConfigChangeDto } from '../dto/project.config.change.dto';
+import { ProjectEarlyStopConfigChangeDto } from '../dto/project.earlystopconfig.change.dto';
 
 export class SocketIoService implements SocketService {
 	socket: Socket | null = null;
@@ -62,4 +65,10 @@ export class SocketIoService implements SocketService {
 	updateEdge(data: EdgeUpdateDto): void {
 		this.socket?.emit(SocketEvent.UpdateEdge, data);
 	}
+
+	changeLearningRateReduction(data: ProjectLearningRateReductionChangeDto): void {}
+
+	changeProjectConfig(data: ProjectConfigChangeDto): void {}
+
+	changeProjectEarlyStopConfig(data: ProjectEarlyStopConfigChangeDto): void {}
 }

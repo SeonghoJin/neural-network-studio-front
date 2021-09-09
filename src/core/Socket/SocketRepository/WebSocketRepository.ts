@@ -10,6 +10,9 @@ import { SocketRepository } from './SocketRespository';
 import { EdgeUpdateDto } from '../dto/edge.update.dto';
 import { BlockLabelChangeDto } from '../dto/block.label.change.dto';
 import { BlockConfigChangeDto } from '../dto/block.config.change.dto';
+import { ProjectLearningRateReductionChangeDto } from '../dto/project.learningratereduction.change.dto';
+import { ProjectEarlyStopConfigChangeDto } from '../dto/project.earlystopconfig.change.dto';
+import { ProjectConfigChangeDto } from '../dto/project.config.change.dto';
 
 export class WebSocketRepository implements SocketRepository {
 	private socket: WebSocket;
@@ -109,6 +112,36 @@ export class WebSocketRepository implements SocketRepository {
 	}
 
 	updateEdge(event: string, cf: (data: EdgeUpdateDto) => void): void {
+		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
+			const data = JSON.parse(msgevt.data);
+			if (data.message === event) {
+				cf(data);
+			}
+		});
+	}
+
+	changeProjectConfig(event: string, cf: (data: ProjectConfigChangeDto) => void): void {
+		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
+			const data = JSON.parse(msgevt.data);
+			if (data.message === event) {
+				cf(data);
+			}
+		});
+	}
+
+	changeProjectEarlyStopConfig(event: string, cf: (data: ProjectEarlyStopConfigChangeDto) => void): void {
+		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
+			const data = JSON.parse(msgevt.data);
+			if (data.message === event) {
+				cf(data);
+			}
+		});
+	}
+
+	changeProjectLearningRateReductionChangeDto(
+		event: string,
+		cf: (data: ProjectLearningRateReductionChangeDto) => void
+	): void {
 		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
 			const data = JSON.parse(msgevt.data);
 			if (data.message === event) {
