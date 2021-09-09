@@ -10,7 +10,7 @@ const useStyle = makeStyles({
 
 type Props = {
 	propertyName: string;
-	propertyContent: string | string[] | number;
+	propertyContent: string | undefined;
 	onChange: any;
 };
 

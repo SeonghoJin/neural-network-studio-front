@@ -58,7 +58,7 @@ const ProjectEarlyStopConfig = ({ earlyStopConfig }: Props) => {
 						propertyCandidates={monitorValues}
 						onChange={onChange}
 					/>
-					<NumberInput propertyName="patience" propertyContent={earlyStopConfig.patience || ''} onChange={onChange} />
+					<NumberInput propertyName="patience" propertyContent={earlyStopConfig.patience} onChange={onChange} />
 				</>
 			)}
 		</div>

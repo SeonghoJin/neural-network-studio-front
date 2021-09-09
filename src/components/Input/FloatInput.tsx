@@ -11,7 +11,7 @@ const useStyle = makeStyles({
 
 type Props = {
 	propertyName: string;
-	propertyContent: number;
+	propertyContent: string | undefined | null | number;
 	onChange: any;
 };
 
@@ -22,28 +22,28 @@ const FloatInput = ({ propertyName, propertyContent, onChange }: Props) => {
 		return floatWithoutSpacesRegExp.test(str);
 	}, []);
 
-	const [error, setError] = useState(!isVaild(propertyContent.toString()));
+	const [error, setError] = useState(!isVaild(propertyContent?.toString() || ''));
 
 	const handleChange = useCallback(
-		(e: ChangeEvent<any>) => {
+		(e: ChangeEvent<HTMLInputElement>) => {
+			const { value } = e.target;
+			const isNan = Number.isNaN(Number(value)) && !isVaild(value);
 			onChange({
 				target: {
 					name: e.target.name,
-					value: Number(e.target.value),
+					value: !isNan ? Number(e.target.value) : e.target.value,
 				},
 			});
-			setError(!isVaild(e.target.value));
+			setError(isNan);
 		},
 		[isVaild, onChange]
 	);
-
 	const body = (
 		<TextField
 			error={error}
 			name={propertyName}
 			onChange={handleChange}
 			value={propertyContent}
-			type="number"
 			className={classes.propertyContentContainer}
 			variant="standard"
 			label={propertyName}

@@ -11,7 +11,7 @@ const useStyle = makeStyles({
 
 type Props = {
 	propertyName: string;
-	propertyContent: string;
+	propertyContent: string | undefined;
 	onChange: (e: ChangeEvent<any>) => void;
 	canNull?: boolean;
 };
@@ -27,7 +27,7 @@ const SecondDivisionTupleInput: FC<Props> = ({ propertyName, propertyContent, on
 		[canNull]
 	);
 
-	const [error, setError] = useState(!isVaild(propertyContent));
+	const [error, setError] = useState(!isVaild(propertyContent?.toString() || ''));
 
 	const handleChange = useCallback(
 		(e: ChangeEvent<any>) => {

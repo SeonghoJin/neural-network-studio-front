@@ -44,15 +44,11 @@ const OptimizerConfig = () => {
 				onChange={onChange}
 				propertyName="optimizer"
 				propertyCandidates={optimizerValues}
-				propertyContent={optimizerConfig.optimizer || ''}
+				propertyContent={optimizerConfig.optimizer}
 			/>
-			<TextInput onChange={onChange} propertyName="loss" propertyContent={optimizerConfig.loss || ''} />
-			<TextInput onChange={onChange} propertyName="metrics" propertyContent={optimizerConfig?.metrics || ''} />
-			<FloatInput
-				onChange={onChange}
-				propertyName="learning_rate"
-				propertyContent={optimizerConfig.learning_rate || 0}
-			/>
+			<TextInput onChange={onChange} propertyName="loss" propertyContent={optimizerConfig.loss} />
+			<TextInput onChange={onChange} propertyName="metrics" propertyContent={optimizerConfig?.metrics} />
+			<FloatInput onChange={onChange} propertyName="learning_rate" propertyContent={optimizerConfig.learning_rate} />
 		</>
 	);
 
