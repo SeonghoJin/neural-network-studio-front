@@ -1,12 +1,11 @@
 import { makeStyles } from '@material-ui/core';
-import { ChangeEvent, useCallback, useMemo } from 'react';
-import useProjectConfig from '../../../../../hooks/useProjectConfig';
-import { ILearningRateReductionConfig, IProjectConfig } from '../../../../../API/project/types';
-import NumberInput from '../../../../Input/NumberInput';
-import SelectInput from '../../../../Input/SelectInput';
-import { getMonitorValues } from '../../../../../core/Project/Montior';
-import CheckInput from '../../../../Input/CheckInput';
-import FloatInput from '../../../../Input/FloatInput';
+import { ChangeEvent, useMemo } from 'react';
+import { ILearningRateReductionConfig } from '../../../../../../API/project/types';
+import NumberInput from '../../../../../Input/NumberInput';
+import SelectInput from '../../../../../Input/SelectInput';
+import { getMonitorValues } from '../../../../../../core/Project/Montior';
+import CheckInput from '../../../../../Input/CheckInput';
+import FloatInput from '../../../../../Input/FloatInput';
 
 const useStyle = makeStyles({
 	container: {
@@ -20,28 +19,16 @@ const useStyle = makeStyles({
 	},
 });
 
-type Props = {
+export type ProjectLearningRateReductionConfigProps = {
 	learningRateReduction: ILearningRateReductionConfig;
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-const ProjectLearningRateReduction = ({ learningRateReduction }: Props) => {
+const ProjectLearningRateReductionConfig = ({
+	learningRateReduction,
+	onChange,
+}: ProjectLearningRateReductionConfigProps) => {
 	const classes = useStyle();
-	const { setProjectConfig } = useProjectConfig();
-
-	const onChange = useCallback(
-		(e: ChangeEvent<HTMLInputElement>) => {
-			const { name, value } = e.target;
-
-			setProjectConfig((state) => ({
-				...(state as IProjectConfig),
-				learning_rate_reduction: {
-					...(state?.learning_rate_reduction as ILearningRateReductionConfig),
-					[name]: value,
-				},
-			}));
-		},
-		[setProjectConfig]
-	);
 
 	const monitorValues = useMemo(() => getMonitorValues(), []);
 
@@ -68,4 +55,4 @@ const ProjectLearningRateReduction = ({ learningRateReduction }: Props) => {
 	);
 };
 
-export default ProjectLearningRateReduction;
+export default ProjectLearningRateReductionConfig;

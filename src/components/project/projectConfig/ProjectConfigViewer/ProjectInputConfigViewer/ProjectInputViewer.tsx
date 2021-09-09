@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-import Upload from '../../../utils/Upload';
+import Upload from '../../../../utils/Upload';
 
 const useStyle = makeStyles({
 	wrapper: {

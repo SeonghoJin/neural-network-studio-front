@@ -1,12 +1,10 @@
 import { makeStyles } from '@material-ui/core';
-import { ChangeEvent, useCallback, useMemo } from 'react';
-import useProjectConfig from '../../../../../hooks/useProjectConfig';
-import { CircleLoading } from '../../../../utils/Loading/CircularLoading';
-import { IEarlyStopConfig, IProjectConfig, IProjectGlobalConfig } from '../../../../../API/project/types';
-import NumberInput from '../../../../Input/NumberInput';
-import SelectInput from '../../../../Input/SelectInput';
-import { getMonitorValues } from '../../../../../core/Project/Montior';
-import CheckInput from '../../../../Input/CheckInput';
+import { ChangeEvent, useMemo } from 'react';
+import { IEarlyStopConfig } from '../../../../../../API/project/types';
+import NumberInput from '../../../../../Input/NumberInput';
+import SelectInput from '../../../../../Input/SelectInput';
+import { getMonitorValues } from '../../../../../../core/Project/Montior';
+import CheckInput from '../../../../../Input/CheckInput';
 
 const useStyle = makeStyles({
 	container: {
@@ -20,27 +18,13 @@ const useStyle = makeStyles({
 	},
 });
 
-type Props = {
+export type EarlyStopConfigProps = {
 	earlyStopConfig: IEarlyStopConfig;
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-const ProjectEarlyStopConfig = ({ earlyStopConfig }: Props) => {
+const ProjectEarlyStopConfig = ({ earlyStopConfig, onChange }: EarlyStopConfigProps) => {
 	const classes = useStyle();
-	const { setProjectConfig } = useProjectConfig();
-	const onChange = useCallback(
-		(e: ChangeEvent<HTMLInputElement>) => {
-			const { name, value } = e.target;
-
-			setProjectConfig((state) => ({
-				...(state as IProjectConfig),
-				early_stop: {
-					...(state?.early_stop as IEarlyStopConfig),
-					[name]: value,
-				},
-			}));
-		},
-		[setProjectConfig]
-	);
 
 	const monitorValues = useMemo(() => getMonitorValues(), []);
 

@@ -2,7 +2,8 @@ import { Container, makeStyles } from '@material-ui/core';
 import { useState } from 'react';
 import ProjectConfigSideBar from './projectConfigSideBar/ProjectConfigSideBar';
 import ProjectConfigViewer from './ProjectConfigViewer/ProjectConfigViewer';
-import selectorItemHeads, { SelectorMappingViewer } from './index';
+import selectorItemHeads from './index';
+import { SelectorMappingViewerType } from '../ProjectShare/ProjectShareConfig';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -18,7 +19,11 @@ const useStyle = makeStyles({
 	},
 });
 
-const ProjectConfigMain = () => {
+export type ProjectConfigMainProps = {
+	selectorMappingViewer: SelectorMappingViewerType;
+};
+
+const ProjectConfigMain = ({ selectorMappingViewer }: ProjectConfigMainProps) => {
 	const classes = useStyle();
 
 	const [value, setValue] = useState<keyof typeof selectorItemHeads>(selectorItemHeads['Global Config']);
@@ -29,7 +34,7 @@ const ProjectConfigMain = () => {
 				<Container className={classes.container}>
 					<ProjectConfigSideBar value={value} setValue={setValue} />
 					<div className={classes.contentWrapper}>
-						<ProjectConfigViewer selectorMappingViewer={SelectorMappingViewer} index={value} />
+						<ProjectConfigViewer selectorMappingViewer={selectorMappingViewer} index={value} />
 					</div>
 				</Container>
 			</div>

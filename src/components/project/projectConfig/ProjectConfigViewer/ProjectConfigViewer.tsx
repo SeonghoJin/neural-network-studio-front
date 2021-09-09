@@ -1,4 +1,4 @@
-import { useMemo, createElement } from 'react';
+import { createElement } from 'react';
 
 import selectorItemHeads, { SelectorMappingViewerType } from '..';
 import CircleLoading from '../../../utils/Loading/CircularLoading';
@@ -10,13 +10,16 @@ type Props = {
 };
 
 const ProjectConfigViewer = ({ index, selectorMappingViewer }: Props) => {
-	const { error, loading } = useProjectConfig();
-
-	const element = useMemo(() => {
-		return createElement(selectorMappingViewer[index]);
-	}, [index, selectorMappingViewer]);
-
-	return <>{error || loading ? <CircleLoading /> : element}</>;
+	const { projectConfig, error, loading } = useProjectConfig();
+	return (
+		<>
+			{loading && <CircleLoading />}
+			{projectConfig &&
+				createElement(selectorMappingViewer[index], {
+					projectConfig,
+				})}
+		</>
+	);
 };
 
 export default ProjectConfigViewer;

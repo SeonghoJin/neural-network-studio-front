@@ -1,12 +1,12 @@
 import { makeStyles } from '@material-ui/core';
 import { ChangeEvent, useCallback, useMemo } from 'react';
-import useProjectConfig from '../../../../hooks/useProjectConfig';
-import CircleLoading from '../../../utils/Loading/CircularLoading';
-import { IProjectConfig, IProjectOptimizerConfig } from '../../../../API/project/types';
-import TextInput from '../../../Input/TextInput';
-import SelectInput from '../../../Input/SelectInput';
-import { getOptimizerValues } from '../../../../core/Project/Optimizers';
-import FloatInput from '../../../Input/FloatInput';
+import useProjectConfig from '../../../../../hooks/useProjectConfig';
+import CircleLoading from '../../../../utils/Loading/CircularLoading';
+import { IProjectConfig, IProjectOptimizerConfig } from '../../../../../API/project/types';
+import TextInput from '../../../../Input/TextInput';
+import SelectInput from '../../../../Input/SelectInput';
+import { getOptimizerValues } from '../../../../../core/Project/Optimizers';
+import FloatInput from '../../../../Input/FloatInput';
 
 const useStyle = makeStyles({
 	wrapper: {
