@@ -1,16 +1,20 @@
 import { createElement } from 'react';
 
-import selectorItemHeads, { SelectorMappingViewerType } from '..';
+import { SelectorMappingViewerKey, SelectorMappingViewerType } from '..';
 import CircleLoading from '../../../utils/Loading/CircularLoading';
 import useProjectConfig from '../../../../hooks/useProjectConfig';
 
-type Props = {
-	index: keyof typeof selectorItemHeads;
-	selectorMappingViewer: SelectorMappingViewerType;
+export type ProjectConfigViewerProps = {
+	index: any;
+	selectorMappingViewer: any;
 };
 
-const ProjectConfigViewer = ({ index, selectorMappingViewer }: Props) => {
-	const { projectConfig, error, loading } = useProjectConfig();
+const ProjectConfigViewer = ({ index, selectorMappingViewer }: ProjectConfigViewerProps) => {
+	const { projectConfig, loading } = useProjectConfig();
+	if (!(index in selectorMappingViewer)) {
+		throw new Error('허용되지 않는 행위입니다.');
+	}
+
 	return (
 		<>
 			{loading && <CircleLoading />}

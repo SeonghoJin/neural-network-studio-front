@@ -8,7 +8,6 @@ import GlobalConfig, { GlobalConfigProps } from './ProjectGlobalConfig';
 const GlobalConfigContainer = ({ projectConfig }: Omit<GlobalConfigProps, 'onChange'>) => {
 	const globalConfig = projectConfig as IProjectGlobalConfig;
 	const { setProjectConfig } = useProjectConfig();
-	console.log(globalConfig);
 	const onChange = useCallback(
 		(e: ChangeEvent<HTMLInputElement>) => {
 			const { name, value } = e.target;

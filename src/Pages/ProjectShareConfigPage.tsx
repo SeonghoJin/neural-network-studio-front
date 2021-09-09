@@ -2,7 +2,10 @@ import { makeStyles } from '@material-ui/core';
 import ProjectConfigNav from '../components/project/projectConfig/projectConfigNav/projectConfigNav';
 import ProjectNav from '../components/project/ProjectNav/projectNav';
 import ProjectConfigMain from '../components/project/projectConfig/projectConfigMain';
-import { SelectorMappingViewerShareMode } from '../components/project/ProjectShare/ProjectShareConfig';
+import {
+	selectorItemHeadsShareMode,
+	SelectorMappingViewerShareMode,
+} from '../components/project/ProjectShare/ProjectShareConfig';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -20,7 +23,7 @@ const useStyle = makeStyles({
 	},
 });
 
-export const ProjectConfigPage = () => {
+export const ProjectShareConfigPage = () => {
 	const classes = useStyle();
 
 	return (
@@ -30,7 +33,10 @@ export const ProjectConfigPage = () => {
 					<ProjectNav />
 					<ProjectConfigNav />
 					<div className={classes.content}>
-						<ProjectConfigMain selectorMappingViewer={SelectorMappingViewerShareMode} />
+						<ProjectConfigMain
+							selectorMappingViewer={SelectorMappingViewerShareMode}
+							selectorItemHeads={selectorItemHeadsShareMode}
+						/>
 					</div>
 				</div>
 			</div>

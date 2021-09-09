@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core';
 import ProjectConfigMain from '../components/project/projectConfig/projectConfigMain';
 import ProjectConfigNav from '../components/project/projectConfig/projectConfigNav/projectConfigNav';
 import ProjectNav from '../components/project/ProjectNav/projectNav';
-import { SelectorMappingViewer } from '../components/project/projectConfig';
+import selectorItemHeads, { SelectorMappingViewer } from '../components/project/projectConfig';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -30,7 +30,7 @@ export const ProjectConfigPage = () => {
 					<ProjectNav />
 					<ProjectConfigNav />
 					<div className={classes.content}>
-						<ProjectConfigMain selectorMappingViewer={SelectorMappingViewer} />
+						<ProjectConfigMain selectorMappingViewer={SelectorMappingViewer} selectorItemHeads={selectorItemHeads} />
 					</div>
 				</div>
 			</div>

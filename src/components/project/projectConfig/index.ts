@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import ProjectOptimizerConfigViewer from './ProjectConfigViewer/ProjectOptimizerConfigViewer/ProjectOptimizerConfigViewer';
 import ProjectInputViewer from './ProjectConfigViewer/ProjectInputConfigViewer/ProjectInputViewer';
 import ProjectGlobalConfigContainer from './ProjectConfigViewer/ProjectGlobalConfigViewer/ProjectGlobalConfigContainer';
+import ProjectOptimizerConfigContainer from './ProjectConfigViewer/ProjectOptimizerConfigViewer/ProjectOptimizerConfigContainer';
 
 enum selectorItemHeads {
 	'Global Config' = 'Global Config',
@@ -9,14 +9,14 @@ enum selectorItemHeads {
 	'Upload File' = 'Upload File',
 }
 
-type SelectorMappingViewerKey = keyof typeof selectorItemHeads;
+export type SelectorMappingViewerKey = keyof typeof selectorItemHeads;
 export type SelectorMappingViewerType = {
 	[K in SelectorMappingViewerKey]: FC<any>;
 };
 
 export const SelectorMappingViewer: SelectorMappingViewerType = {
 	'Global Config': ProjectGlobalConfigContainer,
-	Optimizer: ProjectOptimizerConfigViewer,
+	Optimizer: ProjectOptimizerConfigContainer,
 	'Upload File': ProjectInputViewer,
 };
 
