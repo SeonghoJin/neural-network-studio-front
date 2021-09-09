@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { atom, useRecoilState } from 'recoil';
 import { AxiosError } from 'axios';
 import StandardModal from '../components/utils/modal/StandardModal';
@@ -38,7 +38,7 @@ export const useLogin = () => {
 						data: response,
 					}));
 					return true;
-				} catch (e) {
+				} catch (e: AxiosError | any) {
 					setResult({
 						data: null,
 						loading: false,

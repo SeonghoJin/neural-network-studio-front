@@ -27,6 +27,7 @@ type Props = {
 const ProjectLearningRateReduction = ({ learningRateReduction }: Props) => {
 	const classes = useStyle();
 	const { setProjectConfig } = useProjectConfig();
+
 	const onChange = useCallback(
 		(e: ChangeEvent<HTMLInputElement>) => {
 			const { name, value } = e.target;

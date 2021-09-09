@@ -48,7 +48,7 @@ const useUpdateUserProfile = () => {
 						formData.append('image', blob);
 						const userProfileImage = await uploadImage(formData);
 						profileId = userProfileImage.id;
-					} catch (e) {
+					} catch (e: AxiosError | any) {
 						await setResult({
 							loading: false,
 							error: e,
@@ -71,7 +71,7 @@ const useUpdateUserProfile = () => {
 						data: response || true,
 					});
 					return response || true;
-				} catch (e) {
+				} catch (e: AxiosError | any) {
 					setResult({
 						loading: false,
 						error: e,

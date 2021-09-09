@@ -27,14 +27,13 @@ const FloatInput = ({ propertyName, propertyContent, onChange }: Props) => {
 	const handleChange = useCallback(
 		(e: ChangeEvent<HTMLInputElement>) => {
 			const { value } = e.target;
-			const isNan = Number.isNaN(Number(value)) && !isVaild(value);
 			onChange({
 				target: {
 					name: e.target.name,
-					value: !isNan ? Number(e.target.value) : e.target.value,
+					value: e.target.value,
 				},
 			});
-			setError(isNan);
+			setError(!isVaild(e.target.value));
 		},
 		[isVaild, onChange]
 	);

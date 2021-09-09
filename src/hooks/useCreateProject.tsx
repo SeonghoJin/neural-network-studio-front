@@ -52,7 +52,7 @@ const useCreateProject = () => {
 						loading: false,
 					});
 					return true;
-				} catch (e) {
+				} catch (e: AxiosError | any) {
 					setResult({
 						error: e,
 						data: null,

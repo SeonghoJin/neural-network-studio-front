@@ -1,5 +1,5 @@
 import { makeStyles, TextField } from '@material-ui/core';
-import { ChangeEvent, isValidElement, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 import Input from './Input';
 
 import { numberWithoutSpacesRegExp } from './Validation';
@@ -26,13 +26,11 @@ const NumberInput = ({ propertyName, propertyContent, onChange }: Props) => {
 
 	const handleChange = useCallback(
 		(e: ChangeEvent<HTMLInputElement>) => {
-			const { value } = e.target;
-			const isNan = !isVaild(value);
 			onChange({
 				...e,
 				target: {
 					name: e.target.name,
-					value: !isNan ? Number(e.target.value) : e.target.value,
+					value: e.target.value,
 				},
 			});
 			setError(!isVaild(e.target.value));

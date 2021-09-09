@@ -24,7 +24,7 @@ const useProjectConfig = () => {
 			try {
 				const data = await getProjectConfig(projectNo);
 				return data;
-			} catch (e) {
+			} catch (e: AxiosError | any) {
 				return e;
 			}
 		}

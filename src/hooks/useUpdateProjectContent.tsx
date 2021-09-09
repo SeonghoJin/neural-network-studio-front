@@ -35,8 +35,11 @@ const useUpdateProjectContent = () => {
 						error: null,
 						data: response || true,
 					});
-					return { projectNo, projectContent };
-				} catch (e) {
+					return {
+						projectNo,
+						projectContent,
+					};
+				} catch (e: AxiosError | any) {
 					setResult({
 						data: null,
 						loading: false,

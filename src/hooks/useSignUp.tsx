@@ -39,7 +39,7 @@ const useSignUp = () => {
 						data: data || true,
 					});
 					return data || true;
-				} catch (e) {
+				} catch (e: AxiosError | any) {
 					setResult({
 						loading: false,
 						error: e,

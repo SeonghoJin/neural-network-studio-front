@@ -36,7 +36,7 @@ export const useLogout = () => {
 				data: response || true,
 			}));
 			return true;
-		} catch (e) {
+		} catch (e: AxiosError | any) {
 			setResult({
 				data: null,
 				loading: false,
