@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core';
+import { useEffect } from 'react';
 import ProjectConfigNav from '../components/project/projectConfig/projectConfigNav/projectConfigNav';
 import ProjectNav from '../components/project/ProjectNav/projectNav';
 import ProjectConfigMain from '../components/project/projectConfig/projectConfigMain';
@@ -6,6 +7,11 @@ import {
 	selectorItemHeadsShareMode,
 	SelectorMappingViewerShareMode,
 } from '../components/project/ProjectShare/ProjectShareConfig';
+import { IEarlyStopConfig, ILearningRateReductionConfig, IProjectConfig } from '../API/project/types';
+import useProjectConfig from '../hooks/useProjectConfig';
+import { useRemoteProjectEarlyStopConfigChange } from '../core/Socket/hooks/useProjectEarlyStopConfigChange';
+import { useRemoteProjectConfigChange } from '../core/Socket/hooks/useProjectConfigChange';
+import { useRemoteProjectLearningRateReductionConfigChange } from '../core/Socket/hooks/useProjectLearningRateReductionChange';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -25,6 +31,50 @@ const useStyle = makeStyles({
 
 export const ProjectShareConfigPage = () => {
 	const classes = useStyle();
+	const { projectConfig, setProjectConfig } = useProjectConfig();
+	const { changeProjectEarlyStopConfig } = useRemoteProjectEarlyStopConfigChange();
+	const { changeProjectConfig } = useRemoteProjectConfigChange();
+	const { changeProjectLearningRateReductionConfig } = useRemoteProjectLearningRateReductionConfigChange();
+
+	useEffect(() => {
+		if (projectConfig && changeProjectConfig != null && changeProjectConfig.name !== undefined) {
+			const { name, value } = changeProjectConfig;
+			setProjectConfig({
+				...(projectConfig as IProjectConfig),
+				[name]: value,
+			});
+		}
+	}, [changeProjectConfig, projectConfig, setProjectConfig]);
+
+	useEffect(() => {
+		if (projectConfig && changeProjectEarlyStopConfig != null && changeProjectEarlyStopConfig.name !== undefined) {
+			const { name, value } = changeProjectEarlyStopConfig;
+			setProjectConfig((state) => ({
+				...(state as IProjectConfig),
+				early_stop: {
+					...(state?.early_stop as IEarlyStopConfig),
+					[name]: value,
+				},
+			}));
+		}
+	}, [changeProjectEarlyStopConfig, projectConfig, setProjectConfig]);
+
+	useEffect(() => {
+		if (
+			projectConfig &&
+			changeProjectLearningRateReductionConfig != null &&
+			changeProjectLearningRateReductionConfig.name !== undefined
+		) {
+			const { name, value } = changeProjectLearningRateReductionConfig;
+			setProjectConfig((state) => ({
+				...(state as IProjectConfig),
+				learning_rate_reduction: {
+					...(state?.learning_rate_reduction as ILearningRateReductionConfig),
+					[name]: value,
+				},
+			}));
+		}
+	});
 
 	return (
 		<>

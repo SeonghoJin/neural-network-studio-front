@@ -41,6 +41,28 @@
 
 ```
 
+#Project Config 구조
+```json
+{"batch_size":32,
+  "early_stop":{
+    "monitor":"loss",
+    "patience":2,
+    "usage":true
+  },
+  "learning_rate_reduction":{
+    "factor":0.25,
+    "min_lr":3e-7,
+    "monitor":"val_accuracy",
+    "patience":2,"usage":true
+  },
+  "epochs":3242,
+  "learning_rate":0.004,
+  "loss":"sparse_categorical_crossentropy",
+  "metrics":["accuracy"],
+  "optimizer":"adam"
+}
+```
+
 ## Entity
 
 - IProjectContent
@@ -285,4 +307,40 @@ content.flowState.elements = content.flowState.elements.filter((element) => {
 })
 ````
 
-# ProjectConfig
+# ProjectConfig (추가)
+
+#### 'change_project_config Event'
+
+```typescript
+import {ProjectConfigChangeDto} from "./project.config.change.dto";
+
+dto: ProjectConfigChangeDto = new ProjectConfigChangeDto();
+projectConfig : IProjectConfig = new IProjectConfig();
+
+const {name, value} = dto;
+projectConfig[name] = value;
+```
+#### 'change_project_early_stop_config Event'
+
+```typescript
+
+import {ProjectEarlyStopConfigChangeDto} from "./project.earlystopconfig.change.dto";
+
+dto: ProjectEarlyStopConfigChangeDto = new ProjectEarlyStopConfigChangeDto();
+projectConfig : IProjectConfig = new IProjectConfig();
+
+const {name, value} = dto;
+projectConfig.early_stop[name] = value;
+```
+#### 'change_project_learning_rate_reduction_config'
+
+```typescript
+import {ProjectLearningRateReductionChangeDto} from "./project.learningratereduction.change.dto";
+
+dto: ProjectLearningRateReductionChangeDto = new ProjectLearningRateReductionChangeDto();
+projectConfig : IProjectConfig = new IProjectConfig();
+
+const {name, value} = dto;
+projectConfig.learning_rate_reduction[name] = value;
+
+```
