@@ -1,18 +1,41 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import useProjectShareLocation from '../../../hooks/useProjectShareLocation';
 import config from '../../../config';
-import { SocketContext } from './SocketContext';
+import { useSocketDispatch, useSocketState } from './SocketContext';
 import { WebSocketRepository } from '../SocketRepository/WebSocketRepository';
 import { WebSocketService } from '../SocketService/WebSocketService';
 
 export const WebSocketContext = ({ children }: { children: React.ReactNode }) => {
-	console.log(useLocation());
+	const dispatch = useSocketDispatch();
 	const location = useProjectShareLocation();
-	const socket = new WebSocket(`${config.SOCKET_SERVER_PREFIX}/ws/${location.roomNo}`);
-	const values = {
-		socketRepository: new WebSocketRepository(socket),
-		socketService: new WebSocketService(socket),
-	};
-	return <SocketContext.Provider value={values}>{children}</SocketContext.Provider>;
+	const socketState = useSocketState();
+
+	useEffect(() => {
+		if (socketState.socketRepository === null || socketState.socketService === null) {
+			const socket = new WebSocket(`${config.SOCKET_SERVER_PREFIX}/ws/${location.roomNo}`);
+			socket.onopen = () => {
+				console.log('open');
+				const values = {
+					socketRepository: new WebSocketRepository(socket),
+					socketService: new WebSocketService(socket),
+				};
+				dispatch({
+					payload: values,
+				});
+			};
+
+			socket.onclose = () => {
+				console.log('closed');
+			};
+		}
+	}, [dispatch, location.roomNo, socketState.socketRepository, socketState.socketService]);
+
+	useEffect(() => {
+		return () => {
+			socketState.socketService?.disconnect();
+			socketState.socketService = null;
+			socketState.socketRepository = null;
+		};
+	}, [socketState, socketState.socketService]);
+	return <>{children}</>;
 };

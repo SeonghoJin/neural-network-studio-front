@@ -46,7 +46,6 @@ const ProjectEditorShareGraphContainer = () => {
 	const { remoteBlockMove } = useRemoteBlockMove();
 	const { createdUserResponse } = useCreateUserResponse();
 	const dispatch = useDispatch();
-
 	const setReactInstance = useCallback(
 		(instance: OnLoadParams) => {
 			dispatch(setReactFlowInstance(instance));
@@ -130,12 +129,6 @@ const ProjectEditorShareGraphContainer = () => {
 	);
 
 	useEffect(() => {
-		return () => {
-			socketService?.disconnect();
-		};
-	}, [socketService]);
-
-	useEffect(() => {
 		if (remoteBlockMove !== null) {
 			dispatch(setElementByIdAndUpdatePosition(remoteBlockMove));
 		}
@@ -174,14 +167,14 @@ const ProjectEditorShareGraphContainer = () => {
 	useEffect(() => {
 		if (remoteBlockConfigChange != null) {
 			const { blockId, config } = remoteBlockConfigChange;
-			if (!blockId || !config || !config.value || !config.name) {
+			if (!blockId || !config) {
 				throw new Error('잘못된 데이터입니다.');
 			}
 
 			dispatch(
 				setElementByIdAndUpdateConfig({
 					key: config.name,
-					value: config.name,
+					value: config.value,
 					id: blockId,
 				})
 			);

@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { SocketContext } from '../Context/SocketContext';
+import { SocketContext, useSocketState } from '../Context/SocketContext';
 import { SocketEvent } from '../SocketEvent';
 import { CursorMoveDto } from '../dto/cursor.move.dto';
 import { useRemoteCursorMove } from './useRemoteCursorMove';
@@ -28,7 +28,7 @@ import { ProjectEarlyStopConfigChangeDto } from '../dto/project.earlystopconfig.
 import { ProjectLearningRateReductionChangeDto } from '../dto/project.learningratereduction.change.dto';
 
 export const useSocket = () => {
-	const { socketService, socketRepository } = useContext(SocketContext);
+	const { socketService, socketRepository } = useSocketState();
 	const { setRemoteCursorMove } = useRemoteCursorMove();
 	const { setRemoteEdgeCreate } = useRemoteEdgeCreate();
 	const { setRemoteEdgeRemove } = useRemoteEdgeRemove();
@@ -43,56 +43,58 @@ export const useSocket = () => {
 	const { setChangeProjectConfig } = useRemoteProjectConfigChange();
 	const { setChangeProjectLearningRateReductionConfig } = useRemoteProjectLearningRateReductionConfigChange();
 	const { setChangeProjectEarlyStopConfig } = useRemoteProjectEarlyStopConfigChange();
-
 	useEffect(() => {
-		socketRepository?.moveCursor(SocketEvent.MoveCursor, (data: CursorMoveDto) => {
-			setRemoteCursorMove(data);
+		socketRepository?.initSocketRepository(() => {
+			socketRepository?.moveCursor(SocketEvent.MoveCursor, (data: CursorMoveDto) => {
+				setRemoteCursorMove(data);
+			});
+			socketRepository?.createdUserResponse(SocketEvent.CreateUserResponse, (data: UserCreateResponseDto) => {
+				console.log(data);
+				setCreateUserResponse(data);
+			});
+			socketRepository?.renewUserListResponse(SocketEvent.UserListResponse, (data: UserListResponseDto) => {
+				setUserList(data);
+			});
+			socketRepository?.createBlock(SocketEvent.CreateBlock, (data: BlockCreateDto) => {
+				setRemoteBlockCreate(data);
+			});
+			socketRepository?.changeBlockConfig(SocketEvent.ChangeBlockConfig, (data) => {
+				setRemoteBlockConfigChange(data);
+			});
+			socketRepository?.changeBlockLabel(SocketEvent.ChangeBlockLabel, (data) => {
+				setRemoteBlockLabelChange(data);
+			});
+			socketRepository?.updateEdge(SocketEvent.UpdateEdge, (data) => {
+				setRemoteEdgeUpdate(data);
+			});
+			socketRepository?.moveBlock(SocketEvent.MoveBlock, (data: BlockMoveDto) => {
+				setRemoteBlockMove(data);
+			});
+			socketRepository?.removeBlock(SocketEvent.RemoveBlock, (data: BlockRemoveDto) => {
+				setRemoteBlockRemove(data);
+			});
+			socketRepository?.createEdge(SocketEvent.CreateEdge, (data: EdgeCreateDto) => {
+				setRemoteEdgeCreate(data);
+			});
+			socketRepository?.removeEdge(SocketEvent.RemoveEdge, (data: EdgeRemoveDto) => {
+				setRemoteEdgeRemove(data);
+			});
+			socketRepository?.changeProjectConfig(SocketEvent.ChangeProjectConfig, (data: ProjectConfigChangeDto) => {
+				setChangeProjectConfig(data);
+			});
+			socketRepository?.changeProjectEarlyStopConfig(
+				SocketEvent.ChangeProjectEarlyStopConfig,
+				(data: ProjectEarlyStopConfigChangeDto) => {
+					setChangeProjectEarlyStopConfig(data);
+				}
+			);
+			socketRepository?.changeProjectLearningRateReductionChangeDto(
+				SocketEvent.ChangeProjectLearningRateReductionConfig,
+				(data: ProjectLearningRateReductionChangeDto) => {
+					setChangeProjectLearningRateReductionConfig(data);
+				}
+			);
 		});
-		socketRepository?.createdUserResponse(SocketEvent.CreateUserResponse, (data: UserCreateResponseDto) => {
-			setCreateUserResponse(data);
-		});
-		socketRepository?.renewUserListResponse(SocketEvent.UserListResponse, (data: UserListResponseDto) => {
-			setUserList(data);
-		});
-		socketRepository?.createBlock(SocketEvent.CreateBlock, (data: BlockCreateDto) => {
-			setRemoteBlockCreate(data);
-		});
-		socketRepository?.changeBlockConfig(SocketEvent.ChangeBlockConfig, (data) => {
-			setRemoteBlockConfigChange(data);
-		});
-		socketRepository?.changeBlockLabel(SocketEvent.ChangeBlockLabel, (data) => {
-			setRemoteBlockLabelChange(data);
-		});
-		socketRepository?.updateEdge(SocketEvent.UpdateEdge, (data) => {
-			setRemoteEdgeUpdate(data);
-		});
-		socketRepository?.moveBlock(SocketEvent.MoveBlock, (data: BlockMoveDto) => {
-			setRemoteBlockMove(data);
-		});
-		socketRepository?.removeBlock(SocketEvent.RemoveBlock, (data: BlockRemoveDto) => {
-			setRemoteBlockRemove(data);
-		});
-		socketRepository?.createEdge(SocketEvent.CreateEdge, (data: EdgeCreateDto) => {
-			setRemoteEdgeCreate(data);
-		});
-		socketRepository?.removeEdge(SocketEvent.RemoveEdge, (data: EdgeRemoveDto) => {
-			setRemoteEdgeRemove(data);
-		});
-		socketRepository?.changeProjectConfig(SocketEvent.ChangeProjectConfig, (data: ProjectConfigChangeDto) => {
-			setChangeProjectConfig(data);
-		});
-		socketRepository?.changeProjectEarlyStopConfig(
-			SocketEvent.ChangeProjectEarlyStopConfig,
-			(data: ProjectEarlyStopConfigChangeDto) => {
-				setChangeProjectEarlyStopConfig(data);
-			}
-		);
-		socketRepository?.changeProjectLearningRateReductionChangeDto(
-			SocketEvent.ChangeProjectLearningRateReductionConfig,
-			(data: ProjectLearningRateReductionChangeDto) => {
-				setChangeProjectLearningRateReductionConfig(data);
-			}
-		);
 	}, [
 		setCreateUserResponse,
 		setRemoteBlockCreate,

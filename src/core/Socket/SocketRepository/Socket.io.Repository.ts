@@ -68,4 +68,6 @@ export class SocketIoRepository implements SocketRepository {
 		event: string,
 		cf: (data: ProjectLearningRateReductionChangeDto) => void
 	): void {}
+
+	initSocketRepository(cf: () => void): void {}
 }

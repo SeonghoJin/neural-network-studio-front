@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Elements, OnLoadParams } from 'react-flow-nns';
 import { setReactFlowInstance } from '../../../module/ReactFlowInstance';
 import ProjectEditorGraph from './projectEditorGraph';
@@ -25,6 +25,10 @@ const ProjectEditorGraphContainer = () => {
 		},
 		[dispatch]
 	);
+
+	useEffect(() => {
+		result.mutate();
+	});
 
 	const content = result.data && (
 		<ErrorBoundary>

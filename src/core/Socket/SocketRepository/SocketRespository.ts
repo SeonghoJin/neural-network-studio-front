@@ -14,6 +14,7 @@ import { ProjectEarlyStopConfigChangeDto } from '../dto/project.earlystopconfig.
 import { ProjectLearningRateReductionChangeDto } from '../dto/project.learningratereduction.change.dto';
 
 export interface SocketRepository {
+	initSocketRepository: (cf: () => void) => void;
 	createdUserResponse: (event: string, cf: (data: UserCreateResponseDto) => void) => void;
 	renewUserListResponse: (event: string, cf: (data: UserListResponseDto) => void) => void;
 	moveCursor: (event: string, cf: (data: CursorMoveDto) => void) => void;

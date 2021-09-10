@@ -17,8 +17,11 @@ import { ProjectConfigChangeDto } from '../dto/project.config.change.dto';
 export class WebSocketRepository implements SocketRepository {
 	private socket: WebSocket;
 
+	private initState: boolean;
+
 	constructor(socket: WebSocket) {
 		this.socket = socket;
+		this.initState = false;
 	}
 
 	createdUserResponse: (event: string, cf: (data: UserCreateResponseDto) => void) => void = (event, cf) => {
@@ -148,5 +151,12 @@ export class WebSocketRepository implements SocketRepository {
 				cf(data);
 			}
 		});
+	}
+
+	initSocketRepository(cf: () => void): void {
+		if (!this.initState) {
+			cf();
+			this.initState = true;
+		}
 	}
 }

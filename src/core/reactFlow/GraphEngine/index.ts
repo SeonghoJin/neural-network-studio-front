@@ -18,7 +18,6 @@ class GraphConvertor {
 	};
 
 	addNode = (node: GraphNode) => {
-		console.log(graphNodeNameValidator.test(node.name));
 		if (!graphNodeNameValidator.test(node.name)) {
 			throw new Error(`허용되지 않은 노드 이름이 존재합니다. 수정해주세요. (${node.name})`);
 		}

@@ -101,8 +101,16 @@ const ProjectEditorGraph: FC<Props> = ({
 		const inputNode = createCustomNode({
 			data: inputBlockState,
 		});
-		setElements(flowState?.elements || [inputNode]);
-	}, [flowState?.elements, setElements]);
+		if (elements.length === 0) {
+			setElements(flowState?.elements || [inputNode]);
+		}
+	}, [elements, flowState?.elements, setElements]);
+
+	useEffect(() => {
+		return () => {
+			setElements([]);
+		};
+	}, [setElements]);
 
 	const onConnect = useCallback(
 		(params: Edge | Connection) => {
