@@ -58,7 +58,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 header ul, nav ul, footer ul {margin:0;padding:0;list-style:none}
 legend {position:absolute;font-size:0;line-height:0;text-indent:-9999em;overflow:hidden}
 label, input, button, select, img {vertical-align:middle}
-input, button {margin:0;padding:0;font-size:1em}
+input, button {margin:0;padding:0;font-size:1em; border: 0; cursor: pointer}
 button,input[type=button],input[type=submit]{cursor:pointer;}
 input[type=text], input[type=password], input[type=submit], input[type=image], button {border-radius:0;-webkit-appearance:none}
 textarea, select {font-size:1em;}
@@ -69,7 +69,8 @@ a:link, a:visited {color:inherit;text-decoration:none}
 ul,ol,li{list-style:none;padding:0;margin:0;}
 input, button, textarea, select {font-family: 'Noto Sans KR', sans-serif; outline: none}
 hr {content: '';display:block;padding:0;border:0;margin: 0;}
-
+button{
+	background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible; cursor:pointer}
 
 /*사파리 버튼 초기화*/
 input[type="text"], input[type="password"], input[type="button"], input[type="submit"], textarea { -webkit-appearance: none; -webkit-border-radius: 0; }
@@ -140,7 +141,7 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 /*공통 CSS*/
 /*layout style*/
 #container { display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
-.pos { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); -webkit-transform: translate(-50%, -50%) scale(1); -moz-transform: translate(-50%, -50%) scale(1); -ms-transform: translate(-50%, -50%) scale(1); -o-transform: translate(-50%, -50%) scale(1); }
+.pos { position: absolute; top: 60%; left: 50%; transform: translate(-50%, -50%) scale(1); -webkit-transform: translate(-50%, -50%) scale(1); -moz-transform: translate(-50%, -50%) scale(1); -ms-transform: translate(-50%, -50%) scale(1); -o-transform: translate(-50%, -50%) scale(1); }
 
 
 /*modal style*/
@@ -228,10 +229,10 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 .header .hd-profile .user-info { display: flex; align-items: center; cursor: pointer; }
 .header .hd-profile .user-info .img-profile { margin-right: 7px; }
 .header .hd-profile .user-info .user-id { font-family: 'nanumsquare'; font-size: 15px; font-weight: 800; color: #fff; transform: skew(-0.03deg); }
-.header .hd-profile .btns-group { display: none; position: absolute; top: 30px; left: -80px; width: 103px; border: 1px solid #e1e1e1; border-radius: 10px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); box-sizing: border-box; background: #fff; }
+.header .hd-profile .btns-group { display: none; position: absolute; top: 30px; right:0px; width: 103px; border: 1px solid #e1e1e1; border-radius: 10px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); box-sizing: border-box; background: #fff; overflow: hidden}
 .header .hd-profile .btns-group.active { display: block; }
-.header .hd-profile .btns-group a { display: flex; justify-content: center; align-items: center; height: 45px; border-bottom: 1px solid #e1e1e1; box-sizing: border-box; font-size: 15px; font-weight: 400; color: #2b2b2b; }
-.header .hd-profile .btns-group a:last-child{ border-bottom: 0; }
+.header .hd-profile .btns-group * { display: flex; justify-content: center; align-items: center; height: 45px; border-bottom: 1px solid #e1e1e1; box-sizing: border-box; font-size: 15px; font-weight: 400; color: #2b2b2b; }
+.header .hd-profile .btns-group *:last-child{ border-bottom: 0; }
 
 .hd-hamburger, .m-gnb { display: none; }
 
@@ -535,16 +536,16 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 	.hd-hamburger { display: block; width: 50px; height: 50px; border: none; background: url('../img/ico_hamburger1.png') right center no-repeat; background-size: 25px; }
 	.m-gnb { position: fixed; z-index: 10001; top: 0; right: -100%; width: 70%; height: 100%; background: #fff; }
     .m-gnb-bg { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, .85); }
-    
+
     .m-gnb .top { display: flex; justify-content: space-between; align-items: center; height: 50px; padding: 0 15px; box-sizing: border-box; background: #fff; }
 	.m-gnb .top .m-profile a { display: flex; align-items: center; font-family: 'nanumsquare'; font-size: 15px; font-weight: 800; color: #000; transform: skew(-0.03deg);}
 	.m-gnb .top .m-profile img { margin-right: 7px; }
     .m-gnb .m-gnb-close { display: flex; justify-content: flex-end; align-items: center; width: 50px; height: 50px; border: none; background: none; }
 	.m-gnb .m-gnb-close img { display: block; width: 18px; }
-	
+
     .m-gnb-menu > li a { display: block; width: 100%; height: 54px; line-height: 54px; padding: 0 20px; border-bottom: 1px solid #eee; box-sizing: border-box; background: url('../img/ico_arrow_right1.png') 95% center no-repeat #fff; background-size: 8px; font-size: 14px; font-weight: 400; color: #000; transform: skew(-0.03deg); }
 	.m-gnb-menu > li.active a { color: #00a778; }
-	
+
 	
 	/*인트로*/
 	.intro .top { margin-bottom: 50px; }

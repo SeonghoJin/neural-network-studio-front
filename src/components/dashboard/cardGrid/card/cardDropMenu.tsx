@@ -46,7 +46,7 @@ const CardDropMenu = ({ projectNo }: Props) => {
 			ref={dropRef}
 		>
 			<FontAwesomeIcon icon={faEllipsisH} />
-			<DropMenu open={dropMenuToggle} custom={style.dropMenu}>
+			<DropMenu open={dropMenuToggle}>
 				<div className={`${style.projectMenu}`}>
 					<button type="button">프로젝트 수정</button>
 				</div>
