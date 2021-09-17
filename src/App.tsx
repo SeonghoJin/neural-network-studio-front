@@ -7,6 +7,9 @@ import DashBoardRouter from './Router/DashBoardRouter';
 import { DynamicPath, StaticPath } from './components/PagePathConsts';
 import { AssetPage, LandingPage, NotFoundPage, ProfileModifyPage, ProfilePage, SignInPage, SignUpPage } from './Pages';
 import ProjectShareRouter from './Router/ProjectShareRouter';
+import './static/css/aos.css';
+import './static/css/common.css';
+import './static/css/swiper.min.css';
 
 function App() {
 	return (
