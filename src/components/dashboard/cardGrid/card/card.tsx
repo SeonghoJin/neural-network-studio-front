@@ -5,6 +5,9 @@ import { format } from 'util';
 import style from './card.module.css';
 import CardDropMenu from './cardDropMenu';
 import { DynamicPath } from '../../../PagePathConsts';
+import icoMore1 from '../../../../static/img/ico_more1.png';
+import iconEdit1 from '../../../../static/img/ico_edit1.png';
+import iconDelete1 from '../../../../static/img/ico_delete1.png';
 
 type Props = {
 	id: number;
@@ -20,30 +23,18 @@ const Card = ({ id, description, title, lastUpdate }: Props) => {
 		history.push(format(DynamicPath.PROJECT_FORMAT, id));
 	}, [history, id]);
 
-	const update = useMemo(() => moment(lastUpdate).format('YYYY년 MM월 DD일 HH:mm:ss'), [lastUpdate]);
-
 	return (
-		<>
-			<div className={`${style.card}`}>
-				<header className={`${style.cardHeader}`}>
-					<div className={`${style.cardTitle}`}>
-						<h4>{title}</h4>
-					</div>
-					<CardDropMenu projectNo={id} />
-				</header>
-				<main className={`${style.cardMain}`}>
-					<div className={`${style.descript}`}>
-						<span className={`${style.descript}`}>{description}</span>
-					</div>
-					<span className={`${style.lastUpdate}`}>마지막 수정 : {update}</span>
-				</main>
-				<footer className={`${style.cardFooter}`}>
-					<button type="button" className={style.startButton} onClick={openProject}>
-						프로젝트 열기
-					</button>
-				</footer>
+		<li>
+			<div className="group">
+				<div className="tit">{title}</div>
+				<CardDropMenu projectNo={id} />
+				<div className="content">{description}</div>
 			</div>
-		</>
+
+			<button type="button" className="btn-bottom js-modal-open" onClick={openProject}>
+				프로젝트 열기
+			</button>
+		</li>
 	);
 };
 
