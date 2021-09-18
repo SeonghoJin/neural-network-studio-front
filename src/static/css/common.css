@@ -261,6 +261,24 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 .intro .info li:nth-child(4) .content { background: rgba(129, 71, 202, 0.5); }
 
 
+/* 프로필 수정 */
+.profile-modify-wrapper {display: flex; align-items: center; justify-content: center}
+.profile-modify { width: 474px; padding: 60px; border-radius: 5px; box-sizing: border-box; background: transparent; font-family: 'nanumsquare'; transform: skew(-0.03deg); justify-self: center; align-self: center}
+.profile-modify .tit-page { margin-bottom: 30px; font-size: 23px; font-weight: 800; color: #000; text-align: center; }
+
+.profile-modify .list-frm { margin-bottom: 15px; }
+.profile-modify .list-frm li { margin-bottom: 20px; }
+.profile-modify .list-frm li:last-child { margin-bottom: 0; }
+.profile-modify .list-frm li input {background-color: transparent}
+.profile-modify .list-frm .inp-frm { width: 100%; height: 45px; border: none; border-bottom: 1px solid #d0d0d0; box-sizing: border-box; font-size: 18px; font-weight: 400; color: #000; }
+.profile-modify .util { margin-bottom: 27px; text-align: right; }
+.profile-modify .util .btn-link { border-bottom: 1px solid #454545; box-sizing: border-box; font-size: 15px; font-weight: 400; color: #454545; }
+
+.profile-modify .btn-frm { display: block; width: 100%; height: 50px; margin-bottom: 50px; border: none; border-radius: 5px; box-sizing: border-box; background: #5edab7; font-size: 20px; font-weight: 700; color: #fff; transition: .3s all ease-out; }
+.profile-modify .btn-frm:hover { background: #28413a; color: #fff; }
+
+
+
 /*로그인 및 회원가입 공통*/
 .box-member { width: 474px; padding: 60px; border-radius: 5px; box-sizing: border-box; background: #fff; font-family: 'nanumsquare'; transform: skew(-0.03deg); }
 .box-member .tit-page { margin-bottom: 30px; font-size: 23px; font-weight: 800; color: #000; text-align: center; }
@@ -365,9 +383,11 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 .profile-area .btn-upload label img { width: 100%; height: 100%; border-radius: 50%; box-sizing: border-box; }
 .profile-area .btn-upload input[type="file"] { position: absolute; top: 0; left: 0; z-index: 1; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
 
+
+.profile-area .txt-group { display: flex; flex-direction: column }
 .profile-area .txt-group .txt1 { display: flex; justify-content: center; align-items: center; margin-bottom: 15px; font-size: 27px; font-weight: 400; color: #000; }
-.profile-area .txt-group .txt1 button { width: 26px; height: 26px; margin-left: 5px; border: none; border-radius: 50%; box-sizing: border-box; background: none; }
-.profile-area .txt-group .txt1 button img { display: block; }
+.profile-area .txt-group .txt1 button{ width: 26px; height: 26px; margin-left: 5px; border: none; border-radius: 50%; box-sizing: border-box; background: none; }
+.profile-area .txt-group .txt1 button img, a img { display: block; }
 .profile-area .txt-group .txt2 { margin-bottom: 5px; font-size: 15px; font-weight: 400; color: #000; }
 .profile-area .txt-group .txt2 img { margin-right: 2px; }
 .profile-area .txt-group .txt3 { display: block; width: 100%; height: 75px; margin-top: 35px; padding: 15px; border: none; border-radius: 10px; box-sizing: border-box; background: #e9e9e9; resize: none; font-size: 17px; font-weight: 400; color: #000; }
@@ -588,7 +608,9 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 	/*에셋*/
 	.profile-area { padding: 30px 20px; box-sizing: border-box; }
 	.profile-area .btn-upload { width: 100px; height: 100px; }
+	.profile-area .txt-group {display: flex}
 	.profile-area .txt-group .txt1 { font-size: 24px; }
+	.profile-area .txt-group input {background-color: transparent; width: auto}
 	.asset .content .list-project-v1 { padding: 20px; box-sizing: border-box; }
 	.asset .content .list-project-v1 li { display: block; margin: 0 auto 20px; }
 	.profile-area .txt-group .txt3 { margin-top: 20px; font-size: 14px; }
@@ -627,4 +649,17 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 	
 	.box-member .inp-group .inp-frm2 { font-size: 14px; }
 	.box-member .inp-group .btn-view { transform: scale(0.8); }
+
+	/* 프로필 수정 */
+	.profile-modify { width: auto; max-width: 90%; margin: 0 auto; padding: 30px 20px; box-sizing: border-box; }
+	.profile-modify .list-frm li { margin-bottom: 10px; }
+	.profile-modify .list-frm .inp-frm { height: 40px; font-size: 14px; }
+	.profile-modify .util .btn-link { font-size: 12px; }
+	.profile-modify .btn-frm { height: 40px; margin-bottom: 30px; font-size: 14px; }
+	.profile-modify .sns-login .top { margin-bottom: 30px; }
+	.profile-modify .list-sns li { margin: 0 6px; }
+	.profile-modify .list-sns a { width: 48px; height: 48px; }
+
+	.profile-modify .inp-group .inp-frm2 { font-size: 14px; }
+	.profile-modify .inp-group .btn-view { transform: scale(0.8); }
 }

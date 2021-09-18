@@ -8,7 +8,6 @@ import CardGrid from '../components/dashboard/cardGrid/cardGrid';
 import { GetProjectListParams } from '../API/project/types';
 import usePageNation from '../components/utils/pagenation/usePageNation';
 import useProjectList from '../hooks/useProjectList';
-import { CircleLoading } from '../components/utils/Loading/CircularLoading';
 
 export const DashBoard = () => {
 	const [projectListParams, setProjectListPrams] = useState(new GetProjectListParams());
