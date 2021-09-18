@@ -30,7 +30,6 @@ const Card = ({ id, description, title, lastUpdate }: Props) => {
 				<CardDropMenu projectNo={id} />
 				<div className="content">{description}</div>
 			</div>
-
 			<button type="button" className="btn-bottom js-modal-open" onClick={openProject}>
 				프로젝트 열기
 			</button>
