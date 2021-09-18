@@ -295,7 +295,7 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 
 .box-member .inp-group { position: relative; height: 45px; border-bottom: 1px solid #d0d0d0; box-sizing: border-box; }
 .box-member .inp-group .inp-frm2 { width: 100%; height: 100%; border: none; font-size: 18px; font-weight: 400; color: #000; }
-.box-member .inp-group .btn-view { position: absolute; right: 0; bottom: 10px; width: 28px; height: 23px; border: none; background: url('../img/ico_eye1_off.png') center center no-repeat; }
+.box-member .inp-group .btn-view { position: absolute; right: 0; bottom: 10px; width: 28px; height: 23px; border: none; }
 .box-member .inp-group .btn-view.active { background-image: url('../img/ico_eye1_on.png'); }
 .box-member .list-frm .txt { display: flex; align-items: center; margin-top: 5px; font-family: 'Noto Sans KR'; font-size: 12px; font-weight: 400; color: #e94646; }
 .box-member .list-frm .txt img { margin-right: 5px; }

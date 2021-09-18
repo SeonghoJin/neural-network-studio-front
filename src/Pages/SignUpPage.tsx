@@ -8,6 +8,11 @@ import useSignUp from '../hooks/useSignUp';
 import { passwordValidationRegExp } from '../components/Input/Validation';
 import { StaticPath } from '../components/PagePathConsts';
 import Navigation from '../components/nav';
+import icoWarning1 from '../static/img/ico_warning1.png';
+import icoSns1 from '../static/img/ico_sns1.png';
+import icoSns2 from '../static/img/ico_sns2.png';
+import icoSns3 from '../static/img/ico_sns3.png';
+import icoSns4 from '../static/img/ico_sns4.png';
 
 export const Signup = () => {
 	const [inputs, setInputs] = useState({
@@ -66,69 +71,98 @@ export const Signup = () => {
 	};
 
 	return (
-		<>
-			<Navigation />
-			<div className={`${style.singupWrapper}`}>
-				<div className={`${style.formWrapper} ${utils.flexColumn}`}>
-					<header>
-						<h1>Neural Network Studio</h1>
-						<div>
-							<h3>계정만들기</h3>
-						</div>
-					</header>
-					<main>
-						<div className={`${style.signupForm} `}>
-							<div className={`${utils.inputWrapper} ${utils.flexColumn}`}>
-								<input placeholder="사용자 이름" onChange={onChange} name="id" />
-							</div>
-							<div className={`${utils.inputWrapper} ${utils.flexColumn}`}>
-								<div className={`${utils.inputWrapper}`}>
+		<div id="container">
+			<section className="sign">
+				<Navigation />
+				<div className="pos">
+					<div className="box-member">
+						<div className="tit-page">계정만들기</div>
+
+						<ol className="list-frm">
+							<li>
+								<input
+									type="text"
+									name="id"
+									placeholder="아이디를 입력하세요"
+									className="inp-frm"
+									onChange={onChange}
+								/>
+							</li>
+							<li>
+								<div className="inp-group">
 									<input
+										placeholder="비밀번호 (영문, 숫자, 특수문자 8-30자)"
+										className="inp-frm2"
 										name="password"
 										type={visiblePassword ? '' : 'password'}
-										placeholder="비밀번호"
 										onChange={(e) => {
 											onChange(e);
 										}}
 									/>
+									<button type="button" onClick={onToggleVisiblePassword} className="btn-view js-view">
+										<FontAwesomeIcon icon={visiblePassword ? faEyeSlash : faEye} />
+									</button>
 								</div>
-								{passwordValidation ? (
-									<span className={`${style.requirement} ${style.green}`}>기호, 영문, 숫자를 포함한 8자리 이상</span>
-								) : (
-									<span className={`${style.requirement} ${style.red}`}>
-										반드시 기호, 영문, 숫자를 포함한 8자리이상으로 해야합니다.
-									</span>
+								{!passwordValidation && (
+									<div className="txt">
+										<img src={icoWarning1} alt=" " />
+										반드시 기호, 영문, 숫자를 8자 이상 조합하여야 합니다
+									</div>
 								)}
-							</div>
-							<div className={`${utils.inputWrapper} ${utils.flexColumn}`}>
-								<div className={`${utils.inputWrapper}`}>
+							</li>
+							<li>
+								<div className="inp-group">
 									<input
-										type={visiblePassword ? '' : 'password'}
 										placeholder="비밀번호 확인"
-										onChange={onChangeConfirmPassword}
+										className="inp-frm2"
+										type={visiblePassword ? '' : 'password'}
+										onChange={(e) => {
+											onChangeConfirmPassword(e);
+										}}
 									/>
 								</div>
-								{passwordValidation && confirmPasswordValidation ? (
-									<span className={`${style.requirement} ${style.green}`}>맞습니다.</span>
-								) : (
-									<span className={`${style.requirement} ${style.red}`}>비밀번호가 틀립니다.</span>
+								{!(passwordValidation && confirmPasswordValidation) && (
+									<div className="txt">
+										<img src={icoWarning1} alt=" " />
+										비밀번호가 틀립니다.
+									</div>
 								)}
+							</li>
+						</ol>
+
+						<input type="button" value="회원가입" className="btn-frm" onClick={submit} />
+
+						<div className="sns-login">
+							<div className="top">
+								<div className="txt">SNS 로그인</div>
 							</div>
-							<div className={style.pwVisible}>
-								<span>비밀번호 표시</span>
-								<button type="button" onClick={onToggleVisiblePassword} className={`${utils.iconButton}`}>
-									<FontAwesomeIcon icon={visiblePassword ? faEyeSlash : faEye} />
-								</button>
-							</div>
-							<button className={`${style.submit}`} type="button" onClick={submit}>
-								<span>회원가입</span>
-							</button>
+
+							<ol className="list-sns">
+								<li>
+									<a href="#">
+										<img src={icoSns1} alt="카카오톡" />
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src={icoSns2} alt="네이버" />
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src={icoSns3} alt="구글" />
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src={icoSns4} alt="애플" />
+									</a>
+								</li>
+							</ol>
 						</div>
-					</main>
+					</div>
 				</div>
-			</div>
-			{errorFeedback}
-			{loadingFeedback}
-		</>
+			</section>
+		</div>
 	);
 };
