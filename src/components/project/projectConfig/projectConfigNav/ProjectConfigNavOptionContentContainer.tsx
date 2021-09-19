@@ -14,14 +14,7 @@ const ProjectConfigNavOptionContentContainer = () => {
 		fetch(projectNo, projectConfig);
 	}, [projectConfig, fetch, projectNo]);
 
-	return (
-		<>
-			{errorFeedback}
-			{loadingFeedback}
-			{successFeedback}
-			<ProjectConfigNavOptionContent onSave={onSave} />;
-		</>
-	);
+	return <ProjectConfigNavOptionContent onSave={onSave} />;
 };
 
 export default ProjectConfigNavOptionContentContainer;

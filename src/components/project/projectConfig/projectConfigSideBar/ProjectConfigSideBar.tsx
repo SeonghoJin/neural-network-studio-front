@@ -21,14 +21,10 @@ type Props = {
 };
 
 const ProjectConfigSideBar = ({ value, setValue, selectorItemHeads }: Props) => {
-	const classes = useStyle();
-
 	return (
-		<div className={classes.wrapper}>
-			<div className={classes.container}>
-				<ProjectConfigViewerSelector selectorItemsHeads={selectorItemHeads} value={value} setValue={setValue} />
-			</div>
-		</div>
+		<ol className="sec-menu">
+			<ProjectConfigViewerSelector value={value} setValue={setValue} selectorItemsHeads={selectorItemHeads} />
+		</ol>
 	);
 };
 

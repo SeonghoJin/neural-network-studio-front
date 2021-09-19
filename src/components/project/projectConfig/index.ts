@@ -6,7 +6,6 @@ import ProjectOptimizerConfigContainer from './ProjectConfigViewer/ProjectOptimi
 enum selectorItemHeads {
 	'Global Config' = 'Global Config',
 	'Optimizer' = 'Optimizer',
-	'Upload File' = 'Upload File',
 }
 
 export type SelectorMappingViewerKey = keyof typeof selectorItemHeads;
@@ -17,7 +16,6 @@ export type SelectorMappingViewerType = {
 export const SelectorMappingViewer: SelectorMappingViewerType = {
 	'Global Config': ProjectGlobalConfigContainer,
 	Optimizer: ProjectOptimizerConfigContainer,
-	'Upload File': ProjectInputViewer,
 };
 
 export default selectorItemHeads;

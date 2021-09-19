@@ -1,23 +1,9 @@
-import { makeStyles } from '@material-ui/core';
 import { ChangeEvent, useMemo } from 'react';
 import { ILearningRateReductionConfig } from '../../../../../../API/project/types';
-import NumberInput from '../../../../../Input/NumberInput';
-import SelectInput from '../../../../../Input/SelectInput';
 import { getMonitorValues } from '../../../../../../core/Project/Montior';
-import CheckInput from '../../../../../Input/CheckInput';
-import FloatInput from '../../../../../Input/FloatInput';
-
-const useStyle = makeStyles({
-	container: {
-		width: '100%',
-		height: '100%',
-		padding: 10,
-	},
-	earlyStopUsageCheckInputWrapper: {
-		display: 'flex',
-		flexDirection: 'column',
-	},
-});
+import { CustomCheckInput } from '../../../../../Input/custom/CustomCheckInput';
+import { CustomInput } from '../../../../../Input/custom/CustomInput';
+import { CustomSelectInput } from '../../../../../Input/custom/CustomSelectInput';
 
 export type ProjectLearningRateReductionConfigProps = {
 	learningRateReduction: ILearningRateReductionConfig;
@@ -28,30 +14,31 @@ const ProjectLearningRateReductionConfig = ({
 	learningRateReduction,
 	onChange,
 }: ProjectLearningRateReductionConfigProps) => {
-	const classes = useStyle();
-
 	const monitorValues = useMemo(() => getMonitorValues(), []);
 
 	return (
-		<div className={classes.container}>
-			<div className={classes.earlyStopUsageCheckInputWrapper}>
-				Learning Rate Reduction Usage
-				<CheckInput onChange={onChange} propertyName="usage" propertyContent={learningRateReduction.usage} />
-			</div>
+		<>
+			<CustomCheckInput
+				onChange={onChange}
+				name="usage"
+				value={learningRateReduction.usage}
+				title="Learning Rate Reduction Check"
+			/>
 			{learningRateReduction.usage && (
 				<>
-					<SelectInput
-						propertyName="monitor"
-						propertyContent={learningRateReduction.monitor}
+					<CustomSelectInput
+						name="monitor"
+						value={learningRateReduction.monitor}
 						propertyCandidates={monitorValues}
 						onChange={onChange}
+						title="Monitor"
 					/>
-					<NumberInput propertyName="patience" propertyContent={learningRateReduction.patience} onChange={onChange} />
-					<FloatInput propertyName="factor" propertyContent={learningRateReduction.factor} onChange={onChange} />
-					<FloatInput propertyName="min_lr" propertyContent={learningRateReduction.min_lr} onChange={onChange} />
+					<CustomInput title="Patience" name="patience" value={learningRateReduction.patience} onChange={onChange} />
+					<CustomInput title="Factor" name="factor" value={learningRateReduction.factor} onChange={onChange} />
+					<CustomInput title="Min_lr" name="min_lr" value={learningRateReduction.min_lr} onChange={onChange} />
 				</>
 			)}
-		</div>
+		</>
 	);
 };
 

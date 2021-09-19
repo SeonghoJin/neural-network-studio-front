@@ -5,18 +5,9 @@ import NumberInput from '../../../../../Input/NumberInput';
 import SelectInput from '../../../../../Input/SelectInput';
 import { getMonitorValues } from '../../../../../../core/Project/Montior';
 import CheckInput from '../../../../../Input/CheckInput';
-
-const useStyle = makeStyles({
-	container: {
-		width: '100%',
-		height: '100%',
-		padding: 10,
-	},
-	earlyStopUsageCheckInputWrapper: {
-		display: 'flex',
-		flexDirection: 'column',
-	},
-});
+import { CustomCheckInput } from '../../../../../Input/custom/CustomCheckInput';
+import { CustomSelectInput } from '../../../../../Input/custom/CustomSelectInput';
+import { CustomInput } from '../../../../../Input/custom/CustomInput';
 
 export type EarlyStopConfigProps = {
 	earlyStopConfig: IEarlyStopConfig;
@@ -24,28 +15,29 @@ export type EarlyStopConfigProps = {
 };
 
 const ProjectEarlyStopConfig = ({ earlyStopConfig, onChange }: EarlyStopConfigProps) => {
-	const classes = useStyle();
-
 	const monitorValues = useMemo(() => getMonitorValues(), []);
 
 	return (
-		<div className={classes.container}>
-			<div className={classes.earlyStopUsageCheckInputWrapper}>
-				Early Stop Config Usage
-				<CheckInput onChange={onChange} propertyName="usage" propertyContent={earlyStopConfig.usage} />
-			</div>
+		<>
+			<CustomCheckInput
+				onChange={onChange}
+				name="usage"
+				value={earlyStopConfig.usage}
+				title="Early Stop Config Check"
+			/>
 			{earlyStopConfig.usage && (
 				<>
-					<SelectInput
-						propertyName="monitor"
-						propertyContent={earlyStopConfig.monitor}
+					<CustomSelectInput
+						name="monitor"
+						value={earlyStopConfig.monitor}
 						propertyCandidates={monitorValues}
 						onChange={onChange}
+						title="Monitor"
 					/>
-					<NumberInput propertyName="patience" propertyContent={earlyStopConfig.patience} onChange={onChange} />
+					<CustomInput name="patience" value={earlyStopConfig.patience} onChange={onChange} title="Patience" />
 				</>
 			)}
-		</div>
+		</>
 	);
 };
 

@@ -13,7 +13,6 @@ const ProjectLearningRateReductionConfigContainer = ({
 	const onChange = useCallback(
 		(e: ChangeEvent<HTMLInputElement>) => {
 			const { name, value } = e.target;
-
 			setProjectConfig((state) => ({
 				...(state as IProjectConfig),
 				learning_rate_reduction: {

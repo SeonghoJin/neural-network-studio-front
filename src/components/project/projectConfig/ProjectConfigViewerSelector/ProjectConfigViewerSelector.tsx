@@ -1,18 +1,4 @@
-import { makeStyles } from '@material-ui/core';
 import ProjectConfigViewerSelectorItem from './ProjectConfigViewerSelectorItem';
-
-const useStyle = makeStyles({
-	wrapper: {
-		width: '100%',
-		height: '100%',
-	},
-	container: {
-		width: '100%',
-		height: '100%',
-		display: 'flex',
-		flexDirection: 'column',
-	},
-});
 
 type Props = {
 	value: any;
@@ -21,16 +7,15 @@ type Props = {
 };
 
 const ProjectConfigViewerSelector = (props: Props) => {
-	const classes = useStyle();
 	const { value, setValue, selectorItemsHeads } = props;
-	const selectorItems = (
-		<ul>
+
+	return (
+		<>
 			{Object.keys(selectorItemsHeads).map((head, index) => {
 				return (
-					<li key={head}>
+					<li key={head} className={value === head ? 'active' : ''}>
 						<ProjectConfigViewerSelectorItem
 							head={head}
-							active={head === value}
 							onClick={() => {
 								setValue(head);
 							}}
@@ -38,14 +23,6 @@ const ProjectConfigViewerSelector = (props: Props) => {
 					</li>
 				);
 			})}
-		</ul>
-	);
-
-	return (
-		<>
-			<div className={classes.wrapper}>
-				<div className={classes.container}>{selectorItems}</div>
-			</div>
 		</>
 	);
 };

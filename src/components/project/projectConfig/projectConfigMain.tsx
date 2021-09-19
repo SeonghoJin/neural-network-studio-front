@@ -1,21 +1,11 @@
-import { Container, makeStyles } from '@material-ui/core';
 import { useState } from 'react';
+import styled from 'styled-components';
 import ProjectConfigSideBar from './projectConfigSideBar/ProjectConfigSideBar';
-import ProjectConfigViewer, { ProjectConfigViewerProps } from './ProjectConfigViewer/ProjectConfigViewer';
+import ProjectConfigViewer from './ProjectConfigViewer/ProjectConfigViewer';
 
-const useStyle = makeStyles({
-	wrapper: {
-		width: '100%',
-		height: '100%',
-	},
-	container: {
-		height: '100%',
-		display: 'flex',
-	},
-	contentWrapper: {
-		flexGrow: 1,
-	},
-});
+const LeftWrapper = styled.div`
+	width: 280px;
+`;
 
 const ProjectConfigMain = ({
 	selectorMappingViewer,
@@ -24,19 +14,18 @@ const ProjectConfigMain = ({
 	selectorMappingViewer: any;
 	selectorItemHeads: any;
 }) => {
-	const classes = useStyle();
-
-	const [value, setValue] = useState<keyof typeof selectorItemHeads>(selectorItemHeads['Global Config']);
+	const [value, setValue] = useState<any>(selectorItemHeads['Global Config']);
 
 	return (
 		<>
-			<div className={classes.wrapper}>
-				<Container className={classes.container}>
+			<LeftWrapper>
+				<div className="sec-l">
 					<ProjectConfigSideBar value={value} setValue={setValue} selectorItemHeads={selectorItemHeads} />
-					<div className={classes.contentWrapper}>
-						<ProjectConfigViewer selectorMappingViewer={selectorMappingViewer} index={value} />
-					</div>
-				</Container>
+				</div>
+			</LeftWrapper>
+
+			<div className="sec-c">
+				<ProjectConfigViewer selectorMappingViewer={selectorMappingViewer} index={value} />
 			</div>
 		</>
 	);

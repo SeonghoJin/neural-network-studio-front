@@ -16,8 +16,8 @@ export const ProjectEditorPage = () => {
 		<Provider store={store}>
 			<div id="container">
 				<ProjectNav />
-				<ProjectEditorNav />
 				<section className="edit">
+					<ProjectEditorNav />
 					<div className="sec-container">
 						<ProjectEditorMain
 							projectEditorGraphContainer={<ProjectEditorGraphContainer />}
