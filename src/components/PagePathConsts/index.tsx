@@ -15,6 +15,8 @@ export enum StaticPath {
 export enum DynamicPath {
 	PROJECT = '/project/:projectNo',
 	PROJECT_FORMAT = '/project/%s',
+	PROJECT_LEARN = '/project/:projectNo/learn',
+	PROJECT_LEARN_FORMAT = '/project/%s/learn',
 	PROJECT_CONFIG = '/project/:projectNo/config',
 	PROJECT_CONFIG_FORMAT = '/project/%s/config',
 	PROJECT_SHARE = '/share/project/:projectNo/room/:roomNo',

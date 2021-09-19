@@ -1,15 +1,16 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { format } from 'util';
 import useLogout from '../../../hooks/useLogout';
 import { User } from '../../../hooks/useAuthentication';
 import imgLogo2 from '../../../static/img/img_logo2.png';
 import imgProfile1 from '../../../static/img/img_profile1.png';
 import DropMenu from '../../utils/dropMenu/dropMenu';
-import { StaticPath } from '../../PagePathConsts';
-import { MobileUserNavigation } from '../MobileUserNavigation';
+import { DynamicPath, StaticPath } from '../../PagePathConsts';
+import useProjectLocation from '../../../hooks/useProjectLocation';
 
-export const ProfileImage = styled.img`
+const ProfileImage = styled.img`
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
@@ -21,11 +22,10 @@ type Props = {
 	user: User;
 };
 
-const UserNavigation = ({ user }: Props) => {
+const EditorNavigation = ({ user }: Props) => {
 	const [flag, setFlag] = useState(false);
-	const [mobileFlag, setMobileFlag] = useState(false);
 	const { fetch } = useLogout();
-
+	const { projectNo } = useProjectLocation();
 	const toggleMenu = useCallback(
 		(e) => {
 			e.nativeEvent.stopImmediatePropagation();
@@ -54,16 +54,25 @@ const UserNavigation = ({ user }: Props) => {
 				<Link to={StaticPath.MAIN}>
 					<img src={imgLogo2} alt="NNS" className="hd-logo" />
 				</Link>
-
 				<div className="hd-menu">
-					<Link to={StaticPath.DASHBOARD_PROJECTS}>
-						<div className="ico ico-v1" />
-						<div className="tit">대시보드</div>
+					<Link to={format(DynamicPath.PROJECT_FORMAT, projectNo)}>
+						<div className="ico ico-v3" />
+						<div className="tit">편집</div>
 					</Link>
 
-					<Link to={StaticPath.ASSET_MAIN}>
-						<div className="ico ico-v2" />
-						<div className="tit">에셋</div>
+					<Link to={format(DynamicPath.PROJECT_LEARN_FORMAT, projectNo)}>
+						<div className="ico ico-v4" />
+						<div className="tit">학습</div>
+					</Link>
+
+					<Link to={format(DynamicPath.PROJECT_CONFIG_FORMAT, projectNo)}>
+						<div className="ico ico-v5" />
+						<div className="tit">모델설정</div>
+					</Link>
+
+					<Link to="/">
+						<div className="ico ico-v6" />
+						<div className="tit">Dataset</div>
 					</Link>
 				</div>
 
@@ -74,7 +83,7 @@ const UserNavigation = ({ user }: Props) => {
 					</div>
 
 					<DropMenu open={flag}>
-						<Link to={StaticPath.PROFILE}>내 정보</Link>
+						<Link to="/profile">내 정보</Link>
 						<button
 							type="button"
 							style={{
@@ -86,22 +95,9 @@ const UserNavigation = ({ user }: Props) => {
 						</button>
 					</DropMenu>
 				</div>
-
-				<button
-					type="button"
-					className="hd-hamburger js-hamburger"
-					style={{
-						zIndex: 1,
-					}}
-					onClick={() => {
-						setMobileFlag(true);
-					}}
-				/>
 			</header>
-
-			<MobileUserNavigation user={user} flag={mobileFlag} setFlag={setMobileFlag} />
 		</>
 	);
 };
 
-export default UserNavigation;
+export default EditorNavigation;

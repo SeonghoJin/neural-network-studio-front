@@ -10,6 +10,8 @@ import useRoom from '../../../../hooks/useRoom';
 import { CircleLoading } from '../../../utils/Loading/CircularLoading';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
 import { DynamicPath } from '../../../PagePathConsts';
+import icoShare1 from '../../../../static/img/ico_share1.png';
+import icoSave1 from '../../../../static/img/ico_save1.png';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -31,36 +33,22 @@ const useStyle = makeStyles({
 
 type Props = {
 	onSave: MouseEventHandler;
+	roomNo: string;
+	projectNo: string;
 };
 
-const ProjectEditorNavOptionContent = ({ onSave }: Props) => {
-	const classes = useStyle();
-	const location = useLocation();
-	const { projectNo } = useProjectLocation();
-	const { data, loading } = useRoom();
+const ProjectEditorNavOptionContent = ({ onSave, roomNo, projectNo }: Props) => {
 	return (
-		<div className={classes.wrapper}>
-			<div className={classes.container}>
-				<div className={classes.mainOptionContentItem}>
-					<Button onClick={onSave}>
-						<SaveIcon />
-					</Button>
-				</div>
-				<div className={classes.mainOptionContentItem}>
-					<Link to={`${location.pathname}/config`}>
-						<SettingsIcon />
-					</Link>
-				</div>
-				<div className={classes.mainOptionContentItem}>
-					{loading && <CircleLoading />}
-					{!loading && (
-						<Link to={`${format(DynamicPath.PROJECT_SHARE_FORMAT, projectNo, data)}`}>
-							<LinkIcon />
-						</Link>
-					)}
-				</div>
+		<>
+			<div className="btns-group">
+				<Link to={format(DynamicPath.PROJECT_SHARE_FORMAT, projectNo, roomNo)}>
+					<img src={icoShare1} alt="공유하기" />
+				</Link>
+				<button type="button" onClick={onSave}>
+					<img src={icoSave1} alt="저장하기" />
+				</button>
 			</div>
-		</div>
+		</>
 	);
 };
 

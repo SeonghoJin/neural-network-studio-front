@@ -41,7 +41,7 @@ export const ProjectSharePage = () => {
 			<div className={classes.wrapper}>
 				<div className={classes.container}>
 					<ProjectNav />
-					<ProjectEditorNav projectEditorNavOptionContent={<ProjectShareNavOptionContentContainer />} />
+					{/* <ProjectEditorNav projectEditorNavOptionContent={<ProjectShareNavOptionContentContainer />} /> */}
 					<div className={classes.content}>
 						<ProjectEditorMain
 							nodeConfigViewerContainer={<NodeConfigShareViewerContainer />}

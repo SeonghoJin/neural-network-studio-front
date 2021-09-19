@@ -29,7 +29,7 @@ const ProjectEditorNavMainContentContainer = () => {
 			{errorFeedback}
 			{loadingFeedback}
 			{successFeedback}
-			<ProjectEditorNavMainContent onGetPythonCode={onGetPythonCode} />;
+			<ProjectEditorNavMainContent onGetPythonCode={onGetPythonCode} />
 		</>
 	);
 };

@@ -6,10 +6,12 @@ import { RootState } from '../../../../module';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
 import useUpdateProjectContent from '../../../../hooks/useUpdateProjectContent';
 import SimpleBackdrop from '../../../utils/BackLoading';
+import useRoom from '../../../../hooks/useRoom';
 
 const ProjectEditorNavOptionContentContainer = () => {
 	const instance = useSelector((state: RootState) => state.reactFlowInstance.instance);
 	const { projectNo } = useProjectLocation();
+	const { data: roomNo } = useRoom();
 	const result = useUpdateProjectContent();
 	const onSave = useCallback(() => {
 		result.fetch(projectNo, {
@@ -20,10 +22,7 @@ const ProjectEditorNavOptionContentContainer = () => {
 
 	return (
 		<>
-			{result.successFeedback()}
-			{result.errorFeedback}
-			{result.loading && <SimpleBackdrop open={result.loading} />}
-			<ProjectEditorNavOptionContent onSave={onSave} />
+			<ProjectEditorNavOptionContent onSave={onSave} roomNo={roomNo || ''} projectNo={projectNo} />
 		</>
 	);
 };
