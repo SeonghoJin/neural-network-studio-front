@@ -113,21 +113,21 @@ const ModifyProfileMain = () => {
 						className={classes['text-field']}
 						label="이름"
 						name="name"
-						defaultValue={modifiedProfile?.name}
+						value={modifiedProfile?.name}
 						onChange={onChange}
 					/>
 					<TextField
 						className={classes['text-field']}
 						label="이메일"
 						name="email"
-						defaultValue={modifiedProfile?.email}
+						value={modifiedProfile?.email}
 						onChange={onChange}
 					/>
 					<TextField
 						className={classes['text-field']}
 						label="홈페이지"
 						name="webSite"
-						defaultValue={modifiedProfile?.webSite}
+						value={modifiedProfile?.webSite}
 						onChange={onChange}
 					/>
 				</TextFields>
