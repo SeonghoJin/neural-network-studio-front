@@ -45,7 +45,6 @@ const NumberInput = ({ propertyName, propertyContent, onChange }: Props) => {
 			onChange={handleChange}
 			value={propertyContent}
 			className={classes.propertyContentContainer}
-			variant="standard"
 			label={propertyName}
 			placeholder="12345"
 		/>

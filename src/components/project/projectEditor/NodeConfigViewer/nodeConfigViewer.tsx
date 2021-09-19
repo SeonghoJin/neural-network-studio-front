@@ -49,13 +49,9 @@ const NodeConfigViewer = ({ onChangeConfig, onChangeLabel, selectedElement }: Pr
 	});
 
 	return (
-		<div className={classes.wrapper}>
-			<div className={classes.elementHeadWrapper}>
-				<div className={classes.propertyTypeWrapper}>
-					<Typography>{`Type: ${data.type}`}</Typography>
-				</div>
-				<TextValidationInput propertyName="label" propertyContent={data.label} onChange={onChangeLabel} />
-			</div>
+		<div className="box2">
+			<div className="tit">{`TYPE : ${data.type}`}</div>
+			<TextValidationInput propertyName="label" propertyContent={data.label} onChange={onChangeLabel} />
 			<ul>{inputs}</ul>
 		</div>
 	);

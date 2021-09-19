@@ -56,7 +56,7 @@ const NodeContainer = ({ elementNumber, children, name }: Props) => {
 			<Button onClick={onCollapseToggle} className={`${classes.item} ${collapse ? '' : classes.active}`}>
 				<h3 style={{ margin: 0 }}>{name}</h3>
 			</Button>
-			<ul className={`${classes.Wrapper} ${classes.collapse} ${collapse ? '' : classes.show}`}>{children}</ul>
+			<ol className={`${classes.collapse} ${collapse ? '' : classes.show} depth`}>{children}</ol>
 		</li>
 	);
 };

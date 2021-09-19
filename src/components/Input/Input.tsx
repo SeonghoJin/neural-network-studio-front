@@ -4,7 +4,6 @@ import { FunctionComponent, ReactElement } from 'react';
 const useStyle = makeStyles({
 	wrapper: {
 		width: '100%',
-		padding: 5,
 	},
 	container: {
 		width: '100%',

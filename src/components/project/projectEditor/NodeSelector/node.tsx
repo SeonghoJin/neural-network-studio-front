@@ -10,6 +10,10 @@ const useBlockStyle = makeStyles({
 		width: '100%',
 		margin: 0,
 		justifyContent: 'flex-start',
+		color: '#707070',
+		fontSize: 13,
+		fontWeight: 400,
+		height: 30,
 	},
 });
 
