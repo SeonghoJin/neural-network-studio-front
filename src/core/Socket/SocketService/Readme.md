@@ -235,21 +235,37 @@ content.flowState.elements = content.flowState.elements.map((element) => {
 
 ---
 
-#### 'remove_block Event 을때 서버에서 처리해야할 것'
+#### 'remove_block Event 을때 서버에서 처리해야할 것 (수정)'
 
-dto: BlockRemoveDto라고 할때, flowState.elements에서 dto.blockId와 일치하는 element를 제거
+dto: BlockRemoveDto라고 할때, flowState.elements에서 dto.blockId와 일치하는 element를 제거,
+element가 edge일 경우 
+element.target === dto.blockId || element.source === dto.blockId
+일 경우도 제거
+
+왜냐하면 블록을 삭제할때 연결된 엣지도 삭제해야하기 때문
 
 Example
 
 ```typescript
-import { BlockRemoveDto } from "./block.remove.dto";
-import { IProjectContent } from "./types";
+import {BlockRemoveDto} from "./block.remove.dto";
+import {IProjectContent} from "./types";
+import {isEdge} from "react-flow-nns";
 
 dto : BlockRemoveDto = new BlockRemoveDto();
 content : IProjectContent = new IProjectContent();
 
+function isEdge(element){
+    if(element.source !== undefined && element.target  !== undefined){
+        return true;
+    }
+    return false;
+}
+
 content.flowState.elements = content.flowState.elements.filter((element) => {
-  return element.id != dto.blockId
+    if(isEdge(element)){
+        return element.source != dto.blockId && element.target != dto.blockId;
+    }
+    return element.id != dto.blockId
 })
 ```
 

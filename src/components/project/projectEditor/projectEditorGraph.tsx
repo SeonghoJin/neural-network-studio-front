@@ -97,20 +97,8 @@ const ProjectEditorGraph: FC<Props> = ({
 	const { isValidationConnection } = useValidationConnection();
 
 	useEffect(() => {
-		const inputBlockState = new InputBlockState();
-		const inputNode = createCustomNode({
-			data: inputBlockState,
-		});
-		if (elements.length === 0) {
-			setElements(flowState?.elements || [inputNode]);
-		}
-	}, [elements, flowState?.elements, setElements]);
-
-	useEffect(() => {
-		return () => {
-			setElements([]);
-		};
-	}, [setElements]);
+		setElements(flowState?.elements);
+	}, [flowState, setElements]);
 
 	const onConnect = useCallback(
 		(params: Edge | Connection) => {
