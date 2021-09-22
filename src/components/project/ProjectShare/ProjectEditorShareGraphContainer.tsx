@@ -148,6 +148,7 @@ const ProjectEditorShareGraphContainer = () => {
 
 	useEffect(() => {
 		if (remoteEdgeCreate?.elements != null) {
+			console.log(remoteEdgeCreate.elements);
 			dispatch(setElements(remoteEdgeCreate.elements));
 		}
 	}, [dispatch, remoteEdgeCreate]);

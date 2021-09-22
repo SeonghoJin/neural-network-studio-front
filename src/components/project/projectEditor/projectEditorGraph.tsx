@@ -102,13 +102,16 @@ const ProjectEditorGraph: FC<Props> = ({
 
 	const onConnect = useCallback(
 		(params: Edge | Connection) => {
-			const newElements = addEdge(createCustomEdge(params), elements);
+			if (reactFlowInstance?.getElements() == null) return;
+			const newElements = addEdge(createCustomEdge(params), reactFlowInstance.getElements());
+
 			if (onCreateEdge) {
 				onCreateEdge(newElements);
 			}
+			console.log(newElements);
 			setElements(newElements);
 		},
-		[elements, onCreateEdge, setElements]
+		[onCreateEdge, reactFlowInstance, setElements]
 	);
 
 	const onElementsRemove = useCallback(
