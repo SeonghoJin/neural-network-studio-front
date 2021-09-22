@@ -108,14 +108,13 @@ const ProjectEditorGraph: FC<Props> = ({
 			if (onCreateEdge) {
 				onCreateEdge(newElements);
 			}
-			console.log(newElements);
 			setElements(newElements);
 		},
 		[onCreateEdge, reactFlowInstance, setElements]
 	);
 
 	const onElementsRemove = useCallback(
-		(elementsToRemove: Elements<any>) => {
+		(elementsToRemove: Elements) => {
 			setElements(removeElements(elementsToRemove, elements));
 		},
 		[elements, setElements]
@@ -123,15 +122,16 @@ const ProjectEditorGraph: FC<Props> = ({
 
 	const onEdgeUpdate = useCallback(
 		(oldEdge: Edge, newConnection: Connection) => {
-			setElements((els: Elements) => {
-				const newElements = updateEdge(oldEdge, newConnection, els);
-				if (onUpdateEdge) {
-					onUpdateEdge(newElements);
-				}
-				return updateEdge(oldEdge, newConnection, els);
-			});
+			if (reactFlowInstance?.getElements == null) {
+				return;
+			}
+			const newElements = updateEdge(oldEdge, newConnection, reactFlowInstance.getElements());
+			if (onUpdateEdge) {
+				onUpdateEdge(newElements);
+			}
+			setElements(updateEdge(oldEdge, newConnection, newElements));
 		},
-		[onUpdateEdge, setElements]
+		[onUpdateEdge, reactFlowInstance, setElements]
 	);
 
 	const onDragOver = useCallback((e: React.DragEvent) => {
