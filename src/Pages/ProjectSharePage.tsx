@@ -3,52 +3,30 @@ import { applyMiddleware, createStore } from 'redux';
 import reduxThunk from 'redux-thunk';
 import reduxLogger from 'redux-logger';
 import { Provider } from 'react-redux';
-import { useEffect } from 'react';
 import rootReducer from '../module';
-import ProjectNav from '../components/project/ProjectNav/projectNav';
-import ProjectEditorNav from '../components/project/projectEditor/ProjectEditorNav/projectEditorNav';
-import ProjectShareNavOptionContentContainer from '../components/project/ProjectShare/ProjectShareNav/ProjectShareNavOptionContentContainer';
 import ProjectEditorMain from '../components/project/projectEditor/projectEditorMain';
-import NodeConfigShareViewerContainer from '../components/project/ProjectShare/NodeConfigShareViewer';
+import EditorShareNavigation from '../components/nav/EditorShareNavigation';
+import { ProjectEditorShareNav } from '../components/nav/ProjectEditorShareNav';
 import ProjectEditorShareGraphContainer from '../components/project/ProjectShare/ProjectEditorShareGraphContainer';
-import { useRemoteProjectConfigChange } from '../core/Socket/hooks/useProjectConfigChange';
-import { useRemoteProjectEarlyStopConfigChange } from '../core/Socket/hooks/useProjectEarlyStopConfigChange';
-import { useRemoteProjectLearningRateReductionConfigChange } from '../core/Socket/hooks/useProjectLearningRateReductionChange';
-
-const useStyle = makeStyles({
-	wrapper: {
-		width: '100vw',
-		height: '100vh',
-	},
-	container: {
-		width: '100%',
-		height: '100%',
-		display: 'flex',
-		flexDirection: 'column',
-	},
-	content: {
-		flexGrow: 1,
-	},
-});
+import NodeConfigShareViewerContainer from '../components/project/ProjectShare/NodeConfigShareViewer';
+import ProjectEditorShareMain from '../components/project/ProjectShare/ProjectEditorShareMain';
 
 const store = createStore(rootReducer, applyMiddleware(reduxThunk, reduxLogger));
 
 export const ProjectSharePage = () => {
-	const classes = useStyle();
-
 	return (
 		<Provider store={store}>
-			<div className={classes.wrapper}>
-				<div className={classes.container}>
-					<ProjectNav />
-					{/* <ProjectEditorNav projectEditorNavOptionContent={<ProjectShareNavOptionContentContainer />} /> */}
-					<div className={classes.content}>
-						<ProjectEditorMain
-							nodeConfigViewerContainer={<NodeConfigShareViewerContainer />}
+			<div id="container">
+				<EditorShareNavigation />
+				<section className="edit">
+					<ProjectEditorShareNav />
+					<div className="sec-container">
+						<ProjectEditorShareMain
 							projectEditorGraphContainer={<ProjectEditorShareGraphContainer />}
+							nodeConfigViewerContainer={<NodeConfigShareViewerContainer />}
 						/>
 					</div>
-				</div>
+				</section>
 			</div>
 		</Provider>
 	);

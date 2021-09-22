@@ -4,12 +4,11 @@ import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core';
 import { Button } from 'react-bootstrap';
 import SettingsIcon from '@material-ui/icons/Settings';
-import LinkIcon from '@material-ui/icons/Link';
 import { format } from 'util';
-import useRoom from '../../../../hooks/useRoom';
-import { CircleLoading } from '../../../utils/Loading/CircularLoading';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
 import { DynamicPath } from '../../../PagePathConsts';
+import icoShare1 from '../../../../static/img/ico_share1.png';
+import icoSave1 from '../../../../static/img/ico_save1.png';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -34,23 +33,11 @@ type Props = {
 };
 
 const ProjectShareNavOptionContent = ({ onSave }: Props) => {
-	const classes = useStyle();
-	const location = useLocation();
-	const { projectNo } = useProjectLocation();
 	return (
-		<div className={classes.wrapper}>
-			<div className={classes.container}>
-				<div className={classes.mainOptionContentItem}>
-					<Button onClick={onSave}>
-						<SaveIcon />
-					</Button>
-				</div>
-				<div className={classes.mainOptionContentItem}>
-					<Link to={`${location.pathname}/config`}>
-						<SettingsIcon />
-					</Link>
-				</div>
-			</div>
+		<div className="btns-group">
+			<button type="button" onClick={onSave}>
+				<img src={icoSave1} alt="저장하기" />
+			</button>
 		</div>
 	);
 };

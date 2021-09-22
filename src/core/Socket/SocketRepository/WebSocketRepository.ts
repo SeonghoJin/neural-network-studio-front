@@ -155,8 +155,8 @@ export class WebSocketRepository implements SocketRepository {
 
 	initSocketRepository(cf: () => void): void {
 		if (!this.initState) {
-			cf();
 			this.initState = true;
+			cf();
 		}
 	}
 }

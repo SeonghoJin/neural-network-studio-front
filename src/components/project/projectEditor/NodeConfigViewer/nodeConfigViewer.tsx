@@ -1,32 +1,9 @@
-import { makeStyles, Typography } from '@material-ui/core';
 import React, { ChangeEventHandler, createElement } from 'react';
 
 import { Node } from 'react-flow-nns';
 import { BlockState } from '../../../../core/reactFlow/block/BlockState';
 import ConfigViewerTable from './ConfigViewerTable';
 import TextValidationInput from '../../../Input/TextValidationInput';
-
-const useStyle = makeStyles({
-	wrapper: {
-		width: '100%',
-		height: '100%',
-	},
-	elementHeadWrapper: {
-		width: '100%',
-		textTransform: 'uppercase',
-	},
-	elementHead: {
-		maxWidth: '400',
-		textOverflow: 'hidden',
-		whiteSpace: 'nowrap',
-		overflow: 'hidden',
-	},
-	propertyTypeWrapper: {
-		width: '100%',
-		height: 20,
-		margin: '5px',
-	},
-});
 
 type Props = {
 	onChangeConfig: ChangeEventHandler;
@@ -35,8 +12,6 @@ type Props = {
 };
 
 const NodeConfigViewer = ({ onChangeConfig, onChangeLabel, selectedElement }: Props) => {
-	const classes = useStyle();
-
 	if (selectedElement == null) {
 		return <></>;
 	}

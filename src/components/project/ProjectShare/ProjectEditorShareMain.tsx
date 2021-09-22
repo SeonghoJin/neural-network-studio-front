@@ -1,8 +1,9 @@
 import { makeStyles } from '@material-ui/core';
 import { ReactFlowProvider } from 'react-flow-nns';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
-import ProjectEditorLeftSideBar from './projectEditorSideBar/ProjectEditorLeftSideBar';
 import 'react-reflex/styles.css';
+import { ProjectEditorRightSidebarContainer } from './ProjectEditorRightSidebar/ProjectEditorRightSidebarContainer';
+import ProjectEditorLeftSideBar from '../projectEditor/projectEditorSideBar/ProjectEditorLeftSideBar';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -24,7 +25,7 @@ type Props = {
 	nodeConfigViewerContainer: any;
 };
 
-const ProjectEditorMain = ({ projectEditorGraphContainer, nodeConfigViewerContainer }: Props) => {
+const ProjectEditorShareMain = ({ projectEditorGraphContainer, nodeConfigViewerContainer }: Props) => {
 	const classes = useStyle();
 	return (
 		<>
@@ -34,8 +35,12 @@ const ProjectEditorMain = ({ projectEditorGraphContainer, nodeConfigViewerContai
 						<ProjectEditorLeftSideBar nodeConfigViewer={nodeConfigViewerContainer} />
 					</ReflexElement>
 					<ReflexSplitter />
-					<ReflexElement className="right-pane">
+					<ReflexElement className="middle-pane">
 						<div className={classes.contentWrapper}>{projectEditorGraphContainer}</div>
+					</ReflexElement>
+					<ReflexSplitter />
+					<ReflexElement minSize={150} maxSize={350} size={260} className="right-pane">
+						<ProjectEditorRightSidebarContainer />
 					</ReflexElement>
 				</ReflexContainer>
 			</ReactFlowProvider>
@@ -43,4 +48,4 @@ const ProjectEditorMain = ({ projectEditorGraphContainer, nodeConfigViewerContai
 	);
 };
 
-export default ProjectEditorMain;
+export default ProjectEditorShareMain;

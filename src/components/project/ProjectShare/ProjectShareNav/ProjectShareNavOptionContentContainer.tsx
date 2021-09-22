@@ -4,7 +4,6 @@ import { FlowExportObject } from 'react-flow-nns';
 import { RootState } from '../../../../module';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
 import useUpdateProjectContent from '../../../../hooks/useUpdateProjectContent';
-import SimpleBackdrop from '../../../utils/BackLoading';
 import ProjectShareNavOptionContent from './ProjectShareNavOptionContent';
 
 const ProjectShareNavOptionContentContainer = () => {
@@ -18,14 +17,7 @@ const ProjectShareNavOptionContentContainer = () => {
 		});
 	}, [result, projectNo, instance]);
 
-	return (
-		<>
-			{result.successFeedback()}
-			{result.errorFeedback}
-			{result.loading && <SimpleBackdrop open={result.loading} />}
-			<ProjectShareNavOptionContent onSave={onSave} />
-		</>
-	);
+	return <ProjectShareNavOptionContent onSave={onSave} />;
 };
 
 export default ProjectShareNavOptionContentContainer;

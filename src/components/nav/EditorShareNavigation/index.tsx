@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { format } from 'util';
 import useLogout from '../../../hooks/useLogout';
-import { User } from '../../../hooks/useAuthentication';
+import useAuthentication, { User } from '../../../hooks/useAuthentication';
 import imgLogo2 from '../../../static/img/img_logo2.png';
 import imgProfile1 from '../../../static/img/img_profile1.png';
 import DropMenu from '../../utils/dropMenu/dropMenu';
 import { DynamicPath, StaticPath } from '../../PagePathConsts';
-import useProjectLocation from '../../../hooks/useProjectLocation';
 import useProjectShareLocation from '../../../hooks/useProjectShareLocation';
 
 const ProfileImage = styled.img`
@@ -19,11 +18,8 @@ const ProfileImage = styled.img`
 	cursor: pointer;
 `;
 
-type Props = {
-	user: User;
-};
-
-const EditorShareNavigation = ({ user }: Props) => {
+const EditorShareNavigation = () => {
+	const { user } = useAuthentication();
 	const [flag, setFlag] = useState(false);
 	const { fetch } = useLogout();
 	const { projectNo, roomNo } = useProjectShareLocation();

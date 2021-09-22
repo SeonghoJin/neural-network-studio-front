@@ -5,7 +5,6 @@ import ProjectEditorNavOptionContent from './ProjectEditorNavOptionContent';
 import { RootState } from '../../../../module';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
 import useUpdateProjectContent from '../../../../hooks/useUpdateProjectContent';
-import SimpleBackdrop from '../../../utils/BackLoading';
 import useRoom from '../../../../hooks/useRoom';
 
 const ProjectEditorNavOptionContentContainer = () => {
@@ -20,11 +19,7 @@ const ProjectEditorNavOptionContentContainer = () => {
 		});
 	}, [result, projectNo, instance]);
 
-	return (
-		<>
-			<ProjectEditorNavOptionContent onSave={onSave} roomNo={roomNo || ''} projectNo={projectNo} />
-		</>
-	);
+	return <ProjectEditorNavOptionContent onSave={onSave} roomNo={roomNo || ''} projectNo={projectNo} />;
 };
 
 export default ProjectEditorNavOptionContentContainer;
