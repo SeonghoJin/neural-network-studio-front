@@ -11,12 +11,15 @@ import './static/css/common.css';
 import './static/css/swiper.min.css';
 import useLogout from './hooks/useLogout';
 import useSignUp from './hooks/useSignUp';
+import useUpdateUserProfile from './hooks/useUpdateUserProfile';
 
 function App() {
 	const logoutResult = useLogout();
 	const signUpResult = useSignUp();
+	const updateProfileResult = useUpdateUserProfile();
 	return (
 		<>
+			{updateProfileResult.success && updateProfileResult.successFallback}
 			{signUpResult.success && signUpResult.successFallback}
 			{logoutResult.loading && logoutResult.loadingFallback}
 			{logoutResult.error && logoutResult.errorFallback}

@@ -1,13 +1,15 @@
-import { makeStyles } from '@material-ui/core';
 import React from 'react';
 import PrivateAuthentication from '../components/Authentication/PrivateAuthentication';
 import Navigation from '../components/nav';
 import ProfileMain from '../components/profile/default/main';
+import useUpdateUserProfile from '../hooks/useUpdateUserProfile';
 
 export const Profile = () => {
+	const { successFallback, success } = useUpdateUserProfile();
 	return (
 		<PrivateAuthentication>
 			<div id="container">
+				{success && successFallback}
 				<Navigation />
 				<section className="asset">
 					<div className="wrap">

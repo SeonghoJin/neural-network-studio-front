@@ -1,12 +1,11 @@
 import { AxiosError } from 'axios';
 import { atom, useRecoilState } from 'recoil';
-import { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useCallback, useEffect } from 'react';
 import { updateUserProfile, uploadImage } from '../API/User';
-import StandardModal from '../components/utils/modal/StandardModal';
 import SimpleBackdrop from '../components/utils/BackLoading';
-import useAuthentication from './useAuthentication';
 import { sleep } from '../util';
+import ErrorSnackbar from '../components/utils/Snackbar/ErrorSnackbar';
+import SuccessSnackbar from '../components/utils/Snackbar/SuccessSnackbar';
 
 interface UserProfileToFetchParams {
 	blob: File | null;
@@ -30,8 +29,6 @@ const updateUserProfileResultState = atom<UpdateUserProfileResult>({
 
 const useUpdateUserProfile = () => {
 	const [result, setResult] = useRecoilState(updateUserProfileResultState);
-	const { mutate } = useAuthentication();
-	const history = useHistory();
 	const fetch = useCallback(
 		async ({ blob, email, name, webSite, description, id }: UserProfileToFetchParams) => {
 			setResult({
@@ -88,25 +85,12 @@ const useUpdateUserProfile = () => {
 	return {
 		...result,
 		fetch,
-		errorFeedback: result?.error && (
-			<StandardModal
-				head={result?.error.name}
-				onClose={() => {
-					setResult(null);
-				}}
-			/>
-		),
-		loadingFeedback: result?.loading && <SimpleBackdrop open={!!result?.loading} />,
-		successFeedback: result?.data && (
-			<StandardModal
-				head="저장되었습니다."
-				onClose={() => {
-					setResult(null);
-					mutate();
-					history.goBack();
-				}}
-			/>
-		),
+		error: result?.error,
+		loading: result?.loading,
+		success: !!result?.data,
+		errorFallback: <ErrorSnackbar message="프로필 저장에 실패했습니다. 다시 시도해주십시요." open />,
+		loadingFallback: <SimpleBackdrop open={!!result?.loading} />,
+		successFallback: <SuccessSnackbar message="프로필이 저장되었습니다." open />,
 	};
 };
 export default useUpdateUserProfile;

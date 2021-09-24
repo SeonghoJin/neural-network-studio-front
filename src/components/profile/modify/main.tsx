@@ -2,6 +2,7 @@ import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
 import { Button, ButtonGroup, makeStyles, TextField } from '@material-ui/core';
 import styled from 'styled-components';
 import { useHistory, useLocation } from 'react-router-dom';
+import { mutate } from 'swr';
 import useAuthentication from '../../../hooks/useAuthentication';
 import { UserProfile, UserProfileImage } from '../../../API/User/types';
 import useUpdateUserProfile from '../../../hooks/useUpdateUserProfile';
@@ -33,7 +34,7 @@ const DEFAULT_PROFILE_IMAGE = 'https://s3.ap-northeast-2.amazonaws.com/image.nns
 
 const ModifyProfileMain = () => {
 	const { user } = useAuthentication();
-	const { fetch, errorFeedback, loadingFeedback, successFeedback } = useUpdateUserProfile();
+	const { fetch } = useUpdateUserProfile();
 	const imageInputRef = useRef<HTMLInputElement | null>(null);
 	const [file, setFile] = useState<File | null>(null);
 	const [modifiedProfile, setModifiedProfile] = useState<Partial<UserProfile> | null>(user?.profile || null);
@@ -143,7 +144,14 @@ const ModifyProfileMain = () => {
 					<Button variant="contained" onClick={deleteImage}>
 						사진 초기화
 					</Button>
-					<Button variant="contained" color="primary" onClick={onSave}>
+					<Button
+						variant="contained"
+						color="primary"
+						onClick={async () => {
+							await onSave();
+							history.push(StaticPath.PROFILE);
+						}}
+					>
 						저장
 					</Button>
 					<Button

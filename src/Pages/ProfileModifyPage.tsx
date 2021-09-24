@@ -3,11 +3,15 @@ import React from 'react';
 import PrivateAuthentication from '../components/Authentication/PrivateAuthentication';
 import Navigation from '../components/nav';
 import ModifyProfileMain from '../components/profile/modify/main';
+import useUpdateUserProfile from '../hooks/useUpdateUserProfile';
 
 export const ModifyProfile = () => {
+	const { error, errorFallback, loading, loadingFallback } = useUpdateUserProfile();
 	return (
 		<PrivateAuthentication>
 			<div id="container">
+				{loading && loadingFallback}
+				{error && errorFallback}
 				<Navigation />
 				<section className="asset">
 					<div className="wrap">
