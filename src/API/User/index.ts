@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import config from '../../config';
 import { SignUpParams, UserProfile, UserProfileImage, UserProfileToUpdateParams } from './types';
 
@@ -7,9 +7,18 @@ const axiosConfig: AxiosRequestConfig = {
 };
 
 export const signUp = async (signUpParams: SignUpParams) => {
-	const response = await axios.post(`${config.SERVER_PREFIX}/api/user`, signUpParams, axiosConfig);
-
-	return response.data;
+	try {
+		const response = await axios.post(`${config.SERVER_PREFIX}/api/user`, signUpParams, axiosConfig);
+		return response.data;
+	} catch (e) {
+		if (e.response.status === 422) {
+			throw new Error('중복된 아이디입니다.');
+		}
+		if (e.response.status >= 400) {
+			throw new Error('알수없는 에러입니다.');
+		}
+		return null;
+	}
 };
 
 export const getUserProfile = async () => {

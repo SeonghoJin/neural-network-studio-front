@@ -10,12 +10,14 @@ import './static/css/aos.css';
 import './static/css/common.css';
 import './static/css/swiper.min.css';
 import useLogout from './hooks/useLogout';
+import useSignUp from './hooks/useSignUp';
 
 function App() {
 	const logoutResult = useLogout();
-
+	const signUpResult = useSignUp();
 	return (
 		<>
+			{signUpResult.success && signUpResult.successFallback}
 			{logoutResult.loading && logoutResult.loadingFallback}
 			{logoutResult.error && logoutResult.errorFallback}
 			{logoutResult.success && logoutResult.successFallback}

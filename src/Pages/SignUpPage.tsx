@@ -2,8 +2,6 @@ import React, { ChangeEvent, useCallback, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
-import style from '../components/auth/signup/index.module.css';
-import utils from '../components/utils/index.module.css';
 import useSignUp from '../hooks/useSignUp';
 import { passwordValidationRegExp } from '../components/Input/Validation';
 import { StaticPath } from '../components/PagePathConsts';
@@ -18,12 +16,13 @@ export const Signup = () => {
 	const [inputs, setInputs] = useState({
 		id: '',
 		password: '',
+		validatePassword: '',
 	});
 	const [visiblePassword, setVisiblePassword] = useState(false);
 	const [passwordValidation, setPasswordValidation] = useState(false);
 	const [confirmPasswordValidation, setConfirmPasswordValidation] = useState(false);
 	const history = useHistory();
-	const { fetch, loadingFeedback, errorFeedback } = useSignUp();
+	const { fetch, loading, error, errorFallback, loadingFallback } = useSignUp();
 
 	const onChange = useCallback(
 		(e: ChangeEvent<HTMLInputElement>) => {
@@ -34,44 +33,35 @@ export const Signup = () => {
 			});
 			if (name === 'password') {
 				setPasswordValidation(passwordValidationRegExp.test(value));
+				setConfirmPasswordValidation(inputs.validatePassword === value);
+			}
+
+			if (name === 'validatePassword') {
+				setConfirmPasswordValidation(inputs.password === value);
 			}
 		},
 		[inputs, setInputs]
 	);
 
-	const onChangeConfirmPassword = (e: ChangeEvent<HTMLInputElement>) => {
-		setConfirmPasswordValidation(e.target.value === inputs.password);
-	};
-
 	const onToggleVisiblePassword = () => {
 		setVisiblePassword(!visiblePassword);
 	};
 	const submit = async () => {
-		if (!passwordValidation) {
-			alert('비밀번호는 반드시 기호, 영문, 숫자를 포함한 8자리이상으로 해야합니다.');
-			return;
-		}
-		if (!confirmPasswordValidation) {
-			alert('비밀번호가 일치하지 않습니다.');
-			return;
-		}
-
 		await fetch({
 			id: inputs.id,
 			pw: inputs.password,
+			passwordValidation,
+			confirmPasswordValidation,
 		}).then((res) => {
 			if (!res) return;
-			history.push({
-				pathname: StaticPath.MAIN,
-				state: {
-					from: StaticPath.SIGN_UP,
-				},
-			});
+			history.push(StaticPath.MAIN);
 		});
 	};
 
 	return (
 		<div id="container">
+			{loading && loadingFallback}
+			{error && errorFallback}
 			<section className="sign">
 				<Navigation />
 				<div className="pos">
@@ -115,13 +105,12 @@ export const Signup = () => {
 									<input
 										placeholder="비밀번호 확인"
 										className="inp-frm2"
+										name="validatePassword"
 										type={visiblePassword ? '' : 'password'}
-										onChange={(e) => {
-											onChangeConfirmPassword(e);
-										}}
+										onChange={onChange}
 									/>
 								</div>
-								{!(passwordValidation && confirmPasswordValidation) && (
+								{!confirmPasswordValidation && (
 									<div className="txt">
 										<img src={icoWarning1} alt=" " />
 										비밀번호가 틀립니다.
