@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Authentication from './components/Authentication';
 import ProjectRouter from './Router/ProjectRouter';
 import DashBoardRouter from './Router/DashBoardRouter';
@@ -11,19 +11,12 @@ import './static/css/common.css';
 import './static/css/swiper.min.css';
 import useLogout from './hooks/useLogout';
 import useSignUp from './hooks/useSignUp';
-import useUpdateUserProfile from './hooks/useUpdateUserProfile';
 
 function App() {
 	const logoutResult = useLogout();
-	const signUpResult = useSignUp();
-	const updateProfileResult = useUpdateUserProfile();
 	return (
 		<>
-			{updateProfileResult.success && updateProfileResult.successFallback}
-			{signUpResult.success && signUpResult.successFallback}
 			{logoutResult.loading && logoutResult.loadingFallback}
-			{logoutResult.error && logoutResult.errorFallback}
-			{logoutResult.success && logoutResult.successFallback}
 			<BrowserRouter>
 				<Authentication>
 					<Switch>

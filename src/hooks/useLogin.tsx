@@ -2,6 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { atom, useRecoilState } from 'recoil';
 import { AxiosError } from 'axios';
 import { useLocation } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 import StandardModal from '../components/utils/modal/StandardModal';
 import { login } from '../API/Auth';
 import { LoginParams } from '../API/Auth/types';
@@ -22,6 +23,7 @@ export const loginRequestResult = atom<LoginRequestResult>({
 
 export const useLogin = () => {
 	const [result, setResult] = useRecoilState(loginRequestResult);
+	const { enqueueSnackbar } = useSnackbar();
 
 	const fetch = useCallback(
 		async (param: LoginParams) => {
@@ -46,6 +48,7 @@ export const useLogin = () => {
 						loading: false,
 						error: e,
 					});
+					enqueueSnackbar('로그인하지 못했습니다. 다시 시도해주십시요.', { variant: 'error' });
 					return false;
 				}
 			});
@@ -53,7 +56,7 @@ export const useLogin = () => {
 			return state;
 		},
 
-		[setResult]
+		[enqueueSnackbar, setResult]
 	);
 
 	useEffect(() => {
@@ -65,10 +68,8 @@ export const useLogin = () => {
 	return {
 		fetch,
 		...result,
-		error: result?.error,
 		loading: result?.loading,
 		loadingFallback: <SimpleBackdrop open />,
-		errorFallback: <ErrorSnackbar message="로그인에 실패했습니다." open />,
 	};
 };
 

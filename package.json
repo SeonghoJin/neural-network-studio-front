@@ -38,6 +38,8 @@
     "js-file-download": "^0.4.12",
     "localforage": "^1.9.0",
     "moment": "^2.29.1",
+    "notistack": "^1.0.10",
+    "on-headers": "^1.0.2",
     "query-string": "^4.3.4",
     "randomcolor": "^0.6.2",
     "randomstring": "^1.2.1",

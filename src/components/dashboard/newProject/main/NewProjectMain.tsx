@@ -66,7 +66,7 @@ const NewProjectMain = () => {
 		description: '',
 	});
 
-	const { fetch, errorFeedback, successFeedback, loadingFeedback } = useCreateProject();
+	const { fetch, loading, loadingFallback } = useCreateProject();
 
 	const onchange = useCallback(
 		(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -87,6 +87,7 @@ const NewProjectMain = () => {
 
 	return (
 		<Wrapper>
+			{loading && loadingFallback}
 			<CreateProjectContainer>
 				<h3>프로젝트 생성하기</h3>
 			</CreateProjectContainer>

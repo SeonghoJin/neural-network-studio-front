@@ -10,16 +10,11 @@ import icoSns3 from '../static/img/ico_sns3.png';
 import icoSns4 from '../static/img/ico_sns4.png';
 import icoLogo1 from '../static/img/img_logo1.png';
 import Navigation from '../components/nav';
-import ErrorSnackbar from '../components/utils/Snackbar/ErrorSnackbar';
 
 export const SignIn = () => {
-	const { fetch, error, errorFallback, loading, loadingFallback } = useLogin();
+	const { fetch, loading, loadingFallback } = useLogin();
 	const { mutate } = useAuthentication();
 	const history = useHistory();
-	const location = useLocation<{
-		type: string;
-		message: string;
-	}>();
 	const [inputs, setInputs] = useState({
 		id: '',
 		pw: '',
@@ -57,8 +52,6 @@ export const SignIn = () => {
 	return (
 		<div id="container">
 			{loading && loadingFallback}
-			{error && errorFallback}
-			{location.state && location.state.type === 'error' && <ErrorSnackbar message={location.state.message} open />}
 			<section className="login">
 				<Navigation />
 

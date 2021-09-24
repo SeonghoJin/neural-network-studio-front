@@ -2,6 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { atom, useRecoilState } from 'recoil';
 import { useHistory } from 'react-router-dom';
 import { AxiosError } from 'axios';
+import { useSnackbar } from 'notistack';
 import { logout } from '../API/Auth';
 import StandardModal from '../components/utils/modal/StandardModal';
 import useAuthentication from './useAuthentication';
@@ -26,6 +27,7 @@ export const useLogout = () => {
 	const [result, setResult] = useRecoilState(logoutRequestResult);
 	const history = useHistory();
 	const { mutate } = useAuthentication();
+	const { enqueueSnackbar } = useSnackbar();
 	const fetch = useCallback(async () => {
 		setResult({
 			error: null,
@@ -43,6 +45,7 @@ export const useLogout = () => {
 				}));
 				history.push(StaticPath.MAIN);
 				await mutate();
+				enqueueSnackbar('로그아웃되었습니다.', { variant: 'success' });
 				return true;
 			} catch (e: AxiosError | any) {
 				setResult({
@@ -50,20 +53,17 @@ export const useLogout = () => {
 					loading: false,
 					error: e,
 				});
+				enqueueSnackbar('로그아웃에 실패했습니다. 페이지를 새로고침해주세요.', { variant: 'error' });
 				return false;
 			}
 		});
-	}, [history, mutate, setResult]);
+	}, [enqueueSnackbar, history, mutate, setResult]);
 
 	return {
 		fetch,
 		...result,
 		loading: result?.loading,
-		error: result?.error,
-		success: !!result?.data,
 		loadingFallback: <SimpleBackdrop open />,
-		successFallback: <SuccessSnackbar message="로그아웃되었습니다." open />,
-		errorFallback: <ErrorSnackbar message="로그아웃에 실패했습니다. 페이지를 새로고침해주세요." open />,
 	};
 };
 

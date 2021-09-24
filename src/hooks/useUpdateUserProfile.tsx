@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
 import { atom, useRecoilState } from 'recoil';
 import { useCallback, useEffect } from 'react';
+import { useSnackbar } from 'notistack';
 import { updateUserProfile, uploadImage } from '../API/User';
 import SimpleBackdrop from '../components/utils/BackLoading';
 import { sleep } from '../util';
@@ -29,6 +30,7 @@ const updateUserProfileResultState = atom<UpdateUserProfileResult>({
 
 const useUpdateUserProfile = () => {
 	const [result, setResult] = useRecoilState(updateUserProfileResultState);
+	const { enqueueSnackbar } = useSnackbar();
 	const fetch = useCallback(
 		async ({ blob, email, name, webSite, description, id }: UserProfileToFetchParams) => {
 			setResult({
@@ -67,6 +69,7 @@ const useUpdateUserProfile = () => {
 						error: null,
 						data: response || true,
 					});
+					enqueueSnackbar('프로필을 저장했습니다.', { variant: 'success' });
 					return response || true;
 				} catch (e: AxiosError | any) {
 					setResult({
@@ -74,23 +77,20 @@ const useUpdateUserProfile = () => {
 						error: e,
 						data: null,
 					});
+					enqueueSnackbar('프로필이 저장에 실패했습니다, 다시 시도해주십시요.', { variant: 'error' });
 					return null;
 				}
 			});
 			return delayedData;
 		},
-		[setResult]
+		[enqueueSnackbar, setResult]
 	);
 
 	return {
 		...result,
 		fetch,
-		error: result?.error,
 		loading: result?.loading,
-		success: !!result?.data,
-		errorFallback: <ErrorSnackbar message="프로필 저장에 실패했습니다. 다시 시도해주십시요." open />,
 		loadingFallback: <SimpleBackdrop open={!!result?.loading} />,
-		successFallback: <SuccessSnackbar message="프로필이 저장되었습니다." open />,
 	};
 };
 export default useUpdateUserProfile;

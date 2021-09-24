@@ -22,7 +22,7 @@ export const Signup = () => {
 	const [passwordValidation, setPasswordValidation] = useState(false);
 	const [confirmPasswordValidation, setConfirmPasswordValidation] = useState(false);
 	const history = useHistory();
-	const { fetch, loading, error, errorFallback, loadingFallback } = useSignUp();
+	const { fetch, loading, loadingFallback } = useSignUp();
 
 	const onChange = useCallback(
 		(e: ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +61,6 @@ export const Signup = () => {
 	return (
 		<div id="container">
 			{loading && loadingFallback}
-			{error && errorFallback}
 			<section className="sign">
 				<Navigation />
 				<div className="pos">

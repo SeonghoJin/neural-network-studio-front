@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { RecoilRoot } from 'recoil';
+import { SnackbarProvider } from 'notistack';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
 
 ReactDOM.render(
 	<RecoilRoot>
-		<App />
+		<SnackbarProvider maxSnack={5}>
+			<App />
+		</SnackbarProvider>
 	</RecoilRoot>,
 	document.getElementById('root')
 );

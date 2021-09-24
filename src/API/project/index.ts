@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import * as queryString from 'querystring';
 import {
 	GetProjectListParams,
@@ -46,13 +46,21 @@ export const getProjectContent = async (projectNo: string) => {
 };
 
 export const createProject = async (projectInfo: IProjectInfo) => {
-	const response = await axios.post<{ projectNo: string }>(
-		`${config.SERVER_PREFIX}/api/project`,
-		projectInfo,
-		axiosConfig
-	);
+	try {
+		const response = await axios.post<{ projectNo: string }>(
+			`${config.SERVER_PREFIX}/api/project`,
+			projectInfo,
+			axiosConfig
+		);
 
-	return response.data;
+		return response.data;
+	} catch (e) {
+		if ((e as AxiosError).response?.status === 422) {
+			throw new Error('이미 존재하는 프로젝트 이름입니다.');
+		}
+
+		return null;
+	}
 };
 
 export const updateProjectInfo = async (projectNo: string, projectInfo: IProjectInfo) => {

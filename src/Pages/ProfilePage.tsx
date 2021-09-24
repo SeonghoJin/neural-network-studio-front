@@ -5,11 +5,11 @@ import ProfileMain from '../components/profile/default/main';
 import useUpdateUserProfile from '../hooks/useUpdateUserProfile';
 
 export const Profile = () => {
-	const { successFallback, success } = useUpdateUserProfile();
+	const { loadingFallback, loading } = useUpdateUserProfile();
 	return (
 		<PrivateAuthentication>
 			<div id="container">
-				{success && successFallback}
+				{loading && loadingFallback}
 				<Navigation />
 				<section className="asset">
 					<div className="wrap">
