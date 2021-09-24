@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import useLogout from '../../../hooks/useLogout';
-import { User } from '../../../hooks/useAuthentication';
+import useAuthentication, { User } from '../../../hooks/useAuthentication';
 import imgLogo2 from '../../../static/img/img_logo2.png';
 import imgProfile1 from '../../../static/img/img_profile1.png';
 import DropMenu from '../../utils/dropMenu/dropMenu';
@@ -80,7 +80,9 @@ const UserNavigation = ({ user }: Props) => {
 							style={{
 								width: '100%',
 							}}
-							onClick={() => fetch()}
+							onClick={async () => {
+								fetch();
+							}}
 						>
 							로그아웃
 						</button>

@@ -6,6 +6,10 @@ import { logout } from '../API/Auth';
 import StandardModal from '../components/utils/modal/StandardModal';
 import useAuthentication from './useAuthentication';
 import SimpleBackdrop from '../components/utils/BackLoading';
+import SuccessSnackbar from '../components/utils/Snackbar/SuccessSnackbar';
+import ErrorSnackbar from '../components/utils/Snackbar/ErrorSnackbar';
+import { sleep } from '../util';
+import { StaticPath } from '../components/PagePathConsts';
 
 type LogoutRequestResult = {
 	error: null | AxiosError;
@@ -20,53 +24,46 @@ const logoutRequestResult = atom<LogoutRequestResult>({
 
 export const useLogout = () => {
 	const [result, setResult] = useRecoilState(logoutRequestResult);
-	const { mutate } = useAuthentication();
 	const history = useHistory();
+	const { mutate } = useAuthentication();
 	const fetch = useCallback(async () => {
 		setResult({
 			error: null,
 			data: null,
 			loading: true,
 		});
-		try {
-			const response = await logout();
-			setResult((state) => ({
-				loading: false,
-				error: null,
-				data: response || true,
-			}));
-			return true;
-		} catch (e: AxiosError | any) {
-			setResult({
-				data: null,
-				loading: false,
-				error: e,
-			});
-			return false;
-		}
-	}, [setResult]);
 
-	useEffect(() => {
-		return () => {
-			setResult(null);
-		};
-	}, [setResult]);
+		sleep(500).then(async () => {
+			try {
+				const response = await logout();
+				setResult((state) => ({
+					loading: false,
+					error: null,
+					data: response || true,
+				}));
+				history.push(StaticPath.MAIN);
+				await mutate();
+				return true;
+			} catch (e: AxiosError | any) {
+				setResult({
+					data: null,
+					loading: false,
+					error: e,
+				});
+				return false;
+			}
+		});
+	}, [history, mutate, setResult]);
 
 	return {
 		fetch,
 		...result,
-		loadingFeedback: result?.loading && <SimpleBackdrop open={result.loading} />,
-		successFeedback: result?.data && (
-			<StandardModal
-				head="로그아웃 되었습니다."
-				body=""
-				onClose={async () => {
-					history.push('/');
-					await mutate();
-				}}
-			/>
-		),
-		errorFeedback: result?.error && <StandardModal head={result?.error.name} />,
+		loading: result?.loading,
+		error: result?.error,
+		success: !!result?.data,
+		loadingFallback: <SimpleBackdrop open />,
+		successFallback: <SuccessSnackbar message="로그아웃되었습니다." open />,
+		errorFallback: <ErrorSnackbar message="로그아웃에 실패했습니다. 페이지를 새로고침해주세요." open />,
 	};
 };
 
