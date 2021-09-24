@@ -1,6 +1,5 @@
 import { Link, useHistory } from 'react-router-dom';
 import React, { useCallback, useState } from 'react';
-import styled from 'styled-components';
 import useLogin from '../hooks/useLogin';
 import useAuthentication from '../hooks/useAuthentication';
 import { LoginParams } from '../API/Auth/types';
@@ -13,7 +12,7 @@ import icoLogo1 from '../static/img/img_logo1.png';
 import Navigation from '../components/nav';
 
 export const SignIn = () => {
-	const { fetch, loadingFeedback, errorFeedback } = useLogin();
+	const { fetch, error, errorFallback, loading, loadingFallback } = useLogin();
 	const { mutate } = useAuthentication();
 	const history = useHistory();
 	const [inputs, setInputs] = useState({
@@ -52,6 +51,8 @@ export const SignIn = () => {
 
 	return (
 		<div id="container">
+			{loading && loadingFallback}
+			{error && errorFallback}
 			<section className="login">
 				<Navigation />
 

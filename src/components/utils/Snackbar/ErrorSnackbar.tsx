@@ -3,6 +3,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 
 function Alert(props: AlertProps) {
+	// eslint-disable-next-line react/jsx-props-no-spreading
 	return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
@@ -12,7 +13,7 @@ type Props = {
 	message: string;
 };
 
-const SuccessSnackbar: FC<Props> = ({ open, message, onClose }: Props) => {
+const ErrorSnackbar: FC<Props> = ({ open, message, onClose }: Props) => {
 	const [flag, setFlag] = React.useState(open);
 
 	const handleClose = useCallback(
@@ -35,15 +36,15 @@ const SuccessSnackbar: FC<Props> = ({ open, message, onClose }: Props) => {
 			autoHideDuration={6000}
 			onClose={handleClose}
 		>
-			<Alert onClose={handleClose} severity="success">
+			<Alert onClose={handleClose} severity="error">
 				{message}
 			</Alert>
 		</Snackbar>
 	);
 };
 
-SuccessSnackbar.defaultProps = {
+ErrorSnackbar.defaultProps = {
 	onClose: null,
 };
 
-export default SuccessSnackbar;
+export default ErrorSnackbar;

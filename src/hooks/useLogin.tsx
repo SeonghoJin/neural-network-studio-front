@@ -6,6 +6,7 @@ import { login } from '../API/Auth';
 import { LoginParams } from '../API/Auth/types';
 import SimpleBackdrop from '../components/utils/BackLoading';
 import { sleep } from '../util';
+import ErrorSnackbar from '../components/utils/Snackbar/ErrorSnackbar';
 
 type LoginRequestResult = {
 	error: AxiosError | null;
@@ -63,10 +64,10 @@ export const useLogin = () => {
 	return {
 		fetch,
 		...result,
-		errorFeedback: result?.error && (
-			<StandardModal head="아이디 혹은 비밀번호가 잘못되었습니다. 다시 로그인해주십시요." />
-		),
-		loadingFeedback: result?.loading && <SimpleBackdrop open={result.loading} />,
+		error: result?.error,
+		loading: result?.loading,
+		loadingFallback: <SimpleBackdrop open />,
+		errorFallback: <ErrorSnackbar message="로그인에 실패했습니다." open />,
 	};
 };
 
