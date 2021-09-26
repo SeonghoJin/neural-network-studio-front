@@ -18,7 +18,7 @@ jobs:
           node-version: '14.x'
 
       - name: Install npm dependencies
-        run: npm install -g react-scripts
+        run: npm install && npm install -g react-scripts
 
       - name: Run build task
         run: |
