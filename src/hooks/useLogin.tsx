@@ -1,11 +1,14 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { atom, useRecoilState } from 'recoil';
 import { AxiosError } from 'axios';
+import { useLocation } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 import StandardModal from '../components/utils/modal/StandardModal';
 import { login } from '../API/Auth';
 import { LoginParams } from '../API/Auth/types';
 import SimpleBackdrop from '../components/utils/BackLoading';
 import { sleep } from '../util';
+import ErrorSnackbar from '../components/utils/Snackbar/ErrorSnackbar';
 
 type LoginRequestResult = {
 	error: AxiosError | null;
@@ -20,6 +23,7 @@ export const loginRequestResult = atom<LoginRequestResult>({
 
 export const useLogin = () => {
 	const [result, setResult] = useRecoilState(loginRequestResult);
+	const { enqueueSnackbar } = useSnackbar();
 
 	const fetch = useCallback(
 		async (param: LoginParams) => {
@@ -38,12 +42,13 @@ export const useLogin = () => {
 						data: response,
 					}));
 					return true;
-				} catch (e) {
+				} catch (e: AxiosError | any) {
 					setResult({
 						data: null,
 						loading: false,
 						error: e,
 					});
+					enqueueSnackbar('로그인하지 못했습니다. 다시 시도해주십시요.', { variant: 'error' });
 					return false;
 				}
 			});
@@ -51,7 +56,7 @@ export const useLogin = () => {
 			return state;
 		},
 
-		[setResult]
+		[enqueueSnackbar, setResult]
 	);
 
 	useEffect(() => {
@@ -63,10 +68,8 @@ export const useLogin = () => {
 	return {
 		fetch,
 		...result,
-		errorFeedback: result?.error && (
-			<StandardModal head="아이디 혹은 비밀번호가 잘못되었습니다. 다시 로그인해주십시요." />
-		),
-		loadingFeedback: result?.loading && <SimpleBackdrop open={result.loading} />,
+		loading: result?.loading,
+		loadingFallback: <SimpleBackdrop open />,
 	};
 };
 

@@ -1,8 +1,16 @@
 import React from 'react';
-import style from './dropMenu.module.css';
 
-const DropMenu = ({ open, custom, children }) => {
-	return <>{open ? <div className={`${style.dropMenu} ${custom}`}>{children}</div> : null}</>;
+const DropMenu = ({ open, children }) => {
+	return (
+		<div
+			className={`btns-group ${(open && 'active') || ''} js-more`}
+			style={{
+				zIndex: 100,
+			}}
+		>
+			{children}
+		</div>
+	);
 };
 
 export default DropMenu;

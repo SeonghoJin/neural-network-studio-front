@@ -4,6 +4,9 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import DropMenu from '../../../utils/dropMenu/dropMenu';
 import style from './card.module.css';
 import useDeleteProject from '../../../../hooks/useDeleteProject';
+import icoMore1 from '../../../../static/img/ico_more1.png';
+import iconEdit1 from '../../../../static/img/ico_edit1.png';
+import iconDelete1 from '../../../../static/img/ico_delete1.png';
 
 type Props = {
 	projectNo: number;
@@ -37,24 +40,25 @@ const CardDropMenu = ({ projectNo }: Props) => {
 	}, [setDropMenuToggle, dropMenuToggle]);
 
 	return (
-		<div
-			onKeyDown={openMenu}
-			tabIndex={0}
-			role="button"
-			className={`${style.ellipsisWrapper}`}
-			onClick={openMenu}
-			ref={dropRef}
-		>
-			<FontAwesomeIcon icon={faEllipsisH} />
-			<DropMenu open={dropMenuToggle} custom={style.dropMenu}>
-				<div className={`${style.projectMenu}`}>
-					<button type="button">프로젝트 수정</button>
-				</div>
-				<div className={`${style.projectMenu}`}>
-					<button type="button" onClick={onDeleteProject}>
-						프로젝트 삭제
-					</button>
-				</div>
+		<div className="menu" ref={dropRef}>
+			<button type="button" className="btn-more js-more" onClick={openMenu}>
+				<img src={icoMore1} alt="더보기" />
+			</button>
+			<DropMenu open={dropMenuToggle}>
+				<a href="#">
+					<img src={iconEdit1} alt="수정" />
+					수정
+				</a>
+				<button
+					type="button"
+					onClick={onDeleteProject}
+					style={{
+						width: '100%',
+					}}
+				>
+					<img src={iconDelete1} alt="삭제" />
+					삭제
+				</button>
 			</DropMenu>
 		</div>
 	);

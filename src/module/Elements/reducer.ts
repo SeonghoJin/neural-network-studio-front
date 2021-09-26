@@ -1,5 +1,5 @@
 import { createReducer } from 'typesafe-actions';
-import { addEdge, Edge, Elements, isEdge, removeElements } from 'react-flow-renderer';
+import { addEdge, Edge, Elements, isEdge, removeElements, Node, XYPosition } from 'react-flow-nns';
 import { ElementActionTypes, ElementState } from './types';
 import { ElementAction } from './actions';
 
@@ -8,15 +8,48 @@ const initialState: ElementState = {
 };
 
 const elements = createReducer<ElementState, ElementActionTypes>(initialState, {
-	[ElementAction.SET_ELEMENTS]: (state, action) => ({
-		elements: action.payload,
-	}),
+	[ElementAction.SET_ELEMENTS]: (state, action) => {
+		if (action.payload instanceof Function) {
+			return { elements: action.payload(state.elements) };
+		}
+		return { elements: action.payload };
+	},
+	[ElementAction.ADD_BLOCK]: (state, action) => {
+		return {
+			elements: state.elements.concat(action.payload.block),
+		};
+	},
+	[ElementAction.REMOVE_BLOCK]: (state, action) => {
+		const removeToElements = state.elements.filter((element) => {
+			return element.id === action.payload.blockId;
+		});
+
+		if (removeToElements == null) {
+			return state;
+		}
+
+		return {
+			elements: removeElements(removeToElements, state.elements),
+		};
+	},
+	[ElementAction.REMOVE_EDGE]: (state, action) => {
+		const removeToElements = state.elements.filter((element) => {
+			return element.id === action.payload.edgeId;
+		});
+
+		if (removeToElements == null) {
+			return state;
+		}
+
+		return {
+			elements: removeElements(removeToElements, state.elements),
+		};
+	},
 	[ElementAction.SET_ELEMENT_BY_ID_UPDATE_CONFIG]: (state, action) => {
 		const { id, key, value } = action.payload;
 		return {
 			elements: state.elements.map((element) => {
 				if (element.id !== id) return element;
-
 				return {
 					...element,
 					data: {
@@ -53,24 +86,9 @@ const elements = createReducer<ElementState, ElementActionTypes>(initialState, {
 				if (element.id !== blockId) return element;
 				return {
 					...element,
-					position,
+					position: position as XYPosition,
 				};
 			}),
-		};
-	},
-	[ElementAction.ADD_ELEMENT]: (state, action) => {
-		return {
-			elements: state.elements.concat(action.payload),
-		};
-	},
-	[ElementAction.ADD_EDGE]: (state, action) => {
-		return {
-			elements: addEdge(action.payload as Edge, state.elements),
-		};
-	},
-	[ElementAction.REMOVE_ELEMENTS]: (state, action) => {
-		return {
-			elements: removeElements(action.payload, state.elements),
 		};
 	},
 });

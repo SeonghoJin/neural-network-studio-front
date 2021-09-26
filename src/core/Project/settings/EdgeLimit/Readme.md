@@ -1,0 +1,3 @@
+- 블록에 연결할 수 있는 엣지 갯수를 제한했다. 
+- Input과 Output으로 나뉜다.
+- Input Block의 Input에는 아무것도 들어갈 수 없으므로 None으로 선언해두었다.

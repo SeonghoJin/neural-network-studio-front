@@ -1,4 +1,4 @@
-import { Node } from 'react-flow-renderer';
+import { Node } from 'react-flow-nns';
 import { BlockCategory, BlockState } from '../../../../block';
 
 type NodeStrokeColorTableKey = keyof typeof BlockCategory;
@@ -7,6 +7,7 @@ const NodeStrokeColorTable: {
 	[index in NodeStrokeColorTableKey]: string;
 } = {
 	Layer: '#000000',
+	Math: '#000000',
 };
 
 export const getNodeStrokeColor = (e: Node<BlockState>) => {
@@ -20,6 +21,7 @@ const NodeColorTable: {
 	[index in NodeColorTableKey]: string;
 } = {
 	Layer: '#FFFFFF',
+	Math: '#FFFFFF',
 };
 
 export const getNodeColor = (e: Node<BlockState>) => {

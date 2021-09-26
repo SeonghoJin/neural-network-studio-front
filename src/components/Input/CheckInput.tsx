@@ -16,8 +16,6 @@ type Props = {
 };
 
 export default function CheckInput({ propertyContent, propertyName, onChange }: Props) {
-	const classes = useStyle();
-
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { checked, name } = event.target;
 		onChange({

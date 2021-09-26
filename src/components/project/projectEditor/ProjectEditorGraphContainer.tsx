@@ -1,11 +1,12 @@
 import { useDispatch } from 'react-redux';
 import { useCallback } from 'react';
-import { Elements, OnLoadParams } from 'react-flow-renderer';
+import { Elements, OnLoadParams } from 'react-flow-nns';
 import { setReactFlowInstance } from '../../../module/ReactFlowInstance';
 import ProjectEditorGraph from './projectEditorGraph';
 import CircleLoading from '../../utils/Loading/CircularLoading';
 import { setElements } from '../../../module/Elements';
 import useProject from '../../../hooks/useProject';
+import ErrorBoundary from '../../utils/ErrorBoundary';
 
 const ProjectEditorGraphContainer = () => {
 	const result = useProject();
@@ -26,11 +27,13 @@ const ProjectEditorGraphContainer = () => {
 	);
 
 	const content = result.data && (
-		<ProjectEditorGraph
-			setReactInstance={setReactInstance}
-			flowState={result.data?.content.flowState}
-			setElements={onSetElements}
-		/>
+		<ErrorBoundary>
+			<ProjectEditorGraph
+				setReactInstance={setReactInstance}
+				flowState={result.data?.content.flowState}
+				setElements={onSetElements}
+			/>
+		</ErrorBoundary>
 	);
 
 	return <>{!result.data && !result.error ? <CircleLoading /> : content}</>;

@@ -1,11 +1,10 @@
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import React, { createElement, memo } from 'react';
-import { NodeProps, useStoreState } from 'react-flow-renderer';
+import { NodeProps, useStoreState } from 'react-flow-nns';
 import { BlockState } from '../../../../block';
 import LayerNodeTable from './LayerNodeTable';
 import useTargetCandidates from '../useTargetCandidates';
 import style from '../target.module.css';
-import useValidationConnection from '../useValidationConnection';
 
 const useLayerStyle = makeStyles({
 	wrapper: {
@@ -42,37 +41,17 @@ const useLayerStyle = makeStyles({
 });
 
 const LayerNode = (props: NodeProps<BlockState>) => {
-	const { data, id } = props;
+	const { data } = props;
 	const { targetCandidates } = useTargetCandidates();
 	const { type } = data as BlockState;
 	const classes = useLayerStyle();
 	const node = createElement(LayerNodeTable[type], props);
-	const connectingNodeId = useStoreState((state) => state.connectionNodeId);
-	const connectingHandleType = useStoreState((state) => state.connectionHandleType);
-	const onConnect = useStoreState((state) => state.onConnect);
-	const { isValidationConnection } = useValidationConnection();
 	return (
 		<>
 			<div
 				tabIndex={0}
 				role="button"
 				className={`${classes.wrapper} ${targetCandidates?.has(type) && style.targetCandidate}`}
-				onMouseUp={() => {
-					if (connectingNodeId === id) return;
-					if (onConnect && connectingHandleType && connectingNodeId) {
-						const connection = {
-							source: id,
-							target: id,
-							sourceHandle: null,
-							targetHandle: null,
-							[connectingHandleType]: connectingNodeId,
-						};
-
-						if (isValidationConnection(connection)) {
-							onConnect(connection);
-						}
-					}
-				}}
 			>
 				<div className={classes.nodeHeaderWrapper}>
 					<span className={classes.nodeHeader}>{type}</span>

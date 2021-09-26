@@ -1,4 +1,4 @@
-import { Elements } from 'react-flow-renderer';
+import { Elements } from 'react-flow-nns';
 import { ActionType } from 'typesafe-actions';
 import * as actions from './actions';
 

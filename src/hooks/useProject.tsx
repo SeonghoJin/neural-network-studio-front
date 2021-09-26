@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import useSWR from 'swr';
 import StandardModal from '../components/utils/modal/StandardModal';
 import useProjectLocation from './useProjectLocation';
@@ -19,10 +18,9 @@ const useProject = () => {
 			return delayedData;
 		},
 		{
-			errorRetryCount: 0,
+			revalidateOnFocus: false,
 		}
 	);
-
 	return {
 		...result,
 		loading: !result.data && !result.error,

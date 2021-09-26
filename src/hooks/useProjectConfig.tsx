@@ -2,6 +2,7 @@ import { atom, useRecoilState } from 'recoil';
 import useSWR from 'swr';
 import { useEffect } from 'react';
 import { AxiosError } from 'axios';
+
 import { IProjectConfig, ProjectConfig } from '../API/project/types';
 import { getProjectConfig } from '../API/project';
 import useProjectLocation from './useProjectLocation';
@@ -23,7 +24,7 @@ const useProjectConfig = () => {
 			try {
 				const data = await getProjectConfig(projectNo);
 				return data;
-			} catch (e) {
+			} catch (e: AxiosError | any) {
 				return e;
 			}
 		}

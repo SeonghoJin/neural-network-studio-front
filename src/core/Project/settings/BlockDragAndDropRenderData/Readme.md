@@ -1,0 +1,1 @@
+- 새로운 BlockState를 생성하고, BlockRenderData에 객체를 하나 생성해주면 된다.

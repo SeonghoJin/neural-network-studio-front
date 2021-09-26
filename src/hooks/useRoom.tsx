@@ -11,8 +11,8 @@ const useRoom = () => {
 		},
 		async () => {
 			const delayedData = sleep(700).then(async () => {
-				const data = await getProjectRoomNumber(projectNo);
-				return data;
+				const data: { key: string } = await getProjectRoomNumber(projectNo);
+				return data.key;
 			});
 			return delayedData;
 		}

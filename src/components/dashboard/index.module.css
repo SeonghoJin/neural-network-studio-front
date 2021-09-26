@@ -1,33 +1,33 @@
-.mainWrapper {
-  margin: 0 5%;
-}
+/*.mainWrapper {*/
+/*  margin: 0 5%;*/
+/*}*/
 
-.dashboardMenu {
-  margin-bottom: 20px;
-  display: flex;
-}
+/*.dashboardMenu {*/
+/*  margin-bottom: 20px;*/
+/*  display: flex;*/
+/*}*/
 
-.createButton {
-  margin-left: auto;
-  padding: 7px;
-  background-color: gray;
-  border: none;
-  border-radius: 5px;
-  transition: 0.2s ease-in;
-  color: var(--default-white);
-}
+/*.createButton {*/
+/*  margin-left: auto;*/
+/*  padding: 7px;*/
+/*  background-color: gray;*/
+/*  border: none;*/
+/*  border-radius: 5px;*/
+/*  transition: 0.2s ease-in;*/
+/*  color: var(--default-white);*/
+/*}*/
 
-.createButton a {
-  color: var(--default-white);
-  text-decoration: none;
-  transition: 0.2s ease-in;
-}
+/*.createButton a {*/
+/*  color: var(--default-white);*/
+/*  text-decoration: none;*/
+/*  transition: 0.2s ease-in;*/
+/*}*/
 
-.createButton:hover {
-  background: var(--base-color);
-  color: var(--default-black);
-}
+/*.createButton:hover {*/
+/*  background: var(--base-color);*/
+/*  color: var(--default-black);*/
+/*}*/
 
-.createButton:hover a {
-  color: var(--default-black);
-}
+/*.createButton:hover a {*/
+/*  color: var(--default-black);*/
+/*}*/

@@ -1,4 +1,4 @@
-import { OnLoadParams } from 'react-flow-renderer';
+import { OnLoadParams } from 'react-flow-nns';
 import { createStandardAction } from '../../util';
 
 export enum ReactFlowAction {

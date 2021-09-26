@@ -1,20 +1,16 @@
 import { Route, Switch } from 'react-router-dom';
-import { ReactFlowProvider } from 'react-flow-renderer';
 import React, { FC } from 'react';
-import ProjectEditor from '../Pages/ProjectEditor';
-import ProjectConfig from '../Pages/ProjectConfig';
-import PrivateAuthentication from '../Authentication/PrivateAuthentication';
-import { DynamicPath } from '../pagePathName';
-import ProjectShare from '../components/project/ProjectShare';
-import NotFound from '../Pages/NotFound';
+import PrivateAuthentication from '../components/Authentication/PrivateAuthentication';
+import { DynamicPath } from '../components/PagePathConsts';
+import { NotFoundPage, ProjectConfigPage, ProjectEditorPage } from '../Pages';
 
 const ProjectRouter: FC<null> = () => {
 	return (
 		<PrivateAuthentication>
 			<Switch>
-				<Route path={DynamicPath.PROJECT} exact component={ProjectEditor} />
-				<Route path={DynamicPath.PROJECT_CONFIG} exact component={ProjectConfig} />
-				<Route component={NotFound} />
+				<Route path={DynamicPath.PROJECT} exact component={ProjectEditorPage} />
+				<Route path={DynamicPath.PROJECT_CONFIG} exact component={ProjectConfigPage} />
+				<Route component={NotFoundPage} />
 			</Switch>
 		</PrivateAuthentication>
 	);

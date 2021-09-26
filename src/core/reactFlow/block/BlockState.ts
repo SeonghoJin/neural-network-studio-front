@@ -11,6 +11,8 @@ import {
 	FlattenConfig,
 	InputConfig,
 	MaxPool2DConfig,
+	RescalingConfig,
+	ReshapeConfig,
 } from './BlockConfig';
 import { BlockType } from './BlockType';
 
@@ -114,19 +116,22 @@ export class FlattenBlockState implements BlockState {
 	type: BlockType = BlockType.Flatten;
 }
 
-export const blockStates: { type: BlockCategory; states: BlockState[] }[] = [
-	{
-		type: BlockCategory.Layer,
-		states: [
-			new Conv2DBlockState(),
-			new DenseBlockState(),
-			new AveragePooling2DBlockState(),
-			new MaxPool2DBlockState(),
-			new ActivationBlockState(),
-			new InputBlockState(),
-			new DropoutBlockState(),
-			new BatchNormalizationBlockState(),
-			new FlattenBlockState(),
-		],
-	},
-];
+export class RescalingBlockState implements BlockState {
+	label = 'Rescaling Node';
+
+	category: BlockCategory = BlockCategory.Layer;
+
+	config: BlockConfig = new RescalingConfig();
+
+	type: BlockType = BlockType.Rescaling;
+}
+
+export class ReshapeBlockState implements BlockState {
+	label = 'Reshape Node';
+
+	category: BlockCategory = BlockCategory.Layer;
+
+	config: BlockConfig = new ReshapeConfig();
+
+	type: BlockType = BlockType.Reshape;
+}

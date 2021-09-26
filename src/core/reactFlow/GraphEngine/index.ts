@@ -1,4 +1,4 @@
-import { Edge, FlowElement, isNode, Node } from 'react-flow-renderer';
+import { Edge, FlowElement, isNode, Node } from 'react-flow-nns';
 import GraphNode from './GraphNode';
 import { BlockState } from '../block';
 import graphNodeNameValidator from './validate';
@@ -18,7 +18,6 @@ class GraphConvertor {
 	};
 
 	addNode = (node: GraphNode) => {
-		console.log(graphNodeNameValidator.test(node.name));
 		if (!graphNodeNameValidator.test(node.name)) {
 			throw new Error(`허용되지 않은 노드 이름이 존재합니다. 수정해주세요. (${node.name})`);
 		}
@@ -56,8 +55,8 @@ class GraphConvertor {
 			});
 
 		return {
-			output: outputNodeName[0]?.name || '',
-			input: inputNodeName[0]?.name || '',
+			output: [outputNodeName[0]?.name || ''],
+			input: [inputNodeName[0]?.name || ''],
 			layers: [...Array.from(this.nodes.values())],
 		};
 	};

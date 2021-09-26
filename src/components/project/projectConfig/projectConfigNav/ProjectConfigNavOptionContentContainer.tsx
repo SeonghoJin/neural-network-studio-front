@@ -1,10 +1,8 @@
 import { useCallback } from 'react';
-import { Backdrop } from '@material-ui/core';
 import useProjectConfig from '../../../../hooks/useProjectConfig';
 import ProjectConfigNavOptionContent from './ProjectConfigNavOptionContent';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
 import useUpdateProjectConfig from '../../../../hooks/useUpdateProjectConfig';
-import StandardModal from '../../../utils/modal/StandardModal';
 
 const ProjectConfigNavOptionContentContainer = () => {
 	const { projectConfig } = useProjectConfig();
@@ -16,14 +14,7 @@ const ProjectConfigNavOptionContentContainer = () => {
 		fetch(projectNo, projectConfig);
 	}, [projectConfig, fetch, projectNo]);
 
-	return (
-		<>
-			{errorFeedback}
-			{loadingFeedback}
-			{successFeedback}
-			<ProjectConfigNavOptionContent onSave={onSave} />;
-		</>
-	);
+	return <ProjectConfigNavOptionContent onSave={onSave} />;
 };
 
 export default ProjectConfigNavOptionContentContainer;

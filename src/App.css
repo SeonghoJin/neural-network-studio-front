@@ -13,7 +13,6 @@ ul {
 @font-face {
   font-family: 'naver';
   font-weight: auto;
-  src: url('font/NanumSquareRoundB.ttf') format('truetype');
 }
 
 * {

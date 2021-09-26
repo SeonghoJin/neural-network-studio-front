@@ -1,6 +1,6 @@
 export const numberWithoutSpacesRegExp = new RegExp('^[0-9]{1,5}$');
 
-export const floatWithoutSpacesRegExp = new RegExp('[0-9]+([.|,][0-9]+)?');
+export const floatWithoutSpacesRegExp = new RegExp('^([1-9]\\d*(\\.|\\,)\\d*|0?(\\.|\\,)\\d*[1-9]\\d*|[1-9]\\d*)$');
 
 export const secondDivisionTupleRegExp = new RegExp('^[0-9]{1,3}[\n\t\r ]*,[\n\t\r ]*[0-9]{1,3}$');
 

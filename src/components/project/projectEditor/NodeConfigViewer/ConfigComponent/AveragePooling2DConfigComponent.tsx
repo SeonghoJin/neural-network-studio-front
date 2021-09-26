@@ -25,7 +25,7 @@ const AveragePooling2DConfigComponent = ({ config, onChange }: Props) => {
 				propertyCandidates={getPaddingValues()}
 			/>
 		),
-		pool_size: <TextInput propertyContent={Number(pool_size)} propertyName="pool_size" onChange={onChange} />,
+		pool_size: <NumberInput propertyContent={pool_size} propertyName="pool_size" onChange={onChange} />,
 		strides: <SecondDivisionTupleInput canNull propertyContent={strides} propertyName="strides" onChange={onChange} />,
 	};
 

@@ -1,12 +1,12 @@
 import { AxiosError } from 'axios';
 import { atom, useRecoilState } from 'recoil';
-import { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useCallback, useEffect } from 'react';
+import { useSnackbar } from 'notistack';
 import { updateUserProfile, uploadImage } from '../API/User';
-import StandardModal from '../components/utils/modal/StandardModal';
 import SimpleBackdrop from '../components/utils/BackLoading';
-import useAuthentication from './useAuthentication';
 import { sleep } from '../util';
+import ErrorSnackbar from '../components/utils/Snackbar/ErrorSnackbar';
+import SuccessSnackbar from '../components/utils/Snackbar/SuccessSnackbar';
 
 interface UserProfileToFetchParams {
 	blob: File | null;
@@ -30,8 +30,7 @@ const updateUserProfileResultState = atom<UpdateUserProfileResult>({
 
 const useUpdateUserProfile = () => {
 	const [result, setResult] = useRecoilState(updateUserProfileResultState);
-	const { mutate } = useAuthentication();
-	const history = useHistory();
+	const { enqueueSnackbar } = useSnackbar();
 	const fetch = useCallback(
 		async ({ blob, email, name, webSite, description, id }: UserProfileToFetchParams) => {
 			setResult({
@@ -48,7 +47,7 @@ const useUpdateUserProfile = () => {
 						formData.append('image', blob);
 						const userProfileImage = await uploadImage(formData);
 						profileId = userProfileImage.id;
-					} catch (e) {
+					} catch (e: AxiosError | any) {
 						await setResult({
 							loading: false,
 							error: e,
@@ -70,43 +69,28 @@ const useUpdateUserProfile = () => {
 						error: null,
 						data: response || true,
 					});
+					enqueueSnackbar('프로필을 저장했습니다.', { variant: 'success' });
 					return response || true;
-				} catch (e) {
+				} catch (e: AxiosError | any) {
 					setResult({
 						loading: false,
 						error: e,
 						data: null,
 					});
+					enqueueSnackbar('프로필이 저장에 실패했습니다, 다시 시도해주십시요.', { variant: 'error' });
 					return null;
 				}
 			});
 			return delayedData;
 		},
-		[setResult]
+		[enqueueSnackbar, setResult]
 	);
 
 	return {
 		...result,
 		fetch,
-		errorFeedback: result?.error && (
-			<StandardModal
-				head={result?.error.name}
-				onClose={() => {
-					setResult(null);
-				}}
-			/>
-		),
-		loadingFeedback: result?.loading && <SimpleBackdrop open={!!result?.loading} />,
-		successFeedback: result?.data && (
-			<StandardModal
-				head="저장되었습니다."
-				onClose={() => {
-					setResult(null);
-					mutate();
-					history.goBack();
-				}}
-			/>
-		),
+		loading: result?.loading,
+		loadingFallback: <SimpleBackdrop open={!!result?.loading} />,
 	};
 };
 export default useUpdateUserProfile;

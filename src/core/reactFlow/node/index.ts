@@ -1,25 +1,8 @@
-import { Elements, Node, isNode, OnLoadParams } from 'react-flow-renderer';
+import { Elements, Node, isNode, OnLoadParams } from 'react-flow-nns';
 import React from 'react';
 import { BlockState, BlockType } from '../../../core/reactFlow/block';
 import { getNodeId, getNodeLabel } from '../../../util';
-
-const UNIQUE = 1;
-const INFINITY = 100;
-
-type MAXIMUM_NUMBER_PER_BLOCK_TYPE_AT_GRAPH_KEY = keyof typeof BlockType;
-const MAXIMUM_NUMBER_PER_BLOCK_TYPE_AT_GRAPH: {
-	[K in MAXIMUM_NUMBER_PER_BLOCK_TYPE_AT_GRAPH_KEY]: number;
-} = {
-	Activation: 3,
-	AveragePooling2D: INFINITY,
-	BatchNormalization: INFINITY,
-	Conv2D: INFINITY,
-	Dropout: INFINITY,
-	Flatten: INFINITY,
-	MaxPool2D: INFINITY,
-	Dense: INFINITY,
-	Input: UNIQUE,
-};
+import { MAXIMUM_NUMBER_PER_BLOCK_TYPE_AT_GRAPH } from '../../Project/settings/BlockLimit';
 
 export type CustomNodeParams = {
 	position?: any;
@@ -78,5 +61,3 @@ export const canInsertNode = (elements: Elements, node: Node<BlockState>) => {
 	}).length;
 	return currentCount < limit;
 };
-
-export default MAXIMUM_NUMBER_PER_BLOCK_TYPE_AT_GRAPH;

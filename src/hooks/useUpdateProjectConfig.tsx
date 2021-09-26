@@ -41,7 +41,7 @@ const useUpdateProjectConfig = () => {
 					return true;
 				});
 				return delayedData;
-			} catch (e) {
+			} catch (e: AxiosError | any) {
 				setResult({
 					data: null,
 					loading: false,

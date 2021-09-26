@@ -1,46 +1,51 @@
 import { useCallback, useEffect } from 'react';
-import { Elements, OnLoadParams } from 'react-flow-renderer';
+import { Elements, OnLoadParams, Node } from 'react-flow-nns';
 import { useDispatch } from 'react-redux';
-import useSocket from '../../../hooks/useSocket';
 import { setReactFlowInstance } from '../../../module/ReactFlowInstance';
 import {
-	addEdge,
-	addElement,
-	removeElements,
+	addBlock,
+	removeBlock,
+	removeEdge,
+	setElementByIdAndUpdateConfig,
+	setElementByIdAndUpdateLabel,
 	setElementByIdAndUpdatePosition,
 	setElements,
 } from '../../../module/Elements';
 import ProjectEditorGraph from '../projectEditor/projectEditorGraph';
-import { CircleLoading } from '../../utils/Loading/CircularLoading';
-import useAuthentication from '../../../hooks/useAuthentication';
-import Cursors from './Cursors';
-import {
-	CreateEdgeBaseData,
-	CreateElementBaseData,
-	MoveBlockBaseData,
-	RemoveElementBaseData,
-} from '../../../core/Project/share/SocketEvent';
+import { useSocket } from '../../../core/Socket/hooks/useSocket';
+import { CursorMoveDto } from '../../../core/Socket/dto/cursor.move.dto';
+import { XYPosition } from '../../../core/Socket/entities/types';
+import { useRemoteEdgeCreate } from '../../../core/Socket/hooks/useRemoteEdgeCreate';
+import { useRemoteEdgeRemove } from '../../../core/Socket/hooks/useRemoteEdgeRemove';
+import { useRemoteBlockRemove } from '../../../core/Socket/hooks/useRemoteBlockRemove';
+import { useRemoteBlockCreate } from '../../../core/Socket/hooks/useRemoteBlockCreate';
+import { useRemoteBlockMove } from '../../../core/Socket/hooks/useRemoteBlockMove';
+import { useCreateUserResponse } from '../../../core/Socket/hooks/useCreateUserResponse';
+import { User } from '../../../core/Socket/entities/User';
+import { EdgeCreateDto } from '../../../core/Socket/dto/edge.create.dto';
+import { BlockRemoveDto } from '../../../core/Socket/dto/block.remove.dto';
+import { EdgeRemoveDto } from '../../../core/Socket/dto/edge.remove.dto';
+import { BlockMoveDto } from '../../../core/Socket/dto/block.move.dto';
+import { BlockCreateDto } from '../../../core/Socket/dto/block.create.dto';
+import { BlockState } from '../../../core/reactFlow/block';
+import CursorModule from './CursorModule';
+import { useRemoteEdgeUpdate } from '../../../core/Socket/hooks/useRemoteEdgeUpdate';
+import { useRemoteBlockConfigChange } from '../../../core/Socket/hooks/useRemoteBlockConfigChange';
+import { useRemoteBlockLabelChange } from '../../../core/Socket/hooks/useRemoteBlockLabelChange';
+import { EdgeUpdateDto } from '../../../core/Socket/dto/edge.update.dto';
 
 const ProjectEditorShareGraphContainer = () => {
-	const {
-		project,
-		disconnect,
-		connected,
-		login,
-		onMoveCursor,
-		onMoveBlock,
-		moveBlock,
-		removeBlock,
-		createdRemoteEdge,
-		createBlock,
-		onCreateElement,
-		onRemoveElement,
-		onCreateEdge,
-	} = useSocket();
-	const { user } = useAuthentication();
-	const cursors = Cursors({ ownerName: user?.profile?.name as string });
+	const { socketService } = useSocket();
+	const { remoteEdgeCreate } = useRemoteEdgeCreate();
+	const { remoteEdgeRemove } = useRemoteEdgeRemove();
+	const { remoteEdgeUpdate } = useRemoteEdgeUpdate();
+	const { remoteBlockConfigChange } = useRemoteBlockConfigChange();
+	const { remoteBlockLabelChange } = useRemoteBlockLabelChange();
+	const { remoteBlockRemove } = useRemoteBlockRemove();
+	const { remoteBlockCreate } = useRemoteBlockCreate();
+	const { remoteBlockMove } = useRemoteBlockMove();
+	const { createdUserResponse } = useCreateUserResponse();
 	const dispatch = useDispatch();
-
 	const setReactInstance = useCallback(
 		(instance: OnLoadParams) => {
 			dispatch(setReactFlowInstance(instance));
@@ -49,75 +54,166 @@ const ProjectEditorShareGraphContainer = () => {
 	);
 
 	const onSetElements = useCallback(
+		(elementsOrFunc: Elements | ((elem: Elements) => Elements)) => {
+			dispatch(setElements(elementsOrFunc));
+		},
+		[dispatch]
+	);
+
+	const onMoveCursor = useCallback(
+		(position: XYPosition) => {
+			const dto = new CursorMoveDto();
+			dto.cursor = {
+				position,
+				user: createdUserResponse?.user as User,
+			};
+			socketService?.moveCursor(dto);
+		},
+		[createdUserResponse?.user, socketService]
+	);
+
+	const onCreateEdge = useCallback(
 		(elements: Elements) => {
-			dispatch(setElements(elements));
+			const dto = new EdgeCreateDto();
+			dto.elements = elements;
+			socketService?.createEdge(dto);
 		},
-		[dispatch]
+		[socketService]
 	);
 
-	const updatePosition = useCallback(
-		(data: MoveBlockBaseData) => {
-			dispatch(setElementByIdAndUpdatePosition(data));
+	const onRemoveEdge = useCallback(
+		(edgeId: string) => {
+			const dto = new EdgeRemoveDto();
+			dto.edgeId = edgeId;
+			socketService?.removeEdge(dto);
 		},
-		[dispatch]
+		[socketService]
 	);
 
-	const addRemoteElement = useCallback(
-		(data: CreateElementBaseData) => {
-			dispatch(addElement(data.element));
+	const onMoveBlock = useCallback(
+		(blockId: string, position: XYPosition) => {
+			const dto = new BlockMoveDto();
+			dto.position = position;
+			dto.blockId = blockId;
+			socketService?.moveBlock(dto);
 		},
-		[dispatch]
+		[socketService]
 	);
 
-	const addRemoteEdge = useCallback(
-		(data: CreateEdgeBaseData) => {
-			dispatch(addEdge(data.edge));
+	const onCreateBlock = useCallback(
+		(block: Node<BlockState>) => {
+			const dto = new BlockCreateDto();
+			dto.block = block;
+			dto.blockId = block.id;
+			socketService?.createBlock(dto);
 		},
-		[dispatch]
+		[socketService]
 	);
 
-	const removeRemoteElement = useCallback(
-		(data: RemoveElementBaseData) => {
-			dispatch(removeElements(data.elements));
+	const onRemoveBlock = useCallback(
+		(blockId: string) => {
+			const dto = new BlockRemoveDto();
+			dto.blockId = blockId;
+			socketService?.removeBlock(dto);
 		},
-		[dispatch]
+		[socketService]
 	);
 
-	const content = project && (
+	const onUpdateEdge = useCallback(
+		(elements: Elements) => {
+			const dto = new EdgeUpdateDto();
+			dto.elements = elements;
+			socketService?.updateEdge(dto);
+		},
+		[socketService]
+	);
+
+	useEffect(() => {
+		if (remoteBlockMove !== null) {
+			dispatch(setElementByIdAndUpdatePosition(remoteBlockMove));
+		}
+	}, [dispatch, remoteBlockMove]);
+
+	useEffect(() => {
+		if (remoteBlockCreate !== null) {
+			dispatch(addBlock(remoteBlockCreate));
+		}
+	}, [dispatch, remoteBlockCreate]);
+
+	useEffect(() => {
+		if (remoteBlockRemove !== null) {
+			dispatch(removeBlock(remoteBlockRemove));
+		}
+	}, [dispatch, remoteBlockRemove]);
+
+	useEffect(() => {
+		if (remoteEdgeCreate?.elements != null) {
+			console.log(remoteEdgeCreate.elements);
+			dispatch(setElements(remoteEdgeCreate.elements));
+		}
+	}, [dispatch, remoteEdgeCreate]);
+
+	useEffect(() => {
+		if (remoteEdgeRemove != null) {
+			dispatch(removeEdge(remoteEdgeRemove));
+		}
+	}, [dispatch, remoteEdgeRemove]);
+
+	useEffect(() => {
+		if (remoteEdgeUpdate?.elements != null) {
+			dispatch(setElements(remoteEdgeUpdate.elements));
+		}
+	}, [dispatch, remoteEdgeUpdate?.elements]);
+
+	useEffect(() => {
+		if (remoteBlockConfigChange != null) {
+			const { blockId, config } = remoteBlockConfigChange;
+			if (!blockId || !config) {
+				throw new Error('잘못된 데이터입니다.');
+			}
+
+			dispatch(
+				setElementByIdAndUpdateConfig({
+					key: config.name,
+					value: config.value,
+					id: blockId,
+				})
+			);
+		}
+	}, [dispatch, remoteBlockConfigChange]);
+
+	useEffect(() => {
+		if (remoteBlockLabelChange != null) {
+			const { blockId, data } = remoteBlockLabelChange;
+			if (!blockId || !data) {
+				throw new Error('잘못된 데이터입니다.');
+			}
+			dispatch(
+				setElementByIdAndUpdateLabel({
+					id: blockId,
+					label: data,
+				})
+			);
+		}
+	}, [dispatch, remoteBlockLabelChange]);
+
+	const content = createdUserResponse?.project?.flowState && (
 		<ProjectEditorGraph
 			setReactInstance={setReactInstance}
-			flowState={project.content.flowState}
+			flowState={createdUserResponse?.project.flowState}
 			setElements={onSetElements}
 			onMoveCursor={onMoveCursor}
+			onCreateBlock={onCreateBlock}
 			onMoveBlock={onMoveBlock}
-			cursorModule={cursors}
-			moveBlock={moveBlock}
-			createdBlock={createBlock}
-			removedBlock={removeBlock}
-			updatePosition={updatePosition}
-			createdRemoteEdge={createdRemoteEdge}
-			onCreateElement={onCreateElement}
-			onRemoveElement={onRemoveElement}
+			onRemoveBlock={onRemoveBlock}
 			onCreateEdge={onCreateEdge}
-			addRemoteElement={addRemoteElement}
-			addRemoteEdge={addRemoteEdge}
-			removeRemoteElement={removeRemoteElement}
+			onRemoveEdge={onRemoveEdge}
+			onUpdateEdge={onUpdateEdge}
+			cursorModule={<CursorModule />}
 		/>
 	);
 
-	useEffect(() => {
-		if (connected) {
-			login();
-		}
-	}, [connected, disconnect, login]);
-
-	useEffect(() => {
-		return () => {
-			disconnect();
-		};
-	}, [disconnect]);
-
-	return <>{!project ? <CircleLoading /> : content}</>;
+	return <>{content}</>;
 };
 
 export default ProjectEditorShareGraphContainer;

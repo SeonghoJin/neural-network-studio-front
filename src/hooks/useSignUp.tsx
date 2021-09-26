@@ -1,15 +1,17 @@
 import { AxiosError } from 'axios';
 import { atom, useRecoilState } from 'recoil';
 import { useCallback, useEffect } from 'react';
+import { useSnackbar } from 'notistack';
 import { sleep } from '../util';
 import { SignUpParams } from '../API/User/types';
 import { signUp } from '../API/User';
 import StandardModal from '../components/utils/modal/StandardModal';
 import SuccessSnackbar from '../components/utils/Snackbar/SuccessSnackbar';
 import SimpleBackdrop from '../components/utils/BackLoading';
+import ErrorSnackbar from '../components/utils/Snackbar/ErrorSnackbar';
 
 type SignUpResult = {
-	error: null | AxiosError;
+	error: null | string;
 	loading: boolean;
 	data: null | any;
 } | null;
@@ -21,9 +23,10 @@ const signUpResultState = atom<SignUpResult>({
 
 const useSignUp = () => {
 	const [result, setResult] = useRecoilState(signUpResultState);
+	const { enqueueSnackbar } = useSnackbar();
 
 	const fetch = useCallback(
-		async (params: SignUpParams) => {
+		async (params: { passwordValidation: boolean; confirmPasswordValidation: boolean } & SignUpParams) => {
 			setResult({
 				loading: true,
 				error: null,
@@ -31,6 +34,28 @@ const useSignUp = () => {
 			});
 
 			const delayedData = await sleep(500).then(async () => {
+				if (!params.confirmPasswordValidation) {
+					setResult({
+						loading: false,
+						error: '비밀번호가 일치하지 않습니다.',
+						data: null,
+					});
+					enqueueSnackbar('비밀번호가 일치하지 않습니다.', {
+						variant: 'error',
+					});
+					return null;
+				}
+				if (!params.passwordValidation) {
+					setResult({
+						loading: false,
+						error: '비밀번호는 반드시 기호, 영문, 숫자를 포함한 8자리이상으로 해야합니다.',
+						data: null,
+					});
+					enqueueSnackbar('비밀번호는 반드시 기호, 영문, 숫자를 포함한 8자리이상으로 해야합니다.', {
+						variant: 'error',
+					});
+					return null;
+				}
 				try {
 					const data = await signUp(params);
 					setResult({
@@ -38,34 +63,32 @@ const useSignUp = () => {
 						error: null,
 						data: data || true,
 					});
+					enqueueSnackbar('회원가입이 완료되었습니다.', { variant: 'success' });
 					return data || true;
-				} catch (e) {
+				} catch (e: any) {
 					setResult({
 						loading: false,
-						error: e,
+						error: (e as Error).message,
 						data: null,
 					});
+					enqueueSnackbar((e as Error).message, { variant: 'error' });
 					return null;
 				}
 			});
 
 			return delayedData;
 		},
-		[setResult]
+		[enqueueSnackbar, setResult]
 	);
-
-	useEffect(() => {
-		return () => {
-			setResult(null);
-		};
-	}, [setResult]);
 
 	return {
 		...result,
 		fetch,
-		errorFeedback: result?.error && <StandardModal head={result.error.name} />,
-		successFeedback: <SuccessSnackbar message="회원가입이 완료되었습니다!" open />,
-		loadingFeedback: result?.loading && <SimpleBackdrop open />,
+		error: result?.error,
+		success: !!result?.data,
+		loading: result?.loading,
+		successFallback: <SuccessSnackbar message="회원가입이 완료되었습니다!" open />,
+		loadingFallback: <SimpleBackdrop open />,
 	};
 };
 export default useSignUp;

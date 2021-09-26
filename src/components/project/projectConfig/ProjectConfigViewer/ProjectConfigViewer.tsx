@@ -1,21 +1,29 @@
-import { useMemo, createElement } from 'react';
+import { createElement } from 'react';
 
-import selectorItemHeads, { SelectorMappingViewer } from '..';
+import { SelectorMappingViewerKey, SelectorMappingViewerType } from '..';
 import CircleLoading from '../../../utils/Loading/CircularLoading';
 import useProjectConfig from '../../../../hooks/useProjectConfig';
 
-type Props = {
-	index: keyof typeof selectorItemHeads;
+export type ProjectConfigViewerProps = {
+	index: any;
+	selectorMappingViewer: any;
 };
 
-const ProjectConfigViewer = ({ index }: Props) => {
-	const { error, loading } = useProjectConfig();
+const ProjectConfigViewer = ({ index, selectorMappingViewer }: ProjectConfigViewerProps) => {
+	const { projectConfig, loading } = useProjectConfig();
+	if (!(index in selectorMappingViewer)) {
+		throw new Error('허용되지 않는 행위입니다.');
+	}
 
-	const element = useMemo(() => {
-		return createElement(SelectorMappingViewer[index]);
-	}, [index]);
-
-	return <>{error || loading ? <CircleLoading /> : element}</>;
+	return (
+		<>
+			{loading && <CircleLoading />}
+			{projectConfig &&
+				createElement(selectorMappingViewer[index], {
+					projectConfig,
+				})}
+		</>
+	);
 };
 
 export default ProjectConfigViewer;

@@ -3,7 +3,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import DefaultTabs from '../utils/Tab';
-import { StaticPath, pagePathNameToNumber, UndefinedPathNameNumber } from '../../pagePathName';
+import { StaticPath, pagePathNameToNumber, UndefinedPathNameNumber } from '../PagePathConsts';
 
 const TabWrapper = styled.div`
 	display: flex;

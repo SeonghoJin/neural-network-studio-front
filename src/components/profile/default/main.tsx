@@ -1,46 +1,40 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
-import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import style from '../index.module.css';
 import useAuthentication from '../../../hooks/useAuthentication';
+import icoEdit2 from '../../../static/img/ico_edit2.png';
+import icoEmail from '../../../static/img/ico_email1.png';
+import icoHomepage from '../../../static/img/ico_homepage1.png';
 
 const ProfileMain = () => {
 	const { user } = useAuthentication();
 	const profile = user?.profile;
 	return (
-		<div className={`${style.mainWrapper}`}>
-			<header className={style.headerWrapper}>
-				<div className={`${style.profile}`}>
-					<div className={`${style.profileImage}`}>
-						<input className={`${style.invisibleInput}`} type="file" id="uploadImage" name="image" accept={'image/*'} />
-						<img src={profile?.profileImage.url} alt="profile" />
-					</div>
-					<h2>{profile?.name}</h2>
-				</div>
-				<div className={`${style.buttons}`}>
-					<Link to="/profile/modify" type="button" className={`${style.modifyButton}`}>
-						수정
+		<div className="profile-area">
+			<div className="btn-upload">
+				<label htmlFor="upload">
+					<img src={user?.profile?.profileImage.url} alt=" " />
+				</label>
+			</div>
+
+			<div className="txt-group">
+				<div className="txt1">
+					{profile?.name}
+					<Link to="/profile/modify" type="button">
+						<img src={icoEdit2} alt=" " />
 					</Link>
 				</div>
-			</header>
-			<section className={`${style.userInfo}`}>
-				<div className={`${style.userMail}`}>
-					<FontAwesomeIcon icon={faEnvelope} color="gray" />
-					<a href={`mailto:${profile?.email}`}>{profile?.email}</a>
+				<div className="txt2">
+					<img src={icoEmail} alt="이메일" />
+					<a href={`mailto:${profile?.email}`}>{profile?.email || '없음'}</a>
 				</div>
-				<div className={`${style.userWebsite}`}>
-					<FontAwesomeIcon icon={faGlobe} color="gray" />
+				<div className="txt2">
+					<img src={icoHomepage} alt="홈페이지" />
 					<a href={profile?.webSite} target="_blank" rel="noreferrer">
-						{profile?.webSite}
+						{profile?.webSite || '없음'}
 					</a>
 				</div>
-				<div className={`${style.userDescription}`}>
-					<p>{profile?.description}</p>
-				</div>
-			</section>
-			<footer>프리셋 목록 들어감</footer>
+				<div className="txt3">{user?.profile?.description}</div>
+			</div>
 		</div>
 	);
 };

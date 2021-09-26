@@ -1,0 +1,17 @@
+export enum SocketEvent {
+	CreateUserResponse = 'create_user_response',
+	UserListResponse = 'user_list_response',
+	MoveCursor = 'move_cursor',
+	CreateBlock = 'create_block',
+	MoveBlock = 'move_block',
+	ChangeBlockConfig = 'change_block_config',
+	ChangeBlockLabel = 'change_block_label',
+	RemoveBlock = 'remove_block',
+	CreateEdge = 'create_edge',
+	UpdateEdge = 'update_edge',
+	RemoveEdge = 'remove_edge',
+	ChangeProjectConfig = 'change_project_config',
+	ChangeProjectEarlyStopConfig = 'change_project_early_stop_config',
+	ChangeProjectLearningRateReductionConfig = 'change_project_learning_rate_reduction_config',
+	RemoveUserRequest = 'remove_user_request',
+}
