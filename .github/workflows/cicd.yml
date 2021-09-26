@@ -19,7 +19,8 @@ jobs:
 
       - name: Install npm dependencies
         run: |
-          npm install
+          sudo npm install -g npm@7
+          sudo npm install
 
       - name: Run build task
         run: |
@@ -27,7 +28,7 @@ jobs:
           echo REACT_APP_SERVER_PREFIX=${{ secrets.PRODUCTION_SERVER_PREFIX }} >> .env.production.local
           echo REACT_APP_TEST_SERVER_PREFIX=${{ secrets.PRODUCTION_TEST_SERVER_PREFIX }} >> .env.production.local
           echo REACT_APP_SOCKET_SERVER_PREFIX=${{ secrets.PRODUCTION_SOCKET_SERVER_PREFIX }} >> .env.production.local
-          npm run build
+          sudo npm run build
 
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
