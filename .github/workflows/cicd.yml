@@ -22,9 +22,9 @@ jobs:
 
       - name: Touch environment file
         run: |
-          touch ${{ secrets.PRODUCTION_ENV_FILENAME }}
-          echo ${{ secrets.PRODUCTION_ENV }} >> ${{ secrets.PRODUCTION_ENV_FILENAME }}
-          cat ${{ secrets.PRODUCTION_ENV_FILENAME }}
+          touch .env.production.local
+          echo ${{ secrets.PRODUCTION_ENV }} >> .env.production.local
+          cat .env.production.local
 
       - name: Run build task
         run: |
