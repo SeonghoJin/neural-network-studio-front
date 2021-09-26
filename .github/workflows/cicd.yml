@@ -20,15 +20,12 @@ jobs:
       - name: Install npm dependencies
         run: npm install
 
-      - name: Touch environment file
+      - name: Run build task
         run: |
           touch .env.production.local
           echo REACT_APP_SERVER_PREFIX=${{ secrets.PRODUCTION_SERVER_PREFIX }} >> .env.production.local
           echo REACT_APP_TEST_SERVER_PREFIX=${{ secrets.PRODUCTION_TEST_SERVER_PREFIX }} >> .env.production.local
           echo REACT_APP_SOCKET_SERVER_PREFIX=${{ secrets.PRODUCTION_SOCKET_SERVER_PREFIX }} >> .env.production.local
-
-      - name: Run build task
-        run: |
           npm run build
 
       - name: Deploy to Server
