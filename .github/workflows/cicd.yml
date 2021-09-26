@@ -23,8 +23,9 @@ jobs:
       - name: Touch environment file
         run: |
           touch .env.production.local
-          echo ${{ secrets.PRODUCTION_ENV }} >> .env.production.local
-          cat .env.production.local
+          echo REACT_APP_SERVER_PREFIX=${{ secrets.PRODUCTION_SERVER_PREFIX }} >> .env.production.local
+          echo REACT_APP_TEST_SERVER_PREFIX=${{ secrets.PRODUCTION_TEST_SERVER_PREFIX }} >> .env.production.local
+          echo REACT_APP_SOCKET_SERVER_PREFIX=${{ secrets.PRODUCTION_SOCKET_SERVER_PREFIX }} >> .env.production.local
 
       - name: Run build task
         run: |
