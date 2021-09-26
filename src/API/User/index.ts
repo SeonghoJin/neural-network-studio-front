@@ -10,7 +10,7 @@ export const signUp = async (signUpParams: SignUpParams) => {
 	try {
 		const response = await axios.post(`${config.SERVER_PREFIX}/api/user`, signUpParams, axiosConfig);
 		return response.data;
-	} catch (e) {
+	} catch (e: any) {
 		if (e.response.status === 422) {
 			throw new Error('중복된 아이디입니다.');
 		}
