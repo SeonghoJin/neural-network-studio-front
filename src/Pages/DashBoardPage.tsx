@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Backdrop } from '@material-ui/core';
 import PrivateAuthentication from '../components/Authentication/PrivateAuthentication';
 import Navigation from '../components/nav';
 import { StaticPath } from '../components/PagePathConsts';
@@ -8,11 +9,12 @@ import CardGrid from '../components/dashboard/cardGrid/cardGrid';
 import { GetProjectListParams } from '../API/project/types';
 import usePageNation from '../components/utils/pagenation/usePageNation';
 import useProjectList from '../hooks/useProjectList';
+import { CircleLoading } from '../components/utils/Loading/CircularLoading';
 
 export const DashBoard = () => {
 	const [projectListParams, setProjectListPrams] = useState(new GetProjectListParams());
 
-	const { loading, data } = useProjectList({
+	const { data } = useProjectList({
 		params: projectListParams,
 	});
 
@@ -47,7 +49,7 @@ export const DashBoard = () => {
 								프로젝트 생성
 							</Link>
 						</div>
-						<ol className="list-project">{data && <CardGrid projects={data.projects} />}</ol>
+						<ol className="list-project">{(data && <CardGrid projects={data.projects} />) || <CircleLoading />}</ol>
 						{item}
 					</div>
 				</section>
