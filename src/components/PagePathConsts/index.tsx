@@ -23,6 +23,8 @@ export enum DynamicPath {
 	PROJECT_SHARE_FORMAT = '/share/project/%s/room/%s',
 	PROJECT_SHARE_CONFIG = '/share/project/:projectNo/room/:roomNo/config',
 	PROJECT_SHARE_CONFIG_FORMAT = '/share/project/%s/room/%s/config',
+	DASHBOARD_PROJECT_MODIFY = '/dashboard/project/:projectNo/modify',
+	DASHBOARD_PROJECT_MODIFY_FORMAT = '/dashboard/project/%s/modify',
 }
 
 export type PagePathKey = keyof typeof StaticPath;

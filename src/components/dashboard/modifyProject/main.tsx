@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { Button, TextField } from '@material-ui/core';
-import useCreateProject from '../../../../hooks/useCreateProject';
-import { IProjectDto } from '../../../../API/project/types';
+import { useHistory } from 'react-router-dom';
+import { IProjectDto } from '../../../API/project/types';
 
 const maxNameLen = 45;
 const maxDescriptionLen = 2000;
@@ -61,13 +61,11 @@ const ButtonGroup = styled.div`
 	justify-content: flex-end;
 `;
 
-const NewProjectMain = () => {
+const ModifyProjectMain = ({ project, updateProject }: { project: IProjectDto; updateProject: any }) => {
 	const [inputs, setInputs] = useState({
-		name: '',
-		description: '',
+		name: project.name,
+		description: project.description,
 	});
-
-	const { fetch, loading, loadingFallback } = useCreateProject();
 
 	const onchange = useCallback(
 		(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -88,9 +86,8 @@ const NewProjectMain = () => {
 
 	return (
 		<Wrapper>
-			{loading && loadingFallback}
 			<CreateProjectContainer>
-				<h3>프로젝트 생성하기</h3>
+				<h3>프로젝트 수정하기</h3>
 			</CreateProjectContainer>
 			<Container>
 				<TextField
@@ -112,12 +109,21 @@ const NewProjectMain = () => {
 				<div />
 			</Container>
 			<ButtonGroup>
-				<Button variant="contained" type="button" onClick={() => fetch(inputs)} color="primary">
-					프로젝트 생성
+				<Button
+					variant="contained"
+					type="button"
+					onClick={async () => {
+						await updateProject(project.projectNo, {
+							...inputs,
+						});
+					}}
+					color="primary"
+				>
+					프로젝트 수정
 				</Button>
 			</ButtonGroup>
 		</Wrapper>
 	);
 };
 
-export default NewProjectMain;
+export default ModifyProjectMain;
