@@ -95,8 +95,17 @@ export const updateProjectContent = async (projectNo: string, projectContent: IP
 };
 
 export const deleteProject = async (projectNo: string) => {
-	const response = await axios.delete(`${config.SERVER_PREFIX}/api/project/${projectNo}`);
-	return response.data;
+	try {
+		const response = await axios.delete(`${config.SERVER_PREFIX}/api/project/${projectNo}`);
+		return response.data;
+	} catch (e: AxiosError | any) {
+		if (e.isAxiosError && (e as AxiosError).response?.status === 401) {
+			throw new Error('로그인이 필요합니다.');
+		} else {
+			throw new Error('잘못된 삭제 요청입니다.');
+		}
+		return null;
+	}
 };
 
 export const getProjectList = async (params?: IGetProjectListParams) => {

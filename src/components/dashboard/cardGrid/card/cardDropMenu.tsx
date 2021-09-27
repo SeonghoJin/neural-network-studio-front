@@ -31,6 +31,7 @@ const CardDropMenu = ({ projectNo }: Props) => {
 
 	const onDeleteProject = useCallback(async () => {
 		if (window.confirm('프로젝트를 삭제하시겠습니까?')) {
+			console.log(projectNo.toString());
 			fetch(projectNo.toString());
 		}
 	}, [fetch, projectNo]);

@@ -11,12 +11,15 @@ import './static/css/common.css';
 import './static/css/swiper.min.css';
 import useLogout from './hooks/useLogout';
 import useSignUp from './hooks/useSignUp';
+import useDeleteProject from './hooks/useDeleteProject';
 
 function App() {
 	const logoutResult = useLogout();
+	const deleteDashboardResult = useDeleteProject();
 	return (
 		<>
 			{logoutResult.loading && logoutResult.loadingFallback}
+			{deleteDashboardResult.loading && deleteDashboardResult.loadingFallback}
 			<BrowserRouter>
 				<Authentication>
 					<Switch>
