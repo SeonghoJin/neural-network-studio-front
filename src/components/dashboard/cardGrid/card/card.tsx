@@ -14,9 +14,10 @@ type Props = {
 	title: string;
 	lastUpdate: Date;
 	description: string;
+	onUpdateProjectLists: any;
 };
 
-const Card = ({ id, description, title, lastUpdate }: Props) => {
+const Card = ({ id, description, title, lastUpdate, onUpdateProjectLists }: Props) => {
 	const history = useHistory();
 
 	const openProject = useCallback(() => {
@@ -27,7 +28,7 @@ const Card = ({ id, description, title, lastUpdate }: Props) => {
 		<li>
 			<div className="group">
 				<div className="tit">{title}</div>
-				<CardDropMenu projectNo={id} />
+				<CardDropMenu projectNo={id} onUpdateProjectLists={onUpdateProjectLists} />
 				<div className="content">{description}</div>
 			</div>
 			<button type="button" className="btn-bottom js-modal-open" onClick={openProject}>

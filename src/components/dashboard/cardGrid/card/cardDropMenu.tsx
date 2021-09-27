@@ -10,9 +10,10 @@ import iconDelete1 from '../../../../static/img/ico_delete1.png';
 
 type Props = {
 	projectNo: number;
+	onUpdateProjectLists: any;
 };
 
-const CardDropMenu = ({ projectNo }: Props) => {
+const CardDropMenu = ({ projectNo, onUpdateProjectLists }: Props) => {
 	const [dropMenuToggle, setDropMenuToggle] = useState(false);
 	const dropRef = useRef<HTMLDivElement | null>(null);
 	const { fetch } = useDeleteProject();
@@ -31,10 +32,10 @@ const CardDropMenu = ({ projectNo }: Props) => {
 
 	const onDeleteProject = useCallback(async () => {
 		if (window.confirm('프로젝트를 삭제하시겠습니까?')) {
-			console.log(projectNo.toString());
-			fetch(projectNo.toString());
+			await fetch(projectNo.toString());
+			onUpdateProjectLists();
 		}
-	}, [fetch, projectNo]);
+	}, [fetch, onUpdateProjectLists, projectNo]);
 
 	const openMenu = useCallback(() => {
 		setDropMenuToggle(!dropMenuToggle);
