@@ -53,10 +53,6 @@ const useUpdateProjectConfig = () => {
 		[setResult]
 	);
 
-	useEffect(() => {
-		setResult(null);
-	}, [setResult]);
-
 	return {
 		...result,
 		fetch,

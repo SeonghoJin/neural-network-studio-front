@@ -83,10 +83,6 @@ export const SignIn = () => {
 						</ol>
 
 						<div className="util">
-							<Link to="/" className="btn-link">
-								비밀번호찾기
-							</Link>
-							<span> | </span>
 							<Link to="/signup" className="btn-link">
 								회원가입
 							</Link>

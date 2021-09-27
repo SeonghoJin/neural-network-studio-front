@@ -5,6 +5,7 @@ export enum StaticPath {
 	MAIN = '/',
 	LOGIN = '/login',
 	PROFILE = '/profile',
+	UPDATE_PASSWORD = '/password/update',
 	PROFILE_MODIFY = '/profile/modify',
 	PROJECT = '/project',
 	PROJECT_SHARE_ROUTE = '/share/project',
@@ -44,4 +45,5 @@ export const pagePathNameToNumber: {
 	'/signup': UndefinedPathNameNumber,
 	'/share/project': UndefinedPathNameNumber,
 	'/dashboard/projects/new': UndefinedPathNameNumber,
+	'/password/update': UndefinedPathNameNumber,
 };

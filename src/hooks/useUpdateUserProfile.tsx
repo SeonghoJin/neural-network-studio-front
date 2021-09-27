@@ -7,6 +7,7 @@ import SimpleBackdrop from '../components/utils/BackLoading';
 import { sleep } from '../util';
 import ErrorSnackbar from '../components/utils/Snackbar/ErrorSnackbar';
 import SuccessSnackbar from '../components/utils/Snackbar/SuccessSnackbar';
+import useAuthentication from './useAuthentication';
 
 interface UserProfileToFetchParams {
 	blob: File | null;
@@ -31,6 +32,7 @@ const updateUserProfileResultState = atom<UpdateUserProfileResult>({
 const useUpdateUserProfile = () => {
 	const [result, setResult] = useRecoilState(updateUserProfileResultState);
 	const { enqueueSnackbar } = useSnackbar();
+	const { mutate } = useAuthentication();
 	const fetch = useCallback(
 		async ({ blob, email, name, webSite, description, id }: UserProfileToFetchParams) => {
 			setResult({
@@ -69,6 +71,7 @@ const useUpdateUserProfile = () => {
 						error: null,
 						data: response || true,
 					});
+					await mutate();
 					enqueueSnackbar('프로필을 저장했습니다.', { variant: 'success' });
 					return response || true;
 				} catch (e: AxiosError | any) {
@@ -83,7 +86,7 @@ const useUpdateUserProfile = () => {
 			});
 			return delayedData;
 		},
-		[enqueueSnackbar, setResult]
+		[enqueueSnackbar, mutate, setResult]
 	);
 
 	return {

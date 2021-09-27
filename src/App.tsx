@@ -12,6 +12,7 @@ import './static/css/swiper.min.css';
 import useLogout from './hooks/useLogout';
 import useSignUp from './hooks/useSignUp';
 import useDeleteProject from './hooks/useDeleteProject';
+import { UpdatePasswordPage } from './Pages/UpdatePasswordPage';
 
 function App() {
 	const logoutResult = useLogout();
@@ -26,6 +27,7 @@ function App() {
 						<Route exact path={StaticPath.MAIN} component={LandingPage} />
 						<Route exact path={StaticPath.LOGIN} component={SignInPage} />
 						<Route exact path={StaticPath.SIGN_UP} component={SignUpPage} />
+						<Route exact path={StaticPath.UPDATE_PASSWORD} component={UpdatePasswordPage} />
 						<Route exact path={StaticPath.PROFILE} component={ProfilePage} />
 						<Route exact path={StaticPath.PROFILE_MODIFY} component={ProfileModifyPage} />
 						<Route exact path={StaticPath.ASSET_MAIN} component={AssetPage} />
