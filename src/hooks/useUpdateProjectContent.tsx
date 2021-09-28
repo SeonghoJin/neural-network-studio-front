@@ -1,13 +1,13 @@
 import { useCallback, useEffect } from 'react';
 import { atom, useRecoilState } from 'recoil';
 import { AxiosError } from 'axios';
-import StandardModal from '../components/utils/modal/StandardModal';
 import { updateProjectContent } from '../API/project';
 import { IProjectContentDto } from '../API/project/types';
 import { sleep } from '../util';
+import SimpleBackdrop from '../components/utils/BackLoading';
 
 type PutProjectContentResultState = {
-	error: null | AxiosError;
+	error: null | string;
 	loading: boolean;
 	data: boolean | null;
 } | null;
@@ -43,9 +43,9 @@ const useUpdateProjectContent = () => {
 					setResult({
 						data: null,
 						loading: false,
-						error: e,
+						error: e.message,
 					});
-					return null;
+					throw e;
 				}
 			});
 
@@ -54,33 +54,10 @@ const useUpdateProjectContent = () => {
 		[setResult]
 	);
 
-	useEffect(() => {
-		return () => {
-			setResult(null);
-		};
-	}, [setResult]);
-
 	return {
 		...result,
 		fetch,
-		errorFeedback: result?.error && <StandardModal head={result.error.name} body={result?.error.message} />,
-		successFeedback: useCallback(
-			(onCloseSuccessFeedback?) => {
-				return (
-					result?.data && (
-						<StandardModal
-							head="저장을 완료했습니다"
-							onClose={() => {
-								if (onCloseSuccessFeedback) {
-									onCloseSuccessFeedback();
-								}
-							}}
-						/>
-					)
-				);
-			},
-			[result?.data]
-		),
+		loadingFallback: <SimpleBackdrop open />,
 	};
 };
 

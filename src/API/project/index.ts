@@ -17,9 +17,12 @@ const axiosConfig: AxiosRequestConfig = {
 };
 
 export const getPythonCode = async (projectNo: string) => {
-	const response = await axios.get<Blob>(`${config.SERVER_PREFIX}/api/project/${projectNo}/code`, axiosConfig);
-
-	return response.data;
+	try {
+		const response = await axios.get<Blob>(`${config.SERVER_PREFIX}/api/project/${projectNo}/code`, axiosConfig);
+		return response.data;
+	} catch (e) {
+		throw new Error(e.message);
+	}
 };
 
 export const getProject = async (projectNo: string) => {
@@ -100,7 +103,7 @@ export const updateProjectContent = async (projectNo: string, projectContent: IP
 		return response.data;
 	} catch (e) {
 		if ((e as AxiosError).isAxiosError && (e as AxiosError).response?.status !== 200) {
-			throw new Error('파이썬 코드 추출에 실패했습니다. 다시 시도해주세요.');
+			throw new Error('프로젝트 저장에 실패했습니다. 다시 시도해주세요.');
 		}
 		throw new Error('updateProjectContent Function Error');
 	}

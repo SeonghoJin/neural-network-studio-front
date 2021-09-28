@@ -23,7 +23,6 @@ function App() {
 		<>
 			{logoutResult.loading && logoutResult.loadingFallback}
 			{deleteDashboardResult.loading && deleteDashboardResult.loadingFallback}
-			{pythonCodeResult.loading && pythonCodeResult.loadingFallback}
 			<BrowserRouter>
 				<Authentication>
 					<Switch>

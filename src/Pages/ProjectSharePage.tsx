@@ -4,19 +4,21 @@ import reduxThunk from 'redux-thunk';
 import reduxLogger from 'redux-logger';
 import { Provider } from 'react-redux';
 import rootReducer from '../module';
-import ProjectEditorMain from '../components/project/projectEditor/projectEditorMain';
 import EditorShareNavigation from '../components/nav/EditorShareNavigation';
 import { ProjectEditorShareNav } from '../components/nav/ProjectEditorShareNav';
 import ProjectEditorShareGraphContainer from '../components/project/ProjectShare/ProjectEditorShareGraphContainer';
 import NodeConfigShareViewerContainer from '../components/project/ProjectShare/NodeConfigShareViewer';
 import ProjectEditorShareMain from '../components/project/ProjectShare/ProjectEditorShareMain';
+import useUpdateProjectContent from '../hooks/useUpdateProjectContent';
 
 const store = createStore(rootReducer, applyMiddleware(reduxThunk, reduxLogger));
 
 export const ProjectSharePage = () => {
+	const updateProjectContent = useUpdateProjectContent();
 	return (
 		<Provider store={store}>
 			<div id="container">
+				{updateProjectContent.loading && updateProjectContent.loadingFallback}
 				<EditorShareNavigation />
 				<section className="edit">
 					<ProjectEditorShareNav />

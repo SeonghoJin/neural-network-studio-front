@@ -98,11 +98,11 @@
 
 - Project 저장
   - Project 저장 성공
-    1. [ ] Project 저장 성공 메시지 출력
+    1. [x] Project 저장 성공 메시지 출력
   - Project 저장 실패
-    1. [ ] Project 저장 실패 메시지 출력
-      - [ ] Node 이름이 중복될 경우
-      - [ ] Input Type이 안맞을 경우
+    1. [x] Project 저장 실패 메시지 출력
+      - [x] Node 이름이 중복될 경우
+      - [x] Input Type이 안맞을 경우
 
 
 - Project Config 저장
