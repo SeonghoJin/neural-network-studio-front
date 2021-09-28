@@ -8,13 +8,19 @@ import ProjectEditorNav from '../components/project/projectEditor/ProjectEditorN
 import ProjectEditorMain from '../components/project/projectEditor/projectEditorMain';
 import ProjectEditorGraphContainer from '../components/project/projectEditor/ProjectEditorGraphContainer';
 import NodeConfigViewerContainer from '../components/project/projectEditor/NodeConfigViewer/NodeConfigViewerContainer';
+import usePythonCode from '../hooks/usePythonCode';
+import useUpdateProjectContent from '../hooks/useUpdateProjectContent';
 
 const store = createStore(rootReducer, applyMiddleware(reduxThunk, reduxLogger));
 
 export const ProjectEditorPage = () => {
+	const pythonCodeResult = usePythonCode();
+	const updateProjectContent = useUpdateProjectContent();
 	return (
 		<Provider store={store}>
 			<div id="container">
+				{pythonCodeResult.loading && pythonCodeResult.loadingFallback}
+				{updateProjectContent.loading && updateProjectContent.loadingFallback}
 				<ProjectNav />
 				<section className="edit">
 					<ProjectEditorNav />

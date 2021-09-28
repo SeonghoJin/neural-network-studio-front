@@ -338,7 +338,7 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 .board-util .list-filter li { display: flex; align-items: center; position: relative; margin-left: 50px; }
 .board-util .list-filter li:before { content: ''; display: block; position: absolute; left: -48px; width: 1px; height: 25px; margin: 0 23px; background: #d5d5d5; }
 
-.list-project { display: flex; flex-wrap: wrap; }
+.list-project { display: flex; flex-wrap: wrap; max-width: 1400px; margin: auto; padding: auto;}
 .list-project li { display: flex; flex-direction: column; justify-content: space-between; position: relative; width: 300px; height: 320px; margin: 0 24px 48px; border-radius: 10px; box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); box-sizing: border-box; background: #fff; }
 .list-project .group { position: relative; height: calc(100% - 50px); padding: 20px 25px; box-sizing: border-box; }
 .list-project .tit { max-width: calc(100% - 30px); margin-bottom: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 23px; font-weight: 700; color: #000; }

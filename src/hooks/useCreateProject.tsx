@@ -10,6 +10,7 @@ import { IProjectInfo } from '../API/project/types';
 import { sleep } from '../util';
 import { StaticPath } from '../components/PagePathConsts';
 import SimpleBackdrop from '../components/utils/BackLoading';
+import useUpdateProjectContent from './useUpdateProjectContent';
 
 type CreateProjectResult = {
 	error: null | AxiosError;
@@ -24,9 +25,7 @@ const createProjectResultState = atom<CreateProjectResult>({
 
 const useCreateProject = () => {
 	const [result, setResult] = useRecoilState(createProjectResultState);
-	const { enqueueSnackbar } = useSnackbar();
-	const history = useHistory();
-
+	const updateProjectContent = useUpdateProjectContent();
 	const fetch = useCallback(
 		async (projectInfo: IProjectInfo) => {
 			setResult({
@@ -38,32 +37,36 @@ const useCreateProject = () => {
 			const state = await sleep(500).then(async () => {
 				try {
 					const data = await createProject(projectInfo);
+					if (!data) {
+						throw new Error('프로젝트가 생성되지 않았습니다. ');
+					}
+					await updateProjectContent.fetch(data.projectNo, {
+						flowState: {
+							elements: [],
+							zoom: 1,
+							position: [100, 100],
+						},
+						output: '',
+					});
 					setResult({
 						error: null,
 						data,
 						loading: false,
 					});
-					history.push(StaticPath.DASHBOARD_PROJECTS);
-					enqueueSnackbar('프로젝트가 생성되었습니다.', {
-						variant: 'success',
-					});
-					return true;
+					return data;
 				} catch (e: AxiosError | any) {
 					setResult({
 						error: e,
 						data: null,
 						loading: false,
 					});
-					enqueueSnackbar(e.message, {
-						variant: 'error',
-					});
-					return false;
+					throw e;
 				}
 			});
 
 			return state;
 		},
-		[enqueueSnackbar, history, setResult]
+		[setResult, updateProjectContent]
 	);
 
 	return {

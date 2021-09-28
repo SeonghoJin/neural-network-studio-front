@@ -2,10 +2,12 @@ import { atom, useRecoilState } from 'recoil';
 import React, { useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AxiosError } from 'axios';
+import { useSnackbar } from 'notistack';
 import { deleteProject } from '../API/project';
 import StandardModal from '../components/utils/modal/StandardModal';
 import SimpleBackdrop from '../components/utils/BackLoading';
 import { sleep } from '../util';
+import { CircleLoading } from '../components/utils/Loading/CircularLoading';
 
 type DeleteProjectResultState = {
 	error: null | AxiosError;
@@ -20,7 +22,7 @@ const deleteProjectResultState = atom<DeleteProjectResultState>({
 
 const useDeleteProject = () => {
 	const [result, setResult] = useRecoilState(deleteProjectResultState);
-	const history = useHistory();
+	const { enqueueSnackbar } = useSnackbar();
 	const fetch = useCallback(
 		async (projectNo: string) => {
 			setResult({
@@ -37,6 +39,9 @@ const useDeleteProject = () => {
 						data: data || true,
 						loading: false,
 					});
+					enqueueSnackbar('프로젝트가 삭제되었습니다.', {
+						variant: 'error',
+					});
 					return true;
 				} catch (e: AxiosError | any) {
 					setResult({
@@ -44,34 +49,22 @@ const useDeleteProject = () => {
 						data: null,
 						loading: false,
 					});
+					enqueueSnackbar(e.message, {
+						variant: 'error',
+					});
 					return false;
 				}
 			});
 			return delayedData;
 		},
-		[setResult]
+		[setResult, enqueueSnackbar]
 	);
-
-	useEffect(() => {
-		return () => {
-			setResult(null);
-		};
-	}, [setResult]);
 
 	return {
 		...result,
 		fetch,
-		successFeedback: result?.data && (
-			<StandardModal
-				head="삭제완료했습니다."
-				body=""
-				onClose={async () => {
-					history.go(0);
-				}}
-			/>
-		),
-		loadingFeedback: result?.loading && <SimpleBackdrop open={result?.loading} />,
-		errorFeedback: result?.error && <StandardModal head={result.error.name} />,
+		loading: result?.loading,
+		loadingFallback: <SimpleBackdrop open />,
 	};
 };
 

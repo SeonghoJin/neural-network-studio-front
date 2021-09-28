@@ -1,13 +1,8 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { Button, TextField } from '@material-ui/core';
-import { useSnackbar } from 'notistack';
 import { useHistory } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import useCreateProject from '../../../../hooks/useCreateProject';
-import { IProjectDto } from '../../../../API/project/types';
-import useUpdateProjectContent from '../../../../hooks/useUpdateProjectContent';
-import { StaticPath } from '../../../PagePathConsts';
+import { IProjectDto } from '../../../API/project/types';
 
 const maxNameLen = 45;
 const maxDescriptionLen = 2000;
@@ -66,16 +61,13 @@ const ButtonGroup = styled.div`
 	justify-content: flex-end;
 `;
 
-const NewProjectMain = () => {
+const ModifyProjectMain = ({ project, updateProject }: { project: IProjectDto; updateProject: any }) => {
 	const [inputs, setInputs] = useState({
-		name: '',
-		description: '',
+		name: project.name,
+		description: project.description,
 	});
 
-	const { fetch, loading, loadingFallback } = useCreateProject();
-	const { enqueueSnackbar } = useSnackbar();
-	const history = useHistory();
-	const onChange = useCallback(
+	const onchange = useCallback(
 		(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 			const { name, value } = e.target;
 			if (name === 'name') {
@@ -92,40 +84,24 @@ const NewProjectMain = () => {
 		[inputs]
 	);
 
-	const onCreate = useCallback(() => {
-		fetch(inputs)
-			.then(async () => {
-				history.push(StaticPath.DASHBOARD_PROJECTS);
-				enqueueSnackbar('프로젝트가 생성되었습니다.', {
-					variant: 'success',
-				});
-			})
-			.catch((e) => {
-				enqueueSnackbar(e.message, {
-					variant: 'error',
-				});
-			});
-	}, [enqueueSnackbar, fetch, history, inputs]);
-
 	return (
 		<Wrapper>
-			{loading && loadingFallback}
 			<CreateProjectContainer>
-				<h3>프로젝트 생성하기</h3>
+				<h3>프로젝트 수정하기</h3>
 			</CreateProjectContainer>
 			<Container>
 				<TextField
 					label="이름"
 					name="name"
 					placeholder="프로젝트 이름 (최대 45자)"
-					onChange={onChange}
+					onChange={onchange}
 					value={inputs.name}
 				/>
 				<DescriptionWrapper>
 					<Description
 						placeholder="프로젝트 설명 (최대 2000자)"
 						name="description"
-						onChange={onChange}
+						onChange={onchange}
 						value={inputs.description}
 						maxLength={maxDescriptionLen}
 					/>
@@ -137,15 +113,17 @@ const NewProjectMain = () => {
 					variant="contained"
 					type="button"
 					onClick={async () => {
-						await onCreate();
+						await updateProject(project.projectNo, {
+							...inputs,
+						});
 					}}
 					color="primary"
 				>
-					프로젝트 생성
+					프로젝트 수정
 				</Button>
 			</ButtonGroup>
 		</Wrapper>
 	);
 };
 
-export default NewProjectMain;
+export default ModifyProjectMain;

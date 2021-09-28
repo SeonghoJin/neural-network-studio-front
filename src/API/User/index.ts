@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import { purple } from '@material-ui/core/colors';
 import config from '../../config';
 import { SignUpParams, UserProfile, UserProfileImage, UserProfileToUpdateParams } from './types';
 
@@ -35,4 +36,23 @@ export const updateUserProfile = async (userProfileToUpdate: UserProfileToUpdate
 export const uploadImage = async (blob: FormData) => {
 	const response = await axios.post<UserProfileImage>(`${config.SERVER_PREFIX}/api/image`, blob, axiosConfig);
 	return response.data;
+};
+
+export const updateUserPassword = async (password: string) => {
+	try {
+		const response = await axios.put(
+			`${config.SERVER_PREFIX}/api/user/password`,
+			{
+				pw: password,
+			},
+			axiosConfig
+		);
+		return response.data;
+	} catch (e: any | AxiosError) {
+		if ((e as AxiosError).isAxiosError && (e as AxiosError).response?.status !== 200) {
+			throw new Error('잘못된 요청입니다.');
+		}
+		throw new Error('잘못된 요청입니다.');
+		return null;
+	}
 };

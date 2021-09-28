@@ -97,7 +97,7 @@ const ProjectEditorGraph: FC<Props> = ({
 	const { isValidationConnection } = useValidationConnection();
 
 	useEffect(() => {
-		setElements(flowState?.elements);
+		setElements(flowState?.elements || []);
 	}, [flowState, setElements]);
 
 	const onConnect = useCallback(

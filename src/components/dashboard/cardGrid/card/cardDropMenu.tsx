@@ -1,18 +1,21 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { format } from 'util';
 import DropMenu from '../../../utils/dropMenu/dropMenu';
 import style from './card.module.css';
 import useDeleteProject from '../../../../hooks/useDeleteProject';
 import icoMore1 from '../../../../static/img/ico_more1.png';
 import iconEdit1 from '../../../../static/img/ico_edit1.png';
 import iconDelete1 from '../../../../static/img/ico_delete1.png';
+import { DynamicPath } from '../../../PagePathConsts';
 
 type Props = {
 	projectNo: number;
+	onUpdateProjectLists: any;
 };
 
-const CardDropMenu = ({ projectNo }: Props) => {
+const CardDropMenu = ({ projectNo, onUpdateProjectLists }: Props) => {
 	const [dropMenuToggle, setDropMenuToggle] = useState(false);
 	const dropRef = useRef<HTMLDivElement | null>(null);
 	const { fetch } = useDeleteProject();
@@ -31,9 +34,10 @@ const CardDropMenu = ({ projectNo }: Props) => {
 
 	const onDeleteProject = useCallback(async () => {
 		if (window.confirm('프로젝트를 삭제하시겠습니까?')) {
-			fetch(projectNo.toString());
+			await fetch(projectNo.toString());
+			onUpdateProjectLists();
 		}
-	}, [fetch, projectNo]);
+	}, [fetch, onUpdateProjectLists, projectNo]);
 
 	const openMenu = useCallback(() => {
 		setDropMenuToggle(!dropMenuToggle);
@@ -45,7 +49,7 @@ const CardDropMenu = ({ projectNo }: Props) => {
 				<img src={icoMore1} alt="더보기" />
 			</button>
 			<DropMenu open={dropMenuToggle}>
-				<a href="#">
+				<a href={format(DynamicPath.DASHBOARD_PROJECT_MODIFY_FORMAT, projectNo)}>
 					<img src={iconEdit1} alt="수정" />
 					수정
 				</a>
