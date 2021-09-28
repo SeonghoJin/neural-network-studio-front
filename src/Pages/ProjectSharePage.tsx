@@ -10,6 +10,7 @@ import ProjectEditorShareGraphContainer from '../components/project/ProjectShare
 import NodeConfigShareViewerContainer from '../components/project/ProjectShare/NodeConfigShareViewer';
 import ProjectEditorShareMain from '../components/project/ProjectShare/ProjectEditorShareMain';
 import useUpdateProjectContent from '../hooks/useUpdateProjectContent';
+import { VisitAlarmModule } from '../components/project/ProjectShare/VisitAlarmModule';
 
 const store = createStore(rootReducer, applyMiddleware(reduxThunk, reduxLogger));
 
@@ -18,6 +19,7 @@ export const ProjectSharePage = () => {
 	return (
 		<Provider store={store}>
 			<div id="container">
+				<VisitAlarmModule />
 				{updateProjectContent.loading && updateProjectContent.loadingFallback}
 				<EditorShareNavigation />
 				<section className="edit">
