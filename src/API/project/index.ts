@@ -86,8 +86,7 @@ export const updateProjectConfig = async (projectNo: string, projectConfig: IPro
 };
 
 export const updateProjectContent = async (projectNo: string, projectContent: IProjectContentDto) => {
-	let layers = null;
-	layers = graphToLayouts(projectContent.flowState.elements);
+	const layers = graphToLayouts(projectContent.flowState.elements);
 
 	try {
 		const response = await axios.put(

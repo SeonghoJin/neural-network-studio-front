@@ -44,7 +44,7 @@ const usePythonCode = () => {
 							data: null,
 							loading: false,
 						});
-						return null;
+						throw e;
 					});
 				return res;
 			});
