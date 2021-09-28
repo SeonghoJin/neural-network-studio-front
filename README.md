@@ -107,9 +107,9 @@
 
 - Project Config 저장
   - Project Config 저장성공
-    1. [ ] Project Config 저장 성공 메시지 출력
+    1. [x] Project Config 저장 성공 메시지 출력
   - Project Config 저장실패
-    1. [ ] Project Config 저장 실패 메시지 출력
+    1. [x] Project Config 저장 실패 메시지 출력
 
 - Project Share
   - 프로젝트 입장시

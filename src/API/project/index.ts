@@ -79,13 +79,19 @@ export const updateProjectInfo = async (projectNo: string, projectInfo: IProject
 };
 
 export const updateProjectConfig = async (projectNo: string, projectConfig: IProjectConfig) => {
-	const response = await axios.put(
-		`${config.SERVER_PREFIX}/api/project/${projectNo}/config`,
-		projectConfig,
-		axiosConfig
-	);
-
-	return response.data;
+	try {
+		const response = await axios.put(
+			`${config.SERVER_PREFIX}/api/project/${projectNo}/config`,
+			projectConfig,
+			axiosConfig
+		);
+		return response.data;
+	} catch (e) {
+		if ((e as AxiosError).response?.status !== 200) {
+			throw new Error('모델 설정 저장에 실패했습니다. 다시 시도해주세요.');
+		}
+		throw e;
+	}
 };
 
 export const updateProjectContent = async (projectNo: string, projectContent: IProjectContentDto) => {

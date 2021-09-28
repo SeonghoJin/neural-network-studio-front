@@ -9,7 +9,7 @@ import SimpleBackdrop from '../components/utils/BackLoading';
 import SuccessSnackbar from '../components/utils/Snackbar/SuccessSnackbar';
 
 type UpdateProjectConfigState = {
-	error: null | AxiosError;
+	error: null | string;
 	loading: boolean;
 	data: boolean | null;
 } | null;
@@ -45,9 +45,9 @@ const useUpdateProjectConfig = () => {
 				setResult({
 					data: null,
 					loading: false,
-					error: e,
+					error: e.message,
 				});
-				return null;
+				throw e;
 			}
 		},
 		[setResult]
@@ -56,9 +56,7 @@ const useUpdateProjectConfig = () => {
 	return {
 		...result,
 		fetch,
-		loadingFeedback: result?.loading && <SimpleBackdrop open />,
-		successFeedback: result?.data && <SuccessSnackbar message="저장되었습니다." open />,
-		errorFeedback: result?.error && <StandardModal head="error" body={result?.error?.name} />,
+		loadingFallback: <SimpleBackdrop open />,
 	};
 };
 

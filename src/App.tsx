@@ -10,15 +10,12 @@ import './static/css/aos.css';
 import './static/css/common.css';
 import './static/css/swiper.min.css';
 import useLogout from './hooks/useLogout';
-import useSignUp from './hooks/useSignUp';
 import useDeleteProject from './hooks/useDeleteProject';
 import { UpdatePasswordPage } from './Pages/UpdatePasswordPage';
-import usePythonCode from './hooks/usePythonCode';
 
 function App() {
 	const logoutResult = useLogout();
 	const deleteDashboardResult = useDeleteProject();
-	const pythonCodeResult = usePythonCode();
 	return (
 		<>
 			{logoutResult.loading && logoutResult.loadingFallback}
