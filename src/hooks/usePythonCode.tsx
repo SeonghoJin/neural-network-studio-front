@@ -3,14 +3,12 @@ import { atom, useRecoilState } from 'recoil';
 import { AxiosError } from 'axios';
 import { getPythonCode, updateProjectContent } from '../API/project';
 import { IProjectContentDto } from '../API/project/types';
-import StandardModal from '../components/utils/modal/StandardModal';
-import SuccessSnackbar from '../components/utils/Snackbar/SuccessSnackbar';
 import { sleep } from '../util';
 import SimpleBackdrop from '../components/utils/BackLoading';
 
 type PythonCodeResult = {
 	data: null | Blob;
-	error: null | AxiosError;
+	error: null | string;
 	loading: boolean;
 } | null;
 
@@ -21,7 +19,6 @@ const pythonCodeResultState = atom<PythonCodeResult>({
 
 const usePythonCode = () => {
 	const [result, setResult] = useRecoilState(pythonCodeResultState);
-
 	const fetch = useCallback(
 		async (projectNo: string, projectContent: IProjectContentDto) => {
 			setResult({
@@ -41,9 +38,9 @@ const usePythonCode = () => {
 						});
 						return data;
 					})
-					.catch((e) => {
+					.catch((e: Error) => {
 						setResult({
-							error: e,
+							error: e.message,
 							data: null,
 							loading: false,
 						});
@@ -57,18 +54,10 @@ const usePythonCode = () => {
 		[setResult]
 	);
 
-	useEffect(() => {
-		return () => {
-			setResult(null);
-		};
-	}, [setResult]);
-
 	return {
 		...result,
+		loadingFallback: <SimpleBackdrop open />,
 		fetch,
-		errorFeedback: result?.error && <StandardModal head={result.error.message} />,
-		loadingFeedback: result?.loading && <SimpleBackdrop open />,
-		successFeedback: result?.data && <SuccessSnackbar message="파이썬 코드를 열어보세요." open={!!result?.data} />,
 	};
 };
 

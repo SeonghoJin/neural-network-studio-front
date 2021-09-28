@@ -86,18 +86,25 @@ export const updateProjectConfig = async (projectNo: string, projectConfig: IPro
 };
 
 export const updateProjectContent = async (projectNo: string, projectContent: IProjectContentDto) => {
-	const layers = graphToLayouts(projectContent.flowState.elements);
+	let layers = null;
+	layers = graphToLayouts(projectContent.flowState.elements);
 
-	const response = await axios.put(
-		`${config.SERVER_PREFIX}/api/project/${projectNo}/content`,
-		{
-			...projectContent,
-			...layers,
-		},
-		axiosConfig
-	);
-
-	return response.data;
+	try {
+		const response = await axios.put(
+			`${config.SERVER_PREFIX}/api/project/${projectNo}/content`,
+			{
+				...projectContent,
+				...layers,
+			},
+			axiosConfig
+		);
+		return response.data;
+	} catch (e) {
+		if ((e as AxiosError).isAxiosError && (e as AxiosError).response?.status !== 200) {
+			throw new Error('파이썬 코드 추출에 실패했습니다. 다시 시도해주세요.');
+		}
+		throw new Error('updateProjectContent Function Error');
+	}
 };
 
 export const deleteProject = async (projectNo: string) => {

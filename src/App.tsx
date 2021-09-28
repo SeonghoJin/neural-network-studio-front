@@ -13,14 +13,17 @@ import useLogout from './hooks/useLogout';
 import useSignUp from './hooks/useSignUp';
 import useDeleteProject from './hooks/useDeleteProject';
 import { UpdatePasswordPage } from './Pages/UpdatePasswordPage';
+import usePythonCode from './hooks/usePythonCode';
 
 function App() {
 	const logoutResult = useLogout();
 	const deleteDashboardResult = useDeleteProject();
+	const pythonCodeResult = usePythonCode();
 	return (
 		<>
 			{logoutResult.loading && logoutResult.loadingFallback}
 			{deleteDashboardResult.loading && deleteDashboardResult.loadingFallback}
+			{pythonCodeResult.loading && pythonCodeResult.loadingFallback}
 			<BrowserRouter>
 				<Authentication>
 					<Switch>

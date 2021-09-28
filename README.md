@@ -92,9 +92,9 @@
 
 - PythonCode 추출
   - PythonCode 추출 성공
-    1. [ ] PythonCode 추출 성공 메시지 출력
+    1. [x] PythonCode 추출 성공 메시지 출력
   - PythonCode 추출 실패
-    1. [ ] PythonCode 추출 실패 메시지 출력
+    1. [x] PythonCode 추출 실패 메시지 출력
 
 - Project 저장
   - Project 저장 성공
