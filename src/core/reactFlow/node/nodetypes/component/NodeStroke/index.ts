@@ -3,11 +3,11 @@ import { BlockCategory, BlockState } from '../../../../block';
 
 type NodeStrokeColorTableKey = keyof typeof BlockCategory;
 
-const NodeStrokeColorTable: {
+export const NodeStrokeColorTable: {
 	[index in NodeStrokeColorTableKey]: string;
 } = {
-	Layer: '#000000',
-	Math: '#000000',
+	Layer: '#00AE84',
+	Math: '#FFFFFF',
 };
 
 export const getNodeStrokeColor = (e: Node<BlockState>) => {
@@ -17,10 +17,10 @@ export const getNodeStrokeColor = (e: Node<BlockState>) => {
 
 type NodeColorTableKey = keyof typeof BlockCategory;
 
-const NodeColorTable: {
+export const NodeColorTable: {
 	[index in NodeColorTableKey]: string;
 } = {
-	Layer: '#FFFFFF',
+	Layer: '#38b693',
 	Math: '#FFFFFF',
 };
 
