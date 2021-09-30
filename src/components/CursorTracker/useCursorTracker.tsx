@@ -15,8 +15,13 @@ export const useCursorTracker = () => {
 		[setCursorPosition]
 	);
 
+	const onCursorDragEnd = useCallback(() => {
+		setCursorPosition(null);
+	}, [setCursorPosition]);
+
 	return {
 		onCursorDrag,
+		onCursorDragEnd,
 		cursorPosition,
 		setCursorPosition,
 	};

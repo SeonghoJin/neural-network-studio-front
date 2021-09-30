@@ -24,7 +24,7 @@ type Props = {
 
 const Node = ({ state }: Props) => {
 	const classes = useBlockStyle();
-	const { onCursorDrag } = useCursorTracker();
+	const { onCursorDrag, onCursorDragEnd } = useCursorTracker();
 
 	const setEmptyImage = useCallback((dataTransfer: DataTransfer) => {
 		dataTransfer.setDragImage(document.createElement('img'), 0, 0);
@@ -43,7 +43,8 @@ const Node = ({ state }: Props) => {
 
 	const onDragEnd = useCallback(() => {
 		window.removeEventListener('drag', onCursorDrag);
-	}, [onCursorDrag]);
+		onCursorDragEnd();
+	}, [onCursorDrag, onCursorDragEnd]);
 
 	return (
 		<li className={classes.wrapper}>
