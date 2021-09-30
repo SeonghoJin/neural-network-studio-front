@@ -24,7 +24,7 @@ type Props = {
 
 const Node = ({ state }: Props) => {
 	const classes = useBlockStyle();
-	const { onCursorDrag, onCursorDragEnd } = useCursorTracker();
+	const { onCursorDrag, onCursorDragEnd, onCursorDragStart } = useCursorTracker();
 
 	const setEmptyImage = useCallback((dataTransfer: DataTransfer) => {
 		dataTransfer.setDragImage(document.createElement('img'), 0, 0);
@@ -57,6 +57,7 @@ const Node = ({ state }: Props) => {
 				draggable
 				onDragStart={(event) => {
 					onDragStart(event);
+					onCursorDragStart();
 				}}
 				onDragEnd={onDragEnd}
 			>

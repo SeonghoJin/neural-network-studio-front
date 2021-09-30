@@ -1,9 +1,16 @@
 import { useRecoilState } from 'recoil';
 import { useCallback } from 'react';
-import { CursorPositionState } from './CursorPosition';
+import { CursorDragEvent, CursorPositionState } from './CursorPosition';
 
 export const useCursorTracker = () => {
 	const [cursorPosition, setCursorPosition] = useRecoilState(CursorPositionState);
+	const [cursorDragEvent, setCursorDragEvent] = useRecoilState(CursorDragEvent);
+
+	const onCursorDragStart = useCallback(() => {
+		setCursorDragEvent({
+			flag: true,
+		});
+	}, [setCursorDragEvent]);
 
 	const onCursorDrag = useCallback(
 		(e) => {
@@ -16,10 +23,14 @@ export const useCursorTracker = () => {
 	);
 
 	const onCursorDragEnd = useCallback(() => {
+		setCursorDragEvent({
+			flag: false,
+		});
 		setCursorPosition(null);
-	}, [setCursorPosition]);
+	}, [setCursorDragEvent, setCursorPosition]);
 
 	return {
+		onCursorDragStart,
 		onCursorDrag,
 		onCursorDragEnd,
 		cursorPosition,
