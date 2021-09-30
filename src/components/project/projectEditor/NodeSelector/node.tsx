@@ -36,9 +36,10 @@ const Node = ({ state }: Props) => {
 			setEmptyImage(localEvent.dataTransfer);
 			localEvent.dataTransfer.setData('application/nodedata', JSON.stringify(state));
 			localEvent.dataTransfer.effectAllowed = 'copy';
+			onCursorDragStart();
 			window.addEventListener('drag', onCursorDrag);
 		},
-		[onCursorDrag, setEmptyImage, state]
+		[onCursorDrag, onCursorDragStart, setEmptyImage, state]
 	);
 
 	const onDragEnd = useCallback(() => {
@@ -57,7 +58,6 @@ const Node = ({ state }: Props) => {
 				draggable
 				onDragStart={(event) => {
 					onDragStart(event);
-					onCursorDragStart();
 				}}
 				onDragEnd={onDragEnd}
 			>

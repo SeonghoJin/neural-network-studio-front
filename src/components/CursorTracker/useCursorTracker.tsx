@@ -5,7 +5,6 @@ import { CursorDragEvent, CursorPositionState } from './CursorPosition';
 export const useCursorTracker = () => {
 	const [cursorPosition, setCursorPosition] = useRecoilState(CursorPositionState);
 	const [cursorDragEvent, setCursorDragEvent] = useRecoilState(CursorDragEvent);
-
 	const onCursorDragStart = useCallback(() => {
 		setCursorDragEvent({
 			flag: true,
@@ -35,5 +34,6 @@ export const useCursorTracker = () => {
 		onCursorDragEnd,
 		cursorPosition,
 		setCursorPosition,
+		cursorDragEvent,
 	};
 };

@@ -9,11 +9,6 @@ class ErrorBoundary extends Component<{ children: any }, { error: boolean }> {
 	}
 
 	componentDidCatch(error: Error, info: ErrorInfo) {
-		console.log('에러가 발생했습니다.');
-		console.log({
-			error,
-			info,
-		});
 		this.setState({
 			error: true,
 		});

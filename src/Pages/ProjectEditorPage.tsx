@@ -25,8 +25,8 @@ export const ProjectEditorPage = () => {
 			<div
 				style={{
 					position: 'absolute',
-					top: (cursorPosition?.y || 0) + 20,
-					left: (cursorPosition?.x || 0) + 20,
+					top: (cursorPosition?.y || -100) + 20,
+					left: (cursorPosition?.x || -100) + 20,
 					zIndex: 5,
 					visibility: (!cursorPosition && 'hidden') || 'visible',
 				}}

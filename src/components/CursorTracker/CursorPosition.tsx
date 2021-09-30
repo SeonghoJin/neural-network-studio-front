@@ -17,7 +17,7 @@ export type CursorDragEvent = {
 };
 
 export const CursorDragEvent = atom<CursorDragEvent>({
-	key: 'cursorPositionState',
+	key: 'cursorDrag',
 	default: {
 		flag: false,
 	},
