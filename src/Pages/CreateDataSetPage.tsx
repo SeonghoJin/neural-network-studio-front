@@ -1,20 +1,15 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
-import {
-	Button,
-	Divider,
-	FormControl,
-	FormControlLabel,
-	FormLabel,
-	Radio,
-	RadioGroup,
-	TextField,
-} from '@material-ui/core';
-import { ReflexSplitter } from 'react-reflex';
+import { Button, Divider } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
+import { useHistory } from 'react-router-dom';
 import PrivateAuthentication from '../components/Authentication/PrivateAuthentication';
-import Main from '../components/dashboard/newProject/main/NewProjectMain';
 import Navigation from '../components/nav';
 import { CustomCheckInput } from '../components/Input/custom/CustomCheckInput';
+import { UpdateDataset } from '../API/Dataset/type';
+import { useUploadFileAndUpdateDataset } from '../hooks/useUploadFileAndUpdateDataset';
+import { QueryPath, StaticPath } from '../components/PagePathConsts';
+import SimpleBackdrop from '../components/utils/BackLoading';
 
 const MainWrapper = styled.div`
 	width: 100%;
@@ -115,6 +110,7 @@ const ItemWrapper = styled.div`
 
 const ItemHead = styled.div`
 	width: 200px;
+	margin-right: 20px;
 `;
 
 const ItemBody = styled.div`
@@ -145,18 +141,72 @@ const MarginDivider = () => {
 	);
 };
 
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
 export const CreateDataSetPage = () => {
 	const fileRef = useRef<HTMLInputElement | null>(null);
+	const [updateDatasetState, setUpdateDatasetState] = useState<Omit<UpdateDataset, 'id'>>({
+		public: true,
+		description: '',
+		name: '',
+	});
+	const history = useHistory();
+	const { fetch, loading } = useUploadFileAndUpdateDataset();
+	const [uploadFile, setUploadFile] = useState<File | null>(null);
+	const [filePath, setFilePath] = useState<string>('');
+	const { enqueueSnackbar } = useSnackbar();
 
-	const onChangeFile = useCallback(() => {
+	const onChange = useCallback(
+		(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+			const { name, value } = e.target;
+			setUpdateDatasetState((prev) => ({
+				...prev,
+				[name]: value,
+			}));
+		},
+		[setUpdateDatasetState]
+	);
+
+	const onChangeFile = useCallback(async () => {
 		const inputNode = fileRef.current as HTMLInputElement;
 		const file = (inputNode.files && inputNode.files[0]) || null;
-		console.log(file?.name);
-	}, []);
+		if (!file) {
+			return;
+		}
+
+		if (file.size > MAX_FILE_SIZE) {
+			return;
+		}
+
+		setFilePath(inputNode.value);
+		setUploadFile(file);
+	}, [setFilePath, setUploadFile]);
+
+	const onSubmit = useCallback(() => {
+		const uploadFormData = new FormData();
+		if (uploadFile == null) {
+			enqueueSnackbar('업로드할 파일이 없습니다.', { variant: 'error' });
+			return;
+		}
+		if (updateDatasetState.name === '') {
+			enqueueSnackbar('데이터셋의 이름이 없습니다.', { variant: 'error' });
+			return;
+		}
+		uploadFormData.append('dataset', uploadFile);
+		fetch(uploadFormData, updateDatasetState)
+			.then(() => {
+				history.push(QueryPath.DATASET_STORE_DEFAULT);
+				enqueueSnackbar('데이터 셋이 저장되었습니다.', { variant: 'success' });
+			})
+			.catch((e) => {
+				enqueueSnackbar(e.message, { variant: 'error' });
+			});
+	}, [enqueueSnackbar, fetch, history, updateDatasetState, uploadFile]);
 
 	return (
 		<PrivateAuthentication>
 			<Navigation />
+			{loading && <SimpleBackdrop open />}
 			<MainWrapper>
 				<Wrapper>
 					<CreateProjectContainer>
@@ -164,12 +214,22 @@ export const CreateDataSetPage = () => {
 					</CreateProjectContainer>
 					<Container>
 						<ItemWrapper>
-							<ItemHead>데이터 셋 파일</ItemHead>
+							<ItemHead>
+								데이터 셋 파일
+								<div
+									style={{
+										color: 'gray',
+										fontSize: '8',
+									}}
+								>
+									.csv, .jpg or .png인 .zip파일만 업로드 하실 수 있습니다.
+								</div>
+							</ItemHead>
 							<ItemBody>
 								<FileInputWrapper>
-									<FilePathWrapper />
+									<FilePathWrapper>{filePath}</FilePathWrapper>
 									<FileInputLabel htmlFor="uploadImage">파일 찾기</FileInputLabel>
-									<input ref={fileRef} type="file" id="uploadImage" accept={'image/*'} onChange={onChangeFile} hidden />
+									<input ref={fileRef} type="file" id="uploadImage" accept=".csv" onChange={onChangeFile} hidden />
 								</FileInputWrapper>
 							</ItemBody>
 						</ItemWrapper>
@@ -178,7 +238,12 @@ export const CreateDataSetPage = () => {
 							<ItemHead>공개 여부</ItemHead>
 							<ItemBody>
 								<CheckInputWrapper>
-									<CustomCheckInput title="공개 여부" name="public" onChange={() => {}} value />
+									<CustomCheckInput
+										title="공개 여부"
+										name="public"
+										onChange={onChange}
+										value={updateDatasetState.public}
+									/>
 								</CheckInputWrapper>
 							</ItemBody>
 						</ItemWrapper>
@@ -186,7 +251,7 @@ export const CreateDataSetPage = () => {
 						<ItemWrapper>
 							<ItemHead>데이터 셋 이름</ItemHead>
 							<ItemBody>
-								<NameInput name="name" />
+								<NameInput name="name" onChange={onChange} />
 							</ItemBody>
 						</ItemWrapper>
 						<MarginDivider />
@@ -194,13 +259,18 @@ export const CreateDataSetPage = () => {
 							<ItemHead>데이터 셋 설명</ItemHead>
 							<ItemBody>
 								<DescriptionWrapper>
-									<Description placeholder="" name="description" />
+									<Description
+										placeholder=""
+										name="description"
+										value={updateDatasetState.description}
+										onChange={onChange}
+									/>
 								</DescriptionWrapper>
 							</ItemBody>
 						</ItemWrapper>
 					</Container>
 					<ButtonGroup>
-						<Button variant="contained" type="button" color="primary">
+						<Button variant="contained" type="button" color="primary" onClick={onSubmit}>
 							데이터셋 생성
 						</Button>
 					</ButtonGroup>

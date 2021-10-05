@@ -1,21 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PrivateAuthentication from '../components/Authentication/PrivateAuthentication';
 import Navigation from '../components/nav';
 import icoSorting1 from '../static/img/ico_sorting1.png';
-import { StaticPath } from '../components/PagePathConsts';
-import { useDataSetStoreQuery } from '../hooks/useDataSetStoreQuery';
+import { QueryPath, StaticPath } from '../components/PagePathConsts';
+import { isGetDataSetListQuery, useDataSetStoreQuery } from '../hooks/useDataSetStoreQuery';
 import { getDatasetListAPI } from '../API/Dataset';
 
 export const DataSetStorePage = () => {
-	const { pageSize, curPage, lastPage, searchType, searchContent, itemCount } = useDataSetStoreQuery();
+	const queries = useDataSetStoreQuery();
+
+	if (!isGetDataSetListQuery(queries)) {
+		return <Redirect to={QueryPath.DATASET_STORE_DEFAULT} />;
+	}
 	getDatasetListAPI({
-		pageSize,
-		curPage,
-		searchContent,
-		searchType,
-		lastPage,
-		itemCount,
+		...queries,
 	});
 	return (
 		<PrivateAuthentication>

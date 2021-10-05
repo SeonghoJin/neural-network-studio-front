@@ -4,11 +4,8 @@ import { useHistory } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { useSnackbar } from 'notistack';
 import { logout } from '../API/Auth';
-import StandardModal from '../components/utils/modal/StandardModal';
 import useAuthentication from './useAuthentication';
 import SimpleBackdrop from '../components/utils/BackLoading';
-import SuccessSnackbar from '../components/utils/Snackbar/SuccessSnackbar';
-import ErrorSnackbar from '../components/utils/Snackbar/ErrorSnackbar';
 import { sleep } from '../util';
 import { StaticPath } from '../components/PagePathConsts';
 

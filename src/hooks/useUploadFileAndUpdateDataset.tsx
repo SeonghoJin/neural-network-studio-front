@@ -15,18 +15,18 @@ const uploadFileAndUpdateDatasetResult = atom<UploadFileAndUpdateDatasetResultTy
 	default: null,
 });
 
-const useUploadFileAndUpdateDataset = () => {
+export const useUploadFileAndUpdateDataset = () => {
 	const [uploadFileAndUpdateDatasetResultState, setUploadFileAndUpdateDatasetResultState] =
 		useRecoilState<UploadFileAndUpdateDatasetResultType>(uploadFileAndUpdateDatasetResult);
 
-	const fetch = (formData: UploadNewDatasetFormData, updateDataset: Omit<UpdateDataset, 'id'>) => {
+	const fetch = async (formData: UploadNewDatasetFormData, updateDataset: Omit<UpdateDataset, 'id'>) => {
 		setUploadFileAndUpdateDatasetResultState({
 			loading: true,
 			error: null,
 			data: null,
 		});
 
-		sleep(500)
+		await sleep(500)
 			.then(async () => {
 				const { id } = await uploadNewDatasetFileAPI(formData);
 				const response = await updateDatasetAPI({
@@ -51,6 +51,8 @@ const useUploadFileAndUpdateDataset = () => {
 
 	return {
 		fetch,
+		loading: uploadFileAndUpdateDatasetResultState?.loading,
+		error: uploadFileAndUpdateDatasetResultState?.error,
 		uploadFileAndUpdateDatasetResultState,
 	};
 };

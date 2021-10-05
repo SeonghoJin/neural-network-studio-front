@@ -29,11 +29,13 @@ export const uploadNewDatasetFileAPI = async (formData: UploadNewDatasetFormData
 		const response = await axios.post<UploadNewDatasetFileAPIResponse>(
 			`${config.SERVER_PREFIX}/api/dataset/file`,
 			formData,
-			axiosConfig
+			{
+				...axiosConfig,
+			}
 		);
 		return response.data;
 	} catch (e) {
-		throw new Error('Dataset을 업로드 하지 못했습니다. 다시 시도해주세요.');
+		throw new Error('데이터를 업로드 하지 못했습니다. 다시 시도해주세요.');
 	}
 };
 
