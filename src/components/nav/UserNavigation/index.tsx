@@ -1,12 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Storage } from '@material-ui/icons';
 import useLogout from '../../../hooks/useLogout';
-import useAuthentication, { User } from '../../../hooks/useAuthentication';
+import { User } from '../../../hooks/useAuthentication';
 import imgLogo2 from '../../../static/img/img_logo2.png';
 import imgProfile1 from '../../../static/img/img_profile1.png';
 import DropMenu from '../../utils/dropMenu/dropMenu';
-import { StaticPath } from '../../PagePathConsts';
+import { QueryPath, StaticPath } from '../../PagePathConsts';
 import { MobileUserNavigation } from '../MobileUserNavigation';
 
 export const ProfileImage = styled.img`
@@ -64,6 +65,11 @@ const UserNavigation = ({ user }: Props) => {
 					<Link to={StaticPath.ASSET_MAIN}>
 						<div className="ico ico-v2" />
 						<div className="tit">에셋</div>
+					</Link>
+
+					<Link to={QueryPath.DATASET_STORE_DEFAULT}>
+						<Storage className="ico" />
+						<div className="tit">데이터 스토어</div>
 					</Link>
 				</div>
 

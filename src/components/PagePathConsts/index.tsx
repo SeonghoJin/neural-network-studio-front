@@ -11,6 +11,12 @@ export enum StaticPath {
 	PROJECT_SHARE_ROUTE = '/share/project',
 	SIGN_UP = '/signup',
 	ASSET_MAIN = '/asset',
+	DATASET_STORE = '/dataset',
+	CREATE_DATASET_STORE = '/dataset/create',
+}
+
+export enum QueryPath {
+	DATASET_STORE_DEFAULT = '/dataset?searchType=&searchContent=&curPage=&pageSize=&lastPage=&itemCount=',
 }
 
 export enum DynamicPath {
@@ -46,4 +52,6 @@ export const pagePathNameToNumber: {
 	'/share/project': UndefinedPathNameNumber,
 	'/dashboard/projects/new': UndefinedPathNameNumber,
 	'/password/update': UndefinedPathNameNumber,
+	'/dataset': UndefinedPathNameNumber,
+	'/dataset/create': UndefinedPathNameNumber,
 };

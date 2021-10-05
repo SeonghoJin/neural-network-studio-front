@@ -12,6 +12,8 @@ import './static/css/swiper.min.css';
 import useLogout from './hooks/useLogout';
 import useDeleteProject from './hooks/useDeleteProject';
 import { UpdatePasswordPage } from './Pages/UpdatePasswordPage';
+import { DataSetStorePage } from './Pages/DataSetStorePage';
+import { CreateDataSetPage } from './Pages/CreateDataSetPage';
 
 function App() {
 	const logoutResult = useLogout();
@@ -30,6 +32,8 @@ function App() {
 						<Route exact path={StaticPath.PROFILE} component={ProfilePage} />
 						<Route exact path={StaticPath.PROFILE_MODIFY} component={ProfileModifyPage} />
 						<Route exact path={StaticPath.ASSET_MAIN} component={AssetPage} />
+						<Route exact path={StaticPath.DATASET_STORE} component={DataSetStorePage} />
+						<Route exact path={StaticPath.CREATE_DATASET_STORE} component={CreateDataSetPage} />
 						<Route path={StaticPath.PROJECT} component={ProjectRouter} />
 						<Route path={DynamicPath.PROJECT_SHARE} component={ProjectShareRouter} />
 						<Route path={StaticPath.DASHBOARD} component={DashBoardRouter} />
