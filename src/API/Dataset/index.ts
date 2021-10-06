@@ -54,7 +54,7 @@ export const updateDatasetAPI = async (updateDataset: UpdateDataset) => {
 	}
 };
 
-export const addDatasetToLibraryAPI = async (datasetId: number) => {
+export const addDatasetToLibraryAPI = async (datasetId: string) => {
 	try {
 		const response = await axios.post<AddDatasetToLibraryAPIResponse>(
 			`${config.SERVER_PREFIX}/api/dataset/library`,
@@ -69,7 +69,7 @@ export const addDatasetToLibraryAPI = async (datasetId: number) => {
 	}
 };
 
-export const deleteDatasetFromLibraryAPI = async (datasetId: number) => {
+export const deleteDatasetFromLibraryAPI = async (datasetId: string) => {
 	try {
 		const response = await axios.delete<DeleteDatasetFromLibraryAPIResponse>(
 			`${config.SERVER_PREFIX}/api/dataset/library/${datasetId}`,

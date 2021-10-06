@@ -18,7 +18,7 @@ const addDatasetToLibraryResult = atom<AddDatasetToLibraryResultType>({
 export const useAddDatasetToLibrary = () => {
 	const [result, setResult] = useRecoilState(addDatasetToLibraryResult);
 	const fetch = useCallback(
-		async (datasetId: number) => {
+		async (datasetId: string) => {
 			setResult({
 				error: null,
 				data: false,
@@ -27,10 +27,7 @@ export const useAddDatasetToLibrary = () => {
 
 			const delayedData = await sleep(500)
 				.then(async () => {
-					const data = await addDatasetToLibraryAPI(datasetId);
-					if (data !== null) {
-						throw new Error('라이브러리에 데이터셋을 추가하지 못했습니다. 다시 시도해주세요.');
-					}
+					await addDatasetToLibraryAPI(datasetId);
 					setResult({
 						error: null,
 						data: true,
@@ -38,6 +35,11 @@ export const useAddDatasetToLibrary = () => {
 					});
 				})
 				.catch((e) => {
+					setResult({
+						error: e,
+						data: false,
+						loading: false,
+					});
 					throw new Error(e.message);
 				});
 

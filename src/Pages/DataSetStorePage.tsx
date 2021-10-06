@@ -14,7 +14,7 @@ import { DatasetCards } from '../components/datasetStore/DataSetCards';
 
 export const DataSetStorePage = () => {
 	const queries = useDataSetStoreQuery();
-	const { data, loading } = useGetDatasetList({ params: queries });
+	const { data, loading, mutate } = useGetDatasetList({ params: queries });
 	const { item, page } = usePageNation({ lastPage: data?.pagination.lastPage });
 	const history = useHistory();
 
@@ -41,7 +41,9 @@ export const DataSetStorePage = () => {
 							</Link>
 						</div>
 						{loading && <CircleLoading />}
-						<ol className="list-project">{data && <DatasetCards datasets={data.datasets} />}</ol>
+						<ol className="list-project">
+							{data && <DatasetCards datasets={data.datasets} updateDatasets={mutate} />}
+						</ol>
 						{item}
 					</div>
 				</section>
