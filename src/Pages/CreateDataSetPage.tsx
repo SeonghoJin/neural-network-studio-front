@@ -8,7 +8,7 @@ import Navigation from '../components/nav';
 import { CustomCheckInput } from '../components/Input/custom/CustomCheckInput';
 import { UpdateDataset } from '../API/Dataset/type';
 import { useUploadFileAndUpdateDataset } from '../hooks/useUploadFileAndUpdateDataset';
-import { QueryPath, StaticPath } from '../components/PagePathConsts';
+import { QueryPath } from '../components/PagePathConsts';
 import SimpleBackdrop from '../components/utils/BackLoading';
 
 const MainWrapper = styled.div`
