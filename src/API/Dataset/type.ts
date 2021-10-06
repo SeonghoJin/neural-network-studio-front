@@ -41,3 +41,5 @@ export type UpdateDataset = {
 };
 
 export type UpdateDatasetAPIResponse = null;
+export type AddDatasetToLibraryAPIResponse = null;
+export type DeleteDatasetFromLibraryAPIResponse = null;

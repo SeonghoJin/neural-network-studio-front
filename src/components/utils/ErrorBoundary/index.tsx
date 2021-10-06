@@ -1,4 +1,6 @@
 import React, { Component, ErrorInfo } from 'react';
+import { Redirect } from 'react-router-dom';
+import { QueryPath } from '../../PagePathConsts';
 
 class ErrorBoundary extends Component<{ children: any }, { error: boolean }> {
 	constructor(props: any) {
@@ -18,7 +20,7 @@ class ErrorBoundary extends Component<{ children: any }, { error: boolean }> {
 		const { error } = this.state;
 		const { children } = this.props;
 		if (error) {
-			return <h1>에러 발생!</h1>;
+			return <Redirect to={QueryPath.DATASET_STORE_DEFAULT} />;
 		}
 		return children;
 	}

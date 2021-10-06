@@ -16,7 +16,7 @@ export enum StaticPath {
 }
 
 export enum QueryPath {
-	DATASET_STORE_DEFAULT = '/dataset?searchType=&searchContent=&curPage=&pageSize=&lastPage=&itemCount=',
+	DATASET_STORE_DEFAULT = '/dataset?searchType=&searchContent=&curPage=&pageSize=8&lastPage=&itemCount=',
 }
 
 export enum DynamicPath {

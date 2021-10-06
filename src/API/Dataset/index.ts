@@ -1,6 +1,8 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import queryString from 'querystring';
 import {
+	AddDatasetToLibraryAPIResponse,
+	DeleteDatasetFromLibraryAPIResponse,
 	GetDatasetListAPIResponse,
 	GetDatasetListQuery,
 	UpdateDataset,
@@ -52,10 +54,33 @@ export const updateDatasetAPI = async (updateDataset: UpdateDataset) => {
 	}
 };
 
+export const addDatasetToLibraryAPI = async (datasetId: number) => {
+	try {
+		const response = await axios.post<AddDatasetToLibraryAPIResponse>(
+			`${config.SERVER_PREFIX}/api/dataset/library`,
+			{
+				datasetId,
+			},
+			axiosConfig
+		);
+		return response.data;
+	} catch (e) {
+		throw new Error('Dataset을 라이브러리에 추가하지 못했습니다. 다시 시도해주세요.');
+	}
+};
+
+export const deleteDatasetFromLibraryAPI = async (datasetId: number) => {
+	try {
+		const response = await axios.delete<DeleteDatasetFromLibraryAPIResponse>(
+			`${config.SERVER_PREFIX}/api/dataset/library/${datasetId}`,
+			axiosConfig
+		);
+		return response.data;
+	} catch (e) {
+		throw new Error('Dataset을 라이브러리에 삭제하지 못했습니다. 다시 시도해주세요.');
+	}
+};
+
 const deleteDatasetAPI = () => {};
 
 const getDatasetLibraryListAPI = () => {};
-
-const addDatasetToLibraryAPI = () => {};
-
-const deleteDatasetFromLibraryAPI = () => {};

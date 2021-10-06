@@ -14,6 +14,7 @@ import useDeleteProject from './hooks/useDeleteProject';
 import { UpdatePasswordPage } from './Pages/UpdatePasswordPage';
 import { DataSetStorePage } from './Pages/DataSetStorePage';
 import { CreateDataSetPage } from './Pages/CreateDataSetPage';
+import ErrorBoundary from './components/utils/ErrorBoundary';
 
 function App() {
 	const logoutResult = useLogout();

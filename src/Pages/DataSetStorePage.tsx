@@ -1,21 +1,28 @@
-import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, Redirect, useHistory } from 'react-router-dom';
+import queryString from 'querystring';
 import PrivateAuthentication from '../components/Authentication/PrivateAuthentication';
 import Navigation from '../components/nav';
 import icoSorting1 from '../static/img/ico_sorting1.png';
 import { QueryPath, StaticPath } from '../components/PagePathConsts';
 import { isGetDataSetListQuery, useDataSetStoreQuery } from '../hooks/useDataSetStoreQuery';
 import { getDatasetListAPI } from '../API/Dataset';
+import useGetDatasetList from '../hooks/useGetDatasetList';
+import usePageNation from '../components/utils/pagenation/usePageNation';
+import { CircleLoading } from '../components/utils/Loading/CircularLoading';
+import { DatasetCards } from '../components/datasetStore/DataSetCards';
 
 export const DataSetStorePage = () => {
 	const queries = useDataSetStoreQuery();
+	const { data, loading } = useGetDatasetList({ params: queries });
+	const { item, page } = usePageNation({ lastPage: data?.pagination.lastPage });
+	const history = useHistory();
 
-	if (!isGetDataSetListQuery(queries)) {
-		return <Redirect to={QueryPath.DATASET_STORE_DEFAULT} />;
-	}
-	getDatasetListAPI({
-		...queries,
-	});
+	useEffect(() => {
+		queries.curPage = page;
+		history.push(`${StaticPath.DATASET_STORE}?${queryString.stringify(queries)}`);
+	}, [history, page, queries]);
+
 	return (
 		<PrivateAuthentication>
 			<div id="container">
@@ -27,18 +34,15 @@ export const DataSetStorePage = () => {
 								<button type="button" className="btn-sorting">
 									<img src={icoSorting1} alt=" " />
 								</button>
-
 								<input type="text" placeholder="검색어를 입력하세요" className="inp-search" />
 							</div>
-
 							<Link to={`${StaticPath.CREATE_DATASET_STORE}`} className="btn-create">
 								데이터셋 생성
 							</Link>
 						</div>
-						{/* <ol className="list-project"> */}
-						{/*	{(data && <CardGrid projects={data.projects} onUpdateProjectLists={mutate} />) || <CircleLoading />} */}
-						{/* </ol> */}
-						{/* {item} */}
+						{loading && <CircleLoading />}
+						<ol className="list-project">{data && <DatasetCards datasets={data.datasets} />}</ol>
+						{item}
 					</div>
 				</section>
 				<footer className="footer">Copyright 2021 ⓒ Neural network studio</footer>
