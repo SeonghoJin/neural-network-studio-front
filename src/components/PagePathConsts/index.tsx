@@ -13,6 +13,7 @@ export enum StaticPath {
 	ASSET_MAIN = '/asset',
 	DATASET_STORE = '/dataset',
 	CREATE_DATASET_STORE = '/dataset/create',
+	PROJECT_DATASET_PAGE = '/project/dataset',
 }
 
 export enum QueryPath {
@@ -32,6 +33,8 @@ export enum DynamicPath {
 	PROJECT_SHARE_CONFIG_FORMAT = '/share/project/%s/room/%s/config',
 	DASHBOARD_PROJECT_MODIFY = '/dashboard/project/:projectNo/modify',
 	DASHBOARD_PROJECT_MODIFY_FORMAT = '/dashboard/project/%s/modify',
+	PROJECT_DATASET_PAGE = '/project/:projectNo/dataset',
+	PROJECT_DATASET_FORMAT = '/project/%s/dataset',
 }
 
 export type PagePathKey = keyof typeof StaticPath;
@@ -54,4 +57,5 @@ export const pagePathNameToNumber: {
 	'/password/update': UndefinedPathNameNumber,
 	'/dataset': UndefinedPathNameNumber,
 	'/dataset/create': UndefinedPathNameNumber,
+	'/project/dataset': UndefinedPathNameNumber,
 };

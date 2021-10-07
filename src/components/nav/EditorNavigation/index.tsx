@@ -70,7 +70,7 @@ const EditorNavigation = ({ user }: Props) => {
 						<div className="tit">모델설정</div>
 					</Link>
 
-					<Link to="/">
+					<Link to={format(DynamicPath.PROJECT_DATASET_FORMAT, projectNo)}>
 						<div className="ico ico-v6" />
 						<div className="tit">Dataset</div>
 					</Link>
