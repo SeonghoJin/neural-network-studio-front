@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ProjectConfigSideBar from './projectConfigSideBar/ProjectConfigSideBar';
 import ProjectConfigViewer from './ProjectConfigViewer/ProjectConfigViewer';
 
-const LeftWrapper = styled.div`
+export const LeftWrapper = styled.div`
 	width: 280px;
 `;
 

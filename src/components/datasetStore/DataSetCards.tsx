@@ -32,7 +32,7 @@ const DatasetCard = ({ dataset, deleteDatasetFetch, addDatasetFetch }: DatasetCa
 					onClick={async () => {
 						try {
 							await deleteDatasetFetch(dataset.id);
-						} catch (e) {
+						} catch (e: any) {
 							enqueueSnackbar(e.message, { variant: 'error' });
 						}
 					}}
@@ -47,7 +47,7 @@ const DatasetCard = ({ dataset, deleteDatasetFetch, addDatasetFetch }: DatasetCa
 					onClick={async () => {
 						try {
 							await addDatasetFetch(dataset.id);
-						} catch (e) {
+						} catch (e: any) {
 							enqueueSnackbar(e.message, { variant: 'error' });
 						}
 					}}

@@ -87,7 +87,8 @@ const deleteDatasetAPI = () => {};
 export const getDatasetLibraryListAPI = async (curPage: number, pageSize: number) => {
 	try {
 		const response = await axios.get<GetDatasetListLibraryAPIResponse>(
-			`${config.SERVER_PREFIX}/api/dataset/library?curPage=${curPage}&pageSize=${pageSize}`
+			`${config.SERVER_PREFIX}/api/dataset/library?curPage=${curPage}&pageSize=${pageSize}`,
+			axiosConfig
 		);
 
 		return response.data;

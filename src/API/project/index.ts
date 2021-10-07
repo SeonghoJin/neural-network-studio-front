@@ -20,7 +20,7 @@ export const getPythonCode = async (projectNo: string) => {
 	try {
 		const response = await axios.get<Blob>(`${config.SERVER_PREFIX}/api/project/${projectNo}/code`, axiosConfig);
 		return response.data;
-	} catch (e) {
+	} catch (e: any) {
 		throw new Error(e.message);
 	}
 };

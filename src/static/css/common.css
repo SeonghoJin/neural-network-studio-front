@@ -408,7 +408,7 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 .hd-section .hd-r .btns-group { display: flex; align-items: center; padding: 0 20px; box-sizing: border-box; }
 .hd-section .hd-r .btns-group button { margin-left: 20px; border: none;}
 
-.sec-container { display: flex; flex-grow: 1 }
+.sec-container { display: flex; flex-grow: 1; height: calc(100% - 50px)}
 
 .sec-l,
 .sec-r { width: 100%; height: 100%; overflow-y: auto; }
