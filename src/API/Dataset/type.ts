@@ -1,12 +1,7 @@
 export type GetDatasetListQuery = {
 	searchType: string;
 	searchContent: string;
-} & GetDatasetListAPIPageNation;
-
-export type GetDatasetListAPIResponse = {
-	datasets: Dataset[];
-	pagination: GetDatasetListAPIPageNation;
-};
+} & PageNation;
 
 export type Dataset = {
 	id: string;
@@ -20,7 +15,7 @@ export type Dataset = {
 	inLibrary: boolean;
 };
 
-export type GetDatasetListAPIPageNation = {
+export type PageNation = {
 	curPage: number;
 	pageSize: number;
 	lastPage: number;
@@ -28,10 +23,6 @@ export type GetDatasetListAPIPageNation = {
 };
 
 export type UploadNewDatasetFormData = FormData;
-
-export type UploadNewDatasetFileAPIResponse = {
-	id: number;
-};
 
 export type UpdateDataset = {
 	id: number;
@@ -43,3 +34,14 @@ export type UpdateDataset = {
 export type UpdateDatasetAPIResponse = null;
 export type AddDatasetToLibraryAPIResponse = null;
 export type DeleteDatasetFromLibraryAPIResponse = null;
+export type UploadNewDatasetFileAPIResponse = {
+	id: number;
+};
+export type GetDatasetListAPIResponse = {
+	datasets: Dataset[];
+	pagination: PageNation;
+};
+export type GetDatasetListLibraryAPIResponse = {
+	datasets: Dataset[];
+	pagination: PageNation;
+};

@@ -4,6 +4,7 @@ import {
 	AddDatasetToLibraryAPIResponse,
 	DeleteDatasetFromLibraryAPIResponse,
 	GetDatasetListAPIResponse,
+	GetDatasetListLibraryAPIResponse,
 	GetDatasetListQuery,
 	UpdateDataset,
 	UpdateDatasetAPIResponse,
@@ -83,4 +84,14 @@ export const deleteDatasetFromLibraryAPI = async (datasetId: string) => {
 
 const deleteDatasetAPI = () => {};
 
-const getDatasetLibraryListAPI = () => {};
+export const getDatasetLibraryListAPI = async (curPage: number, pageSize: number) => {
+	try {
+		const response = await axios.get<GetDatasetListLibraryAPIResponse>(
+			`${config.SERVER_PREFIX}/api/dataset/library?curPage=${curPage}&pageSize=${pageSize}`
+		);
+
+		return response.data;
+	} catch (e) {
+		throw new Error('라이브러리에 있는 데이터셋을 가져오지 못했습니다. 다시 시도해주세요.');
+	}
+};
