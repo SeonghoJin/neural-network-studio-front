@@ -117,7 +117,7 @@ export const updateProjectContent = async (projectNo: string, projectContent: IP
 
 export const deleteProject = async (projectNo: string) => {
 	try {
-		const response = await axios.delete(`${config.SERVER_PREFIX}/api/project/${projectNo}`);
+		const response = await axios.delete(`${config.SERVER_PREFIX}/api/project/${projectNo}`, axiosConfig);
 		return response.data;
 	} catch (e: AxiosError | any) {
 		if (e.isAxiosError && (e as AxiosError).response?.status === 401) {
