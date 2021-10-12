@@ -22,6 +22,7 @@ const LayerNodeTable: LayerNodeTableType = {
 	// Math
 	Abs: DefaultNode,
 	Ceil: DefaultNode,
+	Floor: DefaultNode,
 	Round: DefaultNode,
 	Sqrt: DefaultNode,
 	Add: DefaultNode,

@@ -17,6 +17,7 @@ import {
 	// Math
 	AbsConfig,
 	CeilConfig,
+	FloorConfig,
 	RoundConfig,
 	SqrtConfig,
 	AddConfig,
@@ -165,6 +166,16 @@ export class CeilBlockState implements BlockState {
 	type: BlockType = BlockType.Ceil;
 }
 
+export class FloorBlockState implements BlockState {
+	label = 'Floor';
+
+	category: BlockCategory = BlockCategory.Math;
+
+	config: BlockConfig = new FloorConfig();
+
+	type: BlockType = BlockType.Floor;
+}
+
 export class RoundBlockState implements BlockState {
 	label = 'Round';
 
@@ -180,7 +191,7 @@ export class SqrtBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Math;
 
-	config: BlockConfig = new AbsConfig();
+	config: BlockConfig = new SqrtConfig();
 
 	type: BlockType = BlockType.Sqrt;
 }
@@ -210,7 +221,7 @@ export class LogBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Math;
 
-	config: BlockConfig = new AbsConfig();
+	config: BlockConfig = new LogConfig();
 
 	type: BlockType = BlockType.Log;
 }

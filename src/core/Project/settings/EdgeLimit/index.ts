@@ -24,6 +24,7 @@ export const INPUT_CONNECT_NUMBER: {
 
 	Abs: UNIQUE,
 	Ceil: UNIQUE,
+	Floor: UNIQUE,
 	Round: UNIQUE,
 	Sqrt: UNIQUE,
 	Add: DOUBLE,
@@ -50,6 +51,7 @@ export const OUTPUT_CONNECT_NUMBER: {
 
 	Abs: INFINITY,
 	Ceil: INFINITY,
+	Floor: INFINITY,
 	Round: INFINITY,
 	Sqrt: INFINITY,
 	Add: INFINITY,

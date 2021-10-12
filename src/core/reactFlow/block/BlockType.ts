@@ -13,6 +13,7 @@ export enum BlockType {
 	// Math
 	Abs = 'Abs',
 	Ceil = 'Ceil',
+	Floor = 'Floor',
 	Round = 'Round',
 	Sqrt = 'Sqrt',
 	Add = 'Add',
