@@ -8,7 +8,7 @@ const ProjectEditorNavMainContent = ({ onGetPythonCode }: Props) => {
 	return (
 		<div className="btns-group">
 			<button type="button" onClick={onGetPythonCode} className="btn">
-				PythonCode 추출
+				Python 코드로 내보내기
 			</button>
 		</div>
 	);
