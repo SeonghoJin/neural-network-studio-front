@@ -32,6 +32,7 @@ export class FlattenConfig implements BlockConfig {}
 export class InputConfig implements BlockConfig {
 	shape = '';
 }
+
 export class ActivationConfig implements BlockConfig {
 	activation = '';
 }
@@ -61,6 +62,22 @@ export class RescalingConfig implements BlockConfig {
 export class ReshapeConfig implements BlockConfig {
 	target_shape = '';
 }
+
+export class AbsConfig implements BlockConfig {}
+
+export class CeilConfig implements BlockConfig {}
+
+export class FloorConfig implements BlockConfig {}
+
+export class RoundConfig implements BlockConfig {}
+
+export class SqrtConfig implements BlockConfig {}
+
+export class AddConfig implements BlockConfig {}
+
+export class SubtractConfig implements BlockConfig {}
+
+export class LogConfig implements BlockConfig {}
 
 export type IConfigComponent<T> = {
 	[K in keyof T]: JSX.Element;

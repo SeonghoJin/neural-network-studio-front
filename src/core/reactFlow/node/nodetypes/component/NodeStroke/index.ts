@@ -6,8 +6,8 @@ type NodeStrokeColorTableKey = keyof typeof BlockCategory;
 export const NodeStrokeColorTable: {
 	[index in NodeStrokeColorTableKey]: string;
 } = {
-	Layer: '#00AE84',
-	Math: '#FFFFFF',
+	Layer: '#34b691',
+	Math: '#4e50d6',
 };
 
 export const getNodeStrokeColor = (e: Node<BlockState>) => {
@@ -20,8 +20,8 @@ type NodeColorTableKey = keyof typeof BlockCategory;
 export const NodeColorTable: {
 	[index in NodeColorTableKey]: string;
 } = {
-	Layer: '#38b693',
-	Math: '#FFFFFF',
+	Layer: '#34b691',
+	Math: '#4e50d6',
 };
 
 export const getNodeColor = (e: Node<BlockState>) => {

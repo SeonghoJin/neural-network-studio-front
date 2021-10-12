@@ -10,6 +10,15 @@ export enum BlockType {
 	Flatten = 'Flatten',
 	Rescaling = 'Rescaling',
 	Reshape = 'Reshape',
+	// Math
+	Abs = 'Abs',
+	Ceil = 'Ceil',
+	Floor = 'Floor',
+	Round = 'Round',
+	Sqrt = 'Sqrt',
+	Add = 'Add',
+	Subtract = 'Subtract',
+	Log = 'Log',
 }
 
 export default BlockType;

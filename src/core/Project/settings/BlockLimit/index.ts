@@ -18,4 +18,13 @@ export const MAXIMUM_NUMBER_PER_BLOCK_TYPE_AT_GRAPH: {
 	Input: UNIQUE,
 	Rescaling: INFINITY,
 	Reshape: INFINITY,
+
+	Abs: INFINITY,
+	Ceil: INFINITY,
+	Floor: INFINITY,
+	Round: INFINITY,
+	Sqrt: INFINITY,
+	Add: INFINITY,
+	Subtract: INFINITY,
+	Log: INFINITY,
 };

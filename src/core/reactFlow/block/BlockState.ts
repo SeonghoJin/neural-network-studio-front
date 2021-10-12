@@ -1,6 +1,7 @@
 // eslint-disable-next-line max-classes-per-file
 import { BlockCategory } from './BlockCategory';
 import {
+	// Layer
 	ActivationConfig,
 	AveragePooling2DConfig,
 	BatchNormalizationConfig,
@@ -13,6 +14,15 @@ import {
 	MaxPool2DConfig,
 	RescalingConfig,
 	ReshapeConfig,
+	// Math
+	AbsConfig,
+	CeilConfig,
+	FloorConfig,
+	RoundConfig,
+	SqrtConfig,
+	AddConfig,
+	SubtractConfig,
+	LogConfig,
 } from './BlockConfig';
 import { BlockType } from './BlockType';
 
@@ -134,4 +144,84 @@ export class ReshapeBlockState implements BlockState {
 	config: BlockConfig = new ReshapeConfig();
 
 	type: BlockType = BlockType.Reshape;
+}
+
+export class AbsBlockState implements BlockState {
+	label = 'Abs';
+
+	category: BlockCategory = BlockCategory.Math;
+
+	config: BlockConfig = new AbsConfig();
+
+	type: BlockType = BlockType.Abs;
+}
+
+export class CeilBlockState implements BlockState {
+	label = 'Ceil';
+
+	category: BlockCategory = BlockCategory.Math;
+
+	config: BlockConfig = new CeilConfig();
+
+	type: BlockType = BlockType.Ceil;
+}
+
+export class FloorBlockState implements BlockState {
+	label = 'Floor';
+
+	category: BlockCategory = BlockCategory.Math;
+
+	config: BlockConfig = new FloorConfig();
+
+	type: BlockType = BlockType.Floor;
+}
+
+export class RoundBlockState implements BlockState {
+	label = 'Round';
+
+	category: BlockCategory = BlockCategory.Math;
+
+	config: BlockConfig = new RoundConfig();
+
+	type: BlockType = BlockType.Round;
+}
+
+export class SqrtBlockState implements BlockState {
+	label = 'Sqrt';
+
+	category: BlockCategory = BlockCategory.Math;
+
+	config: BlockConfig = new SqrtConfig();
+
+	type: BlockType = BlockType.Sqrt;
+}
+
+export class AddBlockState implements BlockState {
+	label = 'Add';
+
+	category: BlockCategory = BlockCategory.Math;
+
+	config: BlockConfig = new AddConfig();
+
+	type: BlockType = BlockType.Add;
+}
+
+export class SubtractBlockState implements BlockState {
+	label = 'Subtract';
+
+	category: BlockCategory = BlockCategory.Math;
+
+	config: BlockConfig = new SubtractConfig();
+
+	type: BlockType = BlockType.Subtract;
+}
+
+export class LogBlockState implements BlockState {
+	label = 'Log';
+
+	category: BlockCategory = BlockCategory.Math;
+
+	config: BlockConfig = new LogConfig();
+
+	type: BlockType = BlockType.Log;
 }
