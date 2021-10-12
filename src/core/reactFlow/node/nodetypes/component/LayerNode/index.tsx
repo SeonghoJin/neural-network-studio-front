@@ -16,8 +16,8 @@ const useLayerStyle = makeStyles({
 		fontSize: 12,
 		borderWidth: '1px',
 		borderStyle: 'solid',
-		backgroundColor: NodeColorTable.Layer,
-		borderColor: NodeStrokeColorTable.Layer,
+		// backgroundColor: NodeColorTable.Layer,
+		// borderColor: NodeStrokeColorTable.Layer,
 		'&:focus': {
 			boxShadow: '0 1px 4px 1px rgba(0, 0, 0, 0.08)',
 		},
@@ -45,16 +45,24 @@ const useLayerStyle = makeStyles({
 const LayerNode = (props: NodeProps<BlockState>) => {
 	const { data } = props;
 	const { targetCandidates } = useTargetCandidates();
-	const { type } = data as BlockState;
+	const { type, category } = data as BlockState;
 	const classes = useLayerStyle();
 	const node = createElement(LayerNodeTable[type], props);
+	const nodeColorStyle = makeStyles({
+		wrapper: {
+			backgroundColor: NodeColorTable[category],
+			borderColor: NodeColorTable[category],
+		},
+	});
+	const nodeColor = nodeColorStyle();
+
 	return (
 		<>
 			<div
 				tabIndex={0}
 				role="button"
 				className={
-					`${classes.wrapper}`
+					`${classes.wrapper} ${nodeColor.wrapper}`
 					// ${targetCandidates?.has(type) && style.targetCandidate}`
 				}
 			>

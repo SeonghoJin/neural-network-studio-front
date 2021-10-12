@@ -13,7 +13,7 @@ export const getNodeId = (): string => {
 };
 
 export const getNodeLabel = (type: string): string => {
-	const label = `${type}_node_${generate(2)}`;
+	const label = `${type}_${generate(2)}`;
 	return label;
 };
 
