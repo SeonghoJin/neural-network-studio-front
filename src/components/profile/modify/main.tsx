@@ -141,6 +141,14 @@ const ModifyProfileMain = () => {
 					value={modifiedProfile?.description}
 				/>
 				<ButtonGroup className={classes['button-group']}>
+					<Button
+						variant="contained"
+						onClick={() => {
+							history.push(StaticPath.UPDATE_PASSWORD);
+						}}
+					>
+						비밀번호 수정
+					</Button>
 					<Button variant="contained" onClick={deleteImage}>
 						사진 초기화
 					</Button>

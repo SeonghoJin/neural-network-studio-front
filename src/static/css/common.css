@@ -338,7 +338,7 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 .board-util .list-filter li { display: flex; align-items: center; position: relative; margin-left: 50px; }
 .board-util .list-filter li:before { content: ''; display: block; position: absolute; left: -48px; width: 1px; height: 25px; margin: 0 23px; background: #d5d5d5; }
 
-.list-project { display: flex; flex-wrap: wrap; }
+.list-project { display: flex; flex-wrap: wrap; max-width: 1400px; margin: auto; padding: auto;}
 .list-project li { display: flex; flex-direction: column; justify-content: space-between; position: relative; width: 300px; height: 320px; margin: 0 24px 48px; border-radius: 10px; box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); box-sizing: border-box; background: #fff; }
 .list-project .group { position: relative; height: calc(100% - 50px); padding: 20px 25px; box-sizing: border-box; }
 .list-project .tit { max-width: calc(100% - 30px); margin-bottom: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 23px; font-weight: 700; color: #000; }
@@ -408,14 +408,14 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 .hd-section .hd-r .btns-group { display: flex; align-items: center; padding: 0 20px; box-sizing: border-box; }
 .hd-section .hd-r .btns-group button { margin-left: 20px; border: none;}
 
-.sec-container { display: flex; flex-grow: 1 }
+.sec-container { display: flex; flex-grow: 1; height: calc(100% - 50px)}
 
 .sec-l,
 .sec-r { width: 100%; height: 100%; overflow-y: auto; }
 .sec-c { width: calc(100% - 280px); height: 100%; background: #fff; overflow-y: auto; }
 
 .sec-menu li { border-bottom: 1px solid #e1e1e1; box-sizing: border-box; }
-.sec-menu .tit { padding: 20px; box-sizing: border-box; background: url('../img/ico_arrow_bottom1.png') calc(100% - 20px) center no-repeat #f6f6f6; font-size: 15px; font-weight: 700; color: #5a5a5a; cursor: pointer; }
+.sec-menu .tit { padding: 20px; box-sizing: border-box; background: calc(100% - 20px) center no-repeat #f6f6f6; font-size: 15px; font-weight: 700; color: #5a5a5a; cursor: pointer; }
 .sec-menu .depth { display: none; padding: 25px 30px; box-sizing: border-box; background: #efefef; }
 .sec-menu .depth.active { display: block; }
 .sec-menu .depth div { margin-bottom: 20px; }

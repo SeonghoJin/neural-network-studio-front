@@ -19,6 +19,15 @@ const LayerNodeTable: LayerNodeTableType = {
 	MaxPool2D: DefaultNode,
 	Rescaling: DefaultNode,
 	Reshape: DefaultNode,
+	// Math
+	Abs: DefaultNode,
+	Ceil: DefaultNode,
+	Floor: DefaultNode,
+	Round: DefaultNode,
+	Sqrt: DefaultNode,
+	Add: DefaultNode,
+	Subtract: DefaultNode,
+	Log: DefaultNode,
 };
 
 export default LayerNodeTable;

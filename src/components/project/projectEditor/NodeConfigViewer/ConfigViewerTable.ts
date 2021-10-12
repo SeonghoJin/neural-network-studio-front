@@ -10,6 +10,14 @@ import InputConfigComponent from './ConfigComponent/InputConfigComponent';
 import MaxPool2DConfigComponent from './ConfigComponent/MaxPool2DConfigComponent';
 import RescalingConfigComponent from './ConfigComponent/RescalingConfigComponent';
 import ReshapeConfigComponent from './ConfigComponent/ReshapeConfigComponent';
+import AbsConfigComponent from './ConfigComponent/Math/AbsConfigComponent';
+import CeilConfigComponent from './ConfigComponent/Math/CeilConfigComponent';
+import FloorConfigComponent from './ConfigComponent/Math/FloorConfigComponent';
+import RoundConfigComponent from './ConfigComponent/Math/RoundConfigComponent';
+import SqrtConfigComponent from './ConfigComponent/Math/SqrtConfigComponent';
+import AddConfigComponent from './ConfigComponent/Math/AddConfigComponent';
+import SubtractConfigComponent from './ConfigComponent/Math/SubtractConfigComponent';
+import LogConfigComponent from './ConfigComponent/Math/LogConfigComponent';
 
 type ConfigViewerTableKeyType = typeof BlockType[keyof typeof BlockType];
 
@@ -29,6 +37,15 @@ const ConfigViewerTable: ConfigViewerTableType = {
 	MaxPool2D: MaxPool2DConfigComponent,
 	Rescaling: RescalingConfigComponent,
 	Reshape: ReshapeConfigComponent,
+	// Math
+	Abs: AbsConfigComponent,
+	Ceil: CeilConfigComponent,
+	Floor: FloorConfigComponent,
+	Round: RoundConfigComponent,
+	Sqrt: SqrtConfigComponent,
+	Add: AddConfigComponent,
+	Subtract: SubtractConfigComponent,
+	Log: LogConfigComponent,
 };
 
 export default ConfigViewerTable;

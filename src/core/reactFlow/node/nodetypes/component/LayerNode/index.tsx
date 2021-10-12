@@ -5,6 +5,7 @@ import { BlockState } from '../../../../block';
 import LayerNodeTable from './LayerNodeTable';
 import useTargetCandidates from '../useTargetCandidates';
 import style from '../target.module.css';
+import { NodeColorTable, NodeStrokeColorTable } from '../NodeStroke';
 
 const useLayerStyle = makeStyles({
 	wrapper: {
@@ -13,10 +14,10 @@ const useLayerStyle = makeStyles({
 		paddingBottom: 20,
 		borderRadius: 3,
 		fontSize: 12,
-		color: '#222',
 		borderWidth: '1px',
 		borderStyle: 'solid',
-		background: '#fff',
+		backgroundColor: NodeColorTable.Layer,
+		borderColor: NodeStrokeColorTable.Layer,
 		'&:focus': {
 			boxShadow: '0 1px 4px 1px rgba(0, 0, 0, 0.08)',
 		},
@@ -27,6 +28,7 @@ const useLayerStyle = makeStyles({
 		textAlign: 'center',
 	},
 	nodeContent: {
+		color: 'white',
 		fontSize: 16,
 	},
 	nodeHeaderWrapper: {
@@ -51,7 +53,10 @@ const LayerNode = (props: NodeProps<BlockState>) => {
 			<div
 				tabIndex={0}
 				role="button"
-				className={`${classes.wrapper} ${targetCandidates?.has(type) && style.targetCandidate}`}
+				className={
+					`${classes.wrapper}`
+					// ${targetCandidates?.has(type) && style.targetCandidate}`
+				}
 			>
 				<div className={classes.nodeHeaderWrapper}>
 					<span className={classes.nodeHeader}>{type}</span>
