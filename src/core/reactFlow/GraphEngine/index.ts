@@ -31,24 +31,24 @@ class GraphConvertor {
 			this.nodes.forEach((node: GraphNode) => {
 				const newNode = node;
 				if (newNode.id === target) {
-					newNode.input = source;
+					newNode.input?.push(source);
 				}
 				if (newNode.id === source) {
-					newNode.output = target;
+					newNode.output?.push(target);
 				}
 			});
 		});
 
 		const outputNodeName = Array.from(this.nodes)
 			.filter(([, node]) => {
-				return node.output === null;
+				return node.output.length === 0;
 			})
 			.map(([, node]) => {
 				return node;
 			});
 		const inputNodeName = Array.from(this.nodes)
 			.filter(([, node]) => {
-				return node.input === null;
+				return node.input.length === 0;
 			})
 			.map(([, node]) => {
 				return node;
