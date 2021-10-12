@@ -1,10 +1,8 @@
 import { ProjectEditorRightSidebar } from './ProjectEditorRightSidebar';
 import { useUserList } from '../../../../core/Socket/hooks/useUserListResponse';
+import { CircleLoading } from '../../../utils/Loading/CircularLoading';
 
 export const ProjectEditorRightSidebarContainer = () => {
 	const { userList } = useUserList();
-	if (userList?.users === undefined) {
-		return <></>;
-	}
-	return <ProjectEditorRightSidebar users={userList.users} />;
+	return <>{(userList?.users && <ProjectEditorRightSidebar users={userList.users} />) || <CircleLoading />}</>;
 };

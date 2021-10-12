@@ -65,7 +65,7 @@ type Props = {
 	setReactInstance: EventHandler<any>;
 	setElements: EventHandler<any>;
 	flowState: FlowExportObject;
-	onMoveCursor?: (position: XYPosition) => void;
+	onMoveCursor?: (position: XYPosition, dragFlag?: boolean) => void;
 	onCreateBlock?: (block: Node<BlockState>) => void;
 	onMoveBlock?: (blockId: string, position: XYPosition) => void;
 	onRemoveBlock?: (blockId: string) => void;
@@ -97,7 +97,7 @@ const ProjectEditorGraph: FC<Props> = ({
 	const { isValidationConnection } = useValidationConnection();
 
 	useEffect(() => {
-		setElements(flowState?.elements);
+		setElements(flowState?.elements || []);
 	}, [flowState, setElements]);
 
 	const onConnect = useCallback(
@@ -200,7 +200,13 @@ const ProjectEditorGraph: FC<Props> = ({
 				className={classes.reactFlow}
 				elements={elements}
 				onDrop={onDrop}
-				onDragOver={onDragOver}
+				onDragOver={(e) => {
+					onDragOver(e);
+					if (onMoveCursor) {
+						const position = getPosition(e, reactFlowWrapper.current, reactFlowInstance);
+						onMoveCursor(position as XYPosition);
+					}
+				}}
 				onLoad={onLoad}
 				onConnect={onConnect}
 				onKeyDown={onKeyDown}

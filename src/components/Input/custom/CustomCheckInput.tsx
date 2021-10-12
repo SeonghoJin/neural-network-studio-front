@@ -11,7 +11,6 @@ export const CustomCheckInput = ({ title, onChange, name, value }: CustomCheckIn
 	const handleChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
 			const { checked, name: targetName } = event.target;
-			console.log(name);
 			onChange({
 				...event,
 				target: {
@@ -20,7 +19,7 @@ export const CustomCheckInput = ({ title, onChange, name, value }: CustomCheckIn
 				},
 			});
 		},
-		[name, onChange]
+		[onChange]
 	);
 
 	return (

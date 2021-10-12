@@ -5,4 +5,6 @@ export class Cursor {
 	user: User | undefined;
 
 	position: XYPosition | undefined;
+
+	drag: boolean | undefined;
 }

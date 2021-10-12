@@ -1,23 +1,24 @@
-import { XYPosition } from 'react-flow-nns';
 import { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMousePointer } from '@fortawesome/free-solid-svg-icons';
+import { Skeleton } from '@material-ui/lab';
+import { CursorData } from './index';
 
 type CursorProps = {
 	userName: string;
-	position?: XYPosition;
+	cursorData?: CursorData;
 	color: string;
 };
 
-export const Cursor: FC<CursorProps> = ({ userName, position, color }: CursorProps) => {
+export const Cursor: FC<CursorProps> = ({ userName, cursorData, color }: CursorProps) => {
 	return (
 		<div
 			style={{
 				position: 'absolute',
 				width: 'fit-content',
 				height: 'fit-content',
-				left: position?.x || 0,
-				top: position?.y || 0,
+				left: cursorData?.x || 0,
+				top: cursorData?.y || 0,
 				zIndex: 1000,
 			}}
 		>
@@ -28,11 +29,22 @@ export const Cursor: FC<CursorProps> = ({ userName, position, color }: CursorPro
 					boxShadow: 'black',
 				}}
 			/>
+			<Skeleton
+				animation={false}
+				width={130}
+				height={70}
+				style={{
+					top: -35,
+					left: -65,
+					position: 'absolute',
+					visibility: (cursorData?.drag && 'visible') || 'hidden',
+				}}
+			/>
 			<span style={{ color, fontSize: 3, textShadow: 'black' }}>{userName}</span>
 		</div>
 	);
 };
 
 Cursor.defaultProps = {
-	position: undefined,
+	cursorData: undefined,
 };
