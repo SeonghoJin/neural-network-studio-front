@@ -1,68 +1,67 @@
 // eslint-disable-next-line @typescript-eslint/no-empty-interface,max-classes-per-file
-export interface BlockConfig {
-}
+export interface BlockConfig {}
 
 export class DenseConfig implements BlockConfig {
-  units = "";
+  units = '';
 }
 
 export class Conv2DConfig implements BlockConfig {
-  filters = "";
+  filters = '';
 
-  kernel_size = "";
+  kernel_size = '';
 
-  strides = "";
+  strides = '';
 
-  padding = "";
+  padding = '';
 }
 
 export class DropoutConfig implements BlockConfig {
-  rate = "";
+  rate = '';
 }
 
 export class BatchNormalizationConfig implements BlockConfig {
-  axis = "";
+  axis = '';
 
-  momentum = "";
+  momentum = '';
 
-  epsilon = "";
+  epsilon = '';
 }
 
 export class FlattenConfig implements BlockConfig {
 }
 
 export class InputConfig implements BlockConfig {
-  shape = "";
+  shape = '';
 }
 
 export class ActivationConfig implements BlockConfig {
-  activation = "";
+  activation = '';
 }
 
 export class MaxPool2DConfig implements BlockConfig {
-  pool_size = "";
+  pool_size = '';
 
-  strides = "";
+  strides = '';
 
-  padding = "";
+  padding = '';
 }
 
 export class AveragePooling2DConfig implements BlockConfig {
-  pool_size = "";
+  pool_size = '';
 
-  strides = "";
+  strides = '';
 
-  padding = "";
+  padding = '';
 }
 
 export class RescalingConfig implements BlockConfig {
-  scale = "";
+  scale = '';
 
-  offset = "";
+  offset = '';
 }
 
 export class ReshapeConfig implements BlockConfig {
-  target_shape = "";
+  target_shape = '';
 }
 
 export class AbsConfig implements BlockConfig {
