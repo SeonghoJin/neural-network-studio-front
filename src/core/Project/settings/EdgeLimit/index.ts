@@ -2,6 +2,7 @@ import { BlockType } from '../../../reactFlow/block/BlockType';
 
 const NONE = 0;
 const UNIQUE = 1;
+const DOUBLE = 2;
 const INFINITY = 100;
 
 type INPUT_CONNECT_NUMBER_KEY = keyof typeof BlockType;
@@ -20,6 +21,14 @@ export const INPUT_CONNECT_NUMBER: {
 	Input: NONE,
 	Rescaling: UNIQUE,
 	Reshape: UNIQUE,
+
+	Abs: UNIQUE,
+	Ceil: UNIQUE,
+	Round: UNIQUE,
+	Sqrt: UNIQUE,
+	Add: DOUBLE,
+	Subtract: DOUBLE,
+	Log: UNIQUE,
 };
 
 type OUTPUT_CONNECT_NUMBER_KEY = keyof typeof BlockType;
@@ -38,4 +47,12 @@ export const OUTPUT_CONNECT_NUMBER: {
 	Input: INFINITY,
 	Rescaling: INFINITY,
 	Reshape: INFINITY,
+
+	Abs: INFINITY,
+	Ceil: INFINITY,
+	Round: INFINITY,
+	Sqrt: INFINITY,
+	Add: INFINITY,
+	Subtract: INFINITY,
+	Log: INFINITY,
 };

@@ -12,6 +12,14 @@ import {
 	MaxPool2DBlockState,
 	RescalingBlockState,
 	ReshapeBlockState,
+	// Math
+	AbsBlockState,
+	CeilBlockState,
+	RoundBlockState,
+	SqrtBlockState,
+	AddBlockState,
+	SubtractBlockState,
+	LogBlockState,
 } from '../../../reactFlow/block';
 
 export const BlockRenderData: { type: BlockCategory; states: BlockState[] }[] = [
@@ -29,6 +37,14 @@ export const BlockRenderData: { type: BlockCategory; states: BlockState[] }[] = 
 			new FlattenBlockState(),
 			new RescalingBlockState(),
 			new ReshapeBlockState(),
+			// Math
+			new AbsBlockState(),
+			new CeilBlockState(),
+			new RoundBlockState(),
+			new SqrtBlockState(),
+			new AddBlockState(),
+			new SubtractBlockState(),
+			new LogBlockState(),
 		],
 	},
 ];
