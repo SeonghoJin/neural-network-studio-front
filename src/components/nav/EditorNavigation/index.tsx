@@ -60,7 +60,7 @@ const EditorNavigation = ({ user }: Props) => {
 						<div className="tit">편집</div>
 					</Link>
 
-					<Link to={format(DynamicPath.PROJECT_LEARN_FORMAT, projectNo)}>
+					<Link to={format(DynamicPath.PROJECT_TRAIN_FORMAT, projectNo)}>
 						<div className="ico ico-v4" />
 						<div className="tit">학습</div>
 					</Link>
