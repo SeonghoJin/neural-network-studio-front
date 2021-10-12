@@ -54,6 +54,14 @@ class GraphConvertor {
 				return node;
 			});
 
+		if (outputNodeName.length !== 1) {
+			throw new Error('아웃풋이 여러개가 존재합니다. 아웃풋은 한개만 가능합니다.');
+		}
+
+		if (inputNodeName.length !== 1) {
+			throw new Error('input이 여러개가 존재합니다. 인풋은 한개만 가능합니다.');
+		}
+
 		return {
 			output: [outputNodeName[0]?.name || ''],
 			input: [inputNodeName[0]?.name || ''],
