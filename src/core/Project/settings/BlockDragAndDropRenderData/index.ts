@@ -1,25 +1,24 @@
 import { BlockCategory } from '../../../reactFlow/block/BlockCategory';
 import {
+	AbsBlockState,
 	ActivationBlockState,
+	AddBlockState,
 	AveragePooling2DBlockState,
 	BatchNormalizationBlockState,
 	BlockState,
+	CeilBlockState,
 	Conv2DBlockState,
 	DenseBlockState,
 	DropoutBlockState,
 	FlattenBlockState,
 	InputBlockState,
+	LogBlockState,
 	MaxPool2DBlockState,
 	RescalingBlockState,
 	ReshapeBlockState,
-	// Math
-	AbsBlockState,
-	CeilBlockState,
 	RoundBlockState,
 	SqrtBlockState,
-	AddBlockState,
 	SubtractBlockState,
-	LogBlockState,
 } from '../../../reactFlow/block';
 
 export const BlockRenderData: { type: BlockCategory; states: BlockState[] }[] = [
@@ -37,7 +36,11 @@ export const BlockRenderData: { type: BlockCategory; states: BlockState[] }[] = 
 			new FlattenBlockState(),
 			new RescalingBlockState(),
 			new ReshapeBlockState(),
-			// Math
+		],
+	},
+	{
+		type: BlockCategory.Math,
+		states: [
 			new AbsBlockState(),
 			new CeilBlockState(),
 			new RoundBlockState(),
