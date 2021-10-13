@@ -53,7 +53,7 @@ const useCreateProject = () => {
 
 			return state;
 		},
-		[setResult, updateProjectContent]
+		[setResult]
 	);
 
 	return {
