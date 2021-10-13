@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from 'react';
 import useProjectConfig from '../../../../../../hooks/useProjectConfig';
-import { IEarlyStopConfig, IProjectConfig } from '../../../../../../API/project/types';
+import { EarlyStopConfig, ProjectConfig } from '../../../../../../API/project/types';
 import ProjectEarlyStopConfig, { EarlyStopConfigProps } from './ProjectEarlyStopConfig';
 
 const ProjectEarlyStopConfigContainer = ({ earlyStopConfig }: Omit<EarlyStopConfigProps, 'onChange'>) => {
@@ -11,9 +11,9 @@ const ProjectEarlyStopConfigContainer = ({ earlyStopConfig }: Omit<EarlyStopConf
 			const { name, value } = e.target;
 
 			setProjectConfig((state) => ({
-				...(state as IProjectConfig),
+				...(state as ProjectConfig),
 				early_stop: {
-					...(state?.early_stop as IEarlyStopConfig),
+					...(state?.early_stop as EarlyStopConfig),
 					[name]: value,
 				},
 			}));

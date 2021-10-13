@@ -1,12 +1,12 @@
 import { ChangeEvent, useMemo } from 'react';
-import { ILearningRateReductionConfig } from '../../../../../../API/project/types';
+import { LearningRateReductionConfig } from '../../../../../../API/project/types';
 import { getMonitorValues } from '../../../../../../core/Project/Montior';
 import { CustomCheckInput } from '../../../../../Input/custom/CustomCheckInput';
 import { CustomInput } from '../../../../../Input/custom/CustomInput';
 import { CustomSelectInput } from '../../../../../Input/custom/CustomSelectInput';
 
 export type ProjectLearningRateReductionConfigProps = {
-	learningRateReduction: ILearningRateReductionConfig;
+	learningRateReduction: LearningRateReductionConfig;
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 

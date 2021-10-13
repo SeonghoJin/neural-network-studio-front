@@ -1,15 +1,15 @@
 import { ChangeEvent, useCallback, useMemo } from 'react';
-import { IProjectConfig, IProjectOptimizerConfig } from '../../../../../API/project/types';
+import { ProjectConfig, OptimizerConfig } from '../../../../../API/project/types';
 import { getOptimizerValues } from '../../../../../core/Project/Optimizers';
 import { CustomInput } from '../../../../Input/custom/CustomInput';
 import { CustomSelectInput } from '../../../../Input/custom/CustomSelectInput';
 
 export type OptimizerConfigProps = {
-	projectConfig: IProjectConfig;
+	projectConfig: ProjectConfig;
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-const OptimizerConfig = ({ projectConfig, onChange }: OptimizerConfigProps) => {
+const OptimizerConfigComponent = ({ projectConfig, onChange }: OptimizerConfigProps) => {
 	const optimizerValues = useMemo(() => getOptimizerValues(), []);
 
 	return (
@@ -18,14 +18,13 @@ const OptimizerConfig = ({ projectConfig, onChange }: OptimizerConfigProps) => {
 				onChange={onChange}
 				name="optimizer"
 				propertyCandidates={optimizerValues}
-				value={projectConfig.optimizer}
+				value={projectConfig.optimizer_name}
 				title="Optimizer"
 			/>
 			<CustomInput onChange={onChange} name="loss" value={projectConfig.loss} title="Loss" />
 			<CustomInput onChange={onChange} name="metrics" value={projectConfig.metrics.toString()} title="Metrics" />
-			<CustomInput onChange={onChange} name="learning_rate" value={projectConfig.learning_rate} title="Learning Rate" />
 		</>
 	);
 };
 
-export default OptimizerConfig;
+export default OptimizerConfigComponent;

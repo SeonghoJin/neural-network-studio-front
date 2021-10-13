@@ -3,11 +3,11 @@ import useSWR from 'swr';
 import { useEffect } from 'react';
 import { AxiosError } from 'axios';
 
-import { IProjectConfig, ProjectConfig } from '../API/project/types';
+import { ProjectConfig } from '../API/project/types';
 import { getProjectConfig } from '../API/project';
 import useProjectLocation from './useProjectLocation';
 
-export type ProjectConfigState = IProjectConfig | null;
+export type ProjectConfigState = ProjectConfig | null;
 
 const projectConfigState = atom<ProjectConfigState>({
 	key: 'ProjectConfigState',
@@ -18,7 +18,7 @@ const useProjectConfig = () => {
 	const { projectNo } = useProjectLocation();
 	const [projectConfig, setProjectConfig] = useRecoilState(projectConfigState);
 
-	const getProjectConfigResult = useSWR<IProjectConfig, AxiosError>(
+	const getProjectConfigResult = useSWR<ProjectConfig, AxiosError>(
 		() => 'getProjectConfigResult',
 		async () => {
 			try {
@@ -32,7 +32,7 @@ const useProjectConfig = () => {
 
 	useEffect(() => {
 		if (getProjectConfigResult.data != null) {
-			setProjectConfig(new ProjectConfig(getProjectConfigResult.data));
+			setProjectConfig(getProjectConfigResult.data);
 		}
 	}, [getProjectConfigResult.data, setProjectConfig]);
 
