@@ -1,12 +1,11 @@
-import { ChangeEvent, useCallback, useEffect } from 'react';
+import { ChangeEvent, useCallback } from 'react';
 import ProjectEarlyStopConfig, {
 	EarlyStopConfigProps,
 } from '../../projectConfig/ProjectConfigViewer/ProjectGlobalConfigViewer/ProjectEarlyStopConfig/ProjectEarlyStopConfig';
 import useProjectConfig from '../../../../hooks/useProjectConfig';
-import { IEarlyStopConfig, IProjectConfig } from '../../../../API/project/types';
+import { EarlyStopConfig, ProjectConfig } from '../../../../API/project/types';
 import { useSocket } from '../../../../core/Socket/hooks/useSocket';
 import { ProjectEarlyStopConfigChangeDto } from '../../../../core/Socket/dto/project.earlystopconfig.change.dto';
-import { useRemoteProjectEarlyStopConfigChange } from '../../../../core/Socket/hooks/useProjectEarlyStopConfigChange';
 
 const ProjectEarlyStopConfigShareModeContainer = ({ earlyStopConfig }: Omit<EarlyStopConfigProps, 'onChange'>) => {
 	const { setProjectConfig } = useProjectConfig();
@@ -22,9 +21,9 @@ const ProjectEarlyStopConfigShareModeContainer = ({ earlyStopConfig }: Omit<Earl
 			socketService?.changeProjectEarlyStopConfig(dto);
 
 			setProjectConfig((state) => ({
-				...(state as IProjectConfig),
+				...(state as ProjectConfig),
 				early_stop: {
-					...(state?.early_stop as IEarlyStopConfig),
+					...(state?.early_stop as EarlyStopConfig),
 					[name]: value,
 				},
 			}));

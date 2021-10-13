@@ -35,14 +35,6 @@ const useCreateProject = () => {
 					if (!data) {
 						throw new Error('프로젝트가 생성되지 않았습니다. ');
 					}
-					await updateProjectContent.fetch(data.projectNo, {
-						flowState: {
-							elements: [],
-							zoom: 1,
-							position: [100, 100],
-						},
-						output: '',
-					});
 					setResult({
 						error: null,
 						data,
@@ -61,7 +53,7 @@ const useCreateProject = () => {
 
 			return state;
 		},
-		[setResult, updateProjectContent]
+		[setResult]
 	);
 
 	return {

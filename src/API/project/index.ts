@@ -3,10 +3,11 @@ import * as queryString from 'querystring';
 import {
 	GetProjectListParams,
 	IGetProjectListParams,
-	IProjectConfig,
 	IProjectContentDto,
 	IProjectDto,
 	IProjectInfo,
+	ProjectConfig,
+	ProjectConfigDto,
 	Projects,
 } from './types';
 import graphToLayouts from '../../core/reactFlow/GraphEngine';
@@ -32,11 +33,11 @@ export const getProject = async (projectNo: string) => {
 };
 
 export const getProjectConfig = async (projectNo: string) => {
-	const response = await axios.get<IProjectConfig>(
+	const response = await axios.get<ProjectConfigDto>(
 		`${config.SERVER_PREFIX}/api/project/${projectNo}/config`,
 		axiosConfig
 	);
-	return response.data;
+	return new ProjectConfig(response.data);
 };
 
 export const getProjectContent = async (projectNo: string) => {
@@ -78,11 +79,11 @@ export const updateProjectInfo = async (projectNo: string, projectInfo: IProject
 	}
 };
 
-export const updateProjectConfig = async (projectNo: string, projectConfig: IProjectConfig) => {
+export const updateProjectConfig = async (projectNo: string, projectConfig: ProjectConfig) => {
 	try {
 		const response = await axios.put(
 			`${config.SERVER_PREFIX}/api/project/${projectNo}/config`,
-			projectConfig,
+			ProjectConfig.toProjectConfigDto(projectConfig),
 			axiosConfig
 		);
 		return response.data;
