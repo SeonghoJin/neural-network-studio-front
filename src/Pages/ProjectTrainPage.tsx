@@ -22,8 +22,8 @@ type TrainHistory = {
 	datasetLabel: string;
 	datasetNormalizationUsage: boolean;
 	datasetNormalizationMethod: string;
-	modelContent: string;
-	modelConfig: string;
+	modelContent: any;
+	modelConfig: any;
 	createTime: string;
 	updateTime: string;
 };
