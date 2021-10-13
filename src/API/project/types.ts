@@ -120,7 +120,19 @@ export class LearningRateReductionConfig {
 		this.patience = dto?.patience?.toString() || '0.01';
 		this.factor = dto?.factor.toString() || '0.01';
 		this.min_lr = dto?.min_lr.toString() || '0.01';
-		this.usage = dto?.usage;
+		this.usage = dto?.usage || true;
+	}
+
+	static toLearningRateReductionConfigDto(learningRateReduction: LearningRateReductionConfig) {
+		const learningRateReductionConfig: LearningRateReductionConfigDto = {
+			monitor: learningRateReduction.monitor,
+			patience: Number(learningRateReduction.patience),
+			factor: Number(learningRateReduction.factor),
+			min_lr: Number(learningRateReduction.min_lr),
+			usage: learningRateReduction.usage,
+		};
+
+		return learningRateReductionConfig;
 	}
 }
 
@@ -135,6 +147,16 @@ export class EarlyStopConfig {
 		this.usage = dto?.usage || true;
 		this.monitor = dto?.monitor || Monitor.ValAccuracy;
 		this.patience = dto?.patience.toString() || '0.01';
+	}
+
+	static toEarlyStopConfig(earlyStopConfig: EarlyStopConfig) {
+		const earlyStopConfigDto: EarlyStopConfigDto = {
+			usage: earlyStopConfig.usage,
+			monitor: earlyStopConfig.monitor,
+			patience: Number(earlyStopConfig.patience),
+		};
+
+		return earlyStopConfigDto;
 	}
 }
 
@@ -155,6 +177,18 @@ export class OptimizerConfig {
 		this.beta_2 = dto?.beta_2?.toString() || '1';
 		this.epsilon = dto?.epsilon?.toString() || '1';
 		this.amsgrad = dto?.amsgrad || true;
+	}
+
+	static toOptimizerConfigDto(optimizerConfig: OptimizerConfig) {
+		const optimizerConfigDto: OptimizerConfigDto = {
+			learning_rate: Number(optimizerConfig.learning_rate),
+			beta_2: Number(optimizerConfig.beta_2),
+			beta_1: Number(optimizerConfig.beta_1),
+			epsilon: Number(optimizerConfig.epsilon),
+			amsgrad: optimizerConfig.amsgrad,
+		};
+
+		return optimizerConfigDto;
 	}
 }
 
@@ -184,5 +218,21 @@ export class ProjectConfig {
 		this.epochs = dto.epochs.toString();
 		this.early_stop = new EarlyStopConfig(dto.early_stop);
 		this.learning_rate_reduction = new LearningRateReductionConfig(dto.learning_rate_reduction);
+	}
+
+	static toProjectConfigDto(projectConfig: ProjectConfig) {
+		const projectConfigDto: ProjectConfigDto = {
+			optimizer_name: projectConfig.optimizer_name,
+			optimizer_config: OptimizerConfig.toOptimizerConfigDto(projectConfig.optimizer_config),
+			loss: projectConfig.loss,
+			metrics: projectConfig.metrics,
+			batch_size: Number(projectConfig.batch_size),
+			epochs: Number(projectConfig.epochs),
+			early_stop: EarlyStopConfig.toEarlyStopConfig(projectConfig.early_stop),
+			learning_rate_reduction: LearningRateReductionConfig.toLearningRateReductionConfigDto(
+				projectConfig.learning_rate_reduction
+			),
+		};
+		return projectConfigDto;
 	}
 }

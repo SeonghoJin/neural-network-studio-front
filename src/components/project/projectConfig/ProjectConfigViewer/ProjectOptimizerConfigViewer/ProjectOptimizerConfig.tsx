@@ -1,5 +1,5 @@
-import { ChangeEvent, useCallback, useMemo } from 'react';
-import { ProjectConfig, OptimizerConfig } from '../../../../../API/project/types';
+import { ChangeEvent, useMemo } from 'react';
+import { ProjectConfig } from '../../../../../API/project/types';
 import { getOptimizerValues } from '../../../../../core/Project/Optimizers';
 import { CustomInput } from '../../../../Input/custom/CustomInput';
 import { CustomSelectInput } from '../../../../Input/custom/CustomSelectInput';
@@ -16,10 +16,10 @@ const OptimizerConfigComponent = ({ projectConfig, onChange }: OptimizerConfigPr
 		<>
 			<CustomSelectInput
 				onChange={onChange}
-				name="optimizer"
+				name="optimizer_name"
 				propertyCandidates={optimizerValues}
 				value={projectConfig.optimizer_name}
-				title="Optimizer"
+				title="Optimizer Name"
 			/>
 			<CustomInput onChange={onChange} name="loss" value={projectConfig.loss} title="Loss" />
 			<CustomInput onChange={onChange} name="metrics" value={projectConfig.metrics.toString()} title="Metrics" />

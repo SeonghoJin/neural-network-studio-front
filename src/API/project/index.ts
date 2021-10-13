@@ -83,7 +83,7 @@ export const updateProjectConfig = async (projectNo: string, projectConfig: Proj
 	try {
 		const response = await axios.put(
 			`${config.SERVER_PREFIX}/api/project/${projectNo}/config`,
-			projectConfig,
+			ProjectConfig.toProjectConfigDto(projectConfig),
 			axiosConfig
 		);
 		return response.data;
