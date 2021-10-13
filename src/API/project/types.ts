@@ -88,6 +88,11 @@ export interface OptimizerConfigDto {
 	beta_2: number;
 	epsilon: number;
 	amsgrad: boolean;
+	weight_decay: number;
+	initial_accumulator_value: number;
+	momentum: number;
+	centered: boolean;
+	nesterov: boolean;
 }
 
 export interface EarlyStopConfigDto {
@@ -163,6 +168,16 @@ export class EarlyStopConfig {
 export class OptimizerConfig {
 	learning_rate: string;
 
+	weight_decay: string;
+
+	initial_accumulator_value: string;
+
+	momentum: string;
+
+	centered: boolean;
+
+	nesterov: boolean;
+
 	beta_1: string;
 
 	beta_2: string;
@@ -176,11 +191,21 @@ export class OptimizerConfig {
 		this.beta_1 = dto?.beta_1?.toString() || '1';
 		this.beta_2 = dto?.beta_2?.toString() || '1';
 		this.epsilon = dto?.epsilon?.toString() || '1';
-		this.amsgrad = dto?.amsgrad || true;
+		this.amsgrad = dto?.amsgrad || false;
+		this.momentum = dto?.momentum.toString() || '1';
+		this.weight_decay = dto?.weight_decay.toString() || '1';
+		this.initial_accumulator_value = dto?.initial_accumulator_value.toString() || '1';
+		this.centered = dto?.centered || false;
+		this.nesterov = dto?.nesterov || false;
 	}
 
 	static toOptimizerConfigDto(optimizerConfig: OptimizerConfig) {
 		const optimizerConfigDto: OptimizerConfigDto = {
+			centered: optimizerConfig.centered,
+			initial_accumulator_value: Number(optimizerConfig.initial_accumulator_value),
+			momentum: Number(optimizerConfig.momentum),
+			nesterov: optimizerConfig.nesterov,
+			weight_decay: Number(optimizerConfig.weight_decay),
 			learning_rate: Number(optimizerConfig.learning_rate),
 			beta_2: Number(optimizerConfig.beta_2),
 			beta_1: Number(optimizerConfig.beta_1),
