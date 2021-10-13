@@ -73,8 +73,8 @@ class GraphConvertor {
 		}
 
 		return {
-			output: [outputNodeName[0]?.name || ''],
-			input: [inputNodeName[0]?.name || ''],
+			output: outputNodeName[0]?.name || '',
+			input: inputNodeName[0]?.name || '',
 			layers: [...Array.from(this.nodeIdMaps.values())],
 		};
 	};

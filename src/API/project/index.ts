@@ -37,6 +37,7 @@ export const getProjectConfig = async (projectNo: string) => {
 		`${config.SERVER_PREFIX}/api/project/${projectNo}/config`,
 		axiosConfig
 	);
+	console.log(response.data);
 	return new ProjectConfig(response.data);
 };
 
