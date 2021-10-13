@@ -10,11 +10,9 @@ export type ProjectConfigViewerProps = {
 
 const ProjectConfigViewer = ({ index, selectorMappingViewer }: ProjectConfigViewerProps) => {
 	const { projectConfig, loading } = useProjectConfig();
-
 	if (!(index in selectorMappingViewer)) {
 		throw new Error('허용되지 않는 행위입니다.');
 	}
-
 	return (
 		<>
 			{loading && <CircleLoading />}

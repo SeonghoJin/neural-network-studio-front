@@ -83,6 +83,7 @@ export interface ProjectConfigDto {
 }
 
 export interface OptimizerConfigDto {
+	decay: number;
 	learning_rate: number;
 	beta_1: number;
 	beta_2: number;
@@ -186,21 +187,25 @@ export class OptimizerConfig {
 
 	amsgrad: boolean;
 
+	decay: string;
+
 	constructor(dto: OptimizerConfigDto) {
 		this.learning_rate = dto?.learning_rate?.toString() || '0.001';
 		this.beta_1 = dto?.beta_1?.toString() || '1';
 		this.beta_2 = dto?.beta_2?.toString() || '1';
 		this.epsilon = dto?.epsilon?.toString() || '1';
 		this.amsgrad = dto?.amsgrad || false;
-		this.momentum = dto?.momentum.toString() || '1';
-		this.weight_decay = dto?.weight_decay.toString() || '1';
-		this.initial_accumulator_value = dto?.initial_accumulator_value.toString() || '1';
+		this.momentum = dto?.momentum?.toString() || '1';
+		this.weight_decay = dto?.weight_decay?.toString() || '1';
+		this.initial_accumulator_value = dto?.initial_accumulator_value?.toString() || '1';
 		this.centered = dto?.centered || false;
 		this.nesterov = dto?.nesterov || false;
+		this.decay = dto?.decay?.toString() || '1';
 	}
 
 	static toOptimizerConfigDto(optimizerConfig: OptimizerConfig) {
 		const optimizerConfigDto: OptimizerConfigDto = {
+			decay: Number(optimizerConfig.decay),
 			centered: optimizerConfig.centered,
 			initial_accumulator_value: Number(optimizerConfig.initial_accumulator_value),
 			momentum: Number(optimizerConfig.momentum),
