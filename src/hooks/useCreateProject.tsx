@@ -1,14 +1,9 @@
 import { atom, useRecoilState } from 'recoil';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { AxiosError } from 'axios';
-import { Backdrop } from '@material-ui/core';
-import { useSnackbar } from 'notistack';
-import { useHistory } from 'react-router-dom';
-import { huHU } from '@material-ui/core/locale';
 import { createProject } from '../API/project';
 import { IProjectInfo } from '../API/project/types';
 import { sleep } from '../util';
-import { StaticPath } from '../components/PagePathConsts';
 import SimpleBackdrop from '../components/utils/BackLoading';
 import useUpdateProjectContent from './useUpdateProjectContent';
 

@@ -5,8 +5,6 @@ import { useSnackbar } from 'notistack';
 import { updateUserProfile, uploadImage } from '../API/User';
 import SimpleBackdrop from '../components/utils/BackLoading';
 import { sleep } from '../util';
-import ErrorSnackbar from '../components/utils/Snackbar/ErrorSnackbar';
-import SuccessSnackbar from '../components/utils/Snackbar/SuccessSnackbar';
 import useAuthentication from './useAuthentication';
 
 interface UserProfileToFetchParams {

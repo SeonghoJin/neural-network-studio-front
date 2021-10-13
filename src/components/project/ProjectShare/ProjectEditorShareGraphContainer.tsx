@@ -34,6 +34,7 @@ import { useRemoteBlockConfigChange } from '../../../core/Socket/hooks/useRemote
 import { useRemoteBlockLabelChange } from '../../../core/Socket/hooks/useRemoteBlockLabelChange';
 import { EdgeUpdateDto } from '../../../core/Socket/dto/edge.update.dto';
 import { CircleLoading } from '../../utils/Loading/CircularLoading';
+import { useCursorTracker } from '../../CursorTracker/useCursorTracker';
 
 const ProjectEditorShareGraphContainer = () => {
 	const { socketService } = useSocket();
@@ -46,6 +47,7 @@ const ProjectEditorShareGraphContainer = () => {
 	const { remoteBlockCreate } = useRemoteBlockCreate();
 	const { remoteBlockMove } = useRemoteBlockMove();
 	const { createdUserResponse } = useCreateUserResponse();
+	const { cursorDragEvent } = useCursorTracker();
 	const dispatch = useDispatch();
 	const setReactInstance = useCallback(
 		(instance: OnLoadParams) => {
@@ -62,15 +64,16 @@ const ProjectEditorShareGraphContainer = () => {
 	);
 
 	const onMoveCursor = useCallback(
-		(position: XYPosition) => {
+		(position: XYPosition, dragFlag?: boolean) => {
 			const dto = new CursorMoveDto();
 			dto.cursor = {
 				position,
 				user: createdUserResponse?.user as User,
+				drag: dragFlag || cursorDragEvent?.flag,
 			};
 			socketService?.moveCursor(dto);
 		},
-		[createdUserResponse?.user, socketService]
+		[createdUserResponse?.user, cursorDragEvent?.flag, socketService]
 	);
 
 	const onCreateEdge = useCallback(
@@ -149,7 +152,6 @@ const ProjectEditorShareGraphContainer = () => {
 
 	useEffect(() => {
 		if (remoteEdgeCreate?.elements != null) {
-			console.log(remoteEdgeCreate.elements);
 			dispatch(setElements(remoteEdgeCreate.elements));
 		}
 	}, [dispatch, remoteEdgeCreate]);

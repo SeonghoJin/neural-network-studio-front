@@ -10,9 +10,9 @@ class GraphNode {
 
 	id: string;
 
-	input: string | null = null;
+	input: Array<string>;
 
-	output: string | null = null;
+	output: Array<string>;
 
 	config: BlockConfig;
 
@@ -23,6 +23,8 @@ class GraphNode {
 		this.name = data.label.replaceAll(' ', '_').toLowerCase();
 		this.config = data.config;
 		this.id = element.id;
+		this.input = Array<string>(0);
+		this.output = Array<string>(0);
 	}
 }
 
