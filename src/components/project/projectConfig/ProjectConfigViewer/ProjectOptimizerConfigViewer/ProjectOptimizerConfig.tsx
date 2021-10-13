@@ -1,12 +1,23 @@
-import { ChangeEvent, FC, useMemo } from 'react';
+import { ChangeEvent, createElement, FC, useMemo } from 'react';
 import { ProjectConfig } from '../../../../../API/project/types';
 import Optimizers, { getOptimizerValues } from '../../../../../core/Project/Optimizers';
+import { CustomCheckInput } from '../../../../Input/custom/CustomCheckInput';
 import { CustomInput } from '../../../../Input/custom/CustomInput';
 import { CustomSelectInput } from '../../../../Input/custom/CustomSelectInput';
+import { AdadeltaConfig } from './AdadeltaConfig';
+import { AdagradConfig } from './AdagradConfig';
+import { AdamConfig } from './AdamConfig';
+import { AdamaxConfig } from './AdamaxConfig';
+import { NadamConfig } from './NadamConfig';
+import { RMSPropConfig } from './RMSPropConfig';
+import { SGDConfig } from './SGDConfig';
+import { AdamWConfig } from './AdamWConfig';
+import { SGDWConfig } from './SGDWConfig';
 
 export type OptimizerConfigProps = {
 	projectConfig: ProjectConfig;
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	onOptimizerConfigChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 type OptimizerConfigInputKey = keyof typeof Optimizers;
@@ -14,21 +25,25 @@ type OptimizerConfigInputMapperType = {
 	[K in OptimizerConfigInputKey]: FC<any>;
 };
 
-// const OptimizerConfigInputMapper: OptimizerConfigInputMapperType = {
-// 	AdaDelta: <></>,
-// 	Adagrad: <></>,
-// 	Adam: undefined,
-// 	GD: undefined,
-// 	Momentum: undefined,
-// 	NAG: undefined,
-// 	Nadam: undefined,
-// 	RMSProp: undefined,
-// 	SGD: undefined
-// };
+const OptimizerConfigInputMapper: OptimizerConfigInputMapperType = {
+	AdaDelta: AdadeltaConfig,
+	Adagrad: AdagradConfig,
+	Adam: AdamConfig,
+	Adamax: AdamaxConfig,
+	Nadam: NadamConfig,
+	RMSProp: RMSPropConfig,
+	SGD: SGDConfig,
+	AdamW: AdamWConfig,
+	SGDW: SGDWConfig,
+};
 
-const OptimizerConfigComponent = ({ projectConfig, onChange }: OptimizerConfigProps) => {
+const OptimizerConfigComponent = ({ projectConfig, onChange, onOptimizerConfigChange }: OptimizerConfigProps) => {
 	const optimizerValues = useMemo(() => getOptimizerValues(), []);
-
+	const optimizerConfig = projectConfig.optimizer_config;
+	const element = createElement(OptimizerConfigInputMapper[projectConfig.optimizer_name], {
+		optimizerConfig,
+		onChange: onOptimizerConfigChange,
+	});
 	return (
 		<>
 			<CustomSelectInput
@@ -38,8 +53,7 @@ const OptimizerConfigComponent = ({ projectConfig, onChange }: OptimizerConfigPr
 				value={projectConfig.optimizer_name}
 				title="Optimizer Name"
 			/>
-			<CustomInput onChange={onChange} name="loss" value={projectConfig.loss} title="Loss" />
-			<CustomInput onChange={onChange} name="metrics" value={projectConfig.metrics.toString()} title="Metrics" />
+			{element}
 		</>
 	);
 };

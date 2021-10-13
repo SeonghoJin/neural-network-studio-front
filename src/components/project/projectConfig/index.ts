@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import ProjectInputViewer from './ProjectConfigViewer/ProjectInputConfigViewer/ProjectInputViewer';
 import ProjectGlobalConfigContainer from './ProjectConfigViewer/ProjectGlobalConfigViewer/ProjectGlobalConfigContainer';
 import ProjectOptimizerConfigContainer from './ProjectConfigViewer/ProjectOptimizerConfigViewer/ProjectOptimizerConfigContainer';
 

@@ -3,7 +3,7 @@ import { deprecated } from 'typesafe-actions';
 import { generate } from 'randomstring';
 
 export const getId = (): string => {
-	const id = `${uuidv4()}`;
+	const id = `${uuidv4()}${new Date().getDate()}`;
 	return id.replaceAll('-', '');
 };
 

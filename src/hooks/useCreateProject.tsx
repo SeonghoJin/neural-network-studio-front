@@ -20,7 +20,6 @@ const createProjectResultState = atom<CreateProjectResult>({
 
 const useCreateProject = () => {
 	const [result, setResult] = useRecoilState(createProjectResultState);
-	const updateProjectContent = useUpdateProjectContent();
 	const fetch = useCallback(
 		async (projectInfo: IProjectInfo) => {
 			setResult({
