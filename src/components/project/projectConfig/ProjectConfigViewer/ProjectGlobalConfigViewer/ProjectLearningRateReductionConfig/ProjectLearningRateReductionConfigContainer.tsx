@@ -1,5 +1,5 @@
 import { ChangeEvent, useCallback } from 'react';
-import { ILearningRateReductionConfig, IProjectConfig } from '../../../../../../API/project/types';
+import { LearningRateReductionConfig, ProjectConfig } from '../../../../../../API/project/types';
 import ProjectLearningRateReductionConfig, {
 	ProjectLearningRateReductionConfigProps,
 } from './ProjectLearningRateReductionConfig';
@@ -14,9 +14,9 @@ const ProjectLearningRateReductionConfigContainer = ({
 		(e: ChangeEvent<HTMLInputElement>) => {
 			const { name, value } = e.target;
 			setProjectConfig((state) => ({
-				...(state as IProjectConfig),
+				...(state as ProjectConfig),
 				learning_rate_reduction: {
-					...(state?.learning_rate_reduction as ILearningRateReductionConfig),
+					...(state?.learning_rate_reduction as LearningRateReductionConfig),
 					[name]: value,
 				},
 			}));

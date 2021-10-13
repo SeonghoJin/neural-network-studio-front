@@ -1,12 +1,12 @@
 import React, { ChangeEvent, ReactNode } from 'react';
-import { IProjectGlobalConfig } from '../../../../../API/project/types';
+import { ProjectConfig } from '../../../../../API/project/types';
 import { CustomInput } from '../../../../Input/custom/CustomInput';
 
 export type GlobalConfigProps = {
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 	projectEarlyStopConfigContainer: ReactNode;
 	projectLearningRateReductionConfigContainer: ReactNode;
-	projectConfig: IProjectGlobalConfig;
+	projectConfig: ProjectConfig;
 };
 
 const GlobalConfig = ({
@@ -15,7 +15,7 @@ const GlobalConfig = ({
 	projectEarlyStopConfigContainer,
 	projectLearningRateReductionConfigContainer,
 }: GlobalConfigProps) => {
-	const globalConfig = projectConfig as IProjectGlobalConfig;
+	const globalConfig = projectConfig as ProjectConfig;
 	return (
 		<>
 			<CustomInput title="Batch Size" name="batch_size" onChange={onChange} value={globalConfig.batch_size} />

@@ -3,7 +3,7 @@ import ProjectLearningRateReductionConfig, {
 	ProjectLearningRateReductionConfigProps,
 } from '../../projectConfig/ProjectConfigViewer/ProjectGlobalConfigViewer/ProjectLearningRateReductionConfig/ProjectLearningRateReductionConfig';
 import useProjectConfig from '../../../../hooks/useProjectConfig';
-import { ILearningRateReductionConfig, IProjectConfig } from '../../../../API/project/types';
+import { LearningRateReductionConfig, ProjectConfig } from '../../../../API/project/types';
 import { useSocket } from '../../../../core/Socket/hooks/useSocket';
 import { ProjectLearningRateReductionChangeDto } from '../../../../core/Socket/dto/project.learningratereduction.change.dto';
 
@@ -20,9 +20,9 @@ const ProjectLearningRateReductionConfigShareModeContainer = ({
 			dto.value = value;
 			socketService?.changeLearningRateReduction(dto);
 			setProjectConfig((state) => ({
-				...(state as IProjectConfig),
+				...(state as ProjectConfig),
 				learning_rate_reduction: {
-					...(state?.learning_rate_reduction as ILearningRateReductionConfig),
+					...(state?.learning_rate_reduction as LearningRateReductionConfig),
 					[name]: value,
 				},
 			}));
