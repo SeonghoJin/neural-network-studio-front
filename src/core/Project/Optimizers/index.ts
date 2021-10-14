@@ -1,13 +1,16 @@
 enum Optimizers {
-	AdaDelta = 'adaDelta',
-	Adam = 'adam',
-	Adagrad = 'adagrad',
-	GD = 'GD',
-	Momentum = 'momentum',
-	Nadam = 'nadam',
-	NAG = 'NAG',
-	RMSProp = 'rmsprop',
+	AdaDelta = 'AdaDelta',
+	Adam = 'Adam',
+	Adamax = 'Adamax',
+	Adagrad = 'Adagrad',
+	AdamW = 'AdamW',
+	// GD = 'GD',
+	// Momentum = 'momentum',
+	Nadam = 'Nadam',
+	// NAG = 'NAG',
+	RMSProp = 'RMSProp',
 	SGD = 'SGD',
+	SGDW = 'SGDW',
 }
 
 export const getOptimizerValues = () => {
