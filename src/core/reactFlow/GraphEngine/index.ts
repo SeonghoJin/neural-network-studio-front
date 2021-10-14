@@ -75,7 +75,7 @@ class GraphConvertor {
 		return {
 			output: outputNodeName[0]?.name || '',
 			input: inputNodeName[0]?.name || '',
-			layers: [...Array.from(this.nodeIdMaps.values())],
+			layers: [...Array.from(this.nodes.values())],
 		};
 	};
 }

@@ -3,10 +3,12 @@ enum Optimizers {
 	Adagrad = 'Adagrad',
 	Adam = 'Adam',
 	Adamax = 'Adamax',
+	AdamW = 'AdamW',
+	// GD = 'GD',
+	// Momentum = 'momentum',
 	Nadam = 'Nadam',
 	RMSprop = 'RMSprop',
 	SGD = 'SGD',
-	AdamW = 'AdamW',
 	SGDW = 'SGDW',
 }
 

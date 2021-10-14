@@ -423,8 +423,8 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 .sec-menu .depth p { margin-bottom: 10px; font-size: 13px; font-weight: 400; color: #707070; }
 .sec-menu .depth p:last-child { margin-bottom: 0; }
 
-.sec-menu a { display: flex; align-items: center; width: 100%; height: 60px; padding: 0 20px; box-sizing: border-box; background: #efefef; font-size: 15px; font-weight: 700; color: #5a5a5a; }
-.sec-menu li.active a { background: #f6f6f6; }
+.sec-menu a { display: flex; align-items: center; width: 100%; height: 60px; padding: 0 20px; box-sizing: border-box; background: #f6f6f6; font-size: 15px; font-weight: 700; color: #5a5a5a; }
+.sec-menu li.active a { background: #efefef; }
 
 
 /*편집*/

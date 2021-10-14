@@ -30,10 +30,11 @@ const OptimizerConfigInputMapper: OptimizerConfigInputMapperType = {
 	Adagrad: AdagradConfig,
 	Adam: AdamConfig,
 	Adamax: AdamaxConfig,
+	AdamW: AdamWConfig,
+	// Momentum: MomentumConfig,
 	Nadam: NadamConfig,
 	RMSprop: RMSPropConfig,
 	SGD: SGDConfig,
-	AdamW: AdamWConfig,
 	SGDW: SGDWConfig,
 };
 

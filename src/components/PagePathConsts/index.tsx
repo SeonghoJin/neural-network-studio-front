@@ -25,6 +25,8 @@ export enum DynamicPath {
 	PROJECT_FORMAT = '/project/%s',
 	PROJECT_TRAIN = '/project/:projectNo/train',
 	PROJECT_TRAIN_FORMAT = '/project/%s/train',
+	PROJECT_TRAIN_DETAIL = '/project/:projectNo/train/:trainNo',
+	PROJECT_TRAIN_DETAIL_FORMAT = '/project/%s/train/%s',
 	PROJECT_CONFIG = '/project/:projectNo/config',
 	PROJECT_CONFIG_FORMAT = '/project/%s/config',
 	PROJECT_SHARE = '/share/project/:projectNo/room/:roomNo',
