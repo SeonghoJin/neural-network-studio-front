@@ -8,6 +8,7 @@ import { TrainHistory } from './types';
 const ProjectTrainMain = ({ selectorItemHeads }: { selectorItemHeads: Array<TrainHistory> }) => {
 	const [value, setValue] = useState<TrainHistory>(selectorItemHeads[0]);
 
+	// TODO: value.status === 'TRAIN' 이면 소켓 열어야됨
 	return (
 		<>
 			<LeftWrapper>

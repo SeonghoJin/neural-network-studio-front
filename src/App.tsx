@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Authentication from './components/Authentication';
 import ProjectRouter from './Router/ProjectRouter';
@@ -9,6 +10,11 @@ import ProjectShareRouter from './Router/ProjectShareRouter';
 import './static/css/aos.css';
 import './static/css/common.css';
 import './static/css/swiper.min.css';
+import './static/js/script.js';
+import './static/js/aos.js';
+import './static/js/jquery-1.11.1.min.js';
+import './static/js/jquery.easing.1.3.js';
+import './static/js/swiper.min.js';
 import useLogout from './hooks/useLogout';
 import useDeleteProject from './hooks/useDeleteProject';
 import { UpdatePasswordPage } from './Pages/UpdatePasswordPage';
