@@ -16,116 +16,14 @@ import icoPlay1 from '../static/img/ico_play1.png';
 import { DynamicPath } from '../components/PagePathConsts';
 import ProjectTrainNav from '../components/project/projectTrain/projectTrainNav/projectTrainNav';
 import ProjectTrainLearningCurveViewer from '../components/project/projectTrain/projectTrainViewer/projectTrainLearningCurveViewer';
+import { useGetTrainHistoryListLibraryAPI } from '../components/project/projectTrain/api';
+import { TrainHistory } from '../components/project/projectTrain/types';
 
 const LoadingButtonWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
 `;
-
-type TrainHistory = {
-	trainNo: number;
-	name: string;
-	status: string;
-	acc: number;
-	loss: number;
-	valAcc: number;
-	valLoss: number;
-	epochs: number;
-	resultUrl: string;
-	trainDatasetUrl: string;
-	validDatasetUrl: string;
-	datasetShuffle: boolean;
-	datasetLabel: string;
-	datasetNormalizationUsage: boolean;
-	datasetNormalizationMethod: string;
-	modelContent: any;
-	modelConfig: any;
-	createTime: string;
-	updateTime: string;
-};
-
-type GetTrainHistoryListAPIResponse = {
-	history: TrainHistory[];
-};
-
-const axiosConfig: AxiosRequestConfig = {
-	withCredentials: true,
-};
-
-const getTrainHistoryListLibraryAPIResult = atom<GetTrainHistoryListLibraryAPIResultType>({
-	key: 'getTrainHistoryListLibraryAPIResult',
-	default: null,
-});
-
-export const getTrainHistoryListAPI = async (projectNo: number) => {
-	try {
-		const uri = `${config.SERVER_PREFIX}/api/project/${projectNo}/train`;
-		const response = await axios.get(uri, axiosConfig);
-		return response.data;
-	} catch (e) {
-		throw new Error('TrainHistoryList를 가져오지 못했습니다. 다시 시도해주세요.');
-	}
-};
-
-export const getTrainHistoryEpochListAPI = async (projectNo: number, trainNo: number) => {
-	try {
-		const uri = `${config.SERVER_PREFIX}/api/project/${projectNo}/train/${trainNo}`;
-		const response = await axios.get(uri, axiosConfig);
-		return response.data;
-	} catch (e) {
-		throw new Error('TrainHistoryEpochList를 가져오지 못했습니다. 다시 시도해주세요.');
-	}
-};
-
-export const useGetTrainHistoryListLibraryAPI = () => {
-	const [result, setResult] = useRecoilState<GetTrainHistoryListLibraryAPIResultType>(
-		getTrainHistoryListLibraryAPIResult
-	);
-
-	const fetch = useCallback(
-		async (projectNo: number) => {
-			setResult({
-				loading: true,
-				data: null,
-				error: null,
-			});
-
-			const delayedData = await sleep(300)
-				.then(async () => {
-					const data = await getTrainHistoryListAPI(projectNo);
-					setResult({
-						loading: false,
-						data,
-						error: null,
-					});
-					return data;
-				})
-				.catch((e) => {
-					setResult({
-						loading: false,
-						data: null,
-						error: e,
-					});
-					throw new Error(e);
-				});
-
-			return delayedData;
-		},
-		[setResult]
-	);
-
-	return {
-		fetch,
-		...result,
-	};
-};
-
-type GetTrainHistoryListLibraryAPIResultType = {
-	loading: boolean;
-	data: null | GetTrainHistoryListAPIResponse;
-	error: Error | null;
-} | null;
 
 export const ListComponent = () => {
 	const [isActive, setActive] = useState(false);
@@ -203,9 +101,6 @@ export const ProjectTrainPage = () => {
 							</ol>
 						</div>
 					</LeftWrapper>
-					<div className="sec-c">
-						<ProjectTrainLearningCurveViewer epochs={1} />
-					</div>
 				</div>
 			</section>
 		</div>

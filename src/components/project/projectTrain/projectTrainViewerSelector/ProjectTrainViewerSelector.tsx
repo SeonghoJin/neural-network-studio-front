@@ -1,7 +1,10 @@
+import ProjectTrainViewerSelectorItem from './projectTrainViewerSelectorItem';
+import { TrainHistory } from '../types';
+
 type Props = {
 	value: any;
 	setValue: any;
-	selectorItemsHeads: any;
+	selectorItemsHeads: Array<TrainHistory>;
 };
 
 const ProjectTrainViewerSelector = (props: Props) => {
@@ -9,10 +12,15 @@ const ProjectTrainViewerSelector = (props: Props) => {
 
 	return (
 		<>
-			{Object.keys(selectorItemsHeads).map((head, index) => {
+			{selectorItemsHeads.map((head, index) => {
 				return (
-					<li key={head} className={value === head ? 'active' : ''}>
-						<span>test</span>
+					<li key={head.trainNo} className={value === head ? 'active' : ''}>
+						<ProjectTrainViewerSelectorItem
+							head={head}
+							onClick={() => {
+								setValue(head);
+							}}
+						/>
 					</li>
 				);
 			})}
