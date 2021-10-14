@@ -1,7 +1,7 @@
 import { makeStyles, TextField } from '@material-ui/core';
 import { ChangeEvent, useCallback, useState } from 'react';
 import Input from './Input';
-import { thirdDivisionTupleRegExp } from './Validation';
+import { secondDivisionTupleRegExp, thirdDivisionTupleRegExp } from './Validation';
 
 const useStyle = makeStyles({
 	propertyContentContainer: {
@@ -27,6 +27,7 @@ const ThirdDivisionTupleInput = ({ propertyName, propertyContent, onChange }: Pr
 
 	const body = (
 		<TextField
+			error={!(secondDivisionTupleRegExp.test(propertyContent) || thirdDivisionTupleRegExp.test(propertyContent))}
 			name={propertyName}
 			onChange={handleChange}
 			value={propertyContent}

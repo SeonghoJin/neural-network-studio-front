@@ -34,6 +34,7 @@ const NumberInput = ({ propertyName, propertyContent, onChange }: Props) => {
 
 	const body = (
 		<TextField
+			error={!numberWithoutSpacesRegExp.test(propertyContent)}
 			name={propertyName}
 			onChange={handleChange}
 			value={propertyContent}

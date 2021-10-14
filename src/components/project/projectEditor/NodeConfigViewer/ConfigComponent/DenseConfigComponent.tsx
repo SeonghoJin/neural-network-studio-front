@@ -14,7 +14,7 @@ const DenseConfigComponent = ({ config, onChange }: Props) => {
 	const { units } = config;
 
 	const configComponent: IConfigComponent<typeof config> = {
-		units: <NumberInput propertyName="units" onChange={onChange} propertyContent={units.toString()} />,
+		units: <NumberInput propertyName="units" onChange={onChange} propertyContent={units} />,
 	};
 
 	return <>{configComponentToReactNode(configComponent)}</>;

@@ -28,6 +28,7 @@ const SecondDivisionTupleInput: FC<Props> = ({ propertyName, propertyContent, on
 
 	const body = (
 		<TextField
+			error={!secondDivisionTupleRegExp.test(propertyContent)}
 			name={propertyName}
 			onChange={handleChange}
 			value={propertyContent}

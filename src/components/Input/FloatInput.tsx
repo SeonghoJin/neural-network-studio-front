@@ -20,7 +20,6 @@ const FloatInput = ({ propertyName, propertyContent, onChange }: Props) => {
 
 	const handleChange = useCallback(
 		(e: ChangeEvent<HTMLInputElement>) => {
-			const { value } = e.target;
 			onChange({
 				target: {
 					name: e.target.name,
@@ -32,6 +31,7 @@ const FloatInput = ({ propertyName, propertyContent, onChange }: Props) => {
 	);
 	const body = (
 		<TextField
+			error={!floatWithoutSpacesRegExp.test(propertyContent)}
 			name={propertyName}
 			onChange={handleChange}
 			value={propertyContent}
