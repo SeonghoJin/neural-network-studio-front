@@ -13,6 +13,7 @@ import { BlockConfigChangeDto } from '../dto/block.config.change.dto';
 import { ProjectLearningRateReductionChangeDto } from '../dto/project.learningratereduction.change.dto';
 import { ProjectEarlyStopConfigChangeDto } from '../dto/project.earlystopconfig.change.dto';
 import { ProjectConfigChangeDto } from '../dto/project.config.change.dto';
+import { MessageDto } from '../dto/message.dto';
 
 export class WebSocketRepository implements SocketRepository {
 	private socket: WebSocket;
@@ -145,6 +146,15 @@ export class WebSocketRepository implements SocketRepository {
 		event: string,
 		cf: (data: ProjectLearningRateReductionChangeDto) => void
 	): void {
+		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
+			const data = JSON.parse(msgevt.data);
+			if (data.message === event) {
+				cf(data);
+			}
+		});
+	}
+
+	sentMessage(event: string, cf: (data: MessageDto) => void): void {
 		this.socket.addEventListener('message', (msgevt: MessageEvent) => {
 			const data = JSON.parse(msgevt.data);
 			if (data.message === event) {

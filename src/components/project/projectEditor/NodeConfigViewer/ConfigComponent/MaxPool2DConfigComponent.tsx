@@ -25,12 +25,8 @@ const MaxPool2DConfigComponent = ({ config, onChange }: Props) => {
 					propertyCandidates={getPaddingValues()}
 				/>
 			),
-			pool_size: (
-				<SecondDivisionTupleInput propertyName="pool_size" onChange={onChange} propertyContent={pool_size.toString()} />
-			),
-			strides: (
-				<SecondDivisionTupleInput propertyName="strides" onChange={onChange} propertyContent={strides.toString()} />
-			),
+			pool_size: <SecondDivisionTupleInput propertyName="pool_size" onChange={onChange} propertyContent={pool_size} />,
+			strides: <SecondDivisionTupleInput propertyName="strides" onChange={onChange} propertyContent={strides} />,
 		}),
 		[onChange, padding, pool_size, strides]
 	);

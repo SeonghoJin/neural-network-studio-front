@@ -20,7 +20,6 @@ const CursorModule = () => {
 
 	useEffect(() => {
 		if (remoteCursorMove != null) {
-			console.log(remoteCursorMove.cursor);
 			const userId = remoteCursorMove?.cursor?.user?.id as UserId;
 			const _cursorData: CursorData = {
 				drag: remoteCursorMove.cursor?.drag,

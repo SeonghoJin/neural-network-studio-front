@@ -11,6 +11,7 @@ import { BlockLabelChangeDto } from '../dto/block.label.change.dto';
 import { ProjectConfigChangeDto } from '../dto/project.config.change.dto';
 import { ProjectEarlyStopConfigChangeDto } from '../dto/project.earlystopconfig.change.dto';
 import { ProjectLearningRateReductionChangeDto } from '../dto/project.learningratereduction.change.dto';
+import { MessageDto } from '../dto/message.dto';
 
 export interface SocketService {
 	createBlock: (data: BlockCreateDto) => void;
@@ -27,4 +28,5 @@ export interface SocketService {
 	changeProjectConfig: (data: ProjectConfigChangeDto) => void;
 	changeProjectEarlyStopConfig: (data: ProjectEarlyStopConfigChangeDto) => void;
 	changeLearningRateReduction: (data: ProjectLearningRateReductionChangeDto) => void;
+	sendMessage: (data: MessageDto) => void;
 }

@@ -14,4 +14,5 @@ export enum SocketEvent {
 	ChangeProjectEarlyStopConfig = 'change_project_early_stop_config',
 	ChangeProjectLearningRateReductionConfig = 'change_project_learning_rate_reduction_config',
 	RemoveUserRequest = 'remove_user_request',
+	SendMessage = 'send_message',
 }

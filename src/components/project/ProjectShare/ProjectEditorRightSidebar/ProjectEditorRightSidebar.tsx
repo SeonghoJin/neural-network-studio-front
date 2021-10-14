@@ -1,5 +1,6 @@
 import { User } from '../../../../core/Socket/entities/User';
 import imgProfile1 from '../../../../static/img/img_profile1.png';
+import { ChatComponent } from './Chat/ChatComponent';
 
 const UserProfile = ({ user }: { user: User }) => {
 	return (
@@ -22,7 +23,6 @@ export const ProjectEditorRightSidebar = ({ users }: { users: User[] }) => {
 					<div className="txt">온라인</div>
 					<div className="txt">{users.length}명</div>
 				</div>
-
 				<ol className="list-member">
 					{users.map((user) => {
 						return (
@@ -33,6 +33,7 @@ export const ProjectEditorRightSidebar = ({ users }: { users: User[] }) => {
 					})}
 				</ol>
 			</div>
+			<ChatComponent />
 		</div>
 	);
 };
