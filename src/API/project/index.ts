@@ -41,9 +41,7 @@ export const getProject = async (projectNo: string) => {
 			},
 		};
 	});
-	console.log(response.data.content.flowState.elements);
 	response.data.content.flowState.elements = newElements;
-	console.log(response.data.content.flowState.elements);
 	return response.data;
 };
 

@@ -170,15 +170,14 @@ const ProjectEditorShareGraphContainer = () => {
 
 	useEffect(() => {
 		if (remoteBlockConfigChange != null) {
-			const { blockId, config } = remoteBlockConfigChange;
-			if (!blockId || !config) {
+			const { blockId, param } = remoteBlockConfigChange;
+			if (blockId === undefined) {
 				throw new Error('잘못된 데이터입니다.');
 			}
-
 			dispatch(
 				setElementByIdAndUpdateConfig({
-					key: config.name,
-					value: config.value,
+					key: param?.name || '',
+					value: param?.value || '',
 					id: blockId,
 				})
 			);
@@ -188,13 +187,13 @@ const ProjectEditorShareGraphContainer = () => {
 	useEffect(() => {
 		if (remoteBlockLabelChange != null) {
 			const { blockId, data } = remoteBlockLabelChange;
-			if (!blockId || !data) {
+			if (blockId === undefined) {
 				throw new Error('잘못된 데이터입니다.');
 			}
 			dispatch(
 				setElementByIdAndUpdateLabel({
 					id: blockId,
-					label: data,
+					label: data || '',
 				})
 			);
 		}
