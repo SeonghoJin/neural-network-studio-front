@@ -13,7 +13,7 @@ const InputConfigComponent = ({ config, onChange }: Props) => {
 	const { shape } = config;
 
 	const configComponent: IConfigComponent<typeof config> = {
-		shape: <ThirdDivisionTupleInput propertyName="shape" onChange={onChange} propertyContent={shape} />,
+		shape: <ThirdDivisionTupleInput propertyName="shape" onChange={onChange} propertyContent={shape.toString()} />,
 	};
 
 	return <>{configComponentToReactNode(configComponent)}</>;

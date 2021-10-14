@@ -19,7 +19,7 @@ const NodeConfigViewer = ({ onChangeConfig, onChangeLabel, selectedElement }: Pr
 	const data = selectedElement.data as BlockState;
 
 	const inputs = createElement(ConfigViewerTable[data.type], {
-		config: data.config,
+		config: data.param,
 		onChange: onChangeConfig,
 	});
 
