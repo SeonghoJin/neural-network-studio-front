@@ -11,20 +11,13 @@ const useStyle = makeStyles({
 
 type Props = {
 	propertyName: string;
-	propertyContent: string | string[] | number;
+	propertyContent: string;
 	propertyCandidates: Array<string | number>;
 	onChange: any;
 };
 
 const SelectInput = ({ propertyContent, propertyName, propertyCandidates, onChange }: Props) => {
 	const classes = useStyle();
-
-	const isVaild = useCallback((str: string) => {
-		if (str.trim() === '') return false;
-		return true;
-	}, []);
-
-	const [error, setError] = useState(!isVaild(propertyContent as string));
 
 	const candidateComponent = useMemo(
 		() =>
@@ -40,17 +33,15 @@ const SelectInput = ({ propertyContent, propertyName, propertyCandidates, onChan
 
 	const handleChange = useCallback(
 		(e: ChangeEvent<any>) => {
-			setError(!isVaild(e.target.value));
 			onChange(e);
 		},
-		[isVaild, onChange]
+		[onChange]
 	);
 
 	const body = (
 		<FormControl className={classes.propertyContentContainer}>
 			<InputLabel>{propertyName}</InputLabel>
 			<Select
-				error={error}
 				name={propertyName}
 				onChange={(e) => {
 					handleChange(e);

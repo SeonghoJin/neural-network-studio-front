@@ -1,10 +1,10 @@
 enum Optimizers {
-	AdaDelta = 'AdaDelta',
+	Adadelta = 'Adadelta',
 	Adagrad = 'Adagrad',
 	Adam = 'Adam',
 	Adamax = 'Adamax',
 	Nadam = 'Nadam',
-	RMSProp = 'RMSProp',
+	RMSprop = 'RMSprop',
 	SGD = 'SGD',
 	AdamW = 'AdamW',
 	SGDW = 'SGDW',

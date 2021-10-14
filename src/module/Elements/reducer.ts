@@ -54,8 +54,8 @@ const elements = createReducer<ElementState, ElementActionTypes>(initialState, {
 					...element,
 					data: {
 						...element.data,
-						config: {
-							...element.data.config,
+						param: {
+							...element.data.param,
 							[key]: value,
 						},
 					},
