@@ -5,6 +5,7 @@ import useSWR from 'swr';
 import config from '../../../config';
 import { sleep } from '../../../util';
 import {
+	Epoch,
 	EpochList,
 	GetTrainHistoryEpochListLibraryAPIResultType,
 	GetTrainHistoryListAPIResponse,
@@ -33,8 +34,8 @@ export const getTrainHistoryListAPI = async (projectNo: number) => {
 
 export const getTrainHistoryEpochListAPI = async (projectNo: number, trainNo: number) => {
 	try {
-		const uri = `${config.SERVER_PREFIX}/api/project/${projectNo}/train/${trainNo}`;
-		const response = await axios.get(uri, axiosConfig);
+		const uri = `${config.SERVER_PREFIX}/api/project/${projectNo}/train/${trainNo}/epoch`;
+		const response = await axios.get<{ epochs: Epoch[] }>(uri, axiosConfig);
 		return response.data;
 	} catch (e) {
 		throw new Error('TrainHistoryEpochList를 가져오지 못했습니다. 다시 시도해주세요.');
@@ -138,16 +139,6 @@ export const useGetTrainHistoryEpochListLibraryAPI = () => {
 	};
 };
 
-export const getProjectTrainEpochList = async (projectNo: number, trainNo: number) => {
-	const response = await axios.get<EpochList>(
-		`${config.SERVER_PREFIX}/api/project/${projectNo}/train/${trainNo}`,
-		axiosConfig
-	);
-	const epochList = response.data.epochs;
-
-	return epochList;
-};
-
 export type ProjectTrainEpochsState = EpochList | null;
 
 const projectTrainEpochsState = atom<ProjectTrainEpochsState>({
@@ -163,7 +154,8 @@ export const useProjectTrainEpochs = (trainNo: number) => {
 		() => 'getProjectTrainEpochResult',
 		async () => {
 			try {
-				const data = await getProjectTrainEpochList(parseInt(projectNo, 10), trainNo);
+				const data = await getTrainHistoryEpochListAPI(parseInt(projectNo, 10), trainNo);
+				console.log(data);
 				return data;
 			} catch (e: AxiosError | any) {
 				return e;
@@ -178,7 +170,7 @@ export const useProjectTrainEpochs = (trainNo: number) => {
 	}, [getProjectTrainEpochResult.data, setProjectTrainEpochs]);
 
 	return {
-		loading: !getProjectTrainEpochResult.error,
+		loading: !getProjectTrainEpochResult.error && !setProjectTrainEpochs,
 		error: getProjectTrainEpochResult.error,
 		mutate: getProjectTrainEpochResult.mutate,
 		projectTrainEpochs,

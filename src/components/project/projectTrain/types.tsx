@@ -99,7 +99,7 @@ export type Epoch = {
 
 export type EpochList = {
 	epochs: Array<Epoch>;
-}
+};
 
 export type GetTrainHistoryEpochListAPIResponse = {
 	epochs: Array<Epoch>;

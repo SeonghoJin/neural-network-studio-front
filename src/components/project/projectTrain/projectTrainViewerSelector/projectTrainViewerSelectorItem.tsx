@@ -19,6 +19,7 @@ const useStyle = makeStyles({
 	active: {
 		width: '100%',
 		height: '100%',
+		display: 'block',
 		backgroundColor: '#FFFFFF',
 	},
 });
@@ -33,15 +34,9 @@ const ProjectTrainViewerSelectorItem = ({ head, onClick }: Props) => {
 
 	return (
 		<>
-			<button
-				className={`tit js-depth ${classes.wrapper}`}
-				type="button"
-				onClick={onClick}
-				tabIndex={0}
-				onKeyDown={() => onClick()}
-			>
+			<div className={`tit js-depth ${classes.wrapper}`} onClick={onClick} onKeyDown={() => onClick()}>
 				{head.name}
-			</button>
+			</div>
 			<div className="depth">
 				<div>
 					<p>

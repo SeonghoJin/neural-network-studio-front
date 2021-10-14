@@ -14,7 +14,6 @@ const ProjectRouter: FC<null> = () => {
 				<Route path={DynamicPath.PROJECT_CONFIG} exact component={ProjectConfigPage} />
 				<Route path={DynamicPath.PROJECT_DATASET_PAGE} exact component={ProjectDatasetPage} />
 				<Route path={DynamicPath.PROJECT_TRAIN} exact component={ProjectTrainPage} />
-				<Route path={DynamicPath.PROJECT_TRAIN_DETAIL} exact component={ProjectTrainPage} />
 				<Route component={NotFoundPage} />
 			</Switch>
 		</PrivateAuthentication>

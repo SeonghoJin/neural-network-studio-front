@@ -39,6 +39,7 @@
     "chart.js": "^3.5.1",
     "dotenv": "^8.2.0",
     "http-proxy-middleware": "^0.19.1",
+    "jquery": "^3.6.0",
     "js-file-download": "^0.4.12",
     "localforage": "^1.9.0",
     "moment": "^2.29.1",
@@ -95,6 +96,7 @@
     ]
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.7",
     "@types/query-string": "^6.3.0",
     "@types/styled-components": "^5.1.12",
     "@types/uuid": "^8.3.1",

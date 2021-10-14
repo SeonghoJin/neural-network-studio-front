@@ -6,7 +6,7 @@ import ProjectTrainViewer from './projectTrainViewer/projectTrainViewer';
 import { TrainHistory } from './types';
 
 const ProjectTrainMain = ({ selectorItemHeads }: { selectorItemHeads: Array<TrainHistory> }) => {
-	const [value, setValue] = useState<any>(selectorItemHeads);
+	const [value, setValue] = useState<TrainHistory>(selectorItemHeads[0]);
 
 	return (
 		<>
@@ -16,9 +16,7 @@ const ProjectTrainMain = ({ selectorItemHeads }: { selectorItemHeads: Array<Trai
 				</div>
 			</LeftWrapper>
 
-			<div className="sec-c">
-				<ProjectTrainViewer history={value} />
-			</div>
+			<div className="sec-c">{value === undefined ? '' : <ProjectTrainViewer history={value} />}</div>
 		</>
 	);
 };

@@ -1,4 +1,4 @@
-import { createElement } from 'react';
+import { createElement, useEffect } from 'react';
 import { atom, useRecoilState } from 'recoil';
 import { CircleLoading } from '../../../utils/Loading/CircularLoading';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
@@ -27,7 +27,9 @@ export type ProjectTrainViewerProps = {
 
 const ProjectTrainViewer = ({ history }: ProjectTrainViewerProps) => {
 	// const { projectTrain, loading } = useProjectTrain();
-	const { projectTrainEpochs, loading } = useProjectTrainEpochs(history.trainNo);
+	const { projectTrainEpochs, setProjectTrainEpochs, loading } = useProjectTrainEpochs(history.trainNo);
+
+	console.log(projectTrainEpochs);
 
 	return (
 		<>
