@@ -4,6 +4,7 @@ import { getMonitorValues } from '../../../../../../core/Project/Montior';
 import { CustomCheckInput } from '../../../../../Input/custom/CustomCheckInput';
 import { CustomSelectInput } from '../../../../../Input/custom/CustomSelectInput';
 import { CustomInput } from '../../../../../Input/custom/CustomInput';
+import { CustomNumberInput } from '../../../../../Input/custom/CustomNumberInput';
 
 export type EarlyStopConfigProps = {
 	earlyStopConfig: EarlyStopConfig;
@@ -30,7 +31,7 @@ const ProjectEarlyStopConfig = ({ earlyStopConfig, onChange }: EarlyStopConfigPr
 						onChange={onChange}
 						title="Monitor"
 					/>
-					<CustomInput name="patience" value={earlyStopConfig.patience} onChange={onChange} title="Patience" />
+					<CustomNumberInput name="patience" value={earlyStopConfig.patience} onChange={onChange} title="Patience" />
 				</>
 			)}
 		</>
