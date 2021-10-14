@@ -6,7 +6,9 @@ import useProjectConfig from '../../../../hooks/useProjectConfig';
 import { ProjectConfigChangeDto } from '../../../../core/Socket/dto/project.config.change.dto';
 import { useSocket } from '../../../../core/Socket/hooks/useSocket';
 
-const OptimizerConfigShareModeContainer = ({ projectConfig }: Omit<OptimizerConfigProps, 'onChange'>) => {
+const OptimizerConfigShareModeContainer = ({
+	projectConfig,
+}: Omit<OptimizerConfigProps, 'onChange' | 'onOptimizerConfigChange'>) => {
 	const { setProjectConfig } = useProjectConfig();
 	const { socketService } = useSocket();
 	const onChange = useCallback(
@@ -23,8 +25,27 @@ const OptimizerConfigShareModeContainer = ({ projectConfig }: Omit<OptimizerConf
 		},
 		[projectConfig, setProjectConfig, socketService]
 	);
+	const onOptimizerConfigChange = useCallback(
+		(e: ChangeEvent<HTMLInputElement>) => {
+			const { name, value } = e.target;
+			setProjectConfig({
+				...projectConfig,
+				optimizer_config: {
+					...projectConfig.optimizer_config,
+					[name]: value,
+				},
+			});
+		},
+		[projectConfig, setProjectConfig]
+	);
 
-	return <OptimizerConfig projectConfig={projectConfig} onChange={onChange} />;
+	return (
+		<OptimizerConfig
+			projectConfig={projectConfig}
+			onChange={onChange}
+			onOptimizerConfigChange={onOptimizerConfigChange}
+		/>
+	);
 };
 
 export default OptimizerConfigShareModeContainer;

@@ -4,6 +4,7 @@ import PrivateAuthentication from '../components/Authentication/PrivateAuthentic
 import { DynamicPath, StaticPath } from '../components/PagePathConsts';
 import { NotFoundPage, ProjectConfigPage, ProjectEditorPage } from '../Pages';
 import { ProjectDatasetPage } from '../Pages/ProjectDatasetPage';
+import { ProjectTrainPage } from '../Pages/ProjectTrainPage';
 
 const ProjectRouter: FC<null> = () => {
 	return (
@@ -12,6 +13,7 @@ const ProjectRouter: FC<null> = () => {
 				<Route path={DynamicPath.PROJECT} exact component={ProjectEditorPage} />
 				<Route path={DynamicPath.PROJECT_CONFIG} exact component={ProjectConfigPage} />
 				<Route path={DynamicPath.PROJECT_DATASET_PAGE} exact component={ProjectDatasetPage} />
+				<Route path={DynamicPath.PROJECT_TRAIN} exact component={ProjectTrainPage} />
 				<Route component={NotFoundPage} />
 			</Switch>
 		</PrivateAuthentication>

@@ -1,12 +1,10 @@
 import { atom, useRecoilState } from 'recoil';
 import { useCallback, useEffect } from 'react';
 import { AxiosError } from 'axios';
-import StandardModal from '../components/utils/modal/StandardModal';
 import { updateProjectConfig } from '../API/project';
-import { IProjectConfig } from '../API/project/types';
+import { ProjectConfig } from '../API/project/types';
 import { sleep } from '../util';
 import SimpleBackdrop from '../components/utils/BackLoading';
-import SuccessSnackbar from '../components/utils/Snackbar/SuccessSnackbar';
 
 type UpdateProjectConfigState = {
 	error: null | string;
@@ -23,7 +21,7 @@ const useUpdateProjectConfig = () => {
 	const [result, setResult] = useRecoilState(updateProjectConfigResult);
 
 	const fetch = useCallback(
-		async (projectNo: string, projectConfig: IProjectConfig) => {
+		async (projectNo: string, projectConfig: ProjectConfig) => {
 			setResult({
 				data: null,
 				error: null,

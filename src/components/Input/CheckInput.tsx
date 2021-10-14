@@ -1,13 +1,5 @@
 import React from 'react';
 import Switch from '@material-ui/core/Switch';
-import { makeStyles } from '@material-ui/core';
-import * as events from 'events';
-
-const useStyle = makeStyles({
-	propertyContentContainer: {
-		width: '100%',
-	},
-});
 
 type Props = {
 	propertyName: string;

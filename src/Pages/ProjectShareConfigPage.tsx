@@ -7,11 +7,11 @@ import {
 	selectorItemHeadsShareMode,
 	SelectorMappingViewerShareMode,
 } from '../components/project/ProjectShare/ProjectShareConfig';
-import { IEarlyStopConfig, ILearningRateReductionConfig, IProjectConfig } from '../API/project/types';
 import useProjectConfig from '../hooks/useProjectConfig';
 import { useRemoteProjectEarlyStopConfigChange } from '../core/Socket/hooks/useProjectEarlyStopConfigChange';
 import { useRemoteProjectConfigChange } from '../core/Socket/hooks/useProjectConfigChange';
 import { useRemoteProjectLearningRateReductionConfigChange } from '../core/Socket/hooks/useProjectLearningRateReductionChange';
+import { EarlyStopConfig, LearningRateReductionConfig, ProjectConfig } from '../API/project/types';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -40,7 +40,7 @@ export const ProjectShareConfigPage = () => {
 		if (projectConfig && changeProjectConfig != null && changeProjectConfig.name !== undefined) {
 			const { name, value } = changeProjectConfig;
 			setProjectConfig({
-				...(projectConfig as IProjectConfig),
+				...(projectConfig as ProjectConfig),
 				[name]: value,
 			});
 		}
@@ -50,9 +50,9 @@ export const ProjectShareConfigPage = () => {
 		if (projectConfig && changeProjectEarlyStopConfig != null && changeProjectEarlyStopConfig.name !== undefined) {
 			const { name, value } = changeProjectEarlyStopConfig;
 			setProjectConfig((state) => ({
-				...(state as IProjectConfig),
+				...(state as ProjectConfig),
 				early_stop: {
-					...(state?.early_stop as IEarlyStopConfig),
+					...(state?.early_stop as EarlyStopConfig),
 					[name]: value,
 				},
 			}));
@@ -67,9 +67,9 @@ export const ProjectShareConfigPage = () => {
 		) {
 			const { name, value } = changeProjectLearningRateReductionConfig;
 			setProjectConfig((state) => ({
-				...(state as IProjectConfig),
+				...(state as ProjectConfig),
 				learning_rate_reduction: {
-					...(state?.learning_rate_reduction as ILearningRateReductionConfig),
+					...(state?.learning_rate_reduction as LearningRateReductionConfig),
 					[name]: value,
 				},
 			}));

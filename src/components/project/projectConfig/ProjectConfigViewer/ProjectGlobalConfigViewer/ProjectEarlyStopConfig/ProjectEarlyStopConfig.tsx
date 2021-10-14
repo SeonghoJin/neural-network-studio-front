@@ -1,16 +1,12 @@
-import { makeStyles } from '@material-ui/core';
 import { ChangeEvent, useMemo } from 'react';
-import { IEarlyStopConfig } from '../../../../../../API/project/types';
-import NumberInput from '../../../../../Input/NumberInput';
-import SelectInput from '../../../../../Input/SelectInput';
+import { EarlyStopConfig } from '../../../../../../API/project/types';
 import { getMonitorValues } from '../../../../../../core/Project/Montior';
-import CheckInput from '../../../../../Input/CheckInput';
 import { CustomCheckInput } from '../../../../../Input/custom/CustomCheckInput';
 import { CustomSelectInput } from '../../../../../Input/custom/CustomSelectInput';
 import { CustomInput } from '../../../../../Input/custom/CustomInput';
 
 export type EarlyStopConfigProps = {
-	earlyStopConfig: IEarlyStopConfig;
+	earlyStopConfig: EarlyStopConfig;
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
