@@ -20,9 +20,9 @@ const ProjectTrainViewerSelector = (props: Props) => {
 							head={head}
 							onClick={() => {
 								setValue(head);
-								$('.js-depth').click(function () {
+								$('.js-depth').on('click', function (): void {
 									$(this).toggleClass('active');
-									$(this).next().stop(false).slideToggle('active');
+									$(this).next().stop().slideToggle('active');
 								});
 							}}
 						/>
