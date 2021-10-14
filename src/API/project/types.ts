@@ -2,6 +2,7 @@
 import { FlowExportObject } from 'react-flow-nns';
 import Monitor from '../../core/Project/Montior';
 import Optimizers from '../../core/Project/Optimizers';
+import { BlockState } from '../../core/reactFlow/block';
 
 export interface IProjectDto {
 	config: ProjectConfigDto;
@@ -13,7 +14,7 @@ export interface IProjectDto {
 }
 
 export interface IProjectContentDto {
-	flowState: FlowExportObject;
+	flowState: FlowExportObject<BlockState>;
 	output: string;
 }
 

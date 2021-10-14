@@ -12,17 +12,12 @@ const useStyle = makeStyles({
 
 type Props = {
 	propertyName: string;
-	propertyContent: string | undefined | number | null;
+	propertyContent: string;
 	onChange: any;
 };
 
 const NumberInput = ({ propertyName, propertyContent, onChange }: Props) => {
 	const classes = useStyle();
-	const isVaild = useCallback((str: string) => {
-		return numberWithoutSpacesRegExp.test(str);
-	}, []);
-
-	const [error, setError] = useState(!isVaild(propertyContent?.toString() || ''));
 
 	const handleChange = useCallback(
 		(e: ChangeEvent<HTMLInputElement>) => {
@@ -33,14 +28,12 @@ const NumberInput = ({ propertyName, propertyContent, onChange }: Props) => {
 					value: e.target.value,
 				},
 			});
-			setError(!isVaild(e.target.value));
 		},
-		[isVaild, onChange]
+		[onChange]
 	);
 
 	const body = (
 		<TextField
-			error={error}
 			name={propertyName}
 			onChange={handleChange}
 			value={propertyContent}

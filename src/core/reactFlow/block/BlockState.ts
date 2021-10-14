@@ -23,6 +23,7 @@ import {
 	AddConfig,
 	SubtractConfig,
 	LogConfig,
+	IBlockConfig,
 } from './BlockConfig';
 import { BlockType } from './BlockType';
 
@@ -31,7 +32,7 @@ export interface BlockState {
 
 	type: BlockType;
 
-	config: BlockConfig;
+	param: IBlockConfig;
 
 	label: string;
 }
@@ -39,7 +40,7 @@ export interface BlockState {
 export class DenseBlockState implements BlockState {
 	category: BlockCategory = BlockCategory.Layer;
 
-	config: BlockConfig = new DenseConfig();
+	param: IBlockConfig = new DenseConfig();
 
 	type: BlockType = BlockType.Dense;
 
@@ -51,7 +52,7 @@ export class Conv2DBlockState implements BlockState {
 
 	label = 'Conv2D Node';
 
-	config: BlockConfig = new Conv2DConfig();
+	param: IBlockConfig = new Conv2DConfig();
 
 	type: BlockType = BlockType.Conv2D;
 }
@@ -61,7 +62,7 @@ export class AveragePooling2DBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Layer;
 
-	config: BlockConfig = new AveragePooling2DConfig();
+	param: IBlockConfig = new AveragePooling2DConfig();
 
 	type: BlockType = BlockType.AveragePooling2D;
 }
@@ -71,7 +72,7 @@ export class MaxPool2DBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Layer;
 
-	config: BlockConfig = new MaxPool2DConfig();
+	param: IBlockConfig = new MaxPool2DConfig();
 
 	type: BlockType = BlockType.MaxPool2D;
 }
@@ -81,7 +82,7 @@ export class ActivationBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Layer;
 
-	config: BlockConfig = new ActivationConfig();
+	param: IBlockConfig = new ActivationConfig();
 
 	type: BlockType = BlockType.Activation;
 }
@@ -91,7 +92,7 @@ export class InputBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Layer;
 
-	config: BlockConfig = new InputConfig();
+	param: IBlockConfig = new InputConfig();
 
 	type: BlockType = BlockType.Input;
 }
@@ -101,7 +102,7 @@ export class DropoutBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Layer;
 
-	config: BlockConfig = new DropoutConfig();
+	param: IBlockConfig = new DropoutConfig();
 
 	type: BlockType = BlockType.Dropout;
 }
@@ -111,7 +112,7 @@ export class BatchNormalizationBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Layer;
 
-	config: BlockConfig = new BatchNormalizationConfig();
+	param: IBlockConfig = new BatchNormalizationConfig();
 
 	type: BlockType = BlockType.BatchNormalization;
 }
@@ -121,7 +122,7 @@ export class FlattenBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Layer;
 
-	config: BlockConfig = new FlattenConfig();
+	param: IBlockConfig = new FlattenConfig();
 
 	type: BlockType = BlockType.Flatten;
 }
@@ -131,7 +132,7 @@ export class RescalingBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Layer;
 
-	config: BlockConfig = new RescalingConfig();
+	param: IBlockConfig = new RescalingConfig();
 
 	type: BlockType = BlockType.Rescaling;
 }
@@ -141,7 +142,7 @@ export class ReshapeBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Layer;
 
-	config: BlockConfig = new ReshapeConfig();
+	param: IBlockConfig = new ReshapeConfig();
 
 	type: BlockType = BlockType.Reshape;
 }
@@ -151,7 +152,7 @@ export class AbsBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Math;
 
-	config: BlockConfig = new AbsConfig();
+	param: IBlockConfig = new AbsConfig();
 
 	type: BlockType = BlockType.Abs;
 }
@@ -161,7 +162,7 @@ export class CeilBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Math;
 
-	config: BlockConfig = new CeilConfig();
+	param: IBlockConfig = new CeilConfig();
 
 	type: BlockType = BlockType.Ceil;
 }
@@ -171,7 +172,7 @@ export class FloorBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Math;
 
-	config: BlockConfig = new FloorConfig();
+	param: IBlockConfig = new FloorConfig();
 
 	type: BlockType = BlockType.Floor;
 }
@@ -181,7 +182,7 @@ export class RoundBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Math;
 
-	config: BlockConfig = new RoundConfig();
+	param: IBlockConfig = new RoundConfig();
 
 	type: BlockType = BlockType.Round;
 }
@@ -191,7 +192,7 @@ export class SqrtBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Math;
 
-	config: BlockConfig = new SqrtConfig();
+	param: IBlockConfig = new SqrtConfig();
 
 	type: BlockType = BlockType.Sqrt;
 }
@@ -201,7 +202,7 @@ export class AddBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Math;
 
-	config: BlockConfig = new AddConfig();
+	param: IBlockConfig = new AddConfig();
 
 	type: BlockType = BlockType.Add;
 }
@@ -211,7 +212,7 @@ export class SubtractBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Math;
 
-	config: BlockConfig = new SubtractConfig();
+	param: IBlockConfig = new SubtractConfig();
 
 	type: BlockType = BlockType.Subtract;
 }
@@ -221,7 +222,7 @@ export class LogBlockState implements BlockState {
 
 	category: BlockCategory = BlockCategory.Math;
 
-	config: BlockConfig = new LogConfig();
+	param: IBlockConfig = new LogConfig();
 
 	type: BlockType = BlockType.Log;
 }

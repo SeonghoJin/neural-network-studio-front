@@ -12,6 +12,7 @@ import {
 } from './types';
 import graphToLayouts from '../../core/reactFlow/GraphEngine';
 import config from '../../config';
+import { BlockConfig, BlockConfigDto } from '../../core/reactFlow/block';
 
 const axiosConfig: AxiosRequestConfig = {
 	withCredentials: true,
@@ -28,7 +29,21 @@ export const getPythonCode = async (projectNo: string) => {
 
 export const getProject = async (projectNo: string) => {
 	const response = await axios.get<IProjectDto>(`${config.SERVER_PREFIX}/api/project/${projectNo}`, axiosConfig);
-
+	const newElements = response.data.content.flowState.elements.map((element) => {
+		if (element.data == null) {
+			return element;
+		}
+		return {
+			...element,
+			data: {
+				...element.data,
+				param: new BlockConfig(element.data.param as BlockConfigDto),
+			},
+		};
+	});
+	console.log(response.data.content.flowState.elements);
+	response.data.content.flowState.elements = newElements;
+	console.log(response.data.content.flowState.elements);
 	return response.data;
 };
 
@@ -37,7 +52,6 @@ export const getProjectConfig = async (projectNo: string) => {
 		`${config.SERVER_PREFIX}/api/project/${projectNo}/config`,
 		axiosConfig
 	);
-	console.log(response.data);
 	return new ProjectConfig(response.data);
 };
 
@@ -63,7 +77,6 @@ export const createProject = async (projectInfo: IProjectInfo) => {
 		if ((e as AxiosError).response?.status === 422) {
 			throw new Error('이미 존재하는 프로젝트 이름입니다.');
 		}
-
 		return null;
 	}
 };
@@ -97,13 +110,35 @@ export const updateProjectConfig = async (projectNo: string, projectConfig: Proj
 };
 
 export const updateProjectContent = async (projectNo: string, projectContent: IProjectContentDto) => {
-	const layers = graphToLayouts(projectContent.flowState.elements);
+	const newElements = projectContent.flowState.elements.map((element) => {
+		if (element.data == null) {
+			return element;
+		}
+
+		return {
+			...element,
+			data: {
+				...element.data,
+				param: BlockConfig.toDto(element.data.param),
+			},
+		};
+	});
+
+	const newProjectContent = {
+		...projectContent,
+		flowState: {
+			...projectContent.flowState,
+			elements: newElements,
+		},
+	};
+
+	const layers = graphToLayouts(newProjectContent.flowState.elements);
 
 	try {
 		const response = await axios.put(
 			`${config.SERVER_PREFIX}/api/project/${projectNo}/content`,
 			{
-				...projectContent,
+				...newProjectContent,
 				...layers,
 			},
 			axiosConfig

@@ -6,6 +6,7 @@ import SecondDivisionTupleInput from '../../../../Input/SecondDivisionTupleInput
 import SelectInput from '../../../../Input/SelectInput';
 import { configComponentToReactNode } from './util';
 import { getPaddingValues } from '../../../../../core/Project/Padding';
+import NumberInput from '../../../../Input/NumberInput';
 
 type Props = {
 	config: Conv2DConfig;
@@ -35,19 +36,13 @@ const Conv2DConfigComponent = ({ config, onChange }: Props) => {
 	const { padding, strides, kernel_size, filters } = config;
 
 	const configComponent: IConfigComponent<typeof config> = {
-		filters: (
-			<SliderInput
-				onChange={onChange}
-				propertyContent={Number(filters)}
-				propertyName="filters"
-				marks={marks}
-				max={256}
-				min={32}
-				step={null}
-			/>
-		),
+		filters: <NumberInput onChange={onChange} propertyContent={filters.toString()} propertyName="filters" />,
 		kernel_size: (
-			<SecondDivisionTupleInput onChange={onChange} propertyContent={kernel_size} propertyName="kernel_size" />
+			<SecondDivisionTupleInput
+				onChange={onChange}
+				propertyContent={kernel_size.toString()}
+				propertyName="kernel_size"
+			/>
 		),
 		padding: (
 			<SelectInput
@@ -57,7 +52,14 @@ const Conv2DConfigComponent = ({ config, onChange }: Props) => {
 				propertyCandidates={getPaddingValues()}
 			/>
 		),
-		strides: <SecondDivisionTupleInput canNull onChange={onChange} propertyContent={strides} propertyName="strides" />,
+		strides: (
+			<SecondDivisionTupleInput
+				canNull
+				onChange={onChange}
+				propertyContent={strides.toString()}
+				propertyName="strides"
+			/>
+		),
 	};
 
 	return <>{configComponentToReactNode(configComponent)}</>;

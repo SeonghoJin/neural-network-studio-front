@@ -18,23 +18,15 @@ type Props = {
 const ThirdDivisionTupleInput = ({ propertyName, propertyContent, onChange }: Props) => {
 	const classes = useStyle();
 
-	const isVaild = useCallback((str: string) => {
-		return thirdDivisionTupleRegExp.test(str);
-	}, []);
-
-	const [error, setError] = useState(!isVaild(propertyContent));
-
 	const handleChange = useCallback(
 		(e: ChangeEvent<any>) => {
 			onChange(e);
-			setError(!isVaild(e.target.value));
 		},
-		[isVaild, onChange]
+		[onChange]
 	);
 
 	const body = (
 		<TextField
-			error={error}
 			name={propertyName}
 			onChange={handleChange}
 			value={propertyContent}
