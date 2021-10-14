@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import axios, { AxiosRequestConfig } from 'axios';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, FC } from 'react';
 import { atom, useRecoilState } from 'recoil';
 import { LoadingButton } from '@mui/lab';
 import { Link, useRouteMatch } from 'react-router-dom';
@@ -20,6 +20,9 @@ import { useGetTrainHistoryListLibraryAPI } from '../components/project/projectT
 import { TrainHistory } from '../components/project/projectTrain/types';
 import { numberWithoutSpacesRegExp } from '../components/Input/Validation';
 import ProjectConfigViewer from '../components/project/projectConfig/ProjectConfigViewer/ProjectConfigViewer';
+import ProjectTrainMain from '../components/project/projectTrain/projectTrainMain';
+import { SelectorMappingViewerType } from '../components/project/projectConfig';
+import ProjectTrainViewer from '../components/project/projectTrain/projectTrainViewer/projectTrainViewer';
 
 const LoadingButtonWrapper = styled.div`
 	display: flex;
@@ -113,12 +116,12 @@ export const ProjectTrainPage = () => {
 	const { loading, fetch } = useGetTrainHistoryListLibraryAPI();
 	const { projectNo } = useProjectLocation();
 	// const { trainNo } = useTrainLocation();
-	const [trainHistories, setTrainHistories] = useState<TrainHistory[]>(exampleData);
+	const [trainHistories, setTrainHistories] = useState<TrainHistory[]>([]);
 	const [currentTrainNo, setCurrentTrainNo] = useState<null | number>(null);
 
 	useEffect(() => {
 		fetch(parseInt(projectNo, 10)).then((res) => {
-			// setTrainHistories(res.history);
+			setTrainHistories(res.history);
 		});
 	}, [projectNo, fetch]);
 
@@ -134,58 +137,7 @@ export const ProjectTrainPage = () => {
 			<section className="modelset">
 				<ProjectTrainNav />
 				<div className="sec-container">
-					<LeftWrapper>
-						<div className="sec-l">
-							<ol className="sec-menu">
-								{trainHistories.map((trainHistory) => {
-									return (
-										// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-										<li
-											key={trainHistory.trainNo}
-											onClick={() => {
-												setCurrentTrainNo(trainHistory.trainNo);
-											}}
-										>
-											<Link
-												to={format(DynamicPath.PROJECT_TRAIN_DETAIL_FORMAT, projectNo, trainHistory.trainNo)}
-												className="tit js-depth"
-											>
-												{trainHistory.name}
-											</Link>
-											<div className="depth">
-												<div>
-													<p>
-														<strong>Epoch</strong> : {trainHistory.epochs}
-													</p>
-												</div>
-												<div>
-													<p>
-														<strong>학습 정확도</strong> : {trainHistory.acc}
-													</p>
-												</div>
-												<div>
-													<p>
-														<strong>학습 손실</strong> : {trainHistory.loss}
-													</p>
-												</div>
-												<div>
-													<p>
-														<strong>검증 정확도</strong> : {trainHistory.valAcc}
-													</p>
-												</div>
-												<div>
-													<p>
-														<strong>검증 손실</strong> : {trainHistory.valLoss}
-													</p>
-												</div>
-											</div>
-										</li>
-									);
-								})}
-							</ol>
-						</div>
-					</LeftWrapper>
-					<div className="sec-c">{currentTrainNo}</div>
+					<ProjectTrainMain selectorItemHeads={trainHistories} />
 				</div>
 			</section>
 		</div>

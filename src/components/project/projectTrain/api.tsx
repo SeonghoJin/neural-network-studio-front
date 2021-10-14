@@ -1,9 +1,16 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { atom, useRecoilState } from 'recoil';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
+import useSWR from 'swr';
 import config from '../../../config';
 import { sleep } from '../../../util';
-import { GetTrainHistoryEpochListLibraryAPIResultType, GetTrainHistoryListAPIResponse, TrainHistory } from './types';
+import {
+	EpochList,
+	GetTrainHistoryEpochListLibraryAPIResultType,
+	GetTrainHistoryListAPIResponse,
+	TrainHistory,
+} from './types';
+import useProjectLocation from '../../../hooks/useProjectLocation';
 
 const axiosConfig: AxiosRequestConfig = {
 	withCredentials: true,
@@ -128,5 +135,53 @@ export const useGetTrainHistoryEpochListLibraryAPI = () => {
 	return {
 		fetch,
 		...result,
+	};
+};
+
+export const getProjectTrainEpochList = async (projectNo: number, trainNo: number) => {
+	const response = await axios.get<EpochList>(
+		`${config.SERVER_PREFIX}/api/project/${projectNo}/train/${trainNo}`,
+		axiosConfig
+	);
+	const epochList = response.data.epochs;
+
+	return epochList;
+};
+
+export type ProjectTrainEpochsState = EpochList | null;
+
+const projectTrainEpochsState = atom<ProjectTrainEpochsState>({
+	key: 'ProjectTrainEpochs',
+	default: null,
+});
+
+export const useProjectTrainEpochs = (trainNo: number) => {
+	const { projectNo } = useProjectLocation();
+	const [projectTrainEpochs, setProjectTrainEpochs] = useRecoilState(projectTrainEpochsState);
+
+	const getProjectTrainEpochResult = useSWR<EpochList, AxiosError>(
+		() => 'getProjectTrainEpochResult',
+		async () => {
+			try {
+				const data = await getProjectTrainEpochList(parseInt(projectNo, 10), trainNo);
+				return data;
+			} catch (e: AxiosError | any) {
+				return e;
+			}
+		}
+	);
+
+	useEffect(() => {
+		if (getProjectTrainEpochResult.data != null) {
+			setProjectTrainEpochs(getProjectTrainEpochResult.data);
+		}
+	}, [getProjectTrainEpochResult.data, setProjectTrainEpochs]);
+
+	return {
+		loading: !getProjectTrainEpochResult.error,
+		error: getProjectTrainEpochResult.error,
+		mutate: getProjectTrainEpochResult.mutate,
+		projectTrainEpochs,
+		setProjectTrainEpochs,
 	};
 };

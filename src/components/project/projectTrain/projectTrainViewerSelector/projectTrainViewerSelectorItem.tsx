@@ -33,7 +33,13 @@ const ProjectTrainViewerSelectorItem = ({ head, onClick }: Props) => {
 
 	return (
 		<>
-			<button className={classes.wrapper} type="button" onClick={onClick} tabIndex={0} onKeyDown={() => onClick()}>
+			<button
+				className={`tit js-depth ${classes.wrapper}`}
+				type="button"
+				onClick={onClick}
+				tabIndex={0}
+				onKeyDown={() => onClick()}
+			>
 				{head.name}
 			</button>
 			<div className="depth">

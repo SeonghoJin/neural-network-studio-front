@@ -3,6 +3,8 @@ import { atom, useRecoilState } from 'recoil';
 import { CircleLoading } from '../../../utils/Loading/CircularLoading';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
 import { TrainHistory } from '../types';
+import { useProjectTrainEpochs } from '../api';
+import ProjectTrainLearningCurveViewer from './projectTrainLearningCurveViewer';
 
 export class ProjectTrainHistories {
 	trainHistories: Array<TrainHistory>;
@@ -19,23 +21,18 @@ const projectTrainState = atom<ProjectTrainState>({
 	default: null,
 });
 
-const useProjecTrain = () => {
-	const { projectNo } = useProjectLocation();
-};
-
 export type ProjectTrainViewerProps = {
-	index: any;
-	selectorMappingViewer: any;
+	history: TrainHistory;
 };
 
-const ProjectTrainViewer = ({ index, selectorMappingViewer }: ProjectTrainViewerProps) => {
+const ProjectTrainViewer = ({ history }: ProjectTrainViewerProps) => {
 	// const { projectTrain, loading } = useProjectTrain();
-	if (!(index in selectorMappingViewer)) {
-		throw new Error('허용되지 않는 행위입니다.');
-	}
+	const { projectTrainEpochs, loading } = useProjectTrainEpochs(history.trainNo);
+
 	return (
 		<>
-			nothing
+			{loading && <CircleLoading />}
+			{projectTrainEpochs && <ProjectTrainLearningCurveViewer epochs={projectTrainEpochs.epochs} />}
 		</>
 	);
 };

@@ -1,20 +1,19 @@
 import { Line } from 'react-chartjs-2';
-import { Epoch } from '../types';
+import { Epoch, EpochList } from '../types';
 
-export type ProjectTrainViewerProps = {
-	index: any;
-	selectorMappingViewer: any;
-};
-
-const ProjectTrainLearningCurveViewer = (epochs: Array<Epoch>) => {
+const ProjectTrainLearningCurveViewer = (epochs: EpochList) => {
 	const label: Array<number> = [];
 	const acc: Array<number> = [];
 	const loss: Array<number> = [];
 	const valAcc: Array<number> = [];
 	const valLoss: Array<number> = [];
 
-	for (let i = 0; i < epochs.length; i += 1) {
-		const epoch = epochs[i];
+	if (epochs === undefined) {
+		return <></>;
+	}
+
+	for (let i = 0; i < epochs.epochs.length; i += 1) {
+		const epoch = epochs.epochs[i];
 		label.push(epoch.epochNo);
 		acc.push(epoch.acc);
 		loss.push(epoch.loss);
