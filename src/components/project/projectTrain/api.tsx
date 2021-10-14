@@ -3,7 +3,7 @@ import { atom, useRecoilState } from 'recoil';
 import { useCallback } from 'react';
 import config from '../../../config';
 import { sleep } from '../../../util';
-import { GetTrainHistoryEpochListLibraryAPIResultType, GetTrainHistoryListAPIResponse } from './types';
+import { GetTrainHistoryEpochListLibraryAPIResultType, GetTrainHistoryListAPIResponse, TrainHistory } from './types';
 
 const axiosConfig: AxiosRequestConfig = {
 	withCredentials: true,
@@ -17,7 +17,7 @@ const getTrainHistoryListLibraryAPIResult = atom<GetTrainHistoryListLibraryAPIRe
 export const getTrainHistoryListAPI = async (projectNo: number) => {
 	try {
 		const uri = `${config.SERVER_PREFIX}/api/project/${projectNo}/train`;
-		const response = await axios.get(uri, axiosConfig);
+		const response = await axios.get<{ history: TrainHistory[] }>(uri, axiosConfig);
 		return response.data;
 	} catch (e) {
 		throw new Error('TrainHistoryList를 가져오지 못했습니다. 다시 시도해주세요.');

@@ -18,6 +18,8 @@ import ProjectTrainNav from '../components/project/projectTrain/projectTrainNav/
 import ProjectTrainLearningCurveViewer from '../components/project/projectTrain/projectTrainViewer/projectTrainLearningCurveViewer';
 import { useGetTrainHistoryListLibraryAPI } from '../components/project/projectTrain/api';
 import { TrainHistory } from '../components/project/projectTrain/types';
+import { numberWithoutSpacesRegExp } from '../components/Input/Validation';
+import ProjectConfigViewer from '../components/project/projectConfig/ProjectConfigViewer/ProjectConfigViewer';
 
 const LoadingButtonWrapper = styled.div`
 	display: flex;
@@ -38,17 +40,93 @@ const useTrainLocation = () => {
 	return { trainNo: match.params.trainNo };
 };
 
+/*
+예제용 데이터
+* */
+const exampleData: TrainHistory[] = [
+	{
+		trainNo: 1,
+		acc: 1,
+		createTime: 'asd',
+		datasetLabel: 'asd',
+		datasetNormalizationMethod: 'asd',
+		datasetNormalizationUsage: true,
+		datasetShuffle: true,
+		epochs: 1,
+		loss: 1,
+		modelConfig: 'asd',
+		modelContent: 'asd',
+		name: 'asd',
+		trainDatasetUrl: 'asd',
+		resultUrl: 'asd',
+		validDatasetUrl: 'asd',
+		valAcc: 1,
+		valLoss: 1,
+		status: 'asd',
+		updateTime: 'asd',
+	},
+	{
+		trainNo: 2,
+		acc: 1,
+		createTime: 'asd',
+		datasetLabel: 'asd',
+		datasetNormalizationMethod: 'asd',
+		datasetNormalizationUsage: true,
+		datasetShuffle: true,
+		epochs: 1,
+		loss: 1,
+		modelConfig: 'asd',
+		modelContent: 'asd',
+		name: 'asd',
+		trainDatasetUrl: 'asd',
+		resultUrl: 'asd',
+		validDatasetUrl: 'asd',
+		valAcc: 1,
+		valLoss: 1,
+		status: 'asd',
+		updateTime: 'asd',
+	},
+	{
+		trainNo: 3,
+		acc: 1,
+		createTime: 'asd',
+		datasetLabel: 'asd',
+		datasetNormalizationMethod: 'asd',
+		datasetNormalizationUsage: true,
+		datasetShuffle: true,
+		epochs: 1,
+		loss: 1,
+		modelConfig: 'asd',
+		modelContent: 'asd',
+		name: 'asd',
+		trainDatasetUrl: 'asd',
+		resultUrl: 'asd',
+		validDatasetUrl: 'asd',
+		valAcc: 1,
+		valLoss: 1,
+		status: 'asd',
+		updateTime: 'asd',
+	},
+];
+
 export const ProjectTrainPage = () => {
 	const { loading, fetch } = useGetTrainHistoryListLibraryAPI();
 	const { projectNo } = useProjectLocation();
-	const { trainNo } = useTrainLocation();
-	const [trainHistories, setTrainHistories] = useState<TrainHistory[]>(new Array<TrainHistory>(0));
+	// const { trainNo } = useTrainLocation();
+	const [trainHistories, setTrainHistories] = useState<TrainHistory[]>(exampleData);
+	const [currentTrainNo, setCurrentTrainNo] = useState<null | number>(null);
 
 	useEffect(() => {
 		fetch(parseInt(projectNo, 10)).then((res) => {
-			setTrainHistories(res.history);
+			// setTrainHistories(res.history);
 		});
 	}, [projectNo, fetch]);
+
+	useEffect(() => {
+		if (trainHistories.length > 0) {
+			setCurrentTrainNo(trainHistories[0].trainNo);
+		}
+	}, [trainHistories]);
 
 	return (
 		<div id="container">
@@ -61,7 +139,13 @@ export const ProjectTrainPage = () => {
 							<ol className="sec-menu">
 								{trainHistories.map((trainHistory) => {
 									return (
-										<li key={trainHistory.trainNo}>
+										// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+										<li
+											key={trainHistory.trainNo}
+											onClick={() => {
+												setCurrentTrainNo(trainHistory.trainNo);
+											}}
+										>
 											<Link
 												to={format(DynamicPath.PROJECT_TRAIN_DETAIL_FORMAT, projectNo, trainHistory.trainNo)}
 												className="tit js-depth"
@@ -101,6 +185,7 @@ export const ProjectTrainPage = () => {
 							</ol>
 						</div>
 					</LeftWrapper>
+					<div className="sec-c">{currentTrainNo}</div>
 				</div>
 			</section>
 		</div>
