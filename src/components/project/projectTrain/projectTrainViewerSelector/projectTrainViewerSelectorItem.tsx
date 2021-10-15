@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import $ from 'jquery';
 import { TrainHistory } from '../types';
@@ -76,6 +77,9 @@ const ProjectTrainViewerSelectorItem = ({ head, onClick }: Props) => {
 					<p>
 						<strong>검증 손실</strong> : {head.valLoss}
 					</p>
+				</div>
+				<div>
+					<a href={head.resultUrl}>모델 내려받기</a>
 				</div>
 			</div>
 		</>
