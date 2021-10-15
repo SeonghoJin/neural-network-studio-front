@@ -36,13 +36,9 @@ const axiosConfig: AxiosRequestConfig = {
 	withCredentials: true,
 };
 
-export const trainProject = async (projectNo: string, dataset: DatasetConfig) => {
+export const trainProject = async (projectNo: string) => {
 	try {
-		const response = await axios.post(
-			`${config.SERVER_PREFIX}/api/project/${projectNo}/train`,
-			{ dataset },
-			axiosConfig
-		);
+		const response = await axios.post(`${config.SERVER_PREFIX}/api/project/${projectNo}/train`, axiosConfig);
 		return response.data;
 	} catch (e: any) {
 		throw new Error(e.message);
@@ -61,7 +57,7 @@ const testData: DatasetConfig = {
 	},
 };
 
-export const useTrain = (datasetConfig: DatasetConfig) => {
+export const useTrain = () => {
 	const [result, setResult] = useRecoilState(trainResultState);
 	const fetch = useCallback(
 		async (projectNo: string, projectContent: IProjectContentDto) => {
@@ -74,7 +70,7 @@ export const useTrain = (datasetConfig: DatasetConfig) => {
 			const delayedData = await sleep(1000).then(() => {
 				const res = updateProjectContent(projectNo, projectContent)
 					.then(async () => {
-						const trainRequestRes = await trainProject(projectNo, datasetConfig);
+						const trainRequestRes = await trainProject(projectNo);
 						setResult({
 							error: null,
 							data: trainRequestRes,
@@ -95,7 +91,7 @@ export const useTrain = (datasetConfig: DatasetConfig) => {
 
 			return delayedData;
 		},
-		[setResult, datasetConfig]
+		[setResult]
 	);
 
 	return {

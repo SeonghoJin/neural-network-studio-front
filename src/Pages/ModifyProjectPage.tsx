@@ -20,7 +20,7 @@ export const ModifyProjectPage = () => {
 	const { fetch, loading } = useUpdateProjectInfo();
 	return (
 		<PrivateAuthentication>
-			<Navigation />
+			<Navigation currentMenu={0} />
 			<Wrapper>
 				{loading && <SimpleBackdrop open />}
 				{(project && <ModifyProjectMain project={project} updateProject={fetch} />) || <CircleLoading />}

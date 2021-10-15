@@ -32,7 +32,7 @@ export const DashBoard = () => {
 	return (
 		<PrivateAuthentication>
 			<div id="container">
-				<Navigation />
+				<Navigation currentMenu={1} />
 				<section className="dashboard">
 					<div className="wrap">
 						<div className="board-util">

@@ -18,7 +18,7 @@ export const AssetPage = () => {
 	return (
 		<PrivateAuthentication>
 			<Wrapper>
-				<Navigation />
+				<Navigation currentMenu={2} />
 				<AssetMainWrapper>
 					<AssetMain />
 				</AssetMainWrapper>

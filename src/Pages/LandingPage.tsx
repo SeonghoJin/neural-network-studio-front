@@ -7,7 +7,7 @@ export const Landing = () => {
 		<>
 			<div id="container">
 				<section className="intro">
-					<Navigation />
+					<Navigation currentMenu={0} />
 					<LandingMain />
 				</section>
 			</div>
