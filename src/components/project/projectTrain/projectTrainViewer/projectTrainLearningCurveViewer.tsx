@@ -30,6 +30,7 @@ const ProjectTrainLearningCurveViewer = (epochs: EpochList) => {
 				fill: false,
 				backgroundColor: '#57b691',
 				borderColor: '#57b691',
+				tension: 0.5,
 			},
 			{
 				label: '학습 손실',
@@ -37,6 +38,7 @@ const ProjectTrainLearningCurveViewer = (epochs: EpochList) => {
 				fill: false,
 				backgroundColor: '#5cb8c6',
 				borderColor: '#5cb8c6',
+				tension: 0.5,
 			},
 			{
 				label: '검증 정확도',
@@ -44,6 +46,7 @@ const ProjectTrainLearningCurveViewer = (epochs: EpochList) => {
 				fill: false,
 				backgroundColor: '#5450d8',
 				borderColor: '#5450d8',
+				tension: 0.5,
 			},
 			{
 				label: '검증 손실',
@@ -51,6 +54,7 @@ const ProjectTrainLearningCurveViewer = (epochs: EpochList) => {
 				fill: false,
 				backgroundColor: '#7e48cb',
 				borderColor: '#7e48cb',
+				tension: 0.5,
 			},
 		],
 	};

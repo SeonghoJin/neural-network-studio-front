@@ -37,7 +37,7 @@ export const ProjectEditorPage = () => {
 			<div id="container">
 				{pythonCodeResult.loading && pythonCodeResult.loadingFallback}
 				{updateProjectContent.loading && updateProjectContent.loadingFallback}
-				<ProjectNav />
+				<ProjectNav currentMenu={1} />
 				<section className="edit">
 					<ProjectEditorNav />
 					<div className="sec-container">

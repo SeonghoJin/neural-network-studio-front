@@ -205,7 +205,7 @@ export const CreateDataSetPage = () => {
 
 	return (
 		<PrivateAuthentication>
-			<Navigation />
+			<Navigation currentMenu={3} />
 			{loading && <SimpleBackdrop open />}
 			<MainWrapper>
 				<Wrapper>

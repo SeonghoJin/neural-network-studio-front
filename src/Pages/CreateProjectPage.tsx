@@ -14,7 +14,7 @@ export class CreateProjectPage extends React.PureComponent {
 	render() {
 		return (
 			<PrivateAuthentication>
-				<Navigation />
+				<Navigation currentMenu={1} />
 				<Wrapper>
 					<Main />
 				</Wrapper>

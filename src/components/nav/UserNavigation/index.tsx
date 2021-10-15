@@ -20,9 +20,10 @@ export const ProfileImage = styled.img`
 
 type Props = {
 	user: User;
+	currentMenu: number;
 };
 
-const UserNavigation = ({ user }: Props) => {
+const UserNavigation = ({ user, currentMenu }: Props) => {
 	const [flag, setFlag] = useState(false);
 	const [mobileFlag, setMobileFlag] = useState(false);
 	const { fetch } = useLogout();
@@ -57,17 +58,17 @@ const UserNavigation = ({ user }: Props) => {
 				</Link>
 
 				<div className="hd-menu">
-					<Link to={StaticPath.DASHBOARD_PROJECTS}>
+					<Link to={StaticPath.DASHBOARD_PROJECTS} className={currentMenu === 1 ? 'active' : ''}>
 						<div className="ico ico-v1" />
 						<div className="tit">대시보드</div>
 					</Link>
 
-					<Link to={StaticPath.ASSET_MAIN}>
+					<Link to={StaticPath.ASSET_MAIN} className={currentMenu === 2 ? 'active' : ''}>
 						<div className="ico ico-v2" />
 						<div className="tit">에셋</div>
 					</Link>
 
-					<Link to={QueryPath.DATASET_STORE_DEFAULT}>
+					<Link to={QueryPath.DATASET_STORE_DEFAULT} className={currentMenu === 3 ? 'active' : ''}>
 						<Storage className="ico" />
 						<div className="tit">데이터 스토어</div>
 					</Link>

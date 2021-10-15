@@ -26,7 +26,7 @@ export const DataSetStorePage = () => {
 	return (
 		<PrivateAuthentication>
 			<div id="container">
-				<Navigation />
+				<Navigation currentMenu={3} />
 				<section className="dashboard">
 					<div className="wrap">
 						<div className="board-util">

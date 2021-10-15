@@ -1,9 +1,13 @@
 import { makeStyles } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
+import $ from 'jquery';
 import { TrainHistory } from '../types';
+import select from '../../../../static/img/ico_arrow_select1.png';
 
 const useStyle = makeStyles({
 	wrapper: {
+		// display: 'flex',
+		// justifyContent: 'space-between',
 		width: '100%',
 		height: '100px',
 	},
@@ -32,10 +36,20 @@ type Props = {
 const ProjectTrainViewerSelectorItem = ({ head, onClick }: Props) => {
 	const classes = useStyle();
 
+	useEffect(() => {
+		$('.js-depth').on('click', function (): void {
+			$(this).toggleClass('active');
+			$(this).parent().next().slideToggle('active');
+		});
+	}, []);
+
 	return (
 		<>
-			<div className={`tit js-depth ${classes.wrapper}`} onClick={onClick} onKeyDown={() => onClick()}>
+			<div className={`tit ${classes.wrapper}`} onClick={onClick} onKeyDown={() => onClick()}>
 				{head.name}
+				<div className="js-depth">
+					<img src={select} alt="select" />
+				</div>
 			</div>
 			<div className="depth">
 				<div>
@@ -62,6 +76,9 @@ const ProjectTrainViewerSelectorItem = ({ head, onClick }: Props) => {
 					<p>
 						<strong>검증 손실</strong> : {head.valLoss}
 					</p>
+				</div>
+				<div>
+					<a href={head.resultUrl}>모델 내려받기</a>
 				</div>
 			</div>
 		</>

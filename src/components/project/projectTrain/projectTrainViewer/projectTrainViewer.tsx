@@ -29,8 +29,6 @@ const ProjectTrainViewer = ({ history }: ProjectTrainViewerProps) => {
 	// const { projectTrain, loading } = useProjectTrain();
 	const { projectTrainEpochs, setProjectTrainEpochs, loading } = useProjectTrainEpochs(history.trainNo);
 
-	console.log(projectTrainEpochs);
-
 	return (
 		<>
 			{loading && <CircleLoading />}

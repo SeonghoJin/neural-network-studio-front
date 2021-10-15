@@ -5,7 +5,7 @@ const ProjectTrainNav = () => {
 	return (
 		<div className="hd-section">
 			<div className="hd-l">
-				<div className="tit">학습기록</div>
+				<div className="tit">학습 기록</div>
 			</div>
 			<div className="hd-r">
 				<ProjectTrainNavOptionContentContainer />

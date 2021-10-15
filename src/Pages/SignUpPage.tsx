@@ -62,7 +62,7 @@ export const Signup = () => {
 		<div id="container">
 			{loading && loadingFallback}
 			<section className="sign">
-				<Navigation />
+				<Navigation currentMenu={0} />
 				<div className="pos">
 					<div className="box-member">
 						<div className="tit-page">계정만들기</div>

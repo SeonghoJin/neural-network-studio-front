@@ -63,7 +63,7 @@ export const UpdatePasswordPage = () => {
 		<div id="container">
 			{loading && <SimpleBackdrop open />}
 			<section className="sign">
-				<Navigation />
+				<Navigation currentMenu={0} />
 				<div className="pos">
 					<div className="box-member">
 						<div className="tit-page">비밀번호 수정</div>
