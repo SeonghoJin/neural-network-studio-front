@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import $ from 'jquery';
 import { TrainHistory } from '../types';
@@ -7,8 +6,8 @@ import select from '../../../../static/img/ico_arrow_select1.png';
 
 const useStyle = makeStyles({
 	wrapper: {
-		display: 'flex',
-		justifyContent: 'space-between',
+		// display: 'flex',
+		// justifyContent: 'space-between',
 		width: '100%',
 		height: '100px',
 	},
