@@ -5,6 +5,7 @@ import { useGetDatasetListLibraryAPI } from '../hooks/useGetDatasetListLibraryAP
 import ProjectNav from '../components/project/ProjectNav/projectNav';
 import { LeftWrapper } from '../components/project/projectConfig/projectConfigMain';
 import { Dataset } from '../API/Dataset/type';
+import ProjectDatasetNav from '../components/project/projectDataset/projectDatasetNav/projectDatasetNav';
 
 const LoadingButtonWrapper = styled.div`
 	display: flex;
@@ -46,11 +47,7 @@ export const ProjectDatasetPage = () => {
 		<div id="container">
 			<ProjectNav currentMenu={4} />
 			<section className="modelset">
-				<div className="hd-section">
-					<div className="hd-l">
-						<div className="tit">데이터셋 설정</div>
-					</div>
-				</div>
+				<ProjectDatasetNav />
 				<div className="sec-container">
 					<LeftWrapper>
 						<div className="sec-l">
