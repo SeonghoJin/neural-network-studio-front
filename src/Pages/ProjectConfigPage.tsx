@@ -9,7 +9,7 @@ export const ProjectConfigPage = () => {
 	return (
 		<div id="container">
 			{loading && loadingFallback}
-			<ProjectNav />
+			<ProjectNav currentMenu={3} />
 			<section className="modelset">
 				<ProjectConfigNav />
 				<div className="sec-container">

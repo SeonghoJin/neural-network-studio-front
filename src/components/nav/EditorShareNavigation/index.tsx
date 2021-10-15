@@ -52,7 +52,7 @@ const EditorShareNavigation = () => {
 					<img src={imgLogo2} alt="NNS" className="hd-logo" />
 				</Link>
 				<div className="hd-menu">
-					<Link to={format(DynamicPath.PROJECT_SHARE_FORMAT, projectNo, roomNo)}>
+					<Link to={format(DynamicPath.PROJECT_SHARE_FORMAT, projectNo, roomNo)} className="active">
 						<div className="ico ico-v3" />
 						<div className="tit">편집</div>
 					</Link>

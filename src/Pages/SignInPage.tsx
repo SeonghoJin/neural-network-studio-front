@@ -53,7 +53,7 @@ export const SignIn = () => {
 		<div id="container">
 			{loading && loadingFallback}
 			<section className="login">
-				<Navigation />
+				<Navigation currentMenu={0} />
 
 				<div className="pos">
 					<img src={icoLogo1} alt="NNS" className="img-logo" />

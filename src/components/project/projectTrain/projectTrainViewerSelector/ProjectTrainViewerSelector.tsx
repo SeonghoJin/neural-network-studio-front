@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { useEffect } from 'react';
 import ProjectTrainViewerSelectorItem from './projectTrainViewerSelectorItem';
 import { TrainHistory } from '../types';
 
@@ -20,10 +21,6 @@ const ProjectTrainViewerSelector = (props: Props) => {
 							head={head}
 							onClick={() => {
 								setValue(head);
-								$('.js-depth').on('click', function (): void {
-									$(this).toggleClass('active');
-									$(this).next().stop().slideToggle('active');
-								});
 							}}
 						/>
 					</li>

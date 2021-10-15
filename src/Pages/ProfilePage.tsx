@@ -10,7 +10,7 @@ export const Profile = () => {
 		<PrivateAuthentication>
 			<div id="container">
 				{loading && loadingFallback}
-				<Navigation />
+				<Navigation currentMenu={0} />
 				<section className="asset">
 					<div className="wrap">
 						<ProfileMain />

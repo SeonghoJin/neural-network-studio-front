@@ -29,7 +29,7 @@ const ProfileMain = () => {
 				</div>
 				<div className="txt2">
 					<img src={icoHomepage} alt="홈페이지" />
-					<a href={profile?.webSite} target="_blank" rel="noreferrer">
+					<a href={`https://${profile?.webSite}`} target="_blank" rel="noreferrer">
 						{profile?.webSite || '없음'}
 					</a>
 				</div>

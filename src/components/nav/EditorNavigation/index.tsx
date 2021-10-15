@@ -20,9 +20,10 @@ const ProfileImage = styled.img`
 
 type Props = {
 	user: User;
+	currentMenu: number;
 };
 
-const EditorNavigation = ({ user }: Props) => {
+const EditorNavigation = ({ user, currentMenu }: Props) => {
 	const [flag, setFlag] = useState(false);
 	const { fetch } = useLogout();
 	const { projectNo } = useProjectLocation();
@@ -55,24 +56,27 @@ const EditorNavigation = ({ user }: Props) => {
 					<img src={imgLogo2} alt="NNS" className="hd-logo" />
 				</Link>
 				<div className="hd-menu">
-					<Link to={format(DynamicPath.PROJECT_FORMAT, projectNo)}>
+					<Link to={format(DynamicPath.PROJECT_FORMAT, projectNo)} className={currentMenu === 1 ? 'active' : ''}>
 						<div className="ico ico-v3" />
 						<div className="tit">편집</div>
 					</Link>
 
-					<Link to={format(DynamicPath.PROJECT_TRAIN_FORMAT, projectNo)}>
+					<Link to={format(DynamicPath.PROJECT_TRAIN_FORMAT, projectNo)} className={currentMenu === 2 ? 'active' : ''}>
 						<div className="ico ico-v4" />
-						<div className="tit">학습</div>
+						<div className="tit">학습 기록</div>
 					</Link>
 
-					<Link to={format(DynamicPath.PROJECT_CONFIG_FORMAT, projectNo)}>
+					<Link to={format(DynamicPath.PROJECT_CONFIG_FORMAT, projectNo)} className={currentMenu === 3 ? 'active' : ''}>
 						<div className="ico ico-v5" />
-						<div className="tit">모델설정</div>
+						<div className="tit">프로젝트 설정</div>
 					</Link>
 
-					<Link to={format(DynamicPath.PROJECT_DATASET_FORMAT, projectNo)}>
+					<Link
+						to={format(DynamicPath.PROJECT_DATASET_FORMAT, projectNo)}
+						className={currentMenu === 4 ? 'active' : ''}
+					>
 						<div className="ico ico-v6" />
-						<div className="tit">Dataset</div>
+						<div className="tit">데이터셋 설정</div>
 					</Link>
 				</div>
 

@@ -80,7 +80,7 @@ export const ProjectShareConfigPage = () => {
 		<>
 			<div className={classes.wrapper}>
 				<div className={classes.container}>
-					<ProjectNav />
+					<ProjectNav currentMenu={3} />
 					<ProjectConfigNav />
 					<div className={classes.content}>
 						<ProjectConfigMain

@@ -123,17 +123,15 @@ export const ProjectTrainPage = () => {
 		fetch(parseInt(projectNo, 10)).then((res) => {
 			setTrainHistories(res.history);
 		});
-	}, [projectNo, fetch]);
 
-	useEffect(() => {
 		if (trainHistories.length > 0) {
 			setCurrentTrainNo(trainHistories[0].trainNo);
 		}
-	}, [trainHistories]);
+	}, [projectNo, fetch, trainHistories]);
 
 	return (
 		<div id="container">
-			<ProjectNav />
+			<ProjectNav currentMenu={2} />
 			<section className="modelset">
 				<ProjectTrainNav />
 				<div className="sec-container">
