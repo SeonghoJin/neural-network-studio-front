@@ -133,7 +133,7 @@ export const ProjectTrainPage = () => {
 
 	return (
 		<div id="container">
-			<ProjectNav />
+			<ProjectNav currentMenu={2} />
 			<section className="modelset">
 				<ProjectTrainNav />
 				<div className="sec-container">

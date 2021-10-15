@@ -11,7 +11,7 @@ const ProjectEditorNavMainContent = ({ onGetPythonCode }: Props) => {
 				파이썬 코드로 내보내기
 			</button>
 
-			<button type="button" className="btn">
+			<button type="button" className="btn btn-v1">
 				모델 학습
 			</button>
 		</div>
