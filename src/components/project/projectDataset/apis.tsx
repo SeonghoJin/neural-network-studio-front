@@ -48,7 +48,7 @@ const updateDatasetConfig = async (projectNo: string, datasetConfig: DatasetConf
 	}
 };
 
-const useUpdateDatasetConfig = () => {
+export const useUpdateDatasetConfig = () => {
 	const [result, setResult] = useRecoilState(updateDatasetConfigResult);
 	const fetch = useCallback(
 		async (projectNo: string, datasetConfig: DatasetConfig) => {

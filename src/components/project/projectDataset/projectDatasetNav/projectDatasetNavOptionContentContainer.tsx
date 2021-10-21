@@ -3,10 +3,7 @@ import { useSnackbar } from 'notistack';
 import { CircleLoading } from '../../../utils/Loading/CircularLoading';
 import ProjectDatasetNavOptionContent from './ProjectDatasetNavOptionContent';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
-import usePageNation from '../../../utils/pagenation/usePageNation';
-import { useDatasetConfigList } from '../apis';
-import { GetProjectDatasetConfigListParams } from '../types';
-import useUpdateProjectConfig from '../../../../hooks/useUpdateProjectConfig';
+import { useUpdateDatasetConfig } from '../apis';
 
 type Props = {
 	value: any;
@@ -14,7 +11,7 @@ type Props = {
 };
 
 const ProjectDatasetNavOptionContentContainer = ({ value, setValue }: Props) => {
-	const { fetch } = useUpdateProjectConfig();
+	const { fetch } = useUpdateDatasetConfig();
 	const { projectNo } = useProjectLocation();
 	const { enqueueSnackbar } = useSnackbar();
 	const onSave = useCallback(() => {
