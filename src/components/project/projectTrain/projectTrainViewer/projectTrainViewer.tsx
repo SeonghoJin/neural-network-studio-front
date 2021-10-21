@@ -29,6 +29,10 @@ const ProjectTrainViewer = ({ history }: ProjectTrainViewerProps) => {
 	// const { projectTrain, loading } = useProjectTrain();
 	const { projectTrainEpochs, setProjectTrainEpochs, loading } = useProjectTrainEpochs(history.trainNo);
 
+	if (history.status === 'TRAIN') {
+		// Connect socket.
+	}
+
 	return (
 		<>
 			{loading && <CircleLoading />}
