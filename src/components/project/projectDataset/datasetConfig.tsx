@@ -35,3 +35,17 @@ export class DatasetConfig {
 		return datasetConfigDto;
 	}
 }
+
+export type TDatasetConfig = {
+	id: number;
+
+	name: string;
+
+	dataset_id: number;
+
+	shuffle: boolean;
+
+	label: string;
+
+	normalization: NormalizationConfig;
+}

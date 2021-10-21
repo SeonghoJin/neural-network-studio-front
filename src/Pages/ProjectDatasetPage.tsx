@@ -47,7 +47,7 @@ export const ProjectDatasetPage = () => {
 		<div id="container">
 			<ProjectNav currentMenu={4} />
 			<section className="modelset">
-				<ProjectDatasetNav />
+				<ProjectDatasetNav value={null} setValue={null} />
 				<div className="sec-container">
 					<LeftWrapper>
 						<div className="sec-l">

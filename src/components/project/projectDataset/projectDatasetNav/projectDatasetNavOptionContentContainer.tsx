@@ -1,29 +1,43 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useSnackbar } from 'notistack';
 import { CircleLoading } from '../../../utils/Loading/CircularLoading';
 import ProjectDatasetNavOptionContent from './ProjectDatasetNavOptionContent';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
 import usePageNation from '../../../utils/pagenation/usePageNation';
 import { useDatasetConfigList } from '../apis';
 import { GetProjectDatasetConfigListParams } from '../types';
+import useUpdateProjectConfig from '../../../../hooks/useUpdateProjectConfig';
 
-const ProjectDatasetNavOptionContentContainer = () => {
+type Props = {
+	value: any;
+	setValue: any;
+};
+
+const ProjectDatasetNavOptionContentContainer = ({ value, setValue }: Props) => {
+	const { fetch } = useUpdateProjectConfig();
 	const { projectNo } = useProjectLocation();
-	const [datasetConfigListParams, setDatasetConfigListParams] = useState(new GetProjectDatasetConfigListParams());
-	const { data, mutate } = useDatasetConfigList(projectNo, { params: datasetConfigListParams });
-	const { item, page } = usePageNation({
-		lastPage: data?.pagenation.lastPage,
-	});
+	const { enqueueSnackbar } = useSnackbar();
 	const onSave = useCallback(() => {
-		console.log('Add Update dataset config api fetcher');
-	}, []);
+		if (value == null) {
+			enqueueSnackbar('데이터셋 설정이 없습니다.', {
+				variant: 'error',
+			});
 
-	useEffect(() => {
-		setDatasetConfigListParams(
-			new GetProjectDatasetConfigListParams({
-				curPage: page.toString(),
+			return;
+		}
+		fetch(projectNo, value)
+			.then(() => {
+				enqueueSnackbar('저장되었습니다.', {
+					variant: 'success',
+				});
 			})
-		);
-	}, [page]);
+			.catch(() => {
+				enqueueSnackbar('저장에 실패했습니다. 다시 시도해주세요.', {
+					variant: 'error',
+				});
+			});
+		console.log('Add Update dataset config api fetcher');
+	}, [value, fetch, projectNo, enqueueSnackbar]);
 
 	return <>{<ProjectDatasetNavOptionContent onSave={onSave} /> || <CircleLoading />}</>;
 };
