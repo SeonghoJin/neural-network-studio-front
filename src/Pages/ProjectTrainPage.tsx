@@ -123,11 +123,7 @@ export const ProjectTrainPage = () => {
 		fetch(parseInt(projectNo, 10)).then((res) => {
 			setTrainHistories(res.history);
 		});
-
-		if (trainHistories.length > 0) {
-			setCurrentTrainNo(trainHistories[0].trainNo);
-		}
-	}, [projectNo, fetch, trainHistories]);
+	}, [projectNo, fetch, setTrainHistories]);
 
 	return (
 		<div id="container">
