@@ -103,7 +103,7 @@ type Props =
 	  }
 	| undefined;
 
-export const useDatasetConfigList = (projectNo: string, props: Props = undefined) => {
+export const useGetDatasetConfigList = (projectNo: string, props: Props = undefined) => {
 	const result = useSWR<DatasetConfigs, AxiosError>(
 		() => ['getDatasetConfigsResult', props?.params],
 		async (key, value) => {

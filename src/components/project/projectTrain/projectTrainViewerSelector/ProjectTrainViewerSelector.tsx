@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import { useEffect } from 'react';
 import ProjectTrainViewerSelectorItem from './projectTrainViewerSelectorItem';
 import { TrainHistory } from '../types';
 

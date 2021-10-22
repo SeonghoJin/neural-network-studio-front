@@ -48,4 +48,4 @@ export type TDatasetConfig = {
 	label: string;
 
 	normalization: NormalizationConfig;
-}
+};

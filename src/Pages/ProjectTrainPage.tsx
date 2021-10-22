@@ -128,7 +128,7 @@ export const ProjectTrainPage = () => {
 	return (
 		<div id="container">
 			<ProjectNav currentMenu={2} />
-			<section className="modelset">
+			<section className="learning">
 				<ProjectTrainNav />
 				<div className="sec-container">
 					<ProjectTrainMain selectorItemHeads={trainHistories} />

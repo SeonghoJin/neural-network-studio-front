@@ -45,6 +45,6 @@ export class GetProjectDatasetConfigListParams implements IGetProjectDatasetConf
 }
 
 export interface DatasetConfigs {
-	datsetConfigs: DatasetConfig[];
+	datasetConfigs: DatasetConfig[];
 	pagenation: PageNation;
 }
