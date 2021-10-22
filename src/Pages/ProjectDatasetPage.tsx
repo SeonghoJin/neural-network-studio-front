@@ -5,6 +5,10 @@ import { useGetDatasetListLibraryAPI } from '../hooks/useGetDatasetListLibraryAP
 import ProjectNav from '../components/project/ProjectNav/projectNav';
 import { LeftWrapper } from '../components/project/projectConfig/projectConfigMain';
 import { Dataset } from '../API/Dataset/type';
+import ProjectDatasetNav from '../components/project/projectDataset/projectDatasetNav/projectDatasetNav';
+import useProjectLocation from '../hooks/useProjectLocation';
+import { useGetDatasetConfigList } from '../components/project/projectDataset/apis';
+import ProjectDatasetMain from '../components/project/projectDataset/projectDatasetMain';
 
 const LoadingButtonWrapper = styled.div`
 	display: flex;
@@ -18,6 +22,9 @@ export const ProjectDatasetPage = () => {
 	const [pageSize, setPageSize] = useState(5);
 	const [datasets, setDatasets] = useState<Dataset[]>(new Array<Dataset>(0));
 	const [lastPage, setLastPage] = useState<null | number>(null);
+
+	const { projectNo } = useProjectLocation();
+	const { data, mutate } = useGetDatasetConfigList(projectNo);
 
 	useEffect(() => {
 		if (lastPage === null) {
@@ -45,45 +52,9 @@ export const ProjectDatasetPage = () => {
 	return (
 		<div id="container">
 			<ProjectNav currentMenu={4} />
-			<section className="modelset">
-				<div className="hd-section">
-					<div className="hd-l">
-						<div className="tit">데이터셋 설정</div>
-					</div>
-				</div>
-				<div className="sec-container">
-					<LeftWrapper>
-						<div className="sec-l">
-							<ol className="sec-menu">
-								{datasets.map((dataset) => {
-									return (
-										<li key={dataset.id}>
-											<div className="tit">{dataset.name}</div>
-										</li>
-									);
-								})}
-							</ol>
-							<LoadingButtonWrapper>
-								<LoadingButton
-									style={{
-										width: '40px',
-										height: '40px',
-										padding: 0,
-										borderRadius: '50%',
-										minWidth: 0,
-										margin: '20px',
-									}}
-									loading={loading}
-									variant="outlined"
-									onClick={addPage}
-									disabled={curPage === lastPage}
-								>
-									+
-								</LoadingButton>
-							</LoadingButtonWrapper>
-						</div>
-					</LeftWrapper>
-				</div>
+			<section className="dataset">
+				<ProjectDatasetNav value={null} setValue={null} />
+				<div className="sec-container">{data && <ProjectDatasetMain selectorItemsHeads={data.datasetConfigs} />}</div>
 			</section>
 		</div>
 	);

@@ -9,6 +9,7 @@ import imgProfile1 from '../../../static/img/img_profile1.png';
 import DropMenu from '../../utils/dropMenu/dropMenu';
 import { DynamicPath, StaticPath } from '../../PagePathConsts';
 import useProjectLocation from '../../../hooks/useProjectLocation';
+import { MobileUserNavigation } from '../MobileUserNavigation';
 
 const ProfileImage = styled.img`
 	width: 30px;
@@ -27,6 +28,7 @@ const EditorNavigation = ({ user, currentMenu }: Props) => {
 	const [flag, setFlag] = useState(false);
 	const { fetch } = useLogout();
 	const { projectNo } = useProjectLocation();
+	const [mobileFlag, setMobileFlag] = useState(false);
 	const toggleMenu = useCallback(
 		(e) => {
 			e.nativeEvent.stopImmediatePropagation();
@@ -99,7 +101,35 @@ const EditorNavigation = ({ user, currentMenu }: Props) => {
 						</button>
 					</DropMenu>
 				</div>
+
+				<button
+					type="button"
+					className="hd-hamburger js-hamburger"
+					style={{
+						zIndex: 1,
+					}}
+					onClick={() => {
+						setMobileFlag(true);
+					}}
+				/>
 			</header>
+
+			<MobileUserNavigation user={user} flag={mobileFlag} setFlag={setMobileFlag}>
+				<>
+					<li>
+						<Link to={format(DynamicPath.PROJECT_FORMAT, projectNo)}>편집</Link>
+					</li>
+					<li>
+						<Link to={format(DynamicPath.PROJECT_TRAIN_FORMAT, projectNo)}>학습 기록</Link>
+					</li>
+					<li>
+						<Link to={format(DynamicPath.PROJECT_CONFIG_FORMAT, projectNo)}>프로젝트 설정</Link>
+					</li>
+					<li>
+						<Link to={format(DynamicPath.PROJECT_DATASET_FORMAT, projectNo)}>데이터셋 설정</Link>
+					</li>
+				</>
+			</MobileUserNavigation>
 		</>
 	);
 };

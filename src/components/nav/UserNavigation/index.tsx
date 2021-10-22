@@ -108,7 +108,19 @@ const UserNavigation = ({ user, currentMenu }: Props) => {
 				/>
 			</header>
 
-			<MobileUserNavigation user={user} flag={mobileFlag} setFlag={setMobileFlag} />
+			<MobileUserNavigation user={user} flag={mobileFlag} setFlag={setMobileFlag}>
+				<>
+					<li>
+						<Link to={StaticPath.MAIN}>Home</Link>
+					</li>
+					<li>
+						<Link to={StaticPath.DASHBOARD_PROJECTS}>대시보드</Link>
+					</li>
+					<li>
+						<Link to={StaticPath.ASSET_MAIN}>에셋</Link>
+					</li>
+				</>
+			</MobileUserNavigation>
 		</>
 	);
 };
