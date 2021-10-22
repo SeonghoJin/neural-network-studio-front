@@ -114,7 +114,22 @@ const EditorNavigation = ({ user, currentMenu }: Props) => {
 				/>
 			</header>
 
-			<MobileUserNavigation user={user} flag={mobileFlag} setFlag={setMobileFlag} />
+			<MobileUserNavigation user={user} flag={mobileFlag} setFlag={setMobileFlag}>
+				<>
+					<li>
+						<Link to={format(DynamicPath.PROJECT_FORMAT, projectNo)}>편집</Link>
+					</li>
+					<li>
+						<Link to={format(DynamicPath.PROJECT_TRAIN_FORMAT, projectNo)}>학습 기록</Link>
+					</li>
+					<li>
+						<Link to={format(DynamicPath.PROJECT_CONFIG_FORMAT, projectNo)}>프로젝트 설정</Link>
+					</li>
+					<li>
+						<Link to={format(DynamicPath.PROJECT_DATASET_FORMAT, projectNo)}>데이터셋 설정</Link>
+					</li>
+				</>
+			</MobileUserNavigation>
 		</>
 	);
 };

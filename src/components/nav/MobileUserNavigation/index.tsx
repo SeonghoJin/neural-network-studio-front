@@ -8,15 +8,14 @@ import imgProfile1 from '../../../static/img/img_profile1.png';
 import imgClose2 from '../../../static/img/ico_close2.png';
 import { ProfileImage } from '../UserNavigation';
 
-export const MobileUserNavigation = ({
-	user,
-	flag,
-	setFlag,
-}: {
+type Props = {
 	user: User | undefined;
 	flag: boolean;
 	setFlag: (flag: boolean) => void;
-}) => {
+	children: JSX.Element;
+};
+
+export const MobileUserNavigation = ({ user, flag, setFlag, children }: Props) => {
 	const handleResize = useCallback(() => {
 		setFlag(false);
 	}, [setFlag]);
@@ -60,17 +59,7 @@ export const MobileUserNavigation = ({
 					</button>
 				</div>
 
-				<ol className="m-gnb-menu">
-					<li>
-						<Link to={StaticPath.MAIN}>Home</Link>
-					</li>
-					<li>
-						<Link to={StaticPath.DASHBOARD_PROJECTS}>대시보드</Link>
-					</li>
-					<li>
-						<Link to={StaticPath.ASSET_MAIN}>에셋</Link>
-					</li>
-				</ol>
+				<ol className="m-gnb-menu">{children}</ol>
 			</div>
 
 			<div
