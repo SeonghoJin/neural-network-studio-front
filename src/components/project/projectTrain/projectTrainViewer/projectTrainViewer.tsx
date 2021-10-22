@@ -34,10 +34,11 @@ const ProjectTrainViewer = ({ history }: ProjectTrainViewerProps) => {
 	}
 
 	return (
-		<>
+		<div className="box">
+			<div className="tit">Learning Curve</div>
 			{loading && <CircleLoading />}
 			{projectTrainEpochs && <ProjectTrainLearningCurveViewer epochs={projectTrainEpochs.epochs} />}
-		</>
+		</div>
 	);
 };
 

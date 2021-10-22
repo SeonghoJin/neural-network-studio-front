@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
+import $ from 'jquery';
+import 'jquery-easing';
 import { Link } from 'react-router-dom';
 import { User } from '../../../hooks/useAuthentication';
 import { StaticPath } from '../../PagePathConsts';
@@ -22,14 +24,23 @@ export const MobileUserNavigation = ({
 	useEffect(() => {
 		window.addEventListener('resize', handleResize);
 
+		$('.js-hamburger').click(function () {
+			$('.m-gnb').animate({ right: 0 }, 500, 'easeOutExpo');
+			$('.m-gnb, .m-gnb-bg').show();
+		});
+		$('.js-hamburger-close').click(function () {
+			$('.m-gnb').animate({ right: '-100%' }, 500, 'easeOutExpo');
+			$('.m-gnb, .m-gnb-bg').hide();
+		});
+
 		return () => {
 			window.removeEventListener('resize', handleResize);
 		};
-	});
+	}, [handleResize]);
 
 	return (
 		<>
-			<div className="m-gnb" style={{ display: `${(flag && 'block') || ''}`, right: 0 }}>
+			<div className="m-gnb" style={{ display: `${(flag && 'block') || ''}`, right: `${(flag && '0%') || '-100%'}` }}>
 				<div className="top">
 					<div className="m-profile">
 						<Link to={StaticPath.PROFILE}>
