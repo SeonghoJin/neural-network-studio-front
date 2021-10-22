@@ -12,6 +12,7 @@ import {
 	TrainHistory,
 } from './types';
 import useProjectLocation from '../../../hooks/useProjectLocation';
+import SimpleBackdrop from '../../utils/BackLoading';
 
 const axiosConfig: AxiosRequestConfig = {
 	withCredentials: true,
@@ -82,6 +83,7 @@ export const useGetTrainHistoryListLibraryAPI = () => {
 	return {
 		fetch,
 		...result,
+		loadingFallback: <SimpleBackdrop open />,
 	};
 };
 
