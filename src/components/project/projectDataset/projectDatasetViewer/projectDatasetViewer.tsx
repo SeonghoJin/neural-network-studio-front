@@ -1,10 +1,9 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-import useSWR from 'swr';
 import { atom, useRecoilState } from 'recoil';
+import { randomInt } from 'crypto';
 import { DatasetConfig } from '../datasetConfig';
 import { Dataset } from '../../../../API/Dataset/type';
-import { DatasetConfigs } from '../types';
 import config from '../../../../config';
 import { sleep } from '../../../../util';
 import SimpleBackdrop from '../../../utils/BackLoading';
@@ -26,13 +25,25 @@ export const ProjectDatasetViewerTop = ({
 		(e: ChangeEvent<HTMLSelectElement>) => {
 			const { name, value } = e.target;
 
+			let dataName = '';
+			for (let i = 0; i < library.length; i += 1) {
+				// eslint-disable-next-line eqeqeq
+				if (library[i].id == value) {
+					dataName = library[i].name;
+					break;
+				}
+			}
+
 			setDatasetConfig({
 				...datasetConfig,
-				[name]: value,
+				dataset: {
+					[name]: value,
+					name: dataName,
+				},
 			});
 			setHead(datasetConfig);
 		},
-		[datasetConfig, setDatasetConfig, setHead]
+		[library, datasetConfig, setDatasetConfig, setHead]
 	);
 
 	const onChange = useCallback(
@@ -81,13 +92,7 @@ export const ProjectDatasetViewerTop = ({
 		<>
 			<div className="search-filter">
 				<div className="tit">데이터</div>
-				<select
-					key={datasetConfig.dataset.id}
-					className="inp"
-					name="datasetId"
-					defaultValue={datasetConfig.dataset.id}
-					onChange={onDataChange}
-				>
+				<select className="inp" name="id" defaultValue={datasetConfig.dataset.id} onChange={onDataChange}>
 					{library.map((dataset, index) => {
 						return (
 							<option key={dataset.id} value={dataset.id}>
@@ -130,7 +135,7 @@ export const ProjectDatasetViewerTop = ({
 
 					<li>
 						<div className="tit">레이블</div>
-						<input type="text" className="inp" name="label" defaultValue={datasetConfig.label} onChange={onChange} />
+						<input type="text" className="inp" name="label" value={datasetConfig.label} onChange={onChange} />
 					</li>
 				</ol>
 			</div>
@@ -187,7 +192,7 @@ export class DatasetPreview {
 }
 
 type Props = {
-	dataDetail: TDatasetPreview;
+	dataDetail: TDatasetPreview | null;
 };
 
 const axiosConfig: AxiosRequestConfig = {
@@ -229,7 +234,7 @@ export const useGetDatasetDetail = () => {
 			});
 
 			try {
-				const delayedData = await sleep(500).then(async () => {
+				const delayedData = await sleep(1000).then(async () => {
 					const data = await GetDatasetDetail(datasetId);
 					setResult({
 						data: data || true,
@@ -258,12 +263,17 @@ export const useGetDatasetDetail = () => {
 	};
 };
 
+const generateKey = (pre: any) => {
+	return `${pre}_${new Date().getTime()}}`;
+};
+
 export const DatasetPreviewTableRow = ({ dataDetail }: Props) => {
 	return (
 		<>
-			{dataDetail.rows.map((row, index) => {
+			{dataDetail?.rows.map((row, index) => {
 				return (
-					<tr>
+					// eslint-disable-next-line react/no-array-index-key
+					<tr key={generateKey(row[0]) + row[0] + index}>
 						<td>
 							<div className="content">
 								<div className="txt-group">
@@ -273,7 +283,8 @@ export const DatasetPreviewTableRow = ({ dataDetail }: Props) => {
 						</td>
 						{row.map((col, idx) => {
 							return (
-								<td>
+								// eslint-disable-next-line react/no-array-index-key
+								<td key={generateKey(col) + col + idx}>
 									<div className="content">
 										<div className="txt-group">
 											<div className="txt">{col}</div>
@@ -303,12 +314,13 @@ export const DatasetPreviewTable = ({ dataDetail }: Props) => {
 								</div>
 							</div>
 						</th>
-						{dataDetail.feature.map((feat, index) => {
+						{dataDetail?.feature.map((feat, index) => {
 							return (
-								<th>
+								// eslint-disable-next-line react/no-array-index-key
+								<th key={generateKey(feat) + feat + index}>
 									<div className="content">
 										<div className="txt-group">
-											<div className="tit">feat</div>
+											<div className="tit">{feat}</div>
 											<div className="txt">feat</div>
 										</div>
 									</div>
@@ -392,13 +404,15 @@ export const DatasetPreviewTable = ({ dataDetail }: Props) => {
 
 const ProjectDatasetViewer = ({ datasetConfig, setDatasetConfig, setHead, library }: ProjectDatasetViewerProps) => {
 	const { fetch, loading } = useGetDatasetDetail();
-	const [datasetDetail, setDatasetDetail] = useState<TDatasetPreview>();
+	const [datasetDetail, setDatasetDetail] = useState<DatasetPreview>();
 
 	useEffect(() => {
 		fetch(datasetConfig.dataset.id).then((res) => {
-			setDatasetDetail(res.data);
+			setDatasetDetail(res);
 		});
 	}, [fetch, datasetConfig]);
+
+	console.log(datasetDetail);
 
 	return (
 		<>
@@ -410,7 +424,7 @@ const ProjectDatasetViewer = ({ datasetConfig, setDatasetConfig, setHead, librar
 					library={library}
 				/>
 			</div>
-			{datasetDetail && <DatasetPreviewTable dataDetail={datasetDetail} />}
+			<DatasetPreviewTable dataDetail={datasetDetail !== undefined ? datasetDetail : null} />
 		</>
 	);
 };

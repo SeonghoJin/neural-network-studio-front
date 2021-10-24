@@ -3,7 +3,7 @@ import { LeftWrapper } from '../projectConfig/projectConfigMain';
 import ProjectDatasetViewer from './projectDatasetViewer/projectDatasetViewer';
 import ProjectDatasetSideBar from './projectDatsetSideBar/projectDatasetSideBar';
 import { Dataset } from '../../../API/Dataset/type';
-import { DatasetConfig } from './types';
+import { DatasetConfig } from './datasetConfig';
 
 const ProjectDatasetMain = ({
 	selectorItemsHeads,
@@ -35,7 +35,9 @@ const ProjectDatasetMain = ({
 			</LeftWrapper>
 
 			<div className="sec-c">
-				<ProjectDatasetViewer datasetConfig={value} setHead={setHead} setDatasetConfig={setValue} library={library} />
+				{value === undefined ? null : (
+					<ProjectDatasetViewer datasetConfig={value} setHead={setHead} setDatasetConfig={setValue} library={library} />
+				)}
 			</div>
 		</>
 	);
