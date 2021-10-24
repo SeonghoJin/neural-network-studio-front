@@ -1,21 +1,53 @@
 import { ChangeEvent, useCallback } from 'react';
 import { DatasetConfig } from '../datasetConfig';
+import { Dataset } from '../../../../API/Dataset/type';
 
 export type ProjectDatasetViewerProps = {
 	datasetConfig: DatasetConfig;
 	setDatasetConfig: any;
 	setHead: any;
+	library: Array<Dataset>;
 };
 
-export const ProjectDatasetViewerTop = ({ datasetConfig, setDatasetConfig, setHead }: ProjectDatasetViewerProps) => {
+export const ProjectDatasetViewerTop = ({
+	datasetConfig,
+	setDatasetConfig,
+	setHead,
+	library,
+}: ProjectDatasetViewerProps) => {
+	const onDataChange = useCallback(
+		(e: ChangeEvent<any>) => {
+			const { name, key } = e.target;
+
+			setDatasetConfig({
+				...datasetConfig,
+				[name]: key,
+			});
+			setHead(datasetConfig);
+		},
+		[datasetConfig, setDatasetConfig, setHead]
+	);
+
 	const onChange = useCallback(
 		(e: ChangeEvent<HTMLInputElement>) => {
 			const { name, value } = e.target;
-			console.log(e.target);
 
 			setDatasetConfig({
 				...datasetConfig,
 				[name]: value,
+			});
+			setHead(datasetConfig);
+		},
+		[datasetConfig, setDatasetConfig, setHead]
+	);
+
+	const onCheck = useCallback(
+		(e: ChangeEvent<HTMLInputElement>) => {
+			const { name, checked } = e.target;
+
+			setDatasetConfig({
+				...datasetConfig,
+				[name]: checked,
 			});
 			setHead(datasetConfig);
 		},
@@ -33,7 +65,6 @@ export const ProjectDatasetViewerTop = ({ datasetConfig, setDatasetConfig, setHe
 					[name]: value,
 				},
 			});
-			console.log(datasetConfig);
 			setHead(datasetConfig);
 		},
 		[datasetConfig, setDatasetConfig, setHead]
@@ -43,14 +74,21 @@ export const ProjectDatasetViewerTop = ({ datasetConfig, setDatasetConfig, setHe
 		<>
 			<div className="search-filter">
 				<div className="tit">데이터</div>
-				<input
-					type="text"
-					placeholder="검색어를 입력하세요"
-					className="inp-search"
+				<select
+					key={datasetConfig.dataset_id}
+					className="inp"
 					name="datasetId"
 					defaultValue={datasetConfig.dataset_id}
-					onChange={onChange}
-				/>
+					onChange={onDataChange}
+				>
+					{library.map((dataset, index) => {
+						return (
+							<option key={dataset.id} value={dataset.id}>
+								{dataset.name}
+							</option>
+						);
+					})}
+				</select>
 
 				<ol className="list-filter">
 					<li>
@@ -59,7 +97,7 @@ export const ProjectDatasetViewerTop = ({ datasetConfig, setDatasetConfig, setHe
 							type="checkbox"
 							name="shuffle"
 							className="ck-custom"
-							onChange={onChange}
+							onChange={onCheck}
 							defaultChecked={datasetConfig.shuffle}
 						/>
 						<label htmlFor="ck1">
@@ -333,11 +371,16 @@ export const DatasetPreviewTable = () => {
 	);
 };
 
-const ProjectDatasetViewer = ({ datasetConfig, setDatasetConfig, setHead }: ProjectDatasetViewerProps) => {
+const ProjectDatasetViewer = ({ datasetConfig, setDatasetConfig, setHead, library }: ProjectDatasetViewerProps) => {
 	return (
 		<>
 			<div className="board-util">
-				<ProjectDatasetViewerTop datasetConfig={datasetConfig} setHead={setHead} setDatasetConfig={setDatasetConfig} />
+				<ProjectDatasetViewerTop
+					datasetConfig={datasetConfig}
+					setHead={setHead}
+					setDatasetConfig={setDatasetConfig}
+					library={library}
+				/>
 			</div>
 			<DatasetPreviewTable />
 		</>

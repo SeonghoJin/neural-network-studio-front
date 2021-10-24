@@ -21,7 +21,7 @@ export const ProjectDatasetPage = () => {
 	const { loading, fetch } = useGetDatasetListLibraryAPI();
 	const [curPage, setCurPage] = useState(1);
 	const [pageSize, setPageSize] = useState(5);
-	const [datasets, setDatasets] = useState<DatasetConfig[]>(new Array<DatasetConfig>(0));
+	const [datasets, setDatasets] = useState<Dataset[]>(new Array<Dataset>(0));
 	const [lastPage, setLastPage] = useState<null | number>(null);
 
 	const { projectNo } = useProjectLocation();
@@ -33,23 +33,24 @@ export const ProjectDatasetPage = () => {
 		if (lastPage === null) {
 			fetch(curPage, pageSize).then((res) => {
 				setLastPage(res.pagination.lastPage);
+				setDatasets(res.datasets);
 			});
 		}
-	}, [data, curPage, fetch, lastPage, pageSize]);
+	}, [datasets, data, curPage, fetch, lastPage, pageSize]);
 
-	// const addPage = useCallback(() => {
-	// 	if (curPage === lastPage) {
-	// 		return;
-	// 	}
-	//
-	// 	fetch(curPage + 1, pageSize).then((res) => {
-	// 		setDatasets((prev) => {
-	// 			return prev.concat(data.datasetConfigs);
-	// 		});
-	// 	});
-	//
-	// 	setCurPage(curPage + 1);
-	// }, [curPage, fetch, lastPage, pageSize]);
+	const addPage = useCallback(() => {
+		if (curPage === lastPage) {
+			return;
+		}
+
+		fetch(curPage + 1, pageSize).then((res) => {
+			setDatasets((prev) => {
+				return prev.concat(res.datasets);
+			});
+		});
+
+		setCurPage(curPage + 1);
+	}, [curPage, fetch, lastPage, pageSize]);
 
 	return (
 		<div id="container">
@@ -57,7 +58,7 @@ export const ProjectDatasetPage = () => {
 			<section className="dataset">
 				<ProjectDatasetNav value={head} setValue={setHead} />
 				<div className="sec-container">
-					{data && <ProjectDatasetMain setHead={setHead} selectorItemsHeads={data.datasetConfigs} />}
+					{data && <ProjectDatasetMain setHead={setHead} selectorItemsHeads={data.datasetConfigs} library={datasets} />}
 				</div>
 			</section>
 		</div>
