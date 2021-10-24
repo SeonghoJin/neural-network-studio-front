@@ -502,6 +502,7 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 .dataset .sec-c .board-util .inp-search { width: 637px; }
 .dataset .sec-c .list-filter .tit { margin-right: 15px; font-size: 16px; font-weight: 700; color: #000; }
 .dataset .sec-c .list-filter input { width: 240px; height: 44px; padding: 0 15px; border: 1px solid #e4e4e4; border-radius: 10px; box-sizing: border-box; font-size: 16px; font-weight: 400; color: #000; }
+.dataset .sec-c .list-filter select { width: 240px; height: 44px; padding: 0 15px; border: 1px solid #e4e4e4; border-radius: 10px; box-sizing: border-box; font-size: 16px; font-weight: 400; color: #000; background: none; }
 
 .tbl { table-layout: fixed; border-collapse: collapse; border: 1px solid #eee; box-sizing: border-box; }
 .tbl th,

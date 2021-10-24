@@ -1,6 +1,5 @@
 import { DEFAULT_PAGE_SIZE } from '../../../API/project/types';
 import { PageNation } from '../../../API/Dataset/type';
-import { DatasetConfig } from './datasetConfig';
 
 export type NormalizationConfig = {
 	usage: boolean;
@@ -48,3 +47,12 @@ export interface DatasetConfigs {
 	datasetConfigs: DatasetConfig[];
 	pagenation: PageNation;
 }
+
+export type DatasetConfig = {
+	id: number;
+	name: string;
+	dataset_id: number;
+	shuffle: boolean;
+	label: string;
+	normalization: NormalizationConfig;
+};

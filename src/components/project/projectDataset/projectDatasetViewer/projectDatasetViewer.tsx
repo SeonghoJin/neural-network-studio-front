@@ -1,19 +1,67 @@
+import { ChangeEvent, useCallback } from 'react';
 import { DatasetConfig } from '../datasetConfig';
 
 export type ProjectDatasetViewerProps = {
 	datasetConfig: DatasetConfig;
+	setDatasetConfig: any;
+	setHead: any;
 };
 
-export const ProjectDatasetViewerTop = () => {
+export const ProjectDatasetViewerTop = ({ datasetConfig, setDatasetConfig, setHead }: ProjectDatasetViewerProps) => {
+	const onChange = useCallback(
+		(e: ChangeEvent<HTMLInputElement>) => {
+			const { name, value } = e.target;
+			console.log(e.target);
+
+			setDatasetConfig({
+				...datasetConfig,
+				[name]: value,
+			});
+			setHead(datasetConfig);
+		},
+		[datasetConfig, setDatasetConfig, setHead]
+	);
+
+	const onNormalizationChange = useCallback(
+		(e: ChangeEvent<any>) => {
+			const { name, value } = e.target;
+
+			setDatasetConfig({
+				...datasetConfig,
+				normalization: {
+					...datasetConfig.normalization,
+					[name]: value,
+				},
+			});
+			console.log(datasetConfig);
+			setHead(datasetConfig);
+		},
+		[datasetConfig, setDatasetConfig, setHead]
+	);
+
 	return (
 		<>
 			<div className="search-filter">
-				<div className="tit">URL</div>
-				<input type="text" placeholder="검색어를 입력하세요" className="inp-search" />
+				<div className="tit">데이터</div>
+				<input
+					type="text"
+					placeholder="검색어를 입력하세요"
+					className="inp-search"
+					name="datasetId"
+					defaultValue={datasetConfig.dataset_id}
+					onChange={onChange}
+				/>
 
 				<ol className="list-filter">
 					<li>
-						<input id="ck1" type="checkbox" name="ck" className="ck-custom" />
+						<input
+							id="ck1"
+							type="checkbox"
+							name="shuffle"
+							className="ck-custom"
+							onChange={onChange}
+							defaultChecked={datasetConfig.shuffle}
+						/>
 						<label htmlFor="ck1">
 							<span className="custom" />
 							Shuffle
@@ -22,12 +70,22 @@ export const ProjectDatasetViewerTop = () => {
 
 					<li>
 						<div className="tit">정규화</div>
-						<input type="text" className="inp" />
+						<select
+							key={datasetConfig.normalization.method}
+							className="inp"
+							name="method"
+							defaultValue={datasetConfig.normalization.method}
+							onChange={onNormalizationChange}
+						>
+							<option value="MinMax">MinMax</option>
+							<option value="Standard">Standard</option>
+							<option value="Image">Image</option>
+						</select>
 					</li>
 
 					<li>
 						<div className="tit">레이블</div>
-						<input type="text" className="inp" />
+						<input type="text" className="inp" name="label" defaultValue={datasetConfig.label} onChange={onChange} />
 					</li>
 				</ol>
 			</div>
@@ -275,11 +333,11 @@ export const DatasetPreviewTable = () => {
 	);
 };
 
-const ProjectDatasetViewer = ({ datasetConfig }: ProjectDatasetViewerProps) => {
+const ProjectDatasetViewer = ({ datasetConfig, setDatasetConfig, setHead }: ProjectDatasetViewerProps) => {
 	return (
 		<>
 			<div className="board-util">
-				<ProjectDatasetViewerTop />
+				<ProjectDatasetViewerTop datasetConfig={datasetConfig} setHead={setHead} setDatasetConfig={setDatasetConfig} />
 			</div>
 			<DatasetPreviewTable />
 		</>
