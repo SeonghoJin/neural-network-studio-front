@@ -1,11 +1,17 @@
 import { DatasetConfigDto, NormalizationConfig } from './types';
 
+export type DatasetInfo = {
+	id: number;
+
+	name: string;
+};
+
 export class DatasetConfig {
 	id: number;
 
 	name: string;
 
-	dataset_id: number;
+	dataset: DatasetInfo;
 
 	shuffle: boolean;
 
@@ -16,7 +22,7 @@ export class DatasetConfig {
 	constructor(dto: DatasetConfigDto) {
 		this.id = dto?.id || 0;
 		this.name = dto?.name || '';
-		this.dataset_id = dto?.dataset_id || 0;
+		this.dataset = dto?.dataset || { id: 0, name: '' };
 		this.shuffle = dto?.shuffle || false;
 		this.label = dto?.label || '';
 		this.normalization = dto?.normalization || { usage: false, method: '' };
@@ -26,7 +32,7 @@ export class DatasetConfig {
 		const datasetConfigDto: DatasetConfigDto = {
 			id: datasetConfig.id,
 			name: datasetConfig.name,
-			dataset_id: datasetConfig.dataset_id,
+			dataset: datasetConfig.dataset,
 			shuffle: datasetConfig.shuffle,
 			label: datasetConfig.label,
 			normalization: datasetConfig.normalization,
@@ -41,7 +47,7 @@ export type TDatasetConfig = {
 
 	name: string;
 
-	dataset_id: number;
+	dataset: DatasetInfo;
 
 	shuffle: boolean;
 

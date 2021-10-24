@@ -16,12 +16,12 @@ export const ProjectDatasetViewerTop = ({
 	library,
 }: ProjectDatasetViewerProps) => {
 	const onDataChange = useCallback(
-		(e: ChangeEvent<any>) => {
-			const { name, key } = e.target;
+		(e: ChangeEvent<HTMLSelectElement>) => {
+			const { name, value } = e.target;
 
 			setDatasetConfig({
 				...datasetConfig,
-				[name]: key,
+				[name]: value,
 			});
 			setHead(datasetConfig);
 		},
@@ -75,10 +75,10 @@ export const ProjectDatasetViewerTop = ({
 			<div className="search-filter">
 				<div className="tit">데이터</div>
 				<select
-					key={datasetConfig.dataset_id}
+					key={datasetConfig.dataset.id}
 					className="inp"
 					name="datasetId"
-					defaultValue={datasetConfig.dataset_id}
+					defaultValue={datasetConfig.dataset.id}
 					onChange={onDataChange}
 				>
 					{library.map((dataset, index) => {

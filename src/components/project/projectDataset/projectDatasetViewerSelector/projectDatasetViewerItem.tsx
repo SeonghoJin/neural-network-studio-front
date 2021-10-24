@@ -41,13 +41,6 @@ const ProjectDatasetViewerSelectorItem = ({ head, onClick }: Props) => {
 	const classes = useStyle();
 	const [toggle, setToggle] = useState(false);
 
-	// useEffect(() => {
-	// 	$('.js-depth').on('click', function (): void {
-	// 		$(this).toggleClass('active');
-	// 		$(this).parent().next().slideToggle('active');
-	// 	});
-	// }, [classes]);
-
 	const onToggle = (e: any) => {
 		$(e.target).toggleClass('active');
 		$(e.target).parent().next().slideToggle('active');

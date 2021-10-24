@@ -1,4 +1,4 @@
-import { DatasetConfig } from '../datasetConfig';
+import { DatasetConfig, TDatasetConfig } from '../datasetConfig';
 import ProjectDatasetViewerSelectorItem from './projectDatasetViewerItem';
 import 'jquery-easing';
 
@@ -6,7 +6,7 @@ type Props = {
 	value: any;
 	setValue: any;
 	setHead: any;
-	selectorItemHeads: Array<DatasetConfig>;
+	selectorItemHeads: Array<TDatasetConfig>;
 };
 
 const ProjectDatasetViewerSelector = (props: Props) => {

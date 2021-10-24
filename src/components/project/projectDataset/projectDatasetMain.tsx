@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
-import { DatasetConfig } from './datasetConfig';
 import { LeftWrapper } from '../projectConfig/projectConfigMain';
 import ProjectDatasetViewer from './projectDatasetViewer/projectDatasetViewer';
 import ProjectDatasetSideBar from './projectDatsetSideBar/projectDatasetSideBar';
 import { Dataset } from '../../../API/Dataset/type';
+import { DatasetConfig } from './types';
 
 const ProjectDatasetMain = ({
 	selectorItemsHeads,
