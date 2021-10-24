@@ -1,6 +1,13 @@
-import { ChangeEvent, useCallback } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import useSWR from 'swr';
+import { atom, useRecoilState } from 'recoil';
 import { DatasetConfig } from '../datasetConfig';
 import { Dataset } from '../../../../API/Dataset/type';
+import { DatasetConfigs } from '../types';
+import config from '../../../../config';
+import { sleep } from '../../../../util';
+import SimpleBackdrop from '../../../utils/BackLoading';
 
 export type ProjectDatasetViewerProps = {
 	datasetConfig: DatasetConfig;
@@ -131,85 +138,158 @@ export const ProjectDatasetViewerTop = ({
 	);
 };
 
-export const DatasetPreviewTableRow = () => {
+export type TDatasetPreview = {
+	feature: string[];
+
+	rows: Array<string[]>;
+
+	datasetNum: number;
+
+	featureNum: number;
+};
+
+export interface IDatasetPreview {
+	feature: string[];
+
+	rows: Array<string[]>;
+
+	datasetNum: number;
+
+	featureNum: number;
+}
+
+export class DatasetPreview {
+	feature: string[];
+
+	rows: Array<string[]>;
+
+	datasetNum: number;
+
+	featureNum: number;
+
+	constructor(dto: IDatasetPreview) {
+		this.feature = dto.feature;
+		this.rows = dto.rows;
+		this.datasetNum = dto.datasetNum;
+		this.featureNum = dto.featureNum;
+	}
+
+	static toDatasetPreviewDto(datasetPreview: DatasetPreview) {
+		const datasetPreviewDto: IDatasetPreview = {
+			feature: datasetPreview.feature,
+			rows: datasetPreview.rows,
+			datasetNum: datasetPreview.datasetNum,
+			featureNum: datasetPreview.featureNum,
+		};
+
+		return datasetPreviewDto;
+	}
+}
+
+type Props = {
+	dataDetail: TDatasetPreview;
+};
+
+const axiosConfig: AxiosRequestConfig = {
+	withCredentials: true,
+};
+
+export const GetDatasetDetail = async (datasetId: number) => {
+	try {
+		const res = await axios.get(`${config.SERVER_PREFIX}/api/dataset/library/${datasetId}`, axiosConfig);
+
+		return res.data;
+	} catch (e) {
+		if ((e as AxiosError).response?.status !== 200) {
+			throw new Error('데이터셋 정보를 가져오는데 실패했습니다. 다시 시도해주세요.');
+		}
+		throw e;
+	}
+};
+
+type getDatasetDetailState = {
+	error: null | string;
+	loading: boolean;
+	data: boolean | null;
+} | null;
+
+const getDatasetDetailResult = atom<getDatasetDetailState>({
+	key: 'getDatasetDetailState',
+	default: null,
+});
+
+export const useGetDatasetDetail = () => {
+	const [result, setResult] = useRecoilState(getDatasetDetailResult);
+	const fetch = useCallback(
+		async (datasetId: number) => {
+			setResult({
+				error: null,
+				data: null,
+				loading: true,
+			});
+
+			try {
+				const delayedData = await sleep(500).then(async () => {
+					const data = await GetDatasetDetail(datasetId);
+					setResult({
+						data: data || true,
+						error: null,
+						loading: false,
+					});
+					return data;
+				});
+				return delayedData;
+			} catch (e: AxiosError | any) {
+				setResult({
+					data: null,
+					loading: false,
+					error: e.message,
+				});
+				throw e;
+			}
+		},
+		[setResult]
+	);
+
+	return {
+		...result,
+		fetch,
+		loadingFallback: <SimpleBackdrop open />,
+	};
+};
+
+export const DatasetPreviewTableRow = ({ dataDetail }: Props) => {
 	return (
-		<tr>
-			<td>
-				<div className="content">
-					<div className="txt-group">
-						<div className="txt">0</div>
-					</div>
-				</div>
-			</td>
-
-			<td>
-				<div className="content">
-					<div className="txt-group">
-						<div className="txt">10.6.1</div>
-					</div>
-				</div>
-			</td>
-
-			<td>
-				<div className="content">
-					<div className="txt-group">
-						<div className="txt">Alistar</div>
-					</div>
-				</div>
-			</td>
-
-			<td>
-				<div className="content">
-					<div className="txt-group">
-						<div className="txt">84</div>
-					</div>
-				</div>
-			</td>
-
-			<td>
-				<div className="content">
-					<div className="txt-group">
-						<div className="txt">Alistar</div>
-					</div>
-				</div>
-			</td>
-
-			<td>
-				<div className="content">
-					<div className="txt-group">
-						<div className="txt">0</div>
-					</div>
-				</div>
-			</td>
-
-			<td>
-				<div className="content">
-					<div className="txt-group">
-						<div className="txt">10.6.1</div>
-					</div>
-				</div>
-			</td>
-
-			<td>
-				<div className="content">
-					<div className="txt-group">
-						<div className="txt">Alistar</div>
-					</div>
-				</div>
-			</td>
-
-			<td>
-				<div className="content">
-					<div className="txt-group">
-						<div className="txt">84</div>
-					</div>
-				</div>
-			</td>
-		</tr>
+		<>
+			{dataDetail.rows.map((row, index) => {
+				return (
+					<tr>
+						<td>
+							<div className="content">
+								<div className="txt-group">
+									<div className="txt">{index}</div>
+								</div>
+							</div>
+						</td>
+						{row.map((col, idx) => {
+							return (
+								<td>
+									<div className="content">
+										<div className="txt-group">
+											<div className="txt">{col}</div>
+										</div>
+									</div>
+								</td>
+							);
+						})}
+					</tr>
+				);
+			})}
+		</>
 	);
 };
 
-export const DatasetPreviewTable = () => {
+export const DatasetPreviewTable = ({ dataDetail }: Props) => {
 	return (
 		<>
 			<table className="tbl">
@@ -223,148 +303,87 @@ export const DatasetPreviewTable = () => {
 								</div>
 							</div>
 						</th>
-
-						<th>
-							<div className="content">
-								<div className="txt-group">
-									<div className="tit">Version</div>
-									<div className="txt">version</div>
-								</div>
-							</div>
-						</th>
-
-						<th>
-							<div className="content">
-								<div className="txt-group">
-									<div className="tit">Id</div>
-									<div className="txt">champion id</div>
-								</div>
-							</div>
-						</th>
-
-						<th>
-							<div className="content">
-								<div className="txt-group">
-									<div className="tit">Key</div>
-									<div className="txt">champion key</div>
-								</div>
-							</div>
-						</th>
-
-						<th>
-							<div className="content">
-								<div className="txt-group">
-									<div className="tit">Name</div>
-									<div className="txt">champion name</div>
-								</div>
-							</div>
-						</th>
-
-						<th>
-							<div className="content">
-								<div className="txt-group">
-									<div className="tit">Id</div>
-									<div className="txt">champion id</div>
-								</div>
-							</div>
-						</th>
-
-						<th>
-							<div className="content">
-								<div className="txt-group">
-									<div className="tit">Key</div>
-									<div className="txt">champion key</div>
-								</div>
-							</div>
-						</th>
-
-						<th>
-							<div className="content">
-								<div className="txt-group">
-									<div className="tit">Name</div>
-									<div className="txt">champion name</div>
-								</div>
-							</div>
-						</th>
-
-						<th>
-							<div className="content">
-								<div className="txt-group">
-									<div className="tit">Version</div>
-									<div className="txt">champion name</div>
-								</div>
-							</div>
-						</th>
+						{dataDetail.feature.map((feat, index) => {
+							return (
+								<th>
+									<div className="content">
+										<div className="txt-group">
+											<div className="tit">feat</div>
+											<div className="txt">feat</div>
+										</div>
+									</div>
+								</th>
+							);
+						})}
 					</tr>
+					{/* <tr> */}
+					{/*	<td> */}
+					{/*		<div className="content" /> */}
+					{/*	</td> */}
 
-					<tr>
-						<td>
-							<div className="content" />
-						</td>
+					{/*	<td> */}
+					{/*		<div className="content" /> */}
+					{/*	</td> */}
 
-						<td>
-							<div className="content" />
-						</td>
+					{/*	<td> */}
+					{/*		<div className="content"> */}
+					{/*			<div className="txt-group2"> */}
+					{/*				<div className="txt1">148</div> */}
+					{/*				<div className="txt2">Unique Values</div> */}
+					{/*			</div> */}
+					{/*		</div> */}
+					{/*	</td> */}
 
-						<td>
-							<div className="content">
-								<div className="txt-group2">
-									<div className="txt1">148</div>
-									<div className="txt2">Unique Values</div>
-								</div>
-							</div>
-						</td>
+					{/*	<td> */}
+					{/*		<div className="content" /> */}
+					{/*	</td> */}
 
-						<td>
-							<div className="content" />
-						</td>
+					{/*	<td> */}
+					{/*		<div className="content"> */}
+					{/*			<div className="txt-group2"> */}
+					{/*				<div className="txt1">148</div> */}
+					{/*				<div className="txt2">Unique Values</div> */}
+					{/*			</div> */}
+					{/*		</div> */}
+					{/*	</td> */}
 
-						<td>
-							<div className="content">
-								<div className="txt-group2">
-									<div className="txt1">148</div>
-									<div className="txt2">Unique Values</div>
-								</div>
-							</div>
-						</td>
+					{/*	<td> */}
+					{/*		<div className="content"> */}
+					{/*			<div className="txt-group2"> */}
+					{/*				<div className="txt1">148</div> */}
+					{/*				<div className="txt2">Unique Values</div> */}
+					{/*			</div> */}
+					{/*		</div> */}
+					{/*	</td> */}
 
-						<td>
-							<div className="content">
-								<div className="txt-group2">
-									<div className="txt1">148</div>
-									<div className="txt2">Unique Values</div>
-								</div>
-							</div>
-						</td>
+					{/*	<td> */}
+					{/*		<div className="content"> */}
+					{/*			<div className="txt-group2"> */}
+					{/*				<div className="txt1">148</div> */}
+					{/*				<div className="txt2">Unique Values</div> */}
+					{/*			</div> */}
+					{/*		</div> */}
+					{/*	</td> */}
 
-						<td>
-							<div className="content">
-								<div className="txt-group2">
-									<div className="txt1">148</div>
-									<div className="txt2">Unique Values</div>
-								</div>
-							</div>
-						</td>
+					{/*	<td> */}
+					{/*		<div className="content"> */}
+					{/*			<div className="txt-group2"> */}
+					{/*				<div className="txt1">148</div> */}
+					{/*				<div className="txt2">Unique Values</div> */}
+					{/*			</div> */}
+					{/*		</div> */}
+					{/*	</td> */}
 
-						<td>
-							<div className="content">
-								<div className="txt-group2">
-									<div className="txt1">148</div>
-									<div className="txt2">Unique Values</div>
-								</div>
-							</div>
-						</td>
-
-						<td>
-							<div className="content">
-								<div className="txt-group2">
-									<div className="txt1">148</div>
-									<div className="txt2">Unique Values</div>
-								</div>
-							</div>
-						</td>
-					</tr>
-					<DatasetPreviewTableRow />
+					{/*	<td> */}
+					{/*		<div className="content"> */}
+					{/*			<div className="txt-group2"> */}
+					{/*				<div className="txt1">148</div> */}
+					{/*				<div className="txt2">Unique Values</div> */}
+					{/*			</div> */}
+					{/*		</div> */}
+					{/*	</td> */}
+					{/* </tr> */}
+					<DatasetPreviewTableRow dataDetail={dataDetail} />
 				</tbody>
 			</table>
 		</>
@@ -372,6 +391,15 @@ export const DatasetPreviewTable = () => {
 };
 
 const ProjectDatasetViewer = ({ datasetConfig, setDatasetConfig, setHead, library }: ProjectDatasetViewerProps) => {
+	const { fetch, loading } = useGetDatasetDetail();
+	const [datasetDetail, setDatasetDetail] = useState<TDatasetPreview>();
+
+	useEffect(() => {
+		fetch(datasetConfig.dataset.id).then((res) => {
+			setDatasetDetail(res.data);
+		});
+	}, [fetch, datasetConfig]);
+
 	return (
 		<>
 			<div className="board-util">
@@ -382,7 +410,7 @@ const ProjectDatasetViewer = ({ datasetConfig, setDatasetConfig, setHead, librar
 					library={library}
 				/>
 			</div>
-			<DatasetPreviewTable />
+			{datasetDetail && <DatasetPreviewTable dataDetail={datasetDetail} />}
 		</>
 	);
 };
