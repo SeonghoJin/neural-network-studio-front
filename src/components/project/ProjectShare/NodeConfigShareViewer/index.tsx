@@ -25,7 +25,7 @@ const NodeConfigShareViewerContainer = () => {
 			const { name, value } = e.target;
 			const dto = new BlockConfigChangeDto();
 			dto.blockId = selectedElement.id;
-			dto.config = {
+			dto.param = {
 				name,
 				value,
 			};

@@ -36,13 +36,9 @@ const Conv2DConfigComponent = ({ config, onChange }: Props) => {
 	const { padding, strides, kernel_size, filters } = config;
 
 	const configComponent: IConfigComponent<typeof config> = {
-		filters: <NumberInput onChange={onChange} propertyContent={filters.toString()} propertyName="filters" />,
+		filters: <NumberInput onChange={onChange} propertyContent={filters} propertyName="filters" />,
 		kernel_size: (
-			<SecondDivisionTupleInput
-				onChange={onChange}
-				propertyContent={kernel_size.toString()}
-				propertyName="kernel_size"
-			/>
+			<SecondDivisionTupleInput onChange={onChange} propertyContent={kernel_size} propertyName="kernel_size" />
 		),
 		padding: (
 			<SelectInput

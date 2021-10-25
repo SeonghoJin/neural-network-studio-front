@@ -230,7 +230,7 @@ export class ProjectConfig {
 
 	loss: string;
 
-	metrics: Array<string>;
+	metrics: string;
 
 	batch_size: string;
 
@@ -244,7 +244,7 @@ export class ProjectConfig {
 		this.optimizer_name = dto.optimizer_name || Optimizers.Adam;
 		this.optimizer_config = new OptimizerConfig(dto?.optimizer_config || {});
 		this.loss = dto.loss;
-		this.metrics = dto.metrics;
+		this.metrics = dto.metrics.toString();
 		this.batch_size = dto.batch_size.toString();
 		this.epochs = dto.epochs.toString();
 		this.early_stop = new EarlyStopConfig(dto.early_stop);
@@ -256,7 +256,7 @@ export class ProjectConfig {
 			optimizer_name: projectConfig.optimizer_name,
 			optimizer_config: OptimizerConfig.toOptimizerConfigDto(projectConfig.optimizer_config),
 			loss: projectConfig.loss,
-			metrics: projectConfig.metrics,
+			metrics: projectConfig.metrics.split(','),
 			batch_size: Number(projectConfig.batch_size),
 			epochs: Number(projectConfig.epochs),
 			early_stop: EarlyStopConfig.toEarlyStopConfig(projectConfig.early_stop),

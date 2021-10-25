@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FlowElement } from 'react-flow-nns';
 import useProjectShareLocation from '../../../hooks/useProjectShareLocation';
 import config from '../../../config';
 import { useSocketDispatch, useSocketState } from './SocketContext';
@@ -30,6 +31,9 @@ import { EdgeRemoveDto } from '../dto/edge.remove.dto';
 import { ProjectConfigChangeDto } from '../dto/project.config.change.dto';
 import { ProjectEarlyStopConfigChangeDto } from '../dto/project.earlystopconfig.change.dto';
 import { ProjectLearningRateReductionChangeDto } from '../dto/project.learningratereduction.change.dto';
+import { useMessageResult } from '../hooks/useSendMessage';
+import { BlockConfig, BlockConfigDto, BlockState } from '../../reactFlow/block';
+import { IProjectContentDto } from '../../../API/project/types';
 
 export const WebSocketContext = ({ children }: { children: React.ReactNode }) => {
 	const dispatch = useSocketDispatch();
@@ -49,6 +53,7 @@ export const WebSocketContext = ({ children }: { children: React.ReactNode }) =>
 	const { setChangeProjectConfig } = useRemoteProjectConfigChange();
 	const { setChangeProjectLearningRateReductionConfig } = useRemoteProjectLearningRateReductionConfigChange();
 	const { setChangeProjectEarlyStopConfig } = useRemoteProjectEarlyStopConfigChange();
+	const { setMessageDto } = useMessageResult();
 
 	useEffect(() => {
 		if (socketState.socketRepository === null || socketState.socketService === null) {
@@ -59,7 +64,30 @@ export const WebSocketContext = ({ children }: { children: React.ReactNode }) =>
 					setRemoteCursorMove(data);
 				});
 				socketRepository?.createdUserResponse(SocketEvent.CreateUserResponse, (data: UserCreateResponseDto) => {
-					setCreateUserResponse(data);
+					const newElements =
+						data.project?.flowState.elements.map((element) => {
+							if (element.data == null) {
+								return element;
+							}
+							return {
+								...element,
+								data: {
+									...element.data,
+									param: new BlockConfig(element.data.param as BlockConfigDto),
+								},
+							};
+						}) || new Array<FlowElement<BlockState>>();
+
+					setCreateUserResponse({
+						...data,
+						project: {
+							...(data.project as IProjectContentDto),
+							flowState: {
+								...(data.project as IProjectContentDto).flowState,
+								elements: newElements,
+							},
+						},
+					});
 				});
 				socketRepository?.renewUserListResponse(SocketEvent.UserListResponse, (data: UserListResponseDto) => {
 					setUserList(data);
@@ -103,6 +131,9 @@ export const WebSocketContext = ({ children }: { children: React.ReactNode }) =>
 						setChangeProjectLearningRateReductionConfig(data);
 					}
 				);
+				socketRepository?.sentMessage(SocketEvent.SendMessage, (data) => {
+					setMessageDto(data);
+				});
 			});
 			socket.onopen = () => {
 				const values = {
@@ -113,6 +144,12 @@ export const WebSocketContext = ({ children }: { children: React.ReactNode }) =>
 					payload: values,
 				});
 			};
+			socket.onerror = (e) => {
+				console.log(e);
+			};
+			socket.onclose = (e) => {
+				console.log(e);
+			};
 		}
 	}, [
 		dispatch,
@@ -121,6 +158,7 @@ export const WebSocketContext = ({ children }: { children: React.ReactNode }) =>
 		setChangeProjectEarlyStopConfig,
 		setChangeProjectLearningRateReductionConfig,
 		setCreateUserResponse,
+		setMessageDto,
 		setRemoteBlockConfigChange,
 		setRemoteBlockCreate,
 		setRemoteBlockLabelChange,

@@ -1,7 +1,5 @@
-import { makeStyles } from '@material-ui/core';
 import { applyMiddleware, createStore } from 'redux';
 import reduxThunk from 'redux-thunk';
-import reduxLogger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { Skeleton } from '@material-ui/lab';
 import rootReducer from '../module';
@@ -14,7 +12,7 @@ import useUpdateProjectContent from '../hooks/useUpdateProjectContent';
 import { VisitAlarmModule } from '../components/project/ProjectShare/VisitAlarmModule';
 import { useCursorTracker } from '../components/CursorTracker/useCursorTracker';
 
-const store = createStore(rootReducer, applyMiddleware(reduxThunk, reduxLogger));
+const store = createStore(rootReducer, applyMiddleware(reduxThunk));
 
 export const ProjectSharePage = () => {
 	const updateProjectContent = useUpdateProjectContent();

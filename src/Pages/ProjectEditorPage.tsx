@@ -14,7 +14,7 @@ import usePythonCode from '../hooks/usePythonCode';
 import useUpdateProjectContent from '../hooks/useUpdateProjectContent';
 import { useCursorTracker } from '../components/CursorTracker/useCursorTracker';
 
-const store = createStore(rootReducer, applyMiddleware(reduxThunk, reduxLogger));
+const store = createStore(rootReducer, applyMiddleware(reduxThunk));
 
 export const ProjectEditorPage = () => {
 	const pythonCodeResult = usePythonCode();
