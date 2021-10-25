@@ -9,6 +9,7 @@ import ProjectDatasetNav from '../components/project/projectDataset/projectDatas
 import useProjectLocation from '../hooks/useProjectLocation';
 import { useGetDatasetConfigList } from '../components/project/projectDataset/apis';
 import ProjectDatasetMain from '../components/project/projectDataset/projectDatasetMain';
+import { DatasetConfig, DatasetConfigs } from '../components/project/projectDataset/types';
 
 const LoadingButtonWrapper = styled.div`
 	display: flex;
@@ -26,6 +27,8 @@ export const ProjectDatasetPage = () => {
 	const { projectNo } = useProjectLocation();
 	const { data, mutate } = useGetDatasetConfigList(projectNo);
 
+	const [head, setHead] = useState<DatasetConfig>();
+
 	useEffect(() => {
 		if (lastPage === null) {
 			fetch(curPage, pageSize).then((res) => {
@@ -33,7 +36,7 @@ export const ProjectDatasetPage = () => {
 				setDatasets(res.datasets);
 			});
 		}
-	}, [curPage, fetch, lastPage, pageSize]);
+	}, [datasets, data, curPage, fetch, lastPage, pageSize]);
 
 	const addPage = useCallback(() => {
 		if (curPage === lastPage) {
@@ -53,8 +56,10 @@ export const ProjectDatasetPage = () => {
 		<div id="container">
 			<ProjectNav currentMenu={4} />
 			<section className="dataset">
-				<ProjectDatasetNav value={null} setValue={null} />
-				<div className="sec-container">{data && <ProjectDatasetMain selectorItemsHeads={data.datasetConfigs} />}</div>
+				<ProjectDatasetNav value={head} setValue={setHead} />
+				<div className="sec-container">
+					{data && <ProjectDatasetMain setHead={setHead} selectorItemsHeads={data.datasetConfigs} library={datasets} />}
+				</div>
 			</section>
 		</div>
 	);
