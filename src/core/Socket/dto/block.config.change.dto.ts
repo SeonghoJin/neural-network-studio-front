@@ -5,7 +5,7 @@ export class BlockConfigChangeDto {
 
 	blockId: undefined | string;
 
-	config:
+	param:
 		| {
 				name: string;
 				value: string;

@@ -1,8 +1,6 @@
 import { applyMiddleware, createStore } from 'redux';
 import reduxThunk from 'redux-thunk';
-import reduxLogger from 'redux-logger';
 import { Provider } from 'react-redux';
-import { Box } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import ProjectNav from '../components/project/ProjectNav/projectNav';
 import rootReducer from '../module';
@@ -14,11 +12,11 @@ import usePythonCode from '../hooks/usePythonCode';
 import useUpdateProjectContent from '../hooks/useUpdateProjectContent';
 import { useCursorTracker } from '../components/CursorTracker/useCursorTracker';
 
-const store = createStore(rootReducer, applyMiddleware(reduxThunk, reduxLogger));
+const store = createStore(rootReducer, applyMiddleware(reduxThunk));
 
 export const ProjectEditorPage = () => {
 	const pythonCodeResult = usePythonCode();
-	const updateProjectContent = useUpdateProjectContent();
+	const _updateProjectContent = useUpdateProjectContent();
 	const { cursorPosition } = useCursorTracker();
 	return (
 		<Provider store={store}>
@@ -36,7 +34,7 @@ export const ProjectEditorPage = () => {
 
 			<div id="container">
 				{pythonCodeResult.loading && pythonCodeResult.loadingFallback}
-				{updateProjectContent.loading && updateProjectContent.loadingFallback}
+				{_updateProjectContent.loading && _updateProjectContent.loadingFallback}
 				<ProjectNav currentMenu={1} />
 				<section className="edit">
 					<ProjectEditorNav />

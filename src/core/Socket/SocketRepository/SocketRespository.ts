@@ -12,6 +12,7 @@ import { EdgeUpdateDto } from '../dto/edge.update.dto';
 import { ProjectConfigChangeDto } from '../dto/project.config.change.dto';
 import { ProjectEarlyStopConfigChangeDto } from '../dto/project.earlystopconfig.change.dto';
 import { ProjectLearningRateReductionChangeDto } from '../dto/project.learningratereduction.change.dto';
+import { MessageDto } from '../dto/message.dto';
 
 export interface SocketRepository {
 	initSocketRepository: (cf: () => void) => void;
@@ -32,4 +33,5 @@ export interface SocketRepository {
 		event: string,
 		cf: (data: ProjectLearningRateReductionChangeDto) => void
 	) => void;
+	sentMessage: (event: string, cf: (data: MessageDto) => void) => void;
 }

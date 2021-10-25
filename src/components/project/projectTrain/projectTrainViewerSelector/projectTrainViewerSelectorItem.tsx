@@ -6,8 +6,8 @@ import select from '../../../../static/img/ico_arrow_select1.png';
 
 const useStyle = makeStyles({
 	wrapper: {
-		// display: 'flex',
-		// justifyContent: 'space-between',
+		display: 'flex',
+		justifyContent: 'space-between',
 		width: '100%',
 		height: '100px',
 	},
@@ -26,6 +26,12 @@ const useStyle = makeStyles({
 		display: 'block',
 		backgroundColor: '#FFFFFF',
 	},
+	toggleBtn: {
+		display: 'flex',
+		alignItems: 'center',
+		textAlign: 'center',
+		fontSize: '14px',
+	},
 });
 
 type Props = {
@@ -36,20 +42,18 @@ type Props = {
 const ProjectTrainViewerSelectorItem = ({ head, onClick }: Props) => {
 	const classes = useStyle();
 
-	useEffect(() => {
-		$('.js-depth').on('click', function (): void {
-			$(this).toggleClass('active');
-			$(this).parent().next().slideToggle('active');
-		});
-	}, []);
+	const onToggle = (e: any) => {
+		$(e.target).toggleClass('active');
+		$(e.target).parent().next().slideToggle('active');
+	};
 
 	return (
 		<>
 			<div className={`tit ${classes.wrapper}`} onClick={onClick} onKeyDown={() => onClick()}>
 				{head.name}
-				<div className="js-depth">
-					<img src={select} alt="select" />
-				</div>
+				<button className={`js-depth ${classes.toggleBtn}`} type="button" onClick={onToggle}>
+					더 보기
+				</button>
 			</div>
 			<div className="depth">
 				<div>

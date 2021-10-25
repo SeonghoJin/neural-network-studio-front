@@ -14,11 +14,7 @@ const RescalingConfigComponent = ({ config, onChange }: Props) => {
 
 	const configComponent: IConfigComponent<typeof config> = {
 		target_shape: (
-			<ThirdDivisionTupleInput
-				propertyName="target_shape"
-				onChange={onChange}
-				propertyContent={target_shape.toString()}
-			/>
+			<ThirdDivisionTupleInput propertyName="target_shape" onChange={onChange} propertyContent={target_shape} />
 		),
 	};
 

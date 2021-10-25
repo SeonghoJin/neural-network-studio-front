@@ -4,6 +4,7 @@ import { getMonitorValues } from '../../../../../../core/Project/Montior';
 import { CustomCheckInput } from '../../../../../Input/custom/CustomCheckInput';
 import { CustomInput } from '../../../../../Input/custom/CustomInput';
 import { CustomSelectInput } from '../../../../../Input/custom/CustomSelectInput';
+import { CustomNumberInput } from '../../../../../Input/custom/CustomNumberInput';
 
 export type ProjectLearningRateReductionConfigProps = {
 	learningRateReduction: LearningRateReductionConfig;
@@ -33,9 +34,14 @@ const ProjectLearningRateReductionConfig = ({
 						onChange={onChange}
 						title="Monitor"
 					/>
-					<CustomInput title="Patience" name="patience" value={learningRateReduction.patience} onChange={onChange} />
-					<CustomInput title="Factor" name="factor" value={learningRateReduction.factor} onChange={onChange} />
-					<CustomInput title="Min_lr" name="min_lr" value={learningRateReduction.min_lr} onChange={onChange} />
+					<CustomNumberInput
+						title="Patience"
+						name="patience"
+						value={learningRateReduction.patience}
+						onChange={onChange}
+					/>
+					<CustomNumberInput title="Factor" name="factor" value={learningRateReduction.factor} onChange={onChange} />
+					<CustomNumberInput title="Min_lr" name="min_lr" value={learningRateReduction.min_lr} onChange={onChange} />
 				</>
 			)}
 		</>
