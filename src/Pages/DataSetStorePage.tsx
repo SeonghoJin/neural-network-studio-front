@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import queryString from 'querystring';
 import PrivateAuthentication from '../components/Authentication/PrivateAuthentication';
 import Navigation from '../components/nav';
 import icoSorting1 from '../static/img/ico_sorting1.png';
-import { QueryPath, StaticPath } from '../components/PagePathConsts';
-import { isGetDataSetListQuery, useDataSetStoreQuery } from '../hooks/useDataSetStoreQuery';
-import { getDatasetListAPI } from '../API/Dataset';
+import { StaticPath } from '../components/PagePathConsts';
+import { useDataSetStoreQuery } from '../hooks/useDataSetStoreQuery';
 import useGetDatasetList from '../hooks/useGetDatasetList';
 import usePageNation from '../components/utils/pagenation/usePageNation';
 import { CircleLoading } from '../components/utils/Loading/CircularLoading';
 import { DatasetCards } from '../components/datasetStore/DataSetCards';
+import ErrorBoundary from '../components/utils/ErrorBoundary';
 
 export const DataSetStorePage = () => {
 	const queries = useDataSetStoreQuery();
