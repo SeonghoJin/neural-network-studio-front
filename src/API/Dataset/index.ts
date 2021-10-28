@@ -12,6 +12,7 @@ import {
 	UploadNewDatasetFormData,
 } from './type';
 import config from '../../config';
+import { DatasetConfig } from '../../components/project/projectDataset/types';
 
 const axiosConfig: AxiosRequestConfig = {
 	withCredentials: true,
@@ -94,5 +95,19 @@ export const getDatasetLibraryListAPI = async (curPage: number, pageSize: number
 		return response.data;
 	} catch (e) {
 		throw new Error('라이브러리에 있는 데이터셋을 가져오지 못했습니다. 다시 시도해주세요.');
+	}
+};
+
+export const addDatasetConfigAPI = async (projectNo: string, datasetConfig: DatasetConfig) => {
+	try {
+		const response = await axios.post(
+			`${config.SERVER_PREFIX}/api/project/${projectNo}/dataset-config`,
+			datasetConfig,
+			axiosConfig
+		);
+
+		return response.data;
+	} catch (e) {
+		throw new Error('DatasetConfig를 추가하지 못했습니다. 다시 시도해주세요.');
 	}
 };

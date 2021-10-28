@@ -1,27 +1,36 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { atom, useRecoilState } from 'recoil';
 import { randomInt } from 'crypto';
 import { DatasetConfig } from '../datasetConfig';
-import { Dataset } from '../../../../API/Dataset/type';
+import { Dataset, GetDatasetListAPIResponse } from '../../../../API/Dataset/type';
 import config from '../../../../config';
 import { sleep } from '../../../../util';
 import SimpleBackdrop from '../../../utils/BackLoading';
+import { CircleLoading } from '../../../utils/Loading/CircularLoading';
+import { CustomSelectInput } from '../../../Input/custom/CustomSelectInput';
+import SelectInput from '../../../Input/SelectInput';
+import { CustomDatasetSelectInput } from '../../../Input/custom/CustomDatasetSelectInput';
 
 export type ProjectDatasetViewerProps = {
 	datasetConfig: DatasetConfig;
 	setDatasetConfig: any;
+	datasetList: GetDatasetListAPIResponse;
 };
 
-export const ProjectDatasetViewerTop = ({ datasetConfig, setDatasetConfig }: ProjectDatasetViewerProps) => {
+export const ProjectDatasetViewerTop = ({
+	datasetConfig,
+	setDatasetConfig,
+	datasetList,
+}: ProjectDatasetViewerProps) => {
 	const onDataChange = useCallback(
-		(e: ChangeEvent<HTMLSelectElement>) => {
-			const { name, value } = e.target;
-
+		(id, name) => {
+			console.log(id, name);
 			setDatasetConfig({
 				...datasetConfig,
 				dataset: {
-					[name]: value,
+					id,
+					name,
 				},
 			});
 		},
@@ -67,12 +76,28 @@ export const ProjectDatasetViewerTop = ({ datasetConfig, setDatasetConfig }: Pro
 		[datasetConfig, setDatasetConfig]
 	);
 
+	const datasetListCandidates = useMemo(() => {
+		return datasetList.datasets.map((dataset) => {
+			return {
+				id: dataset.id,
+				name: dataset.name,
+			};
+		});
+	}, [datasetList.datasets]);
+
 	return (
 		<>
 			<div className="search-filter">
-				<div className="tit">데이터</div>
-				<select className="inp" name="id" defaultValue={datasetConfig.dataset.id} onChange={onDataChange} />
-
+				<CustomDatasetSelectInput
+					title="데이터"
+					name="id"
+					onChange={onDataChange}
+					value={{
+						id: datasetConfig.dataset.id.toString(),
+						name: datasetConfig.dataset.name,
+					}}
+					propertyCandidates={datasetListCandidates}
+				/>
 				<ol className="list-filter">
 					<li>
 						<input
@@ -88,7 +113,6 @@ export const ProjectDatasetViewerTop = ({ datasetConfig, setDatasetConfig }: Pro
 							Shuffle
 						</label>
 					</li>
-
 					<li>
 						<div className="tit">정규화</div>
 						<select
@@ -234,17 +258,13 @@ export const useGetDatasetDetail = () => {
 	};
 };
 
-const generateKey = (pre: any) => {
-	return `${pre}_${new Date().getTime()}}`;
-};
-
 export const DatasetPreviewTableRow = ({ dataDetail }: Props) => {
 	return (
 		<>
 			{dataDetail?.rows.map((row, index) => {
 				return (
 					// eslint-disable-next-line react/no-array-index-key
-					<tr key={generateKey(row[0]) + row[0] + index}>
+					<tr key={index}>
 						<td>
 							<div className="content">
 								<div className="txt-group">
@@ -255,7 +275,7 @@ export const DatasetPreviewTableRow = ({ dataDetail }: Props) => {
 						{row.map((col, idx) => {
 							return (
 								// eslint-disable-next-line react/no-array-index-key
-								<td key={generateKey(col) + col + idx}>
+								<td key={idx}>
 									<div className="content">
 										<div className="txt-group">
 											<div className="txt">{col}</div>
@@ -288,7 +308,7 @@ export const DatasetPreviewTable = ({ dataDetail }: Props) => {
 						{dataDetail?.feature.map((feat, index) => {
 							return (
 								// eslint-disable-next-line react/no-array-index-key
-								<th key={generateKey(feat) + feat + index}>
+								<th key={index}>
 									<div className="content">
 										<div className="txt-group">
 											<div className="tit">{feat}</div>
@@ -373,22 +393,33 @@ export const DatasetPreviewTable = ({ dataDetail }: Props) => {
 	);
 };
 
-const ProjectDatasetViewer = ({ datasetConfig, setDatasetConfig }: ProjectDatasetViewerProps) => {
-	const { fetch } = useGetDatasetDetail();
-	const [datasetDetail, setDatasetDetail] = useState<DatasetPreview>();
+export const MemoizedDatasetTable = React.memo(DatasetPreviewTable);
 
+const ProjectDatasetViewer = ({ datasetConfig, setDatasetConfig, datasetList }: ProjectDatasetViewerProps) => {
+	const { fetch, loading } = useGetDatasetDetail();
+	const [datasetDetail, setDatasetDetail] = useState<DatasetPreview | null>();
+	console.log(datasetDetail);
 	useEffect(() => {
-		fetch(datasetConfig.dataset.id).then((res) => {
-			setDatasetDetail(res);
-		});
-	}, [fetch, datasetConfig]);
+		if (datasetConfig.dataset.id !== -1) {
+			fetch(datasetConfig.dataset.id).then((res) => {
+				setDatasetDetail(res);
+			});
+		} else {
+			setDatasetDetail(null);
+		}
+	}, [fetch, datasetConfig.dataset.id]);
 
 	return (
 		<>
 			<div className="board-util">
-				<ProjectDatasetViewerTop datasetConfig={datasetConfig} setDatasetConfig={setDatasetConfig} />
+				<ProjectDatasetViewerTop
+					datasetConfig={datasetConfig}
+					setDatasetConfig={setDatasetConfig}
+					datasetList={datasetList}
+				/>
 			</div>
-			<DatasetPreviewTable dataDetail={datasetDetail !== undefined ? datasetDetail : null} />
+			{!loading && datasetDetail && <MemoizedDatasetTable dataDetail={datasetDetail} />}
+			{loading && <CircleLoading />}
 		</>
 	);
 };

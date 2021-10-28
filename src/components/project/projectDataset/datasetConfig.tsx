@@ -19,10 +19,10 @@ export class DatasetConfig {
 
 	normalization: NormalizationConfig;
 
-	constructor(dto: DatasetConfigDto) {
-		this.id = dto?.id || 0;
-		this.name = dto?.name || '';
-		this.dataset = dto?.dataset || { id: 0, name: '' };
+	constructor(dto?: DatasetConfigDto) {
+		this.id = dto?.id || -1;
+		this.name = dto?.name || '데이터셋 설정 이름을 정해주세요.';
+		this.dataset = dto?.dataset || { id: -1, name: '데이터셋을 설정해주세요.' };
 		this.shuffle = dto?.shuffle || false;
 		this.label = dto?.label || '';
 		this.normalization = dto?.normalization || { usage: false, method: '' };
