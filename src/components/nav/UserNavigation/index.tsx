@@ -63,11 +63,6 @@ const UserNavigation = ({ user, currentMenu }: Props) => {
 						<div className="tit">대시보드</div>
 					</Link>
 
-					<Link to={StaticPath.ASSET_MAIN} className={currentMenu === 2 ? 'active' : ''}>
-						<div className="ico ico-v2" />
-						<div className="tit">에셋</div>
-					</Link>
-
 					<Link to={QueryPath.DATASET_STORE_DEFAULT} className={currentMenu === 3 ? 'active' : ''}>
 						<Storage className="ico" />
 						<div className="tit">데이터 스토어</div>

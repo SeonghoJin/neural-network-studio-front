@@ -119,35 +119,6 @@ export const Signup = () => {
 						</ol>
 
 						<input type="button" value="회원가입" className="btn-frm" onClick={submit} />
-
-						<div className="sns-login">
-							<div className="top">
-								<div className="txt">SNS 로그인</div>
-							</div>
-
-							<ol className="list-sns">
-								<li>
-									<a href="#">
-										<img src={icoSns1} alt="카카오톡" />
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src={icoSns2} alt="네이버" />
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src={icoSns3} alt="구글" />
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src={icoSns4} alt="애플" />
-									</a>
-								</li>
-							</ol>
-						</div>
 					</div>
 				</div>
 			</section>
