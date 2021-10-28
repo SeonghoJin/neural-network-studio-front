@@ -5,6 +5,7 @@ import { DynamicPath, StaticPath } from '../components/PagePathConsts';
 import { NotFoundPage, ProjectConfigPage, ProjectEditorPage } from '../Pages';
 import { ProjectDatasetPage } from '../Pages/ProjectDatasetPage';
 import { ProjectTrainPage } from '../Pages/ProjectTrainPage';
+import ErrorBoundary from '../components/utils/ErrorBoundary';
 
 const ProjectRouter: FC<null> = () => {
 	return (

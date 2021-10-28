@@ -15,6 +15,7 @@ import useDeleteProject from './hooks/useDeleteProject';
 import { UpdatePasswordPage } from './Pages/UpdatePasswordPage';
 import { DataSetStorePage } from './Pages/DataSetStorePage';
 import { CreateDataSetPage } from './Pages/CreateDataSetPage';
+import ErrorBoundary from './components/utils/ErrorBoundary';
 
 function App() {
 	const logoutResult = useLogout();
@@ -38,6 +39,7 @@ function App() {
 						<Route path={StaticPath.PROJECT} component={ProjectRouter} />
 						<Route path={DynamicPath.PROJECT_SHARE} component={ProjectShareRouter} />
 						<Route path={StaticPath.DASHBOARD} component={DashBoardRouter} />
+						<Route exact path={StaticPath.DATASET_STORE} component={DataSetStorePage} />
 						<Route component={NotFoundPage} />
 					</Switch>
 				</Authentication>

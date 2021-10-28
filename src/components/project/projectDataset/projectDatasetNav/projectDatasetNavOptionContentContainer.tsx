@@ -1,42 +1,40 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
-import { CircleLoading } from '../../../utils/Loading/CircularLoading';
 import ProjectDatasetNavOptionContent from './ProjectDatasetNavOptionContent';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
 import { useUpdateDatasetConfig } from '../apis';
+import { DatasetConfig } from '../types';
 
 type Props = {
-	value: any;
-	setValue: any;
+	currentDatasetConfig: undefined | DatasetConfig;
 };
 
-const ProjectDatasetNavOptionContentContainer = ({ value, setValue }: Props) => {
+const ProjectDatasetNavOptionContentContainer = ({ currentDatasetConfig }: Props) => {
 	const { fetch } = useUpdateDatasetConfig();
-	const { projectNo } = useProjectLocation();
 	const { enqueueSnackbar } = useSnackbar();
+	const { projectNo } = useProjectLocation();
 	const onSave = useCallback(() => {
-		if (value == null) {
-			enqueueSnackbar('데이터셋 설정이 없습니다.', {
-				variant: 'error',
-			});
+		// if (value == null) {
+		// 	enqueueSnackbar('데이터셋 설정이 없습니다.', {
+		// 		variant: 'error',
+		// 	});
+		//
+		// 	return;
+		// }
+		// fetch(projectNo, value)
+		// 	.then(() => {
+		// 		enqueueSnackbar('저장되었습니다.', {
+		// 			variant: 'success',
+		// 		});
+		// 	})
+		// 	.catch(() => {
+		// 		enqueueSnackbar('저장에 실패했습니다. 다시 시도해주세요.', {
+		// 			variant: 'error',
+		// 		});
+		// 	});
+	}, []);
 
-			return;
-		}
-		fetch(projectNo, value)
-			.then(() => {
-				enqueueSnackbar('저장되었습니다.', {
-					variant: 'success',
-				});
-			})
-			.catch(() => {
-				enqueueSnackbar('저장에 실패했습니다. 다시 시도해주세요.', {
-					variant: 'error',
-				});
-			});
-		console.log('Add Update dataset config api fetcher');
-	}, [value, fetch, projectNo, enqueueSnackbar]);
-
-	return <>{<ProjectDatasetNavOptionContent onSave={onSave} /> || <CircleLoading />}</>;
+	return <ProjectDatasetNavOptionContent onSave={onSave} />;
 };
 
 export default ProjectDatasetNavOptionContentContainer;

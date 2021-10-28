@@ -2,7 +2,6 @@ import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import useAuthentication, { UserType } from '../../hooks/useAuthentication';
-import ErrorSnackbar from '../utils/Snackbar/ErrorSnackbar';
 
 type Props = {
 	children: any;

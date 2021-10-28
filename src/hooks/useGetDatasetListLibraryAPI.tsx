@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { atom, useRecoilState } from 'recoil';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { GetDatasetListAPIResponse } from '../API/Dataset/type';
 import { sleep } from '../util';
 import { getDatasetLibraryListAPI } from '../API/Dataset';
@@ -50,6 +50,10 @@ export const useGetDatasetListLibraryAPI = () => {
 		},
 		[setResult]
 	);
+
+	useEffect(() => {
+		fetch(1, 100);
+	}, [fetch]);
 
 	return {
 		fetch,

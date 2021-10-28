@@ -157,7 +157,6 @@ export const useProjectTrainEpochs = (trainNo: number) => {
 		async () => {
 			try {
 				const data = await getTrainHistoryEpochListAPI(parseInt(projectNo, 10), trainNo);
-				console.log(data);
 				return data;
 			} catch (e: AxiosError | any) {
 				return e;

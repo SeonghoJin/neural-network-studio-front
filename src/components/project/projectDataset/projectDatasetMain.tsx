@@ -1,42 +1,46 @@
-import { useCallback, useEffect, useState } from 'react';
 import { LeftWrapper } from '../projectConfig/projectConfigMain';
 import ProjectDatasetViewer from './projectDatasetViewer/projectDatasetViewer';
 import ProjectDatasetSideBar from './projectDatsetSideBar/projectDatasetSideBar';
-import { Dataset } from '../../../API/Dataset/type';
 import { DatasetConfig } from './datasetConfig';
+import { GetDatasetListAPIResponse } from '../../../API/Dataset/type';
+
+type Props = {
+	datasetConfigs: DatasetConfig[];
+	currentDatasetConfig: DatasetConfig | undefined;
+	setCurrentDatasetConfig: (datasetConfig: DatasetConfig) => any;
+	setDatasetConfigs: any;
+	mutate: any;
+	datasetList: GetDatasetListAPIResponse;
+};
 
 const ProjectDatasetMain = ({
-	selectorItemsHeads,
-	setHead,
-	library,
-}: {
-	selectorItemsHeads: Array<DatasetConfig>;
-	setHead: any;
-	library: Array<Dataset>;
-}) => {
-	const [value, setValue] = useState<DatasetConfig>(selectorItemsHeads[0]);
-
-	const addPage = useCallback(() => {
-		console.log('do something');
-	}, []);
-
+	mutate,
+	setDatasetConfigs,
+	currentDatasetConfig,
+	setCurrentDatasetConfig,
+	datasetConfigs,
+	datasetList,
+}: Props) => {
 	return (
 		<>
 			<LeftWrapper>
 				<div className="sec-l">
 					<ProjectDatasetSideBar
-						value={value}
-						setValue={setValue}
-						setHead={setHead}
-						selectorItemHeads={selectorItemsHeads}
-						addPage={addPage}
+						datasetConfigs={datasetConfigs}
+						setDatasetConfigs={setDatasetConfigs}
+						setCurrentDatasetConfig={setCurrentDatasetConfig}
+						currentDatasetConfig={currentDatasetConfig}
+						mutate={mutate}
 					/>
 				</div>
 			</LeftWrapper>
-
 			<div className="sec-c">
-				{value === undefined ? null : (
-					<ProjectDatasetViewer datasetConfig={value} setHead={setHead} setDatasetConfig={setValue} library={library} />
+				{currentDatasetConfig === undefined ? null : (
+					<ProjectDatasetViewer
+						datasetConfig={currentDatasetConfig}
+						setDatasetConfig={setCurrentDatasetConfig}
+						datasetList={datasetList}
+					/>
 				)}
 			</div>
 		</>
