@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { LoadingButton } from '@mui/lab';
-import ProjectDatasetViewerSelector from '../projectDatasetViewerSelector/projectDatasetViewerSelector';
+import ProjectDatasetViewerSelectorItem from '../projectDatasetViewerSelector/projectDatasetViewerItem';
+import { DatasetConfig } from '../datasetConfig';
 
 type Props = {
-	value: any;
-	setValue: any;
-	selectorItemHeads: any;
+	datasetConfigs: DatasetConfig[];
+	currentDatasetConfig: DatasetConfig | undefined;
 	addPage: any;
-	setHead: any;
+	setCurrentDatasetConfig: (datasetConfig: DatasetConfig) => any;
 };
 
 const LoadingButtonWrapper = styled.div`
@@ -16,16 +16,22 @@ const LoadingButtonWrapper = styled.div`
 	justify-content: center;
 `;
 
-const ProjectDatasetSideBar = ({ value, setValue, selectorItemHeads, addPage, setHead }: Props) => {
+const ProjectDatasetSideBar = ({ addPage, datasetConfigs, setCurrentDatasetConfig, currentDatasetConfig }: Props) => {
 	return (
 		<>
 			<ol className="sec-menu">
-				<ProjectDatasetViewerSelector
-					value={value}
-					setHead={setHead}
-					setValue={setValue}
-					selectorItemHeads={selectorItemHeads}
-				/>
+				{datasetConfigs.map((datasetConfig) => {
+					return (
+						<li key={datasetConfig.id} className={currentDatasetConfig?.id === datasetConfig.id ? 'active' : ''}>
+							<ProjectDatasetViewerSelectorItem
+								datasetConfig={datasetConfig}
+								onClick={() => {
+									setCurrentDatasetConfig(datasetConfig);
+								}}
+							/>
+						</li>
+					);
+				})}
 			</ol>
 			<LoadingButtonWrapper>
 				<LoadingButton

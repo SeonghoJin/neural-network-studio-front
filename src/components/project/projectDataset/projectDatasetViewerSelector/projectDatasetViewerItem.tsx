@@ -33,13 +33,12 @@ const useStyle = makeStyles({
 });
 
 type Props = {
-	head: DatasetConfig;
+	datasetConfig: DatasetConfig;
 	onClick: () => void;
 };
 
-const ProjectDatasetViewerSelectorItem = ({ head, onClick }: Props) => {
+const ProjectDatasetViewerSelectorItem = ({ datasetConfig, onClick }: Props) => {
 	const classes = useStyle();
-	const [toggle, setToggle] = useState(false);
 
 	const onToggle = (e: any) => {
 		$(e.target).toggleClass('active');
@@ -49,7 +48,7 @@ const ProjectDatasetViewerSelectorItem = ({ head, onClick }: Props) => {
 	return (
 		<>
 			<div className={`tit ${classes.wrapper}`} onClick={onClick} onKeyDown={() => onClick()}>
-				{head.name}
+				{datasetConfig.name}
 				<button className={`js-depth ${classes.toggleBtn}`} type="button" onClick={onToggle}>
 					더 보기
 				</button>
@@ -69,13 +68,14 @@ const ProjectDatasetViewerSelectorItem = ({ head, onClick }: Props) => {
 						<strong>특성 개수</strong> : 65
 					</p>
 					<p>
-						<strong>Shuffle</strong> : {head.shuffle ? '사용' : '사용 안 함'}
+						<strong>Shuffle</strong> : {datasetConfig.shuffle ? '사용' : '사용 안 함'}
 					</p>
 					<p>
-						<strong>정규화</strong> : {head.normalization.usage ? head.normalization.method : '사용 안 함'}
+						<strong>정규화</strong> :
+						{datasetConfig.normalization.usage ? datasetConfig.normalization.method : '사용 안 함'}
 					</p>
 					<p>
-						<strong>레이블</strong> : {head.label}
+						<strong>레이블</strong> : {datasetConfig.label}
 					</p>
 				</div>
 			</div>

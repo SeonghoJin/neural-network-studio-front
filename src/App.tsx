@@ -39,6 +39,7 @@ function App() {
 						<Route path={StaticPath.PROJECT} component={ProjectRouter} />
 						<Route path={DynamicPath.PROJECT_SHARE} component={ProjectShareRouter} />
 						<Route path={StaticPath.DASHBOARD} component={DashBoardRouter} />
+						<Route exact path={StaticPath.DATASET_STORE} component={DataSetStorePage} />
 						<Route component={NotFoundPage} />
 					</Switch>
 				</Authentication>

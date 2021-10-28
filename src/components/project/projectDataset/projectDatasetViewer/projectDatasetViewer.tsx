@@ -11,39 +11,21 @@ import SimpleBackdrop from '../../../utils/BackLoading';
 export type ProjectDatasetViewerProps = {
 	datasetConfig: DatasetConfig;
 	setDatasetConfig: any;
-	setHead: any;
-	library: Array<Dataset>;
 };
 
-export const ProjectDatasetViewerTop = ({
-	datasetConfig,
-	setDatasetConfig,
-	setHead,
-	library,
-}: ProjectDatasetViewerProps) => {
+export const ProjectDatasetViewerTop = ({ datasetConfig, setDatasetConfig }: ProjectDatasetViewerProps) => {
 	const onDataChange = useCallback(
 		(e: ChangeEvent<HTMLSelectElement>) => {
 			const { name, value } = e.target;
-
-			let dataName = '';
-			for (let i = 0; i < library.length; i += 1) {
-				// eslint-disable-next-line eqeqeq
-				if (library[i].id == value) {
-					dataName = library[i].name;
-					break;
-				}
-			}
 
 			setDatasetConfig({
 				...datasetConfig,
 				dataset: {
 					[name]: value,
-					name: dataName,
 				},
 			});
-			setHead(datasetConfig);
 		},
-		[library, datasetConfig, setDatasetConfig, setHead]
+		[datasetConfig, setDatasetConfig]
 	);
 
 	const onChange = useCallback(
@@ -54,9 +36,8 @@ export const ProjectDatasetViewerTop = ({
 				...datasetConfig,
 				[name]: value,
 			});
-			setHead(datasetConfig);
 		},
-		[datasetConfig, setDatasetConfig, setHead]
+		[datasetConfig, setDatasetConfig]
 	);
 
 	const onCheck = useCallback(
@@ -67,9 +48,8 @@ export const ProjectDatasetViewerTop = ({
 				...datasetConfig,
 				[name]: checked,
 			});
-			setHead(datasetConfig);
 		},
-		[datasetConfig, setDatasetConfig, setHead]
+		[datasetConfig, setDatasetConfig]
 	);
 
 	const onNormalizationChange = useCallback(
@@ -83,24 +63,15 @@ export const ProjectDatasetViewerTop = ({
 					[name]: value,
 				},
 			});
-			setHead(datasetConfig);
 		},
-		[datasetConfig, setDatasetConfig, setHead]
+		[datasetConfig, setDatasetConfig]
 	);
 
 	return (
 		<>
 			<div className="search-filter">
 				<div className="tit">데이터</div>
-				<select className="inp" name="id" defaultValue={datasetConfig.dataset.id} onChange={onDataChange}>
-					{library.map((dataset, index) => {
-						return (
-							<option key={dataset.id} value={dataset.id}>
-								{dataset.name}
-							</option>
-						);
-					})}
-				</select>
+				<select className="inp" name="id" defaultValue={datasetConfig.dataset.id} onChange={onDataChange} />
 
 				<ol className="list-filter">
 					<li>
@@ -402,8 +373,8 @@ export const DatasetPreviewTable = ({ dataDetail }: Props) => {
 	);
 };
 
-const ProjectDatasetViewer = ({ datasetConfig, setDatasetConfig, setHead, library }: ProjectDatasetViewerProps) => {
-	const { fetch, loading } = useGetDatasetDetail();
+const ProjectDatasetViewer = ({ datasetConfig, setDatasetConfig }: ProjectDatasetViewerProps) => {
+	const { fetch } = useGetDatasetDetail();
 	const [datasetDetail, setDatasetDetail] = useState<DatasetPreview>();
 
 	useEffect(() => {
@@ -412,17 +383,10 @@ const ProjectDatasetViewer = ({ datasetConfig, setDatasetConfig, setHead, librar
 		});
 	}, [fetch, datasetConfig]);
 
-	console.log(datasetDetail);
-
 	return (
 		<>
 			<div className="board-util">
-				<ProjectDatasetViewerTop
-					datasetConfig={datasetConfig}
-					setHead={setHead}
-					setDatasetConfig={setDatasetConfig}
-					library={library}
-				/>
+				<ProjectDatasetViewerTop datasetConfig={datasetConfig} setDatasetConfig={setDatasetConfig} />
 			</div>
 			<DatasetPreviewTable dataDetail={datasetDetail !== undefined ? datasetDetail : null} />
 		</>
