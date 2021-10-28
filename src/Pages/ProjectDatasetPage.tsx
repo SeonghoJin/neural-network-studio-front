@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProjectNav from '../components/project/ProjectNav/projectNav';
 import ProjectDatasetNav from '../components/project/projectDataset/projectDatasetNav/projectDatasetNav';
 import ProjectDatasetMain from '../components/project/projectDataset/projectDatasetMain';
@@ -9,10 +9,15 @@ import { useGetDatasetListLibraryAPI } from '../hooks/useGetDatasetListLibraryAP
 
 export const ProjectDatasetPage = () => {
 	const { datasetConfigList, setDatasetConfigList, loading, mutate } = useDatasetConfigList();
-	const [currentDatasetConfig, setCurrentDatasetConfig] = useState<DatasetConfig | undefined>(
-		datasetConfigList ? datasetConfigList[0] : undefined
-	);
+	const [currentDatasetConfig, setCurrentDatasetConfig] = useState<DatasetConfig | undefined>();
 	const { data: datasetList } = useGetDatasetListLibraryAPI();
+
+	useEffect(() => {
+		if (datasetConfigList != null && datasetConfigList[0] != null && currentDatasetConfig == null) {
+			setCurrentDatasetConfig(datasetConfigList[0]);
+		}
+	}, [currentDatasetConfig, datasetConfigList]);
+
 	return (
 		<div id="container">
 			<ProjectNav currentMenu={4} />
