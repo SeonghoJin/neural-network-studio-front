@@ -41,6 +41,9 @@ export const updateDatasetConfig = async (projectNo: string, datasetConfig: Data
 		);
 		return res.data;
 	} catch (e) {
+		if ((e as AxiosError).response?.status === 400) {
+			throw new Error('중복된 이름이거나, 레이블 값이 설정되지 않았습니다.');
+		}
 		if ((e as AxiosError).response?.status !== 200) {
 			throw new Error('데이터셋 설정 저장에 실패했습니다. 다시 시도해주세요.');
 		}
@@ -59,7 +62,7 @@ export const useUpdateDatasetConfig = () => {
 			});
 
 			try {
-				const delayedData = await sleep(100).then(async () => {
+				const delayedData = await sleep(500).then(async () => {
 					const data = await updateDatasetConfig(projectNo, datasetConfig);
 					setResult({
 						data: data || true,

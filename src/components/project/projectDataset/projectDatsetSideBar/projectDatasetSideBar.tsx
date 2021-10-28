@@ -37,13 +37,14 @@ const ProjectDatasetSideBar = ({
 				return datasetConfig.id === -1;
 			}).length > 0;
 
-		const lengthOverFive = datasetConfigs.length > 5;
+		const lengthOver = datasetConfigs.length > 20;
 
-		if (hasMinusOneId || lengthOverFive) {
+		if (hasMinusOneId || lengthOver) {
 			return false;
 		}
 		return true;
 	}, [datasetConfigs]);
+
 	return (
 		<>
 			<ol className="sec-menu">

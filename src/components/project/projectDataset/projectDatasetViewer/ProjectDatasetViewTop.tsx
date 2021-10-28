@@ -2,6 +2,7 @@ import React, { ChangeEvent, useCallback, useMemo } from 'react';
 import { DatasetConfig } from '../datasetConfig';
 import { GetDatasetListAPIResponse } from '../../../../API/Dataset/type';
 import { CustomDatasetSelectInput } from '../../../Input/custom/CustomDatasetSelectInput';
+import { CustomInput } from '../../../Input/custom/CustomInput';
 
 export type ProjectDatasetViewerTopProps = {
 	datasetConfig: DatasetConfig;
@@ -16,7 +17,6 @@ export const ProjectDatasetViewerTop = ({
 	datasetList,
 	features,
 }: ProjectDatasetViewerTopProps) => {
-	console.log(datasetConfig);
 	const onDataChange = useCallback(
 		(id, name) => {
 			setDatasetConfig({
@@ -81,17 +81,33 @@ export const ProjectDatasetViewerTop = ({
 	return (
 		<>
 			<div className="search-filter">
-				<CustomDatasetSelectInput
-					title="데이터"
-					name="id"
-					onChange={onDataChange}
-					value={{
-						id: datasetConfig.dataset.id.toString(),
-						name: datasetConfig.dataset.name,
+				<CustomInput
+					title="데이터셋 설정 이름"
+					name="name"
+					onChange={(e) => {
+						setDatasetConfig({
+							...datasetConfig,
+							name: e.target.value,
+						});
 					}}
-					propertyCandidates={datasetListCandidates}
+					value={datasetConfig.name}
 				/>
-				<ol className="list-filter">
+				<ol
+					className="list-filter"
+					style={{
+						marginTop: 15,
+					}}
+				>
+					<CustomDatasetSelectInput
+						title="데이터"
+						name="id"
+						onChange={onDataChange}
+						value={{
+							id: datasetConfig.dataset.id.toString(),
+							name: datasetConfig.dataset.name,
+						}}
+						propertyCandidates={datasetListCandidates}
+					/>
 					<li>
 						<input
 							id="ck1"
@@ -112,7 +128,7 @@ export const ProjectDatasetViewerTop = ({
 							key={datasetConfig.normalization.method}
 							className="inp"
 							name="method"
-							defaultValue={datasetConfig.normalization.method}
+							value={datasetConfig.normalization.method}
 							onChange={onNormalizationChange}
 							style={{
 								width: 100,
@@ -127,13 +143,16 @@ export const ProjectDatasetViewerTop = ({
 						<div className="tit">레이블</div>
 						<select
 							className="inp"
-							value={datasetConfig.label}
 							onChange={onChange}
 							name="label"
+							value={datasetConfig.label}
 							style={{
-								width: 200,
+								width: 100,
 							}}
 						>
+							<option key="" value="" selected>
+								none
+							</option>
 							{features?.map((feature) => {
 								return (
 									<option key={feature} value={feature}>

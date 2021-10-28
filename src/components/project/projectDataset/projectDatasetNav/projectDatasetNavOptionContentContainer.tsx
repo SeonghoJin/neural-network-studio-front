@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { useSnackbar } from 'notistack';
 import ProjectDatasetNavOptionContent from './ProjectDatasetNavOptionContent';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
 import { useUpdateDatasetConfig } from '../apis';
 import { DatasetConfig } from '../types';
 import { useAddDatasetConfig } from '../../../../hooks/useAddDatasetConfig';
+import SimpleBackdrop from '../../../utils/BackLoading';
 
 type Props = {
 	currentDatasetConfig: undefined | DatasetConfig;
@@ -17,7 +18,6 @@ const ProjectDatasetNavOptionContentContainer = ({ currentDatasetConfig, mutate 
 	const { enqueueSnackbar } = useSnackbar();
 	const { projectNo } = useProjectLocation();
 	const onSave = useCallback(async () => {
-		console.log(currentDatasetConfig);
 		if (currentDatasetConfig == null) {
 			enqueueSnackbar('데이터셋 설정이 없습니다.', {
 				variant: 'error',
@@ -29,7 +29,9 @@ const ProjectDatasetNavOptionContentContainer = ({ currentDatasetConfig, mutate 
 			await addDatasetConfig
 				.fetch(projectNo, currentDatasetConfig)
 				.then((res) => {
-					console.log(res);
+					enqueueSnackbar('데이터셋 설정을 추가했습니다.', {
+						variant: 'success',
+					});
 				})
 				.catch((e) => {
 					enqueueSnackbar(e.message, {
@@ -45,7 +47,7 @@ const ProjectDatasetNavOptionContentContainer = ({ currentDatasetConfig, mutate 
 					});
 				})
 				.catch((e) => {
-					enqueueSnackbar('저장에 실패했습니다. 다시 시도해주세요.', {
+					enqueueSnackbar(e.message, {
 						variant: 'error',
 					});
 				});
@@ -53,7 +55,12 @@ const ProjectDatasetNavOptionContentContainer = ({ currentDatasetConfig, mutate 
 		mutate();
 	}, [addDatasetConfig, currentDatasetConfig, enqueueSnackbar, mutate, projectNo, updateDatasetConfig]);
 
-	return <ProjectDatasetNavOptionContent onSave={onSave} />;
+	return (
+		<>
+			{addDatasetConfig.loading || (updateDatasetConfig.loading && <SimpleBackdrop open />)}
+			<ProjectDatasetNavOptionContent onSave={onSave} />
+		</>
+	);
 };
 
 export default ProjectDatasetNavOptionContentContainer;

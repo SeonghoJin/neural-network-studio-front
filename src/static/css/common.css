@@ -324,7 +324,7 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 .dashboard .wrap { padding: 54px 66px; box-sizing: border-box; }
 
 .board-util { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin: 0 24px 34px; }
-.board-util .search-filter { display: flex; flex-wrap: wrap; align-items: center; }
+.board-util .search-filter { display: flex; flex-wrap: wrap;  flex-direction: column; }
 .board-util .search-filter .btn-sorting { display: flex; justify-content: center; align-items: center; width: 66px; height: 44px; margin-right: 15px; border: none; border-radius: 22px; box-sizing: border-box; background: #3c3c3c; }
 .board-util .inp-search { width: 394px; height: 44px; padding: 0 15px 0 50px; border: 1px solid #e4e4e4; border-radius: 22px; box-sizing: border-box; background: url('../img/ico_search1.png') 15px center no-repeat #fff; font-size: 16px; font-weight: 400; color: #000; }
 .board-util .btn-create { display: flex; justify-content: center; align-items: center; width: 142px; height: 44px; border-radius: 22px; box-sizing: border-box; background: #5edab7; font-size: 16px; font-weight: 700; color: #28413a; transition: .3s all ease-out; }
