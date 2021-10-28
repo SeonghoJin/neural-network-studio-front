@@ -1,5 +1,5 @@
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import useLogin from '../hooks/useLogin';
 import useAuthentication from '../hooks/useAuthentication';
 import { LoginParams } from '../API/Auth/types';
@@ -19,6 +19,16 @@ export const SignIn = () => {
 		id: '',
 		pw: '',
 	});
+
+	useEffect(() => {
+		const unBlock = history.block((location, action) => {
+			if (action === 'POP') {
+				document.location.href = '/';
+			}
+		});
+
+		return unBlock;
+	}, [history]);
 
 	const login = useCallback(
 		async (params: LoginParams) => {
