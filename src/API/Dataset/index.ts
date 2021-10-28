@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import queryString from 'querystring';
 import {
 	AddDatasetToLibraryAPIResponse,
@@ -108,6 +108,9 @@ export const addDatasetConfigAPI = async (projectNo: string, datasetConfig: Data
 
 		return response.data;
 	} catch (e) {
+		if ((e as AxiosError).response?.status === 400) {
+			throw new Error('이름이 중복되거나, 레이블값이 비어 있습니다.');
+		}
 		throw new Error('DatasetConfig를 추가하지 못했습니다. 다시 시도해주세요.');
 	}
 };

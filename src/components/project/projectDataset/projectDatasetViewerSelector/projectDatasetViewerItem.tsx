@@ -34,7 +34,7 @@ const useStyle = makeStyles({
 
 type Props = {
 	datasetConfig: DatasetConfig;
-	onClick: () => void;
+	onClick: any;
 };
 
 const ProjectDatasetViewerSelectorItem = ({ datasetConfig, onClick }: Props) => {
@@ -44,7 +44,6 @@ const ProjectDatasetViewerSelectorItem = ({ datasetConfig, onClick }: Props) => 
 		$(e.target).toggleClass('active');
 		$(e.target).parent().next().slideToggle('active');
 	};
-
 	return (
 		<>
 			<div className={`tit ${classes.wrapper}`} onClick={onClick} onKeyDown={() => onClick()}>

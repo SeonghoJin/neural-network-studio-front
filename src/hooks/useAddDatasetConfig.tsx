@@ -39,7 +39,7 @@ export const useAddDatasetConfig = () => {
 						data: false,
 						loading: false,
 					});
-					return null;
+					throw e;
 				});
 
 			return responseData;

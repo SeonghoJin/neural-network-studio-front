@@ -32,7 +32,7 @@ interface IDatasetConfigDto {
 	filterTypes: string;
 }
 
-const updateDatasetConfig = async (projectNo: string, datasetConfig: DatasetConfig) => {
+export const updateDatasetConfig = async (projectNo: string, datasetConfig: DatasetConfig) => {
 	try {
 		const res = await axios.put(
 			`${config.SERVER_PREFIX}/api/project/${projectNo}/dataset-config/${datasetConfig.id}`,
@@ -41,6 +41,9 @@ const updateDatasetConfig = async (projectNo: string, datasetConfig: DatasetConf
 		);
 		return res.data;
 	} catch (e) {
+		if ((e as AxiosError).response?.status === 400) {
+			throw new Error('중복된 이름이거나, 레이블 값이 설정되지 않았습니다.');
+		}
 		if ((e as AxiosError).response?.status !== 200) {
 			throw new Error('데이터셋 설정 저장에 실패했습니다. 다시 시도해주세요.');
 		}
@@ -95,28 +98,4 @@ export const getDatasetConfigList = async (projectNo: string, params?: IGetProje
 
 	const response = await axios.get<DatasetConfigs>(uri, axiosConfig);
 	return response.data;
-};
-
-type Props =
-	| {
-			params?: IGetProjectDatasetConfigListParams;
-	  }
-	| undefined;
-
-export const useGetDatasetConfigList = (projectNo: string, props: Props = undefined) => {
-	const result = useSWR<DatasetConfigs, AxiosError>(
-		() => ['getDatasetConfigsResult', props?.params],
-		async (key, value) => {
-			const data = await sleep(300).then(async () => {
-				const delayedData = await getDatasetConfigList(projectNo, value);
-				return delayedData;
-			});
-			return data;
-		}
-	);
-
-	return {
-		loading: !result.data,
-		...result,
-	};
 };
