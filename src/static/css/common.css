@@ -415,7 +415,7 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 .sec-c { width: calc(100% - 280px); height: 100%; background: #fff; overflow-y: auto; }
 
 .sec-menu li { border-bottom: 1px solid #e1e1e1; box-sizing: border-box; }
-.sec-menu .tit { padding: 20px; box-sizing: border-box; background: calc(100% - 20px) center no-repeat #f6f6f6; font-size: 15px; font-weight: 700; color: #5a5a5a; cursor: pointer; }
+.sec-menu .tit { padding: 20px; box-sizing: border-box; font-size: 15px; font-weight: 700; color: #5a5a5a; cursor: pointer; }
 .sec-menu .depth { display: none; padding: 25px 30px; box-sizing: border-box; background: #efefef; }
 .sec-menu .depth.active { display: block; }
 .sec-menu .depth div { margin-bottom: 20px; }

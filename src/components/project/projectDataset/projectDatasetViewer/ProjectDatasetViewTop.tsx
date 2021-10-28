@@ -16,6 +16,7 @@ export const ProjectDatasetViewerTop = ({
 	datasetList,
 	features,
 }: ProjectDatasetViewerTopProps) => {
+	console.log(datasetConfig);
 	const onDataChange = useCallback(
 		(id, name) => {
 			setDatasetConfig({
@@ -98,7 +99,7 @@ export const ProjectDatasetViewerTop = ({
 							name="shuffle"
 							className="ck-custom"
 							onChange={onCheck}
-							defaultChecked={datasetConfig.shuffle}
+							checked={datasetConfig.shuffle}
 						/>
 						<label htmlFor="ck1">
 							<span className="custom" />

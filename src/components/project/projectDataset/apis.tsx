@@ -32,7 +32,7 @@ interface IDatasetConfigDto {
 	filterTypes: string;
 }
 
-const updateDatasetConfig = async (projectNo: string, datasetConfig: DatasetConfig) => {
+export const updateDatasetConfig = async (projectNo: string, datasetConfig: DatasetConfig) => {
 	try {
 		const res = await axios.put(
 			`${config.SERVER_PREFIX}/api/project/${projectNo}/dataset-config/${datasetConfig.id}`,
@@ -59,7 +59,7 @@ export const useUpdateDatasetConfig = () => {
 			});
 
 			try {
-				const delayedData = await sleep(500).then(async () => {
+				const delayedData = await sleep(100).then(async () => {
 					const data = await updateDatasetConfig(projectNo, datasetConfig);
 					setResult({
 						data: data || true,
@@ -95,28 +95,4 @@ export const getDatasetConfigList = async (projectNo: string, params?: IGetProje
 
 	const response = await axios.get<DatasetConfigs>(uri, axiosConfig);
 	return response.data;
-};
-
-type Props =
-	| {
-			params?: IGetProjectDatasetConfigListParams;
-	  }
-	| undefined;
-
-export const useGetDatasetConfigList = (projectNo: string, props: Props = undefined) => {
-	const result = useSWR<DatasetConfigs, AxiosError>(
-		() => ['getDatasetConfigsResult', props?.params],
-		async (key, value) => {
-			const data = await sleep(300).then(async () => {
-				const delayedData = await getDatasetConfigList(projectNo, value);
-				return delayedData;
-			});
-			return data;
-		}
-	);
-
-	return {
-		loading: !result.data,
-		...result,
-	};
 };

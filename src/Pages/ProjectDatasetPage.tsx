@@ -22,7 +22,7 @@ export const ProjectDatasetPage = () => {
 		<div id="container">
 			<ProjectNav currentMenu={4} />
 			<section className="dataset">
-				<ProjectDatasetNav currentDatasetConfig={currentDatasetConfig} />
+				<ProjectDatasetNav currentDatasetConfig={currentDatasetConfig} mutate={mutate} />
 				{loading && <CircleLoading />}
 				<div className="sec-container">
 					{datasetConfigList && datasetList && (
@@ -32,7 +32,6 @@ export const ProjectDatasetPage = () => {
 							setDatasetConfigs={setDatasetConfigList}
 							currentDatasetConfig={currentDatasetConfig}
 							setCurrentDatasetConfig={setCurrentDatasetConfig}
-							mutate={mutate}
 						/>
 					)}
 				</div>

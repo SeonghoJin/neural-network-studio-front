@@ -9,12 +9,10 @@ type Props = {
 	currentDatasetConfig: DatasetConfig | undefined;
 	setCurrentDatasetConfig: (datasetConfig: DatasetConfig) => any;
 	setDatasetConfigs: any;
-	mutate: any;
 	datasetList: GetDatasetListAPIResponse;
 };
 
 const ProjectDatasetMain = ({
-	mutate,
 	setDatasetConfigs,
 	currentDatasetConfig,
 	setCurrentDatasetConfig,
@@ -30,7 +28,6 @@ const ProjectDatasetMain = ({
 						setDatasetConfigs={setDatasetConfigs}
 						setCurrentDatasetConfig={setCurrentDatasetConfig}
 						currentDatasetConfig={currentDatasetConfig}
-						mutate={mutate}
 					/>
 				</div>
 			</LeftWrapper>
