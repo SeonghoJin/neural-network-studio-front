@@ -30,10 +30,10 @@ export const DataSetStorePage = () => {
 					<div className="wrap">
 						<div className="board-util">
 							<div className="search-filter">
-								<button type="button" className="btn-sorting">
-									<img src={icoSorting1} alt=" " />
-								</button>
-								<input type="text" placeholder="검색어를 입력하세요" className="inp-search" />
+								{/* <button type="button" className="btn-sorting"> */}
+								{/*	<img src={icoSorting1} alt=" " /> */}
+								{/* </button> */}
+								{/* <input type="text" placeholder="검색어를 입력하세요" className="inp-search" /> */}
 							</div>
 							<Link to={`${StaticPath.CREATE_DATASET_STORE}`} className="btn-create">
 								데이터셋 생성

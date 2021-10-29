@@ -69,6 +69,7 @@ export const DashBoard = () => {
 										justifyContent: 'space-around',
 										alignItems: 'center',
 									}}
+									onKeyPress={onKeyDown}
 								>
 									<input
 										type="text"
@@ -76,7 +77,6 @@ export const DashBoard = () => {
 										onChange={(e) => {
 											setSearch(e.target.value);
 										}}
-										onKeyPress={onKeyDown}
 										style={{
 											width: '60%',
 										}}

@@ -27,7 +27,7 @@ export interface IGetProjectListParams {
 	curPage?: string;
 	pageSize?: number;
 	sort?: string;
-	filterTypes?: string;
+	filterType?: string;
 	filterString?: string;
 }
 
@@ -49,7 +49,7 @@ export class GetProjectListParams implements IGetProjectListParams {
 		this.pageSize = projectListParams?.pageSize || DEFAULT_PAGE_SIZE;
 		this.sort = projectListParams?.sort || '';
 		this.filterString = projectListParams?.filterString || '';
-		this.filterType = projectListParams?.filterTypes || '';
+		this.filterType = projectListParams?.filterType || '';
 	}
 }
 
