@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { KeyboardEventHandler, useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import NativeSelect from '@material-ui/core/NativeSelect';
 import PrivateAuthentication from '../components/Authentication/PrivateAuthentication';
 import Navigation from '../components/nav';
 import { StaticPath } from '../components/PagePathConsts';
@@ -12,7 +13,8 @@ import { CircleLoading } from '../components/utils/Loading/CircularLoading';
 
 export const DashBoard = () => {
 	const [projectListParams, setProjectListPrams] = useState(new GetProjectListParams());
-
+	const [search, setSearch] = useState<string>('');
+	const [filterType, setFilterType] = useState<string>('');
 	const { data, mutate } = useProjectList({
 		params: projectListParams,
 	});
@@ -21,13 +23,36 @@ export const DashBoard = () => {
 		lastPage: data?.pagination.lastPage,
 	});
 
+	const filterTypeLists = useMemo(() => {
+		return [
+			['제목', 'name'],
+			['설명', 'description'],
+		];
+	}, []);
+
+	const orderTypeLists = useMemo(() => {
+		return [
+			{ name: '생성 시간 순', value: 'createTimeAsc' },
+			{ name: '업데이트 시간 순', value: 'updateTimeAsc' },
+		];
+	}, []);
+
 	useEffect(() => {
-		setProjectListPrams(
-			new GetProjectListParams({
-				curPage: page.toString(),
-			})
-		);
+		setProjectListPrams((getProjectListParams) => ({ ...getProjectListParams, curPage: page.toString() }));
 	}, [page]);
+
+	const onKeyDown: KeyboardEventHandler = useCallback(
+		(event) => {
+			if (event.code === 'Enter') {
+				setProjectListPrams((getProjectListParams) => ({
+					...getProjectListParams,
+					filterString: search,
+					filterType,
+				}));
+			}
+		},
+		[filterType, search]
+	);
 
 	return (
 		<PrivateAuthentication>
@@ -37,11 +62,51 @@ export const DashBoard = () => {
 					<div className="wrap">
 						<div className="board-util">
 							<div className="search-filter">
-								<button type="button" className="btn-sorting">
-									<img src={icoSorting1} alt=" " />
-								</button>
-
-								<input type="text" placeholder="검색어를 입력하세요" className="inp-search" />
+								<div
+									className="inp-search"
+									style={{
+										display: 'flex',
+										justifyContent: 'space-around',
+										alignItems: 'center',
+									}}
+								>
+									<input
+										type="text"
+										placeholder="검색어를 입력하세요"
+										onChange={(e) => {
+											setSearch(e.target.value);
+										}}
+										onKeyPress={onKeyDown}
+										style={{
+											width: '60%',
+										}}
+									/>
+									<div
+										style={{
+											borderLeft: '1px solid #e4e4e4',
+											height: '100%',
+										}}
+									/>
+									<NativeSelect
+										id="select"
+										style={{
+											width: '25%',
+											marginLeft: '10px',
+											marginTop: '3px',
+										}}
+										disableUnderline
+										onChange={(e) => {
+											setFilterType(e.target.value);
+										}}
+									>
+										<option value="" selected>
+											기본
+										</option>
+										{filterTypeLists.map((_filterType) => {
+											return <option value={_filterType[1]}>{_filterType[0]}</option>;
+										})}
+									</NativeSelect>
+								</div>
 							</div>
 
 							<Link to={`${StaticPath.DASHBOARD_NEW_PROJECT}`} className="btn-create">

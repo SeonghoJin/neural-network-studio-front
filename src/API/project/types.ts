@@ -42,14 +42,14 @@ export class GetProjectListParams implements IGetProjectListParams {
 
 	filterString: string;
 
-	filterTypes: string;
+	filterType: string;
 
 	constructor(projectListParams?: IGetProjectListParams) {
 		this.curPage = projectListParams?.curPage || '';
 		this.pageSize = projectListParams?.pageSize || DEFAULT_PAGE_SIZE;
 		this.sort = projectListParams?.sort || '';
 		this.filterString = projectListParams?.filterString || '';
-		this.filterTypes = projectListParams?.filterString || '';
+		this.filterType = projectListParams?.filterTypes || '';
 	}
 }
 

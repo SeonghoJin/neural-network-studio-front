@@ -29,6 +29,7 @@ const ProjectDatasetNavOptionContentContainer = ({ currentDatasetConfig, mutate 
 			await addDatasetConfig
 				.fetch(projectNo, currentDatasetConfig)
 				.then((res) => {
+					console.log(res);
 					enqueueSnackbar('데이터셋 설정을 추가했습니다.', {
 						variant: 'success',
 					});
