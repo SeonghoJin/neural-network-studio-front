@@ -4,6 +4,7 @@ import { AxiosError } from 'axios';
 import { createProject } from '../API/project';
 import { IProjectInfo } from '../API/project/types';
 import { sleep } from '../util';
+import { deleteDatasetConfigAPI } from '../API/Dataset';
 
 type DeleteDatasetResultType = {
 	error: null | Error | AxiosError;
@@ -19,7 +20,7 @@ const deleteDatasetResultState = atom<DeleteDatasetResultType>({
 const useDeleteDatasetConfig = () => {
 	const [result, setResult] = useRecoilState(deleteDatasetResultState);
 	const fetch = useCallback(
-		async (projectInfo: IProjectInfo) => {
+		async (projectNo: string, datasetId: string) => {
 			setResult({
 				error: null,
 				data: false,
@@ -28,7 +29,7 @@ const useDeleteDatasetConfig = () => {
 
 			const state = await sleep(500).then(async () => {
 				try {
-					const data = await createProject(projectInfo);
+					const data = await deleteDatasetConfigAPI(projectNo, datasetId);
 					setResult({
 						error: null,
 						data: true,

@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 import { LoadingButton } from '@mui/lab';
 import { useCallback, useMemo } from 'react';
+import { useSnackbar } from 'notistack';
 import ProjectDatasetViewerSelectorItem from '../projectDatasetViewerSelector/projectDatasetViewerItem';
 import { DatasetConfig } from '../datasetConfig';
+import useProjectLocation from '../../../../hooks/useProjectLocation';
+import useDeleteDatasetConfig from '../../../../hooks/useDeleteDatasetConfig';
+import SimpleBackdrop from '../../../utils/BackLoading';
 
 type Props = {
 	datasetConfigs: DatasetConfig[];
@@ -25,6 +29,9 @@ const ProjectDatasetSideBar = ({
 	currentDatasetConfig,
 	mutate,
 }: Props) => {
+	const { projectNo } = useProjectLocation();
+	const { fetch, loading } = useDeleteDatasetConfig();
+	const { enqueueSnackbar } = useSnackbar();
 	const addDatasetConfig = useCallback(() => {
 		setDatasetConfigs((_dataConfigs: DatasetConfig[]) => {
 			const _currentDatasetConfig = new DatasetConfig();
@@ -49,14 +56,21 @@ const ProjectDatasetSideBar = ({
 
 	const onRemove = useCallback(
 		async (datasetId: string) => {
-			console.log(datasetId);
-			mutate();
+			fetch(projectNo, datasetId)
+				.then(() => {
+					enqueueSnackbar('데이터셋 설정을 삭제했습니다.', { variant: 'success' });
+					mutate();
+				})
+				.catch((e) => {
+					enqueueSnackbar(e.message, { variant: 'error' });
+				});
 		},
-		[mutate]
+		[fetch, projectNo, enqueueSnackbar, mutate]
 	);
 
 	return (
 		<>
+			{loading && <SimpleBackdrop open />}
 			<ol className="sec-menu">
 				{datasetConfigs.map((datasetConfig) => {
 					return (

@@ -346,7 +346,7 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 .list-project .btn-more { display: flex; justify-content: center; align-items: center; width: 30px; height: 30px; border: none; background: none; }
 .list-project .btns-group { display: none; position: absolute; top: 15px; left: 0; width: 85px; border: 1px solid #e1e1e1; border-radius: 10px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); box-sizing: border-box; background: #fff; overflow:hidden}
 .list-project .btns-group.active { display: block; }
-.list-project .btns-group a,button { display: flex; justify-content: center; align-items: center; height: 45px; border-bottom: 1px solid #e1e1e1; box-sizing: border-box; font-size: 15px; font-weight: 400; color: #2b2b2b; }
+.list-project .btns-group a,button { display: flex; justify-content: center; align-items: center; height: 45px;  box-sizing: border-box; font-size: 15px; font-weight: 400; color: #2b2b2b; }
 .list-project .btns-group *:last-child{ border-bottom: 0; }
 .list-project .btns-group .btn-delete { color: #e33131; }
 .list-project .btns-group a img,button img { margin-right: 5px; }
