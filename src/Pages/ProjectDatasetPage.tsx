@@ -13,7 +13,9 @@ export const ProjectDatasetPage = () => {
 	const { data: datasetList } = useGetDatasetListLibraryAPI();
 
 	useEffect(() => {
-		if (datasetConfigList != null && datasetConfigList[0] != null && currentDatasetConfig == null) {
+		if (datasetConfigList == null || datasetConfigList[0] == null) {
+			setCurrentDatasetConfig(undefined);
+		} else if (currentDatasetConfig == null) {
 			setCurrentDatasetConfig(datasetConfigList[0]);
 		}
 	}, [currentDatasetConfig, datasetConfigList]);

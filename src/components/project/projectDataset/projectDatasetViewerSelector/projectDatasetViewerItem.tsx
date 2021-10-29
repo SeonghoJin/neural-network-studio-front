@@ -51,26 +51,28 @@ const ProjectDatasetViewerSelectorItem = ({ datasetConfig, onClick, onRemove }: 
 		<>
 			<div className={`tit ${classes.wrapper}`} onClick={onClick} onKeyDown={() => onClick()}>
 				{datasetConfig.name}
-				<Button
-					variant="text"
-					color="secondary"
-					style={{
-						height: '20px',
-						width: '40px',
-						padding: '5px',
-						minWidth: '0px',
-						position: 'absolute',
-						right: '10px',
-						bottom: '10px',
-					}}
-					onClick={() => {
-						if (window.confirm('데이터셋 설정을 삭제하시겠습니까?')) {
-							onRemove();
-						}
-					}}
-				>
-					삭제
-				</Button>
+				{datasetConfig.id !== -1 && (
+					<Button
+						variant="text"
+						color="secondary"
+						style={{
+							height: '20px',
+							width: '40px',
+							padding: '5px',
+							minWidth: '0px',
+							position: 'absolute',
+							right: '10px',
+							bottom: '10px',
+						}}
+						onClick={() => {
+							if (window.confirm('데이터셋 설정을 삭제하시겠습니까?')) {
+								onRemove();
+							}
+						}}
+					>
+						삭제
+					</Button>
+				)}
 				<button className={`js-depth ${classes.toggleBtn}`} type="button" onClick={onToggle}>
 					더 보기
 				</button>

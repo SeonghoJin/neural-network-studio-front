@@ -10,7 +10,6 @@ import useGetDatasetList from '../hooks/useGetDatasetList';
 import usePageNation from '../components/utils/pagenation/usePageNation';
 import { CircleLoading } from '../components/utils/Loading/CircularLoading';
 import { DatasetCards } from '../components/datasetStore/DataSetCards';
-import ErrorBoundary from '../components/utils/ErrorBoundary';
 
 export const DataSetStorePage = () => {
 	const queries = useDataSetStoreQuery();
