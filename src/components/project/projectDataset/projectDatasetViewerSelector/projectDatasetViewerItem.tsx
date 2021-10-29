@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import React, { useEffect, useState } from 'react';
+import Button from '@material-ui/core/Button';
 import { DatasetConfig } from '../datasetConfig';
 import select from '../../../../static/img/ico_arrow_select1.png';
 
@@ -8,6 +9,7 @@ const useStyle = makeStyles({
 	wrapper: {
 		width: '100%',
 		height: '100px',
+		position: 'relative',
 	},
 	container: {
 		width: '100%',
@@ -35,9 +37,10 @@ const useStyle = makeStyles({
 type Props = {
 	datasetConfig: DatasetConfig;
 	onClick: any;
+	onRemove: any;
 };
 
-const ProjectDatasetViewerSelectorItem = ({ datasetConfig, onClick }: Props) => {
+const ProjectDatasetViewerSelectorItem = ({ datasetConfig, onClick, onRemove }: Props) => {
 	const classes = useStyle();
 
 	const onToggle = (e: any) => {
@@ -48,6 +51,28 @@ const ProjectDatasetViewerSelectorItem = ({ datasetConfig, onClick }: Props) => 
 		<>
 			<div className={`tit ${classes.wrapper}`} onClick={onClick} onKeyDown={() => onClick()}>
 				{datasetConfig.name}
+				{datasetConfig.id !== -1 && (
+					<Button
+						variant="text"
+						color="secondary"
+						style={{
+							height: '20px',
+							width: '40px',
+							padding: '5px',
+							minWidth: '0px',
+							position: 'absolute',
+							right: '10px',
+							bottom: '10px',
+						}}
+						onClick={() => {
+							if (window.confirm('데이터셋 설정을 삭제하시겠습니까?')) {
+								onRemove();
+							}
+						}}
+					>
+						삭제
+					</Button>
+				)}
 				<button className={`js-depth ${classes.toggleBtn}`} type="button" onClick={onToggle}>
 					더 보기
 				</button>

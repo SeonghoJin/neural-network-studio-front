@@ -5,12 +5,12 @@ export type CustomSelectInputProps = {
 	title: string;
 	name: string;
 	onChange: (e: any) => void;
-	value: string;
-	propertyCandidates: Array<string | number>;
+	value: { name: string; id: string };
+	propertyCandidates: Array<{ name: string; id: string }>;
 	style?: any;
 };
 
-export const CustomSelectInput = ({
+export const CustomNameValueSelectInput = ({
 	title,
 	onChange,
 	name,
@@ -22,8 +22,8 @@ export const CustomSelectInput = ({
 		() =>
 			propertyCandidates.map((candidate) => {
 				return (
-					<MenuItem key={candidate} value={candidate}>
-						{candidate}
+					<MenuItem key={candidate.id} value={candidate.id}>
+						{candidate.name}
 					</MenuItem>
 				);
 			}),
@@ -33,8 +33,8 @@ export const CustomSelectInput = ({
 	return (
 		<div className="box" style={style}>
 			<div className="tit">{title}</div>
-			<Select disableUnderline name={name} onChange={onChange} value={value}>
-				<MenuItem value={value}>{value}</MenuItem>
+			<Select disableUnderline name={name} onChange={onChange} value={value.id}>
+				<MenuItem value="-1">none</MenuItem>
 				{candidateComponent}
 			</Select>
 		</div>

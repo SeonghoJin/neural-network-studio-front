@@ -56,13 +56,12 @@ export const ProjectDatasetViewerTop = ({
 
 	const onNormalizationChange = useCallback(
 		(e: ChangeEvent<any>) => {
-			const { name, value } = e.target;
-
+			const { value } = e.target;
 			setDatasetConfig({
 				...datasetConfig,
 				normalization: {
-					...datasetConfig.normalization,
-					[name]: value,
+					method: value,
+					usage: value !== '',
 				},
 			});
 		},
@@ -80,7 +79,12 @@ export const ProjectDatasetViewerTop = ({
 
 	return (
 		<>
-			<div className="search-filter">
+			<div
+				className="search-filter"
+				style={{
+					flexDirection: 'column',
+				}}
+			>
 				<CustomInput
 					title="데이터셋 설정 이름"
 					name="name"
@@ -134,6 +138,7 @@ export const ProjectDatasetViewerTop = ({
 								width: 100,
 							}}
 						>
+							<option value="">None</option>
 							<option value="MinMax">MinMax</option>
 							<option value="Standard">Standard</option>
 							<option value="Image">Image</option>

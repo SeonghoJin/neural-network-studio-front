@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 import { LoadingButton } from '@mui/lab';
 import { useCallback, useMemo } from 'react';
+import { useSnackbar } from 'notistack';
 import ProjectDatasetViewerSelectorItem from '../projectDatasetViewerSelector/projectDatasetViewerItem';
 import { DatasetConfig } from '../datasetConfig';
+import useProjectLocation from '../../../../hooks/useProjectLocation';
+import useDeleteDatasetConfig from '../../../../hooks/useDeleteDatasetConfig';
+import SimpleBackdrop from '../../../utils/BackLoading';
 
 type Props = {
 	datasetConfigs: DatasetConfig[];
 	currentDatasetConfig: DatasetConfig | undefined;
 	setCurrentDatasetConfig: (datasetConfig: DatasetConfig) => any;
 	setDatasetConfigs: any;
+	mutate: any;
 };
 
 const LoadingButtonWrapper = styled.div`
@@ -22,7 +27,11 @@ const ProjectDatasetSideBar = ({
 	setDatasetConfigs,
 	setCurrentDatasetConfig,
 	currentDatasetConfig,
+	mutate,
 }: Props) => {
+	const { projectNo } = useProjectLocation();
+	const { fetch, loading } = useDeleteDatasetConfig();
+	const { enqueueSnackbar } = useSnackbar();
 	const addDatasetConfig = useCallback(() => {
 		setDatasetConfigs((_dataConfigs: DatasetConfig[]) => {
 			const _currentDatasetConfig = new DatasetConfig();
@@ -37,7 +46,7 @@ const ProjectDatasetSideBar = ({
 				return datasetConfig.id === -1;
 			}).length > 0;
 
-		const lengthOver = datasetConfigs.length > 20;
+		const lengthOver = datasetConfigs.length > 10;
 
 		if (hasMinusOneId || lengthOver) {
 			return false;
@@ -45,8 +54,23 @@ const ProjectDatasetSideBar = ({
 		return true;
 	}, [datasetConfigs]);
 
+	const onRemove = useCallback(
+		async (datasetId: string) => {
+			fetch(projectNo, datasetId)
+				.then(() => {
+					enqueueSnackbar('데이터셋 설정을 삭제했습니다.', { variant: 'success' });
+					mutate();
+				})
+				.catch((e) => {
+					enqueueSnackbar(e.message, { variant: 'error' });
+				});
+		},
+		[fetch, projectNo, enqueueSnackbar, mutate]
+	);
+
 	return (
 		<>
+			{loading && <SimpleBackdrop open />}
 			<ol className="sec-menu">
 				{datasetConfigs.map((datasetConfig) => {
 					return (
@@ -61,6 +85,9 @@ const ProjectDatasetSideBar = ({
 								datasetConfig={datasetConfig}
 								onClick={() => {
 									setCurrentDatasetConfig(datasetConfig);
+								}}
+								onRemove={async () => {
+									await onRemove(datasetConfig.id.toString());
 								}}
 							/>
 						</li>
