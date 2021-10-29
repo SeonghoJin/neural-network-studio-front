@@ -81,6 +81,12 @@ export interface ProjectConfigDto {
 	epochs: number;
 	early_stop: EarlyStopConfigDto;
 	learning_rate_reduction: LearningRateReductionConfigDto;
+	dataset_config: ProjectDatasetConfigDto;
+}
+
+export interface ProjectDatasetConfigDto {
+	valid: boolean;
+	id: number;
 }
 
 export interface OptimizerConfigDto {
@@ -223,6 +229,25 @@ export class OptimizerConfig {
 	}
 }
 
+export class ProjectDatasetConfig {
+	valid: boolean;
+
+	id: string;
+
+	constructor(dto: ProjectDatasetConfigDto) {
+		this.valid = dto?.valid || false;
+		this.id = dto?.id.toString() || '-1';
+	}
+
+	static toDto(projectDatasetConfig: ProjectDatasetConfig) {
+		const dto: ProjectDatasetConfigDto = {
+			valid: projectDatasetConfig.valid,
+			id: Number(projectDatasetConfig.id),
+		};
+		return dto;
+	}
+}
+
 export class ProjectConfig {
 	optimizer_name: Optimizers;
 
@@ -240,6 +265,8 @@ export class ProjectConfig {
 
 	learning_rate_reduction: LearningRateReductionConfig;
 
+	dataset_config: ProjectDatasetConfig;
+
 	constructor(dto: ProjectConfigDto) {
 		this.optimizer_name = dto.optimizer_name || Optimizers.Adam;
 		this.optimizer_config = new OptimizerConfig(dto?.optimizer_config || {});
@@ -249,6 +276,7 @@ export class ProjectConfig {
 		this.epochs = dto.epochs.toString();
 		this.early_stop = new EarlyStopConfig(dto.early_stop);
 		this.learning_rate_reduction = new LearningRateReductionConfig(dto.learning_rate_reduction);
+		this.dataset_config = new ProjectDatasetConfig(dto?.dataset_config);
 	}
 
 	static toProjectConfigDto(projectConfig: ProjectConfig) {
@@ -263,6 +291,7 @@ export class ProjectConfig {
 			learning_rate_reduction: LearningRateReductionConfig.toLearningRateReductionConfigDto(
 				projectConfig.learning_rate_reduction
 			),
+			dataset_config: ProjectDatasetConfig.toDto(projectConfig.dataset_config),
 		};
 		return projectConfigDto;
 	}

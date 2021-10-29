@@ -42,18 +42,19 @@ const GlobalConfigShareModeContainer = ({ projectConfig }: Omit<GlobalConfigProp
 	);
 
 	return (
-		<GlobalConfig
-			onChange={onChange}
-			projectLearningRateReductionConfigContainer={
-				<ProjectLearningRateReductionConfigShareModeContainer
-					learningRateReduction={projectConfig.learning_rate_reduction}
-				/>
-			}
-			projectConfig={globalConfig}
-			projectEarlyStopConfigContainer={
-				<ProjectEarlyStopConfigShareModeContainer earlyStopConfig={projectConfig.early_stop} />
-			}
-		/>
+		// <GlobalConfig
+		// 	onChange={onChange}
+		// 	projectLearningRateReductionConfigContainer={
+		// 		<ProjectLearningRateReductionConfigShareModeContainer
+		// 			learningRateReduction={projectConfig.learning_rate_reduction}
+		// 		/>
+		// 	}
+		// 	projectConfig={globalConfig}
+		// 	projectEarlyStopConfigContainer={
+		// 		<ProjectEarlyStopConfigShareModeContainer earlyStopConfig={projectConfig.early_stop} />
+		// 	}
+		// />
+		<></>
 	);
 };
 
