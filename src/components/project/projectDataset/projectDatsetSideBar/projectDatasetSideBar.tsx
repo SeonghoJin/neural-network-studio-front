@@ -9,6 +9,7 @@ type Props = {
 	currentDatasetConfig: DatasetConfig | undefined;
 	setCurrentDatasetConfig: (datasetConfig: DatasetConfig) => any;
 	setDatasetConfigs: any;
+	mutate: any;
 };
 
 const LoadingButtonWrapper = styled.div`
@@ -22,6 +23,7 @@ const ProjectDatasetSideBar = ({
 	setDatasetConfigs,
 	setCurrentDatasetConfig,
 	currentDatasetConfig,
+	mutate,
 }: Props) => {
 	const addDatasetConfig = useCallback(() => {
 		setDatasetConfigs((_dataConfigs: DatasetConfig[]) => {
@@ -37,13 +39,21 @@ const ProjectDatasetSideBar = ({
 				return datasetConfig.id === -1;
 			}).length > 0;
 
-		const lengthOver = datasetConfigs.length > 20;
+		const lengthOver = datasetConfigs.length > 10;
 
 		if (hasMinusOneId || lengthOver) {
 			return false;
 		}
 		return true;
 	}, [datasetConfigs]);
+
+	const onRemove = useCallback(
+		async (datasetId: string) => {
+			console.log(datasetId);
+			mutate();
+		},
+		[mutate]
+	);
 
 	return (
 		<>
@@ -61,6 +71,9 @@ const ProjectDatasetSideBar = ({
 								datasetConfig={datasetConfig}
 								onClick={() => {
 									setCurrentDatasetConfig(datasetConfig);
+								}}
+								onRemove={async () => {
+									await onRemove(datasetConfig.id.toString());
 								}}
 							/>
 						</li>

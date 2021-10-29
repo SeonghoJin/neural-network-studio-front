@@ -32,6 +32,7 @@ export const ProjectDatasetPage = () => {
 							setDatasetConfigs={setDatasetConfigList}
 							currentDatasetConfig={currentDatasetConfig}
 							setCurrentDatasetConfig={setCurrentDatasetConfig}
+							mutate={mutate}
 						/>
 					)}
 				</div>

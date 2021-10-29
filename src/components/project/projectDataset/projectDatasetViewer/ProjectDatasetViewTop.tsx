@@ -80,7 +80,12 @@ export const ProjectDatasetViewerTop = ({
 
 	return (
 		<>
-			<div className="search-filter">
+			<div
+				className="search-filter"
+				style={{
+					flexDirection: 'column',
+				}}
+			>
 				<CustomInput
 					title="데이터셋 설정 이름"
 					name="name"

@@ -35,9 +35,10 @@ const useStyle = makeStyles({
 type Props = {
 	datasetConfig: DatasetConfig;
 	onClick: any;
+	onRemove: any;
 };
 
-const ProjectDatasetViewerSelectorItem = ({ datasetConfig, onClick }: Props) => {
+const ProjectDatasetViewerSelectorItem = ({ datasetConfig, onClick, onRemove }: Props) => {
 	const classes = useStyle();
 
 	const onToggle = (e: any) => {
@@ -48,6 +49,16 @@ const ProjectDatasetViewerSelectorItem = ({ datasetConfig, onClick }: Props) => 
 		<>
 			<div className={`tit ${classes.wrapper}`} onClick={onClick} onKeyDown={() => onClick()}>
 				{datasetConfig.name}
+				<button
+					type="button"
+					onClick={() => {
+						if (window.confirm('데이터셋 설정을 삭제하시겠습니까?')) {
+							onRemove();
+						}
+					}}
+				>
+					x
+				</button>
 				<button className={`js-depth ${classes.toggleBtn}`} type="button" onClick={onToggle}>
 					더 보기
 				</button>

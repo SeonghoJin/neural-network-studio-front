@@ -114,3 +114,18 @@ export const addDatasetConfigAPI = async (projectNo: string, datasetConfig: Data
 		throw new Error('DatasetConfig를 추가하지 못했습니다. 다시 시도해주세요.');
 	}
 };
+
+export const deleteDatasetConfigAPI = async (projectNo: string, datasetConfigId: string) => {
+	try {
+		const response = await axios.delete(
+			`${config.SERVER_PREFIX}/api/project/${projectNo}/dataset-config/${datasetConfigId}`,
+			axiosConfig
+		);
+		return response.data;
+	} catch (e) {
+		if ((e as AxiosError).response?.status !== 200) {
+			throw new Error('데이터셋 설정을 삭제하지 못했습니다. 다시 시도해주세요.');
+		}
+		throw new Error((e as Error).message);
+	}
+};
