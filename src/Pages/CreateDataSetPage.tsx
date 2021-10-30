@@ -229,7 +229,7 @@ export const CreateDataSetPage = () => {
 								<FileInputWrapper>
 									<FilePathWrapper>{filePath}</FilePathWrapper>
 									<FileInputLabel htmlFor="uploadImage">파일 찾기</FileInputLabel>
-									<input ref={fileRef} type="file" id="uploadImage" accept=".csv" onChange={onChangeFile} hidden />
+									<input ref={fileRef} type="file" id="uploadImage" accept=".csv,.zip" onChange={onChangeFile} hidden />
 								</FileInputWrapper>
 							</ItemBody>
 						</ItemWrapper>
