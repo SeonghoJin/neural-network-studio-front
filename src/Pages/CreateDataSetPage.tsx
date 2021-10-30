@@ -141,7 +141,7 @@ const MarginDivider = () => {
 	);
 };
 
-const MAX_FILE_SIZE = 10 * 1024 * 1024;
+const MAX_FILE_SIZE = 500 * 1024 * 1024;
 
 export const CreateDataSetPage = () => {
 	const fileRef = useRef<HTMLInputElement | null>(null);
@@ -175,12 +175,12 @@ export const CreateDataSetPage = () => {
 		}
 
 		if (file.size > MAX_FILE_SIZE) {
+			enqueueSnackbar('파일의 용량이 너무 큽니다.', { variant: 'error' });
 			return;
 		}
-
 		setFilePath(inputNode.value);
 		setUploadFile(file);
-	}, [setFilePath, setUploadFile]);
+	}, [enqueueSnackbar]);
 
 	const onSubmit = useCallback(() => {
 		const uploadFormData = new FormData();
@@ -222,7 +222,7 @@ export const CreateDataSetPage = () => {
 										fontSize: '8',
 									}}
 								>
-									.csv, .jpg or .png인 .zip파일만 업로드 하실 수 있습니다.
+									.csv, .jpg or .png인 .zip파일만 최대 500MB까지 업로드 하실 수 있습니다.
 								</div>
 							</ItemHead>
 							<ItemBody>
