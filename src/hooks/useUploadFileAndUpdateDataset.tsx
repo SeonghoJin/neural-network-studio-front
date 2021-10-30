@@ -34,17 +34,18 @@ export const useUploadFileAndUpdateDataset = () => {
 					...updateDataset,
 				});
 
-				if (response === null) {
-					setUploadFileAndUpdateDatasetResultState({
-						loading: false,
-						error: null,
-						data: true,
-					});
-				} else {
-					throw new Error('데이터 업데이트에 실패했습니다.');
-				}
+				setUploadFileAndUpdateDatasetResultState({
+					loading: false,
+					error: null,
+					data: true,
+				});
 			})
 			.catch((e) => {
+				setUploadFileAndUpdateDatasetResultState({
+					loading: false,
+					error: null,
+					data: true,
+				});
 				throw new Error(e.message);
 			});
 	};
