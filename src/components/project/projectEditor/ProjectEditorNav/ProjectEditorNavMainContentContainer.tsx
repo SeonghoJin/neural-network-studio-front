@@ -32,7 +32,7 @@ const axiosConfig: AxiosRequestConfig = {
 
 const requsetTrain = async (projectNo: string) => {
 	try {
-		const res = await axios.post(`${config.SERVER_PREFIX}/api/project/${projectNo}/train`, axiosConfig);
+		const res = await axios.post(`${config.SERVER_PREFIX}/api/project/${projectNo}/train`, null, axiosConfig);
 		return res.data;
 	} catch (e: any) {
 		throw new Error(e.message);

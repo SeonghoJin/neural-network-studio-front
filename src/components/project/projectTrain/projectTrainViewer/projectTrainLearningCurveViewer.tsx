@@ -1,4 +1,5 @@
 import { Line } from 'react-chartjs-2';
+import { useEffect } from 'react';
 import { Epoch, EpochList } from '../types';
 
 const ProjectTrainLearningCurveViewer = (epochs: EpochList) => {
@@ -8,7 +9,7 @@ const ProjectTrainLearningCurveViewer = (epochs: EpochList) => {
 	const valAcc: Array<number> = [];
 	const valLoss: Array<number> = [];
 
-	if (epochs === undefined) {
+	if (epochs === undefined || epochs === null) {
 		return <></>;
 	}
 

@@ -3,7 +3,7 @@ import { atom, useRecoilState } from 'recoil';
 import { CircleLoading } from '../../../utils/Loading/CircularLoading';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
 import { TrainHistory } from '../types';
-import { useProjectTrainEpochs } from '../api';
+import { getTrainHistoryEpochListAPI, useGetTrainHistoryEpochListLibraryAPI, useProjectTrainEpochs } from '../api';
 import ProjectTrainLearningCurveViewer from './projectTrainLearningCurveViewer';
 
 export class ProjectTrainHistories {
@@ -26,8 +26,15 @@ export type ProjectTrainViewerProps = {
 };
 
 const ProjectTrainViewer = ({ history }: ProjectTrainViewerProps) => {
-	// const { projectTrain, loading } = useProjectTrain();
+	const { projectNo } = useProjectLocation();
 	const { projectTrainEpochs, setProjectTrainEpochs, loading } = useProjectTrainEpochs(history.trainNo);
+	const { fetch } = useGetTrainHistoryEpochListLibraryAPI();
+
+	useEffect(() => {
+		fetch(parseInt(projectNo, 10), history.trainNo).then((res) => {
+			setProjectTrainEpochs(res);
+		});
+	}, [setProjectTrainEpochs, fetch, projectNo, history]);
 
 	if (history.status === 'TRAIN') {
 		// Connect socket.
@@ -37,7 +44,7 @@ const ProjectTrainViewer = ({ history }: ProjectTrainViewerProps) => {
 		<div className="box">
 			<div className="tit">Learning Curve</div>
 			{loading && <CircleLoading />}
-			{projectTrainEpochs && <ProjectTrainLearningCurveViewer epochs={projectTrainEpochs.epochs} />}
+			{projectTrainEpochs?.epochs && <ProjectTrainLearningCurveViewer epochs={projectTrainEpochs.epochs} />}
 		</div>
 	);
 };
