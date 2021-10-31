@@ -142,7 +142,13 @@ export const DataSetStorePage = () => {
 							</div>
 							{loading && <CircleLoading />}
 							<ol className="list-project">
-								{data && <DatasetCards datasets={data.datasets} updateDatasets={mutate} />}
+								{data && (
+									<DatasetCards
+										datasets={data.datasets}
+										updateDatasets={mutate}
+										updateDatasetFromLibrary={datasetListLibrary.mutate}
+									/>
+								)}
 							</ol>
 							<div>{item}</div>
 						</div>

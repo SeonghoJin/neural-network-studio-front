@@ -9,6 +9,7 @@ import { useGetDatasetListLibraryAPI } from '../../hooks/useGetDatasetListLibrar
 type Props = {
 	datasets: Dataset[];
 	updateDatasets: any;
+	updateDatasetFromLibrary: any;
 };
 
 type DatasetCardProps = {
@@ -60,25 +61,24 @@ const DatasetCard = ({ dataset, deleteDatasetFetch, addDatasetFetch }: DatasetCa
 	);
 };
 
-export const DatasetCards = ({ datasets, updateDatasets }: Props) => {
+export const DatasetCards = ({ datasets, updateDatasets, updateDatasetFromLibrary }: Props) => {
 	const deleteDataset = useDeleteDatasetFromLibrary();
 	const addDataset = useAddDatasetToLibrary();
-	const { mutate } = useGetDatasetListLibraryAPI();
 	const onDeleteDataSetFromLibrary = useCallback(
 		async (datasetId: string) => {
 			await deleteDataset.fetch(datasetId);
-			await updateDatasets();
-			await mutate();
+			updateDatasets();
+			updateDatasetFromLibrary();
 		},
-		[deleteDataset, mutate, updateDatasets]
+		[deleteDataset, updateDatasetFromLibrary, updateDatasets]
 	);
 	const onAddDataSetInLibrary = useCallback(
 		async (datasetId: string) => {
 			await addDataset.fetch(datasetId);
-			await updateDatasets();
-			await mutate();
+			updateDatasets();
+			updateDatasetFromLibrary();
 		},
-		[addDataset, mutate, updateDatasets]
+		[addDataset, updateDatasetFromLibrary, updateDatasets]
 	);
 
 	return (
