@@ -7,7 +7,7 @@ import { GetDatasetListAPIResponse } from '../../../API/Dataset/type';
 type Props = {
 	datasetConfigs: DatasetConfig[];
 	currentDatasetConfig: DatasetConfig | undefined;
-	setCurrentDatasetConfig: (datasetConfig: DatasetConfig) => any;
+	setCurrentDatasetConfig: (datasetConfig: DatasetConfig | undefined) => any;
 	setDatasetConfigs: any;
 	datasetList: GetDatasetListAPIResponse;
 	mutate: any;

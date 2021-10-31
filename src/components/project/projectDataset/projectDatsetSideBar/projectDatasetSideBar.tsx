@@ -11,7 +11,7 @@ import SimpleBackdrop from '../../../utils/BackLoading';
 type Props = {
 	datasetConfigs: DatasetConfig[];
 	currentDatasetConfig: DatasetConfig | undefined;
-	setCurrentDatasetConfig: (datasetConfig: DatasetConfig) => any;
+	setCurrentDatasetConfig: (datasetConfig: DatasetConfig | undefined) => any;
 	setDatasetConfigs: any;
 	mutate: any;
 };
@@ -59,13 +59,14 @@ const ProjectDatasetSideBar = ({
 			fetch(projectNo, datasetId)
 				.then(() => {
 					enqueueSnackbar('데이터셋 설정을 삭제했습니다.', { variant: 'success' });
+					setCurrentDatasetConfig(undefined);
 					mutate();
 				})
 				.catch((e) => {
 					enqueueSnackbar(e.message, { variant: 'error' });
 				});
 		},
-		[fetch, projectNo, enqueueSnackbar, mutate]
+		[fetch, projectNo, enqueueSnackbar, setCurrentDatasetConfig, mutate]
 	);
 
 	return (

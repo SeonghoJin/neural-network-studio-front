@@ -14,7 +14,7 @@ export const ProjectDatasetPage = () => {
 	useEffect(() => {
 		if (datasetConfigList == null || datasetConfigList[0] == null) {
 			setCurrentDatasetConfig(undefined);
-		} else if (currentDatasetConfig == null) {
+		} else if (currentDatasetConfig == null && datasetConfigList[0].id !== -1) {
 			setCurrentDatasetConfig(datasetConfigList[0]);
 		}
 	}, [currentDatasetConfig, datasetConfigList]);
