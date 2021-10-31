@@ -10,9 +10,10 @@ import SimpleBackdrop from '../../../utils/BackLoading';
 type Props = {
 	currentDatasetConfig: undefined | DatasetConfig;
 	mutate: any;
+	setCurrentDatasetConfig: any;
 };
 
-const ProjectDatasetNavOptionContentContainer = ({ currentDatasetConfig, mutate }: Props) => {
+const ProjectDatasetNavOptionContentContainer = ({ currentDatasetConfig, mutate, setCurrentDatasetConfig }: Props) => {
 	const updateDatasetConfig = useUpdateDatasetConfig();
 	const addDatasetConfig = useAddDatasetConfig();
 	const { enqueueSnackbar } = useSnackbar();
@@ -28,10 +29,12 @@ const ProjectDatasetNavOptionContentContainer = ({ currentDatasetConfig, mutate 
 		if (currentDatasetConfig.id === -1) {
 			await addDatasetConfig
 				.fetch(projectNo, currentDatasetConfig)
-				.then((res) => {
+				.then(async (res) => {
 					enqueueSnackbar('데이터셋 설정을 추가했습니다.', {
 						variant: 'success',
 					});
+					await mutate();
+					setCurrentDatasetConfig(undefined);
 				})
 				.catch((e) => {
 					enqueueSnackbar(e.message, {
@@ -42,6 +45,7 @@ const ProjectDatasetNavOptionContentContainer = ({ currentDatasetConfig, mutate 
 			await updateDatasetConfig
 				.fetch(projectNo, currentDatasetConfig)
 				.then(() => {
+					mutate();
 					enqueueSnackbar('저장되었습니다.', {
 						variant: 'success',
 					});
@@ -52,8 +56,15 @@ const ProjectDatasetNavOptionContentContainer = ({ currentDatasetConfig, mutate 
 					});
 				});
 		}
-		mutate();
-	}, [addDatasetConfig, currentDatasetConfig, enqueueSnackbar, mutate, projectNo, updateDatasetConfig]);
+	}, [
+		addDatasetConfig,
+		currentDatasetConfig,
+		enqueueSnackbar,
+		mutate,
+		projectNo,
+		setCurrentDatasetConfig,
+		updateDatasetConfig,
+	]);
 
 	return (
 		<>

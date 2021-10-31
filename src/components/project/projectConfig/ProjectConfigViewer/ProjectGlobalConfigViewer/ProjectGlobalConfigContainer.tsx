@@ -26,7 +26,7 @@ const GlobalConfigContainer = ({ projectConfig }: Omit<GlobalConfigProps, 'onCha
 			setProjectConfig({
 				...(projectConfig as ProjectConfig),
 				dataset_config: {
-					...projectConfig.dataset_config,
+					valid: value !== '-1',
 					id: value,
 				},
 			});

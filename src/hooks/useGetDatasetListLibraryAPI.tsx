@@ -58,5 +58,8 @@ export const useGetDatasetListLibraryAPI = () => {
 	return {
 		fetch,
 		...result,
+		mutate: () => {
+			fetch(1, 100);
+		},
 	};
 };

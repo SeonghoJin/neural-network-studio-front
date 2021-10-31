@@ -4,10 +4,12 @@ import { Dataset } from '../../API/Dataset/type';
 import { useDeleteDatasetFromLibrary } from '../../hooks/useDeleteDatasetFromLibrary';
 import { useAddDatasetToLibrary } from '../../hooks/useAddDatasetToLibrary';
 import SimpleBackdrop from '../utils/BackLoading';
+import { useGetDatasetListLibraryAPI } from '../../hooks/useGetDatasetListLibraryAPI';
 
 type Props = {
 	datasets: Dataset[];
 	updateDatasets: any;
+	updateDatasetFromLibrary: any;
 };
 
 type DatasetCardProps = {
@@ -59,23 +61,24 @@ const DatasetCard = ({ dataset, deleteDatasetFetch, addDatasetFetch }: DatasetCa
 	);
 };
 
-export const DatasetCards = ({ datasets, updateDatasets }: Props) => {
+export const DatasetCards = ({ datasets, updateDatasets, updateDatasetFromLibrary }: Props) => {
 	const deleteDataset = useDeleteDatasetFromLibrary();
 	const addDataset = useAddDatasetToLibrary();
-
 	const onDeleteDataSetFromLibrary = useCallback(
 		async (datasetId: string) => {
 			await deleteDataset.fetch(datasetId);
 			updateDatasets();
+			updateDatasetFromLibrary();
 		},
-		[deleteDataset, updateDatasets]
+		[deleteDataset, updateDatasetFromLibrary, updateDatasets]
 	);
 	const onAddDataSetInLibrary = useCallback(
 		async (datasetId: string) => {
 			await addDataset.fetch(datasetId);
-			await updateDatasets();
+			updateDatasets();
+			updateDatasetFromLibrary();
 		},
-		[addDataset, updateDatasets]
+		[addDataset, updateDatasetFromLibrary, updateDatasets]
 	);
 
 	return (
