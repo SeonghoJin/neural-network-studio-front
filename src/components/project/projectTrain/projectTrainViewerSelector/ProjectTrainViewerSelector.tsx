@@ -16,7 +16,7 @@ const ProjectTrainViewerSelector = (props: Props) => {
 				return (
 					<li key={head.trainNo} className={value === head ? 'active' : ''}>
 						<ProjectTrainViewerSelectorItem
-							head={head}
+							trainHistory={head}
 							onClick={() => {
 								setValue(head);
 							}}
