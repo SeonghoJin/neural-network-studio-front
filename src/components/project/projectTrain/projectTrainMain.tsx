@@ -1,23 +1,54 @@
-import { atom, useRecoilState } from 'recoil';
 import { useState } from 'react';
 import { LeftWrapper } from '../projectConfig/projectConfigMain';
-import ProjectTrainSideBar from './projectTrainSideBar/projectTrainSideBar';
 import ProjectTrainViewer from './projectTrainViewer/projectTrainViewer';
 import { TrainHistory } from './types';
+import ProjectTrainViewerSelectorItem from './projectTrainViewerSelector/projectTrainViewerSelectorItem';
 
-const ProjectTrainMain = ({ selectorItemHeads }: { selectorItemHeads: Array<TrainHistory> }) => {
-	const [value, setValue] = useState<TrainHistory>(selectorItemHeads[0]);
-
-	// TODO: value.status === 'TRAIN' 이면 소켓 열어야됨
+const ProjectTrainMain = ({
+	trainHistories,
+	fetchTrainHistory,
+}: {
+	trainHistories: Array<TrainHistory>;
+	fetchTrainHistory: any;
+}) => {
+	const [currentTrainHistory, setCurrentTrainHistory] = useState<TrainHistory | undefined>(trainHistories[0]);
 	return (
 		<>
 			<LeftWrapper>
 				<div className="sec-l">
-					<ProjectTrainSideBar value={value} setValue={setValue} selectorItemHeads={selectorItemHeads} />
+					<ol className="sec-menu">
+						{trainHistories.map((trainHistory) => {
+							return (
+								<li
+									key={trainHistory.trainNo}
+									className={currentTrainHistory?.trainNo === trainHistory.trainNo ? 'active' : ''}
+									style={{
+										backgroundColor: `${
+											currentTrainHistory?.trainNo === trainHistory.trainNo ? 'rgb(199, 199, 199)' : 'transparent'
+										}`,
+									}}
+								>
+									<ProjectTrainViewerSelectorItem
+										trainHistory={trainHistory}
+										onClick={() => {
+											setCurrentTrainHistory(trainHistory);
+										}}
+									/>
+								</li>
+							);
+						})}
+					</ol>
 				</div>
 			</LeftWrapper>
-
-			<div className="sec-c">{value === undefined ? '' : <ProjectTrainViewer history={value} />}</div>
+			{currentTrainHistory && (
+				<div className="sec-c">
+					<ProjectTrainViewer
+						history={currentTrainHistory}
+						fetchTrainHistory={fetchTrainHistory}
+						setCurrentTrainHistory={setCurrentTrainHistory}
+					/>
+				</div>
+			)}
 		</>
 	);
 };

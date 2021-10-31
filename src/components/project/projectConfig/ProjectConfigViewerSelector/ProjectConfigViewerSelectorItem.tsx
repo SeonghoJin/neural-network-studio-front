@@ -17,7 +17,7 @@ const useStyle = makeStyles({
 	active: {
 		width: '100%',
 		height: '100%',
-		backgroundColor: '#FFFFFF',
+		backgroundColor: '#5a5a5a',
 	},
 });
 

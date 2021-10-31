@@ -23,7 +23,7 @@ const getTrainHistoryListLibraryAPIResult = atom<GetTrainHistoryListLibraryAPIRe
 	default: null,
 });
 
-export const getTrainHistoryListAPI = async (projectNo: number) => {
+export const getTrainHistoryListAPI = async (projectNo: string) => {
 	try {
 		const uri = `${config.SERVER_PREFIX}/api/project/${projectNo}/train`;
 		const response = await axios.get<{ history: TrainHistory[] }>(uri, axiosConfig);
@@ -48,8 +48,10 @@ export const useGetTrainHistoryListLibraryAPI = () => {
 		getTrainHistoryListLibraryAPIResult
 	);
 
+	const { projectNo } = useProjectLocation();
+
 	const fetch = useCallback(
-		async (projectNo: number) => {
+		async (_projectNo: string) => {
 			setResult({
 				loading: true,
 				data: null,
@@ -58,7 +60,7 @@ export const useGetTrainHistoryListLibraryAPI = () => {
 
 			const delayedData = await sleep(300)
 				.then(async () => {
-					const data = await getTrainHistoryListAPI(projectNo);
+					const data = await getTrainHistoryListAPI(_projectNo);
 					setResult({
 						loading: false,
 						data,
@@ -79,6 +81,18 @@ export const useGetTrainHistoryListLibraryAPI = () => {
 		},
 		[setResult]
 	);
+
+	useEffect(() => {
+		if (result == null) {
+			fetch(projectNo);
+		}
+	}, [fetch, projectNo, result, setResult]);
+
+	useEffect(() => {
+		return () => {
+			setResult(null);
+		};
+	}, [projectNo, setResult]);
 
 	return {
 		fetch,
@@ -141,19 +155,11 @@ export const useGetTrainHistoryEpochListLibraryAPI = () => {
 	};
 };
 
-export type ProjectTrainEpochsState = EpochList | null;
-
-const projectTrainEpochsState = atom<ProjectTrainEpochsState>({
-	key: 'ProjectTrainEpochs',
-	default: null,
-});
-
 export const useProjectTrainEpochs = (trainNo: number) => {
 	const { projectNo } = useProjectLocation();
-	const [projectTrainEpochs, setProjectTrainEpochs] = useRecoilState(projectTrainEpochsState);
 
 	const getProjectTrainEpochResult = useSWR<EpochList, AxiosError>(
-		() => 'getProjectTrainEpochResult',
+		() => ['getProjectTrainEpochResult', trainNo, projectNo],
 		async () => {
 			try {
 				const data = await getTrainHistoryEpochListAPI(parseInt(projectNo, 10), trainNo);
@@ -164,17 +170,8 @@ export const useProjectTrainEpochs = (trainNo: number) => {
 		}
 	);
 
-	useEffect(() => {
-		if (getProjectTrainEpochResult.data != null) {
-			setProjectTrainEpochs(getProjectTrainEpochResult.data);
-		}
-	}, [getProjectTrainEpochResult.data, setProjectTrainEpochs]);
-
 	return {
-		loading: !getProjectTrainEpochResult.error && !setProjectTrainEpochs,
-		error: getProjectTrainEpochResult.error,
-		mutate: getProjectTrainEpochResult.mutate,
-		projectTrainEpochs,
-		setProjectTrainEpochs,
+		...getProjectTrainEpochResult,
+		loading: !getProjectTrainEpochResult.data && !getProjectTrainEpochResult.error,
 	};
 };
