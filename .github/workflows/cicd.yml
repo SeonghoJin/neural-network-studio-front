@@ -2,10 +2,10 @@ name: Node CI/CD
 
 on:
   push:
-    branches: [ master, feat, dev ]
+    branches: [ master ]
 
   pull_request:
-    branches: [ master, feat, dev ]
+    branches: [ master ]
 
 jobs:
   build:
