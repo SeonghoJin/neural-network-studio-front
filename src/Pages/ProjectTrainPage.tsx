@@ -1,16 +1,8 @@
 import styled from 'styled-components';
 
-import axios, { AxiosRequestConfig } from 'axios';
 import React, { useCallback, useEffect, useState, FC } from 'react';
-import { atom, useRecoilState } from 'recoil';
-import { LoadingButton } from '@mui/lab';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { format } from 'util';
-import config from '../config';
 import ProjectNav from '../components/project/ProjectNav/projectNav';
-import { LeftWrapper } from '../components/project/projectConfig/projectConfigMain';
-import { sleep } from '../util';
-import useProjectList from '../hooks/useProjectList';
 import useProjectLocation from '../hooks/useProjectLocation';
 import icoPlay1 from '../static/img/ico_play1.png';
 import { DynamicPath } from '../components/PagePathConsts';
