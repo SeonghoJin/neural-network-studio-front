@@ -11,7 +11,6 @@ export const ProjectDatasetPage = () => {
 	const { datasetConfigList, setDatasetConfigList, loading, mutate } = useDatasetConfigList();
 	const [currentDatasetConfig, setCurrentDatasetConfig] = useState<DatasetConfig | undefined>();
 	const { data: datasetList } = useGetDatasetListLibraryAPI();
-
 	useEffect(() => {
 		if (datasetConfigList == null || datasetConfigList[0] == null) {
 			setCurrentDatasetConfig(undefined);
@@ -24,7 +23,11 @@ export const ProjectDatasetPage = () => {
 		<div id="container">
 			<ProjectNav currentMenu={4} />
 			<section className="dataset">
-				<ProjectDatasetNav currentDatasetConfig={currentDatasetConfig} mutate={mutate} />
+				<ProjectDatasetNav
+					currentDatasetConfig={currentDatasetConfig}
+					mutate={mutate}
+					setCurrentDatasetConfig={setCurrentDatasetConfig}
+				/>
 				{loading && <CircleLoading />}
 				<div className="sec-container">
 					{datasetConfigList && datasetList && (

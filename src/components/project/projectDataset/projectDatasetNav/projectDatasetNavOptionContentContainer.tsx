@@ -10,9 +10,10 @@ import SimpleBackdrop from '../../../utils/BackLoading';
 type Props = {
 	currentDatasetConfig: undefined | DatasetConfig;
 	mutate: any;
+	setCurrentDatasetConfig: any;
 };
 
-const ProjectDatasetNavOptionContentContainer = ({ currentDatasetConfig, mutate }: Props) => {
+const ProjectDatasetNavOptionContentContainer = ({ currentDatasetConfig, mutate, setCurrentDatasetConfig }: Props) => {
 	const updateDatasetConfig = useUpdateDatasetConfig();
 	const addDatasetConfig = useAddDatasetConfig();
 	const { enqueueSnackbar } = useSnackbar();
@@ -29,6 +30,7 @@ const ProjectDatasetNavOptionContentContainer = ({ currentDatasetConfig, mutate 
 			await addDatasetConfig
 				.fetch(projectNo, currentDatasetConfig)
 				.then((res) => {
+					setCurrentDatasetConfig(undefined);
 					enqueueSnackbar('데이터셋 설정을 추가했습니다.', {
 						variant: 'success',
 					});
@@ -53,7 +55,15 @@ const ProjectDatasetNavOptionContentContainer = ({ currentDatasetConfig, mutate 
 				});
 		}
 		mutate();
-	}, [addDatasetConfig, currentDatasetConfig, enqueueSnackbar, mutate, projectNo, updateDatasetConfig]);
+	}, [
+		addDatasetConfig,
+		currentDatasetConfig,
+		enqueueSnackbar,
+		mutate,
+		projectNo,
+		setCurrentDatasetConfig,
+		updateDatasetConfig,
+	]);
 
 	return (
 		<>
