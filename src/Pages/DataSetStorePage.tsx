@@ -74,7 +74,7 @@ export const DataSetStorePage = () => {
 						>
 							<Toolbar>
 								<Typography variant="h6" noWrap component="div">
-									소유한 데이터셋
+									라이브러리
 								</Typography>
 							</Toolbar>
 							<Divider />
