@@ -96,7 +96,7 @@ const ProjectTrainViewer = ({ history, fetchTrainHistory, setCurrentTrainHistory
 	return (
 		<>
 			<div className="box">
-				<div className="tit">Learning Curve</div>
+				<div className="tit">학습 곡선</div>
 				<GraphViewerWrapper>
 					<GraphViewer>
 						{(currentProjectTrainEpochs && <ProjectTrainLearningCurveViewer epochs={currentProjectTrainEpochs} />) || (
