@@ -40,7 +40,20 @@ export const Cursor: FC<CursorProps> = ({ userName, cursorData, color }: CursorP
 					visibility: (cursorData?.drag && 'visible') || 'hidden',
 				}}
 			/>
-			<span style={{ color, fontSize: 3, textShadow: 'black' }}>{userName}</span>
+			<div
+				style={{
+					color,
+					fontSize: 5,
+					textShadow: 'black',
+					width: '50px',
+					height: '20px',
+					overflow: 'hidden',
+					textOverflow: 'ellipsis',
+					whiteSpace: 'nowrap',
+				}}
+			>
+				{userName}
+			</div>
 		</div>
 	);
 };
