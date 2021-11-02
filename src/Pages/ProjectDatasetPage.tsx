@@ -11,6 +11,7 @@ export const ProjectDatasetPage = () => {
 	const { datasetConfigList, setDatasetConfigList, loading, mutate } = useDatasetConfigList();
 	const [currentDatasetConfig, setCurrentDatasetConfig] = useState<DatasetConfig | undefined>();
 	const { data: datasetList } = useGetDatasetListLibraryAPI();
+
 	useEffect(() => {
 		if (datasetConfigList == null || datasetConfigList[0] == null) {
 			setCurrentDatasetConfig(undefined);

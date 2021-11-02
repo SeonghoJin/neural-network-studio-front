@@ -2,6 +2,7 @@ import React, { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'r
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { atom, useRecoilState } from 'recoil';
 import { randomInt } from 'crypto';
+import { useSnackbar } from 'notistack';
 import { DatasetConfig } from '../datasetConfig';
 import { Dataset, GetDatasetListAPIResponse } from '../../../../API/Dataset/type';
 import config from '../../../../config';
@@ -99,7 +100,7 @@ const getDatasetDetailResult = atom<getDatasetDetailState>({
 export const useGetDatasetDetail = () => {
 	const [result, setResult] = useRecoilState(getDatasetDetailResult);
 	const fetch = useCallback(
-		async (datasetId: number) => {
+		async (_datasetId: number) => {
 			setResult({
 				error: null,
 				data: null,
@@ -107,8 +108,8 @@ export const useGetDatasetDetail = () => {
 			});
 
 			try {
-				const delayedData = await sleep(1000).then(async () => {
-					const data = await GetDatasetDetail(datasetId);
+				const delayedData = await sleep(500).then(async () => {
+					const data = await GetDatasetDetail(_datasetId);
 					setResult({
 						data: data || true,
 						error: null,
@@ -139,16 +140,19 @@ export const useGetDatasetDetail = () => {
 const ProjectDatasetViewer = ({ datasetConfig, setDatasetConfig, datasetList }: ProjectDatasetViewerProps) => {
 	const { fetch, loading } = useGetDatasetDetail();
 	const [datasetDetail, setDatasetDetail] = useState<DatasetPreview | null>();
+	const { enqueueSnackbar } = useSnackbar();
 
 	useEffect(() => {
 		if (datasetConfig.dataset.id !== -1) {
-			fetch(datasetConfig.dataset.id).then((res) => {
-				setDatasetDetail(res);
-			});
+			fetch(datasetConfig.dataset.id)
+				.then((res) => {
+					setDatasetDetail(res);
+				})
+				.catch(() => {});
 		} else {
 			setDatasetDetail(null);
 		}
-	}, [fetch, datasetConfig.dataset.id]);
+	}, [fetch, datasetConfig.dataset.id, enqueueSnackbar]);
 
 	const features = useMemo(() => {
 		return datasetDetail?.feature;
@@ -165,6 +169,7 @@ const ProjectDatasetViewer = ({ datasetConfig, setDatasetConfig, datasetList }: 
 				/>
 			</div>
 			{!loading && datasetDetail && <MemoizedDatasetTable dataDetail={datasetDetail} />}
+			{!loading && !datasetDetail && '존재하지 않은 데이터셋입니다. 데이터셋을 다시 선택해주세요.'}
 			{loading && <CircleLoading />}
 		</>
 	);

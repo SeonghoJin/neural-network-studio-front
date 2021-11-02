@@ -4,7 +4,7 @@ import fileDownload from 'js-file-download';
 import { FlowExportObject } from 'react-flow-nns';
 import { useSnackbar } from 'notistack';
 import { atom, useRecoilState } from 'recoil';
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import ProjectEditorNavMainContent from './ProjectEditorNavMainContent';
 import { RootState } from '../../../../module';
 import useProjectLocation from '../../../../hooks/useProjectLocation';
@@ -35,6 +35,9 @@ const requsetTrain = async (projectNo: string) => {
 		const res = await axios.post(`${config.SERVER_PREFIX}/api/project/${projectNo}/train`, null, axiosConfig);
 		return res.data;
 	} catch (e: any) {
+		if ((e as AxiosError).isAxiosError && (e as AxiosError)?.response?.status === 400) {
+			throw new Error(e.response.data.errMsg);
+		}
 		throw new Error(e.message);
 	}
 };
@@ -49,7 +52,7 @@ const useTrainModel = () => {
 				loading: true,
 			});
 
-			const delayedData = await sleep(1000).then(() => {
+			const delayedData = await sleep(500).then(() => {
 				const res = updateProjectContent(projectNo, projectContent)
 					.then(async () => {
 						const data = await requsetTrain(projectNo);
@@ -117,14 +120,10 @@ const ProjectEditorNavMainContentContainer = () => {
 				output: '',
 				flowState: instance?.toObject() as FlowExportObject,
 			})
-				.then(async (res) => {
-					if (res != null) {
-						enqueueSnackbar('학습요청에 성공했습니다.', {
-							variant: 'success',
-						});
-					} else {
-						throw new Error('학습요청에 실패했습니다. 다시 시도 해주세요.');
-					}
+				.then(async () => {
+					enqueueSnackbar('학습요청에 성공했습니다.', {
+						variant: 'success',
+					});
 				})
 				.catch((err) => {
 					enqueueSnackbar(err.message, { variant: 'error' });
