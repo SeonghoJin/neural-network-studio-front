@@ -36,7 +36,11 @@ const ProjectTrainViewer = ({ history, fetchTrainHistory, setCurrentTrainHistory
 
 	useEffect(() => {
 		setCurrentProjectTrainEpochs(null);
-	}, [projectTrainEpochs]);
+		if (history.status !== 'TRAIN') {
+			socket.current?.close();
+			socket.current = null;
+		}
+	}, [history.status, projectTrainEpochs]);
 
 	useEffect(() => {
 		if (currentProjectTrainEpochs == null && !loading) {
@@ -61,11 +65,8 @@ const ProjectTrainViewer = ({ history, fetchTrainHistory, setCurrentTrainHistory
 			_socket.onopen = () => {
 				enqueueSnackbar('학습이 진행되고 있습니다.', { variant: 'success' });
 			};
-			_socket.onclose = () => {
-				enqueueSnackbar('학습이 종료되었습니다.', { variant: 'success' });
-			};
 			_socket.onerror = () => {
-				enqueueSnackbar('학습이 실패했습니다.', { variant: 'success' });
+				enqueueSnackbar('학습이 실패했습니다.', { variant: 'error' });
 			};
 			_socket.onmessage = (msg) => {
 				const epoch = JSON.parse(msg.data)?.Epoch;

@@ -155,9 +155,6 @@ export const ProjectDatasetViewerTop = ({
 								width: 100,
 							}}
 						>
-							<option key="" value="" selected>
-								none
-							</option>
 							{features?.map((feature) => {
 								return (
 									<option key={feature} value={feature}>
