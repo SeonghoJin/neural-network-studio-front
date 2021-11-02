@@ -25,15 +25,8 @@ export const DashBoard = () => {
 
 	const filterTypeLists = useMemo(() => {
 		return [
-			['제목', 'name'],
-			['설명', 'description'],
-		];
-	}, []);
-
-	const orderTypeLists = useMemo(() => {
-		return [
-			{ name: '생성 시간 순', value: 'createTimeAsc' },
-			{ name: '업데이트 시간 순', value: 'updateTimeAsc' },
+			['제목', 'nameLike'],
+			['설명', 'descriptionLike'],
 		];
 	}, []);
 
