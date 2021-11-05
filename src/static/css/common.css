@@ -517,6 +517,7 @@ select::-ms-expand { display: none; /* 화살표 없애기 for IE10, 11*/ }
 .tbl th .content .txt-group .txt { font-size: 13px; font-weight: 400; color: #707070; text-overflow: ellipsis; }
 
 .tbl td .content .txt-group { display: flex; flex-direction: column; justify-content: space-between; width: 190px; height: 115px; padding: 5px 15px 10px; box-sizing: border-box; }
+.tbl td .content .txt-group .img {font-size: 13px; font-weight: 400; color: #707070; object-fit: cover; width: 100%; height: 100%; }
 .tbl td .content .txt-group .txt { font-size: 13px; font-weight: 400; color: #707070; }
 
 .tbl td .content .txt-group2 { text-align: center; }

@@ -29,6 +29,8 @@ export type TDatasetPreview = {
 	datasetNum: number;
 
 	featureNum: number;
+
+	kind: string;
 };
 
 export interface IDatasetPreview {
@@ -39,6 +41,8 @@ export interface IDatasetPreview {
 	datasetNum: number;
 
 	featureNum: number;
+
+	kind: string;
 }
 
 export class DatasetPreview {
@@ -50,11 +54,14 @@ export class DatasetPreview {
 
 	featureNum: number;
 
+	kind: string;
+
 	constructor(dto: IDatasetPreview) {
 		this.feature = dto.feature;
 		this.rows = dto.rows;
 		this.datasetNum = dto.datasetNum;
 		this.featureNum = dto.featureNum;
+		this.kind = dto.kind;
 	}
 
 	static toDatasetPreviewDto(datasetPreview: DatasetPreview) {
@@ -63,6 +70,7 @@ export class DatasetPreview {
 			rows: datasetPreview.rows,
 			datasetNum: datasetPreview.datasetNum,
 			featureNum: datasetPreview.featureNum,
+			kind: datasetPreview.kind,
 		};
 
 		return datasetPreviewDto;
