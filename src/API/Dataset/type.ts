@@ -7,6 +7,7 @@ export type Dataset = {
 	id: string;
 	datasetNo: number;
 	name: string;
+	kind: string;
 	description: string;
 	createTime: Date;
 	updateTime: Date;
