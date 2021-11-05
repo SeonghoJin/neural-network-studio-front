@@ -133,7 +133,7 @@ export class LearningRateReductionConfig {
 		this.patience = dto?.patience?.toString() || '0.01';
 		this.factor = dto?.factor.toString() || '0.01';
 		this.min_lr = dto?.min_lr.toString() || '0.01';
-		this.usage = dto?.usage || true;
+		this.usage = dto?.usage || false;
 	}
 
 	static toLearningRateReductionConfigDto(learningRateReduction: LearningRateReductionConfig) {
@@ -157,7 +157,7 @@ export class EarlyStopConfig {
 	patience: string;
 
 	constructor(dto: EarlyStopConfigDto) {
-		this.usage = dto?.usage || true;
+		this.usage = dto?.usage || false;
 		this.monitor = dto?.monitor || Monitor.ValAccuracy;
 		this.patience = dto?.patience.toString() || '0.01';
 	}
