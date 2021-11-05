@@ -44,7 +44,7 @@ const GlobalConfig = ({
 	}, [datasetConfigList, globalConfig.dataset_config.id]);
 
 	const lossCandidates = useMemo(() => {
-		return ['binary_crossentropy', 'categorical_crossentropy', 'mse', 'mae'];
+		return ['binary_crossentropy', 'categorical_crossentropy', 'sparse_categorical_crossentropy', 'mse', 'mae'];
 	}, []);
 
 	return (
