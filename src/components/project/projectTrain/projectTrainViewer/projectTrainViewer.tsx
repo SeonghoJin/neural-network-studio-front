@@ -28,83 +28,21 @@ const GraphViewer = styled.div`
 	max-width: 600px;
 `;
 
-const ProjectTrainViewer = ({ history, fetchTrainHistory, setCurrentTrainHistory }: ProjectTrainViewerProps) => {
-	const { projectNo } = useProjectLocation();
-	const { data: projectTrainEpochs, loading, mutate } = useProjectTrainEpochs(history.trainNo);
-	const socket = useRef<WebSocket | null>(null);
+const ProjectTrainViewer = ({ history }: ProjectTrainViewerProps) => {
+	const { data: projectTrainEpochs, loading } = useProjectTrainEpochs(history.trainNo);
 	const [currentProjectTrainEpochs, setCurrentProjectTrainEpochs] = useState<Array<Epoch> | null>(null);
-	const { enqueueSnackbar } = useSnackbar();
 	const [logs, setLogs] = useState<string[]>(new Array<string>(0));
 
 	useEffect(() => {
-		setCurrentProjectTrainEpochs(null);
-		setLogs([]);
-		if (history.status !== 'TRAIN') {
-			socket.current?.close();
-			socket.current = null;
-		}
-	}, [history.status, projectTrainEpochs]);
-
-	useEffect(() => {
-		if (currentProjectTrainEpochs == null && !loading) {
-			if (projectTrainEpochs?.epochs != null) {
-				setCurrentProjectTrainEpochs(projectTrainEpochs.epochs);
-			} else {
-				setCurrentProjectTrainEpochs([]);
-			}
+		if (!loading && projectTrainEpochs?.epochs != null) {
+			setCurrentProjectTrainEpochs(projectTrainEpochs.epochs);
+			setLogs(
+				projectTrainEpochs.epochs.map((epoch) => {
+					return `Epoch=${epoch.epochNo} Accuracy=${epoch.acc} Loss=${epoch.loss} Val_accuracy=${epoch.valAcc} Val_loss=${epoch.valLoss} Learning_rate=${epoch.learningRate}`;
+				})
+			);
 		}
 	}, [currentProjectTrainEpochs, loading, projectTrainEpochs?.epochs]);
-
-	const addEpochs = useCallback((epoch: Epoch) => {
-		setCurrentProjectTrainEpochs((prev) => {
-			if (prev === null) return null;
-			return prev.concat(epoch);
-		});
-	}, []);
-
-	useEffect(() => {
-		if (socket.current === null && history.status === 'TRAIN' && currentProjectTrainEpochs !== null) {
-			const _socket = new WebSocket(`${config.SOCKET_SERVER_PREFIX}/ws/project/${projectNo}/train/${history.trainNo}`);
-			_socket.onopen = () => {
-				setLogs((prev) => prev.concat('학습중..'));
-				enqueueSnackbar('학습이 진행되고 있습니다.', { variant: 'success' });
-			};
-			_socket.onerror = () => {
-				setLogs((prev) => prev.concat('학습 실패'));
-				enqueueSnackbar('학습이 실패했습니다.', { variant: 'error' });
-			};
-			_socket.onclose = () => {
-				setLogs((prev) => prev.concat('학습 종료'));
-			};
-			_socket.onmessage = (msg) => {
-				const data = JSON.parse(msg.data);
-				const epoch = data.Epoch;
-				const { TrainLog } = data;
-				if (epoch != null) {
-					addEpochs({
-						epochNo: epoch.epoch,
-						loss: epoch.loss,
-						acc: epoch.accuracy,
-						valAcc: epoch.val_accuracy,
-						learningRate: 0,
-						valLoss: epoch.val_loss,
-					});
-					setLogs((prev) => prev.concat(TrainLog?.msg));
-				}
-			};
-			socket.current = _socket;
-		}
-	}, [
-		addEpochs,
-		currentProjectTrainEpochs,
-		enqueueSnackbar,
-		fetchTrainHistory,
-		history,
-		logs,
-		mutate,
-		projectNo,
-		setCurrentTrainHistory,
-	]);
 
 	return (
 		<>
@@ -118,20 +56,7 @@ const ProjectTrainViewer = ({ history, fetchTrainHistory, setCurrentTrainHistory
 					</GraphViewer>
 				</GraphViewerWrapper>
 			</div>
-			<div
-				style={{
-					color: 'white',
-					backgroundColor: 'black',
-					width: '100%',
-					flex: '1',
-					padding: '20px 20px 0px 20px',
-					overflow: 'auto',
-					fontSize: '15px',
-					boxSizing: 'border-box',
-				}}
-			>
-				<LogViewer logs={logs} />
-			</div>
+			<LogViewer logs={logs} />
 		</>
 	);
 };

@@ -111,4 +111,4 @@ export type GetTrainHistoryEpochListLibraryAPIResultType = {
 
 export type TrainEpochsProps = {
 	TrainEpochs: EpochList;
-}
+};

@@ -7,7 +7,7 @@ import App from './App';
 
 ReactDOM.render(
 	<RecoilRoot>
-		<SnackbarProvider maxSnack={5}>
+		<SnackbarProvider maxSnack={1}>
 			<App />
 		</SnackbarProvider>
 	</RecoilRoot>,

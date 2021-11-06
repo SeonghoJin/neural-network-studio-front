@@ -3,6 +3,8 @@ import { LeftWrapper } from '../projectConfig/projectConfigMain';
 import ProjectTrainViewer from './projectTrainViewer/projectTrainViewer';
 import { TrainHistory } from './types';
 import ProjectTrainViewerSelectorItem from './projectTrainViewerSelector/projectTrainViewerSelectorItem';
+import ProjectTrainViewerTrainState from './projectTrainViewer/projetTrainViewrTrainState';
+import { useTrainSocket } from './projectTrainViewer/useTrainSocket';
 
 const ProjectTrainMain = ({
 	trainHistories,
@@ -12,6 +14,7 @@ const ProjectTrainMain = ({
 	fetchTrainHistory: any;
 }) => {
 	const [currentTrainHistory, setCurrentTrainHistory] = useState<TrainHistory | undefined>(trainHistories[0]);
+	const { socket, trainMessage, setTrainMessage, epochs, setEpochs } = useTrainSocket();
 	return (
 		<>
 			<LeftWrapper>
@@ -48,11 +51,24 @@ const ProjectTrainMain = ({
 						flexDirection: 'column',
 					}}
 				>
-					<ProjectTrainViewer
-						history={currentTrainHistory}
-						fetchTrainHistory={fetchTrainHistory}
-						setCurrentTrainHistory={setCurrentTrainHistory}
-					/>
+					{currentTrainHistory.status === 'TRAIN' ? (
+						<ProjectTrainViewerTrainState
+							history={currentTrainHistory}
+							fetchTrainHistory={fetchTrainHistory}
+							setCurrentTrainHistory={setCurrentTrainHistory}
+							socket={socket}
+							trainMessage={trainMessage}
+							setTrainMessage={setTrainMessage}
+							epochs={epochs}
+							setEpochs={setEpochs}
+						/>
+					) : (
+						<ProjectTrainViewer
+							history={currentTrainHistory}
+							fetchTrainHistory={fetchTrainHistory}
+							setCurrentTrainHistory={setCurrentTrainHistory}
+						/>
+					)}
 				</div>
 			)}
 		</>

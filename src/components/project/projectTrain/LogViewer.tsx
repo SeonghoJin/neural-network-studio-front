@@ -19,11 +19,22 @@ export const LogViewer = ({ logs }: Props) => {
 	}, [logs.length, scrollToBottom]);
 
 	return (
-		<>
+		<div
+			className="box"
+			style={{
+				width: '100%',
+				flex: '1',
+				padding: '20px 20px 0px 20px',
+				overflow: 'auto',
+				fontSize: '15px',
+				boxSizing: 'border-box',
+			}}
+		>
+			<div className="tit">Log</div>
 			{logs.map((log) => {
 				return <div>{log}</div>;
 			})}
 			<div ref={scrollRef} />
-		</>
+		</div>
 	);
 };
