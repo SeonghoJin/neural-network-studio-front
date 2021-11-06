@@ -55,11 +55,9 @@ const ProjectTrainViewerTrainState = ({
 		if (!loading) {
 			if (trainMessage.length === 0) {
 				setTrainMessage(
-					['학습 중...'].concat(
-						(projectTrainEpochs?.epochs || []).map((epoch) => {
-							return makeLog(epoch);
-						})
-					)
+					(projectTrainEpochs?.epochs || []).map((epoch) => {
+						return makeLog(epoch);
+					})
 				);
 			}
 			if (epochs == null) {
