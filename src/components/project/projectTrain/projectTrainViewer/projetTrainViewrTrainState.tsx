@@ -55,7 +55,7 @@ const ProjectTrainViewerTrainState = ({
 		if (!loading) {
 			if (trainMessage.length === 0) {
 				setTrainMessage(
-					['학습 중..'].concat(
+					['학습 중...'].concat(
 						(projectTrainEpochs?.epochs || []).map((epoch) => {
 							return makeLog(epoch);
 						})
@@ -97,7 +97,7 @@ const ProjectTrainViewerTrainState = ({
 						valLoss: epoch.val_loss,
 					};
 					addEpochs(formattedEpoch);
-					setTrainMessage((prev: string) => prev.concat(makeLog(formattedEpoch)));
+					setTrainMessage((prev: string) => prev.concat(data.TrainLog.msg));
 				}
 			};
 			// eslint-disable-next-line no-param-reassign
