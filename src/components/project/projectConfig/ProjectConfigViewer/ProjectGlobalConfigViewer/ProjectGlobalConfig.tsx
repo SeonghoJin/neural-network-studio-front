@@ -7,6 +7,7 @@ import { useDatasetConfigList } from '../../../../../hooks/useGetDatasetConfigLi
 import { CustomDatasetSelectInput } from '../../../../Input/custom/CustomDatasetSelectInput';
 import { DatasetConfig } from '../../../projectDataset/types';
 import { CustomNameValueSelectInput } from '../../../../Input/custom/CustomNaveValueSelectInput';
+import { CustomSelectInput } from '../../../../Input/custom/CustomSelectInput';
 
 export type GlobalConfigProps = {
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -42,11 +43,21 @@ const GlobalConfig = ({
 		);
 	}, [datasetConfigList, globalConfig.dataset_config.id]);
 
+	const lossCandidates = useMemo(() => {
+		return ['binary_crossentropy', 'categorical_crossentropy', 'sparse_categorical_crossentropy', 'mse', 'mae'];
+	}, []);
+
 	return (
 		<>
 			<CustomNumberInput title="Batch Size" name="batch_size" onChange={onChange} value={globalConfig.batch_size} />
 			<CustomNumberInput title="Epochs" name="epochs" onChange={onChange} value={globalConfig.epochs} />
-			<CustomInput title="Loss" name="loss" onChange={onChange} value={globalConfig.loss} />
+			<CustomSelectInput
+				title="Loss"
+				name="loss"
+				onChange={onChange}
+				value={globalConfig.loss}
+				propertyCandidates={lossCandidates}
+			/>
 			<CustomDivisionInput title="Metrics" name="metrics" onChange={onChange} value={globalConfig.metrics} />
 			<CustomNameValueSelectInput
 				title="데이터셋 설정"

@@ -25,7 +25,11 @@ export const DatasetPreviewTableRow = ({ dataDetail }: Props) => {
 								<td key={idx}>
 									<div className="content">
 										<div className="txt-group">
-											<div className="txt">{col}</div>
+											{dataDetail.kind === 'IMAGES' && idx === 0 ? (
+												<img className="img" src={col} alt={col} />
+											) : (
+												<div className="txt">{col}</div>
+											)}
 										</div>
 									</div>
 								</td>
