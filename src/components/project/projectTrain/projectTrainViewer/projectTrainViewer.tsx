@@ -8,6 +8,7 @@ import { Epoch, TrainHistory } from '../types';
 import { getTrainHistoryEpochListAPI, useGetTrainHistoryEpochListLibraryAPI, useProjectTrainEpochs } from '../api';
 import ProjectTrainLearningCurveViewer from './projectTrainLearningCurveViewer';
 import config from '../../../../config';
+import { LogViewer } from '../LogViewer';
 
 export type ProjectTrainViewerProps = {
 	history: TrainHistory;
@@ -24,7 +25,7 @@ const GraphViewerWrapper = styled.div`
 
 const GraphViewer = styled.div`
 	width: 100%;
-	max-width: 800px;
+	max-width: 600px;
 `;
 
 const ProjectTrainViewer = ({ history, fetchTrainHistory, setCurrentTrainHistory }: ProjectTrainViewerProps) => {
@@ -33,9 +34,11 @@ const ProjectTrainViewer = ({ history, fetchTrainHistory, setCurrentTrainHistory
 	const socket = useRef<WebSocket | null>(null);
 	const [currentProjectTrainEpochs, setCurrentProjectTrainEpochs] = useState<Array<Epoch> | null>(null);
 	const { enqueueSnackbar } = useSnackbar();
+	const [logs, setLogs] = useState<string[]>(new Array<string>(0));
 
 	useEffect(() => {
 		setCurrentProjectTrainEpochs(null);
+		setLogs([]);
 		if (history.status !== 'TRAIN') {
 			socket.current?.close();
 			socket.current = null;
@@ -63,13 +66,20 @@ const ProjectTrainViewer = ({ history, fetchTrainHistory, setCurrentTrainHistory
 		if (socket.current === null && history.status === 'TRAIN' && currentProjectTrainEpochs !== null) {
 			const _socket = new WebSocket(`${config.SOCKET_SERVER_PREFIX}/ws/project/${projectNo}/train/${history.trainNo}`);
 			_socket.onopen = () => {
+				setLogs((prev) => prev.concat('학습중..'));
 				enqueueSnackbar('학습이 진행되고 있습니다.', { variant: 'success' });
 			};
 			_socket.onerror = () => {
+				setLogs((prev) => prev.concat('학습 실패'));
 				enqueueSnackbar('학습이 실패했습니다.', { variant: 'error' });
 			};
+			_socket.onclose = () => {
+				setLogs((prev) => prev.concat('학습 종료'));
+			};
 			_socket.onmessage = (msg) => {
-				const epoch = JSON.parse(msg.data)?.Epoch;
+				const data = JSON.parse(msg.data);
+				const epoch = data.Epoch;
+				const { TrainLog } = data;
 				if (epoch != null) {
 					addEpochs({
 						epochNo: epoch.epoch,
@@ -79,6 +89,7 @@ const ProjectTrainViewer = ({ history, fetchTrainHistory, setCurrentTrainHistory
 						learningRate: 0,
 						valLoss: epoch.val_loss,
 					});
+					setLogs((prev) => prev.concat(TrainLog?.msg));
 				}
 			};
 			socket.current = _socket;
@@ -89,6 +100,7 @@ const ProjectTrainViewer = ({ history, fetchTrainHistory, setCurrentTrainHistory
 		enqueueSnackbar,
 		fetchTrainHistory,
 		history,
+		logs,
 		mutate,
 		projectNo,
 		setCurrentTrainHistory,
@@ -105,6 +117,20 @@ const ProjectTrainViewer = ({ history, fetchTrainHistory, setCurrentTrainHistory
 						)}
 					</GraphViewer>
 				</GraphViewerWrapper>
+			</div>
+			<div
+				style={{
+					color: 'white',
+					backgroundColor: 'black',
+					width: '100%',
+					flex: '1',
+					padding: '20px 20px 0px 20px',
+					overflow: 'auto',
+					fontSize: '15px',
+					boxSizing: 'border-box',
+				}}
+			>
+				<LogViewer logs={logs} />
 			</div>
 		</>
 	);

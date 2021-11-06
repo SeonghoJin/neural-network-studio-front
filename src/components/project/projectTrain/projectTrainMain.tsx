@@ -41,7 +41,13 @@ const ProjectTrainMain = ({
 				</div>
 			</LeftWrapper>
 			{currentTrainHistory && (
-				<div className="sec-c">
+				<div
+					className="sec-c"
+					style={{
+						display: 'flex',
+						flexDirection: 'column',
+					}}
+				>
 					<ProjectTrainViewer
 						history={currentTrainHistory}
 						fetchTrainHistory={fetchTrainHistory}
