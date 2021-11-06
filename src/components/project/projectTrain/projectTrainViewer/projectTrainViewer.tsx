@@ -34,15 +34,17 @@ const ProjectTrainViewer = ({ history }: ProjectTrainViewerProps) => {
 	const [logs, setLogs] = useState<string[]>(new Array<string>(0));
 
 	useEffect(() => {
-		if (!loading && projectTrainEpochs?.epochs != null) {
-			setCurrentProjectTrainEpochs(projectTrainEpochs.epochs);
-			setLogs(
-				projectTrainEpochs.epochs.map((epoch) => {
-					return `Epoch=${epoch.epochNo} Accuracy=${epoch.acc} Loss=${epoch.loss} Val_accuracy=${epoch.valAcc} Val_loss=${epoch.valLoss} Learning_rate=${epoch.learningRate}`;
-				})
-			);
+		if (!loading) {
+			setCurrentProjectTrainEpochs(projectTrainEpochs?.epochs || []);
+			if (projectTrainEpochs?.epochs != null) {
+				setLogs(
+					projectTrainEpochs.epochs.map((epoch) => {
+						return `Epoch=${epoch.epochNo} Accuracy=${epoch.acc} Loss=${epoch.loss} Val_accuracy=${epoch.valAcc} Val_loss=${epoch.valLoss} Learning_rate=${epoch.learningRate}`;
+					})
+				);
+			}
 		}
-	}, [currentProjectTrainEpochs, loading, projectTrainEpochs?.epochs]);
+	}, [loading, projectTrainEpochs?.epochs]);
 
 	return (
 		<>

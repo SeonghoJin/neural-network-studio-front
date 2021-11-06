@@ -6,14 +6,6 @@ type Props = {
 
 export const LogViewer = ({ logs }: Props) => {
 	const scrollRef = useRef<null | HTMLDivElement>(null);
-	const [count, setCount] = useState<number>(0);
-
-	const interval = useMemo(() => {
-		return setInterval(() => {
-			setCount((prev) => (prev + 1) % 4);
-		}, 1000);
-	}, []);
-
 	const scrollToBottom = useCallback(() => {
 		scrollRef.current?.scrollIntoView({
 			behavior: 'smooth',
@@ -23,9 +15,8 @@ export const LogViewer = ({ logs }: Props) => {
 	useEffect(() => {
 		if (logs.length > 0) {
 			scrollToBottom();
-			clearInterval(interval);
 		}
-	}, [interval, logs.length, scrollToBottom]);
+	}, [logs.length, scrollToBottom]);
 
 	return (
 		<div
@@ -40,7 +31,6 @@ export const LogViewer = ({ logs }: Props) => {
 			}}
 		>
 			<div className="tit">Log</div>
-			{`학습 중${'.'.repeat(count)}`}
 			{logs.map((log) => {
 				return <div>{log}</div>;
 			})}
