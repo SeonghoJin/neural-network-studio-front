@@ -33,8 +33,8 @@ export const CustomNameValueSelectInput = ({
 	return (
 		<div className="box" style={style}>
 			<div className="tit">{title}</div>
-			<Select disableUnderline name={name} onChange={onChange} value="None">
-				<MenuItem value="None">None</MenuItem>
+			<Select disableUnderline name={name} onChange={onChange} value={value.id || 'None'}>
+				<MenuItem value="-1">None</MenuItem>
 				{candidateComponent}
 			</Select>
 		</div>
