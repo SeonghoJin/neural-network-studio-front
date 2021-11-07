@@ -66,10 +66,6 @@ https://nnstudio.io/
 Conv2D, Dense 등 Layer층에 해당한 노드들이 있습니다.
 <img width="253" alt="스크린샷 2021-11-07 오후 7 36 19" src="https://user-images.githubusercontent.com/44808218/140641492-d9a12e75-000a-4504-9726-426c108eda04.png">
 
-이 노드들을 드래그하여 그래프를 만들 수 있습니다.
-그리고 노드에 있는 점을 드래그 해보세요.
-회색의 엣지가 생기는데, 이를 다른 노드에 엣지를 만들 수 있습니다.
-
 ![스크린샷 2021-11-07 오후 7 30 02](https://user-images.githubusercontent.com/44808218/140641465-dc5676da-3e4d-4640-944d-47cfc4a3be64.png)
 
 위 그림은 이제 만들어 볼 모델입니다.
