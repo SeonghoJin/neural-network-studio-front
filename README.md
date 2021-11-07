@@ -39,8 +39,8 @@ https://nnstudio.io/
 ### 3. 로그인한 뒤 데이터 스토어 페이지로 접속합니다.
 <img width="1417" alt="스크린샷 2021-11-07 오후 7 16 11" src="https://user-images.githubusercontent.com/44808218/140641048-980bbba9-b925-437b-adea-1a05e2b4725a.png">
 
-### 4. 데이터 스토어에서 supra라는 데이터셋을 라이브러리에 저장합니다.
-<img width="1431" alt="스크린샷 2021-11-07 오후 7 16 18" src="https://user-images.githubusercontent.com/44808218/140641049-8cb1930e-3abf-4bb9-ab0e-dc269f7abec8.png">
+### 4. 데이터 스토어에서 supra classification data 라는 데이터셋을 라이브러리에 저장합니다.
+<img width="1419" alt="스크린샷 2021-11-07 오후 10 30 50" src="https://user-images.githubusercontent.com/44808218/140647155-63e1e422-bde0-41e4-90dc-c1abe76d886a.png">
 
 ### 5. 대시보드 페이지에 접속합니다.
 <img width="1421" alt="스크린샷 2021-11-07 오후 7 16 26" src="https://user-images.githubusercontent.com/44808218/140641050-692f5882-a689-4090-9bec-441a9c944ff6.png">
@@ -133,15 +133,15 @@ BatchNormalization노드를 드래그하여 그래프 판 위에 올려 놓습�
 
 데이터 셋 이름은 원하시는 걸로 입력해주세요. 여기서는 Example로 하겠습니다.
 
-데이터에는 supra 값을 선택해주시고, Shuffle을 Check, 정규화는 Image로 레이블은 label 선택해주세요.
+데이터에는 supra classification data값을 선택해주시고, Shuffle을 Check, 정규화는 Image로 레이블은 label 선택해주세요.
 
 설정이 완료되면 저장 버튼을 눌러주세요. 
 
-<img width="1427" alt="스크린샷 2021-11-07 오후 8 04 28" src="https://user-images.githubusercontent.com/44808218/140642507-25c0d836-2405-4158-a554-9a279901a44c.png">
+<img width="1415" alt="스크린샷 2021-11-07 오후 10 33 03" src="https://user-images.githubusercontent.com/44808218/140647229-eba4b5ee-e5dc-452a-a0d4-ff717c7b1712.png">
 
 데이터 셋 설정 생성이 완료되면 다음 과 같은 메시지가 생성됩니다.
 
-<img width="1419" alt="스크린샷 2021-11-07 오후 8 04 34" src="https://user-images.githubusercontent.com/44808218/140642506-b020c9bf-d51f-4adb-be52-f44e14f2b5aa.png">
+<img width="1419" alt="스크린샷 2021-11-07 오후 10 36 13" src="https://user-images.githubusercontent.com/44808218/140647314-77b50920-83ce-482a-8e79-a7bc4181a627.png">
 
 ### 11. 프로젝트 설정 페이지로 접속합니다.
 
