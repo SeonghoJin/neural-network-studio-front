@@ -150,11 +150,12 @@ export const ProjectDatasetViewerTop = ({
 							className="inp"
 							onChange={onChange}
 							name="label"
-							value={datasetConfig.label}
+							value=""
 							style={{
 								width: 100,
 							}}
 						>
+							<option value="">None</option>
 							{features?.map((feature) => {
 								return (
 									<option key={feature} value={feature}>
