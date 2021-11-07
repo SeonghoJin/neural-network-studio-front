@@ -89,7 +89,7 @@ export const Signup = () => {
 										}}
 									/>
 									<button type="button" onClick={onToggleVisiblePassword} className="btn-view js-view">
-										<FontAwesomeIcon icon={visiblePassword ? faEyeSlash : faEye} />
+										<FontAwesomeIcon icon={!visiblePassword ? faEyeSlash : faEye} />
 									</button>
 								</div>
 								{!passwordValidation && (
