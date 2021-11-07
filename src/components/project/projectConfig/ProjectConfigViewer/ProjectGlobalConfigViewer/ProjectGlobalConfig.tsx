@@ -49,16 +49,6 @@ const GlobalConfig = ({
 
 	return (
 		<>
-			<CustomNumberInput title="Batch Size" name="batch_size" onChange={onChange} value={globalConfig.batch_size} />
-			<CustomNumberInput title="Epochs" name="epochs" onChange={onChange} value={globalConfig.epochs} />
-			<CustomSelectInput
-				title="Loss"
-				name="loss"
-				onChange={onChange}
-				value={globalConfig.loss}
-				propertyCandidates={lossCandidates}
-			/>
-			<CustomDivisionInput title="Metrics" name="metrics" onChange={onChange} value={globalConfig.metrics} />
 			<CustomNameValueSelectInput
 				title="데이터셋 설정"
 				name="id"
@@ -72,6 +62,16 @@ const GlobalConfig = ({
 				}}
 				propertyCandidates={dataConfigCandidates}
 			/>
+			<CustomNumberInput title="Batch Size" name="batch_size" onChange={onChange} value={globalConfig.batch_size} />
+			<CustomNumberInput title="Epochs" name="epochs" onChange={onChange} value={globalConfig.epochs} />
+			<CustomSelectInput
+				title="Loss"
+				name="loss"
+				onChange={onChange}
+				value={globalConfig.loss}
+				propertyCandidates={lossCandidates}
+			/>
+			<CustomDivisionInput title="Metrics" name="metrics" onChange={onChange} value={globalConfig.metrics} />
 			{projectEarlyStopConfigContainer}
 			{projectLearningRateReductionConfigContainer}
 		</>

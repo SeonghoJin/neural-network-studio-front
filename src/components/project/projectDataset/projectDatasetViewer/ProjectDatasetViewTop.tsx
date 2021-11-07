@@ -33,7 +33,7 @@ export const ProjectDatasetViewerTop = ({
 	const onChange = useCallback(
 		(e: ChangeEvent<HTMLSelectElement>) => {
 			const { name, value } = e.target;
-
+			console.log(name, value);
 			setDatasetConfig({
 				...datasetConfig,
 				[name]: value,
@@ -150,7 +150,7 @@ export const ProjectDatasetViewerTop = ({
 							className="inp"
 							onChange={onChange}
 							name="label"
-							value=""
+							value={datasetConfig.label}
 							style={{
 								width: 100,
 							}}
