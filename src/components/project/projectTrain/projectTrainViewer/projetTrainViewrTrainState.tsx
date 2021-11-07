@@ -61,7 +61,7 @@ const ProjectTrainViewerTrainState = ({
 			if (trainMessage.length === 0) {
 				setTrainMessage(
 					(trainLogs?.trainLogs || []).map((trainLog) => {
-						return trainLog.msg;
+						return `${new Date(trainLog.create_time)} ${trainLog.msg}`;
 					})
 				);
 			}
@@ -110,7 +110,7 @@ const ProjectTrainViewerTrainState = ({
 						valLoss: epoch.val_loss,
 					};
 					addEpochs(formattedEpoch);
-					setTrainMessage((prev: string) => prev.concat(data.TrainLog.msg));
+					setTrainMessage((prev: string) => prev.concat(`${new Date(data.TrainLog.create_time)} ${data.TrainLog.msg}`));
 				}
 			};
 			// eslint-disable-next-line no-param-reassign

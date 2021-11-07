@@ -135,6 +135,7 @@ export const getTrainLogsAPI = async (projectNo: string, trainNo: string) => {
 		const response = await axios.get<{
 			trainLogs: Array<{
 				msg: string;
+				create_time: string;
 			}>;
 		}>(`${config.SERVER_PREFIX}/api/project/${projectNo}/train/${trainNo}/log`, axiosConfig);
 		return response.data;

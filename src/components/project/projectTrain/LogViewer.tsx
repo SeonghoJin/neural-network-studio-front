@@ -40,7 +40,16 @@ export const LogViewer = ({ logs }: Props) => {
 				}}
 			>
 				{logs.map((log) => {
-					return <div id={log}>{log}</div>;
+					return (
+						<div
+							id={log}
+							style={{
+								marginTop: '5px',
+							}}
+						>
+							{log}
+						</div>
+					);
 				})}
 				<div ref={scrollRef} />
 			</div>

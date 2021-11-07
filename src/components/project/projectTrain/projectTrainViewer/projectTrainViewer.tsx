@@ -61,7 +61,7 @@ const ProjectTrainViewer = ({ history }: ProjectTrainViewerProps) => {
 			<LogViewer
 				logs={
 					trainLogs?.trainLogs?.map((trainLog) => {
-						return trainLog.msg;
+						return `${new Date(trainLog.create_time)} \n ${trainLog.msg}`;
 					}) || []
 				}
 			/>
