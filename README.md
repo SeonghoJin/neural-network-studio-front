@@ -171,6 +171,7 @@ BatchNormalization노드를 드래그하여 그래프 판 위에 올려 놓습�
 <img width="1425" alt="스크린샷 2021-11-07 오후 8 05 40" src="https://user-images.githubusercontent.com/44808218/140642514-506f3a6f-d822-4fc4-89b2-43a23c37d202.png">
 
 현재 페이지에서 이 학습결과를 보고 있으면 지속적으로 서버와 통신을 하여 Epoch단위로 학습 결과를 그래프와 로그로 보여줍니다.
+2분에서 3분정도 기다려주세요.
 
 <img width="1413" alt="스크린샷 2021-11-07 오후 8 06 31" src="https://user-images.githubusercontent.com/44808218/140642515-fc35e932-62b6-4033-8598-4687049fd67f.png">
 
