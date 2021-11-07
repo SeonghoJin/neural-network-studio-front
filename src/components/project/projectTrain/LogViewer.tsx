@@ -32,7 +32,7 @@ export const LogViewer = ({ logs }: Props) => {
 		>
 			<div className="tit">Log</div>
 			{logs.map((log) => {
-				return <div>{log}</div>;
+				return <div id={log}>{log}</div>;
 			})}
 			<div ref={scrollRef} />
 		</div>

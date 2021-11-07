@@ -129,3 +129,19 @@ export const deleteDatasetConfigAPI = async (projectNo: string, datasetConfigId:
 		throw new Error((e as Error).message);
 	}
 };
+
+export const getTrainLogsAPI = async (projectNo: string, trainNo: string) => {
+	try {
+		const response = await axios.get<{
+			trainLogs: Array<{
+				msg: string;
+			}>;
+		}>(`${config.SERVER_PREFIX}api/project/${projectNo}/train/${trainNo}/log`, axiosConfig);
+		return response.data;
+	} catch (e) {
+		if ((e as AxiosError)?.isAxiosError && (e as AxiosError).response?.status !== 200) {
+			throw new Error('훈련 로그를 가져오지 못했습니다. 다시 시도 해주세요.');
+		}
+		throw new Error((e as Error).message);
+	}
+};

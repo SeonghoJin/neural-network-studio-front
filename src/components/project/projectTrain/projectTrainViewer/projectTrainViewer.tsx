@@ -1,14 +1,12 @@
 import { createElement, useCallback, useEffect, useRef, useState } from 'react';
-import { Divider } from '@material-ui/core';
 import styled from 'styled-components';
-import { useSnackbar } from 'notistack';
 import { CircleLoading } from '../../../utils/Loading/CircularLoading';
-import useProjectLocation from '../../../../hooks/useProjectLocation';
 import { Epoch, TrainHistory } from '../types';
-import { getTrainHistoryEpochListAPI, useGetTrainHistoryEpochListLibraryAPI, useProjectTrainEpochs } from '../api';
+import { useProjectTrainEpochs } from '../api';
 import ProjectTrainLearningCurveViewer from './projectTrainLearningCurveViewer';
-import config from '../../../../config';
 import { LogViewer } from '../LogViewer';
+import { useTrainLogs } from '../../../../hooks/useTrainLogs';
+import useProjectLocation from '../../../../hooks/useProjectLocation';
 
 export type ProjectTrainViewerProps = {
 	history: TrainHistory;
@@ -32,6 +30,8 @@ const ProjectTrainViewer = ({ history }: ProjectTrainViewerProps) => {
 	const { data: projectTrainEpochs, loading } = useProjectTrainEpochs(history.trainNo);
 	const [currentProjectTrainEpochs, setCurrentProjectTrainEpochs] = useState<Array<Epoch> | null>(null);
 	const [logs, setLogs] = useState<string[]>(new Array<string>(0));
+	const { projectNo } = useProjectLocation();
+	const { data: trainLogs } = useTrainLogs({ trainNo: history.trainNo.toString(), projectNo });
 
 	useEffect(() => {
 		if (!loading) {
@@ -58,7 +58,13 @@ const ProjectTrainViewer = ({ history }: ProjectTrainViewerProps) => {
 					</GraphViewer>
 				</GraphViewerWrapper>
 			</div>
-			<LogViewer logs={logs} />
+			<LogViewer
+				logs={
+					trainLogs?.trainLogs?.map((trainLog) => {
+						return trainLog.msg;
+					}) || []
+				}
+			/>
 		</>
 	);
 };

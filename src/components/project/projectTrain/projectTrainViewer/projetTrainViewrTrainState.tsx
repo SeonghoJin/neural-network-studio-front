@@ -9,6 +9,7 @@ import { getTrainHistoryEpochListAPI, useGetTrainHistoryEpochListLibraryAPI, use
 import ProjectTrainLearningCurveViewer from './projectTrainLearningCurveViewer';
 import config from '../../../../config';
 import { LogViewer } from '../LogViewer';
+import { useTrainLogs } from '../../../../hooks/useTrainLogs';
 
 export type ProjectTrainViewerProps = {
 	history: TrainHistory;
@@ -46,18 +47,22 @@ const ProjectTrainViewerTrainState = ({
 	const { projectNo } = useProjectLocation();
 	const { data: projectTrainEpochs, loading, mutate } = useProjectTrainEpochs(history.trainNo);
 	const { enqueueSnackbar } = useSnackbar();
+	const { data: trainLogs, loading: trainLogsLoading } = useTrainLogs({
+		trainNo: history.trainNo.toString(),
+		projectNo,
+	});
 
 	const makeLog = useCallback((epoch) => {
 		return `Epoch=${epoch.epochNo} Accuracy=${epoch.acc} Loss=${epoch.loss} Val_accuracy=${epoch.valAcc} Val_loss=${epoch.valLoss} Learning_rate=${epoch.learningRate}`;
 	}, []);
 
 	useEffect(() => {
-		if (!loading) {
+		if (!loading && !trainLogsLoading) {
 			if (trainMessage.length === 0) {
 				setTrainMessage(
 					['학습 준비중'].concat(
-						(projectTrainEpochs?.epochs || []).map((epoch) => {
-							return makeLog(epoch);
+						(trainLogs?.trainLogs || []).map((trainLog) => {
+							return trainLog.msg;
 						})
 					)
 				);
@@ -66,7 +71,17 @@ const ProjectTrainViewerTrainState = ({
 				setEpochs(projectTrainEpochs?.epochs || []);
 			}
 		}
-	}, [epochs, loading, makeLog, projectTrainEpochs?.epochs, setEpochs, setTrainMessage, trainMessage.length]);
+	}, [
+		epochs,
+		loading,
+		makeLog,
+		projectTrainEpochs?.epochs,
+		setEpochs,
+		setTrainMessage,
+		trainLogs?.trainLogs,
+		trainLogsLoading,
+		trainMessage.length,
+	]);
 
 	const addEpochs = useCallback(
 		(_epoch: Epoch) => {
