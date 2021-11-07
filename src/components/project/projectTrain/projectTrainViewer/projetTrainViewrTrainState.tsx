@@ -109,8 +109,12 @@ const ProjectTrainViewerTrainState = ({
 						learningRate: 0,
 						valLoss: epoch.val_loss,
 					};
-					addEpochs(formattedEpoch);
-					setTrainMessage((prev: string) => prev.concat(`${new Date(data.TrainLog.create_time)} ${data.TrainLog.msg}`));
+					if (epoch.train_id !== 0) {
+						addEpochs(formattedEpoch);
+						setTrainMessage((prev: string) =>
+							prev.concat(`${new Date(data.TrainLog.create_time)} ${data.TrainLog.msg}`)
+						);
+					}
 				}
 			};
 			// eslint-disable-next-line no-param-reassign
