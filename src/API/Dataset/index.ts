@@ -136,7 +136,7 @@ export const getTrainLogsAPI = async (projectNo: string, trainNo: string) => {
 			trainLogs: Array<{
 				msg: string;
 			}>;
-		}>(`${config.SERVER_PREFIX}api/project/${projectNo}/train/${trainNo}/log`, axiosConfig);
+		}>(`${config.SERVER_PREFIX}/api/project/${projectNo}/train/${trainNo}/log`, axiosConfig);
 		return response.data;
 	} catch (e) {
 		if ((e as AxiosError)?.isAxiosError && (e as AxiosError).response?.status !== 200) {
