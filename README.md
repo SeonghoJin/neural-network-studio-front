@@ -17,25 +17,152 @@ https://nnstudio.io/
 - 프로젝트 설정 : 모델에 대한 설정입니다. Epoch, Batch Size, Loss와 자신이 만든 데이터 셋 설정의 종류를 선택할 수 있습니다.
   <img width="1428" alt="스크린샷 2021-11-07 오후 3 52 25" src="https://user-images.githubusercontent.com/44808218/140635498-6be2e7f4-ead7-4804-b746-c7bc882efdf1.png">
 ## 사용법
-### 1. 회원 가입 후 로그인 한 다음 데이터스토어 화면으로 접속한다.
-### 2. 마음에 드는 데이터셋을 라이브러리에 추가한다. (LOL Test 데이터셋 추가)
-![스크린샷 2021-11-05 오후 1 19 30](https://user-images.githubusercontent.com/44808218/140457663-de96c68c-17ff-4ec0-98a6-6ede40010f19.png)
-### 3. 대시보드 화면으로 접속한다.
-### 4. 프로젝트를 만들고 프로젝트 열기버튼을 누른다.
-![스크린샷 2021-11-05 오후 1 19 55](https://user-images.githubusercontent.com/44808218/140457692-0cedcdb5-2eb3-4a2f-b974-8fd4dfbfb4aa.png)
-### 5. 왼쪽 상단에 있는 블록들을 드래그하여 그래프 위에 올려놓으면 블록들이 만들어진다. 
-### 6. 블록의 점을 드래깅하면 다른 블록과 엣지를 만들 수 있다.
-![스크린샷 2021-11-05 오후 1 20 24](https://user-images.githubusercontent.com/44808218/140457727-bb4ec2b3-c02e-4c3d-bfbc-86c115a03603.png)
+### 1. 회원 가입을 합니다.
+<img width="1427" alt="스크린샷 2021-11-07 오후 7 15 43" src="https://user-images.githubusercontent.com/44808218/140641026-2b322955-3dfe-4949-9875-dddef854bf02.png">
 
-### 7. 저장하고 나서 프로젝트 데이터 셋 설정 화면으로 접속한다.
-### 8. + 버튼을 누르고 데이터 셋 설정을 한다. 라이브러리에 추가했었던 데이터를 설정하고 데이터에 관련된 설정을 한다. 
-![스크린샷 2021-11-05 오후 1 20 48](https://user-images.githubusercontent.com/44808218/140457761-05766ace-d569-4332-ae0e-b1af731755f3.png)
-### 9. 프로젝트 설정으로 접속하여 데이터셋 설정 부분에 아까 만들어 놨던 데이터 설정을 설정한다.
-![스크린샷 2021-11-05 오후 1 21 02](https://user-images.githubusercontent.com/44808218/140457783-02dd3558-f952-4d70-b510-0211c0b49633.png)
-### 10. 편집화면으로 돌아와 파이썬 코드 내보내기 버튼을 눌러 파이썬 코드 변환이 제대로 이루어지는지 확인하고, 학습을 시작한다.
-![스크린샷 2021-11-05 오후 1 21 30](https://user-images.githubusercontent.com/44808218/140457810-f3457d04-ba9e-4abb-8872-d6c3733bcb27.png)
-### 11. 모델 학습페이지로 넘어가 학습이 잘 진행되는지 확인한다.
-![스크린샷 2021-11-05 오후 1 21 44](https://user-images.githubusercontent.com/44808218/140457830-158c71a5-25b4-4d35-82ea-e4edabee6c37.png)
+### 2. 회원가입이 완료되면 로그인을 합니다.
+<img width="1420" alt="스크린샷 2021-11-07 오후 7 15 54" src="https://user-images.githubusercontent.com/44808218/140641040-cbc72c39-f913-44f8-8bcf-fe7b7447989f.png">
+
+### 3. 로그인한 뒤 데이터 스토어 페이지로 접속합니다.
+<img width="1417" alt="스크린샷 2021-11-07 오후 7 16 11" src="https://user-images.githubusercontent.com/44808218/140641048-980bbba9-b925-437b-adea-1a05e2b4725a.png">
+
+### 4. 데이터 스토어에서 supra라는 데이터셋을 라이브러리에 저장합니다.
+<img width="1431" alt="스크린샷 2021-11-07 오후 7 16 18" src="https://user-images.githubusercontent.com/44808218/140641049-8cb1930e-3abf-4bb9-ab0e-dc269f7abec8.png">
+
+### 5. 대시보드 페이지에 접속합니다.
+<img width="1421" alt="스크린샷 2021-11-07 오후 7 16 26" src="https://user-images.githubusercontent.com/44808218/140641050-692f5882-a689-4090-9bec-441a9c944ff6.png">
+
+### 6. 대시보드 페이제에서 프로젝트 생성을 눌러 프로젝트 생성 페이지로 접속합니다.
+<img width="1425" alt="스크린샷 2021-11-07 오후 7 17 21" src="https://user-images.githubusercontent.com/44808218/140641051-97215e14-a362-4bc6-b457-5169c92e1cee.png">
+
+### 7. 프로젝트 열기를 통해 프로젝트 페이지로 접속합니다.
+<img width="1432" alt="스크린샷 2021-11-07 오후 7 17 27" src="https://user-images.githubusercontent.com/44808218/140641052-d02d3d6a-47cf-4dad-a1a2-53556f458843.png">
+
+### 8. 프로젝트 페이지로 처음 접속하면 inputNode 한개가 생성되어 있는 것을 확인할 수 있습니다.
+<img width="1427" alt="스크린샷 2021-11-07 오후 7 17 34" src="https://user-images.githubusercontent.com/44808218/140641053-482df0b8-2165-43d3-83c9-3bd408a392ed.png">
+
+### 9. 그래프를 좀 더 멋지게 만들어 봅시다.
+
+다음과 같은 그래프를 만들어 봅시다.
+![스크린샷 2021-11-07 오후 7 30 10](https://user-images.githubusercontent.com/44808218/140641413-4eb33141-d0b3-4755-b4e7-d109f46a9d3d.png)
+
+먼저 왼쪽 상단에 Layer 버튼을 눌러 어떤 노드가 있는지 확인해보세요.
+Conv2D, Dense 등 Layer층에 해당한 노드들이 있습니다.
+<img width="253" alt="스크린샷 2021-11-07 오후 7 36 19" src="https://user-images.githubusercontent.com/44808218/140641492-d9a12e75-000a-4504-9726-426c108eda04.png">
+
+이 노드들을 드래그하여 그래프를 만들 수 있습니다.
+그리고 노드에 있는 점을 드래그 해보세요.
+회색의 엣지가 생기는데, 이를 다른 노드에 엣지를 만들 수 있습니다.
+
+![스크린샷 2021-11-07 오후 7 30 02](https://user-images.githubusercontent.com/44808218/140641465-dc5676da-3e4d-4640-944d-47cfc4a3be64.png)
+
+위 그림은 이제 만들어 볼 모델입니다.
+
+![스크린샷 2021-11-07 오후 7 30 50](https://user-images.githubusercontent.com/44808218/140641418-066454ec-1c5d-4eb8-b7fd-0dfda2fd0ed6.png)
+
+Conv2D노드를 드래그하여 그래프 판 위에 올려 놓습니다. 
+그리고 먼저 생성된 inputNode의 아래 점을 드래그 하여 Conv2D의 위의 검은 점에 연결해보세요.
+다음과 같이 연결되었으면 성공입니다.
+
+<img width="216" alt="스크린샷 2021-11-07 오후 7 47 09" src="https://user-images.githubusercontent.com/44808218/140641817-00e74ef7-b283-40fd-97bd-0377d942a51c.png">
+
+연결 후 Conv2D의 노드를 클릭하시고 왼쪽 하단을 보시면 노드에 대한 설정을 변경할 수 있습니다.
+맨위의 TYPE은 어떤 노드인지 확인할 수 있습니다.
+label은 노드의 이름입니다. 추후에 파이썬 코드로 변경될 때 이 이름이 하나의 변수가 됩니다.
+다음과 같이 설정해주세요.
+
+![스크린샷 2021-11-07 오후 7 31 12](https://user-images.githubusercontent.com/44808218/140641420-2223ca20-ea50-4f9e-98bd-fade022c4f44.png)
+
+BatchNormalization노드를 드래그하여 그래프 판 위에 올려 놓습니다.
+위 그림과 같이 설정해주세요. 
+
+아래 사진 순서대로 노드를 만들어 주시고 값을 설정해주세요.
+
+![스크린샷 2021-11-07 오후 7 31 22](https://user-images.githubusercontent.com/44808218/140641415-b587759d-f96d-4240-b179-28d5d9ce9bfc.png)
+![스크린샷 2021-11-07 오후 7 31 28](https://user-images.githubusercontent.com/44808218/140641416-abd86c66-fb7a-4467-86a2-c8c285aaffba.png)
+![스크린샷 2021-11-07 오후 7 31 33](https://user-images.githubusercontent.com/44808218/140641419-7b43e0ac-6a9b-4e80-86ed-524ee43f511c.png)
+![스크린샷 2021-11-07 오후 7 31 39](https://user-images.githubusercontent.com/44808218/140641410-27d38ae1-fdc1-4c73-8332-459094339623.png)
+![스크린샷 2021-11-07 오후 7 31 44](https://user-images.githubusercontent.com/44808218/140641412-62f2f441-df04-4ccf-892c-49dc60b59fdb.png)
+
+
+아래와 같이 그래프가 완성되었나요?
+
+![스크린샷 2021-11-07 오후 7 30 02](https://user-images.githubusercontent.com/44808218/140641465-dc5676da-3e4d-4640-944d-47cfc4a3be64.png)
+
+마지막으로 inputNode를 선택해 다음과 같이 설정해줍니다.
+
+<img width="263" alt="스크린샷 2021-11-07 오후 7 54 35" src="https://user-images.githubusercontent.com/44808218/140642138-b9fba3ff-0144-4fd2-8d51-6c1889f61cb1.png">
+
+이제 한번 파이썬 코드로 변환시켜봅니다.
+노드를 드래그하는 컴포넌트 위에 보면 파이썬 코드로 내보내기라는 버튼이 있습니다. 버튼을 누르면 변환된 파이썬코드를 얻을 수 있습니다.
+변환이 잘 되었으면 다음과 같은 코드를 얻을 수 있습니다.
+<img width="1433" alt="스크린샷 2021-11-07 오후 7 56 23" src="https://user-images.githubusercontent.com/44808218/140642198-c516b806-106a-4c6e-ab43-272579bd2c22.png">
+
+### 10. 데이터 셋 설정 페이지로 접속합니다.
+
+페이지 접속후 왼쪽의 + 버튼을 누르면 다음과 같이 데이터 설정 셋 하나가 생성됩니다. 
+생성된 데이터 설정 셋을 클릭해주세요.
+
+<img width="1426" alt="스크린샷 2021-11-07 오후 8 04 01" src="https://user-images.githubusercontent.com/44808218/140642522-bad8328f-aead-4342-ac74-7d98bbaf9f45.png">
+
+사용자는 여기서 자신의 데이터 셋 라이브러리에서 하나를 가져와 그 데이터셋에 대한 설정을 할 수 있습니다.
+
+
+<img width="1430" alt="스크린샷 2021-11-07 오후 8 04 07" src="https://user-images.githubusercontent.com/44808218/140642520-e96cad22-0374-463d-9678-314fe8b7b364.png">
+
+데이터 셋 이름은 원하시는 걸로 입력해주세요. 여기서는 Example로 하겠습니다.
+
+데이터에는 supra 값을 선택해주시고, Shuffle을 Check, 정규화는 Image로 레이블은 label 선택해주세요.
+
+<img width="1427" alt="스크린샷 2021-11-07 오후 8 04 28" src="https://user-images.githubusercontent.com/44808218/140642507-25c0d836-2405-4158-a554-9a279901a44c.png">
+
+데이터 셋 설정 생성이 완료되면 다음 과 같은 메시지가 생성됩니다.
+
+<img width="1419" alt="스크린샷 2021-11-07 오후 8 04 34" src="https://user-images.githubusercontent.com/44808218/140642506-b020c9bf-d51f-4adb-be52-f44e14f2b5aa.png">
+
+### 11. 프로젝트 설정 페이지로 접속합니다.
+
+프로젝트 설정 페이지에서는 자신의 프로젝트에 관한 전반적인 설정을 할 수 있습니다.
+
+데이터셋 설정을 위에서 자신이 만든 데이터 셋을 선택해주세요.
+
+<img width="1430" alt="스크린샷 2021-11-07 오후 8 04 47" src="https://user-images.githubusercontent.com/44808218/140642524-4759fc92-ae29-4963-adf2-23b38d12a4ee.png">
+
+저는 아까전 Example을 이름으로 데이터 셋 설정을 만들었으니 Example을 선택하겠습니다.
+
+<img width="1425" alt="스크린샷 2021-11-07 오후 8 04 59" src="https://user-images.githubusercontent.com/44808218/140642510-61944c4d-2a89-440c-9ac9-97968dda29e6.png">
+
+설정이 완료되면 저장 버튼을 눌러 프로젝트 설정을 저장해주세요.
+
+<img width="1427" alt="스크린샷 2021-11-07 오후 8 05 04" src="https://user-images.githubusercontent.com/44808218/140642511-3324a653-16fd-470e-9bd5-3437371920a5.png">
+
+### 12. 편집화면으로 돌아가 다시 한번 그래프를 확인해봅니다.
+
+이제 모델 학습 버튼을 눌러 학습을 해봅니다.
+학습 성공 메시지가 나타나면 학습 기록 페이지에 접속합니다.
+
+<img width="1424" alt="스크린샷 2021-11-07 오후 8 05 33" src="https://user-images.githubusercontent.com/44808218/140642513-b11b8f3f-f3e4-4e8a-8bd2-f88079504574.png">
+
+### 13. 학습 기록 확인하기
+
+학습 요청이 성공 후 학습 기록 페이지에는 학습 결과 1개가 존재할 것입니다.
+
+만약에 없다면 학습이 실패한 것이니, 데이터 셋 설정이나 프로젝트 설정, 그래프를 다시 한번 확인해주세요.
+
+<img width="1425" alt="스크린샷 2021-11-07 오후 8 05 40" src="https://user-images.githubusercontent.com/44808218/140642514-506f3a6f-d822-4fc4-89b2-43a23c37d202.png">
+
+현재 페이지에서 이 학습결과를 보고 있으면 지속적으로 서버와 통신을 하여 Epoch단위로 학습 결과를 그래프와 로그로 보여줍니다.
+
+<img width="1413" alt="스크린샷 2021-11-07 오후 8 06 31" src="https://user-images.githubusercontent.com/44808218/140642515-fc35e932-62b6-4033-8598-4687049fd67f.png">
+
+그래프가 잘 그려졌나요?
+
+### 추가. ProjectShare 기능 이용하기
+
+편집 페이지에서 저장 버튼 옆에 공유 이미지를 클릭하면 공유 화면으로 접속할 수 있습니다.
+url 링크를 복사하여 친구들에게 보내보세요. 
+
+<img width="1429" alt="스크린샷 2021-11-07 오후 8 24 03" src="https://user-images.githubusercontent.com/44808218/140642909-f71439e4-4aa5-40cb-b1bf-a881199891f1.png">
 
 # 주의
 아직 계속해서 개발 중이고 개선중인 프로젝트 입니다 (~2021.12.01까지)
