@@ -133,6 +133,8 @@ BatchNormalization노드를 드래그하여 그래프 판 위에 올려 놓습�
 
 데이터에는 supra 값을 선택해주시고, Shuffle을 Check, 정규화는 Image로 레이블은 label 선택해주세요.
 
+설정이 완료되면 저장 버튼을 눌러주세요. 
+
 <img width="1427" alt="스크린샷 2021-11-07 오후 8 04 28" src="https://user-images.githubusercontent.com/44808218/140642507-25c0d836-2405-4158-a554-9a279901a44c.png">
 
 데이터 셋 설정 생성이 완료되면 다음 과 같은 메시지가 생성됩니다.
