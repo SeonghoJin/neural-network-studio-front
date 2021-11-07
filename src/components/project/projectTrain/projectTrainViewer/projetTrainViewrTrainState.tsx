@@ -60,11 +60,9 @@ const ProjectTrainViewerTrainState = ({
 		if (!loading && !trainLogsLoading) {
 			if (trainMessage.length === 0) {
 				setTrainMessage(
-					['학습 준비중'].concat(
-						(trainLogs?.trainLogs || []).map((trainLog) => {
-							return trainLog.msg;
-						})
-					)
+					(trainLogs?.trainLogs || []).map((trainLog) => {
+						return trainLog.msg;
+					})
 				);
 			}
 			if (epochs == null) {
