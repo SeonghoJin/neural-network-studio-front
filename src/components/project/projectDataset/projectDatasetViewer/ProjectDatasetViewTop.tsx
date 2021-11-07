@@ -1,8 +1,9 @@
 import React, { ChangeEvent, useCallback, useMemo } from 'react';
+import { useSnackbar } from 'notistack';
 import { DatasetConfig } from '../datasetConfig';
 import { GetDatasetListAPIResponse } from '../../../../API/Dataset/type';
 import { CustomDatasetSelectInput } from '../../../Input/custom/CustomDatasetSelectInput';
-import { CustomInput } from '../../../Input/custom/CustomInput';
+import { NoUnderLineInput } from '../../../Input/custom/NoUnderLineInput';
 
 export type ProjectDatasetViewerTopProps = {
 	datasetConfig: DatasetConfig;
@@ -17,6 +18,7 @@ export const ProjectDatasetViewerTop = ({
 	datasetList,
 	features,
 }: ProjectDatasetViewerTopProps) => {
+	const { enqueueSnackbar } = useSnackbar();
 	const onDataChange = useCallback(
 		(id, name) => {
 			setDatasetConfig({
@@ -33,7 +35,6 @@ export const ProjectDatasetViewerTop = ({
 	const onChange = useCallback(
 		(e: ChangeEvent<HTMLSelectElement>) => {
 			const { name, value } = e.target;
-			console.log(name, value);
 			setDatasetConfig({
 				...datasetConfig,
 				[name]: value,
@@ -85,17 +86,24 @@ export const ProjectDatasetViewerTop = ({
 					flexDirection: 'column',
 				}}
 			>
-				<CustomInput
-					title="데이터셋 설정 이름"
-					name="name"
-					onChange={(e) => {
-						setDatasetConfig({
-							...datasetConfig,
-							name: e.target.value,
-						});
-					}}
-					value={datasetConfig.name}
-				/>
+				<div className="box">
+					<div className="tit">데이터셋 설정 이름</div>
+					<NoUnderLineInput
+						name="name"
+						value={datasetConfig.name}
+						placeholder="데이터셋 설정 이름을 설정해주세요."
+						className="inp-txt"
+						onChange={(e) => {
+							setDatasetConfig({
+								...datasetConfig,
+								name: e.target.value,
+							});
+						}}
+						style={{
+							width: 500,
+						}}
+					/>
+				</div>
 				<ol
 					className="list-filter"
 					style={{

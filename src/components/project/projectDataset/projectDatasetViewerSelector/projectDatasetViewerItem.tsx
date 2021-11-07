@@ -50,7 +50,7 @@ const ProjectDatasetViewerSelectorItem = ({ datasetConfig, onClick, onRemove }: 
 	return (
 		<>
 			<div className={`tit ${classes.wrapper}`} onClick={onClick} onKeyDown={() => onClick()}>
-				{datasetConfig.name}
+				{datasetConfig.name || '데이터 셋 이름을 설정해주세요.'}
 				{datasetConfig.id !== -1 && (
 					<Button
 						variant="text"

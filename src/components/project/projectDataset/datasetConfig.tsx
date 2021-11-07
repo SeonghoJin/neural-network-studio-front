@@ -21,8 +21,8 @@ export class DatasetConfig {
 
 	constructor(dto?: DatasetConfigDto) {
 		this.id = dto?.id || -1;
-		this.name = dto?.name || '데이터셋 설정 이름을 정해주세요.';
-		this.dataset = dto?.dataset || { id: -1, name: '데이터셋을 설정해주세요.' };
+		this.name = dto?.name || '';
+		this.dataset = dto?.dataset || { id: -1, name: '' };
 		this.shuffle = dto?.shuffle || false;
 		this.label = dto?.label || '';
 		this.normalization = dto?.normalization || { usage: false, method: '' };

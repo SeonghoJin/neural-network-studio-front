@@ -26,6 +26,13 @@ const ProjectDatasetNavOptionContentContainer = ({ currentDatasetConfig, mutate,
 			return;
 		}
 
+		if (currentDatasetConfig.name === '') {
+			enqueueSnackbar('데이터셋 이름이 없습니다. 다시 설정해주세요.', {
+				variant: 'error',
+			});
+			return;
+		}
+
 		if (currentDatasetConfig.id === -1) {
 			await addDatasetConfig
 				.fetch(projectNo, currentDatasetConfig)
