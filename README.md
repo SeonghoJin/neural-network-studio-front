@@ -90,9 +90,9 @@ label은 노드의 이름입니다. 추후에 파이썬 코드로 변경될 때 
 ![스크린샷 2021-11-07 오후 7 31 12](https://user-images.githubusercontent.com/44808218/140641420-2223ca20-ea50-4f9e-98bd-fade022c4f44.png)
 
 BatchNormalization노드를 드래그하여 그래프 판 위에 올려 놓습니다.
-위 그림과 같이 설정해주세요. 
+위 그림과 같이 설정한뒤 Conv2D 엣지와 연결해주세요.
 
-아래 사진 순서대로 노드를 만들어 주시고 값을 설정해주세요.
+아래 사진 순서대로 노드를 만들어 주시고 값을 설정하고, 엣지를 차례대로 연결 해주세요.
 
 ![스크린샷 2021-11-07 오후 7 31 22](https://user-images.githubusercontent.com/44808218/140641415-b587759d-f96d-4240-b179-28d5d9ce9bfc.png)
 ![스크린샷 2021-11-07 오후 7 31 28](https://user-images.githubusercontent.com/44808218/140641416-abd86c66-fb7a-4467-86a2-c8c285aaffba.png)
