@@ -3,19 +3,32 @@ https://nnstudio.io/
 
 - 데이터 셋 : 데이터 학습을 위한 데이터들의 집합입니다. 공공 데이터라고 생각하시면 됩니다. csv나 image의 zip파일로 구성되어 있습니다. 데이터의 정보는 프로젝트 데이터 셋 설정 페이지에서 확인할 수 있으며, 상단 100개의 데이터를 확인할 수 있습니다.
   - supra 데이터 셋
+  
     <img width="712" alt="스크린샷 2021-11-07 오후 3 50 00" src="https://user-images.githubusercontent.com/44808218/140635514-b7de292d-2971-4887-8455-28428d9821e9.png">
   - LoL 데이터 
+  
     <img width="1123" alt="스크린샷 2021-11-07 오후 3 50 15" src="https://user-images.githubusercontent.com/44808218/140635511-92f94840-7bc5-4391-8edb-4289e81848f4.png">
+    
 - 데이터 스토어 : 데이터 셋을 자신의 라이브러리에 추가 및 삭제 혹은 자신의 데이터 셋을 공유할 수 있는 페이지입니다.
+
   <img width="1412" alt="스크린샷 2021-11-07 오후 3 51 20" src="https://user-images.githubusercontent.com/44808218/140635507-4154a714-96a6-4826-b2b4-2e83d22b400c.png">
+ 
 - 대시보드 : 자신의 프로젝트가 있는 공간입니다. 이 페이지에서 사용자는 프로젝트를 생성 및 삭제를 할 수 있습니다.
+
   <img width="1413" alt="스크린샷 2021-11-07 오후 3 51 27" src="https://user-images.githubusercontent.com/44808218/140635504-ead5daa1-66cb-42c9-9a83-e1602e3196dc.png">
+  
 - 프로젝트 : 모델을 만들 수 있는 공간입니다. 사용자는 모델을 만들어 파이썬 코드를 추출하거나 학습시킬 수 있습니다.
+
   <img width="1427" alt="스크린샷 2021-11-07 오후 3 51 41" src="https://user-images.githubusercontent.com/44808218/140635503-bcac9588-bfc2-4a49-a1c5-d685796b9cb8.png">
+  
 - 프로젝트 데이터 셋 설정 : 데이터 셋에 대한 설정으로, 데이터셋의 Shuffle, label, 정규화등을 설정할 수 있습니다.
+
   <img width="1427" alt="스크린샷 2021-11-07 오후 3 52 12" src="https://user-images.githubusercontent.com/44808218/140635500-a6da35d1-9fa5-4c21-bea0-618ddb7b16da.png">
+  
 - 프로젝트 설정 : 모델에 대한 설정입니다. Epoch, Batch Size, Loss와 자신이 만든 데이터 셋 설정의 종류를 선택할 수 있습니다.
+
   <img width="1428" alt="스크린샷 2021-11-07 오후 3 52 25" src="https://user-images.githubusercontent.com/44808218/140635498-6be2e7f4-ead7-4804-b746-c7bc882efdf1.png">
+
 ## 사용법
 ### 1. 회원 가입을 합니다.
 <img width="1427" alt="스크린샷 2021-11-07 오후 7 15 43" src="https://user-images.githubusercontent.com/44808218/140641026-2b322955-3dfe-4949-9875-dddef854bf02.png">
