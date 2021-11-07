@@ -46,7 +46,10 @@ https://nnstudio.io/
 <img width="1421" alt="스크린샷 2021-11-07 오후 7 16 26" src="https://user-images.githubusercontent.com/44808218/140641050-692f5882-a689-4090-9bec-441a9c944ff6.png">
 
 ### 6. 대시보드 페이지에서 프로젝트 생성을 눌러 프로젝트 생성 페이지로 접속합니다.
+
 <img width="1425" alt="스크린샷 2021-11-07 오후 7 17 21" src="https://user-images.githubusercontent.com/44808218/140641051-97215e14-a362-4bc6-b457-5169c92e1cee.png">
+
+프로젝트의 이름과 설명을 작성하고 프로젝트 생성 버튼을 누릅니다.
 
 ### 7. 프로젝트 열기를 통해 프로젝트 페이지로 접속합니다.
 <img width="1432" alt="스크린샷 2021-11-07 오후 7 17 27" src="https://user-images.githubusercontent.com/44808218/140641052-d02d3d6a-47cf-4dad-a1a2-53556f458843.png">
