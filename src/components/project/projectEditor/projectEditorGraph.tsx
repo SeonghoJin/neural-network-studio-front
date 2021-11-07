@@ -20,6 +20,7 @@ import ReactFlow, {
 	XYPosition,
 } from 'react-flow-nns';
 import { useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
 import { BlockState, InputBlockState } from '../../../core/reactFlow/block/BlockState';
 import { nodeTypes } from '../../../core/reactFlow/node/nodetypes';
 import { RootState } from '../../../module';
@@ -95,6 +96,7 @@ const ProjectEditorGraph: FC<Props> = ({
 	const reactFlowInstance = useSelector((state: RootState) => state.reactFlowInstance.instance);
 	const elements = useSelector((state: RootState) => state.elements.elements);
 	const { isValidationConnection } = useValidationConnection();
+	const { enqueueSnackbar } = useSnackbar();
 
 	useEffect(() => {
 		setElements(flowState?.elements || []);
@@ -150,14 +152,19 @@ const ProjectEditorGraph: FC<Props> = ({
 				position: getPosition(localEvent, reactFlowWrapper.current, reactFlowInstance),
 				data: getNodeData(dataTransfer),
 			});
-			if (!canInsertNode(elements, newNode)) return;
+			try {
+				canInsertNode(elements, newNode);
+			} catch (error: any) {
+				enqueueSnackbar(error.message, { variant: 'error' });
+				return;
+			}
 			setElements(elements.concat(newNode));
 			if (onCreateBlock) {
 				onCreateBlock(newNode);
 			}
 			setSelectedElements(newNode);
 		},
-		[elements, onCreateBlock, reactFlowInstance, setElements, setSelectedElements]
+		[elements, enqueueSnackbar, onCreateBlock, reactFlowInstance, setElements, setSelectedElements]
 	);
 
 	const onLoad = useCallback(

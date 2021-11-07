@@ -59,5 +59,9 @@ export const canInsertNode = (elements: Elements, node: Node<BlockState>) => {
 		const blockStateNode: Node<BlockState> = e;
 		return blockStateNode.data?.type === node.data?.type;
 	}).length;
+
+	if (currentCount >= limit) {
+		throw new Error(`${type}은 최대 ${limit}개 까지만 추가할 수 있습니다.`);
+	}
 	return currentCount < limit;
 };
