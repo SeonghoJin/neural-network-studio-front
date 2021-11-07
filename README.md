@@ -1,21 +1,34 @@
 # 데모
 https://nnstudio.io/
 
-- 데이터 셋 : 데이터 학습을 위한 데이터들의 집합입니다. 공공 데이터라고 생각하시면 됩니다. csv나 image의 zip파일로 구성되어 있다. 데이터의 정보는 프로젝트 데이터 셋 설정 페이지에서 확인할 수 있으며, 상단 100개의 데이터를 확인할 수 있습니다.
+- 데이터 셋 : 데이터 학습을 위한 데이터들의 집합입니다. 공공 데이터라고 생각하시면 됩니다. csv나 image의 zip파일로 구성되어 있습니다. 데이터의 정보는 프로젝트 데이터 셋 설정 페이지에서 확인할 수 있으며, 상단 100개의 데이터를 확인할 수 있습니다.
   - supra 데이터 셋
+  
     <img width="712" alt="스크린샷 2021-11-07 오후 3 50 00" src="https://user-images.githubusercontent.com/44808218/140635514-b7de292d-2971-4887-8455-28428d9821e9.png">
   - LoL 데이터 
+  
     <img width="1123" alt="스크린샷 2021-11-07 오후 3 50 15" src="https://user-images.githubusercontent.com/44808218/140635511-92f94840-7bc5-4391-8edb-4289e81848f4.png">
+    
 - 데이터 스토어 : 데이터 셋을 자신의 라이브러리에 추가 및 삭제 혹은 자신의 데이터 셋을 공유할 수 있는 페이지입니다.
+
   <img width="1412" alt="스크린샷 2021-11-07 오후 3 51 20" src="https://user-images.githubusercontent.com/44808218/140635507-4154a714-96a6-4826-b2b4-2e83d22b400c.png">
+ 
 - 대시보드 : 자신의 프로젝트가 있는 공간입니다. 이 페이지에서 사용자는 프로젝트를 생성 및 삭제를 할 수 있습니다.
+
   <img width="1413" alt="스크린샷 2021-11-07 오후 3 51 27" src="https://user-images.githubusercontent.com/44808218/140635504-ead5daa1-66cb-42c9-9a83-e1602e3196dc.png">
+  
 - 프로젝트 : 모델을 만들 수 있는 공간입니다. 사용자는 모델을 만들어 파이썬 코드를 추출하거나 학습시킬 수 있습니다.
+
   <img width="1427" alt="스크린샷 2021-11-07 오후 3 51 41" src="https://user-images.githubusercontent.com/44808218/140635503-bcac9588-bfc2-4a49-a1c5-d685796b9cb8.png">
+  
 - 프로젝트 데이터 셋 설정 : 데이터 셋에 대한 설정으로, 데이터셋의 Shuffle, label, 정규화등을 설정할 수 있습니다.
+
   <img width="1427" alt="스크린샷 2021-11-07 오후 3 52 12" src="https://user-images.githubusercontent.com/44808218/140635500-a6da35d1-9fa5-4c21-bea0-618ddb7b16da.png">
+  
 - 프로젝트 설정 : 모델에 대한 설정입니다. Epoch, Batch Size, Loss와 자신이 만든 데이터 셋 설정의 종류를 선택할 수 있습니다.
+
   <img width="1428" alt="스크린샷 2021-11-07 오후 3 52 25" src="https://user-images.githubusercontent.com/44808218/140635498-6be2e7f4-ead7-4804-b746-c7bc882efdf1.png">
+
 ## 사용법
 ### 1. 회원 가입을 합니다.
 <img width="1427" alt="스크린샷 2021-11-07 오후 7 15 43" src="https://user-images.githubusercontent.com/44808218/140641026-2b322955-3dfe-4949-9875-dddef854bf02.png">
@@ -32,8 +45,11 @@ https://nnstudio.io/
 ### 5. 대시보드 페이지에 접속합니다.
 <img width="1421" alt="스크린샷 2021-11-07 오후 7 16 26" src="https://user-images.githubusercontent.com/44808218/140641050-692f5882-a689-4090-9bec-441a9c944ff6.png">
 
-### 6. 대시보드 페이제에서 프로젝트 생성을 눌러 프로젝트 생성 페이지로 접속합니다.
+### 6. 대시보드 페이지에서 프로젝트 생성을 눌러 프로젝트 생성 페이지로 접속합니다.
+
 <img width="1425" alt="스크린샷 2021-11-07 오후 7 17 21" src="https://user-images.githubusercontent.com/44808218/140641051-97215e14-a362-4bc6-b457-5169c92e1cee.png">
+
+프로젝트의 이름과 설명을 작성하고 프로젝트 생성 버튼을 누릅니다.
 
 ### 7. 프로젝트 열기를 통해 프로젝트 페이지로 접속합니다.
 <img width="1432" alt="스크린샷 2021-11-07 오후 7 17 27" src="https://user-images.githubusercontent.com/44808218/140641052-d02d3d6a-47cf-4dad-a1a2-53556f458843.png">
@@ -48,17 +64,14 @@ https://nnstudio.io/
 
 먼저 왼쪽 상단에 Layer 버튼을 눌러 어떤 노드가 있는지 확인해보세요.
 Conv2D, Dense 등 Layer층에 해당한 노드들이 있습니다.
-<img width="253" alt="스크린샷 2021-11-07 오후 7 36 19" src="https://user-images.githubusercontent.com/44808218/140641492-d9a12e75-000a-4504-9726-426c108eda04.png">
 
-이 노드들을 드래그하여 그래프를 만들 수 있습니다.
-그리고 노드에 있는 점을 드래그 해보세요.
-회색의 엣지가 생기는데, 이를 다른 노드에 엣지를 만들 수 있습니다.
+<img width="253" alt="스크린샷 2021-11-07 오후 7 36 19" src="https://user-images.githubusercontent.com/44808218/140641492-d9a12e75-000a-4504-9726-426c108eda04.png">
 
 ![스크린샷 2021-11-07 오후 7 30 02](https://user-images.githubusercontent.com/44808218/140641465-dc5676da-3e4d-4640-944d-47cfc4a3be64.png)
 
 위 그림은 이제 만들어 볼 모델입니다.
 
-![스크린샷 2021-11-07 오후 7 30 50](https://user-images.githubusercontent.com/44808218/140641418-066454ec-1c5d-4eb8-b7fd-0dfda2fd0ed6.png)
+
 
 Conv2D노드를 드래그하여 그래프 판 위에 올려 놓습니다. 
 그리고 먼저 생성된 inputNode의 아래 점을 드래그 하여 Conv2D의 위의 검은 점에 연결해보세요.
@@ -70,6 +83,9 @@ Conv2D노드를 드래그하여 그래프 판 위에 올려 놓습니다.
 맨위의 TYPE은 어떤 노드인지 확인할 수 있습니다.
 label은 노드의 이름입니다. 추후에 파이썬 코드로 변경될 때 이 이름이 하나의 변수가 됩니다.
 다음과 같이 설정해주세요.
+
+![스크린샷 2021-11-07 오후 7 30 50](https://user-images.githubusercontent.com/44808218/140641418-066454ec-1c5d-4eb8-b7fd-0dfda2fd0ed6.png)
+
 
 ![스크린샷 2021-11-07 오후 7 31 12](https://user-images.githubusercontent.com/44808218/140641420-2223ca20-ea50-4f9e-98bd-fade022c4f44.png)
 
