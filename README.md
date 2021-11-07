@@ -70,7 +70,7 @@ Conv2D, Dense 등 Layer층에 해당한 노드들이 있습니다.
 
 위 그림은 이제 만들어 볼 모델입니다.
 
-![스크린샷 2021-11-07 오후 7 30 50](https://user-images.githubusercontent.com/44808218/140641418-066454ec-1c5d-4eb8-b7fd-0dfda2fd0ed6.png)
+
 
 Conv2D노드를 드래그하여 그래프 판 위에 올려 놓습니다. 
 그리고 먼저 생성된 inputNode의 아래 점을 드래그 하여 Conv2D의 위의 검은 점에 연결해보세요.
@@ -82,6 +82,8 @@ Conv2D노드를 드래그하여 그래프 판 위에 올려 놓습니다.
 맨위의 TYPE은 어떤 노드인지 확인할 수 있습니다.
 label은 노드의 이름입니다. 추후에 파이썬 코드로 변경될 때 이 이름이 하나의 변수가 됩니다.
 다음과 같이 설정해주세요.
+![스크린샷 2021-11-07 오후 7 30 50](https://user-images.githubusercontent.com/44808218/140641418-066454ec-1c5d-4eb8-b7fd-0dfda2fd0ed6.png)
+
 
 ![스크린샷 2021-11-07 오후 7 31 12](https://user-images.githubusercontent.com/44808218/140641420-2223ca20-ea50-4f9e-98bd-fade022c4f44.png)
 
