@@ -44,13 +44,7 @@ const ProjectTrainMain = ({
 				</div>
 			</LeftWrapper>
 			{currentTrainHistory && (
-				<div
-					className="sec-c"
-					style={{
-						display: 'flex',
-						flexDirection: 'column',
-					}}
-				>
+				<div className="sec-c">
 					{currentTrainHistory.status === 'TRAIN' ? (
 						<ProjectTrainViewerTrainState
 							history={currentTrainHistory}

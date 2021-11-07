@@ -23,7 +23,7 @@ const GraphViewerWrapper = styled.div`
 
 const GraphViewer = styled.div`
 	width: 100%;
-	max-width: 600px;
+	max-width: 960px;
 `;
 
 const ProjectTrainViewer = ({ history }: ProjectTrainViewerProps) => {
