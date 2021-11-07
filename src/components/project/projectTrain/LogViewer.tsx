@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import $ from 'jquery';
 
 type Props = {
 	logs: string[];
@@ -6,10 +7,11 @@ type Props = {
 
 export const LogViewer = ({ logs }: Props) => {
 	const scrollRef = useRef<null | HTMLDivElement>(null);
+	const anchorRef = useRef<null | HTMLDivElement>(null);
 	const scrollToBottom = useCallback(() => {
-		scrollRef.current?.scrollIntoView({
-			behavior: 'smooth',
-		});
+		if (scrollRef.current != null) {
+			scrollRef.current.scrollTop = scrollRef.current?.scrollHeight;
+		}
 	}, []);
 
 	useEffect(() => {
@@ -24,6 +26,7 @@ export const LogViewer = ({ logs }: Props) => {
 				style={{
 					padding: '20px 40px 0px 40px',
 					fontSize: 26,
+					scrollBehavior: 'smooth',
 				}}
 			>
 				Log
@@ -38,6 +41,7 @@ export const LogViewer = ({ logs }: Props) => {
 					boxSizing: 'border-box',
 					height: '300px',
 				}}
+				ref={scrollRef}
 			>
 				{logs.map((log) => {
 					return (
@@ -51,7 +55,7 @@ export const LogViewer = ({ logs }: Props) => {
 						</div>
 					);
 				})}
-				<div ref={scrollRef} />
+				<div ref={anchorRef} />
 			</div>
 		</>
 	);
