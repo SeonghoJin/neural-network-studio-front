@@ -41,9 +41,10 @@
 <img width="1420" alt="스크린샷 2021-11-07 오후 7 15 54" src="https://user-images.githubusercontent.com/44808218/140641040-cbc72c39-f913-44f8-8bcf-fe7b7447989f.png">
 
 ### 3. 로그인한 뒤 데이터 스토어 페이지로 접속합니다.
-<img width="1417" alt="스크린샷 2021-11-07 오후 7 16 11" src="https://user-images.githubusercontent.com/44808218/140641048-980bbba9-b925-437b-adea-1a05e2b4725a.png">
+![스크린샷 2021-11-08 오후 8 15 54](https://user-images.githubusercontent.com/44808218/140733656-d258dc04-80db-4436-80a8-5d420bbc8001.png)
 
-### 4. 데이터 스토어에서 supra classification data 라는 데이터셋을 라이브러리에 저장합니다.
+### 4. 데이터 스토어에서 MNIST 라는 데이터셋을 라이브러리에 저장합니다.
+![스크린샷 2021-11-08 오후 8 16 04](https://user-images.githubusercontent.com/44808218/140733652-1f5b8d48-618e-4e42-a393-068e6292d85b.png)
 <img width="1419" alt="스크린샷 2021-11-07 오후 10 30 50" src="https://user-images.githubusercontent.com/44808218/140647155-63e1e422-bde0-41e4-90dc-c1abe76d886a.png">
 
 ### 5. 대시보드 페이지에 접속합니다.
@@ -137,15 +138,15 @@ BatchNormalization노드를 드래그하여 그래프 판 위에 올려 놓습�
 
 데이터 셋 이름은 원하시는 걸로 입력해주세요. 여기서는 Example로 하겠습니다.
 
-데이터에는 supra classification data값을 선택해주시고, Shuffle을 Check, 정규화는 Image로 레이블은 label 선택해주세요.
+데이터에는 MNIST값을 선택해주시고, Shuffle을 Check, 정규화는 Image로 레이블은 label 선택해주세요.
 
 설정이 완료되면 저장 버튼을 눌러주세요. 
 
-<img width="1415" alt="스크린샷 2021-11-07 오후 10 33 03" src="https://user-images.githubusercontent.com/44808218/140647229-eba4b5ee-e5dc-452a-a0d4-ff717c7b1712.png">
+![스크린샷 2021-11-08 오후 8 22 21](https://user-images.githubusercontent.com/44808218/140733644-e637d5ca-5f10-4444-848f-e24e2a3483a2.png)
 
 데이터 셋 설정 생성이 완료되면 다음 과 같은 메시지가 생성됩니다.
 
-<img width="1419" alt="스크린샷 2021-11-07 오후 10 36 13" src="https://user-images.githubusercontent.com/44808218/140647314-77b50920-83ce-482a-8e79-a7bc4181a627.png">
+![스크린샷 2021-11-08 오후 8 22 28](https://user-images.githubusercontent.com/44808218/140733632-29413480-5388-4ec5-a73d-479aed403c74.png)
 
 ### 11. 프로젝트 설정 페이지로 접속합니다.
 
