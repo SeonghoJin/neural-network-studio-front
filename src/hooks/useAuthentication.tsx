@@ -34,7 +34,7 @@ const useAuthentication = () => {
 			} catch (e: AxiosError | any) {
 				if (e && e.isAxiosError) {
 					const status = (e as AxiosError).response?.status;
-					if (status === 401) {
+					if (status === 401 || status === 404) {
 						return null;
 					}
 				}
