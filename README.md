@@ -43,9 +43,8 @@
 ### 3. 로그인한 뒤 데이터 스토어 페이지로 접속합니다.
 ![스크린샷 2021-11-08 오후 8 15 54](https://user-images.githubusercontent.com/44808218/140733656-d258dc04-80db-4436-80a8-5d420bbc8001.png)
 
-### 4. 데이터 스토어에서 MNIST 라는 데이터셋을 라이브러리에 저장합니다.
+### 4. 데이터 스토어에서 MNIST 라는 데이터셋을 라이브러리에 추가합니다.
 ![스크린샷 2021-11-08 오후 8 16 04](https://user-images.githubusercontent.com/44808218/140733652-1f5b8d48-618e-4e42-a393-068e6292d85b.png)
-<img width="1419" alt="스크린샷 2021-11-07 오후 10 30 50" src="https://user-images.githubusercontent.com/44808218/140647155-63e1e422-bde0-41e4-90dc-c1abe76d886a.png">
 
 ### 5. 대시보드 페이지에 접속합니다.
 <img width="1421" alt="스크린샷 2021-11-07 오후 7 16 26" src="https://user-images.githubusercontent.com/44808218/140641050-692f5882-a689-4090-9bec-441a9c944ff6.png">
