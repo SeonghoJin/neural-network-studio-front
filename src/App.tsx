@@ -1,5 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Authentication from './components/Authentication';
 import ProjectRouter from './Router/ProjectRouter';

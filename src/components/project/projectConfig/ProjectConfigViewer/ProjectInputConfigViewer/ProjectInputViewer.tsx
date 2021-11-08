@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core';
-import Upload from '../../../../utils/Upload';
 
 const useStyle = makeStyles({
 	wrapper: {
@@ -18,7 +17,6 @@ const InputViewer = () => {
 	return (
 		<div className={classes.wrapper}>
 			<div className={classes.container}>
-				<Upload />
 			</div>
 		</div>
 	);

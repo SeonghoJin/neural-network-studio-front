@@ -1,5 +1,4 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-import { purple } from '@material-ui/core/colors';
 import config from '../../config';
 import { SignUpParams, UserProfile, UserProfileImage, UserProfileToUpdateParams } from './types';
 

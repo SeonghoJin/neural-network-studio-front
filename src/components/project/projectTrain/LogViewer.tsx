@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import $ from 'jquery';
+import { useCallback, useEffect, useRef } from 'react';
 
 type Props = {
 	logs: string[];

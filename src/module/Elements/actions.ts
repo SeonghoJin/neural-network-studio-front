@@ -1,11 +1,9 @@
-import { Elements, FlowElement, Node } from 'react-flow-nns';
+import { Elements } from 'react-flow-nns';
 import { createStandardAction } from '../../util';
 import { BlockMoveDto } from '../../core/Socket/dto/block.move.dto';
 import { BlockCreateDto } from '../../core/Socket/dto/block.create.dto';
 import { BlockRemoveDto } from '../../core/Socket/dto/block.remove.dto';
-import { EdgeCreateDto } from '../../core/Socket/dto/edge.create.dto';
 import { EdgeRemoveDto } from '../../core/Socket/dto/edge.remove.dto';
-import { BlockConfigChangeDto } from '../../core/Socket/dto/block.config.change.dto';
 
 export enum ElementAction {
 	SET_ELEMENTS = 'SET_ELEMENTS',

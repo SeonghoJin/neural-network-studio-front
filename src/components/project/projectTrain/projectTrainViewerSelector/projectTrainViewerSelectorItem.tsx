@@ -1,9 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import React, { useCallback, useEffect, useState } from 'react';
-import $ from 'jquery';
 import Button from '@material-ui/core/Button';
 import { TrainHistory } from '../types';
-import select from '../../../../static/img/ico_arrow_select1.png';
 
 const useStyle = makeStyles({
 	wrapper: {

@@ -1,5 +1,4 @@
 import { applyMiddleware, createStore } from 'redux';
-import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { Skeleton } from '@material-ui/lab';
 import ProjectNav from '../components/project/ProjectNav/projectNav';
@@ -12,7 +11,7 @@ import usePythonCode from '../hooks/usePythonCode';
 import useUpdateProjectContent from '../hooks/useUpdateProjectContent';
 import { useCursorTracker } from '../components/CursorTracker/useCursorTracker';
 
-const store = createStore(rootReducer, applyMiddleware(reduxThunk));
+const store = createStore(rootReducer);
 
 export const ProjectEditorPage = () => {
 	const pythonCodeResult = usePythonCode();

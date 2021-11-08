@@ -4,7 +4,6 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import PrivateAuthentication from '../components/Authentication/PrivateAuthentication';
 import Navigation from '../components/nav';
 import { StaticPath } from '../components/PagePathConsts';
-import icoSorting1 from '../static/img/ico_sorting1.png';
 import CardGrid from '../components/dashboard/cardGrid/cardGrid';
 import { GetProjectListParams } from '../API/project/types';
 import usePageNation from '../components/utils/pagenation/usePageNation';

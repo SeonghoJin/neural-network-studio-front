@@ -83,8 +83,6 @@ export const deleteDatasetFromLibraryAPI = async (datasetId: string) => {
 	}
 };
 
-const deleteDatasetAPI = () => {};
-
 export const getDatasetLibraryListAPI = async (curPage: number, pageSize: number) => {
 	try {
 		const response = await axios.get<GetDatasetListLibraryAPIResponse>(
