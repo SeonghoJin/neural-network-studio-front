@@ -1,6 +1,4 @@
 import React, { ReactNode } from 'react';
-import icoShare1 from '../../../../static/img/ico_share1.png';
-import icoSave1 from '../../../../static/img/ico_save1.png';
 import ProjectEditorNavMainContentContainer from './ProjectEditorNavMainContentContainer';
 import ProjectEditorNavOptionContentContainer from './ProjectEditorNavOptionContentContainer';
 

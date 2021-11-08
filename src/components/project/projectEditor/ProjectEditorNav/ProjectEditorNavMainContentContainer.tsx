@@ -81,7 +81,6 @@ const useTrainModel = () => {
 
 	return {
 		...result,
-		loadingFallback: <SimpleBackdrop open />,
 		trainFetch,
 	};
 };
@@ -91,7 +90,7 @@ const ProjectEditorNavMainContentContainer = () => {
 	const instance = useSelector((state: RootState) => state.reactFlowInstance.instance);
 	const { fetch } = usePythonCode();
 	const { enqueueSnackbar } = useSnackbar();
-	const { trainFetch } = useTrainModel();
+	const { trainFetch, loading } = useTrainModel();
 	const onGetPythonCode = useCallback(() => {
 		(async () => {
 			await fetch(projectNo, {
@@ -133,6 +132,7 @@ const ProjectEditorNavMainContentContainer = () => {
 
 	return (
 		<>
+			{loading && <SimpleBackdrop open />}
 			<ProjectEditorNavMainContent onGetPythonCode={onGetPythonCode} onTrainModel={onTrainModel} />
 		</>
 	);
