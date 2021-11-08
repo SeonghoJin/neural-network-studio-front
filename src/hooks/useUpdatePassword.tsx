@@ -17,7 +17,7 @@ type UpdatePasswordState = {
 } | null;
 
 const updatePasswordResult = atom<UpdatePasswordState>({
-	key: 'updateProjectInfoResult',
+	key: 'updatePasswordResult',
 	default: null,
 });
 

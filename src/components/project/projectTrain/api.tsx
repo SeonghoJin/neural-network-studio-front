@@ -108,7 +108,7 @@ type GetTrainHistoryListLibraryAPIResultType = {
 } | null;
 
 const getTrainHistoryEpochListLibraryAPIResult = atom<GetTrainHistoryEpochListLibraryAPIResultType>({
-	key: 'getTrainHistoryListLibraryAPIResult',
+	key: 'getTrainHistoryEpochListLibraryAPIResult',
 	default: null,
 });
 

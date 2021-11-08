@@ -22,7 +22,7 @@ type TrainModelResult = {
 } | null;
 
 const trainModelResultState = atom<TrainModelResult>({
-	key: 'pythonCodeResultState',
+	key: 'trainModuleResultState',
 	default: null,
 });
 
