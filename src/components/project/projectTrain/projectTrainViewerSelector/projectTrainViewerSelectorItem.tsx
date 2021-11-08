@@ -44,10 +44,10 @@ const ProjectTrainDetailItem = ({ name, value }: { name: string; value: string }
 				marginBottom: '10px',
 			}}
 		>
-			<p>
+			<div>
 				<strong>{name}</strong>
 				<p>{value}</p>
-			</p>
+			</div>
 		</div>
 	);
 };

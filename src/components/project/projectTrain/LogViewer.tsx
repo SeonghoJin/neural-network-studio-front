@@ -45,7 +45,7 @@ export const LogViewer = ({ logs }: Props) => {
 				{logs.map((log) => {
 					return (
 						<div
-							id={log}
+							key={log}
 							style={{
 								marginTop: '5px',
 							}}

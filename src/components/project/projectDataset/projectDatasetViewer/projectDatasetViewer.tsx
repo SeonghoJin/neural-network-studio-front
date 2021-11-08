@@ -160,6 +160,10 @@ const ProjectDatasetViewer = ({ datasetConfig, setDatasetConfig, datasetList }: 
 		} else {
 			setDatasetDetail(null);
 		}
+
+		return () => {
+			setDatasetDetail(null);
+		};
 	}, [fetch, datasetConfig.dataset.id, enqueueSnackbar]);
 
 	const features = useMemo(() => {

@@ -90,12 +90,15 @@ export const DashBoard = () => {
 										onChange={(e) => {
 											setFilterType(e.target.value);
 										}}
+										defaultValue=""
 									>
-										<option value="" selected>
-											기본
-										</option>
+										<option value="">기본</option>
 										{filterTypeLists.map((_filterType) => {
-											return <option value={_filterType[1]}>{_filterType[0]}</option>;
+											return (
+												<option key={_filterType[0]} value={_filterType[1]}>
+													{_filterType[0]}
+												</option>
+											);
 										})}
 									</NativeSelect>
 								</div>
