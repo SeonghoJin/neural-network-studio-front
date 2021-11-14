@@ -1,8 +1,11 @@
 import { Line } from 'react-chartjs-2';
-import { useEffect } from 'react';
 import { Epoch, EpochList } from '../types';
 
-const ProjectTrainLearningCurveViewer = (epochs: EpochList) => {
+type Props = {
+	epochs: Epoch[];
+};
+
+const ProjectTrainLearningCurveViewer = ({ epochs }: Props) => {
 	const label: Array<number> = [];
 	const acc: Array<number> = [];
 	const loss: Array<number> = [];
@@ -13,11 +16,18 @@ const ProjectTrainLearningCurveViewer = (epochs: EpochList) => {
 		return <></>;
 	}
 
-	for (let i = 0; i < epochs.epochs.length; i += 1) {
-		const epoch = epochs.epochs[i];
-		const { epochNo: _epochNo, learningRate: _learningRate, loss: _loss, valLoss: _valLoss, valAcc: _valAcc } = epoch;
+	for (let i = 0; i < epochs.length; i += 1) {
+		const epoch = epochs[i];
+		const {
+			learningRate: _learningRate,
+			epochNo: _epochNo,
+			loss: _loss,
+			valLoss: _valLoss,
+			valAcc: _valAcc,
+			acc: _acc,
+		} = epoch;
 		label.push(_epochNo);
-		acc.push(_learningRate);
+		acc.push(_acc);
 		loss.push(_loss);
 		valAcc.push(_valLoss);
 		valLoss.push(_valAcc);
