@@ -15,11 +15,12 @@ const ProjectTrainLearningCurveViewer = (epochs: EpochList) => {
 
 	for (let i = 0; i < epochs.epochs.length; i += 1) {
 		const epoch = epochs.epochs[i];
-		label.push(epoch.epochNo);
-		acc.push(epoch.acc);
-		loss.push(epoch.loss);
-		valAcc.push(epoch.valAcc);
-		valLoss.push(epoch.valLoss);
+		const { epochNo: _epochNo, learningRate: _learningRate, loss: _loss, valLoss: _valLoss, valAcc: _valAcc } = epoch;
+		label.push(_epochNo);
+		acc.push(_learningRate);
+		loss.push(_loss);
+		valAcc.push(_valLoss);
+		valLoss.push(_valAcc);
 	}
 
 	const data = {
