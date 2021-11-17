@@ -29,8 +29,8 @@ const ProjectTrainLearningCurveViewer = ({ epochs }: Props) => {
 		label.push(_epochNo);
 		acc.push(_acc);
 		loss.push(_loss);
-		valAcc.push(_valLoss);
-		valLoss.push(_valAcc);
+		valAcc.push(_valAcc);
+		valLoss.push(_valLoss);
 	}
 
 	const data = {
